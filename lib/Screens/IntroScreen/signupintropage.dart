@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/Route/route.dart';
 import 'package:myapp/Screens/SignInScreen/signinpage.dart';
 
 import '../SignUpAccountScreen/signupaccountchoosepage.dart';
@@ -78,8 +80,9 @@ class _SignIntroPageState extends State<SignIntroPage> {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, SignAccountChoosePage.routename);
+                            // Navigator.pushReplacementNamed(
+                            //     context, SignAccountChoosePage.routename);
+                            Get.offNamed(signinaccout);
                           },
                           child: Text(
                             'Create Profile',
@@ -99,8 +102,9 @@ class _SignIntroPageState extends State<SignIntroPage> {
                         ),
                         TextButton(
                             onPressed: () {
-                              Navigator.pushReplacementNamed(
-                                  context, SignInPage.routename);
+                              Get.offNamed(signin);
+                              // Navigator.pushReplacementNamed(
+                              //     context, SignInPage.routename);
                             },
                             child: Text(
                               'Sign In',

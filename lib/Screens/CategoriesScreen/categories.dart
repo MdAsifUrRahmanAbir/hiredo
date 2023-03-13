@@ -2,6 +2,7 @@
 
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/nav_bar_page/nav_bar_controller.dart';
 import 'package:myapp/utils/colors.dart';
@@ -35,8 +36,9 @@ class _CategoriesPageState extends State<CategoriesPage> {
         elevation: 0,
         leading: IconButton(
             onPressed: () {
-              Navigator.pushReplacementNamed(
-                  context, BottomNavController.routename);
+              // Navigator.pushReplacementNamed(
+              //     context, BottomNavController.routename);
+              Get.back();
             },
             icon: Icon(
               Icons.arrow_back,

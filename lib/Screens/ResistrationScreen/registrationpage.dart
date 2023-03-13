@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/Route/route.dart';
 import 'package:myapp/Screens/SignInScreen/signinpage.dart';
 import 'package:myapp/Screens/SignUpAccountScreen/signupaccountchoosepage.dart';
 
@@ -63,8 +65,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       color: themeColorGreen,
                     ),
                     onPressed: () {
-                      Navigator.pushReplacementNamed(
-                          context, SignAccountChoosePage.routename);
+                      // Navigator.pushReplacementNamed(
+                      //     context, SignAccountChoosePage.routename);
                     },
                   )),
             ),
@@ -397,8 +399,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.pushReplacementNamed(
-                              context, SignInPage.routename);
+                          // Navigator.pushReplacementNamed(
+                          //     context, SignInPage.routename);
+                          Get.offNamed(signin);
                         },
                         child: Text(
                           'Next',

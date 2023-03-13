@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myapp/Route/route.dart';
 import 'package:myapp/Screens/IntroScreen/introonepage.dart';
 import 'package:myapp/utils/colors.dart';
 
@@ -19,8 +21,9 @@ class _SplashPageState extends State<SplashPage> {
 
   void _navigatesplash() async {
     await Future.delayed(Duration(milliseconds: 1500), () {});
-   // Navigator.push(context, MaterialPageRoute(builder: (_) => IntroOnePage()));
-    Navigator.pushNamed(context, IntroOnePage.routename);
+    Get.offNamed(introPageOne);
+    //Navigator.push(context, MaterialPageRoute(builder: (_) => IntroOnePage()));
+    // Navigator.pushNamed(context, IntroOnePage.routename);
   }
 
   @override

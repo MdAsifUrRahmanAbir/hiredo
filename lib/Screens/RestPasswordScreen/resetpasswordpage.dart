@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/Route/route.dart';
 import 'package:myapp/Screens/EmailVerifiyScreen/enterverificationpage.dart';
 
 import '../../utils/colors.dart';
@@ -51,8 +53,10 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     color: themeColorGreen,
                   ),
                   onPressed: () {
-                    Navigator.pushReplacementNamed(
-                        context, VerificationPage.routename);
+                    // Navigator.pushReplacementNamed(
+                    //     context, VerificationPage.routename);
+
+                    Get.offNamed(verification);
                   },
                 )),
           ),

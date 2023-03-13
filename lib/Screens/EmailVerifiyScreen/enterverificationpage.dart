@@ -5,7 +5,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/countdown_controller.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/Route/route.dart';
 import 'package:myapp/Screens/ForgetPasswordScreen/forgotpasswordpage.dart';
 import 'package:myapp/Screens/RestPasswordScreen/resetpasswordpage.dart';
 
@@ -170,8 +172,9 @@ class _VerificationPageState extends State<VerificationPage> {
                         click++;
                       });
                       if (click > 2) {
-                        Navigator.pushReplacementNamed(
-                            context, ResetPasswordPage.routename);
+                        Get.offNamed(resetpassword);
+                        // Navigator.pushReplacementNamed(
+                        //     context, ResetPasswordPage.routename);
                       }
                     },
                     child: Text(
