@@ -8,6 +8,9 @@ import 'package:myapp/Screens/LeadsScreen/lead_screen.dart';
 import 'package:myapp/Screens/MyResponse/my_response.dart';
 import 'package:myapp/Screens/ResistrationScreen/registrationpage.dart';
 import 'package:myapp/Screens/RestPasswordScreen/resetpasswordpage.dart';
+import 'package:myapp/Screens/SettingsScreen/EmailTemplate/email_template_page.dart';
+import 'package:myapp/Screens/SettingsScreen/OneClickResponce/one_click_responce_page.dart';
+import 'package:myapp/Screens/SettingsScreen/SettingsBadge/badge_page.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 import 'package:myapp/Screens/SignInScreen/signinpage.dart';
 import 'package:myapp/Screens/SignUpAccountScreen/signupaccountchoosepage.dart';
@@ -35,7 +38,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         // home: SplashPage(),
-        initialRoute: SplashPage.routeName,
+        initialRoute: EmailTemplatePage.routename,
         routes: {
           SplashPage.routeName: (context) => SplashPage(),
           IntroOnePage.routename: (context) => IntroOnePage(),
@@ -58,7 +61,10 @@ class MyApp extends StatelessWidget {
           LeadsScreen.routename: (context) => LeadsScreen(),
           SettingsPage.routename: (context) => SettingsPage(),
           MyResponse.routename: (context) => MyResponse(),
-          ReviewsPage.routename: (context) => ReviewsPage()
+          ReviewsPage.routename: (context) => ReviewsPage(),
+          BadgePage.routename: (context) => BadgePage(),
+          OneClickResponcePage.routename: (context) => OneClickResponcePage(),
+          EmailTemplatePage.routename: (context) => EmailTemplatePage(),
         });
   }
 }
