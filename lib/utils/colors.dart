@@ -4,4 +4,9 @@ const Color themeColorGreen = Color(0xFF187A49);
 const Color themeColorGreenbright= Color(0xFF197546);
 const Color imageback= Color(0xFF01A38B);
 const Color textformback= Color(0xFFD9F1E5);
+const Color containerClr= Color(0xffFAFAFA);
+const Color scaffoldClr= Color(0xffFFFFFF);
+const Color textClr= Color(0xff000000);
+const Color offWhite= Color(0xff848484);
+
 

@@ -118,7 +118,6 @@ class _DocumentState extends State<Document> {
                 ),
               ),
               Expanded(
-                flex: 3,
                 child: Container(
                   padding:
                       EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 10),
@@ -127,7 +126,7 @@ class _DocumentState extends State<Document> {
                       itemCount: 20,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        childAspectRatio: 1,
+                        childAspectRatio: .8,
                       ),
                       itemBuilder: (_, index) {
                         return GestureDetector(
