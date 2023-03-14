@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:myapp/Screens/IntroScreen/introtwopage.dart';
 import 'package:myapp/Screens/IntroScreen/signupintropage.dart';
 import 'package:myapp/nav_bar_page/nav_bar_controller.dart';
@@ -59,9 +61,9 @@ class _SignInPageState extends State<SignInPage> {
                     color: themeColorGreen,
                   ),
                   onPressed: () {
-                    Navigator.pushReplacementNamed(
-                        context, IntroTwoPage.routename);
-                    // Navigator.pop(context);
+                    // Navigator.pushReplacementNamed(
+                    //     context, IntroTwoPage.routename);
+                    Navigator.pop(context);
                   },
                 )),
           ),
@@ -272,6 +274,7 @@ class _SignInPageState extends State<SignInPage> {
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => BottomNavController()));
+                            // Get.offNamed(bottomnav);
                           },
                           child: Text(
                             'Sign in',
@@ -286,12 +289,13 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     TextButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(
-                              context, ForegPasswordPage.routename);
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (_) => ForegPasswordPage()));
+                          // Navigator.pushReplacementNamed(
+                          //     context, ForegPasswordPage.routename);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => ForegPasswordPage()));
+                          // Get.offNamed(forget);
                         },
                         child: Text(
                           'Forgot the password?',
@@ -310,12 +314,13 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         TextButton(
                             onPressed: () {
-                              Navigator.pushReplacementNamed(
-                                  context, SignIntroPage.routename);
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (_) => SignIntroPage()));
+                              // Navigator.pushReplacementNamed(
+                              //     context, SignIntroPage.routename);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => SignIntroPage()));
+                              // Get.offNamed(signinintropage);
                             },
                             child: Text(
                               'Sign Up',

@@ -2,11 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:myapp/Screens/DocumentScreen/document.dart';
+import 'package:myapp/Screens/SearchResultScreen/catsearchpage.dart';
 import 'package:myapp/Screens/SearchScreen/search.dart';
 import 'package:myapp/Screens/FavoriteScreen/favourite.dart';
 import 'package:myapp/Screens/HomeScreen/home.dart';
 import 'package:myapp/Screens/ProfileScreen/profile.dart';
 import 'package:myapp/Screens/BalanceScreen/blancpage.dart';
+import 'package:myapp/Screens/TrackingScreen/trackingpost.dart';
 import 'package:myapp/utils/colors.dart';
 
 class BottomNavController extends StatefulWidget {
@@ -18,8 +20,8 @@ class BottomNavController extends StatefulWidget {
 final pages = [
   Home(),
   Document(),
-  BlankPage(),
-  Search(),
+  TrackingPostOrder(),
+  SearchResult(),
   Profile(),
 ];
 

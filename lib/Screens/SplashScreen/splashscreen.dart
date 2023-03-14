@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:myapp/Screens/IntroScreen/introonepage.dart';
 import 'package:myapp/utils/colors.dart';
 
 class SplashPage extends StatefulWidget {
-  static const String routeName = '/';
+  // static const String routeName = '/';
   const SplashPage({Key? key}) : super(key: key);
 
   @override
@@ -19,8 +20,9 @@ class _SplashPageState extends State<SplashPage> {
 
   void _navigatesplash() async {
     await Future.delayed(Duration(milliseconds: 1500), () {});
-   // Navigator.push(context, MaterialPageRoute(builder: (_) => IntroOnePage()));
-    Navigator.pushNamed(context, IntroOnePage.routename);
+    // Get.offNamed(introPageOne);
+    Navigator.push(context, MaterialPageRoute(builder: (_) => IntroOnePage()));
+    // Navigator.pushNamed(context, IntroOnePage.routename);
   }
 
   @override

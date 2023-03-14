@@ -261,7 +261,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
                                           Text(reviews[index]['ratings'])
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 8,
                                       ),
                                       SizedBox(
@@ -279,7 +279,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
                               ],
                             ),
                           ),
-                      separatorBuilder: (context, index) => SizedBox(
+                      separatorBuilder: (context, index) => const SizedBox(
                             height: 10,
                           ),
                       itemCount: reviews.length))

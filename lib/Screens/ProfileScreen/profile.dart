@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:myapp/Screens/LeadsScreen/lead_screen.dart';
 import 'package:myapp/Screens/MyResponse/my_response.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
@@ -179,102 +181,6 @@ class _ProfileState extends State<Profile> {
                 const SizedBox(
                   height: 20,
                 ),
-                // Container(
-                //   height: 191,
-                //   width: scw - 20,
-                //   decoration: const BoxDecoration(
-                //       color: Color(0xFFEEEDED),
-                //       borderRadius: BorderRadius.all(Radius.circular(10))),
-                //   child: Padding(
-                //     padding: const EdgeInsets.all(18.0),
-                //     child: Column(
-                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //       crossAxisAlignment: CrossAxisAlignment.start,
-                //       children: [
-                //         const Text(
-                //           'Overview',
-                //           style: TextStyle(
-                //               fontSize: 23, fontWeight: FontWeight.w600),
-                //         ),
-                //         Row(
-                //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //           children: [
-                //             Row(
-                //               children: [
-                //                 Image.asset(
-                //                   "images/eliteicon.png",
-                //                   height: 12,
-                //                   width: 10,
-                //                 ),
-                //                 const SizedBox(
-                //                   width: 7,
-                //                 ),
-                //                 const Text(
-                //                   'Elite Pro',
-                //                   style: TextStyle(fontSize: 14),
-                //                 )
-                //               ],
-                //             ),
-                //             const Row(
-                //               children: [
-                //                 Icon(Icons.timer),
-                //                 SizedBox(
-                //                   width: 7,
-                //                 ),
-                //                 Text(
-                //                   '14 Hires on RingKnock',
-                //                   style: TextStyle(fontSize: 14),
-                //                 )
-                //               ],
-                //             )
-                //           ],
-                //         ),
-                //         const Row(
-                //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //           children: [
-                //             Row(
-                //               children: [
-                //                 Icon(Icons.access_time_sharp),
-                //                 SizedBox(
-                //                   width: 7,
-                //                 ),
-                //                 Text(
-                //                   '7 years in business',
-                //                   style: TextStyle(fontSize: 14),
-                //                 )
-                //               ],
-                //             ),
-                //             Row(
-                //               children: [
-                //                 Icon(Icons.timer),
-                //                 SizedBox(
-                //                   width: 7,
-                //                 ),
-                //                 Text(
-                //                   '6 hours response time',
-                //                   style: TextStyle(fontSize: 14),
-                //                 )
-                //               ],
-                //             )
-                //           ],
-                //         ),
-                //         const Row(
-                //           children: [
-                //             Icon(Icons.person),
-                //             SizedBox(
-                //               width: 7,
-                //             ),
-                //             Text(
-                //               '11-50 Staffs',
-                //               style: TextStyle(fontSize: 14),
-                //             )
-                //           ],
-                //         )
-                //       ],
-                //     ),
-                //   ),
-                // ),
-
                 const SizedBox(
                   height: 20,
                 ),
@@ -396,72 +302,6 @@ class _ProfileState extends State<Profile> {
                 const SizedBox(
                   height: 20,
                 ),
-                // Container(
-                //   height: 151,
-                //   width: scw - 20,
-                //   decoration: const BoxDecoration(
-                //       color: Color(0xFFEEEDED),
-                //       borderRadius: BorderRadius.all(Radius.circular(10))),
-                //   child: const Padding(
-                //     padding: EdgeInsets.all(15.0),
-                //     child: Row(
-                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //       children: [
-                //         Column(
-                //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //           crossAxisAlignment: CrossAxisAlignment.start,
-                //           children: [
-                //             Text(
-                //               'Service Tags',
-                //               style: TextStyle(
-                //                   fontSize: 23, fontWeight: FontWeight.w600),
-                //             ),
-                //             Text(
-                //               '#Kitchen Refurbishment',
-                //               style: TextStyle(
-                //                   fontSize: 14, color: themeColorGreen),
-                //             ),
-                //             Text(
-                //               '#Kitchen Design & Planning',
-                //               style: TextStyle(fontSize: 14),
-                //             ),
-                //             Text(
-                //               '#Bathroom_installation',
-                //               style: TextStyle(fontSize: 14),
-                //             ),
-                //           ],
-                //         ),
-                //         Column(
-                //           crossAxisAlignment: CrossAxisAlignment.start,
-                //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //           children: [
-                //             Text(
-                //               '',
-                //               style: TextStyle(
-                //                   fontSize: 23, fontWeight: FontWeight.w600),
-                //             ),
-                //             Text(
-                //               '#Bathroom_installation',
-                //               style: TextStyle(fontSize: 14),
-                //             ),
-                //             Text(
-                //               '#Bathroom_installation',
-                //               style: TextStyle(fontSize: 14),
-                //             ),
-                //             Text(
-                //               'View More',
-                //               style: TextStyle(
-                //                   fontSize: 14,
-                //                   fontWeight: FontWeight.w500,
-                //                   color: themeColorGreen),
-                //             ),
-                //           ],
-                //         )
-                //       ],
-                //     ),
-                //   ),
-                // ),
-
                 Container(
                   height: 152,
                   width: double.infinity,
@@ -575,10 +415,13 @@ class _ProfileState extends State<Profile> {
                     padding: const EdgeInsets.all(18.0),
                     child: InkWell(
                       onTap: () {
-                        Navigator.pushReplacementNamed(
-                            context, LeadsScreen.routename);
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (_) => LeadsScreen()));
+                        //Get.offNamed(leadscreen);
+
+                        // Navigator.pushReplacementNamed(
+                        //     context, LeadsScreen.routename);
+
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => LeadsScreen()));
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -648,11 +491,13 @@ class _ProfileState extends State<Profile> {
                     padding: const EdgeInsets.all(18.0),
                     child: InkWell(
                       onTap: () {
-                        Navigator.pushReplacementNamed(
-                            context, MyResponse.routename);
+                        // Get.offNamed(myresponse);
 
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (_) => MyResponse()));
+                        // Navigator.pushReplacementNamed(
+                        //     context, MyResponse.routename);
+
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => MyResponse()));
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -763,10 +608,12 @@ class _ProfileState extends State<Profile> {
                     padding: EdgeInsets.all(18.0),
                     child: InkWell(
                       onTap: () {
-                        Navigator.pushReplacementNamed(
-                            context, SettingsPage.routename);
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (_) => SettingsPage()));
+                        //  Get.offNamed(settings);
+                        // Navigator.pushReplacementNamed(
+                        //     context, SettingsPage.routename);
+
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => SettingsPage()));
                       },
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -859,12 +706,14 @@ class _ProfileState extends State<Profile> {
                     padding: const EdgeInsets.all(18.0),
                     child: InkWell(
                       onTap: () {
-                        Navigator.pushReplacementNamed(
-                            context, UpdateLeadSettings.routename);
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (_) => UpdateLeadSettings()));
+                        //Get.offNamed(updateleadsettings);
+
+                        // Navigator.pushReplacementNamed(
+                        //     context, UpdateLeadSettings.routename);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => UpdateLeadSettings()));
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -935,12 +784,14 @@ class _ProfileState extends State<Profile> {
                       children: [
                         InkWell(
                           onTap: () {
-                            Navigator.pushReplacementNamed(
-                                context, LocationPage.routename);
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (_) => LocationPage()));
+                            // Get.offNamed(location);
+
+                            // Navigator.pushReplacementNamed(
+                            //     context, LocationPage.routename);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => LocationPage()));
                           },
                           child: const Row(
                             children: [
@@ -989,8 +840,12 @@ class _ProfileState extends State<Profile> {
                     width: scw / 2 - 60,
                     child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(
-                              context, SignInPage.routename);
+                          // Get.offNamed(signin);
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => SignInPage()));
+
+                          // Navigator.pushReplacementNamed(
+                          //     context, SignInPage.routename);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFFDF2929),

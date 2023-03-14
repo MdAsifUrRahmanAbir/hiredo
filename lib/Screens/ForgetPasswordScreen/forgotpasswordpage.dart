@@ -2,7 +2,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:myapp/Screens/EmailVerifiyScreen/enterverificationpage.dart';
 import 'package:myapp/Screens/SignInScreen/signinpage.dart';
 
@@ -54,8 +56,9 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
                     color: themeColorGreen,
                   ),
                   onPressed: () {
-                    Navigator.pushReplacementNamed(
-                        context, SignInPage.routename);
+                    // Navigator.pushReplacementNamed(
+                    //     context, SignInPage.routename);
+                    Navigator.pop(context);
                   },
                 )),
           ),
@@ -185,8 +188,13 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pushReplacementNamed(
-                            context, VerificationPage.routename);
+                        // Get.offNamed(verification);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => VerificationPage()));
+                        // Navigator.pushReplacementNamed(
+                        //     context, VerificationPage.routename);
                       },
                       child: Text(
                         'Next',

@@ -2,12 +2,13 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
 import 'package:myapp/Screens/CategoriesScreen/categories.dart';
 import 'package:myapp/Screens/SearchResultScreen/catsearchpage.dart';
-import 'package:myapp/Screens/FavoriteScreen/favourite.dart';
+
 import 'package:myapp/nav_bar_page/nav_bar_controller.dart';
 import 'package:myapp/Screens/LocationScreen/locationpage.dart';
 
@@ -90,8 +91,15 @@ class _HomeState extends State<Home> {
                             child: TextFormField(
                               onTap: () {
                                 pages[0] = SearchResult();
-                                Navigator.pushReplacementNamed(
-                                    context, BottomNavController.routename);
+                                print('click');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => BottomNavController()));
+
+                                // Get.offNamed(bottomnav);
+                                // Navigator.pushReplacementNamed(
+                                //     context, BottomNavController.routename);
                               },
                               controller: nameController,
                               decoration: InputDecoration(
@@ -122,8 +130,13 @@ class _HomeState extends State<Home> {
                             child: TextFormField(
                               onTap: () {
                                 pages[0] = LocationPage();
-                                Navigator.pushReplacementNamed(
-                                    context, BottomNavController.routename);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => BottomNavController()));
+
+                                // Navigator.pushReplacementNamed(
+                                //     context, BottomNavController.routename);
                               },
                               controller: locationController,
                               decoration: InputDecoration(
@@ -325,8 +338,11 @@ class _HomeState extends State<Home> {
                                   setState(() {
                                     pages[0] = CategoriesPage();
                                   });
-                                  Navigator.pushReplacementNamed(
-                                      context, BottomNavController.routename);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) =>
+                                              BottomNavController()));
                                 },
                                 child: Text(
                                   "See All",

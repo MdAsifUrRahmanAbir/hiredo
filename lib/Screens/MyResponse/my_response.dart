@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 
 class MyResponse extends StatefulWidget {
-  static const String routename = '/myresponse';
   MyResponse({Key? key}) : super(key: key);
 
   @override
@@ -70,7 +69,9 @@ class _MyResponseState extends State<MyResponse> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: const Icon(
               Icons.arrow_back,
               color: Color(0xff187949),
@@ -308,11 +309,11 @@ class _MyResponseState extends State<MyResponse> {
                                       color: Color(0xffF3F3F6)),
                                   child: Row(
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.beenhere_outlined,
                                         size: 16,
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 10,
                                       ),
                                       Text(
