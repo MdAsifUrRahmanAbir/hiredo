@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+
+
+
 import 'package:get/get.dart';
+
 
 import 'package:myapp/Screens/SplashScreen/splashscreen.dart';
 
@@ -12,6 +16,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
 
@@ -42,5 +47,7 @@ class MyApp extends StatelessWidget {
       //   ReviewsPage.routename: (context) => ReviewsPage()
       // }
     );
+
+
   }
 }
