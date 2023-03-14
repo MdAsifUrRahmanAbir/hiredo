@@ -71,7 +71,9 @@ class _ReviewsPageState extends State<ReviewsPage> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
             icon: Icon(
               Icons.arrow_back,
               color: Color(0xff187949),
