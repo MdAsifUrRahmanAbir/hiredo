@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/Screens/LeadsDetailsScreen/leads_details_screen.dart';
 
 import '../../nav_bar_page/nav_bar_controller.dart';
 
@@ -14,11 +15,51 @@ class LeadsScreen extends StatefulWidget {
 
 class _LeadsScreenState extends State<LeadsScreen> {
   List<Map> item = [
-    {'image': 'images/kumar.png', 'title': 'Kumar', 'time': '3m ago'},
-    {'image': 'images/rahman.png', 'title': 'Reduan', 'time': '5m ago'},
-    {'image': 'images/haq.png', 'title': 'Jhon Smith', 'time': '7m ago'},
-    {'image': 'images/rahman.png', 'title': 'Rahman', 'time': '7m ago'},
-    {'image': 'images/haq.png', 'title': 'Tasmia Haq', 'time': '9m ago'},
+    {
+      'image': 'images/kumar.png',
+      'title': 'Kumar',
+      'time': '3m ago',
+      'locationImage': 'images/location.png',
+      'address': '4517 Washington Ave, Kentucky',
+      'bImage': 'images/b.png',
+      'credit': '2 Credits'
+    },
+    {
+      'image': 'images/rahman.png',
+      'title': 'Reduan',
+      'time': '5m ago',
+      'locationImage': 'images/location.png',
+      'address': '4517 Washington Ave, Kentucky',
+      'bImage': 'images/b.png',
+      'credit': '2 Credits'
+    },
+    {
+      'image': 'images/haq.png',
+      'title': 'Jhon Smith',
+      'time': '7m ago',
+      'locationImage': 'images/location.png',
+      'address': '4517 Washington Ave, Kentucky',
+      'bImage': 'images/b.png',
+      'credit': '2 Credits'
+    },
+    {
+      'image': 'images/rahman.png',
+      'title': 'Rahman',
+      'time': '7m ago',
+      'locationImage': 'images/location.png',
+      'address': '4517 Washington Ave, Kentucky',
+      'bImage': 'images/b.png',
+      'credit': '2 Credits'
+    },
+    {
+      'image': 'images/haq.png',
+      'title': 'Tasmia Haq',
+      'time': '9m ago',
+      'locationImage': 'images/location.png',
+      'address': '4517 Washington Ave, Kentucky',
+      'bImage': 'images/b.png',
+      'credit': '2 Credits'
+    },
   ];
 
   @override
@@ -212,131 +253,148 @@ class _LeadsScreenState extends State<LeadsScreen> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundImage: AssetImage(item[index]['image']),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                item[index]['title'],
-                                style: GoogleFonts.roboto(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xFF272727)),
-                              ),
-                              const SizedBox(
-                                width: 30,
-                              ),
-                              Image.asset('images/run.png'),
-                              Text(
-                                'Plumbing',
-                                style: GoogleFonts.roboto(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: const Color(0xFF424242)),
-                              )
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Image.asset('images/location.png'),
-                              Text(
-                                '4517 Washington Ave, Kentucky ',
-                                style: GoogleFonts.roboto(
-                                    fontSize: 12, fontWeight: FontWeight.w400),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Container(
-                        height: 27,
-                        width: 77,
-                        decoration: BoxDecoration(
-                            color: const Color(0xFFE8FAF1),
-                            borderRadius: BorderRadius.circular(5)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => LeadsDetailsScreen(
+                                image: item[index]['image'],
+                                name: item[index]['title'],
+                                time: item[index]['time'],
+                                locationImage: item[index]['locationImage'],
+                                address: item[index]['address'],
+                                bImage: item[index]['bImage'],
+                                credit: item[index]['credit'],
+                              )));
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        CircleAvatar(
+                          radius: 20,
+                          backgroundImage: AssetImage(item[index]['image']),
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Icon(
-                              Icons.access_time_filled_rounded,
-                              color: Color(0xFF187949),
+                            Row(
+                              children: [
+                                Text(
+                                  item[index]['title'],
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color(0xFF272727)),
+                                ),
+                                const SizedBox(
+                                  width: 30,
+                                ),
+                                Image.asset('images/run.png'),
+                                Text(
+                                  'Plumbing',
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      color: const Color(0xFF424242)),
+                                )
+                              ],
                             ),
-                            Text(
-                              item[index]['time'],
-                              style: GoogleFonts.roboto(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: const Color(0xFF187949)),
+                            Row(
+                              children: [
+                                Image.asset(item[index]['locationImage']),
+                                Text(
+                                  item[index]['address'],
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400),
+                                )
+                              ],
                             )
                           ],
                         ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  RichText(
-                    text: TextSpan(
-                        text: 'Additional Details:',
-                        style: GoogleFonts.roboto(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: const Color(0xFF187949)),
-                        children: [
-                          TextSpan(
-                              text:
-                                  "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.",
-                              style: GoogleFonts.roboto(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w400,
-                                  color: const Color(0xFF848484)))
-                        ]),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Image.asset('images/b.png'),
-                      const SizedBox(
-                        width: 3,
-                      ),
-                      Text(
-                        '2 Credits',
-                        style: GoogleFonts.roboto(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: const Color(0xFF272727)),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  const Divider(
-                    color: Color(0xFF424242),
-                  )
-                ],
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Container(
+                          height: 27,
+                          width: 77,
+                          decoration: BoxDecoration(
+                              color: const Color(0xFFE8FAF1),
+                              borderRadius: BorderRadius.circular(5)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.access_time_filled_rounded,
+                                color: Color(0xFF187949),
+                              ),
+                              Text(
+                                item[index]['time'],
+                                style: GoogleFonts.roboto(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xFF187949)),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    RichText(
+                      text: TextSpan(
+                          text: 'Additional Details:',
+                          style: GoogleFonts.roboto(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: const Color(0xFF187949)),
+                          children: [
+                            TextSpan(
+                                text:
+                                    "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.",
+                                style: GoogleFonts.roboto(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xFF848484)))
+                          ]),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        Image.asset(item[index]['bImage']),
+                        const SizedBox(
+                          width: 3,
+                        ),
+                        Text(
+                          item[index]['credit'],
+                          style: GoogleFonts.roboto(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: const Color(0xFF272727)),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const Divider(
+                      color: Color(0xFF424242),
+                    )
+                  ],
+                ),
               );
             },
             itemCount: item.length,
