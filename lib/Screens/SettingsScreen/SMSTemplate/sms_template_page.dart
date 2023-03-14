@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 import 'package:myapp/utils/colors.dart';
 
-class EmailTemplatePage extends StatefulWidget {
-  static const String routename = '/';
-  EmailTemplatePage({Key? key}) : super(key: key);
+class SMSTemplatePage extends StatefulWidget {
+  SMSTemplatePage({Key? key}) : super(key: key);
 
   @override
-  State<EmailTemplatePage> createState() => _EmailTemplatePageState();
+  State<SMSTemplatePage> createState() => _SMSTemplatePageState();
 }
 
-class _EmailTemplatePageState extends State<EmailTemplatePage> {
-  List<String> name = ['Bathroom', 'Kitchen', 'Renovation'];
+class _SMSTemplatePageState extends State<SMSTemplatePage> {
+
+  List<String> name = ['Visit'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,20 +23,20 @@ class _EmailTemplatePageState extends State<EmailTemplatePage> {
         backgroundColor: Colors.white,
         leading: IconButton(
             onPressed: () {
-              Navigator.of(context).pop();
+             Navigator.of(context).pop();
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Color(0xff187949),
             )),
         title: Text(
-          'Email Templates',
+          'SMS Templates',
           style: myStyle(20, FontWeight.bold, Colors.black),
         ),
         actions: [
           IconButton(
               onPressed: () {},
-              icon: Icon(
+              icon: const Icon(
                 Icons.notifications,
                 color: Color(0xff187949),
               ))
@@ -77,7 +78,7 @@ class _EmailTemplatePageState extends State<EmailTemplatePage> {
               height: 15,
             ),
             ListView.separated(
-              physics: NeverScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) => Container(
                   padding: EdgeInsets.all(10),
@@ -100,10 +101,10 @@ class _EmailTemplatePageState extends State<EmailTemplatePage> {
                       Spacer(),
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 10,vertical: 4),
-                       decoration: BoxDecoration(
-                         color: themeColorGreen,
-                         borderRadius: BorderRadius.circular(4)
-                       ),
+                        decoration: BoxDecoration(
+                            color: themeColorGreen,
+                            borderRadius: BorderRadius.circular(4)
+                        ),
                         child: Text('Edit', style: myStyle(12, FontWeight.w400, scaffoldClr),),
                       ),
                       SizedBox(width: 10,),
@@ -114,8 +115,8 @@ class _EmailTemplatePageState extends State<EmailTemplatePage> {
                   ),
                 ),
                 separatorBuilder: (context, index) => SizedBox(
-                      height: 10,
-                    ),
+                  height: 10,
+                ),
                 itemCount: name.length),
             SizedBox(height: 15,),
             Row(

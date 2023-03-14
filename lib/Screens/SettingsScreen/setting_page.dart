@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/Screens/ProfileScreen/profile.dart';
 import 'package:myapp/Screens/ReviewScreen/reviews_page.dart';
+import 'package:myapp/Screens/SettingsScreen/AccountDetails/account_details.dart';
+import 'package:myapp/Screens/SettingsScreen/ElitePro/elite_pro_page.dart';
+import 'package:myapp/Screens/SettingsScreen/EmailTemplate/email_template_page.dart';
+import 'package:myapp/Screens/SettingsScreen/OneClickResponce/one_click_responce_page.dart';
+import 'package:myapp/Screens/SettingsScreen/SMSTemplate/sms_template_page.dart';
+import 'package:myapp/Screens/SettingsScreen/SettingsBadge/badge_page.dart';
 
 class SettingsPage extends StatefulWidget {
   static const String routename = '/settings';
@@ -39,13 +46,15 @@ class _SettingsPageState extends State<SettingsPage> {
     {'icon': Icons.open_in_browser, 'title': 'Browser'},
   ];
 
-  List pages = [
-    Container(),
+  List profile = [
+    Profile(),
     ReviewsPage(),
-    Container(),
-    Container(),
-    Container()
+    EliteProPage(),
+    BadgePage(),
+    AccountDetailsPage()
   ];
+
+  List communication=[OneClickResponcePage(),EmailTemplatePage(),SMSTemplatePage()];
   int pageIndex = 0;
   var seletced = 0;
 
@@ -107,7 +116,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (_) => pages[pageIndex]));
+                                        builder: (_) => profile[pageIndex]));
                               });
                             },
                             child: Container(
@@ -165,42 +174,51 @@ class _SettingsPageState extends State<SettingsPage> {
                   child: ListView.separated(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => Container(
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-                            height: 55,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(5),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.1),
-                                  spreadRadius: 1,
-                                  blurRadius: 1,
-                                  offset: Offset(
-                                      0, 1), // changes position of shadow
-                                ),
-                              ],
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            seletced=index;
+                            pageIndex=seletced;
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => communication[pageIndex],));
+                          });
+                        },
+                        child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 15),
+                              height: 55,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(5),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.1),
+                                    spreadRadius: 1,
+                                    blurRadius: 1,
+                                    offset: Offset(
+                                        0, 1), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(communications[index]['icon']),
+                                  SizedBox(
+                                    width: 15,
+                                  ),
+                                  Text(
+                                    communications[index]['title'],
+                                    style: myStyle(
+                                        16, FontWeight.w500, Colors.black),
+                                  ),
+                                  Spacer(),
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 16,
+                                  )
+                                ],
+                              ),
                             ),
-                            child: Row(
-                              children: [
-                                Icon(communications[index]['icon']),
-                                SizedBox(
-                                  width: 15,
-                                ),
-                                Text(
-                                  communications[index]['title'],
-                                  style: myStyle(
-                                      16, FontWeight.w500, Colors.black),
-                                ),
-                                Spacer(),
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 16,
-                                )
-                              ],
-                            ),
-                          ),
+                      ),
                       separatorBuilder: (context, index) => SizedBox(
                             height: 10,
                           ),
