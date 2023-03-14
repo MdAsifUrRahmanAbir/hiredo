@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Route/route.dart';
+
 import 'package:myapp/Screens/LeadsScreen/lead_screen.dart';
 import 'package:myapp/Screens/MyResponse/my_response.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
@@ -415,13 +415,13 @@ class _ProfileState extends State<Profile> {
                     padding: const EdgeInsets.all(18.0),
                     child: InkWell(
                       onTap: () {
-                        Get.offNamed(leadscreen);
+                        //Get.offNamed(leadscreen);
 
                         // Navigator.pushReplacementNamed(
                         //     context, LeadsScreen.routename);
 
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (_) => LeadsScreen()));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => LeadsScreen()));
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -491,13 +491,13 @@ class _ProfileState extends State<Profile> {
                     padding: const EdgeInsets.all(18.0),
                     child: InkWell(
                       onTap: () {
-                        Get.offNamed(myresponse);
+                        // Get.offNamed(myresponse);
 
                         // Navigator.pushReplacementNamed(
                         //     context, MyResponse.routename);
 
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (_) => MyResponse()));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => MyResponse()));
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -608,11 +608,12 @@ class _ProfileState extends State<Profile> {
                     padding: EdgeInsets.all(18.0),
                     child: InkWell(
                       onTap: () {
-                        Get.offNamed(settings);
+                        //  Get.offNamed(settings);
                         // Navigator.pushReplacementNamed(
                         //     context, SettingsPage.routename);
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (_) => SettingsPage()));
+
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => SettingsPage()));
                       },
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -705,14 +706,14 @@ class _ProfileState extends State<Profile> {
                     padding: const EdgeInsets.all(18.0),
                     child: InkWell(
                       onTap: () {
-                        Get.offNamed(updateleadsettings);
+                        //Get.offNamed(updateleadsettings);
 
                         // Navigator.pushReplacementNamed(
                         //     context, UpdateLeadSettings.routename);
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (_) => UpdateLeadSettings()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => UpdateLeadSettings()));
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -783,14 +784,14 @@ class _ProfileState extends State<Profile> {
                       children: [
                         InkWell(
                           onTap: () {
-                            Get.offNamed(location);
+                            // Get.offNamed(location);
 
                             // Navigator.pushReplacementNamed(
                             //     context, LocationPage.routename);
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (_) => LocationPage()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => LocationPage()));
                           },
                           child: const Row(
                             children: [
@@ -839,7 +840,9 @@ class _ProfileState extends State<Profile> {
                     width: scw / 2 - 60,
                     child: ElevatedButton(
                         onPressed: () {
-                          Get.offNamed(signin);
+                          // Get.offNamed(signin);
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => SignInPage()));
 
                           // Navigator.pushReplacementNamed(
                           //     context, SignInPage.routename);

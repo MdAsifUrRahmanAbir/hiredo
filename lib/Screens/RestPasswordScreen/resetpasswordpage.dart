@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Route/route.dart';
+
 import 'package:myapp/Screens/EmailVerifiyScreen/enterverificationpage.dart';
 
 import '../../utils/colors.dart';
@@ -33,7 +33,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
             child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(90),
                       topRight: Radius.circular(90),
                       bottomLeft: Radius.circular(90),
@@ -48,15 +48,14 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   ],
                 ),
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back_ios_sharp,
                     color: themeColorGreen,
                   ),
                   onPressed: () {
                     // Navigator.pushReplacementNamed(
                     //     context, VerificationPage.routename);
-
-                    Get.offNamed(verification);
+                    Navigator.pop(context);
                   },
                 )),
           ),

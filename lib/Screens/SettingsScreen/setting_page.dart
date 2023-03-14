@@ -58,8 +58,10 @@ class _SettingsPageState extends State<SettingsPage> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-            onPressed: () {},
-            icon: Icon(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
               Icons.arrow_back,
               color: Color(0xff187949),
             )),
@@ -70,7 +72,7 @@ class _SettingsPageState extends State<SettingsPage> {
         actions: [
           IconButton(
               onPressed: () {},
-              icon: Icon(
+              icon: const Icon(
                 Icons.notifications,
                 color: Color(0xff187949),
               ))
@@ -229,7 +231,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   color: Colors.grey.withOpacity(0.1),
                                   spreadRadius: 1,
                                   blurRadius: 1,
-                                  offset: Offset(
+                                  offset: const Offset(
                                       0, 1), // changes position of shadow
                                 ),
                               ],
@@ -237,7 +239,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             child: Row(
                               children: [
                                 Icon(credits[index]['icon']),
-                                SizedBox(
+                                const SizedBox(
                                   width: 15,
                                 ),
                                 Text(
@@ -245,34 +247,34 @@ class _SettingsPageState extends State<SettingsPage> {
                                   style: myStyle(
                                       16, FontWeight.w500, Colors.black),
                                 ),
-                                Spacer(),
-                                Icon(
+                                const Spacer(),
+                                const Icon(
                                   Icons.arrow_forward_ios,
                                   size: 16,
                                 )
                               ],
                             ),
                           ),
-                      separatorBuilder: (context, index) => SizedBox(
+                      separatorBuilder: (context, index) => const SizedBox(
                             height: 10,
                           ),
                       itemCount: credits.length)),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Text(
                 'Intergrations',
                 style: myStyle(18, FontWeight.bold, Colors.black),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Flexible(
                   child: ListView.separated(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) => Container(
-                            padding: EdgeInsets.symmetric(horizontal: 15),
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
                             height: 55,
                             width: double.infinity,
                             decoration: BoxDecoration(
@@ -283,7 +285,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   color: Colors.grey.withOpacity(0.1),
                                   spreadRadius: 1,
                                   blurRadius: 1,
-                                  offset: Offset(
+                                  offset: const Offset(
                                       0, 1), // changes position of shadow
                                 ),
                               ],
@@ -291,7 +293,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             child: Row(
                               children: [
                                 Icon(intergrations[index]['icon']),
-                                SizedBox(
+                                const SizedBox(
                                   width: 15,
                                 ),
                                 Text(
@@ -299,26 +301,26 @@ class _SettingsPageState extends State<SettingsPage> {
                                   style: myStyle(
                                       16, FontWeight.w500, Colors.black),
                                 ),
-                                Spacer(),
-                                Icon(
+                                const Spacer(),
+                                const Icon(
                                   Icons.arrow_forward_ios,
                                   size: 16,
                                 )
                               ],
                             ),
                           ),
-                      separatorBuilder: (context, index) => SizedBox(
+                      separatorBuilder: (context, index) => const SizedBox(
                             height: 10,
                           ),
                       itemCount: intergrations.length)),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Align(
                 alignment: Alignment.center,
                 child: ElevatedButton.icon(
                   onPressed: () {},
-                  icon: Icon(Icons.save),
+                  icon: const Icon(Icons.save),
                   label: Text('Save'),
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xffDF2929)),

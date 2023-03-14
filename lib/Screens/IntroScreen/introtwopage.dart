@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Route/route.dart';
+
 import 'package:myapp/Screens/IntroScreen/introonepage.dart';
 import 'package:myapp/Screens/SignInScreen/signinpage.dart';
 
@@ -90,12 +90,12 @@ class _IntroTwoPageState extends State<IntroTwoPage> {
                     ),
                     IconButton(
                       onPressed: () {
-                        Get.offNamed(signin);
+                        // Get.offNamed(signin);
 
                         // Navigator.pushReplacementNamed(
                         //     context, SignInPage.routename);
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (_) => SignInPage()));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => SignInPage()));
                       },
                       icon: Icon(Icons.chevron_right_outlined,
                           color: themeColorGreen, size: 25),

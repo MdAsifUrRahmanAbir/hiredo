@@ -39,6 +39,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
               // Navigator.pushReplacementNamed(
               //     context, BottomNavController.routename);
               Get.back();
+              Navigator.pop(context);
             },
             icon: Icon(
               Icons.arrow_back,

@@ -22,6 +22,7 @@ class UpdateLeadSettings extends StatelessWidget {
           leading: IconButton(
               onPressed: () {
                 // Navigator.pushReplacementNamed(context, Profile.routename);
+                Navigator.pop(context);
               },
               icon: const Icon(
                 Icons.arrow_back,

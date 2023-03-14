@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Route/route.dart';
+
 import 'package:myapp/Screens/IntroScreen/introtwopage.dart';
 import 'package:myapp/utils/colors.dart';
 
@@ -76,12 +76,12 @@ class _IntroOnePageState extends State<IntroOnePage> {
                     ),
                     IconButton(
                       onPressed: () {
-                        Get.offNamed(introPageTwo);
+                        // Get.offNamed(introPageTwo);
 
                         // Navigator.pushReplacementNamed(
                         //     context, IntroTwoPage.routename);
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (_) => IntroTwoPage()));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => IntroTwoPage()));
                       },
                       icon: Icon(Icons.chevron_right_outlined,
                           color: themeColorGreen, size: 25),

@@ -2,14 +2,13 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:get/get.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/Route/route.dart';
 
 import 'package:myapp/Screens/CategoriesScreen/categories.dart';
 import 'package:myapp/Screens/SearchResultScreen/catsearchpage.dart';
-import 'package:myapp/Screens/FavoriteScreen/favourite.dart';
+
 import 'package:myapp/nav_bar_page/nav_bar_controller.dart';
 import 'package:myapp/Screens/LocationScreen/locationpage.dart';
 

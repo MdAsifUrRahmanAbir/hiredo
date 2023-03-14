@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Route/route.dart';
+
 import 'package:myapp/Screens/ResistrationScreen/registrationpage.dart';
 import 'package:myapp/Screens/IntroScreen/signupintropage.dart';
 import 'package:myapp/utils/colors.dart';
@@ -55,6 +55,8 @@ class _SignAccountChoosePageState extends State<SignAccountChoosePage> {
                   onPressed: () {
                     // Navigator.pushReplacementNamed(
                     //     context, SignIntroPage.routename);
+
+                    Navigator.pop(context);
                   },
                 )),
           ),
@@ -171,7 +173,9 @@ class _SignAccountChoosePageState extends State<SignAccountChoosePage> {
               onTap: () {
                 // Navigator.pushReplacementNamed(
                 //     context, RegistrationPage.routename);
-                Get.offNamed(registration);
+                //Get.offNamed(registration);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => RegistrationPage()));
               },
               child: Container(
                 height: 50,

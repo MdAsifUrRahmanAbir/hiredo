@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Route/route.dart';
+
 import 'package:myapp/Screens/SignInScreen/signinpage.dart';
 
 import '../SignUpAccountScreen/signupaccountchoosepage.dart';
@@ -82,7 +82,11 @@ class _SignIntroPageState extends State<SignIntroPage> {
                           onPressed: () {
                             // Navigator.pushReplacementNamed(
                             //     context, SignAccountChoosePage.routename);
-                            Get.offNamed(signinaccout);
+                            //Get.offNamed(signinaccout);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => SignAccountChoosePage()));
                           },
                           child: Text(
                             'Create Profile',
@@ -102,9 +106,13 @@ class _SignIntroPageState extends State<SignIntroPage> {
                         ),
                         TextButton(
                             onPressed: () {
-                              Get.offNamed(signin);
+                              // Get.offNamed(signin);
                               // Navigator.pushReplacementNamed(
                               //     context, SignInPage.routename);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => SignInPage()));
                             },
                             child: Text(
                               'Sign In',

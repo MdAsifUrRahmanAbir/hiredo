@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Route/route.dart';
+
 import 'package:myapp/Screens/SignInScreen/signinpage.dart';
 import 'package:myapp/Screens/SignUpAccountScreen/signupaccountchoosepage.dart';
 
@@ -401,7 +401,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         onPressed: () {
                           // Navigator.pushReplacementNamed(
                           //     context, SignInPage.routename);
-                          Get.offNamed(signin);
+                          //Get.offNamed(signin);
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => SignInPage()));
                         },
                         child: Text(
                           'Next',
