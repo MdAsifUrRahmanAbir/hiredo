@@ -56,7 +56,7 @@ class _EmailTemplatePageState extends State<EmailTemplatePage> {
                 ),
                 Container(
                   color: themeColorGreen,
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                   child: Row(
                     children: [
                       Icon(
@@ -99,7 +99,7 @@ class _EmailTemplatePageState extends State<EmailTemplatePage> {
                       Text(name[index], style: myStyle(18, FontWeight.w500, textClr),),
                       Spacer(),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10,vertical: 4),
+                        padding: EdgeInsets.symmetric(horizontal: 10,vertical: 6),
                        decoration: BoxDecoration(
                          color: themeColorGreen,
                          borderRadius: BorderRadius.circular(4)

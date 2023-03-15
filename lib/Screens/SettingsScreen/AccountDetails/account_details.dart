@@ -165,7 +165,7 @@ class _AccountDetailsPageState extends State<AccountDetailsPage> {
             Text('Amet minim mollit non deserunt', style: myStyle(14, FontWeight.w400, offWhite),),
             SizedBox(height: 5,),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
              decoration: BoxDecoration(
                color: themeColorGreen,
                borderRadius: BorderRadius.circular(4)

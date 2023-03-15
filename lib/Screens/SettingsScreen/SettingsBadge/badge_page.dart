@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/Screens/SettingsScreen/SettingsBadge/badges_second_page.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 import 'package:myapp/utils/colors.dart';
 
@@ -95,7 +96,9 @@ class _BadgePageState extends State<BadgePage> {
             ),
             badge_item(
               text: 'The Reviews Badge',
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => BadgesSecondPage(),));
+              },
             ),
             SizedBox(
               height: 10,
