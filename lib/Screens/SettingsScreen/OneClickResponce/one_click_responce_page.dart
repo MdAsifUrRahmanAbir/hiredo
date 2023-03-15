@@ -85,6 +85,7 @@ class _OneClickResponcePageState extends State<OneClickResponcePage> {
               'Email template to be used for your one-click response:',
               style: myStyle(14, FontWeight.w400, textClr),
             ),
+            SizedBox(height: 5,),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10),
               height: 50,
@@ -121,9 +122,11 @@ class _OneClickResponcePageState extends State<OneClickResponcePage> {
                 ],
               ),
             ),
+            SizedBox(height: 5,),
             Row(
               children: [
                 Icon(Icons.error_outline),
+                SizedBox(width: 3,),
                 Expanded(
                     child: Text(
                   'You can view, edit and manage your email templates in email templates',

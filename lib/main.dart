@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 
 import 'package:get/get.dart';
+import 'package:myapp/Screens/SettingsScreen/MyCredits/my_credits_page.dart';
 
 
 import 'package:myapp/Screens/SplashScreen/splashscreen.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
 
-      home: SplashPage(),
+      home: MyCreditsPage(),
 
       // routes: {
       //   SplashPage.routeName: (context) => SplashPage(),
