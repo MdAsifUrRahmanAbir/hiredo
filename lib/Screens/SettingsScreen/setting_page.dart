@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:myapp/Screens/ProfileScreen/profile.dart';
 import 'package:myapp/Screens/ReviewScreen/reviews_page.dart';
 import 'package:myapp/Screens/SettingsScreen/AccountDetails/account_details.dart';
+import 'package:myapp/Screens/SettingsScreen/BillingDetails/billing_details.dart';
 import 'package:myapp/Screens/SettingsScreen/ElitePro/elite_pro_page.dart';
 import 'package:myapp/Screens/SettingsScreen/EmailTemplate/email_template_page.dart';
 import 'package:myapp/Screens/SettingsScreen/MyCredits/my_credits_page.dart';
 import 'package:myapp/Screens/SettingsScreen/OneClickResponce/one_click_responce_page.dart';
+import 'package:myapp/Screens/SettingsScreen/PaymentDetails/payment_details.dart';
 import 'package:myapp/Screens/SettingsScreen/SMSTemplate/sms_template_page.dart';
 import 'package:myapp/Screens/SettingsScreen/SettingsBadge/badge_page.dart';
 
@@ -55,7 +57,7 @@ class _SettingsPageState extends State<SettingsPage> {
     AccountDetailsPage()
   ];
 
-  List credits_payment=[MyCreditsPage(),Container(),Container()];
+  List credits_payment=[MyCreditsPage(),BillingDetails(),PaymentDetails()];
 
   List communication=[OneClickResponcePage(),EmailTemplatePage(),SMSTemplatePage()];
   int pageIndex = 0;
