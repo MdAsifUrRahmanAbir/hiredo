@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/Screens/HomeScreen/home.dart';
 import 'package:myapp/Screens/LeadsDetailsScreen/leads_details_screen.dart';
 
 import '../../nav_bar_page/nav_bar_controller.dart';
+import '../../utils/colors.dart';
 
 class LeadsScreen extends StatefulWidget {
   static const String routename = '/leadscreen';
@@ -86,6 +88,36 @@ class _LeadsScreenState extends State<LeadsScreen> {
             )),
         actions: [Image.asset('images/notification.png')],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.white,
+          currentIndex: 0,
+          items: [
+            BottomNavigationBarItem(
+                icon: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (_) => Home()));
+                  },
+                  icon: Icon(Icons.home),
+                ),
+                activeIcon: Icon(Icons.home, size: 25, color: themeColorGreen),
+                label: ''),
+            BottomNavigationBarItem(
+                icon: IconButton(onPressed: () {}, icon: Icon(Icons.home)),
+                label: ''),
+            BottomNavigationBarItem(
+                icon: IconButton(onPressed: () {}, icon: Icon(Icons.home)),
+                label: ''),
+            BottomNavigationBarItem(
+                icon: IconButton(onPressed: () {}, icon: Icon(Icons.home)),
+                label: ''),
+            BottomNavigationBarItem(
+                icon: IconButton(onPressed: () {}, icon: Icon(Icons.home)),
+                label: '')
+          ]),
       body: ListView(
         padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
         children: [

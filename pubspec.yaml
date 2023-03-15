@@ -41,11 +41,13 @@ dependencies:
   dropdown_button2: ^1.9.4
   flutter_verification_code: ^1.1.6
   flutter_countdown_timer: ^4.1.0
+ 
 
   flutter_switch: ^0.3.2
 
   get: ^4.6.5
   google_maps_flutter: ^2.2.5
+  intl: ^0.18.0
 
 
 dev_dependencies:

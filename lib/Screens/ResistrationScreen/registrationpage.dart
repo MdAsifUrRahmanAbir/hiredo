@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 import 'package:myapp/Screens/SignInScreen/signinpage.dart';
 import 'package:myapp/Screens/SignUpAccountScreen/signupaccountchoosepage.dart';
@@ -65,8 +66,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       color: themeColorGreen,
                     ),
                     onPressed: () {
-                      // Navigator.pushReplacementNamed(
-                      //     context, SignAccountChoosePage.routename);
+                      Navigator.pop(context);
                     },
                   )),
             ),
@@ -99,9 +99,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     decoration: InputDecoration(
                         filled: true,
                         fillColor: themeColorGreen.withOpacity(0.1),
-
-                        //prefixIcon: Icon(Icons.email_outlined,color: Colors.black,),
-
                         focusedBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.black, width: 0.5)),
@@ -273,12 +270,24 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   ),
                   TextFormField(
                     controller: dateController,
+                    onTap: () async {
+                      DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2050));
+
+                      if (pickedDate != null) {
+                        String formattedDate =
+                            DateFormat('yyyy-MM-dd').format(pickedDate);
+                        setState(() {
+                          dateController.text = formattedDate;
+                        });
+                      }
+                    },
                     decoration: InputDecoration(
                         filled: true,
                         fillColor: themeColorGreen.withOpacity(0.1),
-
-                        //prefixIcon: Icon(Icons.email_outlined,color: Colors.black,),
-
                         focusedBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.black, width: 0.5)),
@@ -303,6 +312,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   ),
                   TextFormField(
                     controller: numberController,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                         filled: true,
                         fillColor: themeColorGreen.withOpacity(0.1),
@@ -367,6 +377,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   ),
                   TextFormField(
                     controller: corpunumController,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                         filled: true,
                         fillColor: themeColorGreen.withOpacity(0.1),
@@ -392,7 +403,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     width: scwidth - 18,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: themeColorGreen,
+                          backgroundColor: themeColorGreen,
                           shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.circular(10), // <-- Radius

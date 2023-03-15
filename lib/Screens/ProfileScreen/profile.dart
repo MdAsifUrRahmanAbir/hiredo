@@ -9,6 +9,7 @@ import 'package:myapp/Screens/MyResponse/my_response.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 import 'package:myapp/Screens/SignInScreen/signinpage.dart';
 import 'package:myapp/Screens/UpdateLeadSetting/update_lead_settings.dart';
+import 'package:myapp/Screens/WishListScreen/wish_list_screen.dart';
 import 'package:myapp/utils/colors.dart';
 
 import '../LocationScreen/locationpage.dart';
@@ -560,29 +561,37 @@ class _ProfileState extends State<Profile> {
                       ),
                     ],
                   ),
-                  child: const Padding(
+                  child: Padding(
                     padding: EdgeInsets.all(18.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.favorite_border,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              'Wishlist',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w600),
-                            )
-                          ],
-                        ),
-                        Icon(Icons.navigate_next),
-                      ],
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => WishListScreen()));
+                      },
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.favorite_border,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                'Wishlist',
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w600),
+                              )
+                            ],
+                          ),
+                          Icon(Icons.navigate_next),
+                        ],
+                      ),
                     ),
                   ),
                 ),
