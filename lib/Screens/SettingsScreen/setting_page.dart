@@ -4,6 +4,7 @@ import 'package:myapp/Screens/ReviewScreen/reviews_page.dart';
 import 'package:myapp/Screens/SettingsScreen/AccountDetails/account_details.dart';
 import 'package:myapp/Screens/SettingsScreen/ElitePro/elite_pro_page.dart';
 import 'package:myapp/Screens/SettingsScreen/EmailTemplate/email_template_page.dart';
+import 'package:myapp/Screens/SettingsScreen/MyCredits/my_credits_page.dart';
 import 'package:myapp/Screens/SettingsScreen/OneClickResponce/one_click_responce_page.dart';
 import 'package:myapp/Screens/SettingsScreen/SMSTemplate/sms_template_page.dart';
 import 'package:myapp/Screens/SettingsScreen/SettingsBadge/badge_page.dart';
@@ -53,6 +54,8 @@ class _SettingsPageState extends State<SettingsPage> {
     BadgePage(),
     AccountDetailsPage()
   ];
+
+  List credits_payment=[MyCreditsPage(),Container(),Container()];
 
   List communication=[OneClickResponcePage(),EmailTemplatePage(),SMSTemplatePage()];
   int pageIndex = 0;
@@ -237,42 +240,54 @@ class _SettingsPageState extends State<SettingsPage> {
                   child: ListView.separated(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => Container(
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-                            height: 55,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(5),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.1),
-                                  spreadRadius: 1,
-                                  blurRadius: 1,
-                                  offset: const Offset(
-                                      0, 1), // changes position of shadow
-                                ),
-                              ],
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            seletced = index;
+                            pageIndex = seletced;
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => credits_payment[pageIndex]));
+                          });
+                        },
+                        child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 15),
+                              height: 55,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(5),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.1),
+                                    spreadRadius: 1,
+                                    blurRadius: 1,
+                                    offset: const Offset(
+                                        0, 1), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(credits[index]['icon']),
+                                  const SizedBox(
+                                    width: 15,
+                                  ),
+                                  Text(
+                                    credits[index]['title'],
+                                    style: myStyle(
+                                        16, FontWeight.w500, Colors.black),
+                                  ),
+                                  const Spacer(),
+                                  const Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 16,
+                                  )
+                                ],
+                              ),
                             ),
-                            child: Row(
-                              children: [
-                                Icon(credits[index]['icon']),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                Text(
-                                  credits[index]['title'],
-                                  style: myStyle(
-                                      16, FontWeight.w500, Colors.black),
-                                ),
-                                const Spacer(),
-                                const Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 16,
-                                )
-                              ],
-                            ),
-                          ),
+                      ),
                       separatorBuilder: (context, index) => const SizedBox(
                             height: 10,
                           ),
