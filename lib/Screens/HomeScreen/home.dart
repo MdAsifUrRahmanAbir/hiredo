@@ -90,16 +90,11 @@ class _HomeState extends State<Home> {
                             padding: EdgeInsets.all(8.0),
                             child: TextFormField(
                               onTap: () {
-                                pages[0] = SearchResult();
                                 print('click');
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (_) => BottomNavController()));
-
-                                // Get.offNamed(bottomnav);
-                                // Navigator.pushReplacementNamed(
-                                //     context, BottomNavController.routename);
+                                        builder: (_) => SearchResult()));
                               },
                               controller: nameController,
                               decoration: InputDecoration(
@@ -129,14 +124,10 @@ class _HomeState extends State<Home> {
                             padding: EdgeInsets.all(5),
                             child: TextFormField(
                               onTap: () {
-                                pages[0] = LocationPage();
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (_) => BottomNavController()));
-
-                                // Navigator.pushReplacementNamed(
-                                //     context, BottomNavController.routename);
+                                        builder: (_) => LocationPage()));
                               },
                               controller: locationController,
                               decoration: InputDecoration(

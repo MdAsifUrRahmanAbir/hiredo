@@ -88,36 +88,6 @@ class _LeadsScreenState extends State<LeadsScreen> {
             )),
         actions: [Image.asset('images/notification.png')],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
-          currentIndex: 0,
-          items: [
-            BottomNavigationBarItem(
-                icon: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => Home()));
-                  },
-                  icon: Icon(Icons.home),
-                ),
-                activeIcon: Icon(Icons.home, size: 25, color: themeColorGreen),
-                label: ''),
-            BottomNavigationBarItem(
-                icon: IconButton(onPressed: () {}, icon: Icon(Icons.home)),
-                label: ''),
-            BottomNavigationBarItem(
-                icon: IconButton(onPressed: () {}, icon: Icon(Icons.home)),
-                label: ''),
-            BottomNavigationBarItem(
-                icon: IconButton(onPressed: () {}, icon: Icon(Icons.home)),
-                label: ''),
-            BottomNavigationBarItem(
-                icon: IconButton(onPressed: () {}, icon: Icon(Icons.home)),
-                label: '')
-          ]),
       body: ListView(
         padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
         children: [

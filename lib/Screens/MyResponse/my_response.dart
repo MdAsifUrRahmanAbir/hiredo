@@ -332,7 +332,7 @@ class _MyResponseState extends State<MyResponse> {
                               ],
                             ),
                           ),
-                      separatorBuilder: (context, index) => SizedBox(
+                      separatorBuilder: (context, index) => const SizedBox(
                             height: 20,
                           ),
                       itemCount: pending.length)),

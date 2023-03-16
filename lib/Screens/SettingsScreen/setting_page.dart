@@ -3,7 +3,9 @@ import 'package:myapp/Screens/ProfileScreen/profile.dart';
 import 'package:myapp/Screens/ReviewScreen/reviews_page.dart';
 import 'package:myapp/Screens/SettingsScreen/AccountDetails/account_details.dart';
 import 'package:myapp/Screens/SettingsScreen/BillingDetails/billing_details.dart';
+import 'package:myapp/Screens/SettingsScreen/BrowserNotification/browser_notification.dart';
 import 'package:myapp/Screens/SettingsScreen/ElitePro/elite_pro_page.dart';
+import 'package:myapp/Screens/SettingsScreen/EmailNotification/email_notification.dart';
 import 'package:myapp/Screens/SettingsScreen/EmailTemplate/email_template_page.dart';
 import 'package:myapp/Screens/SettingsScreen/MyCredits/my_credits_page.dart';
 import 'package:myapp/Screens/SettingsScreen/OneClickResponce/one_click_responce_page.dart';
@@ -57,9 +59,15 @@ class _SettingsPageState extends State<SettingsPage> {
     AccountDetailsPage()
   ];
 
-  List credits_payment=[MyCreditsPage(),BillingDetails(),PaymentDetails()];
+  List credits_payment = [MyCreditsPage(), BillingDetails(), PaymentDetails()];
 
-  List communication=[OneClickResponcePage(),EmailTemplatePage(),SMSTemplatePage()];
+  List intergration_screen = [EmailNotification(), BrowserNotification()];
+
+  List communication = [
+    OneClickResponcePage(),
+    EmailTemplatePage(),
+    SMSTemplatePage()
+  ];
   int pageIndex = 0;
   var seletced = 0;
 
@@ -93,7 +101,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         height: double.infinity,
         width: double.infinity,
         child: SingleChildScrollView(
@@ -106,13 +114,13 @@ class _SettingsPageState extends State<SettingsPage> {
                 'My Profile',
                 style: myStyle(18, FontWeight.bold, Colors.black),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Flexible(
                   child: ListView.separated(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) => InkWell(
                             onTap: () {
                               setState(() {
@@ -125,7 +133,8 @@ class _SettingsPageState extends State<SettingsPage> {
                               });
                             },
                             child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 15),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
                               height: 55,
                               width: double.infinity,
                               decoration: BoxDecoration(
@@ -136,7 +145,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                     color: Colors.grey.withOpacity(0.1),
                                     spreadRadius: 1,
                                     blurRadius: 1,
-                                    offset: Offset(
+                                    offset: const Offset(
                                         0, 1), // changes position of shadow
                                   ),
                                 ],
@@ -144,7 +153,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               child: Row(
                                 children: [
                                   Icon(myProfile[index]['icon']),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 15,
                                   ),
                                   Text(
@@ -152,8 +161,8 @@ class _SettingsPageState extends State<SettingsPage> {
                                     style: myStyle(
                                         16, FontWeight.w500, Colors.black),
                                   ),
-                                  Spacer(),
-                                  Icon(
+                                  const Spacer(),
+                                  const Icon(
                                     Icons.arrow_forward_ios,
                                     size: 16,
                                   )
@@ -161,34 +170,38 @@ class _SettingsPageState extends State<SettingsPage> {
                               ),
                             ),
                           ),
-                      separatorBuilder: (context, index) => SizedBox(
+                      separatorBuilder: (context, index) => const SizedBox(
                             height: 10,
                           ),
                       itemCount: myProfile.length)),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Text(
                 'Communication',
                 style: myStyle(18, FontWeight.bold, Colors.black),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Flexible(
                   child: ListView.separated(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) => GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            seletced=index;
-                            pageIndex=seletced;
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => communication[pageIndex],));
-                          });
-                        },
-                        child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 15),
+                            onTap: () {
+                              setState(() {
+                                seletced = index;
+                                pageIndex = seletced;
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      communication[pageIndex],
+                                ));
+                              });
+                            },
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
                               height: 55,
                               width: double.infinity,
                               decoration: BoxDecoration(
@@ -199,7 +212,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                     color: Colors.grey.withOpacity(0.1),
                                     spreadRadius: 1,
                                     blurRadius: 1,
-                                    offset: Offset(
+                                    offset: const Offset(
                                         0, 1), // changes position of shadow
                                   ),
                                 ],
@@ -207,7 +220,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               child: Row(
                                 children: [
                                   Icon(communications[index]['icon']),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 15,
                                   ),
                                   Text(
@@ -215,46 +228,48 @@ class _SettingsPageState extends State<SettingsPage> {
                                     style: myStyle(
                                         16, FontWeight.w500, Colors.black),
                                   ),
-                                  Spacer(),
-                                  Icon(
+                                  const Spacer(),
+                                  const Icon(
                                     Icons.arrow_forward_ios,
                                     size: 16,
                                   )
                                 ],
                               ),
                             ),
-                      ),
-                      separatorBuilder: (context, index) => SizedBox(
+                          ),
+                      separatorBuilder: (context, index) => const SizedBox(
                             height: 10,
                           ),
                       itemCount: communications.length)),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Text(
                 'Credits & Payments',
                 style: myStyle(18, FontWeight.bold, Colors.black),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Flexible(
                   child: ListView.separated(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) => GestureDetector(
-                        onTap: (){
-                          setState(() {
-                            seletced = index;
-                            pageIndex = seletced;
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => credits_payment[pageIndex]));
-                          });
-                        },
-                        child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 15),
+                            onTap: () {
+                              setState(() {
+                                seletced = index;
+                                pageIndex = seletced;
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) =>
+                                            credits_payment[pageIndex]));
+                              });
+                            },
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
                               height: 55,
                               width: double.infinity,
                               decoration: BoxDecoration(
@@ -289,7 +304,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 ],
                               ),
                             ),
-                      ),
+                          ),
                       separatorBuilder: (context, index) => const SizedBox(
                             height: 10,
                           ),
@@ -308,40 +323,54 @@ class _SettingsPageState extends State<SettingsPage> {
                   child: ListView.separated(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            height: 55,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(5),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.1),
-                                  spreadRadius: 1,
-                                  blurRadius: 1,
-                                  offset: const Offset(
-                                      0, 1), // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(intergrations[index]['icon']),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                Text(
-                                  intergrations[index]['title'],
-                                  style: myStyle(
-                                      16, FontWeight.w500, Colors.black),
-                                ),
-                                const Spacer(),
-                                const Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 16,
-                                )
-                              ],
+                      itemBuilder: (context, index) => InkWell(
+                            onTap: () {
+                              setState(() {
+                                seletced = index;
+                                pageIndex = seletced;
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) =>
+                                            intergration_screen[pageIndex]));
+                              });
+                            },
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              height: 55,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(5),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.1),
+                                    spreadRadius: 1,
+                                    blurRadius: 1,
+                                    offset: const Offset(
+                                        0, 1), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(intergrations[index]['icon']),
+                                  const SizedBox(
+                                    width: 15,
+                                  ),
+                                  Text(
+                                    intergrations[index]['title'],
+                                    style: myStyle(
+                                        16, FontWeight.w500, Colors.black),
+                                  ),
+                                  const Spacer(),
+                                  const Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 16,
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                       separatorBuilder: (context, index) => const SizedBox(
