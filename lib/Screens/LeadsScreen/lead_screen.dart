@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/Screens/HomeScreen/home.dart';
@@ -73,7 +74,7 @@ class _LeadsScreenState extends State<LeadsScreen> {
         title: Text(
           'Leads',
           style: GoogleFonts.roboto(
-              fontSize: 20,
+              fontSize: 20.sp,
               fontWeight: FontWeight.w500,
               color: const Color(0xFF272727)),
         ),
@@ -89,13 +90,13 @@ class _LeadsScreenState extends State<LeadsScreen> {
         actions: [Image.asset('images/notification.png')],
       ),
       body: ListView(
-        padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+        padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 10.h),
         children: [
           Row(
             children: [
               Expanded(
                 child: SizedBox(
-                  height: 50,
+                  height: 50.h,
                   child: TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Search',
@@ -119,20 +120,20 @@ class _LeadsScreenState extends State<LeadsScreen> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                height: 50,
-                color: Color(0xff187949),
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                height: 50.h,
+                color: const Color(0xff187949),
                 child: Row(
                   children: [
                     Text(
                       'Filter',
                       style: GoogleFonts.roboto(
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w400,
-                          color: Color(0xFFFFFFFF)),
+                          color: const Color(0xFFFFFFFF)),
                     ),
-                    const SizedBox(
-                      width: 5,
+                    SizedBox(
+                      width: 5.w,
                     ),
                     const Icon(
                       Icons.filter_list_sharp,
@@ -143,16 +144,16 @@ class _LeadsScreenState extends State<LeadsScreen> {
               )
             ],
           ),
-          const SizedBox(
-            height: 30,
+          SizedBox(
+            height: 30.h,
           ),
           Container(
-            height: 70,
-            padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
+            height: 70.h,
+            padding: EdgeInsets.only(left: 10.w, top: 10.h, right: 10.w),
             width: double.infinity,
             decoration: BoxDecoration(
                 color: const Color(0xFFE6E6E6),
-                borderRadius: BorderRadius.circular(7)),
+                borderRadius: BorderRadius.circular(7.r)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -163,45 +164,45 @@ class _LeadsScreenState extends State<LeadsScreen> {
                     Text(
                       '431 matching leads',
                       style: GoogleFonts.roboto(
-                          fontSize: 18,
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.w500,
                           color: const Color(0xFF272727)),
                     ),
-                    const SizedBox(
-                      height: 5,
+                    SizedBox(
+                      height: 5.h,
                     ),
                     Row(
                       children: [
                         Image.asset('images/service.png'),
-                        const SizedBox(
-                          width: 2,
+                        SizedBox(
+                          width: 2.w,
                         ),
                         Text(
                           '61 Services',
                           style: GoogleFonts.roboto(
-                              fontSize: 16,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w400,
                               color: const Color(0xFF454545)),
                         ),
-                        const SizedBox(
-                          width: 10,
+                        SizedBox(
+                          width: 10.w,
                         ),
                         Container(
-                          height: 20,
-                          width: 1,
+                          height: 20.h,
+                          width: 1.w,
                           color: const Color(0xFF187949),
                         ),
-                        const SizedBox(
-                          width: 10,
+                        SizedBox(
+                          width: 10.w,
                         ),
                         Image.asset('images/location.png'),
-                        const SizedBox(
-                          width: 2,
+                        SizedBox(
+                          width: 2.w,
                         ),
                         Text(
                           '61 Services',
                           style: GoogleFonts.roboto(
-                              fontSize: 16,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w400,
                               color: const Color(0xFF454545)),
                         ),
@@ -210,11 +211,11 @@ class _LeadsScreenState extends State<LeadsScreen> {
                   ],
                 ),
                 Container(
-                  width: 77,
-                  height: 34,
+                  width: 77.w,
+                  height: 34.h,
                   decoration: BoxDecoration(
                       color: const Color(0xFF187949),
-                      borderRadius: BorderRadius.circular(5)),
+                      borderRadius: BorderRadius.circular(5.r)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -222,13 +223,13 @@ class _LeadsScreenState extends State<LeadsScreen> {
                         'images/edit.png',
                         color: const Color(0xFFFFFFFF),
                       ),
-                      const SizedBox(
-                        width: 5,
+                      SizedBox(
+                        width: 5.w,
                       ),
                       Text(
                         'Edit',
                         style: GoogleFonts.roboto(
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w400,
                             color: const Color(0xFFF2F2F2)),
                       )
@@ -238,18 +239,18 @@ class _LeadsScreenState extends State<LeadsScreen> {
               ],
             ),
           ),
-          const SizedBox(
-            height: 15,
+          SizedBox(
+            height: 15.h,
           ),
           Text(
             'Showing all 431 leads',
             style: GoogleFonts.roboto(
-                fontSize: 18,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.w400,
                 color: const Color(0xFF686868)),
           ),
-          const SizedBox(
-            height: 15,
+          SizedBox(
+            height: 15.h,
           ),
           ListView.separated(
             shrinkWrap: true,
@@ -278,11 +279,11 @@ class _LeadsScreenState extends State<LeadsScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         CircleAvatar(
-                          radius: 20,
+                          radius: 20.r,
                           backgroundImage: AssetImage(item[index]['image']),
                         ),
-                        const SizedBox(
-                          width: 5,
+                        SizedBox(
+                          width: 5.w,
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -293,18 +294,18 @@ class _LeadsScreenState extends State<LeadsScreen> {
                                 Text(
                                   item[index]['title'],
                                   style: GoogleFonts.roboto(
-                                      fontSize: 16,
+                                      fontSize: 16.sp,
                                       fontWeight: FontWeight.w500,
-                                      color: Color(0xFF272727)),
+                                      color: const Color(0xFF272727)),
                                 ),
-                                const SizedBox(
-                                  width: 30,
+                                SizedBox(
+                                  width: 30.w,
                                 ),
                                 Image.asset('images/run.png'),
                                 Text(
                                   'Plumbing',
                                   style: GoogleFonts.roboto(
-                                      fontSize: 14,
+                                      fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
                                       color: const Color(0xFF424242)),
                                 )
@@ -316,22 +317,22 @@ class _LeadsScreenState extends State<LeadsScreen> {
                                 Text(
                                   item[index]['address'],
                                   style: GoogleFonts.roboto(
-                                      fontSize: 12,
+                                      fontSize: 12.sp,
                                       fontWeight: FontWeight.w400),
                                 )
                               ],
                             )
                           ],
                         ),
-                        const SizedBox(
-                          width: 8,
+                        SizedBox(
+                          width: 8.w,
                         ),
                         Container(
-                          height: 27,
-                          width: 77,
+                          height: 27.h,
+                          width: 77.w,
                           decoration: BoxDecoration(
                               color: const Color(0xFFE8FAF1),
-                              borderRadius: BorderRadius.circular(5)),
+                              borderRadius: BorderRadius.circular(5.r)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -342,7 +343,7 @@ class _LeadsScreenState extends State<LeadsScreen> {
                               Text(
                                 item[index]['time'],
                                 style: GoogleFonts.roboto(
-                                    fontSize: 12,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.w400,
                                     color: const Color(0xFF187949)),
                               )
@@ -351,14 +352,14 @@ class _LeadsScreenState extends State<LeadsScreen> {
                         )
                       ],
                     ),
-                    const SizedBox(
-                      height: 10,
+                    SizedBox(
+                      height: 10.h,
                     ),
                     RichText(
                       text: TextSpan(
                           text: 'Additional Details:',
                           style: GoogleFonts.roboto(
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               fontWeight: FontWeight.w400,
                               color: const Color(0xFF187949)),
                           children: [
@@ -366,31 +367,31 @@ class _LeadsScreenState extends State<LeadsScreen> {
                                 text:
                                     "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.",
                                 style: GoogleFonts.roboto(
-                                    fontSize: 13,
+                                    fontSize: 13.sp,
                                     fontWeight: FontWeight.w400,
                                     color: const Color(0xFF848484)))
                           ]),
                     ),
-                    const SizedBox(
-                      height: 20,
+                    SizedBox(
+                      height: 20.h,
                     ),
                     Row(
                       children: [
                         Image.asset(item[index]['bImage']),
-                        const SizedBox(
-                          width: 3,
+                        SizedBox(
+                          width: 3.w,
                         ),
                         Text(
                           item[index]['credit'],
                           style: GoogleFonts.roboto(
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                               color: const Color(0xFF272727)),
                         )
                       ],
                     ),
-                    const SizedBox(
-                      height: 15,
+                    SizedBox(
+                      height: 15.h,
                     ),
                     const Divider(
                       color: Color(0xFF424242),
@@ -401,8 +402,8 @@ class _LeadsScreenState extends State<LeadsScreen> {
             },
             itemCount: item.length,
             separatorBuilder: (BuildContext context, int index) {
-              return const SizedBox(
-                height: 25,
+              return SizedBox(
+                height: 25.h,
               );
             },
           )

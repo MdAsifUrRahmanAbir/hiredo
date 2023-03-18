@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -29,15 +30,15 @@ class _SignAccountChoosePageState extends State<SignAccountChoosePage> {
           backgroundColor: Colors.white,
           elevation: 0,
           leading: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0.w),
             child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(90),
-                      topRight: Radius.circular(90),
-                      bottomLeft: Radius.circular(90),
-                      bottomRight: Radius.circular(90)),
+                      topLeft: Radius.circular(90.r),
+                      topRight: Radius.circular(90.r),
+                      bottomLeft: Radius.circular(90.r),
+                      bottomRight: Radius.circular(90.r)),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.1),
@@ -53,51 +54,48 @@ class _SignAccountChoosePageState extends State<SignAccountChoosePage> {
                     color: themeColorGreen,
                   ),
                   onPressed: () {
-                    // Navigator.pushReplacementNamed(
-                    //     context, SignIntroPage.routename);
-
                     Navigator.pop(context);
                   },
                 )),
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(18.0),
+          padding: EdgeInsets.all(18.0.w),
           child: ListView(children: [
             SizedBox(
-              height: 180,
+              height: 170.h,
             ),
             Text(
               '''Choose your account
           category''',
               style: GoogleFonts.roboto(
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w400,
                   color: Color(0xff555957)),
             ),
             SizedBox(
-              height: 10,
+              height: 8.h,
             ),
             Row(
               children: [
                 Text(
                   'Choose',
                   style: GoogleFonts.roboto(
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w400,
                       color: Color(0xff555957)),
                 ),
                 Text(
                   ' become a professional ',
                   style: GoogleFonts.roboto(
-                      fontSize: 18,
+                      fontSize: 18.sp,
                       color: Colors.green,
                       fontWeight: FontWeight.w500),
                 ),
                 Text(
                   'option and',
                   style: GoogleFonts.roboto(
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w400,
                       color: Color(0xff555957)),
                 )
@@ -106,24 +104,24 @@ class _SignAccountChoosePageState extends State<SignAccountChoosePage> {
             Text(
               'continue',
               style: GoogleFonts.roboto(
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w400,
                   color: Color(0xff555957)),
             ),
             SizedBox(
-              height: 15,
+              height: 10.h,
             ),
             Container(
-                height: 50,
+                height: 50.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
                     color: Color(0xFFFFFFFF),
-                    borderRadius: BorderRadius.circular(5)),
+                    borderRadius: BorderRadius.circular(5.r)),
                 child: ListTile(
                   title: Text(
                     'Become a User',
                     style: GoogleFonts.roboto(
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
                         color: Color(0xFF373737)),
                   ),
@@ -139,19 +137,19 @@ class _SignAccountChoosePageState extends State<SignAccountChoosePage> {
                   ),
                 )),
             SizedBox(
-              height: 15,
+              height: 10.h,
             ),
             Container(
-                height: 50,
+                height: 50.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
                     color: Color(0xFFFFFFFF),
-                    borderRadius: BorderRadius.circular(5)),
+                    borderRadius: BorderRadius.circular(5.r)),
                 child: ListTile(
                   title: Text(
                     'Become a Professional',
                     style: GoogleFonts.roboto(
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
                         color: Color(0xFF373737)),
                   ),
@@ -167,27 +165,24 @@ class _SignAccountChoosePageState extends State<SignAccountChoosePage> {
                   ),
                 )),
             SizedBox(
-              height: 30,
+              height: 30.h,
             ),
             InkWell(
               onTap: () {
-                // Navigator.pushReplacementNamed(
-                //     context, RegistrationPage.routename);
-                //Get.offNamed(registration);
                 Navigator.push(context,
                     MaterialPageRoute(builder: (_) => RegistrationPage()));
               },
               child: Container(
-                height: 50,
+                height: 50.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
                     color: Color(0xFF187949),
-                    borderRadius: BorderRadius.circular(4)),
+                    borderRadius: BorderRadius.circular(4.r)),
                 child: Center(
                   child: Text(
                     'Next',
                     style: GoogleFonts.roboto(
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.w500,
                         color: Color(0xFFFFFFFF)),
                   ),

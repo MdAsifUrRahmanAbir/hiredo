@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 import 'package:myapp/utils/colors.dart';
@@ -11,8 +12,6 @@ class BillingDetails extends StatefulWidget {
 }
 
 class _BillingDetailsState extends State<BillingDetails> {
-
-
   List<Map> downloads = [
     {
       'invoice': '3328581',
@@ -70,7 +69,7 @@ class _BillingDetailsState extends State<BillingDetails> {
             )),
         title: Text(
           'Settings',
-          style: myStyle(20, FontWeight.bold, Colors.black),
+          style: myStyle(20.sp, FontWeight.bold, Colors.black),
         ),
         actions: [
           IconButton(
@@ -82,7 +81,7 @@ class _BillingDetailsState extends State<BillingDetails> {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.all(15.w),
         height: double.infinity,
         width: double.infinity,
         child: SingleChildScrollView(
@@ -91,11 +90,11 @@ class _BillingDetailsState extends State<BillingDetails> {
             children: [
               Text(
                 'Invoice And Billing',
-                style: myStyle(20, FontWeight.w500, Colors.black),
+                style: myStyle(20.sp, FontWeight.w500, Colors.black),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
-                padding: EdgeInsets.all(10),
+                margin: EdgeInsets.symmetric(vertical: 10.w),
+                padding: EdgeInsets.all(10.w),
                 color: containerClr,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,10 +102,10 @@ class _BillingDetailsState extends State<BillingDetails> {
                     Icon(
                       Icons.error_outline,
                       color: themeColorGreenbright,
-                      size: 27,
+                      size: 27.sp,
                     ),
                     SizedBox(
-                      width: 5,
+                      width: 5.w,
                     ),
                     Expanded(
                       child: SizedBox(
@@ -115,38 +114,45 @@ class _BillingDetailsState extends State<BillingDetails> {
                             text: TextSpan(
                                 text:
                                     'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet',
-                                style: myStyle(14, FontWeight.w400, textClr),
-                                children: <TextSpan>[
+                                style: myStyle(14.sp, FontWeight.w400, textClr),
+                                children: [
                               TextSpan(
                                   text: '\nMy Profile',
                                   style: myStyle(
-                                      14, FontWeight.w400, themeColorGreen))
+                                      14.sp, FontWeight.w400, themeColorGreen))
                             ])),
                       ),
                     ),
                   ],
                 ),
               ),
-              Divider(thickness: 1, color: offWhite.withOpacity(0.3),),
-              SizedBox(height: 20,),
+              Divider(
+                thickness: 1,
+                color: offWhite.withOpacity(0.3),
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
               Text(
                 'Billing Details',
-                style: myStyle(16, FontWeight.w500, textClr),
+                style: myStyle(16.sp, FontWeight.w500, textClr),
               ),
               Text(
                 'Your business address for billing & invoicing',
-                style: myStyle(14, FontWeight.w400, textClr),
+                style: myStyle(14.sp, FontWeight.w400, textClr),
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20.h,
+              ),
               Text(
                 'Contact name',
                 style: GoogleFonts.roboto(
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xff555957)),
+                    color: const Color(0xff555957)),
               ),
               SizedBox(
-                height: 5,
+                height: 5.h,
               ),
               TextFormField(
                 decoration: InputDecoration(
@@ -158,17 +164,17 @@ class _BillingDetailsState extends State<BillingDetails> {
                     hintText: 'Build Wright'),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               Text(
                 'Address line 1',
                 style: GoogleFonts.roboto(
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w400,
                     color: Color(0xff555957)),
               ),
               SizedBox(
-                height: 5,
+                height: 5.h,
               ),
               TextFormField(
                 decoration: InputDecoration(
@@ -180,17 +186,17 @@ class _BillingDetailsState extends State<BillingDetails> {
                     hintText: '2464 Royal Ln. Jersey 45463'),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               Text(
                 'Address line 2',
                 style: GoogleFonts.roboto(
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w400,
                     color: Color(0xff555957)),
               ),
               SizedBox(
-                height: 5,
+                height: 5.h,
               ),
               TextFormField(
                 decoration: InputDecoration(
@@ -202,23 +208,23 @@ class _BillingDetailsState extends State<BillingDetails> {
                     hintText: '2464 Royal Ln. Jersey 45463'),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               Row(
                 children: [
                   Expanded(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'City',
                         style: GoogleFonts.roboto(
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.w400,
                             color: Color(0xff555957)),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 5.h,
                       ),
                       TextFormField(
                         decoration: InputDecoration(
@@ -232,21 +238,21 @@ class _BillingDetailsState extends State<BillingDetails> {
                     ],
                   )),
                   SizedBox(
-                    width: 10,
+                    width: 10.w,
                   ),
                   Expanded(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Postal Code',
                         style: GoogleFonts.roboto(
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.w400,
                             color: Color(0xff555957)),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 5.h,
                       ),
                       TextFormField(
                         decoration: InputDecoration(
@@ -262,17 +268,17 @@ class _BillingDetailsState extends State<BillingDetails> {
                 ],
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               Text(
                 'Phone Number',
                 style: GoogleFonts.roboto(
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w400,
                     color: Color(0xff555957)),
               ),
               SizedBox(
-                height: 5,
+                height: 5.h,
               ),
               TextFormField(
                 decoration: InputDecoration(
@@ -284,17 +290,17 @@ class _BillingDetailsState extends State<BillingDetails> {
                     hintText: '01888888888'),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               Text(
                 'Address line 2',
                 style: GoogleFonts.roboto(
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xff555957)),
+                    color: const Color(0xff555957)),
               ),
               SizedBox(
-                height: 5,
+                height: 5.h,
               ),
               TextFormField(
                 decoration: InputDecoration(
@@ -305,82 +311,97 @@ class _BillingDetailsState extends State<BillingDetails> {
                         const OutlineInputBorder(borderSide: BorderSide.none),
                     hintText: '01888888888'),
               ),
-              SizedBox(height: 20,),
-              Divider(thickness: 1, color: offWhite.withOpacity(0.3),),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20.h,
+              ),
+              Divider(
+                thickness: 1,
+                color: offWhite.withOpacity(0.3),
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
               Container(
-                padding: EdgeInsets.all(8),
-                height: 40,
+                padding: EdgeInsets.all(8.w),
+                height: 40.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4), color: textformback),
+                    borderRadius: BorderRadius.circular(4.r),
+                    color: textformback),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
                       'Invoice#',
-                      style: myStyle(14, FontWeight.w500, textClr),
+                      style: myStyle(14.sp, FontWeight.w500, textClr),
                     ),
                     Text(
                       'Date',
-                      style: myStyle(14, FontWeight.w500, textClr),
+                      style: myStyle(14.sp, FontWeight.w500, textClr),
                     ),
                     Text(
                       'Total',
-                      style: myStyle(14, FontWeight.w500, textClr),
+                      style: myStyle(14.sp, FontWeight.w500, textClr),
                     ),
                     Text(
                       'Invoice',
-                      style: myStyle(14, FontWeight.w500, textClr),
+                      style: myStyle(14.sp, FontWeight.w500, textClr),
                     ),
                   ],
                 ),
               ),
               ListView.separated(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) => Container(
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: downloads[index]['color']
+                        padding: EdgeInsets.all(8.w),
+                        decoration:
+                            BoxDecoration(color: downloads[index]['color']),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              downloads[index]['invoice'],
+                              style: myStyle(12.sp, FontWeight.w400, offWhite),
+                            ),
+                            Text(
+                              downloads[index]['date'],
+                              style: myStyle(12.sp, FontWeight.w400, offWhite),
+                            ),
+                            Text(
+                              downloads[index]['total'],
+                              style: myStyle(12.sp, FontWeight.w400, offWhite),
+                            ),
+                            Container(
+                              alignment: Alignment.center,
+                              height: 30.h,
+                              width: 82.w,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4.r),
+                                  color: themeColorGreen),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Icon(
+                                    Icons.arrow_circle_down,
+                                    color: scaffoldClr,
+                                    size: 12.sp,
+                                  ),
+                                  Text(
+                                    'Download',
+                                    style: myStyle(
+                                        12.sp, FontWeight.w400, scaffoldClr),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          downloads[index]['invoice'],
-                          style: myStyle(12, FontWeight.w400, offWhite),
-                        ),
-                        Text(
-                          downloads[index]['date'],
-                          style: myStyle(12, FontWeight.w400, offWhite),
-                        ),
-                        Text(
-                          downloads[index]['total'],
-                          style: myStyle(12, FontWeight.w400, offWhite),
-                        ),
-                       Container(
-                         alignment: Alignment.center,
-                         height: 30,
-                         width: 82,
-                         decoration: BoxDecoration(
-                           borderRadius: BorderRadius.circular(4),
-                           color: themeColorGreen
-                         ),
-                         child: Row(
-                           mainAxisAlignment: MainAxisAlignment.spaceAround,
-                           children: [
-                             Icon(Icons.arrow_circle_down, color: scaffoldClr, size: 12,),
-                             Text('Download',style: myStyle(12, FontWeight.w400, scaffoldClr),)
-                           ],
-                         ),
-                       )
-                      ],
-                    ),
-                  ),
                   separatorBuilder: (context, index) => SizedBox(
-                    height: 0,
-                  ),
+                        height: 0.h,
+                      ),
                   itemCount: downloads.length),
             ],
           ),

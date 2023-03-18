@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TrackingPostOrder extends StatefulWidget {
@@ -23,17 +24,17 @@ class _TrackingPostOrderState extends State<TrackingPostOrder> {
           onPressed: () {},
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.0),
+              borderRadius: BorderRadius.circular(5.0.r),
               color: Color(0xff187949),
             ),
-            padding: EdgeInsets.only(left: 16, right: 16),
+            padding: EdgeInsets.only(left: 16.w, right: 16.w),
             width: double.infinity,
-            height: 50,
+            height: 50.h,
             child: Center(
               child: Text(
                 "Add a new job post",
                 style: GoogleFonts.roboto(
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     color: Colors.white),
               ),
@@ -47,13 +48,13 @@ class _TrackingPostOrderState extends State<TrackingPostOrder> {
             onPressed: () {},
             icon: Icon(
               Icons.arrow_back,
-              size: 25,
+              size: 25.sp,
               color: Color(0xff187949),
             )),
         title: Text(
           "Tracking Post/Order",
           style: GoogleFonts.roboto(
-              fontSize: 20,
+              fontSize: 20.sp,
               fontWeight: FontWeight.w500,
               color: Color(0xff272727)),
         ),
@@ -61,8 +62,8 @@ class _TrackingPostOrderState extends State<TrackingPostOrder> {
           InkWell(
             onTap: () {},
             child: Container(
-              height: 40,
-              width: 40,
+              height: 40.h,
+              width: 40.w,
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage("images/img2.png"), fit: BoxFit.cover),
@@ -73,7 +74,8 @@ class _TrackingPostOrderState extends State<TrackingPostOrder> {
         automaticallyImplyLeading: false,
       ),
       body: Container(
-        padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 70),
+        padding:
+            EdgeInsets.only(left: 20.w, right: 20.w, top: 10.h, bottom: 70.w),
         child: Column(
           children: [
             Row(
@@ -84,8 +86,8 @@ class _TrackingPostOrderState extends State<TrackingPostOrder> {
                     setState(() {});
                   },
                   child: Container(
-                    height: 40,
-                    width: 150,
+                    height: 40.h,
+                    width: 150.w,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
                         color: Color(0xff187949)),
@@ -93,7 +95,7 @@ class _TrackingPostOrderState extends State<TrackingPostOrder> {
                       child: Text(
                         "Pending",
                         style: GoogleFonts.roboto(
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
                             color: Colors.white),
                       ),
@@ -105,17 +107,17 @@ class _TrackingPostOrderState extends State<TrackingPostOrder> {
                     setState(() {});
                   },
                   child: Container(
-                    height: 40,
-                    width: 150,
+                    height: 40.h,
+                    width: 150.w,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(4.r),
                         border: Border.all(color: Color(0xff0187949)),
                         color: Colors.white),
                     child: Center(
                       child: Text(
                         "Compelete Post",
                         style: GoogleFonts.roboto(
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
                             color: Colors.black),
                       ),
@@ -125,27 +127,27 @@ class _TrackingPostOrderState extends State<TrackingPostOrder> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 30),
+              padding: EdgeInsets.only(top: 30.w),
               child: Row(
                 children: [
                   Expanded(
                     child: SizedBox(
-                      height: 50,
+                      height: 50.h,
                       child: TextFormField(
                         controller: nameController,
                         decoration: InputDecoration(
                           fillColor: Colors.white,
                           focusedBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(3)),
+                                  BorderRadius.all(Radius.circular(3.r)),
                               borderSide: BorderSide(color: Color(0xff9CCDB5))),
                           enabledBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(4.0)),
+                                  BorderRadius.all(Radius.circular(4.0.r)),
                               borderSide: BorderSide(color: Color(0xff9CCDB5))),
                           hintText: "Search ",
                           hintStyle: GoogleFonts.roboto(
-                              fontSize: 16,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w400,
                               letterSpacing: 1,
                               color: Color(0xffB7B7B7)),
@@ -157,8 +159,8 @@ class _TrackingPostOrderState extends State<TrackingPostOrder> {
                     onTap: () {},
                     child: Container(
                       color: Color(0xff187949),
-                      height: 50,
-                      width: 45,
+                      height: 50.h,
+                      width: 45.w,
                       child: Icon(
                         Icons.search,
                         color: Color(0xffFFFFFF),
@@ -169,7 +171,7 @@ class _TrackingPostOrderState extends State<TrackingPostOrder> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 20.h,
             ),
             Expanded(
               flex: 6,
@@ -177,19 +179,19 @@ class _TrackingPostOrderState extends State<TrackingPostOrder> {
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) => Container(
                         color: Color(0xffFFFFFF),
-                        height: 171,
-                        width: 375,
+                        height: 171.h,
+                        width: 375.w,
                         child: Card(
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(
                                   flex: 2,
-                                  child: Container(
-                                    height: 89,
-                                    width: 80,
+                                  child: SizedBox(
+                                    height: 89.h,
+                                    width: 80.w,
                                     child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(3),
+                                      borderRadius: BorderRadius.circular(3.r),
                                       child: Image.asset(
                                         "images/intro2.jpg",
                                         fit: BoxFit.cover,
@@ -200,10 +202,10 @@ class _TrackingPostOrderState extends State<TrackingPostOrder> {
                                   flex: 6,
                                   child: Container(
                                     padding: EdgeInsets.only(
-                                        top: 20,
-                                        right: 5,
-                                        left: 10,
-                                        bottom: 10),
+                                        top: 20.h,
+                                        right: 5.w,
+                                        left: 10.w,
+                                        bottom: 10.w),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -211,27 +213,27 @@ class _TrackingPostOrderState extends State<TrackingPostOrder> {
                                         Text(
                                           "Commercial Cleaning by Experties",
                                           style: GoogleFonts.roboto(
-                                              fontSize: 14,
+                                              fontSize: 14.sp,
                                               fontWeight: FontWeight.w500,
                                               color: Color(0xff272727)),
                                         ),
                                         SizedBox(
-                                          height: 10,
+                                          height: 10.h,
                                         ),
                                         Text(
                                           "Commercial Cleaning\n by Experties",
                                           style: GoogleFonts.roboto(
-                                              fontSize: 12,
+                                              fontSize: 12.sp,
                                               fontWeight: FontWeight.w400,
                                               color: Color(0xff272727)),
                                         ),
                                         SizedBox(
-                                          height: 5,
+                                          height: 5.h,
                                         ),
                                         Text(
                                           "Commercial Cleaning by Experties",
                                           style: GoogleFonts.roboto(
-                                              fontSize: 12,
+                                              fontSize: 12.sp,
                                               fontWeight: FontWeight.w400,
                                               color: Color(0xff272727)),
                                         ),
@@ -245,18 +247,18 @@ class _TrackingPostOrderState extends State<TrackingPostOrder> {
                                                 setState(() {});
                                               },
                                               child: Container(
-                                                height: 34,
-                                                width: 115,
+                                                height: 34.h,
+                                                width: 115.w,
                                                 decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            4),
+                                                            4.r),
                                                     color: Color(0xff187949)),
                                                 child: Center(
                                                   child: Text(
                                                     "view details",
                                                     style: GoogleFonts.roboto(
-                                                        fontSize: 14,
+                                                        fontSize: 14.sp,
                                                         fontWeight:
                                                             FontWeight.w400,
                                                         color: Colors.white),
@@ -269,12 +271,12 @@ class _TrackingPostOrderState extends State<TrackingPostOrder> {
                                                 setState(() {});
                                               },
                                               child: Container(
-                                                height: 34,
-                                                width: 80,
+                                                height: 34.h,
+                                                width: 80.w,
                                                 decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            4),
+                                                            4.r),
                                                     border: Border.all(
                                                         color:
                                                             Color(0xff0187949)),
@@ -283,7 +285,7 @@ class _TrackingPostOrderState extends State<TrackingPostOrder> {
                                                   child: Text(
                                                     "Edit",
                                                     style: GoogleFonts.roboto(
-                                                        fontSize: 14,
+                                                        fontSize: 14.sp,
                                                         fontWeight:
                                                             FontWeight.w400,
                                                         color: Colors.black),
@@ -301,7 +303,7 @@ class _TrackingPostOrderState extends State<TrackingPostOrder> {
                         ),
                       ),
                   separatorBuilder: (_, index) => SizedBox(
-                        height: 10,
+                        height: 10.h,
                       ),
                   itemCount: 10),
             )

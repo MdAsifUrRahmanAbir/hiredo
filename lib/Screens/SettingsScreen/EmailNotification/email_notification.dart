@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/Screens/SettingsScreen/EmailNotification/Model/email_model.dart';
 
@@ -81,15 +82,15 @@ class _EmailNotificationState extends State<EmailNotification> {
                 child: Row(
                   children: [
                     Image.asset('images/mark.png'),
-                    const SizedBox(
-                      width: 5,
+                    SizedBox(
+                      width: 5.w,
                     ),
                     Expanded(
                       child: Text.rich(
                         TextSpan(
                           text:
                               'Control what youd like us to email you about. Not getting our e-mails? ',
-                          style: GoogleFonts.roboto(fontSize: 16),
+                          style: GoogleFonts.roboto(fontSize: 16.sp),
                           children: const [
                             TextSpan(
                                 text: 'Click Here',
@@ -104,27 +105,27 @@ class _EmailNotificationState extends State<EmailNotification> {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               Text(
                 'Email me about:',
                 style: GoogleFonts.roboto(
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
                     color: const Color(0xFF6E6874)),
               ),
               ListView.separated(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return ListTile(
                       title: Text(
                         items[index].title,
                         style: GoogleFonts.roboto(
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xFF272727)),
+                            color: const Color(0xFF272727)),
                       ),
                       trailing: Switch(
                           onChanged: (value) {
@@ -134,51 +135,50 @@ class _EmailNotificationState extends State<EmailNotification> {
                           },
                           value: items[index].isSwitched,
                           activeColor: Colors.white,
-                          activeTrackColor: Color(0xFF47BF9C),
+                          activeTrackColor: const Color(0xFF47BF9C),
                           inactiveThumbColor: Colors.pink,
                           inactiveTrackColor: Colors.green));
                 },
                 itemCount: items.length,
-                separatorBuilder: (BuildContext context, int index) =>
-                    const SizedBox(
-                  height: 10,
+                separatorBuilder: (BuildContext context, int index) => SizedBox(
+                  height: 10.h,
                 ),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               Row(
                 children: [
-                  const SizedBox(
-                    width: 150,
+                  SizedBox(
+                    width: 150.w,
                   ),
                   Text(
                     'Cancel',
                     style: GoogleFonts.roboto(
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.w500,
                         color: const Color(0xFF272727)),
                   ),
-                  const SizedBox(
-                    width: 20,
+                  SizedBox(
+                    width: 20.w,
                   ),
                   Container(
-                    height: 45,
-                    width: 109,
+                    height: 45.h,
+                    width: 109.w,
                     decoration: BoxDecoration(
                         color: const Color(0xFF187949),
-                        borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(10.r)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset('images/tick_mark.png'),
-                        const SizedBox(
-                          width: 5,
+                        SizedBox(
+                          width: 5.w,
                         ),
                         Text(
                           'Save',
                           style: GoogleFonts.roboto(
-                              fontSize: 16,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w500,
                               color: const Color(0xFFFFFFFF)),
                         )
@@ -187,8 +187,8 @@ class _EmailNotificationState extends State<EmailNotification> {
                   )
                 ],
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
             ],
           ),

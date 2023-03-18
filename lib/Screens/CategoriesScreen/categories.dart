@@ -2,6 +2,7 @@
 
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/nav_bar_page/nav_bar_controller.dart';
@@ -36,20 +37,17 @@ class _CategoriesPageState extends State<CategoriesPage> {
         elevation: 0,
         leading: IconButton(
             onPressed: () {
-              // Navigator.pushReplacementNamed(
-              //     context, BottomNavController.routename);
-              Get.back();
               Navigator.pop(context);
             },
             icon: Icon(
               Icons.arrow_back,
-              size: 25,
+              size: 25.sp,
               color: Color(0xff187949),
             )),
         title: Text(
           "Category",
           style: GoogleFonts.roboto(
-              fontSize: 20,
+              fontSize: 20.sp,
               fontWeight: FontWeight.w500,
               color: Color(0xff272727)),
         ),
@@ -59,8 +57,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
             child: InkWell(
               onTap: () {},
               child: Container(
-                height: 40,
-                width: 40,
+                height: 40.h,
+                width: 40.w,
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage("images/img2.png"),
@@ -77,7 +75,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(18.0),
+              padding: EdgeInsets.all(18.0.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -85,17 +83,17 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     child: DropdownButton2(
                       isExpanded: true,
                       hint: Padding(
-                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        padding: EdgeInsets.only(left: 20.w, right: 20.w),
                         child: Row(
                           children: [
                             SizedBox(
-                              width: 4,
+                              width: 4.w,
                             ),
                             Expanded(
                               child: Text(
                                 'Sub Categories',
                                 style: GoogleFonts.roboto(
-                                  fontSize: 14,
+                                  fontSize: 14.sp,
                                   fontWeight: FontWeight.w500,
                                   letterSpacing: 1,
                                   color: Color(0xffF2F2F2),
@@ -117,7 +115,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                 child: Text(
                                   item,
                                   style: GoogleFonts.roboto(
-                                    fontSize: 14,
+                                    fontSize: 14.sp,
                                     fontWeight: FontWeight.w500,
                                     letterSpacing: 1,
                                     color: Color(0xffF2F2F2),
@@ -135,44 +133,44 @@ class _CategoriesPageState extends State<CategoriesPage> {
                       icon: Icon(
                         Icons.arrow_drop_down,
                       ),
-                      iconSize: 14,
+                      iconSize: 14.sp,
                       iconEnabledColor: Color(0xffF2F2F2),
                       iconDisabledColor: Colors.grey,
-                      buttonHeight: 36,
-                      buttonWidth: 207,
-                      buttonPadding: EdgeInsets.only(left: 14, right: 14),
+                      buttonHeight: 36.h,
+                      buttonWidth: 207.h,
+                      buttonPadding: EdgeInsets.only(left: 14.w, right: 14.r),
                       buttonDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(4.r),
                         color: Color(0xff187949),
                       ),
                       buttonElevation: 2,
-                      itemHeight: 40,
-                      itemPadding: EdgeInsets.only(left: 14, right: 14),
-                      dropdownMaxHeight: 200,
-                      dropdownWidth: 200,
+                      itemHeight: 40.h,
+                      itemPadding: EdgeInsets.only(left: 14.w, right: 14.w),
+                      dropdownMaxHeight: 200.h,
+                      dropdownWidth: 200.w,
                       dropdownPadding: null,
                       dropdownDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(4.r),
                         color: Color(0xff187949),
                       ),
                       dropdownElevation: 8,
-                      scrollbarRadius: Radius.circular(4),
+                      scrollbarRadius: Radius.circular(4.r),
                       scrollbarThickness: 6,
                       scrollbarAlwaysShow: true,
                       offset: Offset(-20, 0),
                     ),
                   ),
                   Container(
-                    height: 36,
-                    width: 68,
+                    height: 36.h,
+                    width: 68.w,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
+                        borderRadius: BorderRadius.circular(3.r),
                         color: Color(0xff187949)),
                     child: Center(
                       child: Text(
                         "Filter",
                         style: GoogleFonts.roboto(
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
                             color: Color(0xffF2F2F2),
                             letterSpacing: 1),
@@ -183,19 +181,19 @@ class _CategoriesPageState extends State<CategoriesPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+              padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 20.h),
               child: IntrinsicHeight(
                 child: Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
+                      borderRadius: BorderRadius.circular(4.r),
                       border: Border.all(color: Colors.green)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                        height: 50,
-                        width: 120,
+                        height: 50.h,
+                        width: 120.w,
                         child: Container(
                           padding: EdgeInsets.all(8.0),
                           child: TextFormField(
@@ -205,7 +203,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                               fillColor: Colors.white,
                               hintText: "Search ",
                               hintStyle: GoogleFonts.roboto(
-                                  fontSize: 16,
+                                  fontSize: 16.sp,
                                   fontWeight: FontWeight.w400,
                                   letterSpacing: 1,
                                   color: Color(0xffB7B7B7)),
@@ -214,17 +212,17 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         ),
                       ),
                       VerticalDivider(
-                        width: 20,
+                        width: 20.w,
                         thickness: 1,
                         indent: 10,
                         endIndent: 10,
                         color: Colors.grey,
                       ),
                       SizedBox(
-                        height: 50,
-                        width: 120,
+                        height: 50.h,
+                        width: 120.w,
                         child: Container(
-                          padding: EdgeInsets.all(5),
+                          padding: EdgeInsets.all(5.r),
                           child: TextFormField(
                             controller: locationController,
                             decoration: InputDecoration(
@@ -236,11 +234,11 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                 child: Icon(
                                   Icons.location_pin,
                                   color: Colors.grey,
-                                  size: 20,
+                                  size: 20.sp,
                                 ),
                               ),
                               hintStyle: GoogleFonts.roboto(
-                                  fontSize: 16,
+                                  fontSize: 16.sp,
                                   fontWeight: FontWeight.w400,
                                   letterSpacing: 1,
                                   color: Color(0xffB7B7B7)),
@@ -252,8 +250,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         onTap: () {},
                         child: Container(
                           color: Color(0xff187949),
-                          height: 50,
-                          width: 45,
+                          height: 50.h,
+                          width: 45.w,
                           child: Icon(
                             Icons.search,
                             color: Color(0xffFFFFFF),
@@ -266,7 +264,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 20.h,
             ),
             Expanded(
               flex: 6,
@@ -274,13 +272,13 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) => Container(
                         color: Color(0xffFFFFFF),
-                        margin: EdgeInsets.only(left: 10, right: 10),
-                        height: 94,
-                        width: 376,
+                        margin: EdgeInsets.only(left: 10.w, right: 10.w),
+                        height: 94.h,
+                        width: 376.w,
                         child: Card(
                           child: ListTile(
                             leading: CircleAvatar(
-                              maxRadius: 30,
+                              maxRadius: 30.r,
                               backgroundColor: Color(0xffE8F2ED),
                               child: Icon(
                                 Icons.face,
@@ -290,7 +288,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                             title: Text(
                               "Business",
                               style: GoogleFonts.roboto(
-                                  fontSize: 18,
+                                  fontSize: 18.sp,
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xff187949)),
                             ),
@@ -299,7 +297,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                   ? "100+ sub categories"
                                   : "100+ sub categories \n 400+ company work",
                               style: GoogleFonts.roboto(
-                                  fontSize: 14,
+                                  fontSize: 14.sp,
                                   fontWeight: FontWeight.w400,
                                   color: Color(0xff424242)),
                             ),
@@ -321,7 +319,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                       primary: themeColorGreen,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(
-                                            3), // <-- Radius
+                                            3.r), // <-- Radius
                                       ),
                                     ),
                                     child: Text(
@@ -329,7 +327,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                           ? "Survices"
                                           : "view",
                                       style: GoogleFonts.roboto(
-                                          fontSize: 16,
+                                          fontSize: 16.sp,
                                           fontWeight: FontWeight.w500,
                                           color: Color(0xffFFFFFF),
                                           letterSpacing: 1),
@@ -340,7 +338,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         ),
                       ),
                   separatorBuilder: (_, index) => SizedBox(
-                        height: 10,
+                        height: 10.h,
                       ),
                   itemCount: 10),
             )

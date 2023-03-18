@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:myapp/Screens/EmailVerifiyScreen/enterverificationpage.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/colors.dart';
 
@@ -29,15 +28,15 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           backgroundColor: Colors.white,
           elevation: 0,
           leading: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0.w),
             child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(90),
-                      topRight: Radius.circular(90),
-                      bottomLeft: Radius.circular(90),
-                      bottomRight: Radius.circular(90)),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(90.r),
+                      topRight: Radius.circular(90.r),
+                      bottomLeft: Radius.circular(90.r),
+                      bottomRight: Radius.circular(90.r)),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.1),
@@ -53,8 +52,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     color: themeColorGreen,
                   ),
                   onPressed: () {
-                    // Navigator.pushReplacementNamed(
-                    //     context, VerificationPage.routename);
                     Navigator.pop(context);
                   },
                 )),
@@ -69,29 +66,29 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
               Text(
                 'Create a new password',
                 style: GoogleFonts.roboto(
-                    fontSize: 15, color: Colors.black.withOpacity(0.6)),
+                    fontSize: 15.sp, color: Colors.black.withOpacity(0.6)),
               )
             ],
           ),
         ),
         body: Center(
           child: Padding(
-            padding: const EdgeInsets.all(22.0),
+            padding: EdgeInsets.all(22.0.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 10,
+                  height: 10.sp,
                 ),
                 Text(
                   'New Password',
                   style: GoogleFonts.roboto(
-                      fontSize: 16,
-                      color: Color(0xff25302B),
+                      fontSize: 16.sp,
+                      color: const Color(0xff25302B),
                       fontWeight: FontWeight.w400),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 5.h,
                 ),
                 TextFormField(
                   controller: passwordController,
@@ -99,8 +96,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: themeColorGreen.withOpacity(0.1),
-                      //prefixIcon: Icon(Icons.lock_outlined,color: Colors.black,),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                           borderSide:
                               BorderSide(color: Colors.black, width: 0.5)),
                       enabledBorder: const OutlineInputBorder(
@@ -118,7 +114,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                       : visiblepass = true;
                                 });
                               },
-                              icon: Icon(Icons.visibility, color: Colors.black))
+                              icon: const Icon(Icons.visibility,
+                                  color: Colors.black))
                           : IconButton(
                               onPressed: () {
                                 setState(() {
@@ -127,25 +124,25 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                       : visiblepass = true;
                                 });
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.visibility_off,
                                 color: Colors.black,
                               )),
                       hintText: '********',
-                      labelStyle: TextStyle(color: Colors.black)),
+                      labelStyle: const TextStyle(color: Colors.black)),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 Text(
                   'Confirm Password',
                   style: GoogleFonts.roboto(
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       color: Color(0xff25302B),
                       fontWeight: FontWeight.w400),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 5.sp,
                 ),
                 TextFormField(
                   controller: confirmpasswordController,
@@ -154,7 +151,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       filled: true,
                       fillColor: themeColorGreen.withOpacity(0.1),
                       //prefixIcon: Icon(Icons.lock_outlined,color: Colors.black,),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                           borderSide:
                               BorderSide(color: Colors.black, width: 0.5)),
                       enabledBorder: const OutlineInputBorder(
@@ -172,7 +169,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                       : visiblepass2 = true;
                                 });
                               },
-                              icon: Icon(Icons.visibility, color: Colors.black))
+                              icon: const Icon(Icons.visibility,
+                                  color: Colors.black))
                           : IconButton(
                               onPressed: () {
                                 setState(() {
@@ -181,24 +179,25 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                       : visiblepass2 = true;
                                 });
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.visibility_off,
                                 color: Colors.black,
                               )),
                       hintText: '********',
-                      labelStyle: TextStyle(color: Colors.black)),
+                      labelStyle: const TextStyle(color: Colors.black)),
                 ),
                 SizedBox(
-                  height: 28,
+                  height: 28.h,
                 ),
                 SizedBox(
-                  height: 50,
+                  height: 50.h,
                   width: MediaQuery.of(context).size.width - 22,
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: themeColorGreen,
+                        backgroundColor: themeColorGreen,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10), // <-- Radius
+                          borderRadius:
+                              BorderRadius.circular(10.r), // <-- Radius
                         ),
                       ),
                       onPressed: () {},
@@ -206,7 +205,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                         'Save',
                         style: GoogleFonts.roboto(
                             color: Colors.white,
-                            fontSize: 18,
+                            fontSize: 18.sp,
                             fontWeight: FontWeight.w500),
                       )),
                 ),

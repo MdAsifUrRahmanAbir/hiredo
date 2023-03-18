@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HelpScreen extends StatefulWidget {
@@ -81,7 +82,7 @@ class _HelpScreenState extends State<HelpScreen> {
         title: Text(
           'Help',
           style: GoogleFonts.roboto(
-              fontSize: 20,
+              fontSize: 20.sp,
               fontWeight: FontWeight.w500,
               color: const Color(0xFF272727)),
         ),
@@ -98,7 +99,7 @@ class _HelpScreenState extends State<HelpScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(left: 15, right: 15),
+          padding: EdgeInsets.only(left: 15.w, right: 15.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -106,25 +107,25 @@ class _HelpScreenState extends State<HelpScreen> {
               Text(
                 'FAQs',
                 style: GoogleFonts.roboto(
-                    fontSize: 20,
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.w500,
                     color: const Color(0xFF187949)),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               SizedBox(
-                height: 50,
+                height: 50.h,
                 child: TextFormField(
                   decoration: InputDecoration(
                     hintText: 'Search',
                     fillColor: Colors.white,
                     suffixIcon: Container(
-                      height: 50,
-                      width: 52,
+                      height: 50.h,
+                      width: 52.w,
                       decoration: BoxDecoration(
                           color: const Color(0xFF187949),
-                          borderRadius: BorderRadius.circular(4)),
+                          borderRadius: BorderRadius.circular(4.r)),
                       child: const Center(
                         child: Icon(
                           Icons.search,
@@ -149,18 +150,18 @@ class _HelpScreenState extends State<HelpScreen> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 25,
+              SizedBox(
+                height: 25.h,
               ),
               Text(
                 'Popular',
                 style: GoogleFonts.roboto(
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
                     color: const Color(0xFF272727)),
               ),
-              const SizedBox(
-                height: 25,
+              SizedBox(
+                height: 25.h,
               ),
               ListView.separated(
                 itemCount: popularItem.length,
@@ -175,7 +176,7 @@ class _HelpScreenState extends State<HelpScreen> {
                           Text(
                             popularItem[index]['title'],
                             style: GoogleFonts.roboto(
-                                fontSize: 14,
+                                fontSize: 14.sp,
                                 fontWeight: FontWeight.w400,
                                 color: const Color(0xFF424242)),
                           ),
@@ -189,23 +190,22 @@ class _HelpScreenState extends State<HelpScreen> {
                     ],
                   );
                 },
-                separatorBuilder: (BuildContext context, int index) =>
-                    const SizedBox(
-                  height: 12,
+                separatorBuilder: (BuildContext context, int index) => SizedBox(
+                  height: 12.h,
                 ),
               ),
-              const SizedBox(
-                height: 25,
+              SizedBox(
+                height: 25.h,
               ),
               Text(
                 'Guides',
                 style: GoogleFonts.roboto(
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
                     color: const Color(0xFF272727)),
               ),
-              const SizedBox(
-                height: 25,
+              SizedBox(
+                height: 25.h,
               ),
               ListView.separated(
                 itemCount: guidesItem.length,
@@ -221,7 +221,7 @@ class _HelpScreenState extends State<HelpScreen> {
                             child: Text(
                               guidesItem[index]['title'],
                               style: GoogleFonts.roboto(
-                                fontSize: 14,
+                                fontSize: 14.sp,
                                 fontWeight: FontWeight.w400,
                                 color: const Color(0xFF424242),
                               ),
@@ -237,23 +237,22 @@ class _HelpScreenState extends State<HelpScreen> {
                     ],
                   );
                 },
-                separatorBuilder: (BuildContext context, int index) =>
-                    const SizedBox(
-                  height: 12,
+                separatorBuilder: (BuildContext context, int index) => SizedBox(
+                  height: 12.h,
                 ),
               ),
-              const SizedBox(
-                height: 25,
+              SizedBox(
+                height: 25.h,
               ),
               Text(
                 'Topics',
                 style: GoogleFonts.roboto(
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
                     color: const Color(0xFF272727)),
               ),
-              const SizedBox(
-                height: 25,
+              SizedBox(
+                height: 25.h,
               ),
               ListView.separated(
                 itemCount: topicItem.length,
@@ -269,7 +268,7 @@ class _HelpScreenState extends State<HelpScreen> {
                             child: Text(
                               topicItem[index]['title'],
                               style: GoogleFonts.roboto(
-                                fontSize: 14,
+                                fontSize: 14.sp,
                                 fontWeight: FontWeight.w400,
                                 color: const Color(0xFF424242),
                               ),
@@ -285,43 +284,42 @@ class _HelpScreenState extends State<HelpScreen> {
                     ],
                   );
                 },
-                separatorBuilder: (BuildContext context, int index) =>
-                    const SizedBox(
-                  height: 12,
+                separatorBuilder: (BuildContext context, int index) => SizedBox(
+                  height: 12.h,
                 ),
               ),
-              const SizedBox(
-                height: 25,
+              SizedBox(
+                height: 25.h,
               ),
               Text(
                 'Still need help?',
                 style: GoogleFonts.roboto(
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
                     color: const Color(0xFF272727)),
               ),
-              const SizedBox(
-                height: 15,
+              SizedBox(
+                height: 15.h,
               ),
               Text(
                 'Drop us an email and we’ll get you back up and running.',
                 style: GoogleFonts.roboto(
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     color: const Color(0xFF424242)),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               Text(
                 'Email*',
                 style: GoogleFonts.roboto(
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w400,
                     color: Color(0xFF555957)),
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 10.h,
               ),
               TextFormField(
                 decoration: InputDecoration(
@@ -342,18 +340,18 @@ class _HelpScreenState extends State<HelpScreen> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               Text(
                 'Message',
                 style: GoogleFonts.roboto(
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w400,
                     color: const Color(0xFF555957)),
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 10.h,
               ),
               TextFormField(
                 maxLines: 5,
@@ -375,11 +373,11 @@ class _HelpScreenState extends State<HelpScreen> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 50,
+              SizedBox(
+                height: 50.h,
               ),
               Container(
-                height: 50,
+                height: 50.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
                     color: const Color(0xFF187949),
@@ -388,8 +386,8 @@ class _HelpScreenState extends State<HelpScreen> {
                   child: Text(
                     'Send',
                     style: GoogleFonts.roboto(
-                        color: Color(0xFFFFFFFF),
-                        fontSize: 18,
+                        color: const Color(0xFFFFFFFF),
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.w500),
                   ),
                 ),

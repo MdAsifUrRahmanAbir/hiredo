@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -29,7 +30,7 @@ class _SignIntroPageState extends State<SignIntroPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                height: 1,
+                height: 1.h,
               ),
               Image.asset(
                 'images/img3.png',
@@ -37,7 +38,7 @@ class _SignIntroPageState extends State<SignIntroPage> {
                 height: sch / 2,
               ),
               Padding(
-                padding: const EdgeInsets.all(38.0),
+                padding: EdgeInsets.all(38.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -45,19 +46,19 @@ class _SignIntroPageState extends State<SignIntroPage> {
                       'Choose your service',
                       textAlign: TextAlign.center,
                       style: GoogleFonts.roboto(
-                          fontSize: 24,
+                          fontSize: 24.sp,
                           fontWeight: FontWeight.w500,
                           color: Color(0xff555957)),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 10.h,
                     ),
                     Text(
                       'Ringknock is an online on demand service.'
                       'It has as into 50k+ services.',
                       textAlign: TextAlign.center,
                       style: GoogleFonts.roboto(
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w400,
                           color: Color(0xff555957)),
                     ),
@@ -65,24 +66,21 @@ class _SignIntroPageState extends State<SignIntroPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: EdgeInsets.all(12.0.w),
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 47,
+                      height: 47.h,
                       width: scw - 40,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: themeColorGreen,
+                            backgroundColor: themeColorGreen,
                             shape: RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.circular(10), // <-- Radius
+                                  BorderRadius.circular(10.r), // <-- Radius
                             ),
                           ),
                           onPressed: () {
-                            // Navigator.pushReplacementNamed(
-                            //     context, SignAccountChoosePage.routename);
-                            //Get.offNamed(signinaccout);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -91,7 +89,7 @@ class _SignIntroPageState extends State<SignIntroPage> {
                           child: Text(
                             'Create Profile',
                             style: GoogleFonts.roboto(
-                                color: Colors.white, fontSize: 18),
+                                color: Colors.white, fontSize: 18.sp),
                           )),
                     ),
                     Row(
@@ -100,15 +98,12 @@ class _SignIntroPageState extends State<SignIntroPage> {
                         Text(
                           'Already have an account?',
                           style: GoogleFonts.roboto(
-                              fontSize: 16,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w400,
                               color: Color(0xff555957)),
                         ),
                         TextButton(
                             onPressed: () {
-                              // Get.offNamed(signin);
-                              // Navigator.pushReplacementNamed(
-                              //     context, SignInPage.routename);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -118,7 +113,7 @@ class _SignIntroPageState extends State<SignIntroPage> {
                               'Sign In',
                               style: GoogleFonts.roboto(
                                   color: themeColorGreen,
-                                  fontSize: 18,
+                                  fontSize: 18.sp,
                                   fontWeight: FontWeight.w500),
                             ))
                       ],

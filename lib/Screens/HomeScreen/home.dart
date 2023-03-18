@@ -2,6 +2,7 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
@@ -9,11 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:myapp/Screens/CategoriesScreen/categories.dart';
 import 'package:myapp/Screens/SearchResultScreen/catsearchpage.dart';
 
-import 'package:myapp/nav_bar_page/nav_bar_controller.dart';
 import 'package:myapp/Screens/LocationScreen/locationpage.dart';
 
 class Home extends StatefulWidget {
-  static const String routename = '/homepage';
   const Home({super.key});
 
   @override
@@ -50,7 +49,7 @@ class _HomeState extends State<Home> {
                     Text(
                       "Discover",
                       style: GoogleFonts.roboto(
-                          fontSize: 25,
+                          fontSize: 25.sp,
                           fontWeight: FontWeight.w500,
                           letterSpacing: 1,
                           color: Color(0xff2E2E2E)),
@@ -58,7 +57,7 @@ class _HomeState extends State<Home> {
                     Text(
                       "Find the best one",
                       style: GoogleFonts.roboto(
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w300,
                           letterSpacing: 1,
                           color: Color(0xff2E2E2E)),
@@ -72,22 +71,22 @@ class _HomeState extends State<Home> {
             children: [
               Padding(
                 padding: changed
-                    ? EdgeInsets.only(left: 20, right: 20, top: 0)
-                    : EdgeInsets.only(left: 20, right: 20, top: 20),
+                    ? EdgeInsets.only(left: 20.w, right: 20.w, top: 0)
+                    : EdgeInsets.only(left: 20.w, right: 20.w, top: 20.h),
                 child: IntrinsicHeight(
                   child: Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(4.r),
                         border: Border.all(color: Colors.green)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                          height: 50,
-                          width: 120,
+                          height: 50.h,
+                          width: 120.w,
                           child: Container(
-                            padding: EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(8.0.w),
                             child: TextFormField(
                               onTap: () {
                                 print('click');
@@ -102,7 +101,7 @@ class _HomeState extends State<Home> {
                                 fillColor: Colors.white,
                                 hintText: "Search ",
                                 hintStyle: GoogleFonts.roboto(
-                                    fontSize: 16,
+                                    fontSize: 16.sp,
                                     fontWeight: FontWeight.w400,
                                     letterSpacing: 1,
                                     color: Color(0xffB7B7B7)),
@@ -111,17 +110,17 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         VerticalDivider(
-                          width: 20,
+                          width: 20.w,
                           thickness: 1,
                           indent: 10,
                           endIndent: 10,
                           color: Colors.grey,
                         ),
                         SizedBox(
-                          height: 50,
-                          width: 120,
+                          height: 50.h,
+                          width: 120.w,
                           child: Container(
-                            padding: EdgeInsets.all(5),
+                            padding: EdgeInsets.all(5.w),
                             child: TextFormField(
                               onTap: () {
                                 Navigator.push(
@@ -139,11 +138,11 @@ class _HomeState extends State<Home> {
                                   child: Icon(
                                     Icons.location_pin,
                                     color: Colors.grey,
-                                    size: 20,
+                                    size: 20.sp,
                                   ),
                                 ),
                                 hintStyle: GoogleFonts.roboto(
-                                    fontSize: 16,
+                                    fontSize: 16.sp,
                                     fontWeight: FontWeight.w400,
                                     letterSpacing: 1,
                                     color: Color(0xffB7B7B7)),
@@ -155,8 +154,8 @@ class _HomeState extends State<Home> {
                           onTap: () {},
                           child: Container(
                             color: Color(0xff187949),
-                            height: 50,
-                            width: 45,
+                            height: 50.h,
+                            width: 45.w,
                             child: Icon(
                               Icons.search,
                               color: Color(0xffFFFFFF),
@@ -169,14 +168,14 @@ class _HomeState extends State<Home> {
                 ),
               ),
               SingleChildScrollView(
-                child: Container(
+                child: SizedBox(
                   height: MediaQuery.of(context).size.height - 230,
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 25,
+                          height: 25.h,
                         ),
                         Stack(
                           children: [
@@ -185,8 +184,8 @@ class _HomeState extends State<Home> {
                               child: CarouselSlider(
                                   items: _carouselImages
                                       .map((item) => Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 3, right: 3),
+                                            padding: EdgeInsets.only(
+                                                left: 3.w, right: 3.w),
                                             child: Container(
                                               decoration: BoxDecoration(
                                                   image: DecorationImage(
@@ -209,9 +208,9 @@ class _HomeState extends State<Home> {
                                       })),
                             ),
                             Positioned(
-                              left: 50,
-                              right: 50,
-                              bottom: 5,
+                              left: 50.w,
+                              right: 50.w,
+                              bottom: 5.w,
                               child: DotsIndicator(
                                 dotsCount: _carouselImages.length == 0
                                     ? 1
@@ -227,22 +226,22 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                             Positioned(
-                                top: 20,
-                                left: 15,
+                                top: 20.h,
+                                left: 15.w,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       "order any service,Anytime",
                                       style: GoogleFonts.roboto(
-                                          fontSize: 14,
+                                          fontSize: 14.sp,
                                           fontWeight: FontWeight.w400,
                                           color: Color(0xff555957)),
                                     ),
                                     Text(
                                       "We Provide High Quality",
                                       style: GoogleFonts.roboto(
-                                        fontSize: 20,
+                                        fontSize: 20.sp,
                                         fontWeight: FontWeight.w600,
                                         color: Color(0xff555957),
                                       ),
@@ -252,7 +251,7 @@ class _HomeState extends State<Home> {
                                         Text(
                                           "Professional",
                                           style: GoogleFonts.roboto(
-                                            fontSize: 20,
+                                            fontSize: 20.sp,
                                             fontWeight: FontWeight.w600,
                                             color: Color(0xff555957),
                                           ),
@@ -260,7 +259,7 @@ class _HomeState extends State<Home> {
                                         Text(
                                           " Service",
                                           style: GoogleFonts.roboto(
-                                            fontSize: 20,
+                                            fontSize: 20.sp,
                                             fontWeight: FontWeight.w600,
                                             color: Color(0xff187949),
                                           ),
@@ -270,11 +269,11 @@ class _HomeState extends State<Home> {
                                   ],
                                 )),
                             Positioned(
-                                left: 310,
-                                top: 5,
+                                left: 310.w,
+                                top: 5.h,
                                 child: Container(
-                                  height: 40,
-                                  width: 40,
+                                  height: 40.h,
+                                  width: 40.w,
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                           image: NetworkImage(
@@ -283,11 +282,11 @@ class _HomeState extends State<Home> {
                                       shape: BoxShape.circle),
                                 )),
                             Positioned(
-                                left: 240,
-                                top: 15,
+                                left: 240.w,
+                                top: 15.h,
                                 child: Container(
-                                  height: 50,
-                                  width: 50,
+                                  height: 50.h,
+                                  width: 50.w,
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                           image: NetworkImage(
@@ -296,11 +295,11 @@ class _HomeState extends State<Home> {
                                       shape: BoxShape.circle),
                                 )),
                             Positioned(
-                                left: 275,
-                                top: 30,
+                                left: 275.w,
+                                top: 30.h,
                                 child: Container(
-                                  height: 70,
-                                  width: 70,
+                                  height: 70.h,
+                                  width: 70.w,
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                           image: NetworkImage(
@@ -311,34 +310,30 @@ class _HomeState extends State<Home> {
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                              left: 20, right: 20, top: 20, bottom: 0),
+                          padding: EdgeInsets.only(
+                              left: 20.w, right: 20.w, top: 20.h, bottom: 0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 "Our Categories",
                                 style: GoogleFonts.roboto(
-                                    fontSize: 20,
+                                    fontSize: 20.sp,
                                     fontWeight: FontWeight.w500,
                                     color: Color(0xff555957),
                                     letterSpacing: 1),
                               ),
                               TextButton(
                                 onPressed: () {
-                                  setState(() {
-                                    pages[0] = CategoriesPage();
-                                  });
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (_) =>
-                                              BottomNavController()));
+                                          builder: (_) => CategoriesPage()));
                                 },
                                 child: Text(
                                   "See All",
                                   style: GoogleFonts.roboto(
-                                      fontSize: 14,
+                                      fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
                                       color: Color(0xff187949),
                                       letterSpacing: 1),
@@ -347,32 +342,32 @@ class _HomeState extends State<Home> {
                             ],
                           ),
                         ),
-                        Container(
-                          height: 120,
-                          width: 400,
+                        SizedBox(
+                          height: 120.h,
+                          width: 400.w,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: 6,
                             shrinkWrap: true,
                             itemBuilder: (context, index) => Padding(
-                              padding: const EdgeInsets.all(20),
+                              padding: EdgeInsets.all(20.w),
                               child: Column(
                                 children: [
                                   CircleAvatar(
                                     backgroundColor: Color(0xffD9F1E5),
-                                    radius: 25,
+                                    radius: 25.r,
                                     child: Icon(
                                       Icons.face,
                                       color: Colors.grey,
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 5,
+                                    height: 5.h,
                                   ),
                                   Text(
                                     "Cleaning",
                                     style: GoogleFonts.roboto(
-                                        fontSize: 14,
+                                        fontSize: 14.sp,
                                         fontWeight: FontWeight.w400,
                                         color: Color(0xff555957),
                                         letterSpacing: 1),
@@ -383,15 +378,15 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                              left: 20, right: 20, top: 20, bottom: 20),
+                          padding: EdgeInsets.only(
+                              left: 20.w, right: 20.w, top: 20.h, bottom: 20.w),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 "Fetured Service",
                                 style: GoogleFonts.roboto(
-                                    fontSize: 20,
+                                    fontSize: 20.sp,
                                     fontWeight: FontWeight.w500,
                                     color: Color(0xff555957),
                                     letterSpacing: 1),
@@ -399,7 +394,7 @@ class _HomeState extends State<Home> {
                               Text(
                                 "See All",
                                 style: GoogleFonts.roboto(
-                                    fontSize: 14,
+                                    fontSize: 14.sp,
                                     fontWeight: FontWeight.w400,
                                     color: Color(0xff187949),
                                     letterSpacing: 1),
@@ -408,7 +403,7 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          padding: EdgeInsets.only(left: 10.w, right: 10.w),
                           child: Row(
                             children: [
                               itemContainer(),
@@ -429,9 +424,9 @@ class _HomeState extends State<Home> {
   }
 
   Widget itemContainer() {
-    return Container(
-      height: 240,
-      width: 170,
+    return SizedBox(
+      height: 220.h,
+      width: 170.w,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -439,15 +434,15 @@ class _HomeState extends State<Home> {
           Stack(
             children: [
               Container(
-                height: 111,
-                width: 161,
+                height: 111.h,
+                width: 161.w,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10.r),
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(10),
-                      topRight: Radius.circular(10)),
+                      bottomRight: Radius.circular(10.r),
+                      topRight: Radius.circular(10.r)),
                   child: Image.asset(
                     'images/servImage.png',
                     fit: BoxFit.cover,
@@ -455,8 +450,8 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Positioned(
-                  right: 10,
-                  top: 10,
+                  right: 10.w,
+                  top: 10.h,
                   child: Icon(
                     Icons.favorite_border,
                     color: Color(0xFF187949),
@@ -464,38 +459,38 @@ class _HomeState extends State<Home> {
             ],
           ),
           SizedBox(
-            height: 5,
+            height: 5.h,
           ),
           Text('Commercial cleaning \nby expertise',
               style: GoogleFonts.roboto(
-                fontSize: 14,
+                fontSize: 14.sp,
                 color: Color(0xFF272727),
                 fontWeight: FontWeight.w400,
               )),
           SizedBox(
-            height: 5,
+            height: 5.h,
           ),
           Text(
             '200+ Company work',
             style: GoogleFonts.roboto(
-                fontSize: 10,
+                fontSize: 10.sp,
                 fontWeight: FontWeight.w400,
                 color: Color(0xFF848484)),
           ),
           SizedBox(
-            height: 15,
+            height: 15.h,
           ),
           Container(
-            height: 30,
-            width: 84,
+            height: 30.h,
+            width: 84.w,
             decoration: BoxDecoration(
                 color: Color(0xFF187949),
-                borderRadius: BorderRadius.circular(5)),
+                borderRadius: BorderRadius.circular(5.r)),
             child: Center(
               child: Text(
                 'Post a Job',
                 style: GoogleFonts.roboto(
-                    fontSize: 12,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
                     color: Color(0xFFFFFFFF)),
               ),

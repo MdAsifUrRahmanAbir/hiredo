@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 import 'package:myapp/utils/colors.dart';
 
@@ -28,7 +29,7 @@ class _BadgesSecondPageState extends State<BadgesSecondPage> {
             )),
         title: Text(
           'Badges',
-          style: myStyle(20, FontWeight.bold, Colors.black),
+          style: myStyle(20.sp, FontWeight.bold, Colors.black),
         ),
         actions: [
           IconButton(
@@ -40,21 +41,22 @@ class _BadgesSecondPageState extends State<BadgesSecondPage> {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.all(15.w),
         height: double.infinity,
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(10.w),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4), color: containerClr),
+                  borderRadius: BorderRadius.circular(4.r),
+                  color: containerClr),
               child: Row(
                 children: [
                   Image.asset('images/badges.png'),
                   SizedBox(
-                    width: 15,
+                    width: 15.w,
                   ),
                   Expanded(
                       child: Column(
@@ -62,126 +64,143 @@ class _BadgesSecondPageState extends State<BadgesSecondPage> {
                     children: [
                       Text(
                         'Golden Badges',
-                        style:
-                            myStyle(18, FontWeight.w500, themeColorGreenbright),
+                        style: myStyle(
+                            18.sp, FontWeight.w500, themeColorGreenbright),
                       ),
                       SizedBox(
-                        height: 8,
+                        height: 8.h,
                       ),
                       Text(
                         'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys. ',
-                        style: myStyle(14, FontWeight.w400, offWhite),
+                        style: myStyle(14.sp, FontWeight.w400, offWhite),
                       )
                     ],
                   )),
                 ],
               ),
             ),
-            SizedBox(height: 15,),
+            SizedBox(
+              height: 15.h,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'You are  In Golden Badge Member',
-                  style: myStyle(14, FontWeight.w400, textClr),
+                  style: myStyle(14.sp, FontWeight.w400, textClr),
                 ),
                 Text(
                   '2/3',
-                  style: myStyle(14, FontWeight.w500, textClr),
+                  style: myStyle(14.sp, FontWeight.w500, textClr),
                 )
               ],
             ),
-            SizedBox(height: 8,),
+            SizedBox(
+              height: 8.h,
+            ),
             Row(
               children: [
                 Expanded(
                     child: Container(
-                  height: 8,
+                  height: 8.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(15.r),
                       color: themeColorGreen),
                 )),
                 SizedBox(
-                  width: 1,
+                  width: 1.w,
                 ),
                 Expanded(
                     child: Container(
-                  height: 8,
+                  height: 8.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(15.r),
                       color: themeColorGreen),
                 )),
                 SizedBox(
-                  width: 1,
+                  width: 1.w,
                 ),
                 Expanded(
                     child: Container(
-                  height: 8,
+                  height: 8.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(15.r),
                       color: textformback),
                 )),
               ],
             ),
-            SizedBox(height: 15,),
+            SizedBox(
+              height: 15.h,
+            ),
             Text(
               'Golden Badge Advantage',
-              style: myStyle(18, FontWeight.w500, textClr),
+              style: myStyle(18.sp, FontWeight.w500, textClr),
             ),
             Text(
               'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys.',
-              style: myStyle(14, FontWeight.w400, textClr),
+              style: myStyle(14.sp, FontWeight.w400, textClr),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10.h,
+            ),
             Row(
               children: [
                 Icon(
                   Icons.circle,
-                  size: 18,
+                  size: 18.sp,
                   color: themeColorGreen,
                 ),
                 SizedBox(
-                  width: 20,
+                  width: 20.w,
                 ),
                 Expanded(
                     child: Text(
                   'Lorem Ipsum is simply dummy text of has been the industrys. Lorem Ipsum is simply dummy text of the printing.',
-                  style: myStyle(14, FontWeight.w400, offWhite),
+                  style: myStyle(14.sp, FontWeight.w400, offWhite),
                 ))
               ],
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10.h,
+            ),
             Row(
               children: [
                 Icon(
                   Icons.circle,
-                  size: 18,
+                  size: 18.sp,
                   color: themeColorGreen,
                 ),
                 SizedBox(
-                  width: 20,
+                  width: 20.w,
                 ),
                 Expanded(
                     child: Text(
                   'Lorem Ipsum is simply dummy text of has been the industrys. Lorem Ipsum is simply dummy text of the printing.',
-                  style: myStyle(14, FontWeight.w400, offWhite),
+                  style: myStyle(14.sp, FontWeight.w400, offWhite),
                 ))
               ],
             ),
-            SizedBox(height: 15,),
+            SizedBox(
+              height: 15.h,
+            ),
             Text(
               'Bye/Sale More Services And get Dimond Badge',
-              style: myStyle(18, FontWeight.w500, textClr),
+              style: myStyle(18.sp, FontWeight.w500, textClr),
             ),
             Text(
               'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys.',
-              style: myStyle(14, FontWeight.w400, offWhite),
+              style: myStyle(14.sp, FontWeight.w400, offWhite),
             ),
-            SizedBox(height: 20,),
-            Text('See How to get Dimond Badge Member', style: myStyle(18, FontWeight.w500, themeColorGreenbright),)
+            SizedBox(
+              height: 20.h,
+            ),
+            Text(
+              'See How to get Dimond Badge Member',
+              style: myStyle(18.sp, FontWeight.w500, themeColorGreenbright),
+            )
           ],
         ),
       ),

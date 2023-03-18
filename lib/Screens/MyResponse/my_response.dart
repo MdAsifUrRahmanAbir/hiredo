@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 
 class MyResponse extends StatefulWidget {
@@ -78,7 +79,7 @@ class _MyResponseState extends State<MyResponse> {
             )),
         title: Text(
           'My Responce',
-          style: myStyle(20, FontWeight.bold, Colors.black),
+          style: myStyle(20.sp, FontWeight.bold, Colors.black),
         ),
         actions: [
           IconButton(
@@ -90,7 +91,7 @@ class _MyResponseState extends State<MyResponse> {
         ],
       ),
       body: Container(
-        padding: const EdgeInsets.all(15),
+        padding: EdgeInsets.all(15.w),
         height: double.infinity,
         width: double.infinity,
         child: SingleChildScrollView(
@@ -101,7 +102,7 @@ class _MyResponseState extends State<MyResponse> {
                 children: [
                   Expanded(
                     child: SizedBox(
-                      height: 50,
+                      height: 50.h,
                       child: TextFormField(
                         decoration: InputDecoration(
                           hintText: 'Search',
@@ -125,17 +126,18 @@ class _MyResponseState extends State<MyResponse> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    height: 50,
-                    color: Color(0xff187949),
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    height: 50.h,
+                    color: const Color(0xff187949),
                     child: Row(
                       children: [
                         Text(
                           'Filter',
-                          style: myStyle(16, FontWeight.normal, Colors.white),
+                          style:
+                              myStyle(16.sp, FontWeight.normal, Colors.white),
                         ),
-                        const SizedBox(
-                          width: 5,
+                        SizedBox(
+                          width: 5.w,
                         ),
                         const Icon(
                           Icons.filter_list_sharp,
@@ -146,15 +148,15 @@ class _MyResponseState extends State<MyResponse> {
                   )
                 ],
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 10.h,
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                height: 70,
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                height: 70.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(4.r),
                     color: const Color(0xffFAFAFA)),
                 child: Row(
                   children: [
@@ -164,11 +166,11 @@ class _MyResponseState extends State<MyResponse> {
                       children: [
                         Text(
                           '431 Pending Responces',
-                          style: myStyle(18, FontWeight.w500, Colors.black),
+                          style: myStyle(18.sp, FontWeight.w500, Colors.black),
                         ),
                         Text(
                           'Updated just now',
-                          style: myStyle(14, FontWeight.w400, Colors.black),
+                          style: myStyle(14.sp, FontWeight.w400, Colors.black),
                         )
                       ],
                     ),
@@ -177,18 +179,18 @@ class _MyResponseState extends State<MyResponse> {
                       Icons.refresh,
                       color: Colors.green,
                     ),
-                    const SizedBox(
-                      width: 8,
+                    SizedBox(
+                      width: 8.w,
                     ),
                     Text(
                       'Refresh',
-                      style: myStyle(14, FontWeight.w500, Colors.black),
+                      style: myStyle(14.sp, FontWeight.w500, Colors.black),
                     )
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 10.h,
               ),
               Flexible(
                   child: ListView.separated(
@@ -200,12 +202,12 @@ class _MyResponseState extends State<MyResponse> {
                                 Row(
                                   children: [
                                     CircleAvatar(
-                                      radius: 20,
+                                      radius: 20.r,
                                       backgroundImage:
                                           AssetImage(pending[index]['imgUrl']),
                                     ),
-                                    const SizedBox(
-                                      width: 8,
+                                    SizedBox(
+                                      width: 8.w,
                                     ),
                                     Expanded(
                                       child: Column(
@@ -219,46 +221,45 @@ class _MyResponseState extends State<MyResponse> {
                                               Text(
                                                 pending[index]['name'],
                                                 style: myStyle(
-                                                    14,
+                                                    14.sp,
                                                     FontWeight.bold,
                                                     Colors.black),
                                               ),
-                                              const Icon(
+                                              Icon(
                                                 Icons.restaurant,
                                                 color: Colors.green,
-                                                size: 15,
+                                                size: 15.sp,
                                               ),
                                               Text(
                                                 pending[index]['title'],
                                                 style: myStyle(
-                                                    12,
+                                                    12.sp,
                                                     FontWeight.w400,
                                                     Colors.black),
                                               ),
                                               Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8,
-                                                        vertical: 5),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8.w,
+                                                    vertical: 5.w),
                                                 decoration: BoxDecoration(
                                                     color: Color(0xffF2F2F2),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            4)),
+                                                            4.r)),
                                                 child: Row(
                                                   children: [
-                                                    const Icon(
+                                                    Icon(
                                                       Icons.circle,
                                                       color: Colors.pink,
-                                                      size: 18,
+                                                      size: 18.sp,
                                                     ),
-                                                    const SizedBox(
-                                                      width: 6,
+                                                    SizedBox(
+                                                      width: 6.w,
                                                     ),
                                                     Text(
                                                       'Pending',
                                                       style: myStyle(
-                                                          12,
+                                                          12.sp,
                                                           FontWeight.w400,
                                                           Colors.black),
                                                     )
@@ -269,18 +270,18 @@ class _MyResponseState extends State<MyResponse> {
                                           ),
                                           Row(
                                             children: [
-                                              const Icon(
+                                              Icon(
                                                 Icons.location_on_outlined,
                                                 color: Colors.green,
-                                                size: 16,
+                                                size: 16.sp,
                                               ),
-                                              const SizedBox(
-                                                width: 5,
+                                              SizedBox(
+                                                width: 5.w,
                                               ),
                                               Text(
                                                 pending[index]['location'],
                                                 style: myStyle(
-                                                    12,
+                                                    12.sp,
                                                     FontWeight.w400,
                                                     Colors.grey),
                                               )
@@ -291,39 +292,39 @@ class _MyResponseState extends State<MyResponse> {
                                     )
                                   ],
                                 ),
-                                const SizedBox(
-                                  height: 15,
+                                SizedBox(
+                                  height: 15.sp,
                                 ),
                                 Text(
                                   pending[index]['details'],
                                   style: myStyle(
-                                      12, FontWeight.w400, Colors.black),
+                                      12.sp, FontWeight.w400, Colors.black),
                                 ),
-                                const SizedBox(
-                                  height: 15,
+                                SizedBox(
+                                  height: 15.sp,
                                 ),
                                 Container(
-                                  padding: EdgeInsets.all(8),
+                                  padding: EdgeInsets.all(8.w),
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4),
+                                      borderRadius: BorderRadius.circular(4.r),
                                       color: Color(0xffF3F3F6)),
                                   child: Row(
                                     children: [
-                                      const Icon(
+                                      Icon(
                                         Icons.beenhere_outlined,
-                                        size: 16,
+                                        size: 16.sp,
                                       ),
-                                      const SizedBox(
-                                        width: 10,
+                                      SizedBox(
+                                        width: 10.w,
                                       ),
                                       Text(
                                         'You send Kumar an email',
-                                        style: myStyle(
-                                            14, FontWeight.w400, Colors.black),
+                                        style: myStyle(14.sp, FontWeight.w400,
+                                            Colors.black),
                                       ),
                                       Spacer(),
                                       Text('15h ago',
-                                          style: myStyle(14, FontWeight.w400,
+                                          style: myStyle(14.sp, FontWeight.w400,
                                               Colors.black))
                                     ],
                                   ),

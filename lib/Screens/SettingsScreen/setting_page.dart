@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:myapp/Screens/ProfileScreen/profile.dart';
 import 'package:myapp/Screens/ReviewScreen/reviews_page.dart';
 import 'package:myapp/Screens/SettingsScreen/AccountDetails/account_details.dart';
@@ -89,7 +90,7 @@ class _SettingsPageState extends State<SettingsPage> {
             )),
         title: Text(
           'Settings',
-          style: myStyle(20, FontWeight.bold, Colors.black),
+          style: myStyle(20.sp, FontWeight.bold, Colors.black),
         ),
         actions: [
           IconButton(
@@ -101,7 +102,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ],
       ),
       body: Container(
-        padding: const EdgeInsets.all(15),
+        padding: EdgeInsets.all(15.w),
         height: double.infinity,
         width: double.infinity,
         child: SingleChildScrollView(
@@ -112,10 +113,10 @@ class _SettingsPageState extends State<SettingsPage> {
             children: [
               Text(
                 'My Profile',
-                style: myStyle(18, FontWeight.bold, Colors.black),
+                style: myStyle(18.sp, FontWeight.bold, Colors.black),
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 10.h,
               ),
               Flexible(
                   child: ListView.separated(
@@ -133,13 +134,12 @@ class _SettingsPageState extends State<SettingsPage> {
                               });
                             },
                             child: Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              height: 55,
+                              padding: EdgeInsets.symmetric(horizontal: 15.w),
+                              height: 55.h,
                               width: double.infinity,
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(5),
+                                borderRadius: BorderRadius.circular(5.r),
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.grey.withOpacity(0.1),
@@ -153,36 +153,36 @@ class _SettingsPageState extends State<SettingsPage> {
                               child: Row(
                                 children: [
                                   Icon(myProfile[index]['icon']),
-                                  const SizedBox(
-                                    width: 15,
+                                  SizedBox(
+                                    width: 15.w,
                                   ),
                                   Text(
                                     myProfile[index]['title'],
                                     style: myStyle(
-                                        16, FontWeight.w500, Colors.black),
+                                        16.sp, FontWeight.w500, Colors.black),
                                   ),
                                   const Spacer(),
-                                  const Icon(
+                                  Icon(
                                     Icons.arrow_forward_ios,
-                                    size: 16,
+                                    size: 16.sp,
                                   )
                                 ],
                               ),
                             ),
                           ),
-                      separatorBuilder: (context, index) => const SizedBox(
-                            height: 10,
+                      separatorBuilder: (context, index) => SizedBox(
+                            height: 10.h,
                           ),
                       itemCount: myProfile.length)),
-              const SizedBox(
-                height: 30,
+              SizedBox(
+                height: 30.h,
               ),
               Text(
                 'Communication',
-                style: myStyle(18, FontWeight.bold, Colors.black),
+                style: myStyle(18.sp, FontWeight.bold, Colors.black),
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 10.h,
               ),
               Flexible(
                   child: ListView.separated(
@@ -200,13 +200,12 @@ class _SettingsPageState extends State<SettingsPage> {
                               });
                             },
                             child: Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              height: 55,
+                              padding: EdgeInsets.symmetric(horizontal: 15.w),
+                              height: 55.h,
                               width: double.infinity,
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(5),
+                                borderRadius: BorderRadius.circular(5.r),
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.grey.withOpacity(0.1),
@@ -220,36 +219,36 @@ class _SettingsPageState extends State<SettingsPage> {
                               child: Row(
                                 children: [
                                   Icon(communications[index]['icon']),
-                                  const SizedBox(
-                                    width: 15,
+                                  SizedBox(
+                                    width: 15.w,
                                   ),
                                   Text(
                                     communications[index]['title'],
                                     style: myStyle(
-                                        16, FontWeight.w500, Colors.black),
+                                        16.sp, FontWeight.w500, Colors.black),
                                   ),
                                   const Spacer(),
-                                  const Icon(
+                                  Icon(
                                     Icons.arrow_forward_ios,
-                                    size: 16,
+                                    size: 16.sp,
                                   )
                                 ],
                               ),
                             ),
                           ),
-                      separatorBuilder: (context, index) => const SizedBox(
-                            height: 10,
+                      separatorBuilder: (context, index) => SizedBox(
+                            height: 10.h,
                           ),
                       itemCount: communications.length)),
-              const SizedBox(
-                height: 30,
+              SizedBox(
+                height: 30.h,
               ),
               Text(
                 'Credits & Payments',
-                style: myStyle(18, FontWeight.bold, Colors.black),
+                style: myStyle(18.sp, FontWeight.bold, Colors.black),
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 10.h,
               ),
               Flexible(
                   child: ListView.separated(
@@ -268,13 +267,12 @@ class _SettingsPageState extends State<SettingsPage> {
                               });
                             },
                             child: Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              height: 55,
+                              padding: EdgeInsets.symmetric(horizontal: 15.w),
+                              height: 55.h,
                               width: double.infinity,
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(5),
+                                borderRadius: BorderRadius.circular(5.r),
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.grey.withOpacity(0.1),
@@ -288,36 +286,36 @@ class _SettingsPageState extends State<SettingsPage> {
                               child: Row(
                                 children: [
                                   Icon(credits[index]['icon']),
-                                  const SizedBox(
-                                    width: 15,
+                                  SizedBox(
+                                    width: 15.w,
                                   ),
                                   Text(
                                     credits[index]['title'],
                                     style: myStyle(
-                                        16, FontWeight.w500, Colors.black),
+                                        16.sp, FontWeight.w500, Colors.black),
                                   ),
                                   const Spacer(),
-                                  const Icon(
+                                  Icon(
                                     Icons.arrow_forward_ios,
-                                    size: 16,
+                                    size: 16.sp,
                                   )
                                 ],
                               ),
                             ),
                           ),
-                      separatorBuilder: (context, index) => const SizedBox(
-                            height: 10,
+                      separatorBuilder: (context, index) => SizedBox(
+                            height: 10.h,
                           ),
                       itemCount: credits.length)),
-              const SizedBox(
-                height: 30,
+              SizedBox(
+                height: 30.h,
               ),
               Text(
                 'Intergrations',
-                style: myStyle(18, FontWeight.bold, Colors.black),
+                style: myStyle(18.sp, FontWeight.bold, Colors.black),
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 10.h,
               ),
               Flexible(
                   child: ListView.separated(
@@ -336,13 +334,12 @@ class _SettingsPageState extends State<SettingsPage> {
                               });
                             },
                             child: Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              height: 55,
+                              padding: EdgeInsets.symmetric(horizontal: 15.w),
+                              height: 55.h,
                               width: double.infinity,
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(5),
+                                borderRadius: BorderRadius.circular(5.r),
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.grey.withOpacity(0.1),
@@ -356,29 +353,29 @@ class _SettingsPageState extends State<SettingsPage> {
                               child: Row(
                                 children: [
                                   Icon(intergrations[index]['icon']),
-                                  const SizedBox(
-                                    width: 15,
+                                  SizedBox(
+                                    width: 15.w,
                                   ),
                                   Text(
                                     intergrations[index]['title'],
                                     style: myStyle(
-                                        16, FontWeight.w500, Colors.black),
+                                        16.sp, FontWeight.w500, Colors.black),
                                   ),
                                   const Spacer(),
-                                  const Icon(
+                                  Icon(
                                     Icons.arrow_forward_ios,
-                                    size: 16,
+                                    size: 16.sp,
                                   )
                                 ],
                               ),
                             ),
                           ),
-                      separatorBuilder: (context, index) => const SizedBox(
-                            height: 10,
+                      separatorBuilder: (context, index) => SizedBox(
+                            height: 10.h,
                           ),
                       itemCount: intergrations.length)),
-              const SizedBox(
-                height: 30,
+              SizedBox(
+                height: 30.h,
               ),
               Align(
                 alignment: Alignment.center,

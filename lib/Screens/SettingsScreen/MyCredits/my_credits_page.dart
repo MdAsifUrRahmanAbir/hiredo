@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 import 'package:myapp/utils/colors.dart';
@@ -68,14 +69,14 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
           children: [
             Image.asset(
               'images/credits.png',
-              width: 30,
+              width: 30.w,
             ),
             SizedBox(
-              width: 8,
+              width: 8.w,
             ),
             Text(
               'My Credits',
-              style: myStyle(20, FontWeight.bold, Colors.black),
+              style: myStyle(20.sp, FontWeight.bold, Colors.black),
             ),
           ],
         ),
@@ -89,7 +90,7 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.all(13.w),
         height: double.infinity,
         width: double.infinity,
         child: SingleChildScrollView(
@@ -98,11 +99,11 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
             children: [
               Text(
                 'My Credits',
-                style: myStyle(20, FontWeight.w500, textClr),
+                style: myStyle(20.sp, FontWeight.w500, textClr),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
-                padding: EdgeInsets.all(10),
+                margin: EdgeInsets.symmetric(vertical: 10.h),
+                padding: EdgeInsets.all(10.w),
                 color: containerClr,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,10 +111,10 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
                     Icon(
                       Icons.error_outline,
                       color: themeColorGreenbright,
-                      size: 27,
+                      size: 27.sp,
                     ),
                     SizedBox(
-                      width: 5,
+                      width: 5.w,
                     ),
                     Expanded(
                       child: SizedBox(
@@ -122,12 +123,12 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
                             text: TextSpan(
                                 text:
                                     'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet',
-                                style: myStyle(14, FontWeight.w400, textClr),
+                                style: myStyle(14.sp, FontWeight.w400, textClr),
                                 children: <TextSpan>[
                               TextSpan(
                                   text: '\nMy Profile',
                                   style: myStyle(
-                                      14, FontWeight.w400, themeColorGreen))
+                                      14.sp, FontWeight.w400, themeColorGreen))
                             ])),
                       ),
                     ),
@@ -138,12 +139,12 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
                 children: [
                   FlutterSwitch(
                     activeColor: themeColorGreen,
-                    width: 55.0,
-                    height: 28.0,
-                    toggleSize: 22.0,
+                    width: 55.0.w,
+                    height: 28.0.h,
+                    toggleSize: 22.0.sp,
                     value: status,
-                    borderRadius: 30.0,
-                    padding: 4.0,
+                    borderRadius: 30.0.r,
+                    padding: 4.0.w,
                     showOnOff: false,
                     onToggle: (val) {
                       setState(() {
@@ -152,36 +153,39 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
                     },
                   ),
                   SizedBox(
-                    width: 10,
+                    width: 10.w,
                   ),
                   Text(
                     'Auto top-up is',
-                    style: myStyle(14, FontWeight.w400, textClr),
+                    style: myStyle(14.sp, FontWeight.w400, textClr),
                   ),
                   SizedBox(
-                    width: 10,
+                    width: 10.w,
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 3, horizontal: 5),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 3.h, horizontal: 5.w),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
+                        borderRadius: BorderRadius.circular(3.r),
                         color: textformback),
                     child: Text(
                       'Off',
-                      style: myStyle(8, FontWeight.w400, themeColorGreen),
+                      style: myStyle(8.sp, FontWeight.w400, themeColorGreen),
                     ),
                   ),
                   Spacer(),
                   Text(
                     'You have 64 credits',
-                    style: myStyle(14, FontWeight.w400, textClr),
+                    style: myStyle(14.sp, FontWeight.w400, textClr),
                   ),
                 ],
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10.h,
+              ),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(
+                padding: EdgeInsets.symmetric(vertical: 10.h),
+                decoration: const BoxDecoration(
                   border: Border(
                       top: BorderSide(color: offWhite, width: .5),
                       bottom: BorderSide(color: offWhite, width: .5)),
@@ -193,28 +197,28 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
                       children: [
                         Text(
                           'About 5 responses',
-                          style: myStyle(14, FontWeight.w400, textClr),
+                          style: myStyle(14.sp, FontWeight.w400, textClr),
                         ),
                         Row(
                           children: [
                             Image.asset(
                               'images/credits.png',
-                              width: 30,
+                              width: 30.w,
                             ),
                             Text(
                               '30 credits',
-                              style: myStyle(14, FontWeight.w400, textClr),
+                              style: myStyle(14.sp, FontWeight.w400, textClr),
                             ),
                           ],
                         ),
                         Text(
                           '\$63.00\n\$2.10/credit',
-                          style: myStyle(12, FontWeight.w400, textClr),
+                          style: myStyle(12.sp, FontWeight.w400, textClr),
                         )
                       ],
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 10.h,
                     ),
                     Row(
                       children: [
@@ -223,7 +227,8 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
                           activeColor: themeColorGreen,
                           hoverColor: themeColorGreen,
                           value: value,
-                          side: BorderSide(color: themeColorGreen, width: 2),
+                          side: const BorderSide(
+                              color: themeColorGreen, width: 2),
                           onChanged: (value) {
                             setState(() {
                               this.value = value!;
@@ -231,23 +236,23 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
                           },
                         ),
                         SizedBox(
-                          width: 8,
+                          width: 8.w,
                         ),
                         Text(
                           'Auto top-up next time',
-                          style: myStyle(14, FontWeight.w400, textClr),
+                          style: myStyle(14.sp, FontWeight.w400, textClr),
                         ),
                         Spacer(),
                         Container(
                           alignment: Alignment.center,
-                          height: 35,
-                          width: 100,
+                          height: 35.h,
+                          width: 100.w,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: BorderRadius.circular(4.r),
                               color: themeColorGreen),
                           child: Text(
                             'Buy Credits',
-                            style: myStyle(14, FontWeight.w400, scaffoldClr),
+                            style: myStyle(14.sp, FontWeight.w400, scaffoldClr),
                           ),
                         )
                       ],
@@ -256,8 +261,8 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(
+                padding: EdgeInsets.symmetric(vertical: 10.h),
+                decoration: const BoxDecoration(
                   border: Border(
                       top: BorderSide(color: offWhite, width: .5),
                       bottom: BorderSide(color: offWhite, width: .5)),
@@ -269,28 +274,28 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
                       children: [
                         Text(
                           'About 10 responses',
-                          style: myStyle(14, FontWeight.w400, textClr),
+                          style: myStyle(14.sp, FontWeight.w400, textClr),
                         ),
                         Row(
                           children: [
                             Image.asset(
                               'images/credits.png',
-                              width: 30,
+                              width: 30.w,
                             ),
                             Text(
                               '60 credits',
-                              style: myStyle(14, FontWeight.w400, textClr),
+                              style: myStyle(14.sp, FontWeight.w400, textClr),
                             ),
                           ],
                         ),
                         Text(
                           '\$119.70\n\$2.00/credit',
-                          style: myStyle(12, FontWeight.w400, textClr),
+                          style: myStyle(12.sp, FontWeight.w400, textClr),
                         )
                       ],
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 10.h,
                     ),
                     Row(
                       children: [
@@ -299,7 +304,8 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
                           activeColor: themeColorGreen,
                           hoverColor: themeColorGreen,
                           value: value,
-                          side: BorderSide(color: themeColorGreen, width: 2),
+                          side: const BorderSide(
+                              color: themeColorGreen, width: 2),
                           onChanged: (value) {
                             setState(() {
                               this.value = value!;
@@ -307,23 +313,23 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
                           },
                         ),
                         SizedBox(
-                          width: 8,
+                          width: 8.w,
                         ),
                         Text(
                           'Auto top-up next time',
-                          style: myStyle(14, FontWeight.w400, textClr),
+                          style: myStyle(14.sp, FontWeight.w400, textClr),
                         ),
                         Spacer(),
                         Container(
                           alignment: Alignment.center,
-                          height: 35,
-                          width: 100,
+                          height: 35.h,
+                          width: 100.w,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: BorderRadius.circular(4.r),
                               color: themeColorGreen),
                           child: Text(
                             'Buy Credits',
-                            style: myStyle(14, FontWeight.w400, scaffoldClr),
+                            style: myStyle(14.sp, FontWeight.w400, scaffoldClr),
                           ),
                         )
                       ],
@@ -332,8 +338,8 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(
+                padding: EdgeInsets.symmetric(vertical: 10.h),
+                decoration: const BoxDecoration(
                   border: Border(
                       top: BorderSide(color: offWhite, width: .5),
                       bottom: BorderSide(color: offWhite, width: .5)),
@@ -345,28 +351,28 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
                       children: [
                         Text(
                           'About 120 responses',
-                          style: myStyle(14, FontWeight.w400, textClr),
+                          style: myStyle(14.sp, FontWeight.w400, textClr),
                         ),
                         Row(
                           children: [
                             Image.asset(
                               'images/credits.png',
-                              width: 30,
+                              width: 30.h,
                             ),
                             Text(
                               '120 credits',
-                              style: myStyle(14, FontWeight.w400, textClr),
+                              style: myStyle(14.sp, FontWeight.w400, textClr),
                             ),
                           ],
                         ),
                         Text(
                           '\$168.00\n\$1.85/credit',
-                          style: myStyle(12, FontWeight.w400, textClr),
+                          style: myStyle(12.sp, FontWeight.w400, textClr),
                         )
                       ],
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 10.h,
                     ),
                     Row(
                       children: [
@@ -375,7 +381,8 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
                           activeColor: themeColorGreen,
                           hoverColor: themeColorGreen,
                           value: value,
-                          side: BorderSide(color: themeColorGreen, width: 2),
+                          side: const BorderSide(
+                              color: themeColorGreen, width: 2),
                           onChanged: (value) {
                             setState(() {
                               this.value = value!;
@@ -383,23 +390,23 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
                           },
                         ),
                         SizedBox(
-                          width: 8,
+                          width: 8.w,
                         ),
                         Text(
                           'Auto top-up next time',
-                          style: myStyle(14, FontWeight.w400, textClr),
+                          style: myStyle(14.sp, FontWeight.w400, textClr),
                         ),
                         Spacer(),
                         Container(
                           alignment: Alignment.center,
-                          height: 35,
-                          width: 100,
+                          height: 35.h,
+                          width: 100.w,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: BorderRadius.circular(4.r),
                               color: themeColorGreen),
                           child: Text(
                             'Buy Credits',
-                            style: myStyle(14, FontWeight.w400, scaffoldClr),
+                            style: myStyle(14.sp, FontWeight.w400, scaffoldClr),
                           ),
                         )
                       ],
@@ -407,108 +414,124 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10.h,
+              ),
               Container(
-                padding: EdgeInsets.all(5),
+                padding: EdgeInsets.all(5.w),
                 decoration: BoxDecoration(
-                    color: containerClr, borderRadius: BorderRadius.circular(3)),
+                    color: containerClr,
+                    borderRadius: BorderRadius.circular(3.w)),
                 child: Row(
                   children: [
                     Image.asset(
                       'images/visa.png',
-                      width: 30,
+                      width: 30.w,
                     ),
-                    SizedBox(width: 5,),
+                    SizedBox(
+                      width: 5.w,
+                    ),
                     Expanded(
                         child: Text(
                       'We ll charge the card ending 2518 that we have on file',
-                      style: myStyle(12, FontWeight.w400, textClr),
+                      style: myStyle(12.sp, FontWeight.w400, textClr),
                     )),
                     Text(
                       'Change',
-                      style: myStyle(12, FontWeight.w400, themeColorGreenbright),
+                      style: myStyle(
+                          12.sp, FontWeight.w400, themeColorGreenbright),
                     )
                   ],
                 ),
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10.h,
+              ),
               Text(
                 'Redeem coupon',
-                style: myStyle(12, FontWeight.w400, textClr),
+                style: myStyle(12.sp, FontWeight.w400, textClr),
               ),
-              SizedBox(height: 5,),
+              SizedBox(
+                height: 5.h,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 35,
-                    width: 180,
+                    height: 35.h,
+                    width: 180.w,
                     child: TextFormField(
                       decoration: InputDecoration(
                         hintText: 'coupon code',
                         fillColor: textformback,
                         filled: true,
-                        hintStyle: myStyle(12, FontWeight.w400, offWhite),
-                        enabledBorder:
-                            OutlineInputBorder(borderSide: BorderSide.none),
-                        focusedBorder:
-                            OutlineInputBorder(borderSide: BorderSide.none),
+                        hintStyle: myStyle(12.sp, FontWeight.w400, offWhite),
+                        enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide.none),
+                        focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide.none),
                       ),
                     ),
                   ),
                   SizedBox(
-                    width: 15,
+                    width: 15.h,
                   ),
                   Container(
                     alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    height: 35,
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    height: 35.h,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(4.r),
                         border: Border.all(color: themeColorGreen, width: 1)),
                     child: Text(
                       'Apply',
-                      style: myStyle(14, FontWeight.w400, textClr),
+                      style: myStyle(14.sp, FontWeight.w400, textClr),
                     ),
                   )
                 ],
               ),
-              SizedBox(height: 15,),
-              Text('Credit transaction log', style: myStyle(18, FontWeight.w500, textClr),),
+              SizedBox(
+                height: 15.h,
+              ),
+              Text(
+                'Credit transaction log',
+                style: myStyle(18.sp, FontWeight.w500, textClr),
+              ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
-                height: 30,
+                margin: EdgeInsets.symmetric(vertical: 10.h),
+                height: 30.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4), color: containerClr),
+                    borderRadius: BorderRadius.circular(4.r),
+                    color: containerClr),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
                       'ID',
-                      style: myStyle(12, FontWeight.w400, textClr),
+                      style: myStyle(12.sp, FontWeight.w400, textClr),
                     ),
                     Text(
                       'Description',
-                      style: myStyle(12, FontWeight.w400, textClr),
+                      style: myStyle(12.r, FontWeight.w400, textClr),
                     ),
                     Text(
                       'Credits',
-                      style: myStyle(12, FontWeight.w400, textClr),
+                      style: myStyle(12.r, FontWeight.w400, textClr),
                     ),
                     Text(
                       'Date',
-                      style: myStyle(12, FontWeight.w400, textClr),
+                      style: myStyle(12.h, FontWeight.w400, textClr),
                     ),
                   ],
                 ),
               ),
               ListView.separated(
-                shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) => Container(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        decoration: BoxDecoration(
+                        padding: EdgeInsets.symmetric(vertical: 10.h),
+                        decoration: const BoxDecoration(
                             border: Border(
                                 top: BorderSide(color: offWhite, width: 1),
                                 bottom: BorderSide(color: offWhite, width: 1))),
@@ -517,28 +540,30 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
                           children: [
                             Text(
                               details[index]['id'],
-                              style: myStyle(12, FontWeight.w400, textClr),
+                              style: myStyle(12.sp, FontWeight.w400, textClr),
                             ),
                             Text(
                               details[index]['description'],
-                              style: myStyle(12, FontWeight.w400, textClr),
+                              style: myStyle(12.sp, FontWeight.w400, textClr),
                             ),
                             Text(
                               details[index]['credits'],
-                              style: myStyle(12, FontWeight.w400, textClr),
+                              style: myStyle(12.sp, FontWeight.w400, textClr),
                             ),
                             Text(
                               details[index]['date'],
-                              style: myStyle(12, FontWeight.w400, textClr),
+                              style: myStyle(12.sp, FontWeight.w400, textClr),
                             ),
                           ],
                         ),
                       ),
                   separatorBuilder: (context, index) => SizedBox(
-                        height: 15,
+                        height: 15.h,
                       ),
                   itemCount: details.length),
-              SizedBox(height: 15,),
+              SizedBox(
+                height: 15.h,
+              ),
             ],
           ),
         ),

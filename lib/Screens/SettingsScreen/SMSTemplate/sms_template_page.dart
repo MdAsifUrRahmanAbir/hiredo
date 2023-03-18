@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 import 'package:myapp/utils/colors.dart';
 
@@ -10,7 +11,6 @@ class SMSTemplatePage extends StatefulWidget {
 }
 
 class _SMSTemplatePageState extends State<SMSTemplatePage> {
-
   List<String> name = ['Visit'];
 
   @override
@@ -23,7 +23,7 @@ class _SMSTemplatePageState extends State<SMSTemplatePage> {
         backgroundColor: Colors.white,
         leading: IconButton(
             onPressed: () {
-             Navigator.of(context).pop();
+              Navigator.of(context).pop();
             },
             icon: const Icon(
               Icons.arrow_back,
@@ -31,7 +31,7 @@ class _SMSTemplatePageState extends State<SMSTemplatePage> {
             )),
         title: Text(
           'SMS Templates',
-          style: myStyle(20, FontWeight.bold, Colors.black),
+          style: myStyle(20.sp, FontWeight.bold, Colors.black),
         ),
         actions: [
           IconButton(
@@ -43,7 +43,7 @@ class _SMSTemplatePageState extends State<SMSTemplatePage> {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.all(15.w),
         height: double.infinity,
         width: double.infinity,
         child: Column(
@@ -53,21 +53,22 @@ class _SMSTemplatePageState extends State<SMSTemplatePage> {
               children: [
                 Text(
                   'My templates',
-                  style: myStyle(20, FontWeight.w500, textClr),
+                  style: myStyle(20.sp, FontWeight.w500, textClr),
                 ),
                 Container(
                   color: themeColorGreen,
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.sp, vertical: 5.w),
                   child: Row(
                     children: [
                       Icon(
                         Icons.add,
-                        size: 12,
+                        size: 12.sp,
                         color: scaffoldClr,
                       ),
                       Text(
                         'Add template',
-                        style: myStyle(12, FontWeight.w400, scaffoldClr),
+                        style: myStyle(12.sp, FontWeight.w400, scaffoldClr),
                       )
                     ],
                   ),
@@ -75,58 +76,77 @@ class _SMSTemplatePageState extends State<SMSTemplatePage> {
               ],
             ),
             SizedBox(
-              height: 15,
+              height: 15.h,
             ),
             ListView.separated(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) => Container(
-                  padding: EdgeInsets.all(10),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: scaffoldClr,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.1),
-                        spreadRadius: 1,
-                        blurRadius: 1,
-                        offset: Offset(
-                            0, 1), // changes position of shadow
+                      padding: EdgeInsets.all(10.w),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: scaffoldClr,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: const Offset(
+                                0, 1), // changes position of shadow
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  child: Row(
-                    children: [
-                      Text(name[index], style: myStyle(18, FontWeight.w500, textClr),),
-                      Spacer(),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10,vertical: 4),
-                        decoration: BoxDecoration(
-                            color: themeColorGreen,
-                            borderRadius: BorderRadius.circular(4)
-                        ),
-                        child: Text('Edit', style: myStyle(12, FontWeight.w400, scaffoldClr),),
+                      child: Row(
+                        children: [
+                          Text(
+                            name[index],
+                            style: myStyle(18.sp, FontWeight.w500, textClr),
+                          ),
+                          Spacer(),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.w, vertical: 4.w),
+                            decoration: BoxDecoration(
+                                color: themeColorGreen,
+                                borderRadius: BorderRadius.circular(4.r)),
+                            child: Text(
+                              'Edit',
+                              style:
+                                  myStyle(12.sp, FontWeight.w400, scaffoldClr),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10.h,
+                          ),
+                          IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.delete_sweep,
+                                color: offWhite,
+                              ))
+                        ],
                       ),
-                      SizedBox(width: 10,),
-                      IconButton(onPressed: () {
-
-                      }, icon: Icon(Icons.delete_sweep, color: offWhite,))
-                    ],
-                  ),
-                ),
+                    ),
                 separatorBuilder: (context, index) => SizedBox(
-                  height: 10,
-                ),
+                      height: 10.h,
+                    ),
                 itemCount: name.length),
-            SizedBox(height: 15,),
+            SizedBox(
+              height: 15.h,
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(Icons.error_outline, size: 12,),
-                SizedBox(width: 5,),
+                Icon(
+                  Icons.error_outline,
+                  size: 12.sp,
+                ),
+                SizedBox(
+                  width: 5.w,
+                ),
                 Text(
                   'Learn more about email templates',
-                  style: myStyle(12, FontWeight.w400, offWhite),
+                  style: myStyle(12.sp, FontWeight.w400, offWhite),
                 )
               ],
             ),

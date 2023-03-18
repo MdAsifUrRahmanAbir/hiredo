@@ -1,12 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:myapp/Screens/EmailVerifiyScreen/enterverificationpage.dart';
-import 'package:myapp/Screens/SignInScreen/signinpage.dart';
 
 import '../../utils/colors.dart';
 
@@ -32,15 +31,15 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
           backgroundColor: Colors.white,
           elevation: 0,
           leading: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0.w),
             child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(90),
-                      topRight: Radius.circular(90),
-                      bottomLeft: Radius.circular(90),
-                      bottomRight: Radius.circular(90)),
+                      topLeft: Radius.circular(90.r),
+                      topRight: Radius.circular(90.r),
+                      bottomLeft: Radius.circular(90.r),
+                      bottomRight: Radius.circular(90.r)),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.1),
@@ -56,8 +55,6 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
                     color: themeColorGreen,
                   ),
                   onPressed: () {
-                    // Navigator.pushReplacementNamed(
-                    //     context, SignInPage.routename);
                     Navigator.pop(context);
                   },
                 )),
@@ -69,12 +66,12 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
         ),
         body: Center(
           child: Padding(
-            padding: const EdgeInsets.all(18.0),
+            padding: EdgeInsets.all(18.0.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 Row(
                   children: [
@@ -107,7 +104,7 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
                   ],
                 ),
                 SizedBox(
-                  height: 50,
+                  height: 50.h,
                 ),
                 accounttype == 'phone'
                     ? Column(
@@ -116,19 +113,18 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
                           Text(
                             'Enter Your Phone',
                             style: GoogleFonts.roboto(
-                                fontSize: 16,
+                                fontSize: 16.sp,
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xff555957)),
                           ),
                           SizedBox(
-                            height: 5,
+                            height: 5.h,
                           ),
                           TextFormField(
                             controller: phoneController,
                             decoration: InputDecoration(
                                 filled: true,
                                 fillColor: themeColorGreen.withOpacity(0.1),
-                                //prefixIcon: Icon(Icons.email_outlined,color: Colors.black,),
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Colors.black, width: 0.5)),
@@ -148,19 +144,18 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
                           Text(
                             'Enter Your Email',
                             style: GoogleFonts.roboto(
-                                fontSize: 16,
+                                fontSize: 16.sp,
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xff555957)),
                           ),
                           SizedBox(
-                            height: 5,
+                            height: 5.h,
                           ),
                           TextFormField(
                             controller: phoneController,
                             decoration: InputDecoration(
                                 filled: true,
                                 fillColor: themeColorGreen.withOpacity(0.1),
-                                //prefixIcon: Icon(Icons.email_outlined,color: Colors.black,),
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Colors.black, width: 0.5)),
@@ -175,32 +170,30 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
                         ],
                       ),
                 SizedBox(
-                  height: 38,
+                  height: 30.h,
                 ),
                 SizedBox(
-                  height: 50,
+                  height: 50.h,
                   width: scwidth - 18,
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: themeColorGreen,
+                        backgroundColor: themeColorGreen,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10), // <-- Radius
+                          borderRadius:
+                              BorderRadius.circular(10.r), // <-- Radius
                         ),
                       ),
                       onPressed: () {
-                        // Get.offNamed(verification);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (_) => VerificationPage()));
-                        // Navigator.pushReplacementNamed(
-                        //     context, VerificationPage.routename);
                       },
                       child: Text(
                         'Next',
                         style: GoogleFonts.roboto(
                             color: Colors.white,
-                            fontSize: 18,
+                            fontSize: 18.sp,
                             fontWeight: FontWeight.w500),
                       )),
                 ),

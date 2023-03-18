@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../SettingsScreen/setting_page.dart';
 
@@ -74,25 +75,25 @@ class _ReviewsPageState extends State<ReviewsPage> {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Color(0xff187949),
             )),
         title: Text(
           'Reviews',
-          style: myStyle(20, FontWeight.bold, Colors.black),
+          style: myStyle(20.sp, FontWeight.bold, Colors.black),
         ),
         actions: [
           IconButton(
               onPressed: () {},
-              icon: Icon(
+              icon: const Icon(
                 Icons.notifications,
                 color: Color(0xff187949),
               ))
         ],
       ),
       body: Container(
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.all(15.w),
         height: double.infinity,
         width: double.infinity,
         child: SingleChildScrollView(
@@ -100,18 +101,18 @@ class _ReviewsPageState extends State<ReviewsPage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: EdgeInsets.all(15),
-                decoration: BoxDecoration(
+                padding: EdgeInsets.all(15.w),
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Color(0xffC3F6D7),
                 ),
                 child: Text(
                   '4.9',
-                  style: myStyle(20, FontWeight.w700, Colors.black),
+                  style: myStyle(20.sp, FontWeight.w700, Colors.black),
                 ),
               ),
               SizedBox(
-                height: 8,
+                height: 8.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -119,67 +120,68 @@ class _ReviewsPageState extends State<ReviewsPage> {
                   Icon(
                     Icons.star,
                     color: Color(0xffEACA23),
-                    size: 20,
+                    size: 20.sp,
                   ),
                   Icon(
                     Icons.star,
                     color: Color(0xffEACA23),
-                    size: 20,
+                    size: 20.sp,
                   ),
                   Icon(
                     Icons.star,
                     color: Color(0xffEACA23),
-                    size: 20,
+                    size: 20.sp,
                   ),
                   Icon(
                     Icons.star,
                     color: Color(0xffEACA23),
-                    size: 20,
+                    size: 20.sp,
                   ),
                   Icon(
                     Icons.star,
                     color: Color(0xffEACA23),
-                    size: 20,
+                    size: 20.sp,
                   ),
                 ],
               ),
               SizedBox(
-                height: 15,
+                height: 15.sp,
               ),
               Row(
                 children: [
                   Text(
                     'Overall Rating',
-                    style: myStyle(20, FontWeight.w500, Colors.black),
+                    style: myStyle(20.sp, FontWeight.w500, Colors.black),
                   ),
                   Spacer(),
                   Text(
                     '4.9',
-                    style: myStyle(20, FontWeight.w500, Colors.black),
+                    style: myStyle(20.sp, FontWeight.w500, Colors.black),
                   ),
                   Text(
                     '(500)',
-                    style: myStyle(14, FontWeight.w300, Colors.grey),
+                    style: myStyle(14.sp, FontWeight.w300, Colors.grey),
                   ),
                   Spacer(),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.w),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
+                        borderRadius: BorderRadius.circular(5.r),
                         color: Colors.green),
                     child: Row(
                       children: [
                         Text(
                           'Filter',
-                          style: myStyle(16, FontWeight.w400, Colors.white),
+                          style: myStyle(16.sp, FontWeight.w400, Colors.white),
                         ),
                         SizedBox(
-                          width: 5,
+                          width: 5.r,
                         ),
                         Icon(
                           Icons.filter_list_sharp,
                           color: Colors.white,
-                          size: 18,
+                          size: 18.sp,
                         )
                       ],
                     ),
@@ -187,27 +189,27 @@ class _ReviewsPageState extends State<ReviewsPage> {
                 ],
               ),
               SizedBox(
-                height: 15,
+                height: 15.h,
               ),
               Flexible(
                   child: ListView.separated(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) => Container(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(10.w),
                             decoration: BoxDecoration(
                                 color: Color(0xffF8F8F8),
-                                borderRadius: BorderRadius.circular(5)),
+                                borderRadius: BorderRadius.circular(5.r)),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CircleAvatar(
-                                  radius: 22,
+                                  radius: 22.r,
                                   backgroundImage:
                                       AssetImage(reviews[index]['imgUrl']),
                                 ),
                                 SizedBox(
-                                  width: 10,
+                                  width: 10.w,
                                 ),
                                 Expanded(
                                   child: Column(
@@ -216,55 +218,55 @@ class _ReviewsPageState extends State<ReviewsPage> {
                                         children: [
                                           Text(
                                             reviews[index]['name'],
-                                            style: myStyle(18, FontWeight.w500,
-                                                Colors.black),
+                                            style: myStyle(18.sp,
+                                                FontWeight.w500, Colors.black),
                                           ),
                                           Spacer(),
                                           Text(
                                             reviews[index]['date'],
-                                            style: myStyle(14, FontWeight.w400,
-                                                Colors.black),
+                                            style: myStyle(14.sp,
+                                                FontWeight.w400, Colors.black),
                                           )
                                         ],
                                       ),
                                       SizedBox(
-                                        height: 8,
+                                        height: 8.h,
                                       ),
                                       Row(
                                         children: [
                                           Icon(
                                             Icons.star,
                                             color: Color(0xffEACA23),
-                                            size: 20,
+                                            size: 20.sp,
                                           ),
                                           Icon(
                                             Icons.star,
                                             color: Color(0xffEACA23),
-                                            size: 20,
+                                            size: 20.sp,
                                           ),
                                           Icon(
                                             Icons.star,
                                             color: Color(0xffEACA23),
-                                            size: 20,
+                                            size: 20.sp,
                                           ),
                                           Icon(
                                             Icons.star,
                                             color: Color(0xffEACA23),
-                                            size: 20,
+                                            size: 20.sp,
                                           ),
                                           Icon(
                                             Icons.star,
                                             color: Color(0xffEACA23),
-                                            size: 20,
+                                            size: 20.sp,
                                           ),
                                           SizedBox(
-                                            width: 4,
+                                            width: 4.w,
                                           ),
                                           Text(reviews[index]['ratings'])
                                         ],
                                       ),
-                                      const SizedBox(
-                                        height: 8,
+                                      SizedBox(
+                                        height: 8.h,
                                       ),
                                       SizedBox(
                                           width: double.infinity,
@@ -272,8 +274,8 @@ class _ReviewsPageState extends State<ReviewsPage> {
                                             reviews[index]['details'],
                                             maxLines: 6,
                                             overflow: TextOverflow.ellipsis,
-                                            style: myStyle(14, FontWeight.w400,
-                                                Colors.grey),
+                                            style: myStyle(14.sp,
+                                                FontWeight.w400, Colors.grey),
                                           ))
                                     ],
                                   ),
@@ -281,8 +283,8 @@ class _ReviewsPageState extends State<ReviewsPage> {
                               ],
                             ),
                           ),
-                      separatorBuilder: (context, index) => const SizedBox(
-                            height: 10,
+                      separatorBuilder: (context, index) => SizedBox(
+                            height: 10.h,
                           ),
                       itemCount: reviews.length))
             ],

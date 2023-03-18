@@ -1,17 +1,15 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:myapp/Screens/IntroScreen/introonepage.dart';
 import 'package:myapp/Screens/SignInScreen/signinpage.dart';
 
 import '../../utils/colors.dart';
 
 class IntroTwoPage extends StatefulWidget {
-  static const String routename = '/introtwopage';
   const IntroTwoPage({Key? key}) : super(key: key);
 
   @override
@@ -30,7 +28,7 @@ class _IntroTwoPageState extends State<IntroTwoPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                height: 1,
+                height: 1.h,
               ),
               Image.asset(
                 'images/img2.png',
@@ -38,25 +36,25 @@ class _IntroTwoPageState extends State<IntroTwoPage> {
                 height: sch / 2,
               ),
               Padding(
-                padding: const EdgeInsets.all(38.0),
+                padding: EdgeInsets.all(38.0.w),
                 child: Column(
                   children: [
                     Text(
                       'Easy to your on demand service',
                       style: GoogleFonts.roboto(
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.w500,
                           color: Color(0xff555957)),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 20.h,
                     ),
                     Text(
                       'Ringknock is an online on demand service.'
                       'It has as into 50k+ services. You can buy every onto a service',
                       textAlign: TextAlign.center,
                       style: GoogleFonts.roboto(
-                          fontSize: 12,
+                          fontSize: 12.sp,
                           fontWeight: FontWeight.w300,
                           color: Color(0xff555957)),
                     ),
@@ -64,41 +62,35 @@ class _IntroTwoPageState extends State<IntroTwoPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: EdgeInsets.all(12.0.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
                       onPressed: () {
-                        // Navigator.pushReplacementNamed(
-                        //     context, IntroOnePage.routename);
                         Navigator.pop(context);
                       },
                       icon: Icon(Icons.chevron_left,
-                          color: themeColorGreen, size: 25),
+                          color: themeColorGreen, size: 25.sp),
                     ),
                     Row(
                       children: [
                         Icon(
                           Icons.circle,
                           color: Colors.grey,
-                          size: 12,
+                          size: 12.sp,
                         ),
-                        Icon(Icons.circle, color: themeColorGreen, size: 12),
-                        Icon(Icons.circle, color: Colors.grey, size: 12)
+                        Icon(Icons.circle, color: themeColorGreen, size: 12.sp),
+                        Icon(Icons.circle, color: Colors.grey, size: 12.sp)
                       ],
                     ),
                     IconButton(
                       onPressed: () {
-                        // Get.offNamed(signin);
-
-                        // Navigator.pushReplacementNamed(
-                        //     context, SignInPage.routename);
                         Navigator.push(context,
                             MaterialPageRoute(builder: (_) => SignInPage()));
                       },
                       icon: Icon(Icons.chevron_right_outlined,
-                          color: themeColorGreen, size: 25),
+                          color: themeColorGreen, size: 25.sp),
                     ),
                   ],
                 ),

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:myapp/Screens/LeadsDetailsScreen/component/custom_maps.dart';
@@ -80,7 +81,7 @@ class _LeadsDetailsScreenState extends State<LeadsDetailsScreen> {
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(10.0.w),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -97,34 +98,34 @@ class _LeadsDetailsScreenState extends State<LeadsDetailsScreen> {
                           color: Color(0xFF187949),
                         )),
                     CircleAvatar(
-                      radius: 15,
+                      radius: 15.r,
                       backgroundImage: AssetImage(widget.image),
                     ),
-                    const SizedBox(
-                      width: 10,
+                    SizedBox(
+                      width: 10.w,
                     ),
                     Text(
                       widget.name,
                       style: GoogleFonts.roboto(
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.w500,
                           color: const Color(0xFF272727)),
                     ),
-                    const SizedBox(
-                      width: 120,
+                    SizedBox(
+                      width: 160.w,
                     ),
                     Image.asset('images/notification.png')
                   ],
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
                 Container(
-                  height: 70,
+                  height: 70.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: const Color(0xFFFAFAFA),
-                      borderRadius: BorderRadius.circular(3)),
+                      borderRadius: BorderRadius.circular(3.r)),
                   child: Column(
                     children: [
                       ListTile(
@@ -132,16 +133,16 @@ class _LeadsDetailsScreenState extends State<LeadsDetailsScreen> {
                         title: Text(
                           'House Cleaning Service',
                           style: GoogleFonts.roboto(
-                              fontSize: 18,
+                              fontSize: 18.sp,
                               fontWeight: FontWeight.w500,
                               color: const Color(0xFF272727)),
                         ),
                         trailing: Container(
-                          height: 27,
-                          width: 76,
+                          height: 27.h,
+                          width: 76.sp,
                           decoration: BoxDecoration(
                               color: const Color(0xFFE8FAF1),
-                              borderRadius: BorderRadius.circular(5)),
+                              borderRadius: BorderRadius.circular(5.r)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -149,7 +150,7 @@ class _LeadsDetailsScreenState extends State<LeadsDetailsScreen> {
                               Text(
                                 widget.time,
                                 style: GoogleFonts.roboto(
-                                    fontSize: 12,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.w400,
                                     color: const Color(0xFF187949)),
                               )
@@ -158,12 +159,12 @@ class _LeadsDetailsScreenState extends State<LeadsDetailsScreen> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 10),
+                        padding: EdgeInsets.only(left: 10.w),
                         child: Row(
                           children: [
                             Image.asset(widget.locationImage),
-                            const SizedBox(
-                              width: 8,
+                            SizedBox(
+                              width: 8.w,
                             ),
                             Text(widget.address)
                           ],
@@ -172,8 +173,8 @@ class _LeadsDetailsScreenState extends State<LeadsDetailsScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 15,
+                SizedBox(
+                  height: 15.h,
                 ),
                 Row(
                   children: [
@@ -181,37 +182,37 @@ class _LeadsDetailsScreenState extends State<LeadsDetailsScreen> {
                       Icons.phone,
                       color: Color(0xFF187949),
                     ),
-                    const SizedBox(
-                      width: 3,
+                    SizedBox(
+                      width: 3.w,
                     ),
                     Text(
                       '+122******6***',
                       style: GoogleFonts.roboto(
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
                           color: const Color(0xFF272727)),
                     ),
-                    const SizedBox(
-                      width: 5,
+                    SizedBox(
+                      width: 5.w,
                     ),
                     Container(
-                      height: 12,
-                      width: 40,
+                      height: 12.h,
+                      width: 40.w,
                       decoration: BoxDecoration(
                           color: const Color(0xFFE8FAF1),
-                          borderRadius: BorderRadius.circular(3)),
+                          borderRadius: BorderRadius.circular(3.r)),
                       child: Row(
                         children: [
                           Image.asset(
                             'images/righttick.png',
                           ),
-                          const SizedBox(
-                            width: 2,
+                          SizedBox(
+                            width: 2.w,
                           ),
                           Text(
                             'verified',
                             style: GoogleFonts.roboto(
-                                fontSize: 8,
+                                fontSize: 8.sp,
                                 fontWeight: FontWeight.w400,
                                 color: const Color(0xFF187949)),
                           )
@@ -232,69 +233,69 @@ class _LeadsDetailsScreenState extends State<LeadsDetailsScreen> {
                     Text(
                       'your******@email.com',
                       style: GoogleFonts.roboto(
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
                           color: const Color(0xFF272727)),
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
                 Container(
-                  height: 40,
+                  height: 40.h,
                   width: double.infinity,
                   decoration: const BoxDecoration(color: Color(0xFFFAFAFA)),
                   child: Row(
                     children: [
-                      const CircleAvatar(
-                        radius: 8,
+                      CircleAvatar(
+                        radius: 8.r,
                         backgroundColor: Color(0xFF187949),
                       ),
-                      const SizedBox(
-                        width: 2,
+                      SizedBox(
+                        width: 2.w,
                       ),
-                      const CircleAvatar(
-                        radius: 8,
+                      CircleAvatar(
+                        radius: 8.r,
                         backgroundColor: Color(0xFF187949),
                       ),
-                      const SizedBox(
-                        width: 2,
+                      SizedBox(
+                        width: 2.w,
                       ),
-                      const CircleAvatar(
-                        radius: 8,
+                      CircleAvatar(
+                        radius: 8.r,
                         backgroundColor: Color(0xFF187949),
                       ),
-                      const SizedBox(
-                        width: 2,
+                      SizedBox(
+                        width: 2.w,
                       ),
-                      const CircleAvatar(
-                        radius: 8,
+                      CircleAvatar(
+                        radius: 8.r,
                         backgroundColor: Color(0xFFF2F2F2),
                       ),
-                      const SizedBox(
-                        width: 2,
+                      SizedBox(
+                        width: 2.w,
                       ),
-                      const CircleAvatar(
-                        radius: 8,
+                      CircleAvatar(
+                        radius: 8.r,
                         backgroundColor: Color(0xFFF2F2F2),
                       ),
-                      const SizedBox(
-                        width: 15,
+                      SizedBox(
+                        width: 15.w,
                       ),
                       Text(
                         '3/5 professionals have responded',
                         style: GoogleFonts.roboto(
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w400,
                             color: const Color(0xFF000000)),
                       ),
-                      const SizedBox(
-                        width: 2,
+                      SizedBox(
+                        width: 2.w,
                       ),
                       Container(
-                        height: 18,
-                        width: 14,
+                        height: 18.h,
+                        width: 14.w,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(color: const Color(0xFF292D32))),
@@ -305,41 +306,41 @@ class _LeadsDetailsScreenState extends State<LeadsDetailsScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 15,
+                SizedBox(
+                  height: 15.h,
                 ),
                 Row(
                   children: [
                     Container(
-                      height: 50,
-                      width: 148,
+                      height: 50.h,
+                      width: 148.w,
                       decoration: BoxDecoration(
                           color: const Color(0xFF187949),
-                          borderRadius: BorderRadius.circular(5)),
+                          borderRadius: BorderRadius.circular(5.r)),
                       child: Center(
                         child: Text(
                           'Contact',
                           style: GoogleFonts.roboto(
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                               color: const Color(0xFFFFFFFF)),
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      width: 10,
+                    SizedBox(
+                      width: 10.w,
                     ),
                     Container(
-                      height: 50,
-                      width: 148,
+                      height: 50.h,
+                      width: 148.w,
                       decoration: BoxDecoration(
                           border: Border.all(color: const Color(0xFF187949)),
-                          borderRadius: BorderRadius.circular(5)),
+                          borderRadius: BorderRadius.circular(5.r)),
                       child: Center(
                         child: Text(
                           'Not interested',
                           style: GoogleFonts.roboto(
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                               color: const Color(0xFF187949)),
                         ),
@@ -347,46 +348,46 @@ class _LeadsDetailsScreenState extends State<LeadsDetailsScreen> {
                     )
                   ],
                 ),
-                const SizedBox(
-                  height: 15,
+                SizedBox(
+                  height: 15.h,
                 ),
                 Row(
                   children: [
                     Image.asset(
                       widget.bImage,
                     ),
-                    const SizedBox(
-                      width: 5,
+                    SizedBox(
+                      width: 5.w,
                     ),
                     Text(
                       widget.credit,
                       style: GoogleFonts.roboto(
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
                           color: const Color(0xFF848484)),
                     )
                   ],
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
                 Text(
                   'Details',
                   style: GoogleFonts.roboto(
-                      fontSize: 18,
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.w500,
                       color: const Color(0xFF272727)),
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
                 Divider(
                   color: const Color(0xFF848484).withOpacity(0.05),
                   height: 1,
                   thickness: 2,
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
                 ListView.separated(
                   shrinkWrap: true,
@@ -399,17 +400,17 @@ class _LeadsDetailsScreenState extends State<LeadsDetailsScreen> {
                         Text(
                           item[index]['title'],
                           style: GoogleFonts.roboto(
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               fontWeight: FontWeight.w400,
                               color: const Color(0xFF424242)),
                         ),
-                        const SizedBox(
-                          height: 10,
+                        SizedBox(
+                          height: 10.h,
                         ),
                         Text(
                           item[index]['subTitle'],
                           style: GoogleFonts.roboto(
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               fontWeight: FontWeight.w400,
                               color: const Color(0xFF424242)),
                         ),
@@ -418,65 +419,65 @@ class _LeadsDetailsScreenState extends State<LeadsDetailsScreen> {
                   },
                   itemCount: item.length,
                   separatorBuilder: (BuildContext context, int index) =>
-                      const SizedBox(
-                    height: 20,
+                      SizedBox(
+                    height: 20.h,
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
-                SizedBox(height: 200, child: CustomMaps()),
-                const SizedBox(
-                  height: 20,
+                SizedBox(height: 200.h, child: CustomMaps()),
+                SizedBox(
+                  height: 20.h,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  padding: EdgeInsets.only(left: 10.w, right: 10.w),
                   child: Divider(
                     color: const Color(0xFF848484).withOpacity(0.05),
-                    height: 5,
+                    height: 5.h,
                     thickness: 3,
                   ),
                 ),
-                const SizedBox(
-                  height: 15,
+                SizedBox(
+                  height: 15.h,
                 ),
                 Text(
                   'Not seeing the right leads?',
                   style: GoogleFonts.roboto(
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       color: const Color(0xFF272727)),
                 ),
-                const SizedBox(
-                  height: 15,
+                SizedBox(
+                  height: 15.h,
                 ),
                 Text(
                   'Stop seeing leads with specific answers by customising your settings.',
                   style: GoogleFonts.roboto(
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       color: const Color(0xFF424242)),
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
                 Row(
                   children: [
                     Image.asset('images/settings2.png'),
-                    const SizedBox(
-                      width: 5,
+                    SizedBox(
+                      width: 5.w,
                     ),
                     Text(
                       'Update lead settings',
                       style: GoogleFonts.roboto(
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
                           color: const Color(0xFF187949)),
                     )
                   ],
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
               ],
             ),
@@ -490,7 +491,7 @@ class _LeadsDetailsScreenState extends State<LeadsDetailsScreen> {
     return Text(
       title,
       style: GoogleFonts.roboto(
-          fontSize: 14,
+          fontSize: 14.sp,
           fontWeight: FontWeight.w400,
           color: const Color(0xFF424242)),
     );

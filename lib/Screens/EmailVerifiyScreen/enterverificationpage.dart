@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/countdown_controller.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -13,7 +14,6 @@ import 'package:myapp/Screens/RestPasswordScreen/resetpasswordpage.dart';
 import '../../utils/colors.dart';
 
 class VerificationPage extends StatefulWidget {
-  static const String routename = '/verificationpage';
   const VerificationPage({Key? key}) : super(key: key);
 
   @override
@@ -55,15 +55,15 @@ class _VerificationPageState extends State<VerificationPage> {
           backgroundColor: Colors.white,
           elevation: 0,
           leading: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0.w),
             child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(90),
-                      topRight: Radius.circular(90),
-                      bottomLeft: Radius.circular(90),
-                      bottomRight: Radius.circular(90)),
+                      topLeft: Radius.circular(90.r),
+                      topRight: Radius.circular(90.r),
+                      bottomLeft: Radius.circular(90.r),
+                      bottomRight: Radius.circular(90.r)),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.1),
@@ -79,8 +79,6 @@ class _VerificationPageState extends State<VerificationPage> {
                     color: themeColorGreen,
                   ),
                   onPressed: () {
-                    // Navigator.pushReplacementNamed(
-                    //     context, ForegPasswordPage.routename);
                     Navigator.pop(context);
                   },
                 )),
@@ -95,7 +93,7 @@ class _VerificationPageState extends State<VerificationPage> {
               Text(
                 'Code has sent to 091*******',
                 style: TextStyle(
-                    fontSize: 15, color: Colors.black.withOpacity(0.5)),
+                    fontSize: 15.sp, color: Colors.black.withOpacity(0.5)),
               )
             ],
           ),
@@ -104,7 +102,7 @@ class _VerificationPageState extends State<VerificationPage> {
           child: Column(
             children: [
               SizedBox(
-                height: 40,
+                height: 40.h,
               ),
               VerificationCode(
                 textStyle: Theme.of(context)
@@ -134,36 +132,36 @@ class _VerificationPageState extends State<VerificationPage> {
                 },
               ),
               SizedBox(
-                height: 38,
+                height: 30.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("Re-send Code in ",
                       style: GoogleFonts.roboto(
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.w500,
                           color: Color(0xff555957))),
                   Text("$_counter ",
-                      style: TextStyle(fontSize: 15, color: timertxcol)),
+                      style: TextStyle(fontSize: 15.sp, color: timertxcol)),
                   Text("seconds",
                       style: GoogleFonts.roboto(
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w400,
                           color: Color(0xff555957))),
                 ],
               ),
               SizedBox(
-                height: 38,
+                height: 30.h,
               ),
               SizedBox(
-                height: 45,
+                height: 45.h,
                 width: scwidth - 50,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: themeColorGreen,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10), // <-- Radius
+                        borderRadius: BorderRadius.circular(10.r), // <-- Radius
                       ),
                     ),
                     onPressed: () {
@@ -172,19 +170,16 @@ class _VerificationPageState extends State<VerificationPage> {
                         click++;
                       });
                       if (click > 2) {
-                        // Get.offNamed(resetpassword);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (_) => ResetPasswordPage()));
-                        // Navigator.pushReplacementNamed(
-                        //     context, ResetPasswordPage.routename);
                       }
                     },
                     child: Text(
                       _counter == 0 ? 'Re-send' : 'Next',
                       style: GoogleFonts.roboto(
-                          fontSize: 18,
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.w500,
                           color: Color(0xff555957)),
                     )),
