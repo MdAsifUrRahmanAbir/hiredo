@@ -10,7 +10,7 @@ import 'package:myapp/Screens/SettingsScreen/EmailNotification/email_notificatio
 import 'package:myapp/Screens/SettingsScreen/EmailTemplate/email_template_page.dart';
 import 'package:myapp/Screens/SettingsScreen/MyCredits/my_credits_page.dart';
 import 'package:myapp/Screens/SettingsScreen/OneClickResponce/one_click_responce_page.dart';
-import 'package:myapp/Screens/SettingsScreen/PaymentDetails/payment_details.dart';
+import 'package:myapp/Screens/SettingsScreen/PaymentDetails/payment_details_page.dart';
 import 'package:myapp/Screens/SettingsScreen/SMSTemplate/sms_template_page.dart';
 import 'package:myapp/Screens/SettingsScreen/SettingsBadge/badge_page.dart';
 
@@ -60,7 +60,7 @@ class _SettingsPageState extends State<SettingsPage> {
     AccountDetailsPage()
   ];
 
-  List credits_payment = [MyCreditsPage(), BillingDetails(), PaymentDetails()];
+  List credits_payment = [MyCreditsPage(), BillingDetails(), PaymentDetailsPage()];
 
   List intergration_screen = [EmailNotification(), BrowserNotification()];
 
