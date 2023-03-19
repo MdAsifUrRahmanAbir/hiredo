@@ -1,37 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Screens/SettingsScreen/EmailNotification/Model/email_model.dart';
+import 'package:myapp/Screens/SettingsScreen/EmailNotification/Controller/email_controller.dart';
 
-class EmailNotification extends StatefulWidget {
-  const EmailNotification({super.key});
+class EmailNotification extends StatelessWidget {
+  EmailNotification({super.key});
 
-  @override
-  State<EmailNotification> createState() => _EmailNotificationState();
-}
-
-class _EmailNotificationState extends State<EmailNotification> {
-  bool isSwitch = false;
-
-  List<EmailModel> items = [
-    EmailModel(title: 'New leads I receive'),
-    EmailModel(title: "Customers closing leads I've responded to"),
-    EmailModel(title: 'Customers dismissing my response'),
-    EmailModel(title: 'Customers hiring me'),
-    EmailModel(title: 'Customers reading a message I sent'),
-    EmailModel(title: 'Customers requesting a call from me'),
-    EmailModel(title: 'Customers dismissing my response'),
-    EmailModel(title: 'Customers requesting me to contact them'),
-    EmailModel(title: 'Customers viewing my profile'),
-    EmailModel(title: 'Customers viewing my website'),
-    EmailModel(title: 'Customers viewing contact details on my profile'),
-    EmailModel(title: "A summary of leads I'm matched to each day"),
-    EmailModel(title: 'Customers sending me a message'),
-    EmailModel(title: 'New reviews on my profile'),
-    EmailModel(title: 'New reviews from other sources'),
-    EmailModel(title: 'Services similar to mine I can get more leads from'),
-    EmailModel(title: 'Promotional emails'),
-  ];
+  final _emailController = Get.put(EmailController());
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +18,7 @@ class _EmailNotificationState extends State<EmailNotification> {
         title: Text(
           'Settings',
           style: GoogleFonts.roboto(
-              fontSize: 20,
+              fontSize: 20.sp,
               fontWeight: FontWeight.w500,
               color: const Color(0xFF272727)),
         ),
@@ -59,7 +35,7 @@ class _EmailNotificationState extends State<EmailNotification> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+          padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 10.h),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,15 +44,15 @@ class _EmailNotificationState extends State<EmailNotification> {
               Text(
                 'Email notifications',
                 style: GoogleFonts.roboto(
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
                     color: const Color(0xFF272727)),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               Container(
-                height: 70,
+                height: 70.h,
                 width: double.infinity,
                 decoration: const BoxDecoration(color: Color(0xFFF9F9FA)),
                 child: Row(
@@ -119,27 +95,35 @@ class _EmailNotificationState extends State<EmailNotification> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return ListTile(
-                      title: Text(
-                        items[index].title,
-                        style: GoogleFonts.roboto(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500,
-                            color: const Color(0xFF272727)),
-                      ),
-                      trailing: Switch(
-                          onChanged: (value) {
-                            setState(() {
-                              items[index].isSwitched = value;
-                            });
-                          },
-                          value: items[index].isSwitched,
-                          activeColor: Colors.white,
-                          activeTrackColor: const Color(0xFF47BF9C),
-                          inactiveThumbColor: Colors.pink,
-                          inactiveTrackColor: Colors.green));
+                  return Container(
+                    height: 57.h,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.r),
+                        border:
+                            Border.all(color: Colors.grey.withOpacity(0.1))),
+                    child: Obx(
+                      () => ListTile(
+                          title: Text(
+                            _emailController.items[index].title,
+                            style: GoogleFonts.roboto(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w500,
+                                color: const Color(0xFF272727)),
+                          ),
+                          trailing: Switch(
+                              onChanged: (value) {
+                                _emailController.isSwitched[index] = value;
+                              },
+                              value: _emailController.isSwitched[index],
+                              activeColor: Colors.white,
+                              activeTrackColor: const Color(0xFF47BF9C),
+                              inactiveThumbColor: Colors.pink,
+                              inactiveTrackColor: Colors.green)),
+                    ),
+                  );
                 },
-                itemCount: items.length,
+                itemCount: _emailController.items.length,
                 separatorBuilder: (BuildContext context, int index) => SizedBox(
                   height: 10.h,
                 ),

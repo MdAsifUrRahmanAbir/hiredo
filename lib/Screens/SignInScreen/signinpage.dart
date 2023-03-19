@@ -2,9 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/Screens/IntroScreen/signupintropage.dart';
+import 'package:myapp/Screens/ResistrationScreen/Controller/registration_controller.dart';
+import 'package:myapp/Screens/ResistrationScreen/component/custom_button.dart';
+import 'package:myapp/Screens/ResistrationScreen/component/custome_text_field.dart';
 import 'package:myapp/nav_bar_page/nav_bar_controller.dart';
 import 'package:myapp/utils/colors.dart';
 
@@ -22,8 +26,9 @@ final emailController = TextEditingController();
 final passwordController = TextEditingController();
 String errMsg = '';
 String dont = "Don't have an account?";
-bool visiblepass = false;
+
 bool isChecked = false;
+final _registrationController = Get.put(RegistrationController());
 
 class _SignInPageState extends State<SignInPage> {
   @override
@@ -112,30 +117,18 @@ class _SignInPageState extends State<SignInPage> {
                           SizedBox(
                             height: 6.h,
                           ),
-                          SizedBox(
-                            height: 50.h,
-                            child: TextFormField(
-                              controller: emailController,
-                              decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: textformback.withOpacity(0.62),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color:
-                                              themeColorGreen.withOpacity(0.20),
-                                          width: 1)),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color:
-                                              themeColorGreen.withOpacity(0.20),
-                                          width: 1)),
-                                  border: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color:
-                                              themeColorGreen.withOpacity(0.20),
-                                          width: 1)),
-                                  hintText: '   Enter your email'),
-                            ),
+                          CustomeTextField(
+                            controller: emailController,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Feild is Empty';
+                              } else if (value.contains('@') &&
+                                  !value.contains('.')) {
+                                return 'Invalid Your Email';
+                              }
+                              return null;
+                            },
+                            keyboardType: TextInputType.emailAddress,
                           ),
                         ],
                       ),
@@ -169,55 +162,31 @@ class _SignInPageState extends State<SignInPage> {
                           SizedBox(
                             height: 6.h,
                           ),
-                          SizedBox(
-                            height: 50.h,
-                            child: TextFormField(
-                              controller: passwordController,
-                              obscureText: !visiblepass,
-                              decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: textformback.withOpacity(0.62),
-                                  // prefixIcon: Icon(Icons.lock_outlined,color: Colors.black,),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color:
-                                              themeColorGreen.withOpacity(0.20),
-                                          width: 1)),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color:
-                                              themeColorGreen.withOpacity(0.20),
-                                          width: 1)),
-                                  border: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color:
-                                              themeColorGreen.withOpacity(0.20),
-                                          width: 1)),
-                                  suffixIcon: visiblepass
-                                      ? IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              visiblepass
-                                                  ? visiblepass = false
-                                                  : visiblepass = true;
-                                            });
-                                          },
-                                          icon: Icon(Icons.visibility,
-                                              color: Color(0xFF555957)))
-                                      : IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              visiblepass
-                                                  ? visiblepass = false
-                                                  : visiblepass = true;
-                                            });
-                                          },
-                                          icon: Icon(
-                                            Icons.visibility_off,
-                                            color: Color(0xFF555957),
-                                          )),
-                                  hintText: '   ********',
-                                  labelStyle: TextStyle(color: Colors.black)),
+                          CustomeTextField(
+                            controller: passwordController,
+                            obscureText:
+                                _registrationController.isVisibility.value,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Please Enter Your Password";
+                              } else if (value.length < 8) {
+                                return 'Password required must be 8 character';
+                              }
+                              return null;
+                            },
+                            hintText: '********',
+                            suffixIcon: Obx(
+                              () => IconButton(
+                                  onPressed: () {
+                                    _registrationController.isVisibility.value =
+                                        !_registrationController
+                                            .isVisibility.value;
+                                  },
+                                  icon: Icon(
+                                      _registrationController.isVisibility.value
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                      color: Colors.black)),
                             ),
                           ),
                         ],
@@ -256,29 +225,12 @@ class _SignInPageState extends State<SignInPage> {
                     SizedBox(
                       height: 5.h,
                     ),
-                    SizedBox(
-                      height: 50.h,
-                      width: scwidth - 15,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: themeColorGreen,
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(10.r), // <-- Radius
-                            ),
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => BottomNavController()));
-                          },
-                          child: Text(
-                            'Sign in',
-                            style: GoogleFonts.roboto(
-                                color: Colors.white,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w500),
-                          )),
-                    ),
+                    CustomButton(
+                        title: 'Sign in',
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => BottomNavController()));
+                        }),
                     SizedBox(
                       height: 15.h,
                     ),

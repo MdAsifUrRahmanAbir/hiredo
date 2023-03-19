@@ -5,33 +5,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:myapp/Screens/ResistrationScreen/Controller/registration_controller.dart';
+import 'package:myapp/Screens/ResistrationScreen/component/custom_button.dart';
+import 'package:myapp/Screens/ResistrationScreen/component/custome_text_field.dart';
 
 import 'package:myapp/Screens/SignInScreen/signinpage.dart';
-import 'package:myapp/Screens/SignUpAccountScreen/signupaccountchoosepage.dart';
 
 import '../../utils/colors.dart';
 
-class RegistrationPage extends StatefulWidget {
-  static const String routename = '/registrationpage';
+class RegistrationPage extends StatelessWidget {
   const RegistrationPage({Key? key}) : super(key: key);
 
-  @override
-  State<RegistrationPage> createState() => _RegistrationPageState();
-}
-
-final emailController = TextEditingController();
-final passwordController = TextEditingController();
-final confirmpasswordController = TextEditingController();
-final nameController = TextEditingController();
-final dateController = TextEditingController();
-final numberController = TextEditingController();
-final corpunameController = TextEditingController();
-final corpunumController = TextEditingController();
-String errMsg = '';
-bool visiblepass = false;
-bool visiblepass2 = false;
-
-class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     double scheight = MediaQuery.of(context).size.height;
@@ -85,330 +69,203 @@ class _RegistrationPageState extends State<RegistrationPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Full name',
-                    style: GoogleFonts.roboto(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff555957)),
-                  ),
+                  customeText(title: 'Full Name'),
                   SizedBox(
                     height: 5.h,
                   ),
-                  TextFormField(
-                    controller: nameController,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: themeColorGreen.withOpacity(0.1),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        enabledBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        border: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0)),
-                        hintText: 'Enter full name'),
+                  CustomeTextField(
+                    controller: _registrationController.nameController,
+                    hintText: 'Enter your name',
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Field is Empty';
+                      }
+                      return null;
+                    },
                   ),
                   SizedBox(
                     height: 10.h,
                   ),
-                  Text(
-                    'Enter your email',
-                    style: GoogleFonts.roboto(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff555957)),
-                  ),
+                  customeText(title: 'Enter your email'),
                   SizedBox(
                     height: 5.h,
                   ),
-                  TextFormField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: themeColorGreen.withOpacity(0.1),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        enabledBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        border: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0)),
-                        hintText: 'Enter your email'),
+                  CustomeTextField(
+                    controller: _registrationController.emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    hintText: 'Enter your email',
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Field is Empty';
+                      } else if (value.contains('@') && !value.contains('.')) {
+                        return 'Enter valid email';
+                      }
+                      return null;
+                    },
                   ),
                   SizedBox(
                     height: 10.h,
                   ),
-                  Text(
-                    'Password',
-                    style: GoogleFonts.roboto(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff555957)),
-                  ),
+                  customeText(title: 'Password'),
                   SizedBox(
                     height: 5.h,
                   ),
-                  TextFormField(
-                    controller: passwordController,
-                    obscureText: !visiblepass,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: themeColorGreen.withOpacity(0.1),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        enabledBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        border: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0)),
-                        suffixIcon: visiblepass
-                            ? IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    visiblepass
-                                        ? visiblepass = false
-                                        : visiblepass = true;
-                                  });
-                                },
-                                icon:
-                                    Icon(Icons.visibility, color: Colors.black))
-                            : IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    visiblepass
-                                        ? visiblepass = false
-                                        : visiblepass = true;
-                                  });
-                                },
-                                icon: Icon(
-                                  Icons.visibility_off,
-                                  color: Colors.black,
-                                )),
-                        hintText: '********',
-                        labelStyle: TextStyle(color: Colors.black)),
+                  CustomeTextField(
+                    controller: _registrationController.passwordController,
+                    obscureText: _registrationController.isVisibility.value,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Field is Empty';
+                      } else if (value.length < 8) {
+                        return '8 character requried is password';
+                      }
+                      return null;
+                    },
+                    hintText: '********',
+                    suffixIcon: Obx(
+                      () => IconButton(
+                          onPressed: () {
+                            _registrationController.isVisibility.value =
+                                !_registrationController.isVisibility.value;
+                          },
+                          icon: Icon(
+                              _registrationController.isVisibility.value
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: Colors.black)),
+                    ),
                   ),
                   SizedBox(
                     height: 10.h,
                   ),
-                  Text(
-                    'Confirm Password',
-                    style: GoogleFonts.roboto(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff555957)),
-                  ),
+                  customeText(title: 'Confirm Password'),
                   SizedBox(
                     height: 5.h,
                   ),
-                  TextFormField(
-                    controller: confirmpasswordController,
-                    obscureText: !visiblepass2,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: themeColorGreen.withOpacity(0.1),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        enabledBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        border: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0)),
-                        suffixIcon: visiblepass2
-                            ? IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    visiblepass2
-                                        ? visiblepass2 = false
-                                        : visiblepass2 = true;
-                                  });
-                                },
-                                icon:
-                                    Icon(Icons.visibility, color: Colors.black))
-                            : IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    visiblepass2
-                                        ? visiblepass2 = false
-                                        : visiblepass2 = true;
-                                  });
-                                },
-                                icon: Icon(
-                                  Icons.visibility_off,
-                                  color: Colors.black,
-                                )),
-                        hintText: '********',
-                        labelStyle: TextStyle(color: Colors.black)),
+                  CustomeTextField(
+                    controller:
+                        _registrationController.confirmpasswordController,
+                    obscureText: _registrationController.isVisibility.value,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Field is Empty';
+                      } else if (value !=
+                          _registrationController.passwordController.text) {
+                        return 'Password do not match';
+                      }
+                      return null;
+                    },
+                    hintText: '********',
+                    suffixIcon: Obx(
+                      () => IconButton(
+                          onPressed: () {
+                            _registrationController.isVisibility.value =
+                                !_registrationController.isVisibility.value;
+                          },
+                          icon: Icon(
+                              _registrationController.isVisibility.value
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: Colors.black)),
+                    ),
                   ),
                   SizedBox(
                     height: 10.h,
                   ),
-                  Text(
-                    'Date of birth',
-                    style: GoogleFonts.roboto(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff555957)),
-                  ),
+                  customeText(title: 'Date of birth'),
                   SizedBox(
                     height: 5.h,
                   ),
-                  TextFormField(
-                    controller: dateController,
-                    onTap: () async {
-                      DateTime? pickedDate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2050));
-
-                      if (pickedDate != null) {
-                        String formattedDate =
-                            DateFormat('yyyy-MM-dd').format(pickedDate);
-                        setState(() {
-                          dateController.text = formattedDate;
-                        });
+                  CustomeTextField(
+                      onTap: () {
+                        _registrationController.selectdDateTime(context);
+                      },
+                      controller: _registrationController.dateController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Feild is Empty';
+                        }
+                        return null;
+                      },
+                      hintText: '01/01/2000',
+                      suffixIcon: Icon(Icons.calendar_today)),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  customeText(title: 'Number'),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  CustomeTextField(
+                    controller: _registrationController.numberController,
+                    keyboardType: TextInputType.number,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Feild is Empty';
                       }
                     },
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: themeColorGreen.withOpacity(0.1),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        enabledBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        border: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0)),
-                        hintText: '01/01/2000',
-                        suffixIcon: Icon(Icons.calendar_today)),
+                    hintText: '+880100000000',
                   ),
                   SizedBox(
                     height: 10.h,
                   ),
-                  Text(
-                    'Number',
-                    style: TextStyle(fontSize: 18.sp),
-                  ),
+                  customeText(title: 'Corporate Name'),
                   SizedBox(
                     height: 5.h,
                   ),
-                  TextFormField(
-                    controller: numberController,
+                  CustomeTextField(
+                    controller: _registrationController.corpunameController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Feild is Empty';
+                      }
+                      return null;
+                    },
+                    hintText: 'Frelence learning center',
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  customeText(title: 'Corporate Number'),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  CustomeTextField(
+                    controller: _registrationController.corpunameController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Feild is Empty';
+                      }
+                      return null;
+                    },
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: themeColorGreen.withOpacity(0.1),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        enabledBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        border: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0)),
-                        hintText: '+880100000000'),
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Text(
-                    'Corporate Name',
-                    style: GoogleFonts.roboto(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff555957)),
-                  ),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  TextFormField(
-                    controller: corpunameController,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: themeColorGreen.withOpacity(0.1),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        enabledBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        border: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0)),
-                        hintText: 'Frelence learning center'),
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Text(
-                    'Corporate Number',
-                    style: GoogleFonts.roboto(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff555957)),
-                  ),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  TextFormField(
-                    controller: corpunumController,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: themeColorGreen.withOpacity(0.1),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        enabledBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        border: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0)),
-                        hintText: '+980000000'),
+                    hintText: '+980000000',
                   ),
                   SizedBox(
                     height: 28.h,
                   ),
-                  SizedBox(
-                    height: 50.h,
-                    width: scwidth - 18,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: themeColorGreen,
-                          shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(10.r), // <-- Radius
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (_) => SignInPage()));
-                        },
-                        child: Text(
-                          'Next',
-                          style: GoogleFonts.roboto(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xffFFFFFF)),
-                        )),
-                  ),
+                  CustomButton(
+                      title: 'Next',
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => SignInPage()));
+                      })
                 ],
               ),
             ),
           )),
     );
   }
+
+  Widget customeText({required String title}) {
+    return Text(
+      title,
+      style: GoogleFonts.roboto(
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w400,
+          color: Color(0xff555957)),
+    );
+  }
 }
+
+final _registrationController = Get.put(RegistrationController());
