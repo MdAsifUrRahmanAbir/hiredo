@@ -141,7 +141,7 @@ class _BadgePageState extends State<BadgePage> {
             ),
             Expanded(
               child: Container(
-                margin: EdgeInsets.all(15.w),
+                // margin: EdgeInsets.all(15.w),
                 padding: EdgeInsets.all(10.w),
                 color: containerClr,
                 child: Column(
@@ -230,7 +230,7 @@ class badge_item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 15.h),
       decoration: BoxDecoration(
         color: scaffoldClr,
         boxShadow: [
@@ -250,14 +250,14 @@ class badge_item extends StatelessWidget {
             children: [
               Text(
                 text!,
-                style: myStyle(14, FontWeight.bold, textClr),
+                style: myStyle(14.sp, FontWeight.bold, textClr),
               ),
               SizedBox(
-                height: 5,
+                height: 5.h,
               ),
               Text(
                 'Amet minim mollit non\ndeseruntullamco est sit',
-                style: myStyle(14, FontWeight.w400, textClr),
+                style: myStyle(14.sp, FontWeight.w400, textClr),
               )
             ],
           ),
@@ -265,14 +265,14 @@ class badge_item extends StatelessWidget {
             onTap: onTap,
             child: Container(
               alignment: Alignment.center,
-              height: 35,
-              width: 75,
+              height: 35.h,
+              width: 75.w,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(5.r),
                   color: themeColorGreen),
               child: Text(
                 'Select',
-                style: myStyle(14, FontWeight.w400, scaffoldClr),
+                style: myStyle(14.sp, FontWeight.w400, scaffoldClr),
               ),
             ),
           )
