@@ -5,13 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/Screens/HomeScreen/home.dart';
 import 'package:myapp/Screens/IntroScreen/signupintropage.dart';
 import 'package:myapp/Screens/ResistrationScreen/Controller/registration_controller.dart';
 import 'package:myapp/Screens/ResistrationScreen/component/custom_button.dart';
 import 'package:myapp/Screens/ResistrationScreen/component/custome_text_field.dart';
 import 'package:myapp/nav_bar_page/nav_bar_controller.dart';
 import 'package:myapp/utils/colors.dart';
-
 import '../ForgetPasswordScreen/forgotpasswordpage.dart';
 
 class SignInPage extends StatefulWidget {
@@ -22,8 +22,9 @@ class SignInPage extends StatefulWidget {
   State<SignInPage> createState() => _SignInPageState();
 }
 
-final emailController = TextEditingController();
-final passwordController = TextEditingController();
+// final emailController = TextEditingController();
+// final passwordController = TextEditingController();
+
 String errMsg = '';
 String dont = "Don't have an account?";
 
@@ -31,6 +32,59 @@ bool isChecked = false;
 final _registrationController = Get.put(RegistrationController());
 
 class _SignInPageState extends State<SignInPage> {
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  // @override
+  // void initState() {
+  //   isLogIn();
+  //   super.initState();
+  // }
+  //
+  // isLogIn() async{
+  //   SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
+  //   if(sharedPreferences.getString('token')!=null){
+  //     Navigator.of(context).pushAndRemoveUntil(
+  //         MaterialPageRoute(builder: (context) => Home()),
+  //             (route) => false);
+  //   }
+  // }
+  //
+  // getLogIn() async {
+  //   try{
+  //     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //     String link = 'http://ringknock.pythonanywhere.com/login/';
+  //     var map = Map<String, dynamic>();
+  //     map['email'] = emailController.text.toString();
+  //     map['password'] = passwordController.text.toString();
+  //     var response = await http.post(Uri.parse(link), body: map);
+  //     var data = jsonDecode(response.body);
+  //     print('access token is = ${data['access_token']} =');
+  //     if (data['access_token'] != null) {
+  //       sharedPreferences.setString('token', data['access_token']);
+  //       print(
+  //           'data saved in sharedPreferences = ${sharedPreferences.getString('token')}');
+  //       Navigator.of(context).pushAndRemoveUntil(
+  //           MaterialPageRoute(builder: (context) => Home()),
+  //               (route) => false);
+  //     } else {
+  //      // toastFunction('Password doesn\'t match');
+  //       print('Password doesnot match');
+  //     }
+  //   }catch(e){
+  //     print(e);
+  //   }
+  // }
+  //
+  // @override
+  // void dispose() {
+  //   emailController.dispose();
+  //   passwordController.dispose();
+  //   super.dispose();
+  // }
+
+
   @override
   Widget build(BuildContext context) {
     double scheight = MediaQuery.of(context).size.height;
@@ -230,6 +284,7 @@ class _SignInPageState extends State<SignInPage> {
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => BottomNavController()));
+                          //getLogIn();
                         }),
                     SizedBox(
                       height: 15.h,
