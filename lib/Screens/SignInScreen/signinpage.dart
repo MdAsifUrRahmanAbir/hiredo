@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -9,28 +7,17 @@ import 'package:myapp/Screens/IntroScreen/signupintropage.dart';
 import 'package:myapp/Screens/ResistrationScreen/Controller/registration_controller.dart';
 import 'package:myapp/Screens/ResistrationScreen/component/custom_button.dart';
 import 'package:myapp/Screens/ResistrationScreen/component/custome_text_field.dart';
+import 'package:myapp/Screens/SignInScreen/Contoller/signin_controller.dart';
 import 'package:myapp/nav_bar_page/nav_bar_controller.dart';
 import 'package:myapp/utils/colors.dart';
 
 import '../ForgetPasswordScreen/forgotpasswordpage.dart';
 
-class SignInPage extends StatefulWidget {
-  static const String routename = '/signinpage';
-  const SignInPage({Key? key}) : super(key: key);
+class SignInPage extends StatelessWidget {
+  SignInPage({Key? key}) : super(key: key);
 
-  @override
-  State<SignInPage> createState() => _SignInPageState();
-}
+  final _signInController = Get.put(SignInController());
 
-final emailController = TextEditingController();
-final passwordController = TextEditingController();
-String errMsg = '';
-String dont = "Don't have an account?";
-
-bool isChecked = false;
-final _registrationController = Get.put(RegistrationController());
-
-class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     double scheight = MediaQuery.of(context).size.height;
@@ -60,7 +47,7 @@ class _SignInPageState extends State<SignInPage> {
                   ],
                 ),
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back_ios_sharp,
                     color: themeColorGreen,
                   ),
@@ -118,7 +105,7 @@ class _SignInPageState extends State<SignInPage> {
                             height: 6.h,
                           ),
                           CustomeTextField(
-                            controller: emailController,
+                            controller: _signInController.emailController,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Feild is Empty';
@@ -163,7 +150,7 @@ class _SignInPageState extends State<SignInPage> {
                             height: 6.h,
                           ),
                           CustomeTextField(
-                            controller: passwordController,
+                            controller: _signInController.passwordController,
                             obscureText:
                                 _registrationController.isVisibility.value,
                             validator: (value) {
@@ -195,32 +182,39 @@ class _SignInPageState extends State<SignInPage> {
                     SizedBox(
                       height: 10.h,
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 20.w,
-                          child: Checkbox(
-                            activeColor: themeColorGreen,
-                            value: isChecked,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                isChecked = value!;
-                              });
-                            },
-                          ),
+                    Obx(
+                      () => InkWell(
+                        onTap: () {
+                          _signInController.isChecked.value =
+                              !_signInController.isChecked.value;
+                        },
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 20.w,
+                              child: Checkbox(
+                                activeColor: themeColorGreen,
+                                value: _signInController.isChecked.value,
+                                onChanged: (value) {
+                                  _signInController.isChecked.value =
+                                      !_signInController.isChecked.value;
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              width: 8.w,
+                            ),
+                            Text(
+                              'Remember me',
+                              style: GoogleFonts.roboto(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xff555957)),
+                            )
+                          ],
                         ),
-                        SizedBox(
-                          width: 8.w,
-                        ),
-                        Text(
-                          'Remember me',
-                          style: GoogleFonts.roboto(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xff555957)),
-                        )
-                      ],
+                      ),
                     ),
                     SizedBox(
                       height: 5.h,
@@ -250,7 +244,7 @@ class _SignInPageState extends State<SignInPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          dont,
+                          "Don't have an accout?",
                           style: GoogleFonts.roboto(
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w400,
@@ -282,3 +276,6 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 }
+
+final _registrationController = Get.put(RegistrationController());
+final _signInController = Get.put(SignInController());
