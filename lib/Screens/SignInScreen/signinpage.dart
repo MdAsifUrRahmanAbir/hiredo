@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/Screens/HomeScreen/home.dart';
 import 'package:myapp/Screens/IntroScreen/signupintropage.dart';
 import 'package:myapp/Screens/ResistrationScreen/Controller/registration_controller.dart';
 import 'package:myapp/Screens/ResistrationScreen/component/custom_button.dart';
@@ -10,13 +11,13 @@ import 'package:myapp/Screens/ResistrationScreen/component/custome_text_field.da
 import 'package:myapp/Screens/SignInScreen/Contoller/signin_controller.dart';
 import 'package:myapp/nav_bar_page/nav_bar_controller.dart';
 import 'package:myapp/utils/colors.dart';
-
 import '../ForgetPasswordScreen/forgotpasswordpage.dart';
 
 class SignInPage extends StatelessWidget {
   SignInPage({Key? key}) : super(key: key);
 
   final _signInController = Get.put(SignInController());
+  final _registrationController = Get.put(RegistrationController());
 
   @override
   Widget build(BuildContext context) {
@@ -224,6 +225,7 @@ class SignInPage extends StatelessWidget {
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => BottomNavController()));
+                          //getLogIn();
                         }),
                     SizedBox(
                       height: 15.h,
@@ -276,6 +278,3 @@ class SignInPage extends StatelessWidget {
     );
   }
 }
-
-final _registrationController = Get.put(RegistrationController());
-final _signInController = Get.put(SignInController());

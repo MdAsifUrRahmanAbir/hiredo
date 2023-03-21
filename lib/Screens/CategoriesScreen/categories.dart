@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 import 'package:myapp/nav_bar_page/nav_bar_controller.dart';
 import 'package:myapp/utils/colors.dart';
 
@@ -23,10 +24,14 @@ class _CategoriesPageState extends State<CategoriesPage> {
   final List<String> items = [
     'All Categories',
     'Most Popular',
-    'Sub Categories',
+   //'Sub Categories',
   ];
   String? selectedValue;
   String selectedcat = '';
+
+  String sortBy = "All Category";
+  List<String> list = <String>['All Category', "Most Popular"];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -79,85 +84,116 @@ class _CategoriesPageState extends State<CategoriesPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  DropdownButtonHideUnderline(
-                    child: DropdownButton2(
-                      isExpanded: true,
-                      hint: Padding(
-                        padding: EdgeInsets.only(left: 20.w, right: 20.w),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 4.w,
-                            ),
-                            Expanded(
-                              child: Text(
-                                'Sub Categories',
-                                style: GoogleFonts.roboto(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 1,
-                                  color: Color(0xffF2F2F2),
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
+                  // DropdownButtonHideUnderline(
+                  //   child: DropdownButton2(
+                  //     isExpanded: true,
+                  //     hint: Padding(
+                  //       padding: EdgeInsets.only(left: 20.w, right: 20.w),
+                  //       child: Row(
+                  //         children: [
+                  //           SizedBox(
+                  //             width: 4.w,
+                  //           ),
+                  //           Expanded(
+                  //             child: Text(
+                  //               'Sub Categories',
+                  //               style: GoogleFonts.roboto(
+                  //                 fontSize: 14.sp,
+                  //                 fontWeight: FontWeight.w500,
+                  //                 letterSpacing: 1,
+                  //                 color: Color(0xffF2F2F2),
+                  //               ),
+                  //               overflow: TextOverflow.ellipsis,
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     items: items
+                  //         .map((item) => DropdownMenuItem<String>(
+                  //               onTap: () {
+                  //                 setState(() {
+                  //                   selectedcat = item;
+                  //                 });
+                  //               },
+                  //               value: item,
+                  //               child: Text(
+                  //                 item,
+                  //                 style: GoogleFonts.roboto(
+                  //                   fontSize: 14.sp,
+                  //                   fontWeight: FontWeight.w500,
+                  //                   letterSpacing: 1,
+                  //                   color: Color(0xffF2F2F2),
+                  //                 ),
+                  //                 overflow: TextOverflow.ellipsis,
+                  //               ),
+                  //             ))
+                  //         .toList(),
+                  //     value: selectedValue,
+                  //     onChanged: (value) {
+                  //       setState(() {
+                  //         selectedValue = value as String;
+                  //       });
+                  //     },
+                  //     icon: Icon(
+                  //       Icons.arrow_drop_down,
+                  //     ),
+                  //     iconSize: 14.sp,
+                  //     iconEnabledColor: Color(0xffF2F2F2),
+                  //     iconDisabledColor: Colors.grey,
+                  //     buttonHeight: 36.h,
+                  //     buttonWidth: 207.h,
+                  //     buttonPadding: EdgeInsets.only(left: 14.w, right: 14.r),
+                  //     buttonDecoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(4.r),
+                  //       color: Color(0xff187949),
+                  //     ),
+                  //     buttonElevation: 2,
+                  //     itemHeight: 40.h,
+                  //     itemPadding: EdgeInsets.only(left: 14.w, right: 14.w),
+                  //     dropdownMaxHeight: 200.h,
+                  //     dropdownWidth: 200.w,
+                  //     dropdownPadding: null,
+                  //     dropdownDecoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(4.r),
+                  //       color: Color(0xff187949),
+                  //     ),
+                  //     dropdownElevation: 8,
+                  //     scrollbarRadius: Radius.circular(4.r),
+                  //     scrollbarThickness: 6,
+                  //     scrollbarAlwaysShow: true,
+                  //     offset: Offset(-20, 0),
+                  //   ),
+                  // ),
+                  Container(
+                    // margin: EdgeInsets.symmetric(vertical: 5),
+                    padding: EdgeInsets.symmetric(horizontal: 15.w),
+                    height: 36.h,
+                    width: 207.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(3.r),
+                        color: themeColorGreen),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        dropdownColor: themeColorGreen,
+                        elevation: 0,
+                        value: sortBy,
+                        icon: Icon(Icons.keyboard_arrow_down, size: 14.sp, color: scaffoldClr,),
+                        style: myStyle(14.sp, FontWeight.w400, scaffoldClr),
+                        onChanged: (String? value) {
+                          // This is called when the user selects an item.
+                          setState(() {
+                            sortBy = value!;
+                          });
+                        },
+                        items: list
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
                       ),
-                      items: items
-                          .map((item) => DropdownMenuItem<String>(
-                                onTap: () {
-                                  setState(() {
-                                    selectedcat = item;
-                                  });
-                                },
-                                value: item,
-                                child: Text(
-                                  item,
-                                  style: GoogleFonts.roboto(
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: 1,
-                                    color: Color(0xffF2F2F2),
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ))
-                          .toList(),
-                      value: selectedValue,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedValue = value as String;
-                        });
-                      },
-                      icon: Icon(
-                        Icons.arrow_drop_down,
-                      ),
-                      iconSize: 14.sp,
-                      iconEnabledColor: Color(0xffF2F2F2),
-                      iconDisabledColor: Colors.grey,
-                      buttonHeight: 36.h,
-                      buttonWidth: 207.h,
-                      buttonPadding: EdgeInsets.only(left: 14.w, right: 14.r),
-                      buttonDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4.r),
-                        color: Color(0xff187949),
-                      ),
-                      buttonElevation: 2,
-                      itemHeight: 40.h,
-                      itemPadding: EdgeInsets.only(left: 14.w, right: 14.w),
-                      dropdownMaxHeight: 200.h,
-                      dropdownWidth: 200.w,
-                      dropdownPadding: null,
-                      dropdownDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4.r),
-                        color: Color(0xff187949),
-                      ),
-                      dropdownElevation: 8,
-                      scrollbarRadius: Radius.circular(4.r),
-                      scrollbarThickness: 6,
-                      scrollbarAlwaysShow: true,
-                      offset: Offset(-20, 0),
                     ),
                   ),
                   Container(
