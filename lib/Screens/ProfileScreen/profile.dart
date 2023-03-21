@@ -14,6 +14,7 @@ import 'package:myapp/Screens/UpdateLeadSetting/update_lead_settings.dart';
 import 'package:myapp/Screens/WishListScreen/wish_list_screen.dart';
 import 'package:myapp/utils/colors.dart';
 
+import '../HomeScreen/home.dart';
 import '../LocationScreen/locationpage.dart';
 
 class Profile extends StatefulWidget {
@@ -38,7 +39,7 @@ class _ProfileState extends State<Profile> {
         elevation: 0,
         leading: InkWell(
           onTap: () {
-            Navigator.pop(context);
+            Navigator.push(context, MaterialPageRoute(builder: (_) => Home()));
           },
           child: Icon(
             Icons.keyboard_backspace_rounded,

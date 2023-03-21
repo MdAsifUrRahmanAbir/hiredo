@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:myapp/Screens/HomeScreen/Model/lead_category_model.dart';
 import 'package:myapp/Screens/ResistrationScreen/Model/registration_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:myapp/Services/api_component.dart';
@@ -39,6 +40,32 @@ class ApiServices {
         print(d['message']);
       }
       return false;
+    }
+  }
+
+// handel login
+  static Future<dynamic> handelLogin(
+      {required String email, required String password}) async {
+    var resuest = http.MultipartRequest('POST', Uri.parse(signInApi));
+    resuest.fields.addAll({'full_name': email, 'password': password});
+  }
+
+  // fetch lead our categories
+
+  static dynamic fetchLeadOurCategories() async {
+    try {
+      var response = await client.get(Uri.parse(leadcategory));
+
+      if (response.statusCode == 200) {
+        return leadCategoryModelFromMap(response.body);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        return print("Data fetch Error. Reason ${e.toString()}");
+      }
+      return 0;
     }
   }
 }

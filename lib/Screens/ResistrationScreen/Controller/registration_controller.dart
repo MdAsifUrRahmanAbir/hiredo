@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:myapp/Screens/ForgetPasswordScreen/forgotpasswordpage.dart';
+import 'package:myapp/Screens/HomeScreen/home.dart';
 import 'package:myapp/Screens/ResistrationScreen/Model/registration_model.dart';
 import 'package:myapp/Screens/SignInScreen/signinpage.dart';
 import 'package:myapp/Services/api_services.dart';

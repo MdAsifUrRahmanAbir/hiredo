@@ -18,6 +18,8 @@ class RegistrationPage extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
+  final _registrationController = Get.put(RegistrationController());
+
   @override
   Widget build(BuildContext context) {
     double scheight = MediaQuery.of(context).size.height;
@@ -315,5 +317,3 @@ class RegistrationPage extends StatelessWidget {
     );
   }
 }
-
-final _registrationController = Get.put(RegistrationController());

@@ -3,11 +3,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
 import 'package:myapp/Screens/CategoriesScreen/categories.dart';
+import 'package:myapp/Screens/HomeScreen/Controller/home_controller.dart';
 import 'package:myapp/Screens/SearchResultScreen/catsearchpage.dart';
 
 import 'package:myapp/Screens/LocationScreen/locationpage.dart';
@@ -33,6 +35,9 @@ class _HomeState extends State<Home> {
   var _dotPosition = 0;
   bool changed = false;
   String _selectedGender = 'Top Categories';
+
+  final _homeController = Get.put(HomeController());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -345,36 +350,47 @@ class _HomeState extends State<Home> {
                         SizedBox(
                           height: 120.h,
                           width: 400.w,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 6,
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) => Padding(
-                              padding: EdgeInsets.all(20.w),
-                              child: Column(
-                                children: [
-                                  CircleAvatar(
-                                    backgroundColor: Color(0xffD9F1E5),
-                                    radius: 25.r,
-                                    child: Icon(
-                                      Icons.face,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 5.h,
-                                  ),
-                                  Text(
-                                    "Cleaning",
-                                    style: GoogleFonts.roboto(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: Color(0xff555957),
-                                        letterSpacing: 1),
+                          child: Obx(
+                            () => _homeController.isLoading.value
+                                ? Center(
+                                    child: CircularProgressIndicator(),
                                   )
-                                ],
-                              ),
-                            ),
+                                : ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: _homeController
+                                        .leadCategoryModel.results!.length,
+                                    shrinkWrap: true,
+                                    itemBuilder: (context, index) {
+                                      var result = _homeController
+                                          .leadCategoryModel.results![index];
+                                      return Padding(
+                                        padding: EdgeInsets.all(20.w),
+                                        child: Column(
+                                          children: [
+                                            CircleAvatar(
+                                              backgroundColor:
+                                                  Color(0xffD9F1E5),
+                                              radius: 25.r,
+                                              child: Icon(
+                                                Icons.face,
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 5.h,
+                                            ),
+                                            Text(
+                                              result.name!,
+                                              style: GoogleFonts.roboto(
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Color(0xff555957),
+                                                  letterSpacing: 1),
+                                            )
+                                          ],
+                                        ),
+                                      );
+                                    }),
                           ),
                         ),
                         Padding(
