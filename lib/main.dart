@@ -5,6 +5,8 @@ import 'package:myapp/Screens/SplashScreen/splashscreen.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 

@@ -14,60 +14,66 @@ import 'package:myapp/Screens/SignInScreen/signinpage.dart';
 import '../../utils/colors.dart';
 
 class RegistrationPage extends StatelessWidget {
-  const RegistrationPage({Key? key}) : super(key: key);
+  RegistrationPage({Key? key}) : super(key: key);
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     double scheight = MediaQuery.of(context).size.height;
     double scwidth = MediaQuery.of(context).size.width;
     return SafeArea(
-      child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: Colors.white,
-            elevation: 0,
-            leading: Padding(
-              padding: EdgeInsets.all(8.0.w),
-              child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(90.r),
-                        topRight: Radius.circular(90.r),
-                        bottomLeft: Radius.circular(90.r),
-                        bottomRight: Radius.circular(90.r)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.1),
-                        spreadRadius: 1,
-                        blurRadius: 1,
-                        offset: Offset(0, 2), // changes position of shadow
-                      ),
-                    ],
+        child: Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: Padding(
+          padding: EdgeInsets.all(8.0.w),
+          child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(90.r),
+                    topRight: Radius.circular(90.r),
+                    bottomLeft: Radius.circular(90.r),
+                    bottomRight: Radius.circular(90.r)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 1,
+                    blurRadius: 1,
+                    offset: Offset(0, 2), // changes position of shadow
                   ),
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.arrow_back_ios_sharp,
-                      color: themeColorGreen,
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  )),
-            ),
-            title: Text(
-              'Registration',
-              style: GoogleFonts.roboto(
-                  fontSize: 24.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xff555957)),
-            ),
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(18.0.w),
+                ],
+              ),
+              child: IconButton(
+                icon: Icon(
+                  Icons.arrow_back_ios_sharp,
+                  color: themeColorGreen,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              )),
+        ),
+        title: Text(
+          'Registration',
+          style: GoogleFonts.roboto(
+              fontSize: 24.sp,
+              fontWeight: FontWeight.w500,
+              color: Color(0xff555957)),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(18.0.w),
+          child: Obx(
+            () => Form(
+              key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   customeText(title: 'Full Name'),
                   SizedBox(
@@ -231,7 +237,7 @@ class RegistrationPage extends StatelessWidget {
                     height: 5.h,
                   ),
                   CustomeTextField(
-                    controller: _registrationController.corpunameController,
+                    controller: _registrationController.corpunumController,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Feild is Empty';
@@ -244,17 +250,59 @@ class RegistrationPage extends StatelessWidget {
                   SizedBox(
                     height: 28.h,
                   ),
-                  CustomButton(
-                      title: 'Next',
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => SignInPage()));
-                      })
+                  InkWell(
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        _registrationController.signUp(context);
+                      }
+                    },
+                    child: Container(
+                      height: 50.h,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: const Color(0xFF187949),
+                          borderRadius: BorderRadius.circular(4.r)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Next',
+                            style: GoogleFonts.roboto(
+                                color: Colors.white,
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          Obx(
+                            () => SizedBox(
+                              width: _registrationController.isLoading.value
+                                  ? 3.w
+                                  : 0,
+                            ),
+                          ),
+                          Obx(() {
+                            if (_registrationController.isLoading.value) {
+                              return SizedBox(
+                                height: 15.sp,
+                                width: 15.sp,
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
+                              );
+                            } else {
+                              return SizedBox();
+                            }
+                          })
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
-          )),
-    );
+          ),
+        ),
+      ),
+    ));
   }
 
   Widget customeText({required String title}) {
