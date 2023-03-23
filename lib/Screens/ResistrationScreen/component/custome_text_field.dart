@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../utils/colors.dart';
 
@@ -31,8 +32,9 @@ class CustomeTextField extends StatelessWidget {
       obscureText: obscureText,
       decoration: InputDecoration(
         filled: true,
+        contentPadding: EdgeInsets.only(top: 10.h, left: 10.w),
         fillColor: themeColorGreen.withOpacity(0.1),
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.black, width: 0.5)),
         enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.black, width: 0.5)),

@@ -38,9 +38,7 @@ class _ProfileState extends State<Profile> {
         automaticallyImplyLeading: false,
         elevation: 0,
         leading: InkWell(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (_) => Home()));
-          },
+          onTap: () {},
           child: Icon(
             Icons.keyboard_backspace_rounded,
             color: themeColorGreen,

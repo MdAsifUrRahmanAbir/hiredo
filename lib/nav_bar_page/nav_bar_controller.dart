@@ -3,17 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/Screens/DocumentScreen/document.dart';
 import 'package:myapp/Screens/SearchResultScreen/catsearchpage.dart';
-import 'package:myapp/Screens/SearchScreen/search.dart';
-import 'package:myapp/Screens/FavoriteScreen/favourite.dart';
-import 'package:myapp/Screens/HomeScreen/home.dart';
+
 import 'package:myapp/Screens/ProfileScreen/profile.dart';
-import 'package:myapp/Screens/BalanceScreen/blancpage.dart';
-import 'package:myapp/Screens/TrackingScreen/trackingpost.dart';
-import 'package:myapp/utils/colors.dart';
+
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import '../Screens/HomeScreen/home.dart';
+import '../Screens/TrackingScreen/tracking_screen.dart';
+
 class BottomNavController extends StatefulWidget {
-  static const String routename = '/navbarpage';
   @override
   _BottomNavControllerState createState() => _BottomNavControllerState();
 }
@@ -23,7 +21,7 @@ final controller = PersistentTabController(initialIndex: 0);
 final pages = [
   Home(),
   Document(),
-  TrackingPostOrder(),
+  TrackingScreen(),
   SearchResult(),
   Profile(),
 ];
