@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/Screens/ProfileScreen/profile.dart';
 import 'package:myapp/Screens/ReviewScreen/reviews_page.dart';
 import 'package:myapp/Screens/SettingsScreen/AccountDetails/account_details.dart';
@@ -13,6 +14,7 @@ import 'package:myapp/Screens/SettingsScreen/OneClickResponce/one_click_responce
 import 'package:myapp/Screens/SettingsScreen/PaymentDetails/payment_details_page.dart';
 import 'package:myapp/Screens/SettingsScreen/SMSTemplate/sms_template_page.dart';
 import 'package:myapp/Screens/SettingsScreen/SettingsBadge/badge_page.dart';
+import 'package:myapp/utils/colors.dart';
 
 class SettingsPage extends StatefulWidget {
   static const String routename = '/settings';
@@ -25,31 +27,28 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   List<Map> myProfile = [
-    {'icon': Icons.person_outline, 'title': 'My Profile'},
-    {'icon': Icons.reviews_outlined, 'title': 'Reviews'},
-    {'icon': Icons.badge, 'title': 'Elite pro'},
-    {'icon': Icons.baby_changing_station, 'title': 'Badges'},
-    {'icon': Icons.details, 'title': 'Account Details'},
+    {'icon': 'images/user.png', 'title': 'My Profile'},
+    {'icon': 'images/reviews.png', 'title': 'Reviews'},
+    {'icon': 'images/elite_pro.png', 'title': 'Elite pro'},
+    {'icon': 'images/badge.png', 'title': 'Badges'},
+    {'icon': 'images/account_details.png', 'title': 'Account Details'},
   ];
 
   List<Map> communications = [
-    {'icon': Icons.ads_click, 'title': 'One Click Responce'},
-    {'icon': Icons.email, 'title': 'Email Templates'},
-    {'icon': Icons.sms, 'title': 'SMS Templates'},
+    {'icon': 'images/one_click.png', 'title': 'One Click Responce'},
+    {'icon': 'images/email.png', 'title': 'Email Templates'},
+    {'icon': 'images/sms.png', 'title': 'SMS Templates'},
   ];
 
   List<Map> credits = [
-    {'icon': Icons.credit_score, 'title': 'My Credits'},
-    {
-      'icon': Icons.directions_boat_filled_outlined,
-      'title': 'Invoices and billing details'
-    },
-    {'icon': Icons.payment, 'title': 'My payment details'},
+    {'icon': 'images/credit.png', 'title': 'My Credits'},
+    {'icon': 'images/invoice.png', 'title': 'Invoices and billing details'},
+    {'icon': 'images/payment.png', 'title': 'My payment details'},
   ];
 
   List<Map> intergrations = [
-    {'icon': Icons.email, 'title': 'Email'},
-    {'icon': Icons.open_in_browser, 'title': 'Browser'},
+    {'icon': 'images/email.png', 'title': 'Email'},
+    {'icon': 'images/browser.png', 'title': 'Browser'},
   ];
 
   List profile = [
@@ -60,15 +59,19 @@ class _SettingsPageState extends State<SettingsPage> {
     AccountDetailsPage()
   ];
 
-  List credits_payment = [MyCreditsPage(), BillingDetails(), PaymentDetailsPage()];
-
-  List intergration_screen = [EmailNotification(), BrowserNotification()];
+  List credits_payment = [
+    MyCreditsPage(),
+    BillingDetails(),
+    PaymentDetailsPage()
+  ];
 
   List communication = [
     OneClickResponcePage(),
     EmailTemplatePage(),
     SMSTemplatePage()
   ];
+
+  List intergration_screen = [EmailNotification(), BrowserNotification()];
   int pageIndex = 0;
   var seletced = 0;
 
@@ -86,19 +89,14 @@ class _SettingsPageState extends State<SettingsPage> {
             },
             icon: const Icon(
               Icons.arrow_back,
-              color: Color(0xff187949),
+              color: backIconClr,
             )),
         title: Text(
           'Settings',
-          style: myStyle(20.sp, FontWeight.bold, Colors.black),
+          style: myStyle(20.sp, FontWeight.w500, Colors.black),
         ),
         actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.notifications,
-                color: Color(0xff187949),
-              ))
+          Image.asset('images/notification.png'),
         ],
       ),
       body: Container(
@@ -113,7 +111,7 @@ class _SettingsPageState extends State<SettingsPage> {
             children: [
               Text(
                 'My Profile',
-                style: myStyle(18.sp, FontWeight.bold, Colors.black),
+                style: myStyle(18.sp, FontWeight.w500, textClr),
               ),
               SizedBox(
                 height: 10.h,
@@ -144,27 +142,25 @@ class _SettingsPageState extends State<SettingsPage> {
                                   BoxShadow(
                                     color: Colors.grey.withOpacity(0.1),
                                     spreadRadius: 1,
-                                    blurRadius: 1,
-                                    offset: const Offset(
-                                        0, 1), // changes position of shadow
+                                    blurRadius: 1, // changes position of shadow
                                   ),
                                 ],
                               ),
                               child: Row(
                                 children: [
-                                  Icon(myProfile[index]['icon']),
+                                  Image.asset(myProfile[index]['icon']),
                                   SizedBox(
                                     width: 15.w,
                                   ),
                                   Text(
                                     myProfile[index]['title'],
                                     style: myStyle(
-                                        16.sp, FontWeight.w500, Colors.black),
+                                        16.sp, FontWeight.w500, textClr),
                                   ),
                                   const Spacer(),
                                   Icon(
                                     Icons.arrow_forward_ios,
-                                    size: 16.sp,
+                                    size: 14.sp,
                                   )
                                 ],
                               ),
@@ -179,7 +175,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               Text(
                 'Communication',
-                style: myStyle(18.sp, FontWeight.bold, Colors.black),
+                style: myStyle(18.sp, FontWeight.bold, textClr),
               ),
               SizedBox(
                 height: 10.h,
@@ -211,26 +207,25 @@ class _SettingsPageState extends State<SettingsPage> {
                                     color: Colors.grey.withOpacity(0.1),
                                     spreadRadius: 1,
                                     blurRadius: 1,
-                                    offset: const Offset(
-                                        0, 1), // changes position of shadow
+                                    // changes position of shadow
                                   ),
                                 ],
                               ),
                               child: Row(
                                 children: [
-                                  Icon(communications[index]['icon']),
+                                  Image.asset(communications[index]['icon']),
                                   SizedBox(
                                     width: 15.w,
                                   ),
                                   Text(
                                     communications[index]['title'],
                                     style: myStyle(
-                                        16.sp, FontWeight.w500, Colors.black),
+                                        16.sp, FontWeight.w500, textClr),
                                   ),
                                   const Spacer(),
                                   Icon(
                                     Icons.arrow_forward_ios,
-                                    size: 16.sp,
+                                    size: 14.sp,
                                   )
                                 ],
                               ),
@@ -245,7 +240,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               Text(
                 'Credits & Payments',
-                style: myStyle(18.sp, FontWeight.bold, Colors.black),
+                style: myStyle(18.sp, FontWeight.bold, textClr),
               ),
               SizedBox(
                 height: 10.h,
@@ -278,26 +273,24 @@ class _SettingsPageState extends State<SettingsPage> {
                                     color: Colors.grey.withOpacity(0.1),
                                     spreadRadius: 1,
                                     blurRadius: 1,
-                                    offset: const Offset(
-                                        0, 1), // changes position of shadow
                                   ),
                                 ],
                               ),
                               child: Row(
                                 children: [
-                                  Icon(credits[index]['icon']),
+                                  Image.asset(credits[index]['icon']),
                                   SizedBox(
                                     width: 15.w,
                                   ),
                                   Text(
                                     credits[index]['title'],
                                     style: myStyle(
-                                        16.sp, FontWeight.w500, Colors.black),
+                                        16.sp, FontWeight.w500, textClr),
                                   ),
                                   const Spacer(),
                                   Icon(
                                     Icons.arrow_forward_ios,
-                                    size: 16.sp,
+                                    size: 14.sp,
                                   )
                                 ],
                               ),
@@ -312,7 +305,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               Text(
                 'Intergrations',
-                style: myStyle(18.sp, FontWeight.bold, Colors.black),
+                style: myStyle(18.sp, FontWeight.bold, textClr),
               ),
               SizedBox(
                 height: 10.h,
@@ -345,26 +338,24 @@ class _SettingsPageState extends State<SettingsPage> {
                                     color: Colors.grey.withOpacity(0.1),
                                     spreadRadius: 1,
                                     blurRadius: 1,
-                                    offset: const Offset(
-                                        0, 1), // changes position of shadow
                                   ),
                                 ],
                               ),
                               child: Row(
                                 children: [
-                                  Icon(intergrations[index]['icon']),
+                                  Image.asset(intergrations[index]['icon']),
                                   SizedBox(
                                     width: 15.w,
                                   ),
                                   Text(
                                     intergrations[index]['title'],
                                     style: myStyle(
-                                        16.sp, FontWeight.w500, Colors.black),
+                                        16.sp, FontWeight.w500, textClr),
                                   ),
                                   const Spacer(),
                                   Icon(
                                     Icons.arrow_forward_ios,
-                                    size: 16.sp,
+                                    size: 14.sp,
                                   )
                                 ],
                               ),
@@ -379,14 +370,28 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               Align(
                 alignment: Alignment.center,
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.save),
-                  label: Text('Save'),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xffDF2929)),
+                child: Container(
+                  width: 108.w,
+                  height: 43.h,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.r),
+                    color: Color(0xffDF2929),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('images/share.png'),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      Text(
+                        'Save',
+                        style: myStyle(16.sp, FontWeight.w500, scaffoldClr),
+                      )
+                    ],
+                  ),
                 ),
-              ),
+              )
             ],
           ),
         ),
@@ -396,5 +401,5 @@ class _SettingsPageState extends State<SettingsPage> {
 }
 
 myStyle(double size, FontWeight weight, Color clr) {
-  return TextStyle(fontSize: size, fontWeight: weight, color: clr);
+  return GoogleFonts.roboto(fontSize: size, fontWeight: weight, color: clr);
 }

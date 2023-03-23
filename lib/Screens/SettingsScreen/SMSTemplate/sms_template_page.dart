@@ -23,23 +23,18 @@ class _SMSTemplatePageState extends State<SMSTemplatePage> {
         backgroundColor: Colors.white,
         leading: IconButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pop(context);
             },
             icon: const Icon(
               Icons.arrow_back,
-              color: Color(0xff187949),
+              color: backIconClr,
             )),
         title: Text(
           'SMS Templates',
-          style: myStyle(20.sp, FontWeight.bold, Colors.black),
+          style: myStyle(20.sp, FontWeight.w500, Colors.black),
         ),
         actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.notifications,
-                color: Color(0xff187949),
-              ))
+          Image.asset('images/notification.png'),
         ],
       ),
       body: Container(
@@ -56,10 +51,11 @@ class _SMSTemplatePageState extends State<SMSTemplatePage> {
                   style: myStyle(20.sp, FontWeight.w500, textClr),
                 ),
                 Container(
-                  color: themeColorGreen,
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 10.sp, vertical: 5.w),
+                  height: 28,
+                  width: 104,
+                  color: Color(0xff187949),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.add,
@@ -91,8 +87,6 @@ class _SMSTemplatePageState extends State<SMSTemplatePage> {
                             color: Colors.grey.withOpacity(0.1),
                             spreadRadius: 1,
                             blurRadius: 1,
-                            offset: const Offset(
-                                0, 1), // changes position of shadow
                           ),
                         ],
                       ),
@@ -104,15 +98,16 @@ class _SMSTemplatePageState extends State<SMSTemplatePage> {
                           ),
                           Spacer(),
                           Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10.w, vertical: 4.w),
+                            alignment: Alignment.center,
+                            height: 24,
+                            width: 48,
                             decoration: BoxDecoration(
-                                color: themeColorGreen,
-                                borderRadius: BorderRadius.circular(4.r)),
+                                color: Color(0xff187949),
+                                borderRadius: BorderRadius.circular(3.r)),
                             child: Text(
                               'Edit',
                               style:
-                                  myStyle(12.sp, FontWeight.w400, scaffoldClr),
+                              myStyle(12.sp, FontWeight.w400, scaffoldClr),
                             ),
                           ),
                           SizedBox(
@@ -120,9 +115,10 @@ class _SMSTemplatePageState extends State<SMSTemplatePage> {
                           ),
                           IconButton(
                               onPressed: () {},
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.delete_sweep,
                                 color: offWhite,
+                                size: 18.sp,
                               ))
                         ],
                       ),
@@ -139,7 +135,7 @@ class _SMSTemplatePageState extends State<SMSTemplatePage> {
               children: [
                 Icon(
                   Icons.error_outline,
-                  size: 12.sp,
+                  size: 14.sp,
                 ),
                 SizedBox(
                   width: 5.w,

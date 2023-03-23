@@ -151,7 +151,7 @@ class EmailNotification extends StatelessWidget {
                     width: 109.w,
                     decoration: BoxDecoration(
                         color: const Color(0xFF187949),
-                        borderRadius: BorderRadius.circular(10.r)),
+                        borderRadius: BorderRadius.circular(4.r)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

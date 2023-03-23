@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 import 'package:myapp/utils/colors.dart';
+import 'package:myapp/widgets/custom_widgets.dart';
 
 class BillingDetails extends StatefulWidget {
   const BillingDetails({Key? key}) : super(key: key);
@@ -65,19 +66,14 @@ class _BillingDetailsState extends State<BillingDetails> {
             },
             icon: const Icon(
               Icons.arrow_back,
-              color: Color(0xff187949),
+              color: backIconClr,
             )),
         title: Text(
           'Settings',
-          style: myStyle(20.sp, FontWeight.bold, Colors.black),
+          style: myStyle(20.sp, FontWeight.w500, Colors.black),
         ),
         actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.notifications,
-                color: Color(0xff187949),
-              ))
+          Image.asset('images/notification.png'),
         ],
       ),
       body: Container(
@@ -127,7 +123,7 @@ class _BillingDetailsState extends State<BillingDetails> {
                 ),
               ),
               Divider(
-                thickness: 1,
+                thickness: 0.5,
                 color: offWhite.withOpacity(0.3),
               ),
               SizedBox(
@@ -154,14 +150,8 @@ class _BillingDetailsState extends State<BillingDetails> {
               SizedBox(
                 height: 5.h,
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                    filled: true,
-                    fillColor: themeColorGreen.withOpacity(0.1),
-                    //prefixIcon: Icon(Icons.email_outlined,color: Colors.black,),
-                    enabledBorder:
-                        const OutlineInputBorder(borderSide: BorderSide.none),
-                    hintText: 'Build Wright'),
+              CustomTextFieldForm(
+                hintText: 'Build Wright',
               ),
               SizedBox(
                 height: 10.h,
@@ -176,14 +166,8 @@ class _BillingDetailsState extends State<BillingDetails> {
               SizedBox(
                 height: 5.h,
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                    filled: true,
-                    fillColor: themeColorGreen.withOpacity(0.1),
-                    //prefixIcon: Icon(Icons.email_outlined,color: Colors.black,),
-                    enabledBorder:
-                        const OutlineInputBorder(borderSide: BorderSide.none),
-                    hintText: '2464 Royal Ln. Jersey 45463'),
+              CustomTextFieldForm(
+                hintText: '2464 Royal Ln. Jersey 45463',
               ),
               SizedBox(
                 height: 10.h,
@@ -198,14 +182,8 @@ class _BillingDetailsState extends State<BillingDetails> {
               SizedBox(
                 height: 5.h,
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                    filled: true,
-                    fillColor: themeColorGreen.withOpacity(0.1),
-                    //prefixIcon: Icon(Icons.email_outlined,color: Colors.black,),
-                    enabledBorder:
-                        const OutlineInputBorder(borderSide: BorderSide.none),
-                    hintText: '2464 Royal Ln. Jersey 45463'),
+              CustomTextFieldForm(
+                hintText: '2464 Royal Ln. Jersey 45463',
               ),
               SizedBox(
                 height: 10.h,
@@ -226,15 +204,9 @@ class _BillingDetailsState extends State<BillingDetails> {
                       SizedBox(
                         height: 5.h,
                       ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: themeColorGreen.withOpacity(0.1),
-                            //prefixIcon: Icon(Icons.email_outlined,color: Colors.black,),
-                            enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide.none),
-                            hintText: 'Oshawa'),
-                      ),
+                      CustomTextFieldForm(
+                        hintText: 'Oshawa',
+                      )
                     ],
                   )),
                   SizedBox(
@@ -254,15 +226,9 @@ class _BillingDetailsState extends State<BillingDetails> {
                       SizedBox(
                         height: 5.h,
                       ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: themeColorGreen.withOpacity(0.1),
-                            //prefixIcon: Icon(Icons.email_outlined,color: Colors.black,),
-                            enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide.none),
-                            hintText: 'L1K0B5'),
-                      ),
+                      CustomTextFieldForm(
+                        hintText: 'L1K0B5',
+                      )
                     ],
                   ))
                 ],
@@ -280,14 +246,8 @@ class _BillingDetailsState extends State<BillingDetails> {
               SizedBox(
                 height: 5.h,
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                    filled: true,
-                    fillColor: themeColorGreen.withOpacity(0.1),
-                    //prefixIcon: Icon(Icons.email_outlined,color: Colors.black,),
-                    enabledBorder:
-                        const OutlineInputBorder(borderSide: BorderSide.none),
-                    hintText: '01888888888'),
+              CustomTextFieldForm(
+                hintText: '01888888888',
               ),
               SizedBox(
                 height: 10.h,
@@ -302,20 +262,14 @@ class _BillingDetailsState extends State<BillingDetails> {
               SizedBox(
                 height: 5.h,
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                    filled: true,
-                    fillColor: themeColorGreen.withOpacity(0.1),
-                    //prefixIcon: Icon(Icons.email_outlined,color: Colors.black,),
-                    enabledBorder:
-                        const OutlineInputBorder(borderSide: BorderSide.none),
-                    hintText: '01888888888'),
+              CustomTextFieldForm(
+                hintText: '01888888888',
               ),
               SizedBox(
                 height: 20.h,
               ),
               Divider(
-                thickness: 1,
+                thickness: 0.5,
                 color: offWhite.withOpacity(0.3),
               ),
               SizedBox(
@@ -354,11 +308,12 @@ class _BillingDetailsState extends State<BillingDetails> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) => Container(
-                        padding: EdgeInsets.all(8.w),
+                    height: 40.h,
+                        width: double.infinity,
                         decoration:
                             BoxDecoration(color: downloads[index]['color']),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
                               downloads[index]['invoice'],
@@ -374,14 +329,13 @@ class _BillingDetailsState extends State<BillingDetails> {
                             ),
                             Container(
                               alignment: Alignment.center,
-                              height: 30.h,
+                              height: 26.h,
                               width: 82.w,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(4.r),
-                                  color: themeColorGreen),
+                                  color: backIconClr),
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
                                   Icon(
                                     Icons.arrow_circle_down,

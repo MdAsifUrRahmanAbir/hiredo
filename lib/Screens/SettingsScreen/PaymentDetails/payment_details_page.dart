@@ -112,7 +112,7 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
               width: double.infinity,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4.r),
-                  color: themeColorGreen),
+                  color: backIconClr),
               child: Text(
                 'Add Card',
                 style: myStyle(16.sp, FontWeight.w400, scaffoldClr),
@@ -139,7 +139,9 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
               children: [
                 GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => Profile(),));
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Profile(),
+                      ));
                     },
                     child: Image.asset('images/payment_img.png')),
                 SizedBox(
@@ -222,7 +224,8 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) => Container(
-                          padding: EdgeInsets.all(10.w),
+                          height: 62,
+                          width: double.infinity,
                           decoration:
                               BoxDecoration(color: scaffoldClr, boxShadow: [
                             BoxShadow(
@@ -249,15 +252,16 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                                   });
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 6, horizontal: 8),
+                                  alignment: Alignment.center,
+                                height: 35,
+                                  width: 75,
                                   decoration: BoxDecoration(
                                       color: buttonSelected == index
-                                          ? themeColorGreen
+                                          ? backIconClr
                                           : null,
                                       borderRadius: BorderRadius.circular(4.r),
                                       border: Border.all(
-                                          width: 1, color: themeColorGreen)),
+                                          width: 1, color: backIconClr)),
                                   child: Text(
                                     'Pay Now',
                                     style: myStyle(
@@ -265,7 +269,7 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                                         FontWeight.w400,
                                         buttonSelected == index
                                             ? scaffoldClr
-                                            : themeColorGreen),
+                                            : backIconClr),
                                   ),
                                 ),
                               )
@@ -288,14 +292,14 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3.r),
-                        border: Border.all(color: themeColorGreen, width: 1.w)),
+                        border: Border.all(color: backIconClr, width: 1.w)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
                           Icons.add,
                           size: 18.sp,
-                          color: themeColorGreen,
+                          color: backIconClr,
                         ),
                         SizedBox(
                           width: 8.w,
@@ -303,7 +307,7 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                         Text(
                           'Add new card',
                           style:
-                              myStyle(14.sp, FontWeight.w400, themeColorGreen),
+                              myStyle(14.sp, FontWeight.w400, backIconClr),
                         )
                       ],
                     ),
@@ -318,11 +322,11 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                   padding: EdgeInsets.all(10.w),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(3.r),
-                      border: Border.all(color: themeColorGreen, width: 1.w)),
+                      border: Border.all(color: backIconClr, width: 1.w)),
                   child: Icon(
                     Icons.calendar_month_outlined,
                     size: 16.sp,
-                    color: themeColorGreen,
+                    color: backIconClr,
                   ),
                 ),
                 SizedBox(
@@ -335,7 +339,7 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4.r),
-                      color: themeColorGreen),
+                      color: backIconClr),
                   child: Text(
                     'Next',
                     style: myStyle(16.sp, FontWeight.w400, scaffoldClr),

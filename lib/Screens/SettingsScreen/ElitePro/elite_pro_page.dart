@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
+import 'package:myapp/utils/colors.dart';
 
 class EliteProPage extends StatefulWidget {
   EliteProPage({Key? key}) : super(key: key);
@@ -22,19 +24,14 @@ class _EliteProPageState extends State<EliteProPage> {
             },
             icon: const Icon(
               Icons.arrow_back,
-              color: Color(0xff187949),
+              color: backIconClr,
             )),
         title: Text(
-          'Settings',
-          style: myStyle(20, FontWeight.bold, Colors.black),
+          'Elite Pro',
+          style: myStyle(20.sp, FontWeight.w500, Colors.black),
         ),
         actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.notifications,
-                color: Color(0xff187949),
-              ))
+          Image.asset('images/notification.png'),
         ],
       ),
       body: Center(child: Text('Elite Pro Page')),
