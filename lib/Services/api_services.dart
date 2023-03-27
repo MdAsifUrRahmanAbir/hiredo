@@ -7,6 +7,8 @@ import 'package:myapp/Screens/ResistrationScreen/Model/registration_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:myapp/Services/api_component.dart';
 
+import '../Screens/SignInScreen/Model/sign_in_model.dart';
+
 class ApiServices {
   static var client = http.Client();
 
@@ -46,8 +48,28 @@ class ApiServices {
 // handel login
   static Future<dynamic> handelLogin(
       {required String email, required String password}) async {
-    var resuest = http.MultipartRequest('POST', Uri.parse(signInApi));
-    resuest.fields.addAll({'full_name': email, 'password': password});
+    try {
+      var resuest = http.MultipartRequest('POST', Uri.parse(signInApi));
+      resuest.fields.addAll({'email': email, 'password': password});
+
+      http.StreamedResponse response = await resuest.send();
+      if (response.statusCode == 200) {
+        var data = await response.stream.bytesToString();
+        return signInModelFromMap(data);
+      } else {
+        Map d = json.decode(await response.stream.bytesToString());
+        Fluttertoast.showToast(msg: d['message']);
+        if (kDebugMode) {
+          print(response.reasonPhrase);
+        }
+        return 0;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("login error => ${e.toString()}");
+      }
+      return 0;
+    }
   }
 
   // fetch lead our categories

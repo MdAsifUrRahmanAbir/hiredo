@@ -4,7 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:myapp/Screens/IntroScreen/introonepage.dart';
 import 'package:myapp/Screens/IntroScreen/onBoarding_screen.dart';
+import 'package:myapp/nav_bar_page/nav_bar_controller.dart';
 import 'package:myapp/utils/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -16,9 +18,15 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (_) => OnboardinScreen()));
+    Future.delayed(const Duration(seconds: 3), () async {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      if (preferences.getString('access') != null) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => BottomNavController()));
+      } else {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => OnboardinScreen()));
+      }
     });
 
     super.initState();

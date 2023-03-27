@@ -22,10 +22,7 @@ class RegistrationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double scheight = MediaQuery.of(context).size.height;
-    double scwidth = MediaQuery.of(context).size.width;
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.white,
@@ -304,7 +301,7 @@ class RegistrationPage extends StatelessWidget {
           ),
         ),
       ),
-    ));
+    );
   }
 
   Widget customeText({required String title}) {

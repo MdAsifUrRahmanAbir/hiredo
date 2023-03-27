@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class OrderName extends StatefulWidget {
@@ -13,10 +14,12 @@ class OrderName extends StatefulWidget {
 class _OrderNameState extends State<OrderName> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -50,273 +53,312 @@ class _OrderNameState extends State<OrderName> {
         ],
         automaticallyImplyLeading: false,
       ),
-      body: Container(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: SizedBox(
-                    height: 50,
-                    child: TextFormField(
-                      controller: nameController,
-                      decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(3)),
-                            borderSide: BorderSide(color: Color(0xff9CCDB5))),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(4.0)),
-                            borderSide: BorderSide(color: Color(0xff9CCDB5))),
-                        hintText: "Search ",
-                        hintStyle: GoogleFonts.roboto(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            letterSpacing: 1,
-                            color: Color(0xffB7B7B7)),
-                      ),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    color: Color(0xff187949),
-                    height: 50,
-                    width: 45,
-                    child: Icon(
-                      Icons.search,
-                      color: Color(0xffFFFFFF),
-                    ),
-                  ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Showing all 120 request",
-                      style: GoogleFonts.roboto(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xff424242)),
-                    )),
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    height: 34,
-                    width: 74,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3.0),
-                        color: Color(0xff187949)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.filter_list,
-                          color: Color(0xffFFFFFF),
-                          size: 20,
-                        ),
-                        Text(
-                          "Filter",
-                          style: GoogleFonts.roboto(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: Color(0xffFFFFFF),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Expanded(
-                flex: 4,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              IntrinsicHeight(
                 child: Container(
-                  height: 200,
-                  width: double.infinity,
-                  child: Card(
-                    elevation: 2,
-                    child: Image.asset(
-                      "images/img1.png",
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                )),
-            SizedBox(
-              height: 10,
-            ),
-            Expanded(
-                flex: 2,
-                child: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Color(0xFF9CCDB5))),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        "Commercial Cleaning Experties",
-                        style: GoogleFonts.roboto(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xff272727)),
-                      ),
                       SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "Commercial Cleaning by Experties not simpily\n random text",
-                        style: GoogleFonts.roboto(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: Color(0xff272727)),
-                      ),
-                    ],
-                  ),
-                )),
-            Expanded(
-              flex: 6,
-              child: ListView.separated(
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) => Container(
-                        height: 147,
-                        color: Color(0xffF8F8F8),
-                        width: double.infinity,
-                        child: Card(
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "HBO work",
-                                  style: GoogleFonts.roboto(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color(0xff272727)),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.star,
-                                      color: Colors.yellow,
-                                      size: 25,
-                                    ),
-                                    Text(
-                                      "4.9 (100)",
-                                      style: GoogleFonts.roboto(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400,
-                                          color: Color(0xff272727)),
-                                    ),
-                                  ],
-                                ),
-                                Text(
-                                  "Total 400 work compelete",
-                                  style: GoogleFonts.roboto(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                      color: Color(0xff272727)),
-                                ),
-                                Spacer(),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {},
-                                      child: Container(
-                                        height: 34,
-                                        width: 74,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(3.0),
-                                            color: Color(0xff187949)),
-                                        child: Center(
-                                          child: Text(
-                                            "Accept",
-                                            style: GoogleFonts.roboto(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w400,
-                                              color: Color(0xffFFFFFF),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {},
-                                      child: Container(
-                                        height: 34,
-                                        width: 74,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Color(0xff187949)),
-                                            borderRadius:
-                                                BorderRadius.circular(3.0),
-                                            color: Color(0xffF8F8F8)),
-                                        child: Center(
-                                          child: Text(
-                                            "Reject",
-                                            style: GoogleFonts.roboto(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w400,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {},
-                                      child: Container(
-                                        height: 34,
-                                        width: 130,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Color(0xff187949)),
-                                            borderRadius:
-                                                BorderRadius.circular(3.0),
-                                            color: Color(0xffF8F8F8)),
-                                        child: Center(
-                                          child: Text(
-                                            "View Conpany Profile",
-                                            style: GoogleFonts.roboto(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                )
-                              ],
+                        height: 50.h,
+                        width: 120.w,
+                        child: Container(
+                          padding: EdgeInsets.all(8.0.w),
+                          child: TextFormField(
+                            controller: nameController,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              fillColor: Colors.white,
+                              hintText: "Search ",
+                              hintStyle: GoogleFonts.roboto(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w400,
+                                  letterSpacing: 1,
+                                  color: Color(0xffB7B7B7)),
                             ),
                           ),
                         ),
                       ),
-                  separatorBuilder: (_, index) => SizedBox(
-                        height: 5,
+                      VerticalDivider(
+                        width: 20.w,
+                        thickness: 1,
+                        indent: 10,
+                        endIndent: 10,
+                        color: Colors.grey,
                       ),
-                  itemCount: 10),
-            )
-          ],
+                      SizedBox(
+                        height: 50.h,
+                        width: 120.w,
+                        child: Container(
+                          padding: EdgeInsets.all(5.r),
+                          child: TextFormField(
+                            controller: locationController,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              fillColor: Colors.white,
+                              hintText: "Location",
+                              prefix: InkWell(
+                                onTap: () {},
+                                child: Icon(
+                                  Icons.location_pin,
+                                  color: Colors.grey,
+                                  size: 20.sp,
+                                ),
+                              ),
+                              hintStyle: GoogleFonts.roboto(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w400,
+                                  letterSpacing: 1,
+                                  color: Color(0xffB7B7B7)),
+                            ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          color: Color(0xff187949),
+                          height: 50.h,
+                          width: 45.w,
+                          child: Icon(
+                            Icons.search,
+                            color: Color(0xffFFFFFF),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Showing all 120 request",
+                        style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xff424242)),
+                      )),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      height: 34,
+                      width: 74,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(3.0),
+                          color: Color(0xff187949)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.filter_list,
+                            color: Color(0xffFFFFFF),
+                            size: 20,
+                          ),
+                          Text(
+                            "Filter",
+                            style: GoogleFonts.roboto(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xffFFFFFF),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                height: 185.h,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    image:
+                        DecorationImage(image: AssetImage('images/hand.png'))),
+              ),
+              Text(
+                'Commercial Cleaning by Expertise',
+                style: GoogleFonts.roboto(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xFF272727)),
+              ),
+              SizedBox(
+                height: 8.h,
+              ),
+              Text(
+                'Contrary to popular belief, Lorem Ipsum is not simply random text.',
+                style: GoogleFonts.roboto(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFF555957)),
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              ListView.separated(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: 3,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    height: 147.h,
+                    width: double.infinity,
+                    padding: EdgeInsets.only(top: 15.h, left: 5.w),
+                    decoration: BoxDecoration(
+                        color: Color(0xFFF8F8F8),
+                        borderRadius: BorderRadius.circular(5.r)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'HBO Work',
+                          style: GoogleFonts.roboto(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF272727)),
+                        ),
+                        SizedBox(
+                          height: 3.h,
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.star,
+                              color: Color(0xFFEACA23),
+                            ),
+                            SizedBox(
+                              width: 3.w,
+                            ),
+                            Text(
+                              '4.9',
+                              style: GoogleFonts.roboto(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xFF424242)),
+                            ),
+                            SizedBox(
+                              width: 3.w,
+                            ),
+                            Text(
+                              "(100)",
+                              style: GoogleFonts.roboto(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xFF424242)),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        Text('Total 500 work complete',
+                            style: GoogleFonts.roboto(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xFF424242))),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {},
+                              child: Container(
+                                height: 34.h,
+                                width: 81.w,
+                                decoration: BoxDecoration(
+                                    color: Color(0xFF187949),
+                                    borderRadius: BorderRadius.circular(3.r)),
+                                child: Center(
+                                  child: Text(
+                                    'Accept',
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400,
+                                        color: Color(0xFFF2F2F2)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 8.w,
+                            ),
+                            InkWell(
+                              onTap: () {},
+                              child: Container(
+                                height: 34.h,
+                                width: 76.w,
+                                decoration: BoxDecoration(
+                                    border:
+                                        Border.all(color: Color(0xFF187949)),
+                                    borderRadius: BorderRadius.circular(3.r)),
+                                child: Center(
+                                  child: Text(
+                                    'Reject',
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400,
+                                        color: Color(0xFF424242)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 8.w,
+                            ),
+                            InkWell(
+                              onTap: () {},
+                              child: Container(
+                                height: 34.h,
+                                width: 140.w,
+                                decoration: BoxDecoration(
+                                    border:
+                                        Border.all(color: Color(0xFF187949)),
+                                    borderRadius: BorderRadius.circular(3.r)),
+                                child: Center(
+                                  child: Text(
+                                    'View Conpany Profile',
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400,
+                                        color: Color(0xFF424242)),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    height: 15.h,
+                  );
+                },
+              )
+            ],
+          ),
         ),
       ),
     ));

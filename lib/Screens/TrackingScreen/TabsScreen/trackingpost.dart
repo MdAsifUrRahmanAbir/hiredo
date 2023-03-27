@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/Screens/OrderScreen/ordername.dart';
 import 'package:myapp/Screens/TrackingScreen/Controller/tracking_controller.dart';
 
 class TrackingPostOrder extends StatelessWidget {
@@ -174,20 +175,31 @@ class TrackingPostOrder extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Container(
-                                            height: 34.h,
-                                            width: 115.w,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(4.r),
-                                                color: Color(0xff187949)),
-                                            child: Center(
-                                              child: Text(
-                                                "view details",
-                                                style: GoogleFonts.roboto(
-                                                    fontSize: 14.sp,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: Colors.white),
+                                          InkWell(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (_) =>
+                                                          OrderName()));
+                                            },
+                                            child: Container(
+                                              height: 34.h,
+                                              width: 115.w,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          4.r),
+                                                  color: Color(0xff187949)),
+                                              child: Center(
+                                                child: Text(
+                                                  "view details",
+                                                  style: GoogleFonts.roboto(
+                                                      fontSize: 14.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: Colors.white),
+                                                ),
                                               ),
                                             ),
                                           ),
