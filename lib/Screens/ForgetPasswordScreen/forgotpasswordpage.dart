@@ -6,6 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:myapp/Screens/EmailVerifiyScreen/enterverificationpage.dart';
+import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
+import 'package:myapp/widgets/custom_widgets.dart';
 
 import '../../utils/colors.dart';
 
@@ -27,19 +29,18 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
     double scwidth = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: scaffoldClr,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: scaffoldClr,
           elevation: 0,
           leading: Padding(
-            padding: EdgeInsets.all(8.0.w),
+            padding: EdgeInsets.all(8),
             child: Container(
+              height: 43.h,
+                width: 43.w,
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(90.r),
-                      topRight: Radius.circular(90.r),
-                      bottomLeft: Radius.circular(90.r),
-                      bottomRight: Radius.circular(90.r)),
+                  color:scaffoldClr,
+                shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.1),
@@ -52,7 +53,8 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
                 child: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios_sharp,
-                    color: themeColorGreen,
+                    color: backIconClr,
+                    size: 18.sp,
                   ),
                   onPressed: () {
                     Navigator.pop(context);
@@ -61,7 +63,7 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
           ),
           title: Text(
             'Forgot Password?',
-            style: GoogleFonts.roboto(color: Colors.black.withOpacity(0.5)),
+           style: myStyle(20, FontWeight.w500, textClr),
           ),
         ),
         body: Center(
@@ -77,7 +79,7 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
                   children: [
                     Expanded(
                       child: RadioListTile(
-                        activeColor: themeColorGreen,
+                        activeColor: backIconClr,
                         title: Text('Phone'),
                         value: "phone",
                         groupValue: accounttype,
@@ -90,7 +92,7 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
                     ),
                     Expanded(
                       child: RadioListTile(
-                        activeColor: themeColorGreen,
+                        activeColor: backIconClr,
                         title: Text('Email'),
                         value: "email",
                         groupValue: accounttype,
@@ -120,22 +122,7 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
                           SizedBox(
                             height: 5.h,
                           ),
-                          TextFormField(
-                            controller: phoneController,
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: themeColorGreen.withOpacity(0.1),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 0.5)),
-                                enabledBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 0.5)),
-                                border: const OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 0)),
-                                hintText: '+880100000000'),
-                          ),
+                          CustomTextFieldForm(controller: phoneController, hintText: 'Enter your phone',)
                         ],
                       )
                     : Column(
@@ -151,52 +138,21 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
                           SizedBox(
                             height: 5.h,
                           ),
-                          TextFormField(
-                            controller: phoneController,
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: themeColorGreen.withOpacity(0.1),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 0.5)),
-                                enabledBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 0.5)),
-                                border: const OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 0)),
-                                hintText: 'h@gmail.com'),
-                          ),
+                          CustomTextFieldForm(controller: phoneController, hintText: 'Enter your email',)
                         ],
                       ),
                 SizedBox(
                   height: 30.h,
                 ),
-                SizedBox(
-                  height: 50.h,
-                  width: scwidth - 18,
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: themeColorGreen,
-                        shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(10.r), // <-- Radius
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => VerificationPage()));
-                      },
-                      child: Text(
-                        'Next',
-                        style: GoogleFonts.roboto(
-                            color: Colors.white,
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.w500),
-                      )),
-                ),
+                customButton(
+                  onTap: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => VerificationPage()));
+                  },
+                  title: 'Next',
+                )
               ],
             ),
           ),
