@@ -283,7 +283,7 @@ class _LeadsScreenState extends State<LeadsScreen> {
                           backgroundImage: AssetImage(item[index]['image']),
                         ),
                         SizedBox(
-                          width: 5.w,
+                          width: 8.w,
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -302,6 +302,9 @@ class _LeadsScreenState extends State<LeadsScreen> {
                                   width: 30.w,
                                 ),
                                 Image.asset('images/run.png'),
+                                SizedBox(
+                                  width: 5.w,
+                                ),
                                 Text(
                                   'Plumbing',
                                   style: GoogleFonts.roboto(
@@ -311,9 +314,15 @@ class _LeadsScreenState extends State<LeadsScreen> {
                                 )
                               ],
                             ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
                             Row(
                               children: [
                                 Image.asset(item[index]['locationImage']),
+                                SizedBox(
+                                  width: 5.w,
+                                ),
                                 Text(
                                   item[index]['address'],
                                   style: GoogleFonts.roboto(

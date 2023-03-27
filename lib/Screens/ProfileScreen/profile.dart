@@ -36,6 +36,7 @@ class _ProfileState extends State<Profile> {
       appBar: AppBar(
         elevation: 0.3,
         centerTitle: true,
+
         backgroundColor: Colors.white,
         leading: IconButton(
             onPressed: () {
@@ -45,6 +46,7 @@ class _ProfileState extends State<Profile> {
               Icons.arrow_back,
               color: backIconClr,
             )),
+
         title: Text(
           'Profile',
           style: myStyle(20.sp, FontWeight.w500, Colors.black),

@@ -2,15 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:myapp/Screens/ResistrationScreen/registrationpage.dart';
-import 'package:myapp/Screens/IntroScreen/signupintropage.dart';
+
 import 'package:myapp/utils/colors.dart';
 
 class SignAccountChoosePage extends StatefulWidget {
-  static const String routename = '/accountselectionpage';
   const SignAccountChoosePage({Key? key}) : super(key: key);
 
   @override
@@ -22,10 +21,9 @@ String? accounttype;
 class _SignAccountChoosePageState extends State<SignAccountChoosePage> {
   @override
   Widget build(BuildContext context) {
-    double sch = MediaQuery.of(context).size.height;
-    double scw = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
@@ -63,59 +61,64 @@ class _SignAccountChoosePageState extends State<SignAccountChoosePage> {
           padding: EdgeInsets.all(18.0.w),
           child: ListView(children: [
             SizedBox(
-              height: 170.h,
+              height: 150.h,
             ),
             Text(
-              '''Choose your account
-          category''',
+              'Choose your account category',
               style: GoogleFonts.roboto(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w400,
+                  fontSize: 24.sp,
+                  fontWeight: FontWeight.w500,
                   color: Color(0xff555957)),
             ),
             SizedBox(
-              height: 8.h,
+              height: 14.h,
             ),
             Row(
               children: [
                 Text(
                   'Choose',
                   style: GoogleFonts.roboto(
-                      fontSize: 16.sp,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xff555957)),
+                      color: Color(0xFF5B5B5B)),
                 ),
                 Text(
                   ' become a professional ',
                   style: GoogleFonts.roboto(
-                      fontSize: 18.sp,
-                      color: Colors.green,
-                      fontWeight: FontWeight.w500),
+                      fontSize: 14.sp,
+                      color: Color(0xFF187949),
+                      fontWeight: FontWeight.w400),
                 ),
                 Text(
                   'option and',
                   style: GoogleFonts.roboto(
-                      fontSize: 16.sp,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xff555957)),
+                      color: Color(0xFF5B5B5B)),
                 )
               ],
             ),
             Text(
               'continue',
               style: GoogleFonts.roboto(
-                  fontSize: 16.sp,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
-                  color: Color(0xff555957)),
+                  color: Color(0xFF5B5B5B)),
             ),
             SizedBox(
-              height: 10.h,
+              height: 20.h,
             ),
             Container(
                 height: 50.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
                     color: Color(0xFFFFFFFF),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 1)
+                    ],
                     borderRadius: BorderRadius.circular(5.r)),
                 child: ListTile(
                   title: Text(
@@ -137,13 +140,19 @@ class _SignAccountChoosePageState extends State<SignAccountChoosePage> {
                   ),
                 )),
             SizedBox(
-              height: 10.h,
+              height: 30.h,
             ),
             Container(
                 height: 50.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
                     color: Color(0xFFFFFFFF),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 1)
+                    ],
                     borderRadius: BorderRadius.circular(5.r)),
                 child: ListTile(
                   title: Text(
@@ -165,7 +174,7 @@ class _SignAccountChoosePageState extends State<SignAccountChoosePage> {
                   ),
                 )),
             SizedBox(
-              height: 30.h,
+              height: 40.h,
             ),
             InkWell(
               onTap: () {

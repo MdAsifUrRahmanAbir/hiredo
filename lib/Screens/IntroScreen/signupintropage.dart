@@ -21,113 +21,98 @@ class SignIntroPage extends StatefulWidget {
 class _SignIntroPageState extends State<SignIntroPage> {
   @override
   Widget build(BuildContext context) {
-    double sch = MediaQuery.of(context).size.height;
-    double scw = MediaQuery.of(context).size.width;
+    // double sch = MediaQuery.of(context).size.height;
+    // double scw = MediaQuery.of(context).size.width;
     return SafeArea(
-      child: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                height: 1.h,
-              ),
-              Image.asset(
-                'images/img3.png',
-                width: scw,
-                height: sch / 2,
-              ),
-              Padding(
-                padding: EdgeInsets.all(38.0.w),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Choose your service',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.roboto(
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xff555957)),
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    Text(
-                      'Ringknock is an online on demand service.'
-                      'It has as into 50k+ services.',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.roboto(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xff555957)),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(12.0.w),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 47.h,
-                      width: scw - 40,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: themeColorGreen,
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(10.r), // <-- Radius
-                            ),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => SignAccountChoosePage()));
-                          },
-                          child: Text(
-                            'Create Profile',
-                            style: GoogleFonts.roboto(
-                                color: Colors.white, fontSize: 18.sp),
-                          )),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Already have an account?',
-                          style: GoogleFonts.roboto(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xff555957)),
-                        ),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => SignInPage()));
-                            },
-                            child: Text(
-                              'Sign In',
-                              style: GoogleFonts.roboto(
-                                  color: themeColorGreen,
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.w500),
-                            ))
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              Text(''),
-              Text(''),
-              Text('')
-            ],
+        child: Scaffold(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset('images/ima3.png'),
+          SizedBox(
+            height: 40.h,
           ),
-        ),
+          Text(
+            'Choose Your Service',
+            style: GoogleFonts.roboto(
+                fontSize: 24.sp,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFF424242)),
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 40.w, right: 30.w),
+            child: Text(
+              'Ringknock is a online on demand  service. It’s has as into the 50k+ services.',
+              style: GoogleFonts.roboto(
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.w300,
+                  color: Color(0xFF424242)),
+            ),
+          ),
+          SizedBox(
+            height: 40.h,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 15.w, right: 15.w),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => SignAccountChoosePage()));
+              },
+              child: Container(
+                height: 50.h,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    color: Color(0xFF187949),
+                    borderRadius: BorderRadius.circular(4.r)),
+                child: Center(
+                  child: Text(
+                    'Create Profile',
+                    style: GoogleFonts.roboto(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFFFFFFFF)),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 15.h,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Already have a profile?',
+                style: GoogleFonts.roboto(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFF555957)),
+              ),
+              SizedBox(
+                width: 8.w,
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => SignInPage()));
+                },
+                child: Text(
+                  'Sign in',
+                  style: GoogleFonts.roboto(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF187949)),
+                ),
+              )
+            ],
+          )
+        ],
       ),
-    );
+    ));
   }
 }
