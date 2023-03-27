@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/Screens/HelpScreen/help_screen.dart';
-
 import 'package:myapp/Screens/LeadsScreen/lead_screen.dart';
 import 'package:myapp/Screens/MyResponse/my_response.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
@@ -13,9 +11,9 @@ import 'package:myapp/Screens/SignInScreen/signinpage.dart';
 import 'package:myapp/Screens/UpdateLeadSetting/update_lead_settings.dart';
 import 'package:myapp/Screens/WishListScreen/wish_list_screen.dart';
 import 'package:myapp/utils/colors.dart';
-
 import '../HomeScreen/home.dart';
 import '../LocationScreen/locationpage.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class Profile extends StatefulWidget {
   static const String routename = '/profile';
@@ -24,8 +22,6 @@ class Profile extends StatefulWidget {
   @override
   State<Profile> createState() => _ProfileState();
 }
-
-double _progressValue = 0.8;
 
 class _ProfileState extends State<Profile> {
   @override
@@ -36,7 +32,6 @@ class _ProfileState extends State<Profile> {
       appBar: AppBar(
         elevation: 0.3,
         centerTitle: true,
-
         backgroundColor: Colors.white,
         leading: IconButton(
             onPressed: () {
@@ -46,7 +41,6 @@ class _ProfileState extends State<Profile> {
               Icons.arrow_back,
               color: backIconClr,
             )),
-
         title: Text(
           'Profile',
           style: myStyle(20.sp, FontWeight.w500, Colors.black),
@@ -71,11 +65,12 @@ class _ProfileState extends State<Profile> {
                     children: [
                       Text(
                         'Built wright inc',
-                       style: myStyle(16.sp, FontWeight.w500, textClr),
+                        style: myStyle(16.sp, FontWeight.w500, textClr),
                       ),
                       Text(
                         'info@builtwrightinc.com',
-                      style: myStyle(14.sp, FontWeight.w400, Color(0xff424242)),
+                        style:
+                            myStyle(14.sp, FontWeight.w400, Color(0xff424242)),
                       ),
                     ],
                   ),
@@ -86,82 +81,25 @@ class _ProfileState extends State<Profile> {
                   Icon(Icons.more_vert)
                 ],
               ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Row(
-              //       children: [
-              //         Container(
-              //           height: 63.h,
-              //           width: 63.w,
-              //           decoration: BoxDecoration(
-              //             borderRadius:
-              //                 BorderRadius.all(Radius.circular(90.r)),
-              //           ),
-              //           child: ClipRRect(
-              //             borderRadius:
-              //                 BorderRadius.all(Radius.circular(90.r)),
-              //             child: Image.asset(
-              //               "images/profilepic.png",
-              //               height: 63.h,
-              //               width: 63.w,
-              //               fit: BoxFit.cover,
-              //             ),
-              //           ),
-              //         ),
-              //         SizedBox(
-              //           width: 10.w,
-              //         ),
-              //         Column(
-              //           crossAxisAlignment: CrossAxisAlignment.start,
-              //           mainAxisAlignment: MainAxisAlignment.center,
-              //           children: [
-              //             Text(
-              //               'Built wright inc',
-              //               style: TextStyle(
-              //                   fontSize: 19.sp,
-              //                   fontWeight: FontWeight.w500),
-              //             ),
-              //             Text(
-              //               'info@builtwrightinc.com',
-              //               style: TextStyle(fontSize: 16.sp),
-              //             ),
-              //           ],
-              //         ),
-              //       ],
-              //     ),
-              //     Row(
-              //       children: [
-              //         Image.asset("images/switchimg.png"),
-              //         SizedBox(
-              //           width: 15.w,
-              //         ),
-              //         const Icon(Icons.more_vert)
-              //       ],
-              //     )
-              //   ],
-              // ),
               SizedBox(
                 height: 20.h,
               ),
               Container(
                 height: 150.h,
-               width: double.infinity,
-                padding: EdgeInsets.all(10.w),
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: containerClr
-                ),
+                    borderRadius: BorderRadius.circular(5.r),
+                    color: containerClr),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "Your profile is 80% complete",
-                          style: TextStyle(
-                              fontSize: 19.sp, fontWeight: FontWeight.w400),
-                        ),
+                        Text("Your profile is 80% complete",
+                            style: myStyle(16, FontWeight.w500, textClr)),
                         Image.asset(
                           "images/editicon.png",
                           height: 22.h,
@@ -171,25 +109,26 @@ class _ProfileState extends State<Profile> {
                     ),
                     Row(
                       children: [
-                        SizedBox(
-                          height: 8.h,
-                          width: scw - 110,
-                          child: LinearProgressIndicator(
-                            backgroundColor: Colors.white,
-                            valueColor: const AlwaysStoppedAnimation<Color>(
-                                themeColorGreen),
-                            value: _progressValue,
+                        Expanded(
+                          child: LinearPercentIndicator(
+                            animation: true,
+                            animationDuration: 1000,
+                            lineHeight: 8.h,
+                            percent: 0.8,
+                            barRadius: Radius.circular(30.r),
+                            progressColor: backIconClr,
+                            backgroundColor: scaffoldClr,
                           ),
                         ),
                         Text(
                           '8/10',
-                          style: TextStyle(fontSize: 14.sp),
+                          style: myStyle(14, FontWeight.w500, textClr),
                         )
                       ],
                     ),
                     Text(
                       'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. ',
-                      style: TextStyle(fontSize: 14.sp),
+                      style: myStyle(14, FontWeight.w400, Color(0xff424242)),
                     )
                   ],
                 ),
@@ -200,23 +139,17 @@ class _ProfileState extends State<Profile> {
               Container(
                 height: 167.h,
                 width: 371.w,
-                padding: EdgeInsets.only(left: 10.w, top: 20.h, right: 10.w),
-                decoration: const BoxDecoration(
-                  color: Color(0xFFEEEDED),
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6.r),
+                    color: containerClr),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'OverView',
-                      style: GoogleFonts.roboto(
-                          color: const Color(0xFF272727),
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    SizedBox(
-                      height: 10.h,
+                      style: myStyle(20.sp, FontWeight.w500, textClr),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -229,10 +162,7 @@ class _ProfileState extends State<Profile> {
                             ),
                             Text(
                               'Elite Pro',
-                              style: GoogleFonts.roboto(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: const Color(0xFF272727)),
+                              style: myStyle(14.sp, FontWeight.w500, textClr),
                             )
                           ],
                         ),
@@ -244,17 +174,11 @@ class _ProfileState extends State<Profile> {
                             ),
                             Text(
                               '14 Hires on Ringknock',
-                              style: GoogleFonts.roboto(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: const Color(0xFF272727)),
+                              style: myStyle(14.sp, FontWeight.w500, textClr),
                             )
                           ],
                         )
                       ],
-                    ),
-                    SizedBox(
-                      height: 15.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -267,10 +191,7 @@ class _ProfileState extends State<Profile> {
                             ),
                             Text(
                               '7 Years in business',
-                              style: GoogleFonts.roboto(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: const Color(0xFF272727)),
+                              style: myStyle(14.sp, FontWeight.w500, textClr),
                             )
                           ],
                         ),
@@ -282,21 +203,18 @@ class _ProfileState extends State<Profile> {
                             ),
                             Text(
                               '6 Hour response  time',
-                              style: GoogleFonts.roboto(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: const Color(0xFF272727)),
+                              style: myStyle(14.sp, FontWeight.w500, textClr),
                             )
                           ],
                         )
                       ],
                     ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
                     Row(
                       children: [
-                        const Icon(Icons.person),
+                        Icon(
+                          Icons.person_rounded,
+                          size: 18.sp,
+                        ),
                         SizedBox(
                           width: 4.w,
                         ),
@@ -316,92 +234,65 @@ class _ProfileState extends State<Profile> {
                 height: 20.h,
               ),
               Container(
-                height: 152.w,
+                height: 152.h,
                 width: double.infinity,
-                padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 20.h),
-                color: const Color(0xFFEEEDED),
+                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+                color: containerClr,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Service Tags',
-                      style: GoogleFonts.roboto(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w500,
-                          color: const Color(0xFF272727)),
+                      style: myStyle(20, FontWeight.w500, textClr),
                     ),
                     SizedBox(
-                      height: 10.h,
+                      height: 5.h,
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          '#Bathroom_installation',
-                          style: GoogleFonts.roboto(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w400,
-                              color: const Color(0xFF187949)),
-                        ),
-                        SizedBox(
-                          width: 15.w,
-                        ),
-                        Text(
-                          '#Bathroom_installation',
-                          style: GoogleFonts.roboto(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w400,
-                              color: const Color(0xFF272727)),
-                        ),
-                      ],
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                '#Bathroom_installation',
+                                style:
+                                    myStyle(14, FontWeight.w400, backIconClr),
+                              ),
+                              Text(
+                                '#Kitchen Refurbishment',
+                                style: myStyle(14, FontWeight.w400, textClr),
+                              ),
+                              Text(
+                                '#Kitchen Refurbishment',
+                                style: myStyle(14, FontWeight.w400, textClr),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                '#Bathroom_installation',
+                                style: myStyle(14, FontWeight.w400, textClr),
+                              ),
+                              Text(
+                                '#Kitchen Design',
+                                style: myStyle(14, FontWeight.w400, textClr),
+                              ),
+                              Text(
+                                'View More',
+                                style:
+                                    myStyle(14, FontWeight.w400, backIconClr),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          '#Kitchen Refurbishment',
-                          style: GoogleFonts.roboto(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w400,
-                              color: const Color(0xFF272727)),
-                        ),
-                        SizedBox(
-                          width: 15.w,
-                        ),
-                        Text(
-                          '#Kitchen Design & Planning',
-                          style: GoogleFonts.roboto(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w400,
-                              color: const Color(0xFF272727)),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          '#Kitchen Refurbishment',
-                          style: GoogleFonts.roboto(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w400,
-                              color: const Color(0xFF272727)),
-                        ),
-                        SizedBox(
-                          width: 15.w,
-                        ),
-                        Text(
-                          'View More',
-                          style: GoogleFonts.roboto(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xFF187949)),
-                        ),
-                      ],
-                    )
+
                   ],
                 ),
               ),
@@ -410,7 +301,7 @@ class _ProfileState extends State<Profile> {
               ),
               Container(
                 height: 55.h,
-                width: scw - 20,
+                width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(10.r)),
@@ -419,8 +310,7 @@ class _ProfileState extends State<Profile> {
                       color: Colors.grey.withOpacity(0.1),
                       spreadRadius: 1,
                       blurRadius: 1,
-                      offset:
-                          const Offset(1, 0), // changes position of shadow
+                      offset: const Offset(1, 0), // changes position of shadow
                     ),
                   ],
                 ),
@@ -447,8 +337,7 @@ class _ProfileState extends State<Profile> {
                             Text(
                               'Leads',
                               style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w600),
+                                  fontSize: 16.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
@@ -519,8 +408,7 @@ class _ProfileState extends State<Profile> {
                             Text(
                               'My Responces',
                               style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w600),
+                                  fontSize: 16.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
@@ -569,10 +457,8 @@ class _ProfileState extends State<Profile> {
                   padding: EdgeInsets.all(18.0.w),
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => WishListScreen()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => WishListScreen()));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -589,8 +475,7 @@ class _ProfileState extends State<Profile> {
                             Text(
                               'Wishlist',
                               style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w600),
+                                  fontSize: 16.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
@@ -640,8 +525,7 @@ class _ProfileState extends State<Profile> {
                             Text(
                               'Settings',
                               style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w600),
+                                  fontSize: 16.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
@@ -691,8 +575,7 @@ class _ProfileState extends State<Profile> {
                             Text(
                               'Help',
                               style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w600),
+                                  fontSize: 16.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
@@ -745,8 +628,7 @@ class _ProfileState extends State<Profile> {
                             Text(
                               'Services',
                               style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w600),
+                                  fontSize: 16.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
@@ -816,8 +698,7 @@ class _ProfileState extends State<Profile> {
                             Text(
                               'Locations',
                               style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w600),
+                                  fontSize: 16.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
@@ -847,30 +728,26 @@ class _ProfileState extends State<Profile> {
               SizedBox(
                 height: 20.h,
               ),
-              SizedBox(
+              Container(
                   height: 43.h,
-                  width: scw / 2 - 60,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => SignInPage()));
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFDF2929),
+                  width: 124.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.r),
+                    color: Color(0xffDF2929)
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.logout_outlined, color: scaffoldClr, size: 18,),
+                      SizedBox(
+                        width: 10.w,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(Icons.login),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          Text(
-                            'Logout',
-                            style: TextStyle(fontSize: 16.sp),
-                          ),
-                        ],
-                      )))
+                      Text(
+                        'Logout',
+                       style: myStyle(16, FontWeight.w500, scaffoldClr),
+                      ),
+                    ],
+                  ))
             ],
           ),
         ),
