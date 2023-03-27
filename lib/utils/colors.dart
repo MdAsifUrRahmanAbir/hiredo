@@ -6,7 +6,6 @@ const Color imageback= Color(0xFF01A38B);
 const Color textformback= Color(0xFFD9F1E5);
 const Color containerClr= Color(0xffFAFAFA);
 const Color scaffoldClr= Color(0xffFFFFFF);
-const Color textClr= Color(0xff000000);
+const Color textClr= Color(0xff272727);
 const Color offWhite= Color(0xff848484);
-
-
+const Color backIconClr=Color(0xff187949);

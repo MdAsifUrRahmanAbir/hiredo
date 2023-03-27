@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:myapp/utils/colors.dart';
 
 import '../SettingsScreen/setting_page.dart';
 
@@ -14,7 +15,7 @@ class ReviewsPage extends StatefulWidget {
 class _ReviewsPageState extends State<ReviewsPage> {
   List<Map> reviews = [
     {
-      'imgUrl': 'images/img1.png',
+      'imgUrl': 'images/haq.png',
       'name': 'Jasim Uddin',
       'date': '15 Jan 2023',
       'ratings': '5.0',
@@ -22,7 +23,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
     },
     {
-      'imgUrl': 'images/img2.png',
+      'imgUrl': 'images/jhon.png',
       'name': 'Jhon Smith',
       'date': '12 Jan 2023',
       'ratings': '4.9',
@@ -30,7 +31,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
     },
     {
-      'imgUrl': 'images/img3.png',
+      'imgUrl': 'images/kumar.png',
       'name': 'Barak Uddin',
       'date': '10 Jan 2023',
       'ratings': '4.8',
@@ -38,7 +39,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
     },
     {
-      'imgUrl': 'images/img4.png',
+      'imgUrl': 'images/redun.png',
       'name': 'Mr. Karun',
       'date': '15 Jan 2023',
       'ratings': '4.7',
@@ -46,7 +47,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
     },
     {
-      'imgUrl': 'images/img.png',
+      'imgUrl': 'images/rahman.png',
       'name': 'Josef Benjamin',
       'date': '15 Jan 2023',
       'ratings': '5.0',
@@ -54,7 +55,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
     },
     {
-      'imgUrl': 'images/img5.png',
+      'imgUrl': 'images/haq.png',
       'name': 'Henry Feyol',
       'date': '15 Jan 2023',
       'ratings': '4.0',
@@ -73,23 +74,18 @@ class _ReviewsPageState extends State<ReviewsPage> {
         backgroundColor: Colors.white,
         leading: IconButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pop(context);
             },
             icon: const Icon(
               Icons.arrow_back,
-              color: Color(0xff187949),
+              color: backIconClr,
             )),
         title: Text(
           'Reviews',
-          style: myStyle(20.sp, FontWeight.bold, Colors.black),
+          style: myStyle(20.sp, FontWeight.w500, Colors.black),
         ),
         actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.notifications,
-                color: Color(0xff187949),
-              ))
+          Image.asset('images/notification.png'),
         ],
       ),
       body: Container(
@@ -151,36 +147,38 @@ class _ReviewsPageState extends State<ReviewsPage> {
                 children: [
                   Text(
                     'Overall Rating',
-                    style: myStyle(20.sp, FontWeight.w500, Colors.black),
+                    style: myStyle(20.sp, FontWeight.w500, textClr),
                   ),
                   Spacer(),
                   Text(
                     '4.9',
-                    style: myStyle(20.sp, FontWeight.w500, Colors.black),
+                    style: myStyle(20.sp, FontWeight.w500, textClr),
                   ),
+                  SizedBox(width: 3.w,),
                   Text(
                     '(500)',
-                    style: myStyle(14.sp, FontWeight.w300, Colors.grey),
+                    style: myStyle(14.sp, FontWeight.w300, Color(0xff848484)),
                   ),
                   Spacer(),
                   Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.w),
+                    width: 95,
+                    height: 35,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.r),
-                        color: Colors.green),
+                        borderRadius: BorderRadius.circular(3.r),
+                        color: Color(0xff187949)),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           'Filter',
-                          style: myStyle(16.sp, FontWeight.w400, Colors.white),
+                          style: myStyle(16.sp, FontWeight.w400, scaffoldClr),
                         ),
                         SizedBox(
                           width: 5.r,
                         ),
                         Icon(
                           Icons.filter_list_sharp,
-                          color: Colors.white,
+                          color: scaffoldClr,
                           size: 18.sp,
                         )
                       ],
@@ -199,7 +197,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
                             padding: EdgeInsets.all(10.w),
                             decoration: BoxDecoration(
                                 color: Color(0xffF8F8F8),
-                                borderRadius: BorderRadius.circular(5.r)),
+                                borderRadius: BorderRadius.circular(3.r)),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -219,7 +217,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
                                           Text(
                                             reviews[index]['name'],
                                             style: myStyle(18.sp,
-                                                FontWeight.w500, Colors.black),
+                                                FontWeight.w500, textClr),
                                           ),
                                           Spacer(),
                                           Text(
@@ -230,7 +228,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
                                         ],
                                       ),
                                       SizedBox(
-                                        height: 8.h,
+                                        height: 6.h,
                                       ),
                                       Row(
                                         children: [
@@ -275,7 +273,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
                                             maxLines: 6,
                                             overflow: TextOverflow.ellipsis,
                                             style: myStyle(14.sp,
-                                                FontWeight.w400, Colors.grey),
+                                                FontWeight.w400, Color(0xff848484)),
                                           ))
                                     ],
                                   ),
@@ -286,7 +284,18 @@ class _ReviewsPageState extends State<ReviewsPage> {
                       separatorBuilder: (context, index) => SizedBox(
                             height: 10.h,
                           ),
-                      itemCount: reviews.length))
+                      itemCount: reviews.length)),
+              SizedBox(height: 20.h,),
+              Container(
+                alignment: Alignment.center,
+                height: 50.h,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.r),
+                  color: Color(0xff187949)
+                ),
+                child: Text('See All Review', style: myStyle(16.sp, FontWeight.w500, Color(0xffF2F2F2)),),
+              )
             ],
           ),
         ),

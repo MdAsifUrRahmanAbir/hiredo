@@ -28,23 +28,18 @@ class _OneClickResponcePageState extends State<OneClickResponcePage> {
         backgroundColor: Colors.white,
         leading: IconButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pop(context);
             },
             icon: const Icon(
               Icons.arrow_back,
-              color: Color(0xff187949),
+              color: backIconClr,
             )),
         title: Text(
           'One Click Responce',
-          style: myStyle(20.sp, FontWeight.bold, Colors.black),
+          style: myStyle(20.sp, FontWeight.w500, Colors.black),
         ),
         actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.notifications,
-                color: Color(0xff187949),
-              ))
+          Image.asset('images/notification.png'),
         ],
       ),
       body: Container(
@@ -57,9 +52,9 @@ class _OneClickResponcePageState extends State<OneClickResponcePage> {
               children: [
                 FlutterSwitch(
                   activeColor: themeColorGreen,
-                  width: 55.0.w,
-                  height: 28.0.h,
-                  toggleSize: 22.0.sp,
+                  width: 52.0.w,
+                  height: 27.0.h,
+                  toggleSize: 21.0.sp,
                   value: status,
                   borderRadius: 30.0.r,
                   padding: 4.0.w,
@@ -80,7 +75,7 @@ class _OneClickResponcePageState extends State<OneClickResponcePage> {
               ],
             ),
             SizedBox(
-              height: 15.h,
+              height: 20.h,
             ),
             Text(
               'Email template to be used for your one-click response:',
@@ -94,7 +89,7 @@ class _OneClickResponcePageState extends State<OneClickResponcePage> {
               height: 50.h,
               width: double.infinity,
               decoration:
-                  BoxDecoration(border: Border.all(color: textClr, width: 1)),
+                  BoxDecoration(border: Border.all(color: textClr.withOpacity(0.3), width: 0.5)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -142,12 +137,12 @@ class _OneClickResponcePageState extends State<OneClickResponcePage> {
               ],
             ),
             SizedBox(
-              height: 15.h,
+              height: 20.h,
             ),
             Container(
               padding: EdgeInsets.all(15.w),
               decoration:
-                  BoxDecoration(border: Border.all(color: textClr, width: 1)),
+                  BoxDecoration(border: Border.all(color: textClr.withOpacity(0.3), width: 0.5)),
               child: Column(
                 children: [
                   Row(

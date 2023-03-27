@@ -23,28 +23,21 @@ class _BadgePageState extends State<BadgePage> {
         backgroundColor: Colors.white,
         leading: IconButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pop(context);
             },
             icon: const Icon(
               Icons.arrow_back,
-              color: Color(0xff187949),
+              color: backIconClr,
             )),
         title: Text(
-          'Badges',
-          style: myStyle(20.sp, FontWeight.bold, Colors.black),
+          'Settings',
+          style: myStyle(20.sp, FontWeight.w500, Colors.black),
         ),
         actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.notifications,
-                color: Color(0xff187949),
-              ))
+          Image.asset('images/notification.png'),
         ],
       ),
-      body: SizedBox(
-        height: double.infinity,
-        width: double.infinity,
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -68,7 +61,7 @@ class _BadgePageState extends State<BadgePage> {
                   Icon(
                     Icons.error_outline,
                     color: themeColorGreenbright,
-                    size: 27.sp,
+                    size: 25.sp,
                   ),
                   SizedBox(
                     width: 5.w,
@@ -93,7 +86,7 @@ class _BadgePageState extends State<BadgePage> {
               ),
             ),
             SizedBox(
-              height: 20.h,
+              height: 15.h,
             ),
             badge_item(
               text: 'The Reviews Badge',
@@ -118,7 +111,7 @@ class _BadgePageState extends State<BadgePage> {
               onTap: () {},
             ),
             SizedBox(
-              height: 5.h,
+              height: 15.h,
             ),
             Padding(
               padding: EdgeInsets.only(left: 15.w),
@@ -139,80 +132,81 @@ class _BadgePageState extends State<BadgePage> {
                 ],
               ),
             ),
-            Expanded(
-              child: Container(
-                // margin: EdgeInsets.all(15.w),
-                padding: EdgeInsets.all(10.w),
-                color: containerClr,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: 5.h),
-                          child: Icon(
-                            Icons.circle,
-                            size: 6.sp,
-                            color: textClr,
-                          ),
+            SizedBox(height: 15.h,),
+            Container(
+              height: 215,
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(horizontal: 10.w),
+              padding: EdgeInsets.all(10.w),
+              color: containerClr,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 5.h),
+                        child: Icon(
+                          Icons.circle,
+                          size: 6.sp,
+                          color: textClr,
                         ),
-                        SizedBox(
-                          width: 5.w,
+                      ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      Expanded(
+                          child: Text(
+                        'Upgrading your app with a ringknock badge helps boost search engine rankings (SEO) and attractsmore customers',
+                        style: myStyle(14.sp, FontWeight.w400, Color(0xff424242)),
+                      ))
+                    ],
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 5.h),
+                        child: Icon(
+                          Icons.circle,
+                          size: 6.sp,
+                          color: textClr,
                         ),
-                        Expanded(
-                            child: Text(
-                          'Upgrading your app with a ringknock badge helps boost search engine rankings (SEO) and attractsmore customers',
-                          style: myStyle(14.sp, FontWeight.w400, textClr),
-                        ))
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: 5.h),
-                          child: Icon(
-                            Icons.circle,
-                            size: 6.sp,
-                            color: textClr,
-                          ),
+                      ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      Expanded(
+                          child: Text(
+                        'Visitors to your website will be able to see your reviews and leave their own. This increases customer trust, gaining you more business - for free',
+                        style: myStyle(14.sp, FontWeight.w400,  Color(0xff424242)),
+                        overflow: TextOverflow.clip,
+                      ))
+                    ],
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 5.h),
+                        child: Icon(
+                          Icons.circle,
+                          size: 6.sp,
+                          color: textClr,
                         ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        Expanded(
-                            child: Text(
-                          'Visitors to your website will be able to see your reviews and leave their own. This increases customer trust, gaining you more business - for free',
-                          style: myStyle(14.sp, FontWeight.w400, textClr),
-                          overflow: TextOverflow.clip,
-                        ))
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: 5.h),
-                          child: Icon(
-                            Icons.circle,
-                            size: 6.sp,
-                            color: textClr,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        Expanded(
-                            child: Text(
-                          'Customers are much more likely to hire professionals with 1 or more badges on display',
-                          style: myStyle(14.sp, FontWeight.w400, textClr),
-                        ))
-                      ],
-                    )
-                  ],
-                ),
+                      ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      Expanded(
+                          child: Text(
+                        'Customers are much more likely to hire professionals with 1 or more badges on display',
+                        style: myStyle(14.sp, FontWeight.w400,  Color(0xff424242)),
+                      ))
+                    ],
+                  )
+                ],
               ),
             )
           ],
@@ -247,6 +241,7 @@ class badge_item extends StatelessWidget {
         children: [
           Image.asset('images/bark.png'),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 text!,
@@ -265,11 +260,11 @@ class badge_item extends StatelessWidget {
             onTap: onTap,
             child: Container(
               alignment: Alignment.center,
-              height: 35.h,
-              width: 75.w,
+              height: 34.h,
+              width: 72.w,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: themeColorGreen),
+                  borderRadius: BorderRadius.circular(3.r),
+                  color: backIconClr),
               child: Text(
                 'Select',
                 style: myStyle(14.sp, FontWeight.w400, scaffoldClr),

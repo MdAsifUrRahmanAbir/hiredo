@@ -25,19 +25,14 @@ class _BadgesSecondPageState extends State<BadgesSecondPage> {
             },
             icon: const Icon(
               Icons.arrow_back,
-              color: Color(0xff187949),
+              color: backIconClr,
             )),
         title: Text(
           'Badges',
-          style: myStyle(20.sp, FontWeight.bold, Colors.black),
+          style: myStyle(20.sp, FontWeight.w500, Colors.black),
         ),
         actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.notifications,
-                color: Color(0xff187949),
-              ))
+          Image.asset('images/notification.png'),
         ],
       ),
       body: Container(
@@ -133,12 +128,13 @@ class _BadgesSecondPageState extends State<BadgesSecondPage> {
               ],
             ),
             SizedBox(
-              height: 15.h,
+              height: 20.h,
             ),
             Text(
               'Golden Badge Advantage',
               style: myStyle(18.sp, FontWeight.w500, textClr),
             ),
+            SizedBox(height: 8,),
             Text(
               'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys.',
               style: myStyle(14.sp, FontWeight.w400, textClr),
@@ -150,8 +146,8 @@ class _BadgesSecondPageState extends State<BadgesSecondPage> {
               children: [
                 Icon(
                   Icons.circle,
-                  size: 18.sp,
-                  color: themeColorGreen,
+                  size: 16.sp,
+                  color: backIconClr,
                 ),
                 SizedBox(
                   width: 20.w,
@@ -170,8 +166,8 @@ class _BadgesSecondPageState extends State<BadgesSecondPage> {
               children: [
                 Icon(
                   Icons.circle,
-                  size: 18.sp,
-                  color: themeColorGreen,
+                  size: 16.sp,
+                  color: backIconClr,
                 ),
                 SizedBox(
                   width: 20.w,
@@ -188,7 +184,7 @@ class _BadgesSecondPageState extends State<BadgesSecondPage> {
             ),
             Text(
               'Bye/Sale More Services And get Dimond Badge',
-              style: myStyle(18.sp, FontWeight.w500, textClr),
+              style: myStyle(16.sp, FontWeight.w500, textClr),
             ),
             Text(
               'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys.',
