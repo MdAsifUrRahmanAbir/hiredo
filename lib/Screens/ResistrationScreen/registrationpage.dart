@@ -72,7 +72,7 @@ class RegistrationPage extends StatelessWidget {
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
+                //mainAxisSize: MainAxisSize.min,
                 children: [
                   customeText(title: 'Full Name'),
                   SizedBox(

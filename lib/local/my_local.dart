@@ -15,5 +15,5 @@ class MyPreference {
 }
 
 class Constance {
-  static String accessToken = "access";
+  static String accessToken = "token";
 }

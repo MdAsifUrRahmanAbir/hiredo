@@ -358,11 +358,11 @@ class _HomeState extends State<Home> {
                                 : ListView.builder(
                                     scrollDirection: Axis.horizontal,
                                     itemCount: _homeController
-                                        .leadCategoryModel.results!.length,
+                                        .leadCategoriesModel.results!.length,
                                     shrinkWrap: true,
                                     itemBuilder: (context, index) {
                                       var result = _homeController
-                                          .leadCategoryModel.results![index];
+                                          .leadCategoriesModel.results![index];
                                       return Padding(
                                         padding: EdgeInsets.all(20.w),
                                         child: Column(

@@ -6,7 +6,7 @@ import 'package:myapp/Services/api_services.dart';
 class HomeController extends GetxController {
   var isLoading = false.obs;
 
-  late LeadCategoryModel leadCategoryModel;
+  late LeadCategoriesModel leadCategoriesModel;
 
   @override
   void onInit() {
@@ -23,8 +23,8 @@ class HomeController extends GetxController {
           print("Error $result");
         }
       } else {
-        leadCategoryModel = result;
-        print(leadCategoryModel);
+        leadCategoriesModel = result;
+        print(leadCategoriesModel);
       }
     } on Exception catch (e) {
       if (kDebugMode) {

@@ -15,36 +15,16 @@ class SignInModel {
     this.message,
   });
 
-  Token? token;
+  String? token;
   String? message;
 
   factory SignInModel.fromMap(Map<String, dynamic> json) => SignInModel(
-        token: json["token"] == null ? null : Token.fromMap(json["token"]),
+        token: json["token"],
         message: json["message"],
       );
 
   Map<String, dynamic> toMap() => {
-        "token": token?.toMap(),
+        "token": token,
         "message": message,
-      };
-}
-
-class Token {
-  Token({
-    this.refresh,
-    this.access,
-  });
-
-  String? refresh;
-  String? access;
-
-  factory Token.fromMap(Map<String, dynamic> json) => Token(
-        refresh: json["refresh"],
-        access: json["access"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "refresh": refresh,
-        "access": access,
       };
 }

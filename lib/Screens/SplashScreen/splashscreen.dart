@@ -20,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     Future.delayed(const Duration(seconds: 3), () async {
       SharedPreferences preferences = await SharedPreferences.getInstance();
-      if (preferences.getString('access') != null) {
+      if (preferences.getString('token') != null) {
         Navigator.push(
             context, MaterialPageRoute(builder: (_) => BottomNavController()));
       } else {

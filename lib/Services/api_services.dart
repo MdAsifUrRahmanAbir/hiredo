@@ -3,9 +3,14 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:myapp/Screens/HomeScreen/Model/lead_category_model.dart';
+import 'package:myapp/Screens/MyResponse/my_response.dart';
 import 'package:myapp/Screens/ResistrationScreen/Model/registration_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:myapp/Screens/UpdateLeadSetting/Model/add_services_model.dart';
+import 'package:myapp/Screens/UpdateLeadSetting/Model/location_model.dart';
 import 'package:myapp/Services/api_component.dart';
+import 'package:myapp/local/my_local.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Screens/SignInScreen/Model/sign_in_model.dart';
 
@@ -45,33 +50,6 @@ class ApiServices {
     }
   }
 
-// handel login
-  static Future<dynamic> handelLogin(
-      {required String email, required String password}) async {
-    try {
-      var resuest = http.MultipartRequest('POST', Uri.parse(signInApi));
-      resuest.fields.addAll({'email': email, 'password': password});
-
-      http.StreamedResponse response = await resuest.send();
-      if (response.statusCode == 200) {
-        var data = await response.stream.bytesToString();
-        return signInModelFromMap(data);
-      } else {
-        Map d = json.decode(await response.stream.bytesToString());
-        Fluttertoast.showToast(msg: d['message']);
-        if (kDebugMode) {
-          print(response.reasonPhrase);
-        }
-        return 0;
-      }
-    } on Exception catch (e) {
-      if (kDebugMode) {
-        print("login error => ${e.toString()}");
-      }
-      return 0;
-    }
-  }
-
   // fetch lead our categories
 
   static dynamic fetchLeadOurCategories() async {
@@ -79,13 +57,148 @@ class ApiServices {
       var response = await client.get(Uri.parse(leadcategory));
 
       if (response.statusCode == 200) {
-        return leadCategoryModelFromMap(response.body);
+        return leadCategoriesModelFromMap(response.body);
       } else {
         return response.statusCode;
       }
     } on Exception catch (e) {
       if (kDebugMode) {
         return print("Data fetch Error. Reason ${e.toString()}");
+      }
+      return 0;
+    }
+  }
+
+// add service
+  static Future<bool> AddServicePost(
+      {required String design, required String description}) async {
+    var accessToken = await MyPreference.getToken();
+    // SharedPreferences preferences = await SharedPreferences.getInstance();
+    // var accessToken = preferences.getString('token');
+    try {
+      var headers = {
+        'Authorization': "Bearer $accessToken",
+        'Cookie':
+            'csrftoken=pwnIa5wXWizyqYO2ybhtX0GLZ0NxqhtU; sessionid=gg5ikg2sfd8r50skh2zkn4d9uahf6lue'
+      };
+      var request = http.MultipartRequest('POST', Uri.parse(addService));
+      request.fields
+          .addAll({'service_name': design, 'service_description': description});
+
+      request.headers.addAll(headers);
+
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 201) {
+        return true;
+      } else {
+        if (kDebugMode) {
+          print(response.reasonPhrase);
+        }
+        return false;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("User Add Servies Error. Reason ${e.toString()}");
+      }
+      return false;
+    }
+  }
+
+// fetch service data
+
+  static dynamic fetchServices() async {
+    var accessToken = await MyPreference.getToken();
+    // SharedPreferences preferences = await SharedPreferences.getInstance();
+    // var accessToken = preferences.getString('token');
+    try {
+      var headers = {
+        'Authorization': "Bearer $accessToken",
+        'Cookie':
+            'csrftoken=pwnIa5wXWizyqYO2ybhtX0GLZ0NxqhtU; sessionid=gg5ikg2sfd8r50skh2zkn4d9uahf6lue'
+      };
+      var request = http.Request('GET', Uri.parse(fetchService));
+
+      request.headers.addAll(headers);
+
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        var data = await response.stream.bytesToString();
+        return addServicesModelFromMap(data);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        return print("Data fetch Error. Reason ${e.toString()}");
+      }
+      return 0;
+    }
+  }
+
+// add location
+
+  static Future<bool> AddLocationPost(
+      {required String city, required String distance}) async {
+    var accessToken = await MyPreference.getToken();
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Cookie':
+            'csrftoken=JTmUdH4YgUsvhRKiYHXELavXWYkDj2Jy; sessionid=zgackrotla65p88t23gjkrpw7qfig439'
+      };
+      var request = http.MultipartRequest('POST', Uri.parse(addLocation));
+
+      request.fields.addAll({'city': city, 'distance': distance});
+
+      request.headers.addAll(headers);
+
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 201) {
+        print(await response.stream.bytesToString());
+        return true;
+      } else {
+        if (kDebugMode) {
+          print(response.reasonPhrase);
+        }
+        return false;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("User Add Location Error. Reason ${e.toString()}");
+      }
+      return false;
+    }
+  }
+
+// fetch location data
+
+  static dynamic fetchLocationData() async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Cookie':
+            'csrftoken=Mhh6ZEtVRRjjThE4WYMWICRo8M54bfbV; sessionid=zgackrotla65p88t23gjkrpw7qfig439'
+      };
+      var request = http.Request('GET', Uri.parse(fetchLocation));
+
+      request.headers.addAll(headers);
+
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        var data = await response.stream.bytesToString();
+        return locationModelFromMap(data);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        return print(" Location fetch Error. Reason ${e.toString()}");
       }
       return 0;
     }

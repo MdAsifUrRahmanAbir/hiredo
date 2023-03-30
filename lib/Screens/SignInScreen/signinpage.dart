@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,6 +18,7 @@ import 'package:myapp/Screens/SignInScreen/Model/sign_in_model.dart';
 import 'package:myapp/local/my_local.dart';
 import 'package:myapp/nav_bar_page/nav_bar_controller.dart';
 import 'package:myapp/utils/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../ForgetPasswordScreen/forgotpasswordpage.dart';
 
 class SignInPage extends StatefulWidget {
@@ -350,10 +353,19 @@ class _SignInPageState extends State<SignInPage> {
       });
       print("Respnse ${response.body}");
 
-      MyPreference.setToken(signInModel.token.toString());
+      var jsonResponse = jsonDecode(response.body);
+
+      // SharedPreferences sharedPreferences =
+      //     await SharedPreferences.getInstance();
+      // sharedPreferences.setString('token', jsonResponse['token']);
+      print(jsonResponse);
+
+      MyPreference.setToken("${signInModel.token}");
+      print(signInModel.token);
 
       Navigator.push(
           context, MaterialPageRoute(builder: (_) => BottomNavController()));
+      return jsonResponse;
     } else if (response.statusCode == 404) {
       _signInErrorModel = signInErrorModelFromMap(response.body);
       setState(() {

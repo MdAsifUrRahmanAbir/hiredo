@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/widgets/custom_widgets.dart';
+
+import 'Controller/update_lead_controller.dart';
 
 class UpdateLeadSettings extends StatelessWidget {
-  static const String routename = '/updateleadsettings';
-  const UpdateLeadSettings({super.key});
+  UpdateLeadSettings({super.key});
+
+  final updatLeadController = Get.put(UpdateController());
 
   @override
   Widget build(BuildContext context) {
@@ -60,42 +65,175 @@ class UpdateLeadSettings extends StatelessWidget {
             SizedBox(
               height: 25.h,
             ),
-            itemListTile(
-                title: 'Wedding Photography',
-                subTitle: 'All leads',
-                location: '1 location'),
+            Obx(
+              () => updatLeadController.isLoading.value
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.green,
+                      ),
+                    )
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount:
+                          updatLeadController.addServiceModel.results!.length,
+                      itemBuilder: (context, index) {
+                        var result =
+                            updatLeadController.addServiceModel.results![index];
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  result.serviceName.toString(),
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w400,
+                                      color: const Color(0xFF272727)),
+                                ),
+                                Text(result.serviceDescription.toString(),
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400,
+                                        color: const Color(0xFF424242))),
+                              ],
+                            ),
+                            IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.navigate_next,
+                                  color: Color(0xFF272727),
+                                ))
+                          ],
+                        );
+                      }),
+            ),
             SizedBox(
               height: 30.h,
             ),
-            itemListTile(
-                title: 'Web Design',
-                subTitle: 'All leads',
-                location: '1 location'),
-            SizedBox(
-              height: 30.h,
-            ),
-            Container(
-              height: 57.h,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  border: Border.all(color: const Color(0xFF187949))),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.add,
-                        color: Color(0xFF187949),
-                      )),
-                  Text(
-                    'Add a Service',
-                    style: GoogleFonts.roboto(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400,
-                        color: const Color(0xFF187949)),
-                  )
-                ],
+            InkWell(
+              onTap: () {
+                showModalBottomSheet(
+                    context: context,
+                    isDismissible: true,
+                    builder: (context) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              controller: updatLeadController.desginController,
+                              decoration: const InputDecoration(
+                                hintText: 'Add Service Name',
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black, width: 0.5)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black, width: 0.5)),
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black, width: 0)),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            TextFormField(
+                              controller:
+                                  updatLeadController.descriptionController,
+                              decoration: const InputDecoration(
+                                hintText: 'Add Service Description',
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black, width: 0.5)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black, width: 0.5)),
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black, width: 0)),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                updatLeadController.submiteService();
+                              },
+                              child: Container(
+                                height: 50.h,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    color: const Color(0xFF187949),
+                                    borderRadius: BorderRadius.circular(8.r)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Submit',
+                                      style: GoogleFonts.roboto(
+                                          fontSize: 18.sp,
+                                          fontWeight: FontWeight.w500,
+                                          color: const Color(0xFFFFFFFF)),
+                                    ),
+                                    Obx(() => SizedBox(
+                                          width: updatLeadController
+                                                  .isLoading.value
+                                              ? 5.w
+                                              : 0,
+                                        )),
+                                    Obx(() {
+                                      if (updatLeadController.isLoading.value) {
+                                        return SizedBox(
+                                          height: 10.h,
+                                          width: 10.w,
+                                          child:
+                                              const CircularProgressIndicator(
+                                            color: Colors.white,
+                                          ),
+                                        );
+                                      } else {
+                                        return const SizedBox();
+                                      }
+                                    })
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                          ],
+                        ),
+                      );
+                    });
+              },
+              child: Container(
+                height: 57.h,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    border: Border.all(color: const Color(0xFF187949))),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.add,
+                      color: Color(0xFF187949),
+                    ),
+                    Text(
+                      'Add a Service',
+                      style: GoogleFonts.roboto(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
+                          color: const Color(0xFF187949)),
+                    )
+                  ],
+                ),
               ),
             ),
             SizedBox(
@@ -118,59 +256,186 @@ class UpdateLeadSettings extends StatelessWidget {
             SizedBox(
               height: 30.h,
             ),
-            Row(
-              children: [
-                Image.asset('images/location.png'),
-                SizedBox(
-                  width: 20.w,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('4517 Washington',
-                        style: GoogleFonts.roboto(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                            color: const Color(0xFF272727))),
-                    Text('20 miles of K0A 0A1',
-                        style: GoogleFonts.roboto(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                            color: const Color(0xFF424242))),
-                  ],
-                ),
-                SizedBox(
-                  width: 150.w,
-                ),
-                Image.asset('images/edit.png'),
-              ],
+            Padding(
+              padding: EdgeInsets.only(left: 10.w),
+              child: Row(
+                children: [
+                  Image.asset('images/location.png'),
+                  SizedBox(
+                    width: 10.w,
+                  ),
+                  Expanded(
+                    child: Obx(
+                      () => updatLeadController.isLoading.value
+                          ? const Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : ListView.separated(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: updatLeadController
+                                  .locationModel.results!.length,
+                              itemBuilder: (context, index) {
+                                var result = updatLeadController
+                                    .locationModel.results![index];
+                                return Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      result.city.toString(),
+                                      style: GoogleFonts.roboto(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: const Color(0xFF272727)),
+                                    ),
+                                    Text(result.distance.toString(),
+                                        style: GoogleFonts.roboto(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w400,
+                                            color: const Color(0xFF272727)))
+                                  ],
+                                );
+                              },
+                              separatorBuilder:
+                                  (BuildContext context, int index) => SizedBox(
+                                height: 10.h,
+                              ),
+                            ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 150.w,
+                  ),
+                  Image.asset('images/edit.png'),
+                ],
+              ),
             ),
             SizedBox(
               height: 30.h,
             ),
-            Container(
-              height: 57.h,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  border: Border.all(color: const Color(0xFF187949))),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.add,
-                        color: Color(0xFF187949),
-                      )),
-                  Text(
-                    'Add a New Location',
-                    style: GoogleFonts.roboto(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400,
-                        color: const Color(0xFF187949)),
-                  )
-                ],
+            InkWell(
+              onTap: () {
+                showModalBottomSheet(
+                    context: context,
+                    isDismissible: true,
+                    builder: (context) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              controller: updatLeadController.cityController,
+                              decoration: const InputDecoration(
+                                hintText: 'Add City',
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black, width: 0.5)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black, width: 0.5)),
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black, width: 0)),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            TextFormField(
+                              controller:
+                                  updatLeadController.distanceController,
+                              decoration: const InputDecoration(
+                                hintText: 'Add Location Distance',
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black, width: 0.5)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black, width: 0.5)),
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black, width: 0)),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                updatLeadController.submiteLocation();
+                              },
+                              child: Container(
+                                height: 50.h,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    color: const Color(0xFF187949),
+                                    borderRadius: BorderRadius.circular(8.r)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Submit',
+                                      style: GoogleFonts.roboto(
+                                          fontSize: 18.sp,
+                                          fontWeight: FontWeight.w500,
+                                          color: const Color(0xFFFFFFFF)),
+                                    ),
+                                    Obx(() => SizedBox(
+                                          width: updatLeadController
+                                                  .isLoading.value
+                                              ? 5.w
+                                              : 0,
+                                        )),
+                                    Obx(() {
+                                      if (updatLeadController.isLoading.value) {
+                                        return SizedBox(
+                                          height: 10.h,
+                                          width: 10.w,
+                                          child:
+                                              const CircularProgressIndicator(
+                                            color: Colors.white,
+                                          ),
+                                        );
+                                      } else {
+                                        return const SizedBox();
+                                      }
+                                    })
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                          ],
+                        ),
+                      );
+                    });
+              },
+              child: Container(
+                height: 57.h,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    border: Border.all(color: const Color(0xFF187949))),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.add,
+                          color: Color(0xFF187949),
+                        )),
+                    Text(
+                      'Add a New Location',
+                      style: GoogleFonts.roboto(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
+                          color: const Color(0xFF187949)),
+                    )
+                  ],
+                ),
               ),
             ),
             SizedBox(
