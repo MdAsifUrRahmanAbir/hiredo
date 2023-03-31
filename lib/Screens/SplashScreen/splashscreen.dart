@@ -21,7 +21,7 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(const Duration(seconds: 3), () async {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       if (preferences.getString('token') != null) {
-        Navigator.push(
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (_) => BottomNavController()));
       } else {
         Navigator.push(
@@ -38,11 +38,15 @@ class _SplashPageState extends State<SplashPage> {
       child: Scaffold(
         body: Center(
           child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: 20
+            ),
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(color: themeColorGreen),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Welcome to ',

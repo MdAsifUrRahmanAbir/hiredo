@@ -108,71 +108,85 @@ class _SignAccountChoosePageState extends State<SignAccountChoosePage> {
             SizedBox(
               height: 20.h,
             ),
-            Container(
-                height: 50.h,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: Color(0xFFFFFFFF),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 1,
-                          blurRadius: 1)
-                    ],
-                    borderRadius: BorderRadius.circular(5.r)),
-                child: ListTile(
-                  title: Text(
-                    'Become a User',
-                    style: GoogleFonts.roboto(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xFF373737)),
-                  ),
-                  trailing: Radio(
-                    activeColor: themeColorGreen,
-                    value: 'User',
-                    groupValue: accounttype,
-                    onChanged: (value) {
-                      setState(() {
-                        accounttype = value.toString();
+            InkWell(
+              onTap: (){
+                  setState(() {
+                        accounttype = "User";
                       });
-                    },
-                  ),
-                )),
+              },
+              child: Container(
+                  height: 50.h,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: Color(0xFFFFFFFF),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 1)
+                      ],
+                      borderRadius: BorderRadius.circular(5.r)),
+                  child: ListTile(
+                    title: Text(
+                      'Become a User',
+                      style: GoogleFonts.roboto(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xFF373737)),
+                    ),
+                    trailing: Radio(
+                      activeColor: themeColorGreen,
+                      value: 'User',
+                      groupValue: accounttype,
+                      onChanged: (value) {
+                        setState(() {
+                          accounttype = value.toString();
+                        });
+                      },
+                    ),
+                  )),
+            ),
             SizedBox(
               height: 30.h,
             ),
-            Container(
-                height: 50.h,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: Color(0xFFFFFFFF),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 1,
-                          blurRadius: 1)
-                    ],
-                    borderRadius: BorderRadius.circular(5.r)),
-                child: ListTile(
-                  title: Text(
-                    'Become a Professional',
-                    style: GoogleFonts.roboto(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xFF373737)),
-                  ),
-                  trailing: Radio(
-                    activeColor: themeColorGreen,
-                    value: 'Professional',
-                    groupValue: accounttype,
-                    onChanged: (value) {
-                      setState(() {
-                        accounttype = value.toString();
+            InkWell(
+              onTap: (){
+                  setState(() {
+                        accounttype = "Professional";
                       });
-                    },
-                  ),
-                )),
+              },
+              child: Container(
+                  height: 50.h,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: Color(0xFFFFFFFF),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 1)
+                      ],
+                      borderRadius: BorderRadius.circular(5.r)),
+                  child: ListTile(
+                    title: Text(
+                      'Become a Professional',
+                      style: GoogleFonts.roboto(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xFF373737)),
+                    ),
+                    trailing: Radio(
+                      activeColor: themeColorGreen,
+                      value: 'Professional',
+                      groupValue: accounttype,
+                      onChanged: (value) {
+                        setState(() {
+                          accounttype = value.toString();
+                        });
+                      },
+                    ),
+                  )),
+            ),
             SizedBox(
               height: 40.h,
             ),
