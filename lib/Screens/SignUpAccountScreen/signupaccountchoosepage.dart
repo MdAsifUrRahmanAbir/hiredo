@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:myapp/Screens/ResistrationScreen/registrationpage.dart';
-
 import 'package:myapp/utils/colors.dart';
 
 class SignAccountChoosePage extends StatefulWidget {
@@ -57,7 +55,7 @@ class _SignAccountChoosePageState extends State<SignAccountChoosePage> {
                 )),
           ),
         ),
-        body: Padding(
+        body: Padding( 
           padding: EdgeInsets.all(18.0.w),
           child: ListView(children: [
             SizedBox(
