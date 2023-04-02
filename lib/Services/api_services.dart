@@ -57,7 +57,8 @@ class ApiServices {
       var response = await client.get(Uri.parse(leadcategory));
 
       if (response.statusCode == 200) {
-        return leadCategoriesModelFromMap(response.body);
+
+        return leadCategoriesModelFromJson(response.body);
       } else {
         return response.statusCode;
       }

@@ -1,78 +1,42 @@
 // To parse this JSON data, do
 //
-//     final leadCategoriesModel = leadCategoriesModelFromMap(jsonString);
+//     final leadCategoriesModel = leadCategoriesModelFromJson(jsonString);
 
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
-LeadCategoriesModel leadCategoriesModelFromMap(String str) =>
-    LeadCategoriesModel.fromMap(json.decode(str));
+List<LeadCategoriesModel> leadCategoriesModelFromJson(String str) => List<LeadCategoriesModel>.from(json.decode(str).map((x) => LeadCategoriesModel.fromJson(x)));
 
-String leadCategoriesModelToMap(LeadCategoriesModel data) =>
-    json.encode(data.toMap());
+String leadCategoriesModelToJson(List<LeadCategoriesModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class LeadCategoriesModel {
-  LeadCategoriesModel({
-    this.next,
-    this.previous,
-    this.results,
-  });
+    LeadCategoriesModel({
+        required this.id,
+        required this.name,
+        required this.image,
+        required this.catName,
+        required this.children,
+    });
 
-  dynamic next;
-  dynamic previous;
-  List<Result>? results;
+    int id;
+    String name;
+    String image;
+    List<dynamic> catName;
+    List<LeadCategoriesModel> children;
 
-  factory LeadCategoriesModel.fromMap(Map<String, dynamic> json) =>
-      LeadCategoriesModel(
-        next: json["next"],
-        previous: json["previous"],
-        results: json["results"] == null
-            ? []
-            : List<Result>.from(json["results"]!.map((x) => Result.fromMap(x))),
-      );
-
-  Map<String, dynamic> toMap() => {
-        "next": next,
-        "previous": previous,
-        "results": results == null
-            ? []
-            : List<dynamic>.from(results!.map((x) => x.toMap())),
-      };
-}
-
-class Result {
-  Result({
-    this.id,
-    this.name,
-    this.image,
-    this.catName,
-    this.children,
-  });
-
-  int? id;
-  String? name;
-  dynamic image;
-  List<dynamic>? catName;
-  List<dynamic>? children;
-
-  factory Result.fromMap(Map<String, dynamic> json) => Result(
+    factory LeadCategoriesModel.fromJson(Map<String, dynamic> json) => LeadCategoriesModel(
         id: json["id"],
         name: json["name"],
         image: json["image"],
-        catName: json["cat_name"] == null
-            ? []
-            : List<dynamic>.from(json["cat_name"]!.map((x) => x)),
-        children: json["children"] == null
-            ? []
-            : List<dynamic>.from(json["children"]!.map((x) => x)),
-      );
+        catName: List<dynamic>.from(json["cat_name"].map((x) => x)),
+        children: List<LeadCategoriesModel>.from(json["children"].map((x) => LeadCategoriesModel.fromJson(x))),
+    );
 
-  Map<String, dynamic> toMap() => {
+    Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "image": image,
-        "cat_name":
-            catName == null ? [] : List<dynamic>.from(catName!.map((x) => x)),
-        "children":
-            children == null ? [] : List<dynamic>.from(children!.map((x) => x)),
-      };
+        "cat_name": List<dynamic>.from(catName.map((x) => x)),
+        "children": List<dynamic>.from(children.map((x) => x.toJson())),
+    };
 }

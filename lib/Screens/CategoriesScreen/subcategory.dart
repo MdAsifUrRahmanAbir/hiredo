@@ -1,11 +1,18 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructor, prefer_const_constructors, avoid_unnecessary_containers, unused_field
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
+import '../../utils/colors.dart';
+import '../HomeScreen/Model/lead_category_model.dart';
+
 class SubCategoryPage extends StatefulWidget {
-  const SubCategoryPage({super.key});
+  SubCategoryPage(
+      {super.key, required this.categorieName, required this.allSubCategories});
+  String categorieName;
+  List<LeadCategoriesModel> allSubCategories;
 
   @override
   State<SubCategoryPage> createState() => _SubCategoryPageState();
@@ -14,265 +21,418 @@ class SubCategoryPage extends StatefulWidget {
 class _SubCategoryPageState extends State<SubCategoryPage> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   final TextEditingController nameController = TextEditingController();
-  final List<String> items = [
-    'Sub Categories',
-    'Most Popular',
-    'All Categories',
-  ];
-  String? selectedValue;
+  late List<LeadCategoriesModel> demoList;
+  late List<LeadCategoriesModel> subcategory;
+
+  // final List<String> items = [
+  //   'Sub Categories',
+  //   'Most Popular',
+  //   'All Categories',
+  // ];
+  // String? selectedValue;
+
+  @override
+  void initState() {
+    demoList = widget.allSubCategories;
+    subcategory = widget.allSubCategories;
+    super.initState();
+  }
+
+  searchSubCategory(String text) async {
+    if (text.isNotEmpty) {
+      List<LeadCategoriesModel> dataList = demoList
+          .where((element) =>
+              element.name.toLowerCase().contains(text.toLowerCase()))
+          .toList();
+      print(dataList.length);
+
+      setState(() {
+        demoList = dataList;
+      });
+    } else {
+      setState(() {
+        demoList = widget.allSubCategories;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: Icon(
               Icons.arrow_back,
               size: 25,
               color: Color(0xff187949),
             )),
         title: Text(
-          "Business",
+          widget.categorieName,
           style: GoogleFonts.roboto(
               fontSize: 20,
               fontWeight: FontWeight.w500,
               color: Color(0xff272727)),
         ),
-        actions: [
-          InkWell(
-            onTap: () {},
-            child: Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("images/img2.png"), fit: BoxFit.cover),
-                  shape: BoxShape.circle),
-            ),
-          )
-        ],
+        // actions: [
+        //   InkWell(
+        //     onTap: () {},
+        //     child: Container(
+        //       height: 40,
+        //       width: 40,
+        //       decoration: BoxDecoration(
+        //           image: DecorationImage(
+        //               image: AssetImage("images/img2.png"), fit: BoxFit.cover),
+        //           shape: BoxShape.circle),
+        //     ),
+        //   )
+        // ],
         automaticallyImplyLeading: false,
       ),
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 20, right: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: widget.allSubCategories.isEmpty
+          ? Center(
+              child: Text(
+              "There are no sub-categories",
+              style: TextStyle(color: Colors.red),
+            ))
+          : SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // <------------ drop down ---------->
+
+                  // Padding(
+                  //   padding: EdgeInsets.only(left: 20, right: 20),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     children: [
+                  //       Padding(
+                  //         padding: const EdgeInsets.all(20.0),
+                  //         child: DropdownButtonHideUnderline(
+                  //           child: DropdownButton2(
+                  //             isExpanded: true,
+                  //             hint: Row(
+                  //               children: [
+                  //                 SizedBox(
+                  //                   width: 4,
+                  //                 ),
+                  //                 Expanded(
+                  //                   child: Text(
+                  //                     'Sub Categories',
+                  //                     style: GoogleFonts.roboto(
+                  //                       fontSize: 14,
+                  //                       fontWeight: FontWeight.w500,
+                  //                       letterSpacing: 1,
+                  //                       color: Color(0xffF2F2F2),
+                  //                     ),
+                  //                     overflow: TextOverflow.ellipsis,
+                  //                   ),
+                  //                 ),
+                  //               ],
+                  //             ),
+                  //             items: items
+                  //                 .map((item) => DropdownMenuItem<String>(
+                  //                       value: item,
+                  //                       child: Text(
+                  //                         item,
+                  //                         style: GoogleFonts.roboto(
+                  //                           fontSize: 14,
+                  //                           fontWeight: FontWeight.w500,
+                  //                           letterSpacing: 1,
+                  //                           color: Color(0xffF2F2F2),
+                  //                         ),
+                  //                         overflow: TextOverflow.ellipsis,
+                  //                       ),
+                  //                     ))
+                  //                 .toList(),
+                  //             value: selectedValue,
+                  //             onChanged: (value) {
+                  //               setState(() {
+                  //                 selectedValue = value as String;
+                  //               });
+                  //             },
+                  //             icon: Icon(
+                  //               Icons.arrow_drop_down,
+                  //             ),
+                  //             iconSize: 14,
+                  //             iconEnabledColor: Color(0xffF2F2F2),
+                  //             iconDisabledColor: Colors.grey,
+                  //             buttonHeight: 36,
+                  //             buttonWidth: 207,
+                  //             buttonPadding: EdgeInsets.only(left: 14, right: 14),
+                  //             buttonDecoration: BoxDecoration(
+                  //               borderRadius: BorderRadius.circular(4),
+                  //               color: Color(0xff187949),
+                  //             ),
+                  //             buttonElevation: 2,
+                  //             itemHeight: 40,
+                  //             itemPadding: EdgeInsets.only(left: 14, right: 14),
+                  //             dropdownMaxHeight: 200,
+                  //             dropdownWidth: 200,
+                  //             dropdownPadding: null,
+                  //             dropdownDecoration: BoxDecoration(
+                  //               borderRadius: BorderRadius.circular(4),
+                  //               color: Color(0xff187949),
+                  //             ),
+                  //             dropdownElevation: 8,
+                  //             scrollbarRadius: Radius.circular(4),
+                  //             scrollbarThickness: 6,
+                  //             scrollbarAlwaysShow: true,
+                  //             offset: Offset(-20, 0),
+                  //           ),
+                  //         ),
+                  //       ),
+
+                  //       Container(
+                  //         height: 36,
+                  //         width: 68,
+                  //         decoration: BoxDecoration(
+                  //             borderRadius: BorderRadius.circular(3),
+                  //             color: Color(0xff187949)),
+                  //         child: Center(
+                  //           child: Text(
+                  //             "Filter",
+                  //             style: GoogleFonts.roboto(
+                  //                 fontSize: 14,
+                  //                 fontWeight: FontWeight.w500,
+                  //                 color: Color(0xffF2F2F2),
+                  //                 letterSpacing: 1),
+                  //           ),
+                  //         ),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
+
+                  // <------------ search section ---------->
+
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton2(
-                        isExpanded: true,
-                        hint: Row(
-                          children: [
-                            SizedBox(
-                              width: 4,
-                            ),
-                            Expanded(
-                              child: Text(
-                                'Sub Categories',
-                                style: GoogleFonts.roboto(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 1,
-                                  color: Color(0xffF2F2F2),
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
-                        items: items
-                            .map((item) => DropdownMenuItem<String>(
-                                  value: item,
-                                  child: Text(
-                                    item,
-                                    style: GoogleFonts.roboto(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      letterSpacing: 1,
-                                      color: Color(0xffF2F2F2),
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ))
-                            .toList(),
-                        value: selectedValue,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedValue = value as String;
-                          });
-                        },
-                        icon: Icon(
-                          Icons.arrow_drop_down,
-                        ),
-                        iconSize: 14,
-                        iconEnabledColor: Color(0xffF2F2F2),
-                        iconDisabledColor: Colors.grey,
-                        buttonHeight: 36,
-                        buttonWidth: 207,
-                        buttonPadding: EdgeInsets.only(left: 14, right: 14),
-                        buttonDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          color: Color(0xff187949),
-                        ),
-                        buttonElevation: 2,
-                        itemHeight: 40,
-                        itemPadding: EdgeInsets.only(left: 14, right: 14),
-                        dropdownMaxHeight: 200,
-                        dropdownWidth: 200,
-                        dropdownPadding: null,
-                        dropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          color: Color(0xff187949),
-                        ),
-                        dropdownElevation: 8,
-                        scrollbarRadius: Radius.circular(4),
-                        scrollbarThickness: 6,
-                        scrollbarAlwaysShow: true,
-                        offset: Offset(-20, 0),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 36,
-                    width: 68,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
-                        color: Color(0xff187949)),
-                    child: Center(
-                      child: Text(
-                        "Filter",
-                        style: GoogleFonts.roboto(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xffF2F2F2),
-                            letterSpacing: 1),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 20),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: SizedBox(
-                      height: 50,
-                      child: TextFormField(
-                        controller: nameController,
-                        decoration: InputDecoration(
-                          fillColor: Colors.white,
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(3)),
-                              borderSide: BorderSide(color: Color(0xff9CCDB5))),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4.0)),
-                              borderSide: BorderSide(color: Color(0xff9CCDB5))),
-                          hintText: "Search ",
-                          hintStyle: GoogleFonts.roboto(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: 1,
-                              color: Color(0xffB7B7B7)),
-                        ),
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      color: Color(0xff187949),
-                      height: 50,
-                      width: 45,
-                      child: Icon(
-                        Icons.search,
-                        color: Color(0xffFFFFFF),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              flex: 6,
-              child: ListView.separated(
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) => Container(
-                        color: Color(0xffFFFFFF),
-                        margin: EdgeInsets.only(left: 10, right: 10),
-                        height: 94,
-                        width: 376,
-                        child: Card(
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              maxRadius: 30,
-                              backgroundColor: Color(0xffE8F2ED),
-                              child: Icon(
-                                Icons.free_breakfast,
-                                color: Color(0xff187949),
-                              ),
-                            ),
-                            title: Text(
-                              "House Cleaning",
-                              style: GoogleFonts.roboto(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xff187949)),
-                            ),
-                            subtitle: Text(
-                              "100+ company work",
-                              style: GoogleFonts.roboto(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xff424242)),
-                            ),
-                            trailing: InkWell(
-                              onTap: () {},
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3),
-                                  color: Color(0xff187949),
-                                ),
-                                height: 30,
-                                width: 60,
-                                child: Center(
-                                    child: Text(
-                                  "service",
-                                  style: GoogleFonts.roboto(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color(0xffFFFFFF),
-                                      letterSpacing: 1),
-                                )),
+                    padding:
+                        EdgeInsets.only(left: 20.w, right: 20.w, top: 20.h),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: SizedBox(
+                            height: 50.h,
+                            child: TextFormField(
+                              controller: nameController,
+                              onChanged: (value) {
+                                if (value.isEmpty) {
+                                  demoList = subcategory;
+                                }
+                              },
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(3.r),
+                                        bottomLeft: Radius.circular(3.r)),
+                                    borderSide:
+                                        BorderSide(color: Color(0xff9CCDB5))),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(3.r),
+                                        bottomLeft: Radius.circular(3.r)),
+                                    borderSide:
+                                        BorderSide(color: Color(0xff9CCDB5))),
+                                hintText: "Search ",
+                                hintStyle: GoogleFonts.roboto(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w400,
+                                    letterSpacing: 1,
+                                    color: Color(0xffB7B7B7)),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                  separatorBuilder: (_, index) => SizedBox(
-                        height: 10,
-                      ),
-                  itemCount: 10),
-            )
-          ],
-        ),
-      ),
-    ));
+                        GestureDetector(
+                          onTap: () {
+                            searchSubCategory(nameController.text);
+                          },
+                          child: Container(
+                            height: 50.h,
+                            width: 55.w,
+                            decoration: BoxDecoration(
+                              color: Color(0xff187949),
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(3.r),
+                                  bottomRight: Radius.circular(3.r)),
+                            ),
+                            child: Icon(
+                              Icons.search,
+                              color: Color(0xffFFFFFF),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 20,
+                  ),
+
+                  ListView.separated(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        LeadCategoriesModel data = demoList[index];
+                        return Container(
+                          alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(
+                              color: Color(0xffFFFFFF),
+                              borderRadius: BorderRadius.circular(5.r),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color(0xFF1879490d).withOpacity(0.05),
+                                  blurRadius: 10,
+                                  spreadRadius: 0,
+                                )
+                              ]),
+                          margin: EdgeInsets.symmetric(horizontal: 10.w),
+                          height: 94.h,
+                          width: 376.w,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 14.sp, vertical: 14.sp),
+                          child: Row(
+                            children: [
+                              data.image.isEmpty
+                                  ? CircleAvatar(
+                                      maxRadius: 35.r,
+                                      backgroundColor: Color(0xffE8F2ED),
+                                      child: Icon(
+                                        Icons.face,
+                                        color: Color(0xff187949),
+                                      ),
+                                    )
+                                  : CircleAvatar(
+                                      maxRadius: 35.r,
+                                      backgroundColor: Color(0xffE8F2ED),
+                                      backgroundImage: NetworkImage(data.image),
+                                    ),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              Expanded(
+                                  child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    data.name,
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 18.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xff187949)),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                  ),
+                                  Text(
+                                    "90+ Company Work",
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400,
+                                        color: Color(0xff424242)),
+                                  ),
+                                ],
+                              )),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.favorite_border,
+                                    color: Color(0xFF187949),
+                                  )),
+                              InkWell(
+                                onTap: () {},
+                                child: Container(
+                                  height: 34.h,
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 16.w),
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      color: themeColorGreen,
+                                      borderRadius: BorderRadius.circular(3.r)),
+                                  child: Text(
+                                    "Services",
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xffFFFFFF),
+                                        letterSpacing: 1),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      },
+
+                      //  Container(
+                      //       color: Color(0xffFFFFFF),
+                      //       margin: EdgeInsets.only(left: 10, right: 10),
+                      //       height: 94,
+                      //       width: 376,
+                      //       child: Card(
+                      //         child: ListTile(
+                      //           leading: CircleAvatar(
+                      //             maxRadius: 30,
+                      //             backgroundColor: Color(0xffE8F2ED),
+                      //             child: Icon(
+                      //               Icons.free_breakfast,
+                      //               color: Color(0xff187949),
+                      //             ),
+                      //           ),
+                      //           title: Text(
+                      //             "House Cleaning",
+                      //             style: GoogleFonts.roboto(
+                      //                 fontSize: 18,
+                      //                 fontWeight: FontWeight.w500,
+                      //                 color: Color(0xff187949)),
+                      //           ),
+                      //           subtitle: Text(
+                      //             "100+ company work",
+                      //             style: GoogleFonts.roboto(
+                      //                 fontSize: 14,
+                      //                 fontWeight: FontWeight.w400,
+                      //                 color: Color(0xff424242)),
+                      //           ),
+                      //           trailing: InkWell(
+                      //             onTap: () {},
+                      //             child: Container(
+                      //               decoration: BoxDecoration(
+                      //                 borderRadius: BorderRadius.circular(3),
+                      //                 color: Color(0xff187949),
+                      //               ),
+                      //               height: 30,
+                      //               width: 60,
+                      //               child: Center(
+                      //                   child: Text(
+                      //                 "service",
+                      //                 style: GoogleFonts.roboto(
+                      //                     fontSize: 12,
+                      //                     fontWeight: FontWeight.w500,
+                      //                     color: Color(0xffFFFFFF),
+                      //                     letterSpacing: 1),
+                      //               )),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ),
+
+                      separatorBuilder: (_, index) => SizedBox(
+                            height: 10,
+                          ),
+                      itemCount: demoList.length)
+                ],
+              ),
+            ),
+    );
   }
 }
