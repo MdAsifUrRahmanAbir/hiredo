@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:myapp/Screens/ForgetPasswordScreen/forgotpasswordpage.dart';
-import 'package:myapp/Screens/HomeScreen/home.dart';
+
 import 'package:myapp/Screens/ResistrationScreen/Model/registration_model.dart';
 import 'package:myapp/Screens/SignInScreen/signinpage.dart';
 import 'package:myapp/Services/api_services.dart';
@@ -10,6 +10,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class RegistrationController extends GetxController {
   var isVisibility = false.obs;
+
+var isVisible = false.obs;
+
   final dateController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -63,7 +66,7 @@ class RegistrationController extends GetxController {
     }
   }
 
-  signUp(BuildContext context) async {
+  signUp(BuildContext context, String userType) async {
     isLoading(true);
 
     try {
@@ -81,16 +84,16 @@ class RegistrationController extends GetxController {
           await ApiServices.handelRegistration(model: registrationModel);
       if (result) {
         isLoading(false);
-        print(result);
+        debugPrint("$result");
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (_) => SignInPage()));
       } else {
-        print("Ooops! Sign in error");
+        debugPrint("Ooops! Sign in error");
         isLoading(false);
       }
     } on Exception catch (e) {
-      print("Ooops! Sign in error. ${e.toString()}");
-      isLoading(false);
+      debugPrint("Ooops! Sign in error. ${e.toString()}");
+      isLoading(false);  
     } finally {
       isLoading(false);
     }

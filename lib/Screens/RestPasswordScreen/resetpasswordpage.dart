@@ -1,27 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/Screens/RestPasswordScreen/Controller/rest_controller.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 import 'package:myapp/widgets/custom_widgets.dart';
 
 import '../../utils/colors.dart';
 
-class ResetPasswordPage extends StatefulWidget {
-  static const String routename = '/resetpasspage';
-  const ResetPasswordPage({Key? key}) : super(key: key);
+class ResetPasswordPage extends StatelessWidget {
+  ResetPasswordPage({Key? key}) : super(key: key);
 
-  @override
-  State<ResetPasswordPage> createState() => _ResetPasswordPageState();
-}
+  final _restPasswordController = Get.put(RestPasswordController());
 
-final passwordController = TextEditingController();
-final confirmpasswordController = TextEditingController();
-String errMsg = '';
-bool visiblepass = false;
-bool visiblepass2 = false;
-
-class _ResetPasswordPageState extends State<ResetPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,12 +22,12 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: Padding(
-          padding: EdgeInsets.all(8),
+          padding: EdgeInsets.all(8.w),
           child: Container(
               height: 43.h,
               width: 43.w,
               decoration: BoxDecoration(
-                color:scaffoldClr,
+                color: scaffoldClr,
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
@@ -62,11 +54,19 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           children: [
             Text(
               'Forgot Password',
-            style: myStyle(20, FontWeight.w500, textClr),
+              style: GoogleFonts.roboto(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w500,
+                color: const Color(0xFF555957)
+              ),
             ),
             Text(
               'Create a new password',
-             style: myStyle(14, FontWeight.w400, offWhite),
+              style: GoogleFonts.roboto(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400,
+                color: const Color(0xFF798079)
+              ),
             )
           ],
         ),
@@ -81,122 +81,152 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
             SizedBox(
               height: 10.sp,
             ),
-            Text(
-              'New Password',
-             style: myStyle(16, FontWeight.w400, textClr),
-            ),
+
+            RichText(
+                      text: TextSpan(
+                       text: "New Password",
+                        style:GoogleFonts.roboto(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xFF25302B)
+                        ),
+                        children: [
+                          TextSpan(
+                            text:"*",
+                            style: GoogleFonts.roboto(
+                              color: const Color(0xFFDA1414)
+                            )
+                          )
+                        ]
+                      ),
+                    ),
+           
             SizedBox(
               height: 5.h,
             ),
-            TextFormField(
-              controller: passwordController,
-              obscureText: !visiblepass,
-              decoration: InputDecoration(
-                  filled: true,
-                  fillColor: themeColorGreen.withOpacity(0.1),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(3.r),
-                    borderSide: BorderSide(
-                      color: themeColorGreen.withOpacity(0.3),
-                      width: .2.w,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(3.r),
-                    borderSide: BorderSide(
-                      color: themeColorGreen.withOpacity(0.3),
-                      width: .2.w,
-                    ),
-                  ),
-                  suffixIcon: visiblepass
-                      ? IconButton(
-                          onPressed: () {
-                            setState(() {
-                              visiblepass
-                                  ? visiblepass = false
-                                  : visiblepass = true;
-                            });
-                          },
-                          icon: const Icon(Icons.visibility,
-                              color: Colors.black))
-                      : IconButton(
-                          onPressed: () {
-                            setState(() {
-                              visiblepass
-                                  ? visiblepass = false
-                                  : visiblepass = true;
-                            });
-                          },
-                          icon: const Icon(
-                            Icons.visibility_off,
-                            color: Colors.black,
-                          )),
-                  hintText: '********',
-                  labelStyle: const TextStyle(color: Colors.black)),
-            ),
+
+              Obx
+              (()=>
+                 TextFormField(
+                      controller: _restPasswordController.passwordController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                         
+                          return 'Field is Empty';
+                        } else if (value.length < 8) {
+                          return '8 character requried is password';
+                        }
+                        return null;
+                        
+                      },
+                      obscureText: _restPasswordController.isVisibility.value,
+                      decoration: InputDecoration(
+                        filled: true,
+                        contentPadding: EdgeInsets.only(top: 10.h, left: 10.w),
+                        fillColor: themeColorGreen.withOpacity(0.1),
+                        focusedBorder: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.black, width: 0.5)),
+                        enabledBorder: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.black, width: 0.5)),
+                        border: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.black, width: 0)),
+                        hintText: "*******",
+                        suffixIcon: IconButton(
+                              onPressed: () {
+                                _restPasswordController.isVisibility.value =
+                                    !_restPasswordController.isVisibility.value;
+                              },
+                              icon: Icon(
+                                  _restPasswordController.isVisibility.value
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: Colors.black)),
+                        ),
+                      ),
+              ),
+                  
+                
+                 
             SizedBox(
               height: 10.h,
             ),
-            Text(
-              'Confirm Password',
-             style: myStyle(16, FontWeight.w400, textClr),
-            ),
+             RichText(
+                      text: TextSpan(
+                       text: "Confirm Password",
+                        style:GoogleFonts.roboto(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w400,
+                          color: const Color(0xFF25302B)
+                        ),
+                        children: [
+                          TextSpan(
+                            text:"*",
+                            style: GoogleFonts.roboto(
+                              color: const Color(0xFFDA1414)
+                            )
+                          )
+                        ]
+                      ),
+                    ),
+           
             SizedBox(
               height: 5.sp,
             ),
-            TextFormField(
-              controller: confirmpasswordController,
-              obscureText: !visiblepass2,
-              decoration: InputDecoration(
-                  filled: true,
-                  fillColor: themeColorGreen.withOpacity(0.1),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(3.r),
-                    borderSide: BorderSide(
-                      color: themeColorGreen.withOpacity(0.3),
-                      width: .2.w,
+
+              
+                  Obx(()=>
+                     TextFormField(
+                      controller:
+                          _restPasswordController.confirmpasswordController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Field is Empty';
+                        } else if (value.length < 8) {
+                          return '8 character requried is password';
+                        }
+                        return null;
+                      },
+                      obscureText: _restPasswordController.isVisiable.value,
+                      decoration: InputDecoration(
+                        filled: true,
+                        contentPadding: EdgeInsets.only(top: 10.h, left: 10.w),
+                        fillColor: themeColorGreen.withOpacity(0.1),
+                        focusedBorder: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.black, width: 0.5)),
+                        enabledBorder: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.black, width: 0.5)),
+                        border: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.black, width: 0)),
+                        hintText: "*******",
+                        suffixIcon: 
+                          IconButton(
+                              onPressed: () {
+                                _restPasswordController.isVisiable.value =
+                                    !_restPasswordController.isVisiable.value;
+                              },
+                              icon: Icon(
+                                  _restPasswordController.isVisiable.value
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: Colors.black)),
+                      
+                      ),
                     ),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(3.r),
-                    borderSide: BorderSide(
-                      color: themeColorGreen.withOpacity(0.3),
-                      width: .2.w,
-                    ),
-                  ),
-                  suffixIcon: visiblepass2
-                      ? IconButton(
-                          onPressed: () {
-                            setState(() {
-                              visiblepass2
-                                  ? visiblepass2 = false
-                                  : visiblepass2 = true;
-                            });
-                          },
-                          icon: const Icon(Icons.visibility,
-                              color: Colors.black))
-                      : IconButton(
-                          onPressed: () {
-                            setState(() {
-                              visiblepass2
-                                  ? visiblepass2 = false
-                                  : visiblepass2 = true;
-                            });
-                          },
-                          icon: const Icon(
-                            Icons.visibility_off,
-                            color: Colors.black,
-                          )),
-                  hintText: '********',
-                  labelStyle: const TextStyle(color: Colors.black)),
-            ),
+                 
             SizedBox(
               height: 28.h,
             ),
-           customButton(
-             onTap: (){},
-             title: 'Save',
-           )
+            customButton(
+              onTap: () {},
+              title: 'Save',
+            )
           ],
         ),
       ),

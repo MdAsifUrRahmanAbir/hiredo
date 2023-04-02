@@ -3,16 +3,16 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:myapp/Screens/HomeScreen/Model/lead_category_model.dart';
-import 'package:myapp/Screens/MyResponse/my_response.dart';
+
 import 'package:myapp/Screens/ResistrationScreen/Model/registration_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:myapp/Screens/UpdateLeadSetting/Model/add_services_model.dart';
 import 'package:myapp/Screens/UpdateLeadSetting/Model/location_model.dart';
 import 'package:myapp/Services/api_component.dart';
 import 'package:myapp/local/my_local.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Screens/SignInScreen/Model/sign_in_model.dart';
+
+
 
 class ApiServices {
   static var client = http.Client();
