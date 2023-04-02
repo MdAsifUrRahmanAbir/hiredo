@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:myapp/Screens/IntroScreen/introonepage.dart';
+
 import 'package:myapp/Screens/IntroScreen/onBoarding_screen.dart';
 import 'package:myapp/nav_bar_page/nav_bar_controller.dart';
 import 'package:myapp/utils/colors.dart';

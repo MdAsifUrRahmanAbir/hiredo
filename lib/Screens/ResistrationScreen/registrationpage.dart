@@ -4,21 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
-import 'package:myapp/Screens/ResistrationScreen/Controller/registration_controller.dart';
-import 'package:myapp/Screens/ResistrationScreen/component/custom_button.dart';
-import 'package:myapp/Screens/ResistrationScreen/component/custome_text_field.dart';
 
+import 'package:myapp/Screens/ResistrationScreen/Controller/registration_controller.dart';
+
+import 'package:myapp/Screens/ResistrationScreen/component/custome_text_field.dart';
 import 'package:myapp/Screens/SignInScreen/signinpage.dart';
 
 import '../../utils/colors.dart';
 
 class RegistrationPage extends StatelessWidget {
-  RegistrationPage({Key? key}) : super(key: key);
+  RegistrationPage({Key? key, required this.userType}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
 
   final _registrationController = Get.put(RegistrationController());
+
+  String userType;
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +72,8 @@ class RegistrationPage extends StatelessWidget {
             () => Form(
               key: _formKey,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                //mainAxisSize: MainAxisSize.min,
                 children: [
                   customeText(title: 'Full Name'),
                   SizedBox(
@@ -115,9 +116,59 @@ class RegistrationPage extends StatelessWidget {
                   SizedBox(
                     height: 5.h,
                   ),
-                  CustomeTextField(
+                  TextFormField(
                     controller: _registrationController.passwordController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                       
+                        return 'Field is Empty';
+                      } else if (value.length < 8) {
+                        return '8 character requried is password';
+                      }
+                      return null;
+                      
+                    },
                     obscureText: _registrationController.isVisibility.value,
+                    decoration: InputDecoration(
+                      filled: true,
+                      contentPadding: EdgeInsets.only(top: 10.h, left: 10.w),
+                      fillColor: themeColorGreen.withOpacity(0.1),
+                      focusedBorder: const OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 0.5)),
+                      enabledBorder: const OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 0.5)),
+                      border: const OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 0)),
+                      hintText: "*******",
+                      suffixIcon: Obx(
+                        () => IconButton(
+                            onPressed: () {
+                              _registrationController.isVisibility.value =
+                                  !_registrationController.isVisibility.value;
+                            },
+                            icon: Icon(
+                                _registrationController.isVisibility.value
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: Colors.black)),
+                      ),
+                    ),
+                  ),
+                
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  customeText(title: 'Confirm Password'),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  
+                  TextFormField(
+                    controller:
+                        _registrationController.confirmpasswordController,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Field is Empty';
@@ -126,54 +177,36 @@ class RegistrationPage extends StatelessWidget {
                       }
                       return null;
                     },
-                    hintText: '********',
-                    suffixIcon: Obx(
-                      () => IconButton(
-                          onPressed: () {
-                            _registrationController.isVisibility.value =
-                                !_registrationController.isVisibility.value;
-                          },
-                          icon: Icon(
-                              _registrationController.isVisibility.value
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: Colors.black)),
+                    obscureText: _registrationController.isVisible.value,
+                    decoration: InputDecoration(
+                      filled: true,
+                      contentPadding: EdgeInsets.only(top: 10.h, left: 10.w),
+                      fillColor: themeColorGreen.withOpacity(0.1),
+                      focusedBorder: const OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 0.5)),
+                      enabledBorder: const OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 0.5)),
+                      border: const OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 0)),
+                      hintText: "*******",
+                      suffixIcon: Obx(
+                        () => IconButton(
+                            onPressed: () {
+                              _registrationController.isVisible.value =
+                                  !_registrationController.isVisible.value;
+                            },
+                            icon: Icon(
+                                _registrationController.isVisible.value
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: Colors.black)),
+                      ),
                     ),
                   ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  customeText(title: 'Confirm Password'),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  CustomeTextField(
-                    controller:
-                        _registrationController.confirmpasswordController,
-                    obscureText: _registrationController.isVisibility.value,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Field is Empty';
-                      } else if (value !=
-                          _registrationController.passwordController.text) {
-                        return 'Password do not match';
-                      }
-                      return null;
-                    },
-                    hintText: '********',
-                    suffixIcon: Obx(
-                      () => IconButton(
-                          onPressed: () {
-                            _registrationController.isVisibility.value =
-                                !_registrationController.isVisibility.value;
-                          },
-                          icon: Icon(
-                              _registrationController.isVisibility.value
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: Colors.black)),
-                    ),
-                  ),
+                 
                   SizedBox(
                     height: 10.h,
                   ),
@@ -251,9 +284,10 @@ class RegistrationPage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      if (_formKey.currentState!.validate()) {
-                        _registrationController.signUp(context);
-                      }
+                      // if (_formKey.currentState!.validate()) {
+                      //   _registrationController.signUp(context);
+                      // }
+                      Get.to(SignInPage());
                     },
                     child: Container(
                       height: 50.h,

@@ -8,37 +8,26 @@ import 'package:http/http.dart' as http;
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/Screens/HomeScreen/home.dart';
+
 import 'package:myapp/Screens/IntroScreen/signupintropage.dart';
-import 'package:myapp/Screens/ResistrationScreen/Controller/registration_controller.dart';
-import 'package:myapp/Screens/ResistrationScreen/component/custom_button.dart';
+
 import 'package:myapp/Screens/ResistrationScreen/component/custome_text_field.dart';
 import 'package:myapp/Screens/SignInScreen/Contoller/signin_controller.dart';
-import 'package:myapp/Screens/SignInScreen/Model/error_model.dart';
-import 'package:myapp/Screens/SignInScreen/Model/sign_in_model.dart';
-import 'package:myapp/local/my_local.dart';
-import 'package:myapp/nav_bar_page/nav_bar_controller.dart';
+
+
 import 'package:myapp/utils/colors.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import '../ForgetPasswordScreen/forgotpasswordpage.dart';
+import '../ResistrationScreen/Controller/registration_controller.dart';
 
-class SignInPage extends StatefulWidget {
-  SignInPage({Key? key}) : super(key: key);
+class SignInPage extends StatelessWidget {
+ SignInPage({Key? key}) : super(key: key);
 
-  @override
-  State<SignInPage> createState() => _SignInPageState();
-}
-
-class _SignInPageState extends State<SignInPage> {
   final _signInController = Get.put(SignInController());
 
-  final _registrationController = Get.put(RegistrationController());
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  late SignInModel signInModel;
-  late SignInErrorModel _signInErrorModel;
 
-  final _formKey = GlobalKey<FormState>();
-  bool isLoading = false;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -111,14 +100,14 @@ class _SignInPageState extends State<SignInPage> {
                                   style: GoogleFonts.roboto(
                                       fontSize: 16.sp,
                                       fontWeight: FontWeight.w400,
-                                      color: Color(0xff555957)),
+                                      color: const Color(0xff555957)),
                                 ),
                                 Text(
                                   '*',
                                   style: GoogleFonts.roboto(
                                       fontSize: 16.sp,
                                       fontWeight: FontWeight.w400,
-                                      color: Color(0xff555957)),
+                                      color: const Color(0xff555957)),
                                 ),
                               ],
                             ),
@@ -126,7 +115,7 @@ class _SignInPageState extends State<SignInPage> {
                               height: 6.h,
                             ),
                             CustomeTextField(
-                              controller: emailController,
+                              controller: _signInController.emailController,
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return 'Feild is Empty';
@@ -156,7 +145,7 @@ class _SignInPageState extends State<SignInPage> {
                                   style: GoogleFonts.roboto(
                                       fontSize: 16.sp,
                                       fontWeight: FontWeight.w400,
-                                      color: Color(0xff555957)),
+                                      color: const Color(0xff555957)),
                                 ),
                                 Text(
                                   '*',
@@ -170,35 +159,50 @@ class _SignInPageState extends State<SignInPage> {
                             SizedBox(
                               height: 6.h,
                             ),
-                            CustomeTextField(
-                              controller: passwordController,
-                              obscureText:
-                                  _registrationController.isVisibility.value,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "Please Enter Your Password";
-                                } else if (value.length < 8) {
-                                  return 'Password required must be 8 character';
-                                }
-                                return null;
-                              },
-                              hintText: '********',
-                              suffixIcon: Obx(
-                                () => IconButton(
-                                    onPressed: () {
-                                      _registrationController
-                                              .isVisibility.value =
-                                          !_registrationController
-                                              .isVisibility.value;
-                                    },
-                                    icon: Icon(
-                                        _registrationController
-                                                .isVisibility.value
-                                            ? Icons.visibility_off
-                                            : Icons.visibility,
-                                        color: Colors.black)),
-                              ),
-                            ),
+                          
+                          
+                                 TextFormField(
+                    controller: _signInController.passwordController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                       
+                        return 'Field is Empty';
+                      } else if (value.length < 8) {
+                        return '8 character requried is password';
+                      }
+                      return null;
+                      
+                    },
+                    obscureText: _signInController.isVisibility.value,
+                    decoration: InputDecoration(
+                      filled: true,
+                      contentPadding: EdgeInsets.only(top: 10.h, left: 10.w),
+                      fillColor: themeColorGreen.withOpacity(0.1),
+                      focusedBorder: const OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 0.5)),
+                      enabledBorder: const OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 0.5)),
+                      border: const OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 0)),
+                      hintText: "*******",
+                      suffixIcon: Obx(
+                        () => IconButton(
+                            onPressed: () {
+                              _signInController.isVisibility.value =
+                                  !_signInController.isVisibility.value;
+                            },
+                            icon: Icon(
+                                _signInController.isVisibility.value
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: Colors.black)),
+                      ),
+                    ),
+                  ),
+                
                           ],
                         ),
                       ),
@@ -242,15 +246,15 @@ class _SignInPageState extends State<SignInPage> {
                       SizedBox(
                         height: 5.h,
                       ),
-                      isLoading
-                          ? const Center(
-                              child: CircularProgressIndicator(),
-                            )
-                          : InkWell(
+                      InkWell(
                               onTap: () {
-                                print("login");
+                            
 
-                                login();
+                               // login();
+
+                               Get.to(Home());
+
+
                               },
                               child: Container(
                                 height: 50.h,
@@ -319,64 +323,5 @@ class _SignInPageState extends State<SignInPage> {
         ),
       ),
     );
-  }
-
-  Future<SignInModel?> login() async {
-    setState(() {
-      isLoading = true;
-    });
-
-    Map<String, dynamic> body = {
-      "email": emailController.text,
-      "password": passwordController.text
-    };
-
-    var response = await http.post(
-        Uri.parse('http://ringknock.pythonanywhere.com//login/'),
-        body: body,
-        headers: {'Accept': "application/json"});
-
-    if (response.statusCode == 200) {
-      signInModel = signInModelFromMap(response.body);
-      setState(() {
-        Fluttertoast.showToast(
-            msg: "${signInModel.message}",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.sp);
-      });
-
-      setState(() {
-        isLoading = false;
-      });
-      print("Respnse ${response.body}");
-
-      var jsonResponse = jsonDecode(response.body);
-
-      // SharedPreferences sharedPreferences =
-      //     await SharedPreferences.getInstance();
-      // sharedPreferences.setString('token', jsonResponse['token']);
-      print(jsonResponse);
-
-      MyPreference.setToken("${signInModel.token}");
-      print(signInModel.token);
-
-      Navigator.push(
-          context, MaterialPageRoute(builder: (_) => BottomNavController()));
-      return jsonResponse;
-    } else if (response.statusCode == 404) {
-      _signInErrorModel = signInErrorModelFromMap(response.body);
-      setState(() {
-        Fluttertoast.showToast(
-            msg: "${_signInErrorModel.errors}",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.sp);
-      });
-    }
   }
 }

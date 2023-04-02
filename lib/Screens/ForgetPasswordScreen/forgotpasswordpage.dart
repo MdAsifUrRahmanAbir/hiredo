@@ -2,31 +2,24 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:myapp/Screens/EmailVerifiyScreen/enterverificationpage.dart';
+import 'package:myapp/Screens/ForgetPasswordScreen/Controller/forget_controller.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 import 'package:myapp/widgets/custom_widgets.dart';
 
 import '../../utils/colors.dart';
 
-class ForegPasswordPage extends StatefulWidget {
-  static const String routename = '/forgetpasswordpage';
-  const ForegPasswordPage({Key? key}) : super(key: key);
+class ForegPasswordPage extends StatelessWidget {
+  ForegPasswordPage({Key? key}) : super(key: key);
 
-  @override
-  State<ForegPasswordPage> createState() => _ForegPasswordPageState();
-}
+  final _forgetController = Get.put(ForgetController());
 
-String? accounttype = "phone";
-final phoneController = TextEditingController();
-
-class _ForegPasswordPageState extends State<ForegPasswordPage> {
   @override
   Widget build(BuildContext context) {
-    double scheight = MediaQuery.of(context).size.height;
-    double scwidth = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         backgroundColor: scaffoldClr,
@@ -36,11 +29,11 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
           leading: Padding(
             padding: EdgeInsets.all(8),
             child: Container(
-              height: 43.h,
+                height: 43.h,
                 width: 43.w,
                 decoration: BoxDecoration(
-                  color:scaffoldClr,
-                shape: BoxShape.circle,
+                  color: scaffoldClr,
+                  shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.1),
@@ -63,7 +56,7 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
           ),
           title: Text(
             'Forgot Password?',
-           style: myStyle(20, FontWeight.w500, textClr),
+            style: myStyle(20, FontWeight.w500, textClr),
           ),
         ),
         body: Center(
@@ -75,40 +68,38 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
                 SizedBox(
                   height: 10.h,
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: RadioListTile(
-                        activeColor: backIconClr,
-                        title: Text('Phone'),
-                        value: "phone",
-                        groupValue: accounttype,
-                        onChanged: (value) {
-                          setState(() {
-                            accounttype = value.toString();
-                          });
-                        },
+                Obx(
+                  () => Row(
+                    children: [
+                      Expanded(
+                        child: RadioListTile(
+                          activeColor: backIconClr,
+                          title: Text('Phone'),
+                          value: 'phone',
+                          groupValue: _forgetController.userType.value,
+                          onChanged: (value) {
+                            _forgetController.userType.value = "$value";
+                          },
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: RadioListTile(
-                        activeColor: backIconClr,
-                        title: Text('Email'),
-                        value: "email",
-                        groupValue: accounttype,
-                        onChanged: (value) {
-                          setState(() {
-                            accounttype = value.toString();
-                          });
-                        },
+                      Expanded(
+                        child: RadioListTile(
+                          activeColor: backIconClr,
+                          title: Text('Email'),
+                          value: 'email',
+                          groupValue: _forgetController.userType.value,
+                          onChanged: (value) {
+                            _forgetController.userType.value = "$value";
+                          },
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+                ),      
                 SizedBox(
                   height: 50.h,
                 ),
-                accounttype == 'phone'
+                Obx(() => _forgetController.userType.value == 'phone'
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -122,7 +113,10 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
                           SizedBox(
                             height: 5.h,
                           ),
-                          CustomTextFieldForm(controller: phoneController, hintText: 'Enter your phone',)
+                          CustomTextFieldForm(
+                            controller: phoneController,
+                            hintText: 'Enter your phone',
+                          )
                         ],
                       )
                     : Column(
@@ -138,18 +132,19 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
                           SizedBox(
                             height: 5.h,
                           ),
-                          CustomTextFieldForm(controller: phoneController, hintText: 'Enter your email',)
+                          CustomTextFieldForm(
+                            controller: phoneController,
+                            hintText: 'Enter your email',
+                          )
                         ],
-                      ),
+                      )),
                 SizedBox(
                   height: 30.h,
                 ),
                 customButton(
-                  onTap: (){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => VerificationPage()));
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => VerificationPage()));
                   },
                   title: 'Next',
                 )
@@ -161,3 +156,5 @@ class _ForegPasswordPageState extends State<ForegPasswordPage> {
     );
   }
 }
+
+final phoneController = TextEditingController();

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/Screens/ResistrationScreen/registrationpage.dart';
@@ -190,8 +191,9 @@ class _SignAccountChoosePageState extends State<SignAccountChoosePage> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => RegistrationPage()));
+                Get.to(RegistrationPage(
+                  userType: accounttype!,
+                ));
               },
               child: Container(
                 height: 50.h,
