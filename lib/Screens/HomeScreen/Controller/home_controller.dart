@@ -7,29 +7,28 @@ import 'package:myapp/Services/api_services.dart';
 class HomeController extends GetxController {
   var isLoading = false.obs;
 
-  late List<LeadCategoriesModel> categoryList=[];
-  late List<LeadCategoriesModel> subCategoryList=[];
+  late List<LeadCategoriesModel> categoryList = [];
+  late List<LeadCategoriesModel> subCategoryList = [];
 
-    final TextEditingController nameController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
-  List<String> carouselImages = [
-    "https://www.colorhexa.com/c8ced9.png",
-    "https://www.colorhexa.com/c8ced9.png",
-    "https://www.colorhexa.com/c8ced9.png"
-  ];
-  var dotPosition = 0;
-  bool changed = false;
-
-  
+  List<String> carouselImages = [];
+  var dotPosition = 0.obs;
 
   @override
   void onInit() {
     super.onInit();
-    getLeadOurCategories();
+    allDataGet();
+  }
+
+  allDataGet() async {
+    isLoading(true);
+    await getLeadOurCategories();
+    await getSlider();
+    isLoading(false);
   }
 
   getLeadOurCategories() async {
-    isLoading(true);
     try {
       var result = await ApiServices.fetchLeadOurCategories();
       if (result.runtimeType == int) {
@@ -38,12 +37,10 @@ class HomeController extends GetxController {
         }
       } else {
         categoryList = result;
-        categoryList.forEach((element) { 
-            element.children.forEach((ele) {
-              subCategoryList.add(ele);
-              
-            });
-
+        categoryList.forEach((element) {
+          element.children.forEach((ele) {
+            subCategoryList.add(ele);
+          });
         });
         print(subCategoryList.length);
 
@@ -55,8 +52,28 @@ class HomeController extends GetxController {
       if (kDebugMode) {
         print('Fetch Error: ${e.toString()}');
       }
-    } finally {
-      isLoading(false);
+    }
+  }
+
+  getSlider() async {
+    try {
+      var result = await ApiServices.fetchSlider();
+      if (result.runtimeType == int) {
+        if (kDebugMode) {
+          print("Opps fetch slider error ");
+        }
+      } else {
+        List demoList = result;
+        demoList.forEach((element) {
+          carouselImages.add(element["image"]);
+        });
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("Opps fetch slider error ");
+      }
+
+      // TODO
     }
   }
 }
