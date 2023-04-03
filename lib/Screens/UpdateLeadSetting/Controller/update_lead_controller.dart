@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapp/Screens/SignInScreen/Model/sign_in_model.dart';
+
 import 'package:myapp/Screens/UpdateLeadSetting/Model/add_services_model.dart';
 import 'package:myapp/Screens/UpdateLeadSetting/Model/location_model.dart';
 import 'package:myapp/Services/api_services.dart';
@@ -17,7 +17,7 @@ class UpdateController extends GetxController {
   TextEditingController distanceController = TextEditingController();
 
   var accessToken = MyPreference.getToken();
-  late SignInModel signInModel;
+
 
   late AddServicesModel addServiceModel = AddServicesModel();
   late LocationModel locationModel = LocationModel();

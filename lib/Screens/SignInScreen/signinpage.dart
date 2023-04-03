@@ -89,7 +89,7 @@ class SignInPage extends StatelessWidget {
                         height: 30.h,
                       ),
                       SizedBox(
-                        height: 82.h,
+                        height: 85.h,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -134,7 +134,7 @@ class SignInPage extends StatelessWidget {
                         height: 8.h,
                       ),
                       SizedBox(
-                        height: 82.h,
+                        height: 85.h,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

@@ -114,7 +114,7 @@ class ForegPasswordPage extends StatelessWidget {
                             height: 5.h,
                           ),
                           CustomTextFieldForm(
-                            controller: phoneController,
+                            controller:_forgetController. phoneController,
                             hintText: 'Enter your phone',
                           )
                         ],
@@ -133,7 +133,7 @@ class ForegPasswordPage extends StatelessWidget {
                             height: 5.h,
                           ),
                           CustomTextFieldForm(
-                            controller: phoneController,
+                            controller:_forgetController. phoneController,
                             hintText: 'Enter your email',
                           )
                         ],
@@ -157,4 +157,4 @@ class ForegPasswordPage extends StatelessWidget {
   }
 }
 
-final phoneController = TextEditingController();
+

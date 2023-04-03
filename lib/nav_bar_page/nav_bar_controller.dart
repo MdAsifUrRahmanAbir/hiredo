@@ -24,51 +24,51 @@ final pages = [
   List<PersistentBottomNavBarItem> _navBarItem() {
     return [
       PersistentBottomNavBarItem(
-        icon: Icon(
+        icon: const Icon(
           Icons.home,
           color: Color(0xFF187949),
         ),
-        inactiveIcon: Icon(
+        inactiveIcon: const Icon(
           Icons.home,
           color: Color(0xFFADB5BD),
         ),
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(
+        icon: const Icon(
           Icons.rocket_launch_outlined,
           color: Color(0xFF187949),
         ),
-        inactiveIcon: Icon(
+        inactiveIcon: const Icon(
           Icons.rocket_launch_outlined,
           color: Color(0xFFADB5BD),
         ),
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(
+        icon: const Icon(
           Icons.fact_check_rounded,
           color: Color(0xFF187949),
         ),
-        inactiveIcon: Icon(
+        inactiveIcon: const Icon(
           Icons.fact_check_rounded,
           color: Color(0xFFADB5BD),
         ),
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(
+        icon: const Icon(
           Icons.search,
           color: Color(0xFF187949),
         ),
-        inactiveIcon: Icon(
+        inactiveIcon: const Icon(
           Icons.search,
           color: Color(0xFFADB5BD),
         ),
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(
+        icon: const Icon(
           Icons.person,
           color: Color(0xFF187949),
         ),
-        inactiveIcon: Icon(
+        inactiveIcon: const Icon(
           Icons.person,
           color: Color(0xFFADB5BD),
         ),
