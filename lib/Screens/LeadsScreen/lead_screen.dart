@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/Screens/HomeScreen/home.dart';
 import 'package:myapp/Screens/LeadsDetailsScreen/leads_details_screen.dart';
 
-import '../../nav_bar_page/nav_bar_controller.dart';
+import '../../nav_bar_page/main_controller.dart';
 import '../../utils/colors.dart';
 
 class LeadsScreen extends StatefulWidget {

@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/Screens/CategoriesScreen/subcategory.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
-import 'package:myapp/nav_bar_page/nav_bar_controller.dart';
+import 'package:myapp/nav_bar_page/main_controller.dart';
 import 'package:myapp/utils/colors.dart';
 
 import '../HomeScreen/Model/lead_category_model.dart';
@@ -266,7 +266,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   padding: EdgeInsets.symmetric(horizontal: 14.sp,vertical: 14.sp),
                   child: Row(
                     children: [
-                      data.image.isEmpty? CircleAvatar(
+                      data.image==null? CircleAvatar(
                       maxRadius: 35.r,
                       backgroundColor: Color(0xffE8F2ED),
                       child: Icon(
@@ -276,7 +276,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     ):CircleAvatar(
                       maxRadius: 35.r,
                       backgroundColor: Color(0xffE8F2ED),
-                      backgroundImage: NetworkImage(data.image),
+                      backgroundImage: NetworkImage(data.image!),
                     ),
                     SizedBox(width: 10.w,),
                     Expanded(child:Column(

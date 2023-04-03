@@ -4,9 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 import 'package:myapp/Screens/IntroScreen/onBoarding_screen.dart';
-import 'package:myapp/nav_bar_page/nav_bar_controller.dart';
+
 import 'package:myapp/utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../nav_bar_page/main_screen.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -22,7 +24,7 @@ class _SplashPageState extends State<SplashPage> {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       if (preferences.getString('token') != null) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => BottomNavController()));
+            context, MaterialPageRoute(builder: (_) => MainScreen()));
       } else {
         Navigator.push(
             context, MaterialPageRoute(builder: (_) => OnboardinScreen()));

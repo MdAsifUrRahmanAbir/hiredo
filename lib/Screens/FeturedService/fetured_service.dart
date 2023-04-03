@@ -61,7 +61,7 @@ body:  GridView.builder(
             blurRadius: 1,
             spreadRadius: 0,
             color: Colors.black.withOpacity(0.1),
-            offset: Offset(0, 1)
+            offset: const Offset(0, 1)
           )
         ]
       ),
@@ -83,7 +83,7 @@ body:  GridView.builder(
                   borderRadius: BorderRadius.circular(
                       10.r),
                   child: Image.network(
-                    data.image,
+                    data.image!,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -91,7 +91,7 @@ body:  GridView.builder(
               Positioned(
                   right: 10.w,
                   top: 10.h,
-                  child: Icon(
+                  child:const Icon(
                     Icons.favorite_border,
                     color: Color(0xFF187949),
                   ))
@@ -103,7 +103,7 @@ body:  GridView.builder(
           Text(data.name,
               style: GoogleFonts.roboto(
                 fontSize: 14.sp,
-                color: Color(0xFF272727),
+                color:const Color(0xFF272727),
                 fontWeight: FontWeight.w400,
               )),
           SizedBox(
