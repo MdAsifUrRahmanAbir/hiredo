@@ -174,6 +174,8 @@ class RegistrationPage extends StatelessWidget {
                         return 'Field is Empty';
                       } else if (value.length < 8) {
                         return '8 character requried is password';
+                      }else if(value!= _registrationController.passwordController.text){
+                        return 'password do not match';
                       }
                       return null;
                     },
@@ -241,6 +243,7 @@ class RegistrationPage extends StatelessWidget {
                       if (value!.isEmpty) {
                         return 'Feild is Empty';
                       }
+                      return null;
                     },
                     hintText: '+880100000000',
                   ),
@@ -284,10 +287,10 @@ class RegistrationPage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      // if (_formKey.currentState!.validate()) {
-                      //   _registrationController.signUp(context);
-                      // }
-                      Get.to(SignInPage());
+                      if (_formKey.currentState!.validate()) {
+                        _registrationController.signUp(context, userType);
+                      }
+                     // Get.to(SignInPage());
                     },
                     child: Container(
                       height: 50.h,

@@ -47,7 +47,7 @@ var isVisible = false.obs;
     passwordController.dispose();
     confirmpasswordController.dispose();
     dateController.dispose();
-    phoneController.dispose();
+
     corpunameController.dispose();
     corpunameController.dispose();
     super.dispose();
@@ -70,25 +70,32 @@ var isVisible = false.obs;
     isLoading(true);
 
     try {
-      RegistrationModel registrationModel = RegistrationModel(
-          userName: nameController.text,
-          email: emailController.text,
-          password: passwordController.text,
-          confirmPassword: confirmpasswordController.text,
-          dateOfBirth: dateController.text,
-          phoneNumber: phoneController.text,
-          corporateName: corpunameController.text,
-          corporateNumber: corpunameController.text);
+      SignUpModel signUpModel = SignUpModel(
+        fullName: nameController.text, 
+        email: emailController.text,
+       dateOfBirth: dateController.text, 
+       phoneNumber: numberController.text, 
+       corporationName: corpunameController.text, 
+       corporationNumber: corpunumController.text,
+        isUser: userType == 'User' ? true: false,
+         isProfessional: userType == 'Professional' ? true: false,
+          password: passwordController.text);
+   
 
       var result =
-          await ApiServices.handelRegistration(model: registrationModel);
+           await ApiServices.handelRegistration(model: signUpModel);
       if (result) {
         isLoading(false);
         debugPrint("$result");
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => SignInPage()));
+
+        print('User create successful');
+
+        Get.to(SignInPage());
+
+    
+
       } else {
-        debugPrint("Ooops! Sign in error");
+        debugPrint(" Sign in error");
         isLoading(false);
       }
     } on Exception catch (e) {

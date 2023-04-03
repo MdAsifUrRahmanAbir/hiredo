@@ -15,31 +15,25 @@ class ApiServices {
   static var client = http.Client();
 
   // handel Registration
-  static Future<bool> handelRegistration(
-      {required RegistrationModel model}) async {
-    var request = http.MultipartRequest('POST', Uri.parse(signupApi));
+  static Future<bool> handelRegistration({required SignUpModel model}) async {
+    var headers = {
+      'Content-Type': 'application/json',
+    };
+    var request = http.Request('POST', Uri.parse(signupApi));
 
-    request.fields.addAll({
-      "full_name": model.userName,
-      "email": model.email,
-      "password": model.password,
-      "password2": model.confirmPassword,
-      "dateofbirth": model.dateOfBirth,
-      "phoneNumber": model.phoneNumber,
-      "corporateName": model.corporateName,
-      "corporateNumber": model.corporateNumber
-    });
-
+    request.body = jsonEncode(model.toJson());
+    request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
 
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
       if (kDebugMode) {
         print(await response.stream.bytesToString());
       }
       return true;
     } else {
       Map d = json.decode(await response.stream.bytesToString());
-      Fluttertoast.showToast(msg: d['message']);
+      print(d);
+  
       if (kDebugMode) {
         print(d['message']);
       }
@@ -47,13 +41,15 @@ class ApiServices {
     }
   }
 
+// 
+  
   // fetch lead our categories
-
   static dynamic fetchLeadOurCategories() async {
     try {
       var response = await client.get(Uri.parse(leadcategory));
 
       if (response.statusCode == 200) {
+
         print("data : ${jsonDecode(response.body)}");
 
         return leadCategoriesModelFromJson(response.body);
@@ -105,7 +101,6 @@ class ApiServices {
   }
 
 // fetch service data
-
   static dynamic fetchServices() async {
     var accessToken = await MyPreference.getToken();
     // SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -137,7 +132,6 @@ class ApiServices {
   }
 
 // add location
-
   static Future<bool> AddLocationPost(
       {required String city, required String distance}) async {
     var accessToken = await MyPreference.getToken();
@@ -172,8 +166,8 @@ class ApiServices {
     }
   }
 
-// fetch location data
 
+// fetch location data
   static dynamic fetchLocationData() async {
     var accessToken = await MyPreference.getToken();
 
