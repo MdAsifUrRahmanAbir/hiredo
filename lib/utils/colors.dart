@@ -9,3 +9,4 @@ const Color scaffoldClr= Color(0xffFFFFFF);
 const Color textClr= Color(0xff272727);
 const Color offWhite= Color(0xff848484);
 const Color backIconClr=Color(0xff187949);
+const Color greyColor=Color(0xFFADB5BD);

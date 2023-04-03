@@ -11,9 +11,6 @@ import 'package:myapp/Screens/UpdateLeadSetting/Model/location_model.dart';
 import 'package:myapp/Services/api_component.dart';
 import 'package:myapp/local/my_local.dart';
 
-
-
-
 class ApiServices {
   static var client = http.Client();
 
@@ -57,6 +54,7 @@ class ApiServices {
       var response = await client.get(Uri.parse(leadcategory));
 
       if (response.statusCode == 200) {
+        print("data : ${jsonDecode(response.body)}");
 
         return leadCategoriesModelFromJson(response.body);
       } else {
@@ -202,6 +200,23 @@ class ApiServices {
         return print(" Location fetch Error. Reason ${e.toString()}");
       }
       return 0;
+    }
+  }
+
+  static Future<dynamic> fetchSlider() async {
+    try {
+      var response = await client.get(Uri.parse(sliderApi));
+
+      if (response.statusCode == 200) {
+          return jsonDecode(response.body);
+      } else {
+        if (kDebugMode) {
+          print("Fetch Slider error : ${response.statusCode}");
+        return 1;
+        }
+      }
+    } on Exception catch (e) {
+      return 1;  
     }
   }
 }

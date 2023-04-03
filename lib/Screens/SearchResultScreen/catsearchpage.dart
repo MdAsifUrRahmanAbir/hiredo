@@ -21,9 +21,9 @@ class _SearchResultState extends State<SearchResult> {
   final TextEditingController locationController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
           padding: EdgeInsets.all(20.0.w),
           child: Column(
             children: [

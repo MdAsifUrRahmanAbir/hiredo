@@ -302,7 +302,7 @@ class _SubCategoryPageState extends State<SubCategoryPage> {
                               horizontal: 14.sp, vertical: 14.sp),
                           child: Row(
                             children: [
-                              data.image.isEmpty
+                              data.image==null
                                   ? CircleAvatar(
                                       maxRadius: 35.r,
                                       backgroundColor: Color(0xffE8F2ED),
@@ -314,7 +314,7 @@ class _SubCategoryPageState extends State<SubCategoryPage> {
                                   : CircleAvatar(
                                       maxRadius: 35.r,
                                       backgroundColor: Color(0xffE8F2ED),
-                                      backgroundImage: NetworkImage(data.image),
+                                      backgroundImage: NetworkImage(data.image!),
                                     ),
                               SizedBox(
                                 width: 10.w,
