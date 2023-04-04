@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Screens/HomeScreen/Model/lead_category_model.dart';
+
 import 'package:myapp/Screens/QuestionScreen/question_screen.dart';
 
 import 'Controller/tracking_controller.dart';
@@ -31,7 +31,7 @@ class TrackingScreen extends StatelessWidget {
           style: GoogleFonts.roboto(
               fontSize: 20.sp,
               fontWeight: FontWeight.w500,
-              color: Color(0xff272727)),
+              color: const Color(0xff272727)),
         ),
         actions: [
           InkWell(
@@ -92,7 +92,7 @@ class TrackingScreen extends StatelessWidget {
                                                 .currentIndex.value ==
                                             index
                                         ? const Color(0xFFFFFFFF)
-                                        : Color(0xFF424242),
+                                        : const Color(0xFF424242),
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w400),
                               ),
