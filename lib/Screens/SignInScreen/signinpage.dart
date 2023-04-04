@@ -13,6 +13,7 @@ import 'package:myapp/Screens/IntroScreen/signupintropage.dart';
 
 import 'package:myapp/Screens/ResistrationScreen/component/custome_text_field.dart';
 import 'package:myapp/Screens/SignInScreen/Contoller/signin_controller.dart';
+import 'package:myapp/nav_bar_page/main_screen.dart';
 
 
 import 'package:myapp/utils/colors.dart';
@@ -252,7 +253,7 @@ class SignInPage extends StatelessWidget {
 
                                // login();
 
-                               Get.to(Home());
+                               Get.to(MainScreen());
 
 
                               },
