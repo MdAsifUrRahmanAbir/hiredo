@@ -6,6 +6,7 @@ import 'package:myapp/Screens/HomeScreen/Model/lead_category_model.dart';
 
 import 'package:myapp/Screens/ResistrationScreen/Model/registration_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:myapp/Screens/SignInScreen/Model/login_model.dart';
 import 'package:myapp/Screens/UpdateLeadSetting/Model/add_services_model.dart';
 import 'package:myapp/Screens/UpdateLeadSetting/Model/location_model.dart';
 import 'package:myapp/Services/api_component.dart';
@@ -33,7 +34,7 @@ class ApiServices {
     } else {
       Map d = json.decode(await response.stream.bytesToString());
       print(d);
-  
+
       if (kDebugMode) {
         print(d['message']);
       }
@@ -41,15 +42,45 @@ class ApiServices {
     }
   }
 
-// 
+//
+
+// handle login
+
+  static Future<dynamic> handelLogin(
+      {required String email, required String password}) async {
+
+    try {
+  var request = http.Request('POST', Uri.parse(signInApi));
   
+  request.bodyFields = {'email': email, 'password': password};
+  
+  http.StreamedResponse response = await request.send();
+  
+  if (response.statusCode == 200) {
+    var data = await response.stream.bytesToString();
+    return loginModelFromJson(data);
+  } else {
+    Map d = json.decode(await response.stream.bytesToString());
+    debugPrint("$d");
+    if (kDebugMode) {
+      debugPrint(response.reasonPhrase);
+    }
+    return 0;
+  }
+} on Exception catch (e) {
+  if(kDebugMode){
+    debugPrint('Login Error ${e.toString()}');
+  }
+
+}
+  }
+
   // fetch lead our categories
   static dynamic fetchLeadOurCategories() async {
     try {
       var response = await client.get(Uri.parse(leadcategory));
 
       if (response.statusCode == 200) {
-
         print("data : ${jsonDecode(response.body)}");
 
         return leadCategoriesModelFromJson(response.body);
@@ -166,7 +197,6 @@ class ApiServices {
     }
   }
 
-
 // fetch location data
   static dynamic fetchLocationData() async {
     var accessToken = await MyPreference.getToken();
@@ -202,15 +232,15 @@ class ApiServices {
       var response = await client.get(Uri.parse(sliderApi));
 
       if (response.statusCode == 200) {
-          return jsonDecode(response.body);
+        return jsonDecode(response.body);
       } else {
         if (kDebugMode) {
           print("Fetch Slider error : ${response.statusCode}");
-        return 1;
+          return 1;
         }
       }
     } on Exception catch (e) {
-      return 1;  
+      return 1;
     }
   }
 }
