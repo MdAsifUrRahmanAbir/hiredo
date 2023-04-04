@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:myapp/Screens/QuestionScreen/question_screen.dart';
+
 import 'Controller/tracking_controller.dart';
 
 class TrackingScreen extends StatelessWidget {
@@ -22,14 +24,14 @@ class TrackingScreen extends StatelessWidget {
             icon: Icon(
               Icons.arrow_back,
               size: 25.sp,
-              color: Color(0xff187949),
+              color: const Color(0xff187949),
             )),
         title: Text(
           "Tracking Post/Order",
           style: GoogleFonts.roboto(
               fontSize: 20.sp,
               fontWeight: FontWeight.w500,
-              color: Color(0xff272727)),
+              color: const Color(0xff272727)),
         ),
         actions: [
           InkWell(
@@ -90,7 +92,7 @@ class TrackingScreen extends StatelessWidget {
                                                 .currentIndex.value ==
                                             index
                                         ? const Color(0xFFFFFFFF)
-                                        : Color(0xFF424242),
+                                        : const Color(0xFF424242),
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w400),
                               ),
@@ -109,19 +111,24 @@ class TrackingScreen extends StatelessWidget {
                       .screen[_trackingController.currentIndex.value],
                 ),
               ),
-              Container(
-                height: 50.h,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: const Color(0xFF187949),
-                    borderRadius: BorderRadius.circular(5.r)),
-                child: Center(
-                  child: Text(
-                    'Add a new job post',
-                    style: GoogleFonts.roboto(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
-                        color: const Color(0xFFF2F2F2)),
+              InkWell(
+                onTap: (){
+                  Get.to(QuestionScreen());
+                },
+                child: Container(
+                  height: 50.h,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: const Color(0xFF187949),
+                      borderRadius: BorderRadius.circular(5.r)),
+                  child: Center(
+                    child: Text(
+                      'Add a new job post',
+                      style: GoogleFonts.roboto(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xFFF2F2F2)),
+                    ),
                   ),
                 ),
               ),

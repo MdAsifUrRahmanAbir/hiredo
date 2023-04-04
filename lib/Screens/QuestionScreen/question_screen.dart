@@ -12,20 +12,25 @@ class QuestionScreen extends StatelessWidget {
   QuestionScreen({super.key,required  this.data});
    List<CatName>? data;
 
+
   final _questionController = Get.put(QuestionController());
 
   @override
   Widget build(BuildContext context) {
+
     _questionController.selectedQuestionIndex.value=0;
     _questionController.selectedItemIndex.value=0;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
+
           onPressed: () {
             Navigator.pop(context);
           },
+
           icon: const Icon(
             Icons.arrow_back,
             color: Color(0xFF187949),
@@ -40,6 +45,7 @@ class QuestionScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
+
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 18.w),
         physics:const BouncingScrollPhysics(),
@@ -136,6 +142,7 @@ class QuestionScreen extends StatelessWidget {
               }),
             ],
           ),
+
         ),
       ),
     );

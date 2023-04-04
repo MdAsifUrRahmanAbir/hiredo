@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:myapp/Screens/ResistrationScreen/component/custome_text_field.dart';
 import 'package:myapp/Screens/SignInScreen/Contoller/signin_controller.dart';
+import 'package:myapp/nav_bar_page/main_screen.dart';
 
 import 'package:myapp/utils/colors.dart';
 
@@ -198,9 +199,13 @@ class SignInPage extends StatelessWidget {
                     height: 5.h,
                   ),
 
+
                   // <------------------- remember me ---------------->
                   // InkWell(
                   //   onTap: () {
+
+                 //              Get.to(MainScreen());
+
 
                   //     if(_formKey.currentState!.validate()){
                   //         _signInController.userSignIn(context);
