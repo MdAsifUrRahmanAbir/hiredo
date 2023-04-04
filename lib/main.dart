@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
                   const ResponsiveBreakpoint.resize(1000, name: DESKTOP),
                 ],
                 background: Container(color: const Color(0xFFF5F5F5))),
+              
             initialRoute: "/",
             home: SplashPage(),
           );

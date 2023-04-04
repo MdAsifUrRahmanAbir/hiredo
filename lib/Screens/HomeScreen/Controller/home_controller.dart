@@ -13,12 +13,13 @@ class HomeController extends GetxController {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
   List<String> carouselImages = [];
-  var dotPosition = 0.obs;
+  var dotPosition =0.obs;
 
   @override
   void onInit() {
     super.onInit();
     allDataGet();
+   
   }
 
   allDataGet() async {
@@ -30,6 +31,7 @@ class HomeController extends GetxController {
 
   getLeadOurCategories() async {
     try {
+    
       var result = await ApiServices.fetchLeadOurCategories();
       if (result.runtimeType == int) {
         if (kDebugMode) {
@@ -52,7 +54,7 @@ class HomeController extends GetxController {
       if (kDebugMode) {
         print('Fetch Error: ${e.toString()}');
       }
-    }
+    } 
   }
 
   getSlider() async {

@@ -30,18 +30,24 @@ class CustomeTextField extends StatelessWidget {
       controller: controller,
       validator: validator,
       obscureText: obscureText,
+      
       decoration: InputDecoration(
         filled: true,
-        contentPadding: EdgeInsets.only(top: 10.h, left: 10.w),
-        fillColor: themeColorGreen.withOpacity(0.1),
-        focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black, width: 0.5)),
-        enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black, width: 0.5)),
-        border: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black, width: 0)),
+        isDense: true,
+        contentPadding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w),
+        fillColor:const Color(0xFFD9F1E5).withOpacity(0.62),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color:const Color(0xFF187949).withOpacity(0.2), width: 0.5)),
+        enabledBorder:  OutlineInputBorder(
+            borderSide: BorderSide(color:const Color(0xFF187949).withOpacity(0.2), width: 0.5)),
+       border:  OutlineInputBorder(
+           borderSide: BorderSide(color:const Color(0xFF1879492B).withOpacity(0.2), width: 0)),
         hintText: hintText,
         suffixIcon: suffixIcon,
+          suffixIconConstraints: BoxConstraints(
+                      minHeight:14.h,
+                      minWidth:45.w
+                    ),
       ),
     );
   }

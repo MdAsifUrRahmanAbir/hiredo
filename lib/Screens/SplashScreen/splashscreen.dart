@@ -22,7 +22,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     Future.delayed(const Duration(seconds: 3), () async {
       SharedPreferences preferences = await SharedPreferences.getInstance();
-      if (preferences.getString('token') != null) {
+      if (preferences.getString('token') != null&& preferences.get("isLoggedIn")==true) {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (_) => MainScreen()));
       } else {

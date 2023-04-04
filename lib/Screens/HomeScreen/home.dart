@@ -26,15 +26,14 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
-        //  appBar: _appBarWidget(),
-        body: Obx(() => _homeController.isLoading.value
-            ? CustomLoader()
-            : _bodyWidget(context)),
-      ),
+
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white,
+      //  appBar: _appBarWidget(),
+      body: Obx(() => _homeController.isLoading.value
+          ? CustomLoader()
+          : _bodyWidget(context)),
     );
   }
 
