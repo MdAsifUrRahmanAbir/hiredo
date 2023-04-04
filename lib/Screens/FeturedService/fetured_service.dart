@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../HomeScreen/Model/lead_category_model.dart';
+import '../QuestionScreen/question_screen.dart';
 
 class FeturedServiceScreen extends StatelessWidget {
    FeturedServiceScreen({super.key,required this.data});
@@ -119,19 +121,26 @@ body:  GridView.builder(
           SizedBox(
             height: 15.h,
           ),
-          Container(
-            height: 30.h,
-            width: 84.w,
-            decoration: BoxDecoration(
-                color: Color(0xFF187949),
-                borderRadius: BorderRadius.circular(5.r)),
-            child: Center(
-              child: Text(
-                'Post a Job',
-                style: GoogleFonts.roboto(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFFFFFFFF)),
+          InkWell(
+            onTap: (){
+               if(data.catName.isNotEmpty){
+                   Get.to(QuestionScreen(data:data.catName,));
+              }
+            },
+            child: Container(
+              height: 30.h,
+              width: 84.w,
+              decoration: BoxDecoration(
+                  color: Color(0xFF187949),
+                  borderRadius: BorderRadius.circular(5.r)),
+              child: Center(
+                child: Text(
+                  'Post a Job',
+                  style: GoogleFonts.roboto(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFFFFFFFF)),
+                ),
               ),
             ),
           )

@@ -16,6 +16,7 @@ import 'package:myapp/Screens/LocationScreen/locationpage.dart';
 import 'package:myapp/widgets/custom_loader.dart';
 
 import '../FeturedService/fetured_service.dart';
+import '../QuestionScreen/question_screen.dart';
 import 'Model/lead_category_model.dart';
 
 class Home extends StatelessWidget {
@@ -501,19 +502,27 @@ class Home extends StatelessWidget {
           SizedBox(
             height: 15.h,
           ),
-          Container(
-            height: 30.h,
-            width: 84.w,
-            decoration: BoxDecoration(
-                color: Color(0xFF187949),
-                borderRadius: BorderRadius.circular(5.r)),
-            child: Center(
-              child: Text(
-                'Post a Job',
-                style: GoogleFonts.roboto(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFFFFFFFF)),
+          InkWell(
+            onTap: (){
+              if(data.catName.isNotEmpty){
+                   Get.to(QuestionScreen(data:data.catName,));
+              }
+             
+            },
+            child: Container(
+              height: 30.h,
+              width: 84.w,
+              decoration: BoxDecoration(
+                  color: Color(0xFF187949),
+                  borderRadius: BorderRadius.circular(5.r)),
+              child: Center(
+                child: Text(
+                  'Post a Job',
+                  style: GoogleFonts.roboto(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFFFFFFFF)),
+                ),
               ),
             ),
           )
