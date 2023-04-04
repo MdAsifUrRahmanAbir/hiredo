@@ -91,6 +91,7 @@ var isVisible = false.obs;
         print('User create successful');
 
         Get.to(SignInPage());
+        textFieldClear();
 
     
 

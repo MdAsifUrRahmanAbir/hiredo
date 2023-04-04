@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
@@ -9,6 +10,7 @@ import 'package:myapp/utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../nav_bar_page/main_screen.dart';
+import '../../widgets/data_controller.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -18,11 +20,13 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  final _dataController =Get.put(DataController());
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 3), () async {
       SharedPreferences preferences = await SharedPreferences.getInstance();
-      if (preferences.getString('token') != null) {
+      if (preferences.getString('token') != null&& preferences.get("isLoggedIn")==true) {
+        _dataController.getData();
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (_) => MainScreen()));
       } else {

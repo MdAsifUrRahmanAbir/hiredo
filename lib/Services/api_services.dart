@@ -33,8 +33,8 @@ class ApiServices {
       return true;
     } else {
       Map d = json.decode(await response.stream.bytesToString());
-      print(d);
-
+    
+        Fluttertoast.showToast(msg: d['email'][0]);
       if (kDebugMode) {
         print(d['message']);
       }
@@ -62,16 +62,17 @@ class ApiServices {
   } else {
     Map d = json.decode(await response.stream.bytesToString());
     debugPrint("$d");
+    
     if (kDebugMode) {
       debugPrint(response.reasonPhrase);
     }
-    return 0;
+    return 1;
   }
 } on Exception catch (e) {
   if(kDebugMode){
     debugPrint('Login Error ${e.toString()}');
   }
-
+ return 1;
 }
   }
 

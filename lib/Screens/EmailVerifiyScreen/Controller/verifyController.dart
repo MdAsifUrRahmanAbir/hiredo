@@ -11,27 +11,30 @@ class VerificationController extends GetxController{
 
   var onEditing = true.obs;
  var code = ''.obs;
-CountdownController countdownController =
-    CountdownController(duration: Duration(minutes: 1));
-
-   var counter = 0.obs;
+   var secounds = 0.obs;
 
    var isValue = false.obs;
-  var click = 0.obs;
+  
   late Timer timer;
-  Color timertxcol = themeColorGreen;
+ 
   void startTimer() {
-    counter.value = 60;
-    timer = Timer.periodic(Duration(milliseconds: 1550), (timer) {
-      if (counter.value > 0) {
+    timer.cancel();
+    secounds.value = 60;
+    timer = Timer.periodic(const Duration(seconds:1), (ter) {
+      if (secounds.value > 0) {
      
-          counter.value--;
+          secounds.value--;
     
-      } else if (counter.value == 0) {
-        timertxcol = Colors.red;
-      } else {
+      }  else {
         timer.cancel();
       }
     });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    timer.cancel();
+    super.dispose();
   }
 }

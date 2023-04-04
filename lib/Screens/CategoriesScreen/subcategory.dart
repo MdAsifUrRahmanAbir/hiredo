@@ -1,12 +1,15 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructor, prefer_const_constructors, avoid_unnecessary_containers, unused_field
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
 import '../../utils/colors.dart';
 import '../HomeScreen/Model/lead_category_model.dart';
+import '../QuestionScreen/question_screen.dart';
 
 class SubCategoryPage extends StatefulWidget {
   SubCategoryPage(
@@ -44,14 +47,16 @@ class _SubCategoryPageState extends State<SubCategoryPage> {
           .where((element) =>
               element.name.toLowerCase().contains(text.toLowerCase()))
           .toList();
-      print(dataList.length);
+      if (kDebugMode) {
+        print(dataList.length);
+      }
 
       setState(() {
         demoList = dataList;
       });
     } else {
       setState(() {
-        demoList = widget.allSubCategories;
+        demoList =subcategory;
       });
     }
   }
@@ -349,7 +354,11 @@ class _SubCategoryPageState extends State<SubCategoryPage> {
                                     color: Color(0xFF187949),
                                   )),
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                   if(data.catName.isNotEmpty){
+                   Get.to(QuestionScreen(data:data.catName,));
+              }
+                                },
                                 child: Container(
                                   height: 34.h,
                                   padding:
@@ -359,12 +368,12 @@ class _SubCategoryPageState extends State<SubCategoryPage> {
                                       color: themeColorGreen,
                                       borderRadius: BorderRadius.circular(3.r)),
                                   child: Text(
-                                    "Services",
+                                    "Post a job",
                                     style: GoogleFonts.roboto(
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.w500,
                                         color: Color(0xffFFFFFF),
-                                        letterSpacing: 1),
+                                        ),
                                   ),
                                 ),
                               )
