@@ -26,6 +26,7 @@ class VerificationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double scheight = MediaQuery.of(context).size.height;
     double scwidth = MediaQuery.of(context).size.width;
+    _verificationController.startTimer();
     return Scaffold(
       backgroundColor: scaffoldClr,
       appBar: AppBar(
@@ -80,14 +81,13 @@ class VerificationPage extends StatelessWidget {
           ],
         ),
       ),
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
+      body: SingleChildScrollView(
+       
         padding: EdgeInsets.all(15.w),
         child: Column(
           children: [
             SizedBox(
-              height: 40.h,
+              height: 63.h,
             ),
             
                VerificationCode(
@@ -113,7 +113,7 @@ class VerificationPage extends StatelessWidget {
               ),
             
             SizedBox(
-              height: 30.h,
+              height: 46.h,
             ),
             Obx
             (()=>
@@ -128,7 +128,7 @@ class VerificationPage extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                            text: " ${_verificationController.counter.value}",
+                            text: " ${_verificationController.secounds.value}",
                             style:GoogleFonts.roboto(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w400,
@@ -141,23 +141,34 @@ class VerificationPage extends StatelessWidget {
                       ])),
             ),
             SizedBox(
-              height: 30.h,
+              height: 63.h,
             ),
 
             Obx
             (()=>
                InkWell(
                 onTap: () {
-                       
-                 _verificationController.startTimer();
-                 _verificationController. click.value++;
-                
-                if ( _verificationController. click.value > 2) {
-                  Navigator.push(
+
+
+                  if(_verificationController.secounds.value==0){
+                     _verificationController.startTimer();
+
+                  }else{
+                    _verificationController.timer.cancel();
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (_) => ResetPasswordPage()));
-                }
+
+
+                  }
+                       
+                
+                 
+                
+                
+                  
+              
               },
                 child: Container(
                   alignment: Alignment.center,
@@ -167,7 +178,7 @@ class VerificationPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(4.r),
                       color: backIconClr
                   ),
-                  child: Text(_verificationController. counter.value == 0 ? 'Next' : 'Re-send',
+                  child: Text(_verificationController. secounds.value!=0 ?'Next' : 'Re-send',
                     style: GoogleFonts.roboto(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w500,

@@ -86,12 +86,10 @@ class SignInController extends GetxController {
   }
 rememberMeGetData()async{
  preferences = await SharedPreferences.getInstance();
-  String? email= preferences.getString("rememberEmail",);
-   String? password=   preferences.getString("rememberPassword",);
-  print(email);
-  print(password);
-   emailController.text=email!;
-   passwordController.text=password!;
+  String email= preferences.getString("rememberEmail",)??"";
+   String password=   preferences.getString("rememberPassword",)??"";
+   emailController.text=email;
+   passwordController.text=password;
 
   }
 

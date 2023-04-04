@@ -34,7 +34,7 @@ class ResetPasswordPage extends StatelessWidget {
                     color: Colors.grey.withOpacity(0.1),
                     spreadRadius: 1,
                     blurRadius: 1,
-                    offset: Offset(0, 2), // changes position of shadow
+                    offset:const Offset(0, 2), // changes position of shadow
                   ),
                 ],
               ),
@@ -71,17 +71,15 @@ class ResetPasswordPage extends StatelessWidget {
           ],
         ),
       ),
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        padding: EdgeInsets.all(15.w),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: 26.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 10.sp,
+              height: 51.h,
             ),
-
+      
             RichText(
                       text: TextSpan(
                        text: "New Password",
@@ -102,9 +100,9 @@ class ResetPasswordPage extends StatelessWidget {
                     ),
            
             SizedBox(
-              height: 5.h,
+              height: 9.h,
             ),
-
+      
               Obx
               (()=>
                  TextFormField(
@@ -119,11 +117,12 @@ class ResetPasswordPage extends StatelessWidget {
                         return null;
                         
                       },
-                      obscureText: _restPasswordController.isVisibility.value,
+                      obscureText: !_restPasswordController.isVisibility.value,
                       decoration: InputDecoration(
                         filled: true,
-                        contentPadding: EdgeInsets.only(top: 10.h, left: 10.w),
-                        fillColor: themeColorGreen.withOpacity(0.1),
+                         isDense: true,
+        contentPadding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w),
+        fillColor:const Color(0xFFD9F1E5).withOpacity(0.62),
                         focusedBorder: const OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.black, width: 0.5)),
@@ -134,16 +133,20 @@ class ResetPasswordPage extends StatelessWidget {
                             borderSide:
                                 BorderSide(color: Colors.black, width: 0)),
                         hintText: "*******",
-                        suffixIcon: IconButton(
-                              onPressed: () {
+                        suffixIcon: InkWell(
+                              onTap: () {
                                 _restPasswordController.isVisibility.value =
                                     !_restPasswordController.isVisibility.value;
                               },
-                              icon: Icon(
-                                  _restPasswordController.isVisibility.value
+                              child: Icon(
+                                  !_restPasswordController.isVisibility.value
                                       ? Icons.visibility_off
                                       : Icons.visibility,
                                   color: Colors.black)),
+                                     suffixIconConstraints: BoxConstraints(
+                      minHeight:14.h,
+                      minWidth:45.w
+                    ),
                         ),
                       ),
               ),
@@ -151,7 +154,7 @@ class ResetPasswordPage extends StatelessWidget {
                 
                  
             SizedBox(
-              height: 10.h,
+              height: 25.h,
             ),
              RichText(
                       text: TextSpan(
@@ -173,9 +176,9 @@ class ResetPasswordPage extends StatelessWidget {
                     ),
            
             SizedBox(
-              height: 5.sp,
+              height: 9.sp,
             ),
-
+      
               
                   Obx(()=>
                      TextFormField(
@@ -189,11 +192,12 @@ class ResetPasswordPage extends StatelessWidget {
                         }
                         return null;
                       },
-                      obscureText: _restPasswordController.isVisiable.value,
+                      obscureText: !_restPasswordController.isVisiable.value,
                       decoration: InputDecoration(
                         filled: true,
-                        contentPadding: EdgeInsets.only(top: 10.h, left: 10.w),
-                        fillColor: themeColorGreen.withOpacity(0.1),
+        isDense: true,
+        contentPadding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w),
+        fillColor:const Color(0xFFD9F1E5).withOpacity(0.62),
                         focusedBorder: const OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.black, width: 0.5)),
@@ -205,23 +209,28 @@ class ResetPasswordPage extends StatelessWidget {
                                 BorderSide(color: Colors.black, width: 0)),
                         hintText: "*******",
                         suffixIcon: 
-                          IconButton(
-                              onPressed: () {
+                          InkWell(
+                              onTap: () {
                                 _restPasswordController.isVisiable.value =
                                     !_restPasswordController.isVisiable.value;
                               },
-                              icon: Icon(
-                                  _restPasswordController.isVisiable.value
+                              child: Icon(
+                                  !_restPasswordController.isVisiable.value
                                       ? Icons.visibility_off
                                       : Icons.visibility,
                                   color: Colors.black)),
+                                  
+          suffixIconConstraints: BoxConstraints(
+                      minHeight:14.h,
+                      minWidth:45.w
+                    ),
                       
                       ),
                     ),
                   ),
                  
             SizedBox(
-              height: 28.h,
+              height: 44.h,
             ),
             customButton(
               onTap: () {},
