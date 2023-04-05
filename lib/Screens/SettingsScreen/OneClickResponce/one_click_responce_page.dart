@@ -6,7 +6,7 @@ import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 import 'package:myapp/utils/colors.dart';
 
 class OneClickResponcePage extends StatefulWidget {
-  static const String routename = '/one_click';
+
   OneClickResponcePage({Key? key}) : super(key: key);
 
   @override

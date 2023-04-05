@@ -4,16 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 import 'package:myapp/utils/colors.dart';
 
-class EmailTemplatePage extends StatefulWidget {
-  static const String routename = '/';
+class EmailTemplatePage extends StatelessWidget {
+ 
   EmailTemplatePage({Key? key}) : super(key: key);
 
-  @override
-  State<EmailTemplatePage> createState() => _EmailTemplatePageState();
-}
-
-class _EmailTemplatePageState extends State<EmailTemplatePage> {
   List<String> name = ['Bathroom', 'Kitchen', 'Renovation'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,10 +34,8 @@ class _EmailTemplatePageState extends State<EmailTemplatePage> {
           Image.asset('images/notification.png'),
         ],
       ),
-      body: Container(
-        padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 10.h),
-        height: double.infinity,
-        width: double.infinity,
+      body: Padding(
+        padding:  EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
         child: Column(
           children: [
             Row(
@@ -95,22 +89,24 @@ class _EmailTemplatePageState extends State<EmailTemplatePage> {
             SizedBox(
               height: 15.h,
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
-                  Icons.error_outline,
-                  size: 14.sp,
-                ),
-                SizedBox(
-                  width: 5.w,
-                ),
-                Text(
-                  'Learn more about email templates',
-                  style: myStyle(12.sp, FontWeight.w400, offWhite),
-                )
-              ],
-            ),
+        Row(
+                children: [
+                  const Icon(
+                    Icons.error,
+                    color: Color(0xFF848484),
+                  ),
+                  SizedBox(
+                    width: 5.w,
+                  ),
+                  Text(
+                    'Learn more about SMS templates',
+                    style: GoogleFonts.roboto(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w400,
+                        color: const Color(0xFF848484)),
+                  )
+                ],
+              )
           ],
         ),
       ),
@@ -134,14 +130,16 @@ class _EmailTemplatePageState extends State<EmailTemplatePage> {
           borderRadius: BorderRadius.circular(3.r)),
       child: Row(
         children: [
-          Text(
-            title,
-            style: GoogleFonts.roboto(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xFF272727)),
+          Expanded(
+            child: Text(
+              title,
+              style: GoogleFonts.roboto(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w500,
+                  color: const Color(0xFF272727)),
+            ),
           ),
-          Spacer(),
+    
           Container(
             height: 24.h,
             width: 48.w,
@@ -160,7 +158,7 @@ class _EmailTemplatePageState extends State<EmailTemplatePage> {
           ),
           IconButton(
               onPressed: () {},
-              icon: Icon(
+              icon: const Icon(
                 Icons.delete_sweep,
                 color: Color(0xFF848484),
               ))

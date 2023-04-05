@@ -338,7 +338,7 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
     );
   }
 
-  Container buildContainer(String responce, String credit, String amount) {
+   buildContainer(String responce, String credit, String amount) {
 
     return Container(
               padding: EdgeInsets.symmetric(vertical: 10.h),
