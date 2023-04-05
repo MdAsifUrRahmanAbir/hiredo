@@ -4,15 +4,10 @@ import 'package:myapp/Screens/SettingsScreen/SettingsBadge/badges_second_page.da
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 import 'package:myapp/utils/colors.dart';
 
-class BadgePage extends StatefulWidget {
-  static const String routename = '/badgepage';
+class BadgePage extends StatelessWidget {
+
   BadgePage({Key? key}) : super(key: key);
 
-  @override
-  State<BadgePage> createState() => _BadgePageState();
-}
-
-class _BadgePageState extends State<BadgePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

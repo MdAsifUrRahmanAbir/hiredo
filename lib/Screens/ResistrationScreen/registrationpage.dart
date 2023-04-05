@@ -225,6 +225,8 @@ class RegistrationPage extends StatelessWidget {
                       ),
                     ),
                    
+                   
+                   
                     SizedBox(
                       height: 25.h,
                     ),

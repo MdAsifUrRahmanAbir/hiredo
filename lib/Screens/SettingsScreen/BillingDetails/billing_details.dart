@@ -5,14 +5,9 @@ import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 import 'package:myapp/utils/colors.dart';
 import 'package:myapp/widgets/custom_widgets.dart';
 
-class BillingDetails extends StatefulWidget {
-  const BillingDetails({Key? key}) : super(key: key);
+class BillingDetails extends StatelessWidget {
+   BillingDetails({Key? key}) : super(key: key);
 
-  @override
-  State<BillingDetails> createState() => _BillingDetailsState();
-}
-
-class _BillingDetailsState extends State<BillingDetails> {
   List<Map> downloads = [
     {
       'invoice': '3328581',

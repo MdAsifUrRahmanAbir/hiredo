@@ -6,6 +6,7 @@ import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 import 'package:myapp/utils/colors.dart';
 
 class PaymentDetailsPage extends StatefulWidget {
+
   const PaymentDetailsPage({Key? key}) : super(key: key);
 
   @override
@@ -81,7 +82,7 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                         'Expiry date',
                         style: myStyle(14.sp, FontWeight.w400, offWhite),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         child: TextField(),
                       ),
                     ],
@@ -97,7 +98,7 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                         'CVV',
                         style: myStyle(14.sp, FontWeight.w400, offWhite),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         child: TextField(),
                       ),
                     ],
@@ -175,7 +176,7 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                               spreadRadius: 1,
                             )
                           ]),
-                      child: Icon(
+                      child: const Icon(
                         Icons.search,
                         color: themeColorGreen,
                         size: 18,
@@ -222,7 +223,7 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                 ),
                 Flexible(
                   child: ListView.separated(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) => Container(
                             height: 62,

@@ -59,6 +59,7 @@ class ForegPasswordPage extends StatelessWidget {
           style: myStyle(20, FontWeight.w500, textClr),
         ),
       ),
+    
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 26.w),
