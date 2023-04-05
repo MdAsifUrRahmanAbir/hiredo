@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:myapp/Screens/IntroScreen/introonepage.dart';
 import 'package:myapp/Screens/IntroScreen/introtwopage.dart';
 import 'package:myapp/Screens/IntroScreen/signupintropage.dart';
+import 'package:myapp/Screens/SignUpAccountScreen/signupaccountchoosepage.dart';
+import 'package:myapp/local/my_local.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../SignInScreen/signinpage.dart';
@@ -17,7 +20,8 @@ class OnboardinScreen extends StatefulWidget {
 class _OnboardinScreenState extends State<OnboardinScreen> {
   PageController _controller = PageController();
 
-  bool onLastPage = false;
+  int selectIndex=0;
+  List<Widget> page=[IntroOnePage(), IntroTwoPage(),];
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +31,10 @@ class _OnboardinScreenState extends State<OnboardinScreen> {
           controller: _controller,
           onPageChanged: (index) {
             setState(() {
-              onLastPage = (index == 1);
+            selectIndex=index;
             });
           },
-          children: const [IntroOnePage(), IntroTwoPage(), SignIntroPage()],
+          children: page ,
         ),
         Container(
             alignment: Alignment(0, 0.9),
@@ -47,7 +51,7 @@ class _OnboardinScreenState extends State<OnboardinScreen> {
                     )),
                 SmoothPageIndicator(
                     controller: _controller,
-                    count: 3,
+                    count:2,
                     axisDirection: Axis.horizontal,
                     effect: WormEffect(
                         spacing: 8.0,
@@ -58,9 +62,15 @@ class _OnboardinScreenState extends State<OnboardinScreen> {
                         activeDotColor: Color(0xFF187949))),
                 IconButton(
                     onPressed: () {
-                      _controller.nextPage(
+                          if(page.length>selectIndex+1){
+                                _controller.nextPage(
                           duration: const Duration(milliseconds: 500),
                           curve: Curves.easeIn);
+                          }else{
+                               Get.off(SignIntroPage());
+                               MyPreference.setOnBoard(true);
+                          }
+                     
                     },
                     icon: const Icon(
                       Icons.arrow_forward_ios,
