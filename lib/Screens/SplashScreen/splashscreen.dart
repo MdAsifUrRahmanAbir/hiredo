@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 import 'package:myapp/Screens/IntroScreen/onBoarding_screen.dart';
+import 'package:myapp/Screens/IntroScreen/signupintropage.dart';
+import 'package:myapp/local/my_local.dart';
 
 import 'package:myapp/utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,8 +32,16 @@ class _SplashPageState extends State<SplashPage> {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (_) => MainScreen()));
       } else {
-        Navigator.push(
+        bool isOnboard = await MyPreference.getOnBoard();
+        print(isOnboard);
+        if(isOnboard){
+          Get.off(SignIntroPage());
+        }else{
+          print(isOnboard);
+            Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (_) => OnboardinScreen()));
+        }
+      
       }
     });
 
