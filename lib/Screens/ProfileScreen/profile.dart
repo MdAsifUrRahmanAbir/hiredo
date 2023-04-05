@@ -355,7 +355,7 @@ class _ProfileState extends State<Profile> {
                 count: 50.toString()),
             _cardItem(
                 onTap: () {
-                  Get.to(const LocationPage());
+                  Get.to( LocationPage());
                 },
                 icon: Icons.location_pin,
                 text: 'Locations',
