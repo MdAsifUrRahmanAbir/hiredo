@@ -50,37 +50,55 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Center(
-          child: Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 20
-            ),
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(color: themeColorGreen),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Welcome to ',
-                    style: GoogleFonts.roboto(
-                        fontSize: 22.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xFFFFFFFF)),
-                  ),
-                  Text(
-                    'Homely Knocks ',
-                    style: GoogleFonts.museoModerno(
-                        fontSize: 40.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFFFFFFFF)),
-                  )
-                ],
-              )),
+    return Scaffold(
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width:  MediaQuery.of(context).size.width,
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              tileMode: TileMode.mirror,
+            
+              colors:[
+                   Color(0xFF174E31),
+                 Color(0xFF1A7949),
+                 Color(0xFF174E31),
+              
+                 
+               
+                
+            ]),
+
         ),
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: 20.w
+          ),
+           alignment: Alignment.center,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            //decoration: BoxDecoration(color: themeColorGreen),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Welcome to ',
+                  style: GoogleFonts.roboto(
+                      fontSize: 22.sp,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFFFFFFFF)),
+                ),
+                Text(
+                  'Homely Knocks ',
+                  style: GoogleFonts.museoModerno(
+                      fontSize: 40.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFFFFFFFF)),
+                )
+              ],
+            )),
       ),
     );
   }
