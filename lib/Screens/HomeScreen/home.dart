@@ -15,15 +15,18 @@ import 'package:myapp/Screens/SearchResultScreen/catsearchpage.dart';
 import 'package:myapp/Screens/LocationScreen/locationpage.dart';
 import 'package:myapp/widgets/custom_loader.dart';
 
+import '../../nav_bar_page/main_controller.dart';
 import '../FeturedService/fetured_service.dart';
 import '../QuestionScreen/question_screen.dart';
 import 'Model/lead_category_model.dart';
 
+ final mainController=Get.put(MainScreenController());
 class Home extends StatelessWidget {
   Home({super.key});
 
   final GlobalKey<FormState> _formKey = GlobalKey();
   final _homeController = Get.put(HomeController());
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +81,9 @@ class Home extends StatelessWidget {
 
         InkWell(
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (_)=>  SearchResult(),));
+            
+         mainController.initIndex.value=3;
+       
           },
           child: Container(
             height: 50.h,

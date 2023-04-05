@@ -1,7 +1,5 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,11 +8,10 @@ import 'package:myapp/Screens/LeadsScreen/lead_screen.dart';
 import 'package:myapp/Screens/MyResponse/my_response.dart';
 import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
 import 'package:myapp/Screens/SignInScreen/signinpage.dart';
-import 'package:myapp/Screens/UpdateLeadSetting/update_lead_settings.dart';
 import 'package:myapp/Screens/WishListScreen/wish_list_screen.dart';
 import 'package:myapp/utils/colors.dart';
+import '../../nav_bar_page/main_controller.dart';
 import '../../widgets/data_controller.dart';
-import '../HomeScreen/home.dart';
 import '../LocationScreen/locationpage.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -28,10 +25,11 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   final _dataController = Get.put(DataController());
+  final _mainController = Get.put(MainScreenController());
 
   @override
   Widget build(BuildContext context) {
-    double scw = MediaQuery.of(context).size.width;
+    
     return Scaffold(
       backgroundColor: scaffoldClr,
       appBar: AppBar(
@@ -40,7 +38,7 @@ class _ProfileState extends State<Profile> {
         backgroundColor: Colors.white,
         leading: IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              _mainController.initIndex.value = 0;
             },
             icon: const Icon(
               Icons.arrow_back,
@@ -65,8 +63,15 @@ class _ProfileState extends State<Profile> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image.asset(
-                  "images/profilepic.png",
+                Stack(
+                  children: [
+                    ClipRRect
+                    (
+                      child: Image.asset(
+                        "images/profilepic.png",
+                      ),
+                    ),
+                  ],
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -304,56 +309,54 @@ class _ProfileState extends State<Profile> {
               height: 20.h,
             ),
             _cardItem(
-              onTap: (){
-                Get.to(LeadsScreen());
-                
-              },
+                onTap: () {
+                  Get.to(LeadsScreen());
+                },
                 icon: Icons.star_border_outlined,
                 text: 'Leads',
                 isCount: true,
                 count: 450.toString()),
             _cardItem(
-              onTap: (){
-                Get.to(MyResponse());
-                
-              },
+                onTap: () {
+                  Get.to(MyResponse());
+                },
                 icon: Icons.sports_handball_rounded,
                 text: 'My Responces',
                 isCount: true,
                 count: 450.toString()),
             _cardItem(
-              onTap: (){
+              onTap: () {
                 Get.to(WishListScreen());
               },
               icon: Icons.favorite_border,
               text: 'Wishlist',
             ),
             _cardItem(
-              onTap: (){
-              Get.to(SettingsPage());
+              onTap: () {
+                Get.to(SettingsPage());
               },
               icon: Icons.settings,
               text: 'Settings',
             ),
             _cardItem(
-              onTap: (){
-                 Get.to(HelpScreen());
+              onTap: () {
+                Get.to(HelpScreen());
               },
               icon: Icons.help_outline,
               text: 'Help',
             ),
             _cardItem(
-              onTap: (){
-                 Get.to(Service());
-              },
+                onTap: () {
+                  Get.to(Service());
+                },
                 icon: Icons.rotate_right,
                 text: 'Services',
                 isCount: true,
                 count: 50.toString()),
             _cardItem(
-              onTap: (){
-                 Get.to(const LocationPage());
-              },
+                onTap: () {
+                  Get.to( LocationPage());
+                },
                 icon: Icons.location_pin,
                 text: 'Locations',
                 isCount: true,
@@ -361,29 +364,34 @@ class _ProfileState extends State<Profile> {
             SizedBox(
               height: 37.h,
             ),
-            Container(
-                height: 43.h,
-                width: 124.w,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.r),
-                    color:const Color(0xffDF2929)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                const    Icon(
-                      Icons.logout_outlined,
-                      color: scaffoldClr,
-                      size: 18,
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    Text(
-                      'Logout',
-                      style: myStyle(16, FontWeight.w500, scaffoldClr),
-                    ),
-                  ],
-                )),
+            InkWell(
+              onTap: (){
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>SignInPage()), (route) => false);
+              },
+              child: Container(
+                  height: 43.h,
+                  width: 124.w,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.r),
+                      color: const Color(0xffDF2929)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.logout_outlined,
+                        color: scaffoldClr,
+                        size: 18,
+                      ),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      Text(
+                        'Logout',
+                        style: myStyle(16, FontWeight.w500, scaffoldClr),
+                      ),
+                    ],
+                  )),
+            ),
             SizedBox(
               height: 80.h,
             )
@@ -393,9 +401,10 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-   _cardItem(
+  _cardItem(
       {required String text,
-      String? count,required Function() onTap,
+      String? count,
+      required Function() onTap,
       required IconData icon,
       bool? isCount = false}) {
     return InkWell(
@@ -422,15 +431,17 @@ class _ProfileState extends State<Profile> {
               children: [
                 Icon(
                   icon,
-                  color:
-                      text == "Leads" ? themeColorGreen : const Color(0xFF272727),
+                  color: text == "Leads"
+                      ? themeColorGreen
+                      : const Color(0xFF272727),
                 ),
                 SizedBox(
                   width: 5.h,
                 ),
                 Text(
                   text,
-                  style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+                  style:
+                      TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
                 )
               ],
             ),
@@ -446,8 +457,8 @@ class _ProfileState extends State<Profile> {
                         child: Center(
                             child: Text(
                           count!,
-                          style:
-                              TextStyle(fontSize: 12.sp, color: themeColorGreen),
+                          style: TextStyle(
+                              fontSize: 12.sp, color: themeColorGreen),
                         )),
                       )
                     : SizedBox(),

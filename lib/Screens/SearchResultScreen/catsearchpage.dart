@@ -23,10 +23,13 @@ class _SearchResultState extends State<SearchResult> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           padding: EdgeInsets.all(20.0.w),
           child: Column(
             children: [
+
+              // <------------------- search Screen---------------->
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4.r),
@@ -110,80 +113,73 @@ class _SearchResultState extends State<SearchResult> {
               SizedBox(
                 height: 25.h,
               ),
-              Expanded(
-                flex: 5,
-                child: Card(
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: ListTile(
-                          trailing: Radio<String>(
-                            activeColor: Color(0xff187949),
-                            value: 'Top Categories',
-                            groupValue: _selectedGender,
-                            onChanged: (value) {
-                              setState(() {
-                                _selectedGender = value!;
-                              });
-                            },
-                          ),
-                          leading: Text('Top Categories',
-                              style: GoogleFonts.roboto(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xff272727))),
-                        ),
+              Card(
+                child: Column(
+                  children: [
+                    ListTile(
+                      trailing: Radio<String>(
+                        activeColor: Color(0xff187949),
+                        value: 'Top Categories',
+                        groupValue: _selectedGender,
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedGender = value!;
+                          });
+                        },
                       ),
-                      Expanded(
-                        flex: 7,
-                        child: GridView.builder(
-                            scrollDirection: Axis.vertical,
-                            itemCount: 10,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              childAspectRatio: 2.3,
-                            ),
-                            itemBuilder: (_, index) {
-                              return GestureDetector(
+                      leading: Text('Top Categories',
+                          style: GoogleFonts.roboto(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xff272727))),
+                    ),
+                    GridView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: 10,
+                        gridDelegate:
+                            SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 2.3,
+                        ),
+                        itemBuilder: (_, index) {
+                          return GestureDetector(
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  left: 5.w,
+                                  right: 5.w,
+                                  bottom: 5.w,
+                                  top: 5.h),
+                              child: Card(
                                 child: Container(
-                                  padding: EdgeInsets.only(
-                                      left: 5.w,
-                                      right: 5.w,
-                                      bottom: 5.w,
-                                      top: 5.h),
-                                  child: Card(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(4.r),
-                                          border: Border.all(
-                                            color: Color(0xff9CCDB5),
-                                          )),
-                                      child: ListTile(
-                                        leading: Text(
-                                          "Hair",
-                                          style: GoogleFonts.roboto(
-                                              fontSize: 16.sp,
-                                              fontWeight: FontWeight.w400,
-                                              color: Color(0xff272727)),
-                                        ),
-                                        trailing: Icon(
-                                          Icons.fingerprint,
-                                          color: Color(0xff187949),
-                                        ),
-                                      ),
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.circular(4.r),
+                                      border: Border.all(
+                                        color: Color(0xff9CCDB5),
+                                      )),
+                                  child: ListTile(
+                                    leading: Text(
+                                      "Hair",
+                                      style: GoogleFonts.roboto(
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xff272727)),
+                                    ),
+                                    trailing: Icon(
+                                      Icons.fingerprint,
+                                      color: Color(0xff187949),
                                     ),
                                   ),
                                 ),
-                              );
-                            }),
-                      ),
-                    ],
-                  ),
+                              ),
+                            ),
+                          );
+                        }),
+                  ],
                 ),
               ),
-              Expanded(flex: 3, child: Container())
+              
             ],
           ),
         ),

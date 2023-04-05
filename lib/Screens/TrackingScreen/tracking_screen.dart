@@ -113,7 +113,11 @@ class TrackingScreen extends StatelessWidget {
               ),
               InkWell(
                 onTap: (){
+
                   Get.to(QuestionScreen(data: [],));
+
+           
+
                 },
                 child: Container(
                   height: 50.h,

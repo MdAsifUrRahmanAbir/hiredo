@@ -15,9 +15,12 @@ class SignAccountChoosePage extends StatefulWidget {
   State<SignAccountChoosePage> createState() => _SignAccountChoosePageState();
 }
 
-String? accounttype;
+
 
 class _SignAccountChoosePageState extends State<SignAccountChoosePage> {
+
+
+  String accounttype ="User";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -144,7 +147,7 @@ class _SignAccountChoosePageState extends State<SignAccountChoosePage> {
                     groupValue: accounttype,
                     onChanged: (value) {
                       setState(() {
-                        accounttype = value;
+                        accounttype = value!;
                       });
                     },
                   ),
@@ -203,7 +206,7 @@ class _SignAccountChoosePageState extends State<SignAccountChoosePage> {
           InkWell(
             onTap: () {
               Get.to(RegistrationPage(
-                userType: accounttype!,
+                userType: accounttype,
               ));
             },
             child: Container(
