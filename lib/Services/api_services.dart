@@ -12,6 +12,8 @@ import 'package:myapp/Screens/UpdateLeadSetting/Model/location_model.dart';
 import 'package:myapp/Services/api_component.dart';
 import 'package:myapp/local/my_local.dart';
 
+import '../Screens/QuestionScreen/Model/job_post_model.dart';
+
 class ApiServices {
   static var client = http.Client();
 
@@ -42,7 +44,6 @@ class ApiServices {
     }
   }
 
-//
 
 // handle login
 
@@ -97,7 +98,7 @@ class ApiServices {
   }
 
 // add service
-  static Future<bool> AddServicePost(
+  static Future<bool> addServicePost(
       {required String design, required String description}) async {
     var accessToken = await MyPreference.getToken();
     // SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -164,7 +165,7 @@ class ApiServices {
   }
 
 // add location
-  static Future<bool> AddLocationPost(
+  static Future<bool> addLocationPost(
       {required String city, required String distance}) async {
     var accessToken = await MyPreference.getToken();
     try {
@@ -244,4 +245,92 @@ class ApiServices {
       return 1;
     }
   }
+
+  // Job Post
+    static Future<dynamic> jobPostCreate(
+      {required List<JobPostModel> data}) async {
+    try {
+  var accessToken = await MyPreference.getToken();
+  
+  var headers = {
+    'Authorization': 'Bearer $accessToken',
+    'Content-Type': 'application/json',
+    'Cookie': 'csrftoken=YqvXb0jbZKzIkJLJhy1KgrFX5K0aDJ3I; sessionid=s56mcfr0yahwh0jk9nuikt10ie6d8cau'
+  };
+  var request = http.Request('POST', Uri.parse(jobPostApi));
+  request.body =jobPostModelToJson(data);
+  request.headers.addAll(headers);
+  
+  http.StreamedResponse response = await request.send();
+  
+  if (response.statusCode == 200) {
+    debugPrint(await response.stream.bytesToString());
+    return "success";
+  }
+  else {
+    debugPrint( "error:  ${response.reasonPhrase}");
+    return 1;
+  }
+} on Exception catch (e) {
+  debugPrint("Job post  Error. Reason ${e.toString()}");
+  return 1;
+  
+}
+
+
+
+
+
+
+
+
+    
+    // try {
+    //   var headers = {
+    //     'Authorization': "Bearer $accessToken",
+    //     'Content-Type': 'application/json',
+    //     'Cookie':
+    //         'csrftoken=pwnIa5wXWizyqYO2ybhtX0GLZ0NxqhtU; sessionid=gg5ikg2sfd8r50skh2zkn4d9uahf6lue'
+//       };
+//  var _data= json.encode([
+//   {
+//     "category": 4,
+//     "question": 2,
+//     "location": 1,
+//     "p_answer": 2
+//   },
+//   {
+//     "category": 4,
+//     "question": 2,
+//     "location": 1,
+//     "p_answer": 2
+//   }
+// ]);
+
+//       var response = await client.post( Uri.parse("http://ringknock.pythonanywhere.com/lead/JobPostCreate/"),headers:headers,body:jsonEncode(_data));
+     
+//       if (response.statusCode == 200) {
+        
+//         return "success";
+
+//       } else {
+//         if (kDebugMode) {
+//           print(response.statusCode);
+//         }
+//         return response.statusCode;
+//       }
+//     } on Exception catch (e) {
+//       if (kDebugMode) {
+//         print("Job post  Error. Reason ${e.toString()}");
+//       }
+//       return 1;
+//     }
+  }
+
+
+
+
+
+
+
 }

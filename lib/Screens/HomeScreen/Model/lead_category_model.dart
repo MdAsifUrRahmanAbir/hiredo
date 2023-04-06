@@ -42,22 +42,26 @@ class LeadCategoriesModel {
 
 class CatName {
     CatName({
+        required this.id,
         required this.qs,
         required this.answers,
         required this.cat,
     });
 
+    int id;
     String qs;
     List<Answer> answers;
     Cat cat;
 
     factory CatName.fromJson(Map<String, dynamic> json) => CatName(
+        id: json["id"],
         qs: json["qs"],
         answers: List<Answer>.from(json["answers"].map((x) => Answer.fromJson(x))),
         cat: Cat.fromJson(json["cat"]),
     );
 
     Map<String, dynamic> toJson() => {
+        "id": id,
         "qs": qs,
         "answers": List<dynamic>.from(answers.map((x) => x.toJson())),
         "cat": cat.toJson(),
@@ -66,21 +70,29 @@ class CatName {
 
 class Answer {
     Answer({
+        required this.id,
         required this.question,
         required this.options,
+        required this.credit,
     });
 
+    int id;
     Question question;
     String options;
+    int credit;
 
     factory Answer.fromJson(Map<String, dynamic> json) => Answer(
+        id: json["id"],
         question: Question.fromJson(json["question"]),
         options: json["options"],
+        credit: json["credit"],
     );
 
     Map<String, dynamic> toJson() => {
+        "id": id,
         "question": question.toJson(),
         "options": options,
+        "credit": credit,
     };
 }
 
@@ -113,7 +125,7 @@ class Cat {
     String name;
     String image;
     DateTime created;
-    dynamic parent;
+    int? parent;
 
     factory Cat.fromJson(Map<String, dynamic> json) => Cat(
         id: json["id"],

@@ -49,6 +49,7 @@ dependencies:
   shared_preferences: ^2.0.18
   percent_indicator: ^4.2.3
   smooth_page_indicator: ^1.0.1
+  dropdown_search: ^5.0.6
 
  
 
