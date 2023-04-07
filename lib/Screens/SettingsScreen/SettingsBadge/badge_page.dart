@@ -7,6 +7,9 @@ import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 
+import '../../../Services/api_component.dart';
+import 'badges_second_page.dart';
+
 class BadgePage extends StatelessWidget {
 
   BadgePage({Key? key}) : super(key: key);
@@ -115,6 +118,9 @@ class BadgePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // add image
+
+                        Image.network(baseUrl+result.image),
+
                         Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -132,7 +138,13 @@ class BadgePage extends StatelessWidget {
                 ],
                         ),
                         GestureDetector(
-                onTap: (){},
+                onTap: (){
+                  Get.to(BadgesSecondPage(
+                    title: result.title,
+                    image: baseUrl+result.image,
+                    longDescription: result.longDescription,
+                  ));
+                },
                 child: Container(
                   alignment: Alignment.center,
                   height: 34.h,

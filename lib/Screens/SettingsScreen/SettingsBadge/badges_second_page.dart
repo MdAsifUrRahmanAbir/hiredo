@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 
 class BadgesSecondPage extends StatelessWidget {
-  const BadgesSecondPage({Key? key}) : super(key: key);
+   BadgesSecondPage({Key? key, required this.image, required this.title,
+   required this.longDescription}) : super(key: key);
+
+   String image;
+   String title;
+   String longDescription;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: scaffoldClr,
+    
       appBar: AppBar(
-        elevation: 0.3,
+        elevation: 0,
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -44,7 +50,7 @@ class BadgesSecondPage extends StatelessWidget {
                   color: containerClr),
               child: Row(
                 children: [
-                  Image.asset('images/badges.png'),
+                  Image.network(image),
                   SizedBox(
                     width: 15.w,
                   ),
@@ -53,7 +59,7 @@ class BadgesSecondPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Golden Badges',
+                        title,
                         style: myStyle(
                             18.sp, FontWeight.w500, themeColorGreenbright),
                       ),
@@ -125,69 +131,11 @@ class BadgesSecondPage extends StatelessWidget {
             SizedBox(
               height: 20.h,
             ),
-            Text(
-              'Golden Badge Advantage',
-              style: myStyle(18.sp, FontWeight.w500, textClr),
-            ),
-            SizedBox(height: 8,),
-            Text(
-              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys.',
-              style: myStyle(14.sp, FontWeight.w400, textClr),
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.circle,
-                  size: 16.sp,
-                  color: backIconClr,
-                ),
-                SizedBox(
-                  width: 20.w,
-                ),
-                Expanded(
-                    child: Text(
-                  'Lorem Ipsum is simply dummy text of has been the industrys. Lorem Ipsum is simply dummy text of the printing.',
-                  style: myStyle(14.sp, FontWeight.w400, offWhite),
-                ))
-              ],
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.circle,
-                  size: 16.sp,
-                  color: backIconClr,
-                ),
-                SizedBox(
-                  width: 20.w,
-                ),
-                Expanded(
-                    child: Text(
-                  'Lorem Ipsum is simply dummy text of has been the industrys. Lorem Ipsum is simply dummy text of the printing.',
-                  style: myStyle(14.sp, FontWeight.w400, offWhite),
-                ))
-              ],
-            ),
-            SizedBox(
-              height: 15.h,
-            ),
-            Text(
-              'Bye/Sale More Services And get Dimond Badge',
-              style: myStyle(16.sp, FontWeight.w500, textClr),
-            ),
-            Text(
-              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys.',
-              style: myStyle(14.sp, FontWeight.w400, offWhite),
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
+            
+            HtmlWidget(longDescription),
+
+        SizedBox(height: 20.h,),
+
             Text(
               'See How to get Dimond Badge Member',
               style: myStyle(18.sp, FontWeight.w500, themeColorGreenbright),
