@@ -6,38 +6,28 @@ import 'dart:convert';
 
 LoginModel loginModelFromJson(String str) => LoginModel.fromJson(json.decode(str));
 
-String loginModelToJson(LoginModel data) => json.encode(data.toJson());
 
 class LoginModel {
     LoginModel({
-        required this.status,
         required this.token,
         required this.message,
-        required this.data,
+        required this.user,
     });
 
-    int status;
     String token;
     String message;
-    Data data;
+    User user;
 
     factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
-        status: json["status"],
         token: json["token"],
         message: json["message"],
-        data: Data.fromJson(json["data"]),
+        user: User.fromJson(json["user"]),
     );
 
-    Map<String, dynamic> toJson() => {
-        "status": status,
-        "token": token,
-        "message": message,
-        "data": data.toJson(),
-    };
 }
 
-class Data {
-    Data({
+class User {
+    User({
         required this.id,
         required this.fullName,
         required this.email,
@@ -61,7 +51,7 @@ class Data {
     bool isUser;
     String password;
 
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
+    factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         fullName: json["full_name"],
         email: json["email"],
@@ -74,16 +64,4 @@ class Data {
         password: json["password"],
     );
 
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "full_name": fullName,
-        "email": email,
-        "date_of_birth": dateOfBirth,
-        "phone_number": phoneNumber,
-        "corporation_name": corporationName,
-        "corporation_number": corporationNumber,
-        "is_professional": isProfessional,
-        "is_user": isUser,
-        "password": password,
-    };
 }

@@ -42,16 +42,16 @@ class SignInController extends GetxController {
         
         LoginModel allData = result;
         _dataController.setData(
-            idD: allData.data.id,
-            corporationNameD: allData.data.corporationName,
-            corporationNumberD: allData.data.corporationNumber,
-            fullNameD: allData.data.fullName,
-            dateOfBirthD: allData.data.dateOfBirth,
-            emailD: allData.data.email,
-            passwordD: allData.data.password,
-            phoneD: allData.data.phoneNumber,
-            isProfessionalD: allData.data.isProfessional,
-            isUserD: allData.data.isUser);
+            idD: allData.user.id,
+            corporationNameD: allData.user.corporationName,
+            corporationNumberD: allData.user.corporationNumber,
+            fullNameD: allData.user.fullName,
+            dateOfBirthD: allData.user.dateOfBirth,
+            emailD: allData.user.email,
+            passwordD: allData.user.password,
+            phoneD: allData.user.phoneNumber,
+            isProfessionalD: allData.user.isProfessional,
+            isUserD: allData.user.isUser);
 
             print(_dataController.id);
 
