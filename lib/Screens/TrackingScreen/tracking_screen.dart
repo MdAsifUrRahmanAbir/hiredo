@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Screens/QuestionScreen/question_screen.dart';
 
 import 'Controller/tracking_controller.dart';
+import 'TabsScreen/trackingpost.dart';
+import 'TabsScreen/trackingpostorder.dart';
 
 class TrackingScreen extends StatelessWidget {
   TrackingScreen({super.key});
@@ -33,64 +35,58 @@ class TrackingScreen extends StatelessWidget {
               fontWeight: FontWeight.w500,
               color: const Color(0xff272727)),
         ),
-        actions: [
-          InkWell(
-            onTap: () {},
-            child: Container(
-              height: 40.h,
-              width: 40.w,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("images/img2.png"), fit: BoxFit.cover),
-                  shape: BoxShape.circle),
-            ),
-          )
-        ],
+        // actions: [
+        //   InkWell(
+        //     onTap: () {},
+        //     child: Container(
+        //       height: 40.h,
+        //       width: 40.w,
+        //       decoration: const BoxDecoration(
+        //           image: DecorationImage(
+        //               image: AssetImage("images/img2.png"), fit: BoxFit.cover),
+        //           shape: BoxShape.circle),
+        //     ),
+        //   )
+        // ],
         automaticallyImplyLeading: false,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(left: 15.w, right: 15.w),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 50.h,
-                width: double.infinity,
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: _trackingController.items.length,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          _trackingController.currentIndex.value = index;
-                        },
-                        child: Obx(
-                          () => AnimatedContainer(
-                            duration: const Duration(milliseconds: 300),
-                            margin: EdgeInsets.all(5.w),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 26.w),
+        child: Column(
+          children: [
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                     Obx(
+                        () => InkWell(
+                          onTap: (){
+                            _trackingController.currentIndex.value=0;
+                          },
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds:500),
+                            
                             height: 40.h,
-                            width: 169.w,
+                            width: 180.w,
                             decoration: BoxDecoration(
                                 color: _trackingController.currentIndex.value ==
-                                        index
+                                        0
                                     ? const Color(0xFF187949)
                                     : null,
                                 border: Border.all(
                                     color: _trackingController
                                                 .currentIndex.value ==
-                                            index
+                                            0
                                         ? const Color(0xFF187949)
                                         : const Color(0xFF187949)),
                                 borderRadius: BorderRadius.circular(3.r)),
                             child: Center(
                               child: Text(
-                                _trackingController.items[index],
+                                "Pending Post",
                                 style: GoogleFonts.roboto(
                                     color: _trackingController
                                                 .currentIndex.value ==
-                                            index
+                                            0
                                         ? const Color(0xFFFFFFFF)
                                         : const Color(0xFF424242),
                                     fontSize: 14.sp,
@@ -99,48 +95,63 @@ class TrackingScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                      );
-                    }),
-              ),
-              Obx(
-                () => Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.only(left: 5.w, right: 5.w),
-                  height: 470.h,
-                  child: _trackingController
-                      .screen[_trackingController.currentIndex.value],
-                ),
-              ),
-              InkWell(
-                onTap: (){
+                      ),
+                        SizedBox(width: 27.w,),
+                        Obx(
+                        () => InkWell(
+                          onTap: (){
+                            _trackingController.currentIndex.value=1;
+                          },
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 500),
+                           
+                            height: 40.h,
+                            width: 180.w,
+                            decoration: BoxDecoration(
+                                color: _trackingController.currentIndex.value ==
+                                        1
+                                    ? const Color(0xFF187949)
+                                    : null,
+                                border: Border.all(
+                                    color: _trackingController
+                                                .currentIndex.value ==
+                                            1
+                                        ? const Color(0xFF187949)
+                                        : const Color(0xFF187949)),
+                                borderRadius: BorderRadius.circular(3.r)),
+                            child: Center(
+                              child: Text(
+                                "Complete Post",
+                                style: GoogleFonts.roboto(
+                                    color: _trackingController
+                                                .currentIndex.value ==
+                                            1
+                                        ? const Color(0xFFFFFFFF)
+                                        : const Color(0xFF424242),
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                  
+                  
 
-                  Get.to(QuestionScreen(data: [],));
+                ],
+              ),
 
+                SizedBox(height: 25.h,),
+          Obx(()=> Expanded(child: _trackingController.currentIndex.value==0?TrackingPostOrder(): TrackingPostOrderTwo() ))
+
+          
+          
            
+          ,
+          
+            
+          ],
 
-                },
-                child: Container(
-                  height: 50.h,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: const Color(0xFF187949),
-                      borderRadius: BorderRadius.circular(5.r)),
-                  child: Center(
-                    child: Text(
-                      'Add a new job post',
-                      style: GoogleFonts.roboto(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w500,
-                          color: const Color(0xFFF2F2F2)),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 30.h,
-              )
-            ],
-          ),
         ),
       ),
     );
