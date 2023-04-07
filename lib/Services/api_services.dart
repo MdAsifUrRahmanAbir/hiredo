@@ -46,7 +46,6 @@ class ApiServices {
     }
   }
 
-
 // handle login
 
   static Future<dynamic> handelLogin(
@@ -247,7 +246,6 @@ class ApiServices {
     }
   }
 
-
 // fetch bedge data
 
   static dynamic fetchBedge() async {
@@ -278,44 +276,35 @@ class ApiServices {
   }
 
   // Job Post
-    static Future<dynamic> jobPostCreate(
+  static Future<dynamic> jobPostCreate(
       {required List<JobPostModel> data}) async {
     try {
-  var accessToken = await MyPreference.getToken();
-  
-  var headers = {
-    'Authorization': 'Bearer $accessToken',
-    'Content-Type': 'application/json',
-    'Cookie': 'csrftoken=YqvXb0jbZKzIkJLJhy1KgrFX5K0aDJ3I; sessionid=s56mcfr0yahwh0jk9nuikt10ie6d8cau'
-  };
-  var request = http.Request('POST', Uri.parse(jobPostApi));
-  request.body =jobPostModelToJson(data);
-  request.headers.addAll(headers);
-  
-  http.StreamedResponse response = await request.send();
-  
-  if (response.statusCode == 200) {
-    debugPrint(await response.stream.bytesToString());
-    return "success";
-  }
-  else {
-    debugPrint( "error:  ${response.reasonPhrase}");
-    return 1;
-  }
-} on Exception catch (e) {
-  debugPrint("Job post  Error. Reason ${e.toString()}");
-  return 1;
-  
-}
+      var accessToken = await MyPreference.getToken();
 
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+        'Cookie':
+            'csrftoken=YqvXb0jbZKzIkJLJhy1KgrFX5K0aDJ3I; sessionid=s56mcfr0yahwh0jk9nuikt10ie6d8cau'
+      };
+      var request = http.Request('POST', Uri.parse(jobPostApi));
+      request.body = jobPostModelToJson(data);
+      request.headers.addAll(headers);
 
+      http.StreamedResponse response = await request.send();
 
+      if (response.statusCode == 200) {
+        debugPrint(await response.stream.bytesToString());
+        return "success";
+      } else {
+        debugPrint("error:  ${response.reasonPhrase}");
+        return 1;
+      }
+    } on Exception catch (e) {
+      debugPrint("Job post  Error. Reason ${e.toString()}");
+      return 1;
+    }
 
-
-
-
-
-    
     // try {
     //   var headers = {
     //     'Authorization': "Bearer $accessToken",
@@ -339,9 +328,9 @@ class ApiServices {
 // ]);
 
 //       var response = await client.post( Uri.parse("http://ringknock.pythonanywhere.com/lead/JobPostCreate/"),headers:headers,body:jsonEncode(_data));
-     
+
 //       if (response.statusCode == 200) {
-        
+
 //         return "success";
 
 //       } else {
@@ -357,12 +346,4 @@ class ApiServices {
 //       return 1;
 //     }
   }
-
-
-
-
-
-
-
-
 }
