@@ -177,21 +177,47 @@ class ChangePasswordScreen extends StatelessWidget {
                 height: 30.h,
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  _changePasswordController.handelChangePassword();
+                },
                 child: Container(
                   height: 50.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: const Color(0xFF187949),
                       borderRadius: BorderRadius.circular(4.r)),
-                  child: Center(
-                    child: Text(
-                      'Save',
-                      style: GoogleFonts.roboto(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w500,
-                          color: const Color(0xFFFFFFFF)),
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Save',
+                        style: GoogleFonts.roboto(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w500,
+                            color: const Color(0xFFFFFFFF)),
+                      ),
+                        Obx(
+                              () => SizedBox(
+                                width: _changePasswordController.isLoading.value
+                                    ? 5.w
+                                    : 0,
+                              ),
+                            ),
+                              Obx(() {
+                              if (_changePasswordController.isLoading.value) {
+                                return SizedBox(
+                                  height: 15.sp,
+                                  width: 15.sp,
+                                  child: const CircularProgressIndicator(
+                                    strokeWidth: 1,
+                                    color: Colors.white,
+                                  ),
+                                );
+                              } else {
+                                return SizedBox();
+                              }
+                            })
+                    ],
                   ),
                 ),
               )
