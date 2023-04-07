@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Screens/RestPasswordScreen/Controller/rest_controller.dart';
-import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
-import 'package:myapp/widgets/custom_widgets.dart';
+import 'package:homelyknock/Screens/RestPasswordScreen/Controller/rest_controller.dart';
+import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
+import 'package:homelyknock/widgets/custom_widgets.dart';
 
 import '../../utils/colors.dart';
 

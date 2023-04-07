@@ -2,10 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:myapp/Screens/UpdateLeadSetting/Model/add_services_model.dart';
-import 'package:myapp/Screens/UpdateLeadSetting/Model/location_model.dart';
-import 'package:myapp/Services/api_services.dart';
-import 'package:myapp/local/my_local.dart';
+import 'package:homelyknock/Screens/UpdateLeadSetting/Model/add_services_model.dart';
+import 'package:homelyknock/Screens/UpdateLeadSetting/Model/location_model.dart';
+import 'package:homelyknock/Services/api_services.dart';
+import 'package:homelyknock/local/my_local.dart';
 
 class UpdateController extends GetxController {
   var isLoading = false.obs;

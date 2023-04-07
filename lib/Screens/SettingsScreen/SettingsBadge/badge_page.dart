@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:myapp/Screens/SettingsScreen/SettingsBadge/Controller/bedge_controller.dart';
+import 'package:homelyknock/Screens/SettingsScreen/SettingsBadge/Controller/bedge_controller.dart';
 
-import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
-import 'package:myapp/utils/colors.dart';
-import 'package:myapp/widgets/custom_loader.dart';
+import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
+import 'package:homelyknock/utils/colors.dart';
+import 'package:homelyknock/widgets/custom_loader.dart';
 
 class BadgePage extends StatelessWidget {
 

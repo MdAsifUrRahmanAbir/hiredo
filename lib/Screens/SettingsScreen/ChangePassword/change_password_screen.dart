@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Screens/ResistrationScreen/component/custome_text_field.dart';
-import 'package:myapp/Screens/SettingsScreen/ChangePassword/Controller/change_password_controller.dart';
+import 'package:homelyknock/Screens/ResistrationScreen/component/custome_text_field.dart';
+import 'package:homelyknock/Screens/SettingsScreen/ChangePassword/Controller/change_password_controller.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   ChangePasswordScreen({super.key});

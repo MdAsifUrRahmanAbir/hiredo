@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:myapp/Screens/SplashScreen/splashscreen.dart';
+import 'package:homelyknock/Screens/SplashScreen/splashscreen.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 
 void main() {

@@ -11,8 +11,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 
-import 'package:myapp/Screens/RestPasswordScreen/resetpasswordpage.dart';
-import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
+import 'package:homelyknock/Screens/RestPasswordScreen/resetpasswordpage.dart';
+import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 
 import '../../utils/colors.dart';
 import 'Controller/verifyController.dart';

@@ -5,11 +5,11 @@ import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:myapp/Screens/ResistrationScreen/component/custome_text_field.dart';
-import 'package:myapp/Screens/SignInScreen/Contoller/signin_controller.dart';
-import 'package:myapp/nav_bar_page/main_screen.dart';
+import 'package:homelyknock/Screens/ResistrationScreen/component/custome_text_field.dart';
+import 'package:homelyknock/Screens/SignInScreen/Contoller/signin_controller.dart';
+import 'package:homelyknock/nav_bar_page/main_screen.dart';
 
-import 'package:myapp/utils/colors.dart';
+import 'package:homelyknock/utils/colors.dart';
 
 import '../ForgetPasswordScreen/forgotpasswordpage.dart';
 

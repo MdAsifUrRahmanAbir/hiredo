@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:myapp/Screens/SettingsScreen/SettingsBadge/Model/bedge_mode.dart';
+import 'package:homelyknock/Screens/SettingsScreen/SettingsBadge/Model/bedge_mode.dart';
 
-import 'package:myapp/Services/api_services.dart';
+import 'package:homelyknock/Services/api_services.dart';
 
 class BedgeController extends GetxController {
 

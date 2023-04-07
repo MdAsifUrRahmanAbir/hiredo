@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'package:myapp/nav_bar_page/main_controller.dart';
-import 'package:myapp/utils/colors.dart';
+import 'package:homelyknock/nav_bar_page/main_controller.dart';
+import 'package:homelyknock/utils/colors.dart';
 
 
 

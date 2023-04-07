@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Screens/ResistrationScreen/component/custom_button.dart';
-import 'package:myapp/widgets/custom_loader.dart';
+import 'package:homelyknock/Screens/ResistrationScreen/component/custom_button.dart';
+import 'package:homelyknock/widgets/custom_loader.dart';
 
 import '../HomeScreen/Model/lead_category_model.dart';
 import 'Controller/question_controller.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:myapp/utils/colors.dart';
+import 'package:homelyknock/utils/colors.dart';
 
 class CustomLoader extends StatelessWidget {
   const CustomLoader({super.key});

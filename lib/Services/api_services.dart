@@ -3,16 +3,16 @@ import 'dart:core';
 
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:myapp/Screens/HomeScreen/Model/lead_category_model.dart';
+import 'package:homelyknock/Screens/HomeScreen/Model/lead_category_model.dart';
 
-import 'package:myapp/Screens/ResistrationScreen/Model/registration_model.dart';
+import 'package:homelyknock/Screens/ResistrationScreen/Model/registration_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:myapp/Screens/SettingsScreen/SettingsBadge/Model/bedge_mode.dart';
-import 'package:myapp/Screens/SignInScreen/Model/login_model.dart';
-import 'package:myapp/Screens/UpdateLeadSetting/Model/add_services_model.dart';
-import 'package:myapp/Screens/UpdateLeadSetting/Model/location_model.dart';
-import 'package:myapp/Services/api_component.dart';
-import 'package:myapp/local/my_local.dart';
+import 'package:homelyknock/Screens/SettingsScreen/SettingsBadge/Model/bedge_mode.dart';
+import 'package:homelyknock/Screens/SignInScreen/Model/login_model.dart';
+import 'package:homelyknock/Screens/UpdateLeadSetting/Model/add_services_model.dart';
+import 'package:homelyknock/Screens/UpdateLeadSetting/Model/location_model.dart';
+import 'package:homelyknock/Services/api_component.dart';
+import 'package:homelyknock/local/my_local.dart';
 
 import '../Screens/QuestionScreen/Model/job_post_model.dart';
 

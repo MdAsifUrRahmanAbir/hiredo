@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:myapp/Screens/LeadsDetailsScreen/component/custom_maps.dart';
-import 'package:myapp/Screens/ResistrationScreen/registrationpage.dart';
+import 'package:homelyknock/Screens/LeadsDetailsScreen/component/custom_maps.dart';
+import 'package:homelyknock/Screens/ResistrationScreen/registrationpage.dart';
 
 class LeadsDetailsScreen extends StatefulWidget {
   LeadsDetailsScreen(

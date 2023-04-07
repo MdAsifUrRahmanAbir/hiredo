@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:myapp/Screens/SettingsScreen/EmailNotification/Model/email_model.dart';
+import 'package:homelyknock/Screens/SettingsScreen/EmailNotification/Model/email_model.dart';
 
 class EmailController extends GetxController {
   List<EmailModel> items = [

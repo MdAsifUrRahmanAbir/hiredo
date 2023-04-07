@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:myapp/Screens/ProfileScreen/profile.dart';
-import 'package:myapp/Screens/SettingsScreen/PaymentDetails/Model/payment_model.dart';
-import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
-import 'package:myapp/utils/colors.dart';
+import 'package:homelyknock/Screens/ProfileScreen/profile.dart';
+import 'package:homelyknock/Screens/SettingsScreen/PaymentDetails/Model/payment_model.dart';
+import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
+import 'package:homelyknock/utils/colors.dart';
 
 class PaymentDetailsPage extends StatefulWidget {
 

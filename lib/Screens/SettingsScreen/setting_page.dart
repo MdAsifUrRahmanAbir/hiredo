@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Screens/ProfileScreen/profile.dart';
-import 'package:myapp/Screens/ReviewScreen/reviews_page.dart';
-import 'package:myapp/Screens/SettingsScreen/AccountDetails/account_details.dart';
-import 'package:myapp/Screens/SettingsScreen/BillingDetails/billing_details.dart';
-import 'package:myapp/Screens/SettingsScreen/BrowserNotification/browser_notification.dart';
-import 'package:myapp/Screens/SettingsScreen/ElitePro/elite_pro_page.dart';
-import 'package:myapp/Screens/SettingsScreen/EmailNotification/email_notification.dart';
-import 'package:myapp/Screens/SettingsScreen/EmailTemplate/email_template_page.dart';
-import 'package:myapp/Screens/SettingsScreen/MyCredits/my_credits_page.dart';
-import 'package:myapp/Screens/SettingsScreen/OneClickResponce/one_click_responce_page.dart';
-import 'package:myapp/Screens/SettingsScreen/PaymentDetails/payment_details_page.dart';
-import 'package:myapp/Screens/SettingsScreen/SMSTemplate/sms_template_page.dart';
-import 'package:myapp/Screens/SettingsScreen/SettingsBadge/badge_page.dart';
-import 'package:myapp/utils/colors.dart';
+import 'package:homelyknock/Screens/ProfileScreen/profile.dart';
+import 'package:homelyknock/Screens/ReviewScreen/reviews_page.dart';
+import 'package:homelyknock/Screens/SettingsScreen/AccountDetails/account_details.dart';
+import 'package:homelyknock/Screens/SettingsScreen/BillingDetails/billing_details.dart';
+import 'package:homelyknock/Screens/SettingsScreen/BrowserNotification/browser_notification.dart';
+import 'package:homelyknock/Screens/SettingsScreen/ElitePro/elite_pro_page.dart';
+import 'package:homelyknock/Screens/SettingsScreen/EmailNotification/email_notification.dart';
+import 'package:homelyknock/Screens/SettingsScreen/EmailTemplate/email_template_page.dart';
+import 'package:homelyknock/Screens/SettingsScreen/MyCredits/my_credits_page.dart';
+import 'package:homelyknock/Screens/SettingsScreen/OneClickResponce/one_click_responce_page.dart';
+import 'package:homelyknock/Screens/SettingsScreen/PaymentDetails/payment_details_page.dart';
+import 'package:homelyknock/Screens/SettingsScreen/SMSTemplate/sms_template_page.dart';
+import 'package:homelyknock/Screens/SettingsScreen/SettingsBadge/badge_page.dart';
+import 'package:homelyknock/utils/colors.dart';
 
 class SettingsPage extends StatefulWidget {
   static const String routename = '/settings';

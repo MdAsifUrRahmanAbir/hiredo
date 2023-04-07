@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
-import 'package:myapp/Screens/IntroScreen/onBoarding_screen.dart';
-import 'package:myapp/Screens/IntroScreen/signupintropage.dart';
-import 'package:myapp/local/my_local.dart';
+import 'package:homelyknock/Screens/IntroScreen/onBoarding_screen.dart';
+import 'package:homelyknock/Screens/IntroScreen/signupintropage.dart';
+import 'package:homelyknock/local/my_local.dart';
 
-import 'package:myapp/utils/colors.dart';
+import 'package:homelyknock/utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../nav_bar_page/main_screen.dart';

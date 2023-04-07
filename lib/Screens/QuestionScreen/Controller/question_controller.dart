@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:myapp/Services/api_services.dart';
+import 'package:homelyknock/Services/api_services.dart';
 
 import '../Model/job_post_model.dart';
 
