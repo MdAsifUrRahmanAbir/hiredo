@@ -307,4 +307,37 @@ class ApiServices {
 
     
   }
+
+// forgot password
+Future<dynamic>  forgotPassword({required String email,required String type})async{
+
+  var headers = {
+  'Content-Type': 'application/json'
+};
+var request = http.Request('POST', Uri.parse(forgotPasswordApi));
+request.body = json.encode({
+  "media": type,
+  "phone_or_email":email,
+});
+request.headers.addAll(headers);
+
+http.StreamedResponse response = await request.send();
+
+if (response.statusCode == 200) {
+  print(await response.stream.bytesToString());
+}
+else {
+  print(response.reasonPhrase);
+}
+
+
+
+}
+
+
+
+
+
+
+
 }

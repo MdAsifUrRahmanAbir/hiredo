@@ -15,4 +15,5 @@ String jobPostApi="${baseUrl}lead/JobPostCreate/";
 String fetchAllLocationApi="${baseUrl}lead/PostLocation/";
 
 String locationsApi = "${baseUrl}lead/category/";
+String forgotPasswordApi="${baseUrl}reset-password-otp/";
 

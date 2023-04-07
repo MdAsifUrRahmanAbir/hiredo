@@ -54,380 +54,448 @@ class _ProfileState extends State<Profile> {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         padding: EdgeInsets.symmetric(horizontal: 26.w),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 32.h,
-            ),
-            Row(
-             
-              children: [
-                Stack(
-                  alignment: Alignment.bottomRight,
-                  children: [
-                    Container(
-                      height:63.h,
-                      width: 63.h,
-                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(width:1,color: Colors.grey.shade500),
-                      color: Colors.grey.shade400
-                     ),
-                    ),
-                   
-                    Positioned(
-                        bottom: -20.h,
-                        right: -20.h,
-                        child: IconButton(
-                            onPressed: () {},
-                            icon:  Icon(
-                              Icons.camera_alt,
-                              size:25.sp,
-                            )))
-                  ],
-                ),
-                SizedBox(width:15.w,),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        _dataController.fullName.value,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      
-                        style: myStyle(16.sp, FontWeight.w500, textClr),
-                      ),
-                      Text(
-                        _dataController.email.value,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: myStyle(14.sp, FontWeight.w400, const Color(0xff424242)),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: 10.w,
-                ),
-                Image.asset("images/switchimg.png",height:26.h,width: 26.w,),
-                SizedBox(
-                  width: 10.w,
-                ),
-                const Icon(Icons.more_vert)
-              ],
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            Container(
-              height: 150.h,
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: containerClr),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Your profile is 80% complete",
-                          style: myStyle(16, FontWeight.w500, textClr)),
-                      Image.asset(
-                        "images/editicon.png",
-                        height: 22.h,
-                        width: 22.w,
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: LinearPercentIndicator(
-                          animation: true,
-                          animationDuration: 1000,
-                          lineHeight: 8.h,
-                          percent: 0.8,
-                          barRadius: Radius.circular(30.r),
-                          progressColor: backIconClr,
-                          backgroundColor: scaffoldClr,
-                        ),
-                      ),
-                      Text(
-                        '8/10',
-                        style: myStyle(14, FontWeight.w500, textClr),
-                      )
-                    ],
-                  ),
-                  Text(
-                    'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. ',
-                    style: myStyle(14, FontWeight.w400, Color(0xff424242)),
-                  )
-                ],
+        child: Obx(()=>
+           Column(
+            children: [
+              SizedBox(
+                height: 32.h,
               ),
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            Container(
-              height: 167.h,
-             
-             
-              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6.r),
-                  color: containerClr),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Row(
+               
                 children: [
-                  Text(
-                    'OverView',
-                    style: myStyle(20.sp, FontWeight.w500, textClr),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Stack(
+                    alignment: Alignment.bottomRight,
                     children: [
-                      Row(
-                        children: [
-                          Image.asset('images/eliteicon.png'),
-                          SizedBox(
-                            width: 4.w,
-                          ),
-                          Text(
-                            'Elite Pro',
-                            style: myStyle(14.sp, FontWeight.w500, textClr),
-                          )
-                        ],
+                      Container(
+                        height:63.h,
+                        width: 63.h,
+                       decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(width:1,color: Colors.grey.shade500),
+                        color: Colors.grey.shade400
+                       ),
                       ),
-                      Row(
-                        children: [
-                          Image.asset('images/tick.png'),
-                          SizedBox(
-                            width: 4.w,
-                          ),
-                          Text(
-                            '14 Hires on Ringknock',
-                            style: myStyle(14.sp, FontWeight.w500, textClr),
-                          )
-                        ],
-                      )
+                     
+                      Positioned(
+                          bottom: -20.h,
+                          right: -20.h,
+                          child: IconButton(
+                              onPressed: () {},
+                              icon:  Icon(
+                                Icons.camera_alt,
+                                size:25.sp,
+                              )))
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Image.asset('images/moon.png'),
-                          SizedBox(
-                            width: 4.w,
-                          ),
-                          Text(
-                            '7 Years in business',
-                            style: myStyle(14.sp, FontWeight.w500, textClr),
-                          )
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Image.asset('images/tick.png'),
-                          SizedBox(
-                            width: 4.w,
-                          ),
-                          Text(
-                            '6 Hour response  time',
-                            style: myStyle(14.sp, FontWeight.w500, textClr),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.person_rounded,
-                        size: 18.sp,
-                      ),
-                      SizedBox(
-                        width: 4.w,
-                      ),
-                      Text(
-                        '11-50 Staff',
-                        style: GoogleFonts.roboto(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                            color: const Color(0xFF272727)),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            Container(
-              height: 152.h,
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-              color: containerClr,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Service Tags',
-                    style: myStyle(20, FontWeight.w500, textClr),
-                  ),
-                  SizedBox(
-                    height: 5.h,
-                  ),
+                  SizedBox(width:15.w,),
                   Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              '#Bathroom_installation',
-                              style: myStyle(14, FontWeight.w400, backIconClr),
-                            ),
-                            Text(
-                              '#Kitchen Refurbishment',
-                              style: myStyle(14, FontWeight.w400, textClr),
-                            ),
-                            Text(
-                              '#Kitchen Refurbishment',
-                              style: myStyle(14, FontWeight.w400, textClr),
-                            ),
-                          ],
+                        Text(
+                          _dataController.fullName.value,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        
+                          style: myStyle(16.sp, FontWeight.w500, textClr),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              '#Bathroom_installation',
-                              style: myStyle(14, FontWeight.w400, textClr),
-                            ),
-                            Text(
-                              '#Kitchen Design',
-                              style: myStyle(14, FontWeight.w400, textClr),
-                            ),
-                            Text(
-                              'View More',
-                              style: myStyle(14, FontWeight.w400, backIconClr),
-                            ),
-                          ],
-                        )
+                        Text(
+                          _dataController.email.value,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: myStyle(14.sp, FontWeight.w400, const Color(0xff424242)),
+                        ),
                       ],
                     ),
                   ),
+                  SizedBox(
+                    width: 10.w,
+                  ),
+                  InkWell(
+                    onTap: (){
+                      _dataController.isProfessional.value=!_dataController.isProfessional.value;
+                         _dataController.isUser.value=!_dataController.isUser.value;
+                    },
+                    
+                    child: Image.asset("images/switchimg.png",height:26.h,width: 26.w,)),
+                  SizedBox(
+                    width: 10.w,
+                  ),
+                  const Icon(Icons.more_vert)
                 ],
               ),
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            _cardItem(
+              SizedBox(
+                height: 20.h,
+              ),
+        
+              _dataController.isUser.value?
+              _isUser():_isProfational(),
+          
+            
+              SizedBox(
+                height: 37.h,
+              ),
+              InkWell(
                 onTap: () {
-                  Get.to(LeadsScreen());
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (_) => SignInPage()),
+                      (route) => false);
                 },
-                icon: Icons.star_border_outlined,
-                text: 'Leads',
-                isCount: true,
-                count: 450.toString()),
-            _cardItem(
-                onTap: () {
-                  Get.to(MyResponse());
-                },
-                icon: Icons.sports_handball_rounded,
-                text: 'My Responces',
-                isCount: true,
-                count: 450.toString()),
-            _cardItem(
-              onTap: () {
-                Get.to(WishListScreen());
-              },
-              icon: Icons.favorite_border,
-              text: 'Wishlist',
-            ),
-            _cardItem(
-              onTap: () {
-                Get.to(SettingsPage());
-              },
-              icon: Icons.settings,
-              text: 'Settings',
-            ),
-            _cardItem(
-              onTap: () {
-                Get.to(HelpScreen());
-              },
-              icon: Icons.help_outline,
-              text: 'Help',
-            ),
-            _cardItem(
-                onTap: () {
-                  Get.to(Service());
-                },
-                icon: Icons.rotate_right,
-                text: 'Services',
-                isCount: true,
-                count: 50.toString()),
-            _cardItem(
-                onTap: () {
-                  Get.to(LocationPage());
-                },
-                icon: Icons.location_pin,
-                text: 'Locations',
-                isCount: true,
-                count: 50.toString()),
-            SizedBox(
-              height: 37.h,
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (_) => SignInPage()),
-                    (route) => false);
-              },
-              child: Container(
-                  height: 43.h,
-                  width: 124.w,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.r),
-                      color: const Color(0xffDF2929)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.logout_outlined,
-                        color: scaffoldClr,
-                        size: 18,
-                      ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      Text(
-                        'Logout',
-                        style: myStyle(16, FontWeight.w500, scaffoldClr),
-                      ),
-                    ],
-                  )),
-            ),
-            SizedBox(
-              height: 80.h,
-            )
-          ],
+                child: Container(
+                    height: 43.h,
+                    width: 124.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.r),
+                        color: const Color(0xffDF2929)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.logout_outlined,
+                          color: scaffoldClr,
+                          size: 18,
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        Text(
+                          'Logout',
+                          style: myStyle(16, FontWeight.w500, scaffoldClr),
+                        ),
+                      ],
+                    )),
+              ),
+              SizedBox(
+                height: 80.h,
+              )
+            ],
+          ),
         ),
       ),
     );
   }
+
+
+_isProfational(){
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+       
+          Card(
+            child: ListTile(
+              title: Text("Phone number",style: GoogleFonts.roboto(fontSize:20.sp,color:Colors.black),),
+              subtitle: Text("01796165636",style: GoogleFonts.roboto(fontSize:16.sp,color:Colors.black),),
+            )
+          ),
+           Card(
+            child: ListTile(
+              title: Text("Corporation name",style: GoogleFonts.roboto(fontSize:20.sp,color:Colors.black),),
+              subtitle: Text("Developer",style: GoogleFonts.roboto(fontSize:16.sp,color:Colors.black),),
+            )
+          ),
+           Card(
+            child: ListTile(
+              title: Text("Corporation number",style: GoogleFonts.roboto(fontSize:20.sp,color:Colors.black),),
+              subtitle: Text("01796165636",style: GoogleFonts.roboto(fontSize:16.sp,color:Colors.black),),
+            )
+          )
+
+         
+
+          
+          
+
+
+
+        ],
+
+
+
+
+    );
+
+}
+
+
+ _isUser() {
+    return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+                  Container(
+            height: 150.h,
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5.r),
+                color: containerClr),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Your profile is 80% complete",
+                        style: myStyle(16, FontWeight.w500, textClr)),
+                    Image.asset(
+                      "images/editicon.png",
+                      height: 22.h,
+                      width: 22.w,
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: LinearPercentIndicator(
+                        animation: true,
+                        animationDuration: 1000,
+                        lineHeight: 8.h,
+                        percent: 0.8,
+                        barRadius: Radius.circular(30.r),
+                        progressColor: backIconClr,
+                        backgroundColor: scaffoldClr,
+                      ),
+                    ),
+                    Text(
+                      '8/10',
+                      style: myStyle(14, FontWeight.w500, textClr),
+                    )
+                  ],
+                ),
+                Text(
+                  'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. ',
+                  style: myStyle(14, FontWeight.w400, Color(0xff424242)),
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 20.h,
+          ),
+          Container(
+            height: 167.h,
+           
+           
+            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6.r),
+                color: containerClr),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'OverView',
+                  style: myStyle(20.sp, FontWeight.w500, textClr),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset('images/eliteicon.png'),
+                        SizedBox(
+                          width: 4.w,
+                        ),
+                        Text(
+                          'Elite Pro',
+                          style: myStyle(14.sp, FontWeight.w500, textClr),
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Image.asset('images/tick.png'),
+                        SizedBox(
+                          width: 4.w,
+                        ),
+                        Text(
+                          '14 Hires on Ringknock',
+                          style: myStyle(14.sp, FontWeight.w500, textClr),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset('images/moon.png'),
+                        SizedBox(
+                          width: 4.w,
+                        ),
+                        Text(
+                          '7 Years in business',
+                          style: myStyle(14.sp, FontWeight.w500, textClr),
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Image.asset('images/tick.png'),
+                        SizedBox(
+                          width: 4.w,
+                        ),
+                        Text(
+                          '6 Hour response  time',
+                          style: myStyle(14.sp, FontWeight.w500, textClr),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.person_rounded,
+                      size: 18.sp,
+                    ),
+                    SizedBox(
+                      width: 4.w,
+                    ),
+                    Text(
+                      '11-50 Staff',
+                      style: GoogleFonts.roboto(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xFF272727)),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 20.h,
+          ),
+          Container(
+            height: 152.h,
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+            color: containerClr,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Service Tags',
+                  style: myStyle(20, FontWeight.w500, textClr),
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            '#Bathroom_installation',
+                            style: myStyle(14, FontWeight.w400, backIconClr),
+                          ),
+                          Text(
+                            '#Kitchen Refurbishment',
+                            style: myStyle(14, FontWeight.w400, textClr),
+                          ),
+                          Text(
+                            '#Kitchen Refurbishment',
+                            style: myStyle(14, FontWeight.w400, textClr),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            '#Bathroom_installation',
+                            style: myStyle(14, FontWeight.w400, textClr),
+                          ),
+                          Text(
+                            '#Kitchen Design',
+                            style: myStyle(14, FontWeight.w400, textClr),
+                          ),
+                          Text(
+                            'View More',
+                            style: myStyle(14, FontWeight.w400, backIconClr),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 20.h,
+          ),
+          _cardItem(
+              onTap: () {
+                Get.to(LeadsScreen());
+              },
+              icon: Icons.star_border_outlined,
+              text: 'Leads',
+              isCount: true,
+              count: 450.toString()),
+          _cardItem(
+              onTap: () {
+                Get.to(MyResponse());
+              },
+              icon: Icons.sports_handball_rounded,
+              text: 'My Responces',
+              isCount: true,
+              count: 450.toString()),
+          _cardItem(
+            onTap: () {
+              Get.to(WishListScreen());
+            },
+            icon: Icons.favorite_border,
+            text: 'Wishlist',
+          ),
+          _cardItem(
+            onTap: () {
+              Get.to(SettingsPage());
+            },
+            icon: Icons.settings,
+            text: 'Settings',
+          ),
+          _cardItem(
+            onTap: () {
+              Get.to(HelpScreen());
+            },
+            icon: Icons.help_outline,
+            text: 'Help',
+          ),
+          _cardItem(
+              onTap: () {
+                Get.to(Service());
+              },
+              icon: Icons.rotate_right,
+              text: 'Services',
+              isCount: true,
+              count: 50.toString()),
+          _cardItem(
+              onTap: () {
+                Get.to(LocationPage());
+              },
+              icon: Icons.location_pin,
+              text: 'Locations',
+              isCount: true,
+              count: 50.toString()),
+        
+            ],
+          );
+  }
+
+
+
 
   _cardItem(
       {required String text,
