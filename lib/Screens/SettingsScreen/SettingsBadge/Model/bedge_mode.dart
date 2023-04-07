@@ -15,6 +15,7 @@ class BedgeModel {
         required this.title,
         required this.description,
         required this.image,
+        required this.longDescription,
     });
 
     int id;
@@ -22,6 +23,7 @@ class BedgeModel {
     String title;
     String description;
     String image;
+    String longDescription;
 
     factory BedgeModel.fromJson(Map<String, dynamic> json) => BedgeModel(
         id: json["id"],
@@ -29,6 +31,7 @@ class BedgeModel {
         title: json["title"],
         description: json["description"],
         image: json["image"],
+        longDescription: json["long_description"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -37,5 +40,6 @@ class BedgeModel {
         "title": title,
         "description": description,
         "image": image,
+        "long_description": longDescription,
     };
 }
