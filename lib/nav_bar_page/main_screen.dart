@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -10,13 +9,12 @@ import 'package:homelyknock/utils/colors.dart';
 
 import '../utils/app_icon.dart';
 
-
-
 class MainScreen extends StatelessWidget {
+   MainScreen({super.key});
 
-    final _mainController =Get.put(MainScreenController());
+   final _mainController =Get.put(MainScreenController());
 
-  @override
+   @override
   Widget build(BuildContext context) {
    
     return Scaffold(

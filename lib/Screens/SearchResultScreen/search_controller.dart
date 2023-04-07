@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../common_dashboard_services/models/get_location_model.dart';
+import '../../widgets/common_dashboard_controller.dart';
+
 class SearchController extends GetxController{
 
   final categoryController = TextEditingController();
