@@ -29,7 +29,6 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: scaffoldClr,
       appBar: AppBar(
@@ -65,12 +64,19 @@ class _ProfileState extends State<Profile> {
               children: [
                 Stack(
                   children: [
-                    ClipRRect
-                    (
+                    ClipRRect(
                       child: Image.asset(
                         "images/profilepic.png",
                       ),
                     ),
+                    Positioned(
+                        top: 40.w,
+                        left: 30.w,
+                        child: IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.person,
+                            )))
                   ],
                 ),
                 Column(
@@ -248,7 +254,7 @@ class _ProfileState extends State<Profile> {
             Container(
               height: 152.h,
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
               color: containerClr,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -355,7 +361,7 @@ class _ProfileState extends State<Profile> {
                 count: 50.toString()),
             _cardItem(
                 onTap: () {
-                  Get.to( LocationPage());
+                  Get.to(LocationPage());
                 },
                 icon: Icons.location_pin,
                 text: 'Locations',
@@ -365,8 +371,11 @@ class _ProfileState extends State<Profile> {
               height: 37.h,
             ),
             InkWell(
-              onTap: (){
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>SignInPage()), (route) => false);
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (_) => SignInPage()),
+                    (route) => false);
               },
               child: Container(
                   height: 43.h,
