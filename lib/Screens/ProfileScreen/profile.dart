@@ -60,39 +60,57 @@ class _ProfileState extends State<Profile> {
               height: 32.h,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+             
               children: [
                 Stack(
+                  alignment: Alignment.bottomRight,
                   children: [
-                    ClipRRect(
-                      child: Image.asset(
-                        "images/profilepic.png",
-                      ),
+                    Container(
+                      height:63.h,
+                      width: 63.h,
+                     decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(width:1,color: Colors.grey.shade500),
+                      color: Colors.grey.shade400
+                     ),
                     ),
+                   
                     Positioned(
-                        top: 40.w,
-                        left: 30.w,
+                        bottom: -20.h,
+                        right: -20.h,
                         child: IconButton(
                             onPressed: () {},
-                            icon: const Icon(
-                              Icons.person,
+                            icon:  Icon(
+                              Icons.camera_alt,
+                              size:25.sp,
                             )))
                   ],
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      _dataController.fullName.value,
-                      style: myStyle(16.sp, FontWeight.w500, textClr),
-                    ),
-                    Text(
-                      _dataController.email.value,
-                      style: myStyle(14.sp, FontWeight.w400, Color(0xff424242)),
-                    ),
-                  ],
+                SizedBox(width:15.w,),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        _dataController.fullName.value,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      
+                        style: myStyle(16.sp, FontWeight.w500, textClr),
+                      ),
+                      Text(
+                        _dataController.email.value,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: myStyle(14.sp, FontWeight.w400, const Color(0xff424242)),
+                      ),
+                    ],
+                  ),
                 ),
-                Image.asset("images/switchimg.png"),
+                SizedBox(
+                  width: 10.w,
+                ),
+                Image.asset("images/switchimg.png",height:26.h,width: 26.w,),
                 SizedBox(
                   width: 10.w,
                 ),
@@ -156,7 +174,8 @@ class _ProfileState extends State<Profile> {
             ),
             Container(
               height: 167.h,
-              width: 371.w,
+             
+             
               padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6.r),

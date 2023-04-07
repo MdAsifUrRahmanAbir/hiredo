@@ -7,10 +7,10 @@ class MyPreference {
     sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences!.setBool(Constance.isOnboard,isOnboard );
   }
-  static Future<bool> getOnBoard() async {
-    sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences!.getBool(Constance.isOnboard) ??false;
-  }
+  // static Future<bool> getOnBoard() async {
+  //   sharedPreferences = await SharedPreferences.getInstance();
+  //   return sharedPreferences!.getBool(Constance.isOnboard) ??false;
+  // }
 
   static Future<void> setToken(String accessToken) async {
     sharedPreferences = await SharedPreferences.getInstance();
@@ -23,20 +23,24 @@ class MyPreference {
   }
 
 
-  static Future<void> isLoggedSave(bool value) async {
+  static Future<void> isLoggedSave({required String email, required String password}) async {
     sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences!.setBool(Constance.isLoggedIn, value);
+    sharedPreferences!.setString(Constance.isLoggedEmail, email);
+     sharedPreferences!.setString(Constance.isLoggedPassword, password);
+
   }
 
-  static Future<bool> getIsLoggedIn() async {
-    sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences!.getBool(Constance.isLoggedIn) ?? false;
-  }
-}
+//   static Future<bool> getIsLoggedIn() async {
+//     sharedPreferences = await SharedPreferences.getInstance();
+//     return sharedPreferences!.(Constance.isLoggedIn) ?? false;
+//   }
+ }
 
 class Constance {
   static String accessToken = "token";
 
-  static String isLoggedIn = "isLoggedIn";
+  static String isLoggedEmail = "isLoggedEmail";
+  static String isLoggedPassword="isLoggedPassword";
   static String isOnboard="isOnBoard";
+  
 }

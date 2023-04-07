@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';
 import 'package:homelyknock/Services/api_services.dart';
 import 'package:homelyknock/nav_bar_page/main_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,13 +32,20 @@ class SignInController extends GetxController {
 
   // handlesSignIn
 
-  userSignIn(BuildContext context) async {
-    isLoading(true);
+  userSignIn({required BuildContext context,required bool isLogged,required String email, required String password}) async {
+    if(isLogged){
+        isLoading(true);
+    }
+    
     try {
       var result = await ApiServices.handelLogin(
-          email: emailController.text, password: passwordController.text);
+          email: email, password: password);
 
       if (result.runtimeType == int) {
+        if(!isLogged){
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>SignInPage()));
+           }
+        Fluttertoast.showToast(msg: "Invalid email or password.",);
         debugPrint("Opps sign in Error $result");
       } else {
         
@@ -53,14 +62,14 @@ class SignInController extends GetxController {
             isProfessionalD: allData.user.isProfessional,
             isUserD: allData.user.isUser);
 
-            print(_dataController.id);
+            debugPrint(_dataController.id.toString());
 
            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>MainScreen()), (route) => false);
        
         if(isChecked.value){
         await  rememberMeSetData();
         }
-        MyPreference.isLoggedSave(true);
+        MyPreference.isLoggedSave(email:emailController.text,password:passwordController.text);
         MyPreference.setToken(allData.token);
 
          emailController.clear();
@@ -70,9 +79,12 @@ class SignInController extends GetxController {
       }
     } on Exception catch (e) {
       debugPrint("Opps sign in Error $e");
+      
       // TODO
     } finally {
-      isLoading(false);
+      if(isLogged){
+        isLoading(false);
+    }
     }
   }
 
