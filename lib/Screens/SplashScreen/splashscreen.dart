@@ -31,14 +31,14 @@ class _SplashPageState extends State<SplashPage> {
       SharedPreferences preferences = await SharedPreferences.getInstance();
         String? isLoggedEmail= preferences.getString(Constance.isLoggedEmail);
         String? isLoggedPassword= preferences.getString(Constance.isLoggedPassword);
-        bool? isOnBoard= preferences.getBool(Constance.isOnboard);
+        bool isOnBoard= preferences.getBool(Constance.isOnboard) ?? false;
 
       if (isLoggedEmail!=null) {
           _signInController.userSignIn(context: context, isLogged: false, email: isLoggedEmail, password:isLoggedPassword!);
       } else {
         
         print(isOnBoard);
-        if(isOnBoard!){
+        if(isOnBoard){
           Get.off(SignIntroPage());
         }else{
           print(isOnBoard);

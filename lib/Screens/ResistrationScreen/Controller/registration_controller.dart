@@ -5,7 +5,7 @@ import 'package:homelyknock/Screens/ForgetPasswordScreen/forgotpasswordpage.dart
 
 import 'package:homelyknock/Screens/ResistrationScreen/Model/registration_model.dart';
 import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';
-import 'package:homelyknock/Services/api_services.dart';
+import 'package:homelyknock/common_dashboard_services/controller/api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RegistrationController extends GetxController {

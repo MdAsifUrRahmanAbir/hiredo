@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:homelyknock/Screens/UpdateLeadSetting/Model/add_services_model.dart';
 import 'package:homelyknock/Screens/UpdateLeadSetting/Model/location_model.dart';
-import 'package:homelyknock/Services/api_services.dart';
+import 'package:homelyknock/common_dashboard_services/controller/api_services.dart';
 import 'package:homelyknock/local/my_local.dart';
 
 class UpdateController extends GetxController {
