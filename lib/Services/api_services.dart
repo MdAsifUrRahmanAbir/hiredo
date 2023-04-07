@@ -37,14 +37,14 @@ class ApiServices {
       return true;
     } else {
       Map d = json.decode(await response.stream.bytesToString());
-      Fluttertoast.showToast(msg:d["message"]);
+
+      Fluttertoast.showToast(msg: d['email'][0]);
       if (kDebugMode) {
         print(d['message']);
       }
       return false;
     }
   }
-
 
 // handle login
 
@@ -63,7 +63,7 @@ class ApiServices {
       } else {
         Map d = json.decode(await response.stream.bytesToString());
         debugPrint("$d");
-        
+
         if (kDebugMode) {
           debugPrint(response.reasonPhrase);
         }
@@ -246,7 +246,6 @@ class ApiServices {
     }
   }
 
-
 // fetch bedge data
 
   static dynamic fetchBedge() async {
@@ -277,67 +276,35 @@ class ApiServices {
   }
 
   // Job Post
-    static Future<dynamic> jobPostCreate(
+  static Future<dynamic> jobPostCreate(
       {required List<JobPostModel> data}) async {
     try {
-  var accessToken = await MyPreference.getToken();
-  
-  var headers = {
-    'Authorization': 'Bearer $accessToken',
-    'Content-Type': 'application/json',
-    'Cookie': 'csrftoken=YqvXb0jbZKzIkJLJhy1KgrFX5K0aDJ3I; sessionid=s56mcfr0yahwh0jk9nuikt10ie6d8cau'
-  };
-  var request = http.Request('POST', Uri.parse(jobPostApi));
-  request.body =jobPostModelToJson(data);
-  request.headers.addAll(headers);
-  
-  http.StreamedResponse response = await request.send();
-  
-  if (response.statusCode == 200) {
-    debugPrint(await response.stream.bytesToString());
-    return "success";
+      var accessToken = await MyPreference.getToken();
+
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+        'Cookie':
+            'csrftoken=YqvXb0jbZKzIkJLJhy1KgrFX5K0aDJ3I; sessionid=s56mcfr0yahwh0jk9nuikt10ie6d8cau'
+      };
+      var request = http.Request('POST', Uri.parse(jobPostApi));
+      request.body = jobPostModelToJson(data);
+      request.headers.addAll(headers);
+
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        debugPrint(await response.stream.bytesToString());
+        return "success";
+      } else {
+        debugPrint("error:  ${response.reasonPhrase}");
+        return 1;
+      }
+    } on Exception catch (e) {
+      debugPrint("Job post  Error. Reason ${e.toString()}");
+      return 1;
+    }
+
+    
   }
-  else {
-    debugPrint( "error:  ${response.reasonPhrase}");
-    return 1;
-  }
-} on Exception catch (e) {
-  debugPrint("Job post  Error. Reason ${e.toString()}");
-  return 1;
-  
-}
-
-  }
-
-
-/// fetch All Location
-fetchAllLocations()async{
-  var accessToken = await MyPreference.getToken();
-  
-  var headers = {
-    'Authorization': 'Bearer $accessToken',
-    'Content-Type': 'application/json',
-  };
-var request = http.Request('GET', Uri.parse(fetchAllLocationApi));
-
-request.headers.addAll(headers);
-
-http.StreamedResponse response = await request.send();
-
-if (response.statusCode == 200) {
-  print(await response.stream.bytesToString());
-}
-else {
-  print(response.reasonPhrase);
-}
-
-  }
-
-
-
-
-
-
-
-
 }

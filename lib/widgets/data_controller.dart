@@ -80,4 +80,7 @@ class DataController extends GetxController {
     preferences.setBool(CommonData.isProfessional, isProfessionalD);
     preferences.setBool(CommonData.isUser, isUserD);
   }
+
+
+
 }
