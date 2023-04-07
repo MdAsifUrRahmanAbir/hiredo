@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../nav_bar_page/main_screen.dart';
 import '../../widgets/data_controller.dart';
+import '../SignInScreen/Contoller/signin_controller.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -22,22 +23,25 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  final _dataController =Get.put(DataController());
+ 
+   final _signInController = Get.put(SignInController());
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 3), () async {
       SharedPreferences preferences = await SharedPreferences.getInstance();
-      if (preferences.getString('token') != null&& preferences.get("isLoggedIn")==true) {
-        _dataController.getData();
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => MainScreen()));
+        String? isLoggedEmail= preferences.getString(Constance.isLoggedEmail);
+        String? isLoggedPassword= preferences.getString(Constance.isLoggedPassword);
+        bool? isOnBoard= preferences.getBool(Constance.isOnboard);
+
+      if (isLoggedEmail!=null) {
+          _signInController.userSignIn(context: context, isLogged: false, email: isLoggedEmail, password:isLoggedPassword!);
       } else {
-        bool isOnboard = await MyPreference.getOnBoard();
-        print(isOnboard);
-        if(isOnboard){
+        
+        print(isOnBoard);
+        if(isOnBoard!){
           Get.off(SignIntroPage());
         }else{
-          print(isOnboard);
+          print(isOnBoard);
             Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (_) => OnboardinScreen()));
         }
