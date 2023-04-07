@@ -1,4 +1,4 @@
-name: myapp
+name: homelyknock
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -50,15 +50,11 @@ dependencies:
   percent_indicator: ^4.2.3
   smooth_page_indicator: ^1.0.1
   dropdown_search: ^5.0.6
-
- 
-
-
   flutter_switch: ^0.3.2
-
   get: ^4.6.5
   google_maps_flutter: ^2.2.5
   intl: ^0.18.0
+  dart_code_metrics: ^5.7.0       # added by abir
 
 
 dev_dependencies:
@@ -71,6 +67,15 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+
+#  flutter_launcher_icons:       # added by abir
+#flutter pub run flutter_launcher_icons:main
+
+#flutter_icons:                  # added by abir
+#  android: "launcher_icon"
+#  ios: true
+#  image_path: "assets/Logo/escroc_launcher_icon.png"
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

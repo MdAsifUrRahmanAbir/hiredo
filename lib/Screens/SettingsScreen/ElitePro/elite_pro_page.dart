@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
-import 'package:myapp/utils/colors.dart';
+import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
+import 'package:homelyknock/utils/colors.dart';
 
-class EliteProPage extends StatefulWidget {
+class EliteProPage extends StatelessWidget {
   EliteProPage({Key? key}) : super(key: key);
 
-  @override
-  State<EliteProPage> createState() => _EliteProPageState();
-}
-
-class _EliteProPageState extends State<EliteProPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

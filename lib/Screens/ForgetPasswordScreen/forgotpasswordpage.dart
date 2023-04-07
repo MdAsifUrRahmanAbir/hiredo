@@ -6,10 +6,10 @@ import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:myapp/Screens/EmailVerifiyScreen/enterverificationpage.dart';
-import 'package:myapp/Screens/ForgetPasswordScreen/Controller/forget_controller.dart';
-import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
-import 'package:myapp/widgets/custom_widgets.dart';
+import 'package:homelyknock/Screens/EmailVerifiyScreen/enterverificationpage.dart';
+import 'package:homelyknock/Screens/ForgetPasswordScreen/Controller/forget_controller.dart';
+import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
+import 'package:homelyknock/widgets/custom_widgets.dart';
 
 import '../../utils/colors.dart';
 import '../ResistrationScreen/component/custome_text_field.dart';
@@ -59,6 +59,7 @@ class ForegPasswordPage extends StatelessWidget {
           style: myStyle(20, FontWeight.w500, textClr),
         ),
       ),
+    
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 26.w),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Screens/IntroScreen/signupintropage.dart';
+import 'package:homelyknock/Screens/IntroScreen/signupintropage.dart';
 
 import '../../utils/colors.dart';
 

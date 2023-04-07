@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Screens/SettingsScreen/BrowserNotification/Controller/browser_controller.dart';
+import 'package:homelyknock/Screens/SettingsScreen/BrowserNotification/Controller/browser_controller.dart';
 
 class BrowserNotification extends StatelessWidget {
   BrowserNotification({super.key});

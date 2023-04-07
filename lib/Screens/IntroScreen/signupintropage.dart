@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:myapp/Screens/SignInScreen/signinpage.dart';
+import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';
 
 import '../SignUpAccountScreen/signupaccountchoosepage.dart';
 import '../../utils/colors.dart';

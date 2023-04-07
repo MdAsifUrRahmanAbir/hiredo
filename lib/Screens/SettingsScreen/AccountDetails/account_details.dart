@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
-import 'package:myapp/utils/colors.dart';
-import 'package:myapp/widgets/custom_widgets.dart';
+import 'package:homelyknock/Screens/SettingsScreen/ChangePassword/change_password_screen.dart';
+import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
+import 'package:homelyknock/utils/colors.dart';
+import 'package:homelyknock/widgets/custom_widgets.dart';
 
-class AccountDetailsPage extends StatefulWidget {
+class AccountDetailsPage extends StatelessWidget {
   AccountDetailsPage({Key? key}) : super(key: key);
 
-  @override
-  State<AccountDetailsPage> createState() => _AccountDetailsPageState();
-}
-
-class _AccountDetailsPageState extends State<AccountDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -177,16 +174,22 @@ class _AccountDetailsPageState extends State<AccountDetailsPage> {
               SizedBox(
                 height: 16.h,
               ),
-              Container(
-                alignment: Alignment.center,
-               width: 147,
-                height: 34,
-                decoration: BoxDecoration(
-                    color: backIconClr,
-                    borderRadius: BorderRadius.circular(3.r)),
-                child: Text(
-                  'Change Password',
-                  style: myStyle(14.sp, FontWeight.w400, scaffoldClr),
+              InkWell
+              (
+                onTap: (){
+                  Get.to(ChangePasswordScreen());
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                 width: 147.w,
+                  height: 34.h,
+                  decoration: BoxDecoration(
+                      color: backIconClr,
+                      borderRadius: BorderRadius.circular(3.r)),
+                  child: Text(
+                    'Change Password',
+                    style: myStyle(14.sp, FontWeight.w400, scaffoldClr),
+                  ),
                 ),
               ),
             ],

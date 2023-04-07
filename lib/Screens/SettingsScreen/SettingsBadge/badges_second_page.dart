@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
-import 'package:myapp/utils/colors.dart';
+import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
+import 'package:homelyknock/utils/colors.dart';
 
-class BadgesSecondPage extends StatefulWidget {
+class BadgesSecondPage extends StatelessWidget {
   const BadgesSecondPage({Key? key}) : super(key: key);
 
-  @override
-  State<BadgesSecondPage> createState() => _BadgesSecondPageState();
-}
-
-class _BadgesSecondPageState extends State<BadgesSecondPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

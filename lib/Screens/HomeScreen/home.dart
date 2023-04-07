@@ -8,10 +8,10 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
-import 'package:myapp/Screens/CategoriesScreen/categories.dart';
-import 'package:myapp/Screens/HomeScreen/Controller/home_controller.dart';
+import 'package:homelyknock/Screens/CategoriesScreen/categories.dart';
+import 'package:homelyknock/Screens/HomeScreen/Controller/home_controller.dart';
 
-import 'package:myapp/widgets/custom_loader.dart';
+import 'package:homelyknock/widgets/custom_loader.dart';
 
 import '../../nav_bar_page/main_controller.dart';
 import '../FeturedService/fetured_service.dart';

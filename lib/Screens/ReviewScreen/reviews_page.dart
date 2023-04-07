@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:myapp/utils/colors.dart';
+import 'package:homelyknock/utils/colors.dart';
 
 import '../SettingsScreen/setting_page.dart';
 

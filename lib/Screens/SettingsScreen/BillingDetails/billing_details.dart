@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
-import 'package:myapp/utils/colors.dart';
-import 'package:myapp/widgets/custom_widgets.dart';
+import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
+import 'package:homelyknock/utils/colors.dart';
+import 'package:homelyknock/widgets/custom_widgets.dart';
 
-class BillingDetails extends StatefulWidget {
-  const BillingDetails({Key? key}) : super(key: key);
+class BillingDetails extends StatelessWidget {
+   BillingDetails({Key? key}) : super(key: key);
 
-  @override
-  State<BillingDetails> createState() => _BillingDetailsState();
-}
-
-class _BillingDetailsState extends State<BillingDetails> {
   List<Map> downloads = [
     {
       'invoice': '3328581',

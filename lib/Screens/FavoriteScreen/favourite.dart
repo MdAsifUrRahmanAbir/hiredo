@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Screens/HomeScreen/home.dart';
+import 'package:homelyknock/Screens/HomeScreen/home.dart';
 
 class Favourite extends StatefulWidget {
   static const String routename = '/favpage';

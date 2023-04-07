@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Screens/HelpScreen/help_screen.dart';
-import 'package:myapp/Screens/LeadsScreen/lead_screen.dart';
-import 'package:myapp/Screens/MyResponse/my_response.dart';
-import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
-import 'package:myapp/Screens/SignInScreen/signinpage.dart';
-import 'package:myapp/Screens/WishListScreen/wish_list_screen.dart';
-import 'package:myapp/utils/colors.dart';
+import 'package:homelyknock/Screens/HelpScreen/help_screen.dart';
+import 'package:homelyknock/Screens/LeadsScreen/lead_screen.dart';
+import 'package:homelyknock/Screens/MyResponse/my_response.dart';
+import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
+import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';
+import 'package:homelyknock/Screens/WishListScreen/wish_list_screen.dart';
+import 'package:homelyknock/utils/colors.dart';
 import '../../nav_bar_page/main_controller.dart';
 import '../../widgets/data_controller.dart';
 import '../LocationScreen/locationpage.dart';
@@ -29,7 +29,6 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: scaffoldClr,
       appBar: AppBar(
@@ -65,12 +64,19 @@ class _ProfileState extends State<Profile> {
               children: [
                 Stack(
                   children: [
-                    ClipRRect
-                    (
+                    ClipRRect(
                       child: Image.asset(
                         "images/profilepic.png",
                       ),
                     ),
+                    Positioned(
+                        top: 40.w,
+                        left: 30.w,
+                        child: IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.person,
+                            )))
                   ],
                 ),
                 Column(
@@ -248,7 +254,7 @@ class _ProfileState extends State<Profile> {
             Container(
               height: 152.h,
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
               color: containerClr,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -355,7 +361,7 @@ class _ProfileState extends State<Profile> {
                 count: 50.toString()),
             _cardItem(
                 onTap: () {
-                  Get.to( LocationPage());
+                  Get.to(LocationPage());
                 },
                 icon: Icons.location_pin,
                 text: 'Locations',
@@ -365,8 +371,11 @@ class _ProfileState extends State<Profile> {
               height: 37.h,
             ),
             InkWell(
-              onTap: (){
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>SignInPage()), (route) => false);
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (_) => SignInPage()),
+                    (route) => false);
               },
               child: Container(
                   height: 43.h,

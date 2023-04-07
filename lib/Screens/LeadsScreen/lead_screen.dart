@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Screens/HomeScreen/home.dart';
-import 'package:myapp/Screens/LeadsDetailsScreen/leads_details_screen.dart';
+import 'package:homelyknock/Screens/HomeScreen/home.dart';
+import 'package:homelyknock/Screens/LeadsDetailsScreen/leads_details_screen.dart';
 
 import '../../nav_bar_page/main_controller.dart';
 import '../../utils/colors.dart';

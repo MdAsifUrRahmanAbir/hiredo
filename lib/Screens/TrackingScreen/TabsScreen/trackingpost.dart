@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Screens/OrderScreen/ordername.dart';
-import 'package:myapp/Screens/TrackingScreen/Controller/tracking_controller.dart';
+import 'package:homelyknock/Screens/OrderScreen/ordername.dart';
+import 'package:homelyknock/Screens/TrackingScreen/Controller/tracking_controller.dart';
 
 class TrackingPostOrder extends StatelessWidget {
   TrackingPostOrder({super.key});

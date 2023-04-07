@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapp/Services/api_services.dart';
-import 'package:myapp/nav_bar_page/main_screen.dart';
+import 'package:homelyknock/Services/api_services.dart';
+import 'package:homelyknock/nav_bar_page/main_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../local/my_local.dart';

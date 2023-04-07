@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/Screens/SettingsScreen/EmailNotification/Controller/email_controller.dart';
+import 'package:homelyknock/Screens/SettingsScreen/EmailNotification/Controller/email_controller.dart';
 
 class EmailNotification extends StatelessWidget {
   EmailNotification({super.key});

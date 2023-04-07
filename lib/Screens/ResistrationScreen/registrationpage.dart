@@ -5,10 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:myapp/Screens/ResistrationScreen/Controller/registration_controller.dart';
+import 'package:homelyknock/Screens/ResistrationScreen/Controller/registration_controller.dart';
 
-import 'package:myapp/Screens/ResistrationScreen/component/custome_text_field.dart';
-import 'package:myapp/Screens/SignInScreen/signinpage.dart';
+import 'package:homelyknock/Screens/ResistrationScreen/component/custome_text_field.dart';
+import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';
 
 import '../../utils/colors.dart';
 
@@ -224,6 +224,8 @@ class RegistrationPage extends StatelessWidget {
                     // ),
                       ),
                     ),
+                   
+                   
                    
                     SizedBox(
                       height: 25.h,

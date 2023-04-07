@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:myapp/Screens/IntroScreen/introonepage.dart';
-import 'package:myapp/Screens/IntroScreen/introtwopage.dart';
-import 'package:myapp/Screens/IntroScreen/signupintropage.dart';
-import 'package:myapp/Screens/SignUpAccountScreen/signupaccountchoosepage.dart';
-import 'package:myapp/local/my_local.dart';
+import 'package:homelyknock/Screens/IntroScreen/introonepage.dart';
+import 'package:homelyknock/Screens/IntroScreen/introtwopage.dart';
+import 'package:homelyknock/Screens/IntroScreen/signupintropage.dart';
+import 'package:homelyknock/Screens/SignUpAccountScreen/signupaccountchoosepage.dart';
+import 'package:homelyknock/local/my_local.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../SignInScreen/signinpage.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import 'package:myapp/Screens/SettingsScreen/setting_page.dart';
-import 'package:myapp/utils/colors.dart';
+import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
+import 'package:homelyknock/utils/colors.dart';
 
 class MyCreditsPage extends StatefulWidget {
   const MyCreditsPage({Key? key}) : super(key: key);
@@ -338,7 +338,7 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
     );
   }
 
-  Container buildContainer(String responce, String credit, String amount) {
+   buildContainer(String responce, String credit, String amount) {
 
     return Container(
               padding: EdgeInsets.symmetric(vertical: 10.h),
