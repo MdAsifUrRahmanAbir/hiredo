@@ -24,7 +24,7 @@ class UpdateController extends GetxController {
 
   @override
   void onInit() {
-    //submiteService();
+
     fetchServices();
     fetchLocation();
     super.onInit();
@@ -76,7 +76,7 @@ class UpdateController extends GetxController {
       if (result.runtimeType == int) {
         if (kDebugMode) {
           print('Error $result');
-          print('Error');
+      
         }
       } else {
         addServiceModel = result;

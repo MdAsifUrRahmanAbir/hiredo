@@ -6,6 +6,7 @@ import 'package:myapp/Screens/HomeScreen/Model/lead_category_model.dart';
 
 import 'package:myapp/Screens/ResistrationScreen/Model/registration_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:myapp/Screens/SettingsScreen/SettingsBadge/Model/bedge_mode.dart';
 import 'package:myapp/Screens/SignInScreen/Model/login_model.dart';
 import 'package:myapp/Screens/UpdateLeadSetting/Model/add_services_model.dart';
 import 'package:myapp/Screens/UpdateLeadSetting/Model/location_model.dart';
@@ -33,8 +34,8 @@ class ApiServices {
       return true;
     } else {
       Map d = json.decode(await response.stream.bytesToString());
-    
-        Fluttertoast.showToast(msg: d['email'][0]);
+
+      Fluttertoast.showToast(msg: d['email'][0]);
       if (kDebugMode) {
         print(d['message']);
       }
@@ -48,32 +49,31 @@ class ApiServices {
 
   static Future<dynamic> handelLogin(
       {required String email, required String password}) async {
-
     try {
-  var request = http.Request('POST', Uri.parse(signInApi));
-  
-  request.bodyFields = {'email': email, 'password': password};
-  
-  http.StreamedResponse response = await request.send();
-  
-  if (response.statusCode == 200) {
-    var data = await response.stream.bytesToString();
-    return loginModelFromJson(data);
-  } else {
-    Map d = json.decode(await response.stream.bytesToString());
-    debugPrint("$d");
-    
-    if (kDebugMode) {
-      debugPrint(response.reasonPhrase);
+      var request = http.Request('POST', Uri.parse(signInApi));
+
+      request.bodyFields = {'email': email, 'password': password};
+
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        var data = await response.stream.bytesToString();
+        return loginModelFromJson(data);
+      } else {
+        Map d = json.decode(await response.stream.bytesToString());
+        debugPrint("$d");
+
+        if (kDebugMode) {
+          debugPrint(response.reasonPhrase);
+        }
+        return 1;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        debugPrint('Login Error ${e.toString()}');
+      }
+      return 1;
     }
-    return 1;
-  }
-} on Exception catch (e) {
-  if(kDebugMode){
-    debugPrint('Login Error ${e.toString()}');
-  }
- return 1;
-}
   }
 
   // fetch lead our categories
@@ -242,6 +242,35 @@ class ApiServices {
       }
     } on Exception catch (e) {
       return 1;
+    }
+  }
+
+// fetch bedge data
+
+  static dynamic fetchBedge() async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Cookie':
+            'csrftoken=x6eHPOJU6MQ69KZhy0Qj8OlQWHtKqxcx; sessionid=d8as8dj5ar7aq961u89ypw7484ztb6io'
+      };
+      var request = http.Request('GET', Uri.parse(fetchBedgeApi));
+      request.headers.addAll(headers);
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        var data = await response.stream.bytesToString();
+        return bedgeModelFromJson(data);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        return print(" Bedge fetch Error. Reason ${e.toString()}");
+      }
+      return 0;
     }
   }
 }

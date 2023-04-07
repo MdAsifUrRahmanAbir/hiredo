@@ -7,3 +7,4 @@ String fetchService = "${baseUrl}services/";
 String addLocation = "${baseUrl}locations/";
 String fetchLocation = "${baseUrl}locations/";
 String sliderApi="${baseUrl}slider/";
+String fetchBedgeApi = "${baseUrl}begde/";
