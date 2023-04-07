@@ -11,3 +11,6 @@ String sliderApi="${baseUrl}slider/";
 String fetchBedgeApi = "${baseUrl}begde/";
 
 String jobPostApi="$baseUrl/lead/JobPostCreate/";
+
+String locationsApi = "${baseUrl}lead/category/";
+
