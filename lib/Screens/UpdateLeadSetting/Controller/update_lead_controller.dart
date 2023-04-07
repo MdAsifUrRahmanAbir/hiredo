@@ -35,7 +35,7 @@ class UpdateController extends GetxController {
     isLoading(true);
 
     try {
-      var result = await ApiServices.AddServicePost(
+      var result = await ApiServices.addServicePost(
           design: desginController.text,
           description: descriptionController.text);
       if (result.runtimeType == int) {
@@ -98,7 +98,7 @@ class UpdateController extends GetxController {
     isLoading(true);
 
     try {
-      var result = await ApiServices.AddLocationPost(
+      var result = await ApiServices.addLocationPost(
           city: cityController.text, distance: distanceController.text);
       if (result.runtimeType == int) {
         if (kDebugMode) {

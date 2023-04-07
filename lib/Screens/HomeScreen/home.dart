@@ -10,14 +10,13 @@ import 'package:flutter/material.dart';
 
 import 'package:myapp/Screens/CategoriesScreen/categories.dart';
 import 'package:myapp/Screens/HomeScreen/Controller/home_controller.dart';
-import 'package:myapp/Screens/SearchResultScreen/catsearchpage.dart';
 
-import 'package:myapp/Screens/LocationScreen/locationpage.dart';
 import 'package:myapp/widgets/custom_loader.dart';
 
 import '../../nav_bar_page/main_controller.dart';
 import '../FeturedService/fetured_service.dart';
-import '../QuestionScreen/question_screen.dart';
+import '../JobPost/post_a_job.dart';
+
 import 'Model/lead_category_model.dart';
 
  final mainController=Get.put(MainScreenController());
@@ -437,13 +436,13 @@ class Home extends StatelessWidget {
               mainAxisSpacing: 15.h,
               crossAxisCount: 2),
           itemBuilder: (context, index) =>
-              itemContainer(_homeController.subCategoryList[index]),
+              itemContainer(_homeController.subCategoryList[index],index),
         ),
       ],
     );
   }
 
-  itemContainer(LeadCategoriesModel data) {
+  itemContainer(LeadCategoriesModel data,int index) {
     return Container(
       padding: EdgeInsets.all(10.w),
       decoration: BoxDecoration(
@@ -509,9 +508,8 @@ class Home extends StatelessWidget {
           ),
           InkWell(
             onTap: (){
-              if(data.catName.isNotEmpty){
-                   Get.to(QuestionScreen(data:data.catName,));
-              }
+             
+              Get.to(PostAJob(selectIndex:index,));
              
             },
             child: Container(

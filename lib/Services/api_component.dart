@@ -1,3 +1,4 @@
+
 String baseUrl = "http://ringknock.pythonanywhere.com/";
 String signupApi = "${baseUrl}register/";
 String signInApi = "${baseUrl}login/";
@@ -8,3 +9,5 @@ String addLocation = "${baseUrl}locations/";
 String fetchLocation = "${baseUrl}locations/";
 String sliderApi="${baseUrl}slider/";
 String fetchBedgeApi = "${baseUrl}begde/";
+
+String jobPostApi="$baseUrl/lead/JobPostCreate/";
