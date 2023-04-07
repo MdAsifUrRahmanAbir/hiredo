@@ -10,3 +10,11 @@ String fetchLocation = "${baseUrl}locations/";
 String sliderApi="${baseUrl}slider/";
 String fetchBedgeApi = "${baseUrl}begde/";
 String jobPostApi="$baseUrl/lead/JobPostCreate/";
+
+
+
+String jobPostApi="${baseUrl}lead/JobPostCreate/";
+String fetchAllLocationApi="${baseUrl}lead/PostLocation/";
+
+String locationsApi = "${baseUrl}lead/category/";
+

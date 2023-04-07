@@ -2,23 +2,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-class SearchResult extends StatefulWidget {
-  static const String routename = '/catsearchpage';
-  const SearchResult({super.key});
+import 'search_controller.dart';
 
-  @override
-  State<SearchResult> createState() => _SearchResultState();
-}
+class SearchResult extends StatelessWidget {
+  SearchResult({super.key});
 
-class _SearchResultState extends State<SearchResult> {
-  String _selectedGender = 'Top Categories';
+  final controller = Get.put(SearchController());
 
-  final GlobalKey<FormState> _formKey = GlobalKey();
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController locationController = TextEditingController();
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,14 +37,13 @@ class _SearchResultState extends State<SearchResult> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 50.h,
-                        width: 120.w,
-                        child: Container(
-                          padding: EdgeInsets.all(8.0.w),
-                          child: TextFormField(
-                            controller: nameController,
-                            decoration: InputDecoration(
+                      Expanded(
+                        child: TextFormField(
+                          controller: controller.categoryController,
+                          onTap: (){
+                            controller.isTopCatSearchScreen.value = true;
+                          },
+                          decoration: InputDecoration(
                               border: InputBorder.none,
                               fillColor: Colors.white,
                               hintText: "Search ",
@@ -55,9 +52,16 @@ class _SearchResultState extends State<SearchResult> {
                                   fontWeight: FontWeight.w400,
                                   letterSpacing: 1,
                                   color: Color(0xffB7B7B7)),
-                            ),
+                              prefix: Padding(
+                                padding: EdgeInsets.all(5),
+                                child: Icon(
+                                  Icons.category,
+                                  color: Colors.grey,
+                                  size: 20.sp,
+                                ),
+                              )
                           ),
-                        ),
+                        )
                       ),
                       VerticalDivider(
                         width: 20.w,
@@ -66,36 +70,36 @@ class _SearchResultState extends State<SearchResult> {
                         endIndent: 10,
                         color: Colors.grey,
                       ),
-                      SizedBox(
-                        height: 50.h,
-                        width: 120.w,
-                        child: Container(
-                          padding: EdgeInsets.all(5.w),
-                          child: TextFormField(
-                            controller: locationController,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              fillColor: Colors.white,
-                              hintText: "Location",
-                              prefix: InkWell(
-                                onTap: () {},
-                                child: Icon(
-                                  Icons.location_pin,
-                                  color: Colors.grey,
-                                  size: 20.sp,
-                                ),
+                      Expanded(
+                        child: TextFormField(
+                          controller: controller.locationController,
+                          onTap: (){
+                            controller.isTopCatSearchScreen.value = false;
+                          },
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            fillColor: Colors.white,
+                            hintText: "Location",
+                            prefix: Padding(
+                              padding: EdgeInsets.all(5),
+                              child: Icon(
+                                Icons.location_on,
+                                color: Colors.grey,
+                                size: 20.sp,
                               ),
-                              hintStyle: GoogleFonts.roboto(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w400,
-                                  letterSpacing: 1,
-                                  color: Color(0xffB7B7B7)),
                             ),
+                            hintStyle: GoogleFonts.roboto(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w400,
+                                letterSpacing: 1,
+                                color: Color(0xffB7B7B7)),
                           ),
-                        ),
+                        )
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+
+                        },
                         child: Container(
                           color: Color(0xff187949),
                           height: 50.h,
@@ -113,26 +117,30 @@ class _SearchResultState extends State<SearchResult> {
               SizedBox(
                 height: 25.h,
               ),
+
               Card(
                 child: Column(
                   children: [
-                    ListTile(
+                    Obx(() => ListTile(
                       trailing: Radio<String>(
                         activeColor: Color(0xff187949),
-                        value: 'Top Categories',
-                        groupValue: _selectedGender,
+                        value: controller.isTopCatSearchScreen.value
+                            ? 'Top Categories'
+                            : 'Locations'
+                        ,
+                        groupValue: "",
                         onChanged: (value) {
-                          setState(() {
-                            _selectedGender = value!;
-                          });
+
                         },
                       ),
-                      leading: Text('Top Categories',
+                      leading: Text(controller.isTopCatSearchScreen.value
+                          ? 'Top Categories'
+                          : 'Locations',
                           style: GoogleFonts.roboto(
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w500,
                               color: Color(0xff272727))),
-                    ),
+                    )),
                     GridView.builder(
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
@@ -144,6 +152,9 @@ class _SearchResultState extends State<SearchResult> {
                         ),
                         itemBuilder: (_, index) {
                           return GestureDetector(
+                            onTap: (){
+                              controller.selectedIndex.value = index;
+                            },
                             child: Container(
                               padding: EdgeInsets.only(
                                   left: 5.w,
@@ -151,27 +162,33 @@ class _SearchResultState extends State<SearchResult> {
                                   bottom: 5.w,
                                   top: 5.h),
                               child: Card(
-                                child: Container(
+                                child: Obx(() => Container(
                                   decoration: BoxDecoration(
                                       borderRadius:
                                           BorderRadius.circular(4.r),
                                       border: Border.all(
-                                        color: Color(0xff9CCDB5),
+                                        color: controller.selectedIndex.value == index
+                                            ? Color(0xff9CCDB5)
+                                            : Color(0xffffffff),
                                       )),
-                                  child: ListTile(
+                                  child: Obx(() => ListTile(
                                     leading: Text(
-                                      "Hair",
+                                      controller.isTopCatSearchScreen.value
+                                          ? 'Top Category $index'
+                                          : 'Locations $index',
                                       style: GoogleFonts.roboto(
                                           fontSize: 16.sp,
                                           fontWeight: FontWeight.w400,
                                           color: Color(0xff272727)),
                                     ),
                                     trailing: Icon(
-                                      Icons.fingerprint,
+                                      controller.isTopCatSearchScreen.value
+                                          ? Icons.fingerprint
+                                          : Icons.location_on_outlined,
                                       color: Color(0xff187949),
                                     ),
-                                  ),
-                                ),
+                                  )),
+                                )),
                               ),
                             ),
                           );

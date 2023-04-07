@@ -16,12 +16,9 @@ class MainScreen extends StatelessWidget {
 
     final _mainController =Get.put(MainScreenController());
 
-
-
-
   @override
   Widget build(BuildContext context) {
-    _mainController.initIndex.value=0;
+   
     return Scaffold(
       extendBody: true,
         body: Obx(
