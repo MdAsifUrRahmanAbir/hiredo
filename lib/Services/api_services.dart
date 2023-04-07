@@ -305,45 +305,6 @@ class ApiServices {
       return 1;
     }
 
-    // try {
-    //   var headers = {
-    //     'Authorization': "Bearer $accessToken",
-    //     'Content-Type': 'application/json',
-    //     'Cookie':
-    //         'csrftoken=pwnIa5wXWizyqYO2ybhtX0GLZ0NxqhtU; sessionid=gg5ikg2sfd8r50skh2zkn4d9uahf6lue'
-//       };
-//  var _data= json.encode([
-//   {
-//     "category": 4,
-//     "question": 2,
-//     "location": 1,
-//     "p_answer": 2
-//   },
-//   {
-//     "category": 4,
-//     "question": 2,
-//     "location": 1,
-//     "p_answer": 2
-//   }
-// ]);
-
-//       var response = await client.post( Uri.parse("http://ringknock.pythonanywhere.com/lead/JobPostCreate/"),headers:headers,body:jsonEncode(_data));
-
-//       if (response.statusCode == 200) {
-
-//         return "success";
-
-//       } else {
-//         if (kDebugMode) {
-//           print(response.statusCode);
-//         }
-//         return response.statusCode;
-//       }
-//     } on Exception catch (e) {
-//       if (kDebugMode) {
-//         print("Job post  Error. Reason ${e.toString()}");
-//       }
-//       return 1;
-//     }
+    
   }
 }
