@@ -1,4 +1,4 @@
-class Sorting {
+ class Sorting {
 
   List? selectionSort(List? list) {
     if (list == null || list.isEmpty) return null;

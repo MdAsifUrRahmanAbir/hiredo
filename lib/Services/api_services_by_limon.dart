@@ -15,6 +15,7 @@ class ApiServicesByLimon {
     try {
       var headers = {
         'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json'
         
       };
 
@@ -27,9 +28,9 @@ class ApiServicesByLimon {
       request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();
-debugPrint(jsonDecode(response.toString()));
+debugPrint(await response.stream.bytesToString());
       if (response.statusCode == 200) {
-        print(await response.stream.bytesToString());
+        debugPrint(await response.stream.bytesToString());
         return true;
       } else {
         if (kDebugMode) {

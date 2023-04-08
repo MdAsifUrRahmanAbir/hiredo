@@ -87,6 +87,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 () => CustomeTextField(
                   hintText: '********',
                   obscureText: !_changePasswordController.isVisibility.value,
+                  controller: _changePasswordController.oldPasswordController,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Field is Empty';
@@ -118,6 +119,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 () => CustomeTextField(
                   hintText: '********',
                   obscureText: !_changePasswordController.isVisible.value,
+                  controller: _changePasswordController.newPasswordController,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Field is Empty';
@@ -149,6 +151,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 () => CustomeTextField(
                   hintText: '********',
                   obscureText: !_changePasswordController.isVisiblele.value,
+                  controller: _changePasswordController.confirmPasswordController,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Field is Empty';
