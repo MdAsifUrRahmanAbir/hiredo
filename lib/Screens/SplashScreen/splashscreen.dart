@@ -8,11 +8,8 @@ import 'package:homelyknock/Screens/IntroScreen/onBoarding_screen.dart';
 import 'package:homelyknock/Screens/IntroScreen/signupintropage.dart';
 import 'package:homelyknock/local/my_local.dart';
 
-import 'package:homelyknock/utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../nav_bar_page/main_screen.dart';
-import '../../widgets/data_controller.dart';
 import '../SignInScreen/Contoller/signin_controller.dart';
 
 class SplashPage extends StatefulWidget {
@@ -29,21 +26,21 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     Future.delayed(const Duration(seconds: 3), () async {
       SharedPreferences preferences = await SharedPreferences.getInstance();
-        String? isLoggedEmail= preferences.getString(Constance.isLoggedEmail);
-        String? isLoggedPassword= preferences.getString(Constance.isLoggedPassword);
+        String isLoggedEmail= preferences.getString(Constance.isLoggedEmail)??"";
+        String isLoggedPassword= preferences.getString(Constance.isLoggedPassword)??"";
         bool isOnBoard= preferences.getBool(Constance.isOnboard) ?? false;
 
-      if (isLoggedEmail!=null) {
-          _signInController.userSignIn(context: context, isLogged: false, email: isLoggedEmail, password:isLoggedPassword!);
+      if (isLoggedEmail.isNotEmpty) {
+          _signInController.userSignIn(isLogged: false, email: isLoggedEmail, password:isLoggedPassword);
       } else {
         
         print(isOnBoard);
         if(isOnBoard){
-          Get.off(SignIntroPage());
+          Get.off(const SignIntroPage());
         }else{
           print(isOnBoard);
-            Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => OnboardinScreen()));
+          Get.off(OnboardinScreen);
+           
         }
       
       }
