@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/Screens/HomeScreen/Model/lead_category_model.dart';
-import 'package:homelyknock/common_dashboard_services/controller/api_services.dart';
+
+
+import '../../../Services/api_services.dart';
 
 class HomeController extends GetxController {
   var isLoading = false.obs;

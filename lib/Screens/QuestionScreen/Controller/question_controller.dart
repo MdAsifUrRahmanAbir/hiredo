@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:homelyknock/common_dashboard_services/controller/api_services.dart';
 
+
+import '../../../Services/api_services.dart';
 import '../Model/job_post_model.dart';
 
 class QuestionController extends GetxController {

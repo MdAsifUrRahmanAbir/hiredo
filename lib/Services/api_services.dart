@@ -14,7 +14,7 @@ import 'package:homelyknock/Screens/UpdateLeadSetting/Model/location_model.dart'
 import 'package:homelyknock/Services/api_component.dart';
 import 'package:homelyknock/local/my_local.dart';
 
-import '../Screens/QuestionScreen/Model/job_post_model.dart';
+import '../../Screens/QuestionScreen/Model/job_post_model.dart';
 
 class ApiServices {
   static var client = http.Client();
@@ -305,45 +305,39 @@ class ApiServices {
       return 1;
     }
 
-    // try {
-    //   var headers = {
-    //     'Authorization': "Bearer $accessToken",
-    //     'Content-Type': 'application/json',
-    //     'Cookie':
-    //         'csrftoken=pwnIa5wXWizyqYO2ybhtX0GLZ0NxqhtU; sessionid=gg5ikg2sfd8r50skh2zkn4d9uahf6lue'
-//       };
-//  var _data= json.encode([
-//   {
-//     "category": 4,
-//     "question": 2,
-//     "location": 1,
-//     "p_answer": 2
-//   },
-//   {
-//     "category": 4,
-//     "question": 2,
-//     "location": 1,
-//     "p_answer": 2
-//   }
-// ]);
-
-//       var response = await client.post( Uri.parse("http://ringknock.pythonanywhere.com/lead/JobPostCreate/"),headers:headers,body:jsonEncode(_data));
-
-//       if (response.statusCode == 200) {
-
-//         return "success";
-
-//       } else {
-//         if (kDebugMode) {
-//           print(response.statusCode);
-//         }
-//         return response.statusCode;
-//       }
-//     } on Exception catch (e) {
-//       if (kDebugMode) {
-//         print("Job post  Error. Reason ${e.toString()}");
-//       }
-//       return 1;
-//     }
+    
   }
+
+// forgot password
+Future<dynamic>  forgotPassword({required String email,required String type})async{
+
+  var headers = {
+  'Content-Type': 'application/json'
+};
+var request = http.Request('POST', Uri.parse(forgotPasswordApi));
+request.body = json.encode({
+  "media": type,
+  "phone_or_email":email,
+});
+request.headers.addAll(headers);
+
+http.StreamedResponse response = await request.send();
+
+if (response.statusCode == 200) {
+  print(await response.stream.bytesToString());
+}
+else {
+  print(response.reasonPhrase);
+}
+
+
+
+}
+
+
+
+
+
+
+
 }
