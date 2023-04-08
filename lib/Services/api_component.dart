@@ -14,10 +14,10 @@ String jobPostApi="$baseUrl/lead/JobPostCreate/";
 
 
 String fetchAllLocationApi="${baseUrl}lead/PostLocation/";
-
+String textApi = "${baseUrl}lead/category/";
 String locationsApi = "${baseUrl}lead/category/";
+String forgotPasswordApi="${baseUrl}reset-password-otp/";
 
-String fetchAllLocationApi="${baseUrl}lead/PostLocation";
 
 
 String changePasswordApi = "${baseUrl}change-password/";
