@@ -234,7 +234,7 @@ class SignInPage extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
-                        _signInController.userSignIn(context: context,isLogged: true,email: _signInController.emailController.text,password: _signInController.passwordController.text);
+                        _signInController.userSignIn(isLogged: true,email: _signInController.emailController.text,password: _signInController.passwordController.text);
                       }
                       // Get.to(SignInPage());
                     },
