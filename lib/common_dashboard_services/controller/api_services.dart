@@ -14,7 +14,7 @@ import 'package:homelyknock/Screens/UpdateLeadSetting/Model/location_model.dart'
 import 'package:homelyknock/Services/api_component.dart';
 import 'package:homelyknock/local/my_local.dart';
 
-import '../Screens/QuestionScreen/Model/job_post_model.dart';
+import '../../Screens/QuestionScreen/Model/job_post_model.dart';
 
 class ApiServices {
   static var client = http.Client();

@@ -55,6 +55,8 @@ dependencies:
   google_maps_flutter: ^2.2.5
   intl: ^0.18.0
   dart_code_metrics: ^5.7.0       # added by abir
+  logger:                         # added by abir
+  flutter_widget_from_html: ^0.10.0
 
 
 dev_dependencies:
