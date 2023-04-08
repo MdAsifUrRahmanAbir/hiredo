@@ -17,7 +17,7 @@ String fetchAllLocationApi="${baseUrl}lead/PostLocation/";
 
 String locationsApi = "${baseUrl}lead/category/";
 
-String fetchAllLocationApi="${baseUrl}lead/PostLocation";
+
 
 
 String changePasswordApi = "${baseUrl}change-password/";
