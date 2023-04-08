@@ -32,7 +32,7 @@ class SignInController extends GetxController {
 
   // handlesSignIn
 
-  userSignIn({required BuildContext context,required bool isLogged,required String email, required String password}) async {
+  userSignIn({required bool isLogged,required String email, required String password}) async {
     if(isLogged){
         isLoading(true);
     }
@@ -43,7 +43,8 @@ class SignInController extends GetxController {
 
       if (result.runtimeType == int) {
         if(!isLogged){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>SignInPage()));
+          Get.offAll(SignInPage());
+           // Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>SignInPage()));
            }
         Fluttertoast.showToast(msg: "Invalid email or password.",);
         debugPrint("Opps sign in Error $result");
@@ -63,8 +64,8 @@ class SignInController extends GetxController {
             isUserD: allData.user.isUser);
 
             debugPrint(_dataController.id.toString());
-
-           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>MainScreen()), (route) => false);
+        Get.offAll(MainScreen());
+          // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>MainScreen()), (route) => false);
        
         if(isChecked.value){
         await  rememberMeSetData();

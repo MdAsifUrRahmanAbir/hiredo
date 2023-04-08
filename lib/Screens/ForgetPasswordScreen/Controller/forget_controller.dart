@@ -5,4 +5,9 @@ class ForgetController extends GetxController{
 
   var userType = "phone".obs;
   final phoneController = TextEditingController();
+
+  
+
+
+
 }
