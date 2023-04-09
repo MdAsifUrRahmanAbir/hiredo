@@ -24,7 +24,7 @@ final pages = [
   const Document(),
   TrackingScreen(),
   SearchResult(),
-  const Profile(),
+   Profile(),
 ];
 
   void onItemTapped(int index) {

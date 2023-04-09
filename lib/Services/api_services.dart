@@ -360,4 +360,36 @@ class ApiServices {
       // TODO
     }
   }
+
+  // user logOut
+    static Future<bool> logoutUser() async {
+    var accessToken = await MyPreference.getToken();
+
+              try {
+                var headers = {
+                  'Authorization': 'Bearer $accessToken',
+                  'Content-Type': 'application/json',
+                };
+                  var request = http.Request('POST', Uri.parse(logoutUserApi));
+              request.body = '''\r\n''';
+              request.headers.addAll(headers);
+              http.StreamedResponse response = await request.send();
+              if (response.statusCode == 200) {
+                  debugPrint(await response.stream.bytesToString());
+                return true;
+              }
+              else {
+                debugPrint(response.reasonPhrase);
+                return false;
+              }
+                    
+    } on Exception catch (e) {
+      debugPrint("Change user mode error :  $e");
+
+      return false;
+      // TODO
+    }
+  }
+
+
 }
