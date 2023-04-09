@@ -19,17 +19,16 @@ import '../JobPost/post_a_job.dart';
 
 import 'Model/lead_category_model.dart';
 
- final mainController=Get.put(MainScreenController());
+final mainController = Get.put(MainScreenController());
+
 class Home extends StatelessWidget {
   Home({super.key});
 
   final GlobalKey<FormState> _formKey = GlobalKey();
   final _homeController = Get.put(HomeController());
- 
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -79,15 +78,12 @@ class Home extends StatelessWidget {
 //<------------- Search Box ------------>
 
         InkWell(
-          onTap: (){
-            
-         mainController.initIndex.value=3;
-       
+          onTap: () {
+            mainController.initIndex.value = 3;
           },
           child: Container(
             height: 50.h,
             margin: EdgeInsets.symmetric(horizontal: 17.w),
-           
             decoration: BoxDecoration(
                 border: Border.all(color: Color(0xFF9CCDB5), width: 1),
                 borderRadius: BorderRadius.circular(4.r)),
@@ -141,11 +137,8 @@ class Home extends StatelessWidget {
                       color: Color(0xFF187949),
                       borderRadius: BorderRadius.only(
                           topRight: Radius.circular(3.r),
-                          bottomRight: Radius.circular(3.r)))
-                          ,
-                         child:  Icon(
-                          Icons.search,
-                           color: Color(0xffFFFFFF)),
+                          bottomRight: Radius.circular(3.r))),
+                  child: Icon(Icons.search, color: Color(0xffFFFFFF)),
                 )
               ],
             ),
@@ -276,6 +269,7 @@ class Home extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         margin: EdgeInsets.symmetric(horizontal: 5.0),
                         decoration: BoxDecoration(
+                          
                             image: DecorationImage(
                                 image: NetworkImage(i), fit: BoxFit.cover)),
                       );
@@ -285,17 +279,17 @@ class Home extends StatelessWidget {
               ),
               Positioned(
                 bottom: 9.h,
-                child: DotsIndicator(
+                child:_homeController.carouselImages.isNotEmpty? DotsIndicator(
                   dotsCount: _homeController.carouselImages.length,
                   position: _homeController.dotPosition.value.toDouble(),
                   decorator: DotsDecorator(
                     activeColor: Color(0xff187949),
-                    color: const Color(0xff174e314d).withOpacity(0.3),
+                    color: const Color(0xff174E31).withOpacity(0.3),
                     spacing: EdgeInsets.all(2),
                     activeSize: Size(8, 8),
                     size: Size(8, 8),
                   ),
-                ),
+                ):SizedBox(),
               ),
             ],
           ),
@@ -319,12 +313,8 @@ class Home extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => CategoriesPage(
-                                allCategories: _homeController.categoryList,
-                              )));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => CategoriesPage()));
                 },
                 child: Text(
                   "See All",
@@ -436,13 +426,13 @@ class Home extends StatelessWidget {
               mainAxisSpacing: 15.h,
               crossAxisCount: 2),
           itemBuilder: (context, index) =>
-              itemContainer(_homeController.subCategoryList[index],index),
+              itemContainer(_homeController.subCategoryList[index], index),
         ),
       ],
     );
   }
 
-  itemContainer(LeadCategoriesModel data,int index) {
+  itemContainer(LeadCategoriesModel data, int index) {
     return Container(
       padding: EdgeInsets.all(10.w),
       decoration: BoxDecoration(
@@ -507,10 +497,10 @@ class Home extends StatelessWidget {
             height: 15.h,
           ),
           InkWell(
-            onTap: (){
-             
-              Get.to(PostAJob(selectIndex:index,));
-             
+            onTap: () {
+              Get.to(PostAJob(
+                selectIndex: index,
+              ));
             },
             child: Container(
               height: 30.h,
@@ -533,7 +523,4 @@ class Home extends StatelessWidget {
       ),
     );
   }
-
-
-
 }
