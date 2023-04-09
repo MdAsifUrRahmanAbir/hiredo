@@ -11,21 +11,20 @@ import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';
 import 'package:homelyknock/Screens/WishListScreen/wish_list_screen.dart';
 import 'package:homelyknock/utils/colors.dart';
 import '../../nav_bar_page/main_controller.dart';
+import '../../widgets/custom_loader.dart';
 import '../../widgets/data_controller.dart';
 import '../LocationScreen/locationpage.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-class Profile extends StatefulWidget {
-  static const String routename = '/profile';
-  const Profile({super.key});
+import 'Controller/profile_controller.dart';
 
-  @override
-  State<Profile> createState() => _ProfileState();
-}
+ final _mainController = Get.put(MainScreenController());
+class Profile extends StatelessWidget {
+ 
+   Profile({super.key});
 
-class _ProfileState extends State<Profile> {
-  final _dataController = Get.put(DataController());
-  final _mainController = Get.put(MainScreenController());
+  final _dataController=Get.put(DataController());
+  final _profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -51,130 +50,128 @@ class _ProfileState extends State<Profile> {
           Image.asset('images/notification.png'),
         ],
       ),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        padding: EdgeInsets.symmetric(horizontal: 26.w),
-        child: Obx(()=>
-           Column(
-            children: [
-              SizedBox(
-                height: 32.h,
-              ),
-              Row(
-               
-                children: [
-                  Stack(
-                    alignment: Alignment.bottomRight,
-                    children: [
-                      Container(
-                        height:63.h,
-                        width: 63.h,
-                       decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(width:1,color: Colors.grey.shade500),
-                        color: Colors.grey.shade400
-                       ),
-                      ),
-                     
-                      Positioned(
-                          bottom: -20.h,
-                          right: -20.h,
-                          child: IconButton(
-                              onPressed: () {},
-                              icon:  Icon(
-                                Icons.camera_alt,
-                                size:25.sp,
-                              )))
-                    ],
-                  ),
-                  SizedBox(width:15.w,),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+      body: Obx(()=>_profileController.isLoading.value?const CustomLoader():
+         SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          padding: EdgeInsets.symmetric(horizontal: 26.w),
+          child: 
+             Column(
+              children: [
+                SizedBox(
+                  height: 32.h,
+                ),
+                Row(
+                 
+                  children: [
+                    Stack(
+                      alignment: Alignment.bottomRight,
                       children: [
-                        Text(
-                          _dataController.fullName.value,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        
-                          style: myStyle(16.sp, FontWeight.w500, textClr),
+                        Container(
+                          height:63.h,
+                          width: 63.h,
+                         decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(width:1,color: Colors.grey.shade500),
+                          color: Colors.grey.shade400
+                         ),
                         ),
-                        Text(
-                          _dataController.email.value,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: myStyle(14.sp, FontWeight.w400, const Color(0xff424242)),
-                        ),
+                       
+                        Positioned(
+                            bottom: -20.h,
+                            right: -20.h,
+                            child: IconButton(
+                                onPressed: () {},
+                                icon:  Icon(
+                                  Icons.camera_alt,
+                                  size:25.sp,
+                                )))
                       ],
                     ),
-                  ),
-                  SizedBox(
-                    width: 10.w,
-                  ),
-                  InkWell(
-                    onTap: (){
-                     _dataController.modeChange();
-                    },
-                    
-                    child: Image.asset("images/switchimg.png",height:26.h,width: 26.w,)),
-                  SizedBox(
-                    width: 10.w,
-                  ),
-                  const Icon(Icons.more_vert)
-                ],
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-        
-              _dataController.isUser.value?
-              _isUser():_isProfational(),
+                    SizedBox(width:15.w,),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            _dataController.fullName.value,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          
+                            style: myStyle(16.sp, FontWeight.w500, textClr),
+                          ),
+                          Text(
+                            _dataController.email.value,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: myStyle(14.sp, FontWeight.w400, const Color(0xff424242)),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    InkWell(
+                      onTap: (){
+                       _dataController.modeChange();
+                      },
+                      
+                      child: Image.asset("images/switchimg.png",height:26.h,width: 26.w,)),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    const Icon(Icons.more_vert)
+                  ],
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
           
+                _dataController.isUser.value?
+                _isUser():_isProfational(),
             
-              SizedBox(
-                height: 37.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (_) => SignInPage()),
-                      (route) => false);
-                },
-                child: Container(
-                    height: 43.h,
-                    width: 124.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.r),
-                        color: const Color(0xffDF2929)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.logout_outlined,
-                          color: scaffoldClr,
-                          size: 18,
-                        ),
-                        SizedBox(
-                          width: 10.w,
-                        ),
-                        Text(
-                          'Logout',
-                          style: myStyle(16, FontWeight.w500, scaffoldClr),
-                        ),
-                      ],
-                    )),
-              ),
-              SizedBox(
-                height: 80.h,
-              )
-            ],
-          ),
+              
+                SizedBox(
+                  height: 37.h,
+                ),
+                InkWell(
+                  onTap: () {
+                   _profileController.hendleLogout();
+                  },
+                  child: Container(
+                      height: 43.h,
+                      width: 124.w,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.r),
+                          color: const Color(0xffDF2929)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.logout_outlined,
+                            color: scaffoldClr,
+                            size: 18,
+                          ),
+                          SizedBox(
+                            width: 10.w,
+                          ),
+                          Text(
+                            'Logout',
+                            style: myStyle(16, FontWeight.w500, scaffoldClr),
+                          ),
+                        ],
+                      )),
+                ),
+                SizedBox(
+                  height: 80.h,
+                )
+              ],
+            ),
+          
         ),
       ),
     );
   }
-
 
 _isProfational(){
 
@@ -216,7 +213,6 @@ _isProfational(){
     );
 
 }
-
 
  _isUser() {
     return Column(
@@ -492,9 +488,6 @@ _isProfational(){
             ],
           );
   }
-
-
-
 
   _cardItem(
       {required String text,
