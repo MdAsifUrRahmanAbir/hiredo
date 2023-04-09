@@ -113,8 +113,7 @@ class _ProfileState extends State<Profile> {
                   ),
                   InkWell(
                     onTap: (){
-                      _dataController.isProfessional.value=!_dataController.isProfessional.value;
-                         _dataController.isUser.value=!_dataController.isUser.value;
+                     _dataController.modeChange();
                     },
                     
                     child: Image.asset("images/switchimg.png",height:26.h,width: 26.w,)),
