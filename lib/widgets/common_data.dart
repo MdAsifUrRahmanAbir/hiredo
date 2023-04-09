@@ -10,6 +10,7 @@ static String corporationNumber="corporationNumber";
 static String isProfessional="isProfessional";
 static String isUser="isUser";
 static String password="password";
+static String bearerToken="bearerToken";
 
 
 

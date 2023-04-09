@@ -26,3 +26,17 @@ String emailTemplateApi = "${baseUrl}email_templates/";
 String fetchEmailTemplateApi = "${baseUrl}email_templates/";
 String smsTemplateApi = "${baseUrl}sms_templates/";
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+String changeUserModeApi="${baseUrl}profile/change_user_type/";

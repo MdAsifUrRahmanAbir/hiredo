@@ -3,6 +3,7 @@ import 'dart:core';
 
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:homelyknock/Screens/HomeScreen/Model/lead_category_model.dart';
 
 import 'package:homelyknock/Screens/ResistrationScreen/Model/registration_model.dart';
@@ -15,6 +16,7 @@ import 'package:homelyknock/Services/api_component.dart';
 import 'package:homelyknock/local/my_local.dart';
 
 import '../../Screens/QuestionScreen/Model/job_post_model.dart';
+import '../widgets/data_controller.dart';
 
 class ApiServices {
   static var client = http.Client();
@@ -38,7 +40,7 @@ class ApiServices {
     } else {
       Map d = json.decode(await response.stream.bytesToString());
 
-      Fluttertoast.showToast(msg:d['message']);
+      Fluttertoast.showToast(msg: d['message']);
       if (kDebugMode) {
         print(d['message']);
       }
@@ -304,40 +306,58 @@ class ApiServices {
       debugPrint("Job post  Error. Reason ${e.toString()}");
       return 1;
     }
-
-    
   }
 
 // forgot password
-Future<dynamic>  forgotPassword({required String email,required String type})async{
+  Future<dynamic> forgotPassword(
+      {required String email, required String type}) async {
+    var headers = {'Content-Type': 'application/json'};
+    var request = http.Request('POST', Uri.parse(forgotPasswordApi));
+    request.body = json.encode({
+      "media": type,
+      "phone_or_email": email,
+    });
+    request.headers.addAll(headers);
 
-  var headers = {
-  'Content-Type': 'application/json'
-};
-var request = http.Request('POST', Uri.parse(forgotPasswordApi));
-request.body = json.encode({
-  "media": type,
-  "phone_or_email":email,
-});
-request.headers.addAll(headers);
+    http.StreamedResponse response = await request.send();
 
-http.StreamedResponse response = await request.send();
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
 
-if (response.statusCode == 200) {
-  print(await response.stream.bytesToString());
-}
-else {
-  print(response.reasonPhrase);
-}
+// change user mode
 
+  static Future<bool> changeUserMode(
+      {required bool is_user, required bool is_professional}) async {
+    var accessToken = await MyPreference.getToken();
 
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var request = http.Request('PATCH', Uri.parse(changeUserModeApi));
+      request.body =
+          json.encode({"is_professional": is_professional, "is_user": is_user});
+      request.headers.addAll(headers);
 
-}
+      http.StreamedResponse response = await request.send();
 
+      if (response.statusCode == 200) {
+        debugPrint(await response.stream.bytesToString());
+        return true;
+      } else {
+        debugPrint(response.reasonPhrase);
+        return false;
+      }
+    } on Exception catch (e) {
+      debugPrint("Change user mode error :  $e");
 
-
-
-
-
-
+      return false;
+      // TODO
+    }
+  }
 }

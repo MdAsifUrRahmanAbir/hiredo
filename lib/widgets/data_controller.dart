@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:homelyknock/Services/api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'common_data.dart';
@@ -14,6 +16,7 @@ class DataController extends GetxController {
   var isProfessional = false.obs;
   var isUser = false.obs;
   var password = "".obs;
+  var bearerToken = "".obs;
 
   late SharedPreferences preferences;
 
@@ -32,6 +35,7 @@ class DataController extends GetxController {
     isProfessional.value =
         preferences.getBool(CommonData.isProfessional) ?? false;
     isUser.value = preferences.getBool(CommonData.isUser) ?? false;
+    bearerToken.value = preferences.getString(CommonData.bearerToken) ?? "";
   }
 
   setData({
@@ -45,6 +49,7 @@ class DataController extends GetxController {
     required String corporationNumberD,
     required bool isProfessionalD,
     required bool isUserD,
+    required String bearerTokenD,
   }) async {
     id.value = idD;
     email.value = emailD;
@@ -56,6 +61,7 @@ class DataController extends GetxController {
     isUser.value = isUserD;
     fullName.value = fullNameD;
     corporationNumber.value = corporationNumberD;
+    bearerToken.value = bearerTokenD;
 
     preferences = await SharedPreferences.getInstance();
     preferences.setInt(CommonData.id, idD);
@@ -68,19 +74,21 @@ class DataController extends GetxController {
     preferences.setString(CommonData.corporationNumber, corporationNumberD);
     preferences.setBool(CommonData.isProfessional, isProfessionalD);
     preferences.setBool(CommonData.isUser, isUserD);
+    preferences.setString(CommonData.bearerToken, bearerTokenD);
   }
 
-  updateUserMode({
-    required bool isProfessionalD,
-    required bool isUserD,
-  }) async {
-    isProfessional.value = isProfessionalD;
-    isUser.value = isUserD;
-    preferences = await SharedPreferences.getInstance();
-    preferences.setBool(CommonData.isProfessional, isProfessionalD);
-    preferences.setBool(CommonData.isUser, isUserD);
+  modeChange() async {
+    var result = await ApiServices.changeUserMode(
+        is_user: isUser.value, is_professional: isProfessional.value);
+
+    if (result) {
+      isProfessional.value = !isProfessional.value;
+      isUser.value = !isUser.value;
+      preferences = await SharedPreferences.getInstance();
+      preferences.setBool(CommonData.isProfessional, isProfessional.value);
+      preferences.setBool(CommonData.isUser, isUser.value);
+    } else {
+      debugPrint("User not mode change");
+    }
   }
-
-
-
 }

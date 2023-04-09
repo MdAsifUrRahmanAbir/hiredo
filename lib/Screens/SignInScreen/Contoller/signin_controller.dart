@@ -62,7 +62,9 @@ class SignInController extends GetxController {
             passwordD: allData.user.password,
             phoneD: allData.user.phoneNumber,
             isProfessionalD: allData.user.isProfessional,
-            isUserD: allData.user.isUser);
+            isUserD: allData.user.isUser,
+            bearerTokenD: allData.token,
+            );
 
             debugPrint(_dataController.id.toString());
         Get.offAll(MainScreen());
