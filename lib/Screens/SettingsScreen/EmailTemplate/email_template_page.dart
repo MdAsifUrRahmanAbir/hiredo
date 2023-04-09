@@ -218,69 +218,74 @@ class EmailTemplatePage extends StatelessWidget {
               
               stream: _emailTemplateController.getEmailTemplateData(),
               builder: (context,AsyncSnapshot<List<EmailTemplateModel>> snapshot) {
-                if(snapshot.hasData){
-                   return ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    var result = snapshot.data![index];
-                    return Container(
-                      height: 52.h,
-                      width: double.infinity,
-                      padding: EdgeInsets.only(left: 10.w),
-                      margin: EdgeInsets.only(left: 10.w),
-                      decoration: BoxDecoration(
-                          color: const Color(0xFFFFFFFF),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey.withOpacity(0.1),
-                                spreadRadius: 1,
-                                blurRadius: 1)
-                          ],
-                          borderRadius: BorderRadius.circular(3.r)),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              result.templateName,
-                              style: GoogleFonts.roboto(
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: const Color(0xFF272727)),
-                            ),
-                          ),
-                          Container(
-                            height: 24.h,
-                            width: 48.w,
-                            decoration: BoxDecoration(
-                                color: const Color(0xFF187949),
-                                borderRadius: BorderRadius.circular(3.r)),
-                            child: Center(
-                              child: Text(
-                                'Edit',
-                                style: GoogleFonts.roboto(
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w400,
-                                    color: const Color(0xFFFFFFFF)),
-                              ),
-                            ),
-                          ),
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.delete_sweep,
-                                color: Color(0xFF848484),
-                              ))
-                        ],
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) => const SizedBox(),
-                  itemCount: snapshot.data!.length);
-                }else{
+                if(!snapshot.hasData){
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
+                }else{
+                
+
+                     return Obx(()=>
+                        ListView.separated(
+                                     shrinkWrap: true,
+                                     physics: const NeverScrollableScrollPhysics(),
+                                       itemBuilder: (context, index) {
+                                         var result = snapshot.data![index];
+                                         return Container(
+                        height: 52.h,
+                        width: double.infinity,
+                        padding: EdgeInsets.only(left: 10.w),
+                        margin: EdgeInsets.only(left: 10.w),
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFFFFFFF),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey.withOpacity(0.1),
+                                  spreadRadius: 1,
+                                  blurRadius: 1)
+                            ],
+                            borderRadius: BorderRadius.circular(3.r)),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                result.templateName,
+                                style: GoogleFonts.roboto(
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: const Color(0xFF272727)),
+                              ),
+                            ),
+                            Container(
+                              height: 24.h,
+                              width: 48.w,
+                              decoration: BoxDecoration(
+                                  color: const Color(0xFF187949),
+                                  borderRadius: BorderRadius.circular(3.r)),
+                              child: Center(
+                                child: Text(
+                                  'Edit',
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w400,
+                                      color: const Color(0xFFFFFFFF)),
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.delete_sweep,
+                                  color: Color(0xFF848484),
+                                ))
+                          ],
+                        ),
+                                         );
+                                       },
+                                       separatorBuilder: (context, index) => const SizedBox(),
+                                       itemCount: snapshot.data!.length),
+                     );
+               
                 }
                
               },

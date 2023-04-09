@@ -5,18 +5,12 @@ import 'package:get/get.dart';
 import 'package:homelyknock/Services/api_services_by_limon.dart';
 import 'package:homelyknock/widgets/data_controller.dart';
 
-import '../../../SignInScreen/Model/login_model.dart';
-
-
-
 class SmsTemplateController extends GetxController {
   final TextEditingController smsNameController = TextEditingController();
   final TextEditingController messageTemplateController =
       TextEditingController();
-     DataController _dataController = Get.put(DataController());
-      
- 
- 
+  final _dataController = Get.put(DataController());
+
   var isLoading = false.obs;
 
   addSmsTemplate() async {
@@ -26,21 +20,18 @@ class SmsTemplateController extends GetxController {
       var result = await ApiServicesByLimon.smsTemplate(
           smsTemplate: smsNameController.text,
           messageTemplate: messageTemplateController.text,
-          user: _dataController.id.value
-          );  
-    
+          user: _dataController.id.value);
 
-      if (result.runtimeType == int) {
+      if (result) {
         if (kDebugMode) {
           print("Add Template $result");
-          Get.snackbar('Error', 'SMS Template Add Fail',
+          debugPrint('SMS Template Added Successfull');
+          Get.snackbar('Success', 'SMS Template Added Successfull',
               colorText: Colors.white);
-          isLoading(false);
+          isLoading(true);
         }
       } else {
-        debugPrint('SMS Template Added Successfull');
-        Get.snackbar('Error', 'SMS Template Add Successfull',
-            colorText: Colors.white);
+        Get.snackbar('Error', 'SMS Template Add Fail', colorText: Colors.white);
         isLoading(false);
       }
     } on Exception catch (e) {

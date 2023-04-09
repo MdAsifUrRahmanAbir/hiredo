@@ -10,17 +10,16 @@ class EmailTemplateController extends GetxController {
 
   var isLoading = false.obs;
 
-  final Rx<List<EmailTemplateModel>> _emailTemplateModel =  Rx<List<EmailTemplateModel>>([]);
+  final Rx<List<EmailTemplateModel>> _emailTemplateModel =
+      Rx<List<EmailTemplateModel>>([]);
   List<EmailTemplateModel> get emailTemplateModel => _emailTemplateModel.value;
-
-
 
   @override
   void onInit() {
     super.onInit();
     getEmailList();
-   
   }
+
 // Email Template add
   addToEmailTemplate() async {
     isLoading(true);
@@ -29,17 +28,19 @@ class EmailTemplateController extends GetxController {
       var result = await ApiServicesByLimon.emailTemplate(
           templateName: templeteNameController.text,
           message: messageController.text);
-      if (result.runtimeType == int) {
+      if (result) {
         if (kDebugMode) {
           print("Add Template $result");
+           debugPrint('Template Added Successfull');
+          Get.snackbar('Success', 'Template Add Successfull',
+              colorText: Colors.white);
+       
 
-          Get.snackbar('Error', 'Template Add Fail', colorText: Colors.white);
-          isLoading(false);
+          isLoading(true);
         }
       } else {
-        debugPrint('Template Added Successfull');
-        Get.snackbar('Error', 'Template Add Successfull',
-            colorText: Colors.white);
+        Get.snackbar('Error', 'Template Add Fail', colorText: Colors.white);
+          
         isLoading(false);
       }
     } on Exception catch (e) {
@@ -53,24 +54,16 @@ class EmailTemplateController extends GetxController {
   }
 
   getEmailList() async {
-    _emailTemplateModel.bindStream(getEmailTemplateData());}
-
+    _emailTemplateModel.bindStream(getEmailTemplateData());
+  }
 
 // fetchEmailTemplate
-Stream<List<EmailTemplateModel>> getEmailTemplateData()async*{
-
-while(true){
-  await Future.delayed(const Duration(seconds: 1));
-  var result = await ApiServicesByLimon.fetchEmailTemplate();
-  List<EmailTemplateModel> demoList = result;
-
-  yield demoList;
-
-
- 
+  Stream<List<EmailTemplateModel>> getEmailTemplateData() async* {
+    while (true) {
+      await Future.delayed(const Duration(seconds: 1));
+      var result = await ApiServicesByLimon.fetchEmailTemplate();
+      List<EmailTemplateModel> demoList = result;
+      yield demoList;
+    }
   }
-  
 }
-
-}
-
