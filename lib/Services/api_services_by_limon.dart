@@ -64,6 +64,7 @@ class ApiServicesByLimon {
 
       var headers = {
         'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json'
       };
 
       var response = await client.post(Uri.parse(smsTemplateApi),
@@ -71,6 +72,7 @@ class ApiServicesByLimon {
 
       if (response.statusCode == 201) {
         debugPrint('SMS Template Successfull');
+        print(response.body);
         return true;
       } else {
         if (kDebugMode) {
@@ -129,6 +131,7 @@ class ApiServicesByLimon {
       var response = await client.get(Uri.parse(fetchEmailTemplateApi));
       if (response.statusCode == 200) {
         debugPrint("Data :${jsonDecode(response.body)}");
+    
         return emailTemplateModelFromJson(response.body);
       } else {
         return response.statusCode;

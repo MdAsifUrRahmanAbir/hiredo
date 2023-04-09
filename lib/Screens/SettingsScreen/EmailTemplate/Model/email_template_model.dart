@@ -10,23 +10,23 @@ String emailTemplateModelToJson(List<EmailTemplateModel> data) => json.encode(Li
 
 class EmailTemplateModel {
     EmailTemplateModel({
-        required this.user,
+      //  required this.user,
         required this.templateName,
         required this.message,
     });
 
-    int user;
+   // int user;
     String templateName;
     String message;
 
     factory EmailTemplateModel.fromJson(Map<String, dynamic> json) => EmailTemplateModel(
-        user: json["user"],
+      //  user: json["user"],
         templateName: json["template_name"],
         message: json["message"],
     );
 
     Map<String, dynamic> toJson() => {
-        "user": user,
+      //  "user": user,
         "template_name": templateName,
         "message": message,
     };
