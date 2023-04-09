@@ -26,7 +26,7 @@ class ChangePasswordController extends GetxController {
         isLoading(false);
         debugPrint("$result");
 
-        print('Change Password Successful');
+        debugPrint('Change Password Successful');
         Get.to(SignInPage());
       } else {
         debugPrint(" Password Change Faield");
