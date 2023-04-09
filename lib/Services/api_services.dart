@@ -38,7 +38,7 @@ class ApiServices {
     } else {
       Map d = json.decode(await response.stream.bytesToString());
 
-      Fluttertoast.showToast(msg: d['email'][0]);
+      Fluttertoast.showToast(msg:d['message']);
       if (kDebugMode) {
         print(d['message']);
       }

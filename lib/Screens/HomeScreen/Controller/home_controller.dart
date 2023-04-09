@@ -12,6 +12,7 @@ class HomeController extends GetxController {
   late List<LeadCategoriesModel> categoryList = [];
   late List<LeadCategoriesModel> subCategoryList = [];
 
+
   final TextEditingController nameController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
   List<String> carouselImages = [];

@@ -15,18 +15,21 @@ class LeadCategoriesModel {
         this.image,
         required this.catName,
         required this.children,
+      required  this.popularity,
     });
 
     int id;
     String name;
     String? image;
     List<CatName> catName;
+    int popularity;
     List<LeadCategoriesModel> children;
 
     factory LeadCategoriesModel.fromJson(Map<String, dynamic> json) => LeadCategoriesModel(
         id: json["id"],
         name: json["name"],
         image: json["image"],
+        popularity: json["popularity"],
         catName: List<CatName>.from(json["cat_name"].map((x) => CatName.fromJson(x))),
         children: List<LeadCategoriesModel>.from(json["children"].map((x) => LeadCategoriesModel.fromJson(x))),
     );

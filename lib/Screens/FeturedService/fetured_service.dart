@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../HomeScreen/Model/lead_category_model.dart';
+import '../JobPost/post_a_job.dart';
 import '../QuestionScreen/question_screen.dart';
 
 class FeturedServiceScreen extends StatelessWidget {
@@ -46,13 +47,13 @@ body:  GridView.builder(
                                   crossAxisSpacing:15.w,
                                   mainAxisSpacing: 15.h,
                                   crossAxisCount: 2), 
-                                  itemBuilder: (context,index)=>itemContainer(data[index]),
+                                  itemBuilder: (context,index)=>itemContainer(data[index],index),
                                   ),
 
 
     );
     }
-   itemContainer(LeadCategoriesModel data) {
+   itemContainer(LeadCategoriesModel data,int index) {
     return Container(
       padding:EdgeInsets.all(10.w),
       decoration: BoxDecoration(
@@ -123,9 +124,9 @@ body:  GridView.builder(
           ),
           InkWell(
             onTap: (){
-               if(data.catName.isNotEmpty){
-                   Get.to(QuestionScreen(data:data.catName,));
-              }
+               
+                   Get.to(PostAJob(selectIndex:index,));
+              
             },
             child: Container(
               height: 30.h,
