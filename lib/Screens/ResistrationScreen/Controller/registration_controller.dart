@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:homelyknock/Screens/ForgetPasswordScreen/forgotpasswordpage.dart';
 
 import 'package:homelyknock/Screens/ResistrationScreen/Model/registration_model.dart';
 import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';

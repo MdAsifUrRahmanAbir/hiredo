@@ -7,8 +7,10 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../widgets/common_dashboard_controller.dart';
+import '../HomeScreen/Controller/home_controller.dart';
 import 'search_controller.dart';
 
+final homeController = Get.put(HomeController());
 class SearchResult extends StatelessWidget {
   SearchResult({super.key});
 
@@ -74,7 +76,7 @@ class SearchResult extends StatelessWidget {
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: controller.isTopCatSearchScreen.value
-            ? 8
+            ? homeController.categoryList.length
             : commonController.locationList.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
@@ -101,10 +103,10 @@ class SearchResult extends StatelessWidget {
                       child: Obx(() => ListTile(
                             leading: Text(
                               controller.isTopCatSearchScreen.value
-                                  ? 'Top Category $index'
-                                  : commonController.locationList[index].name + commonController.locationList[index].id.toString(),
+                                  ? homeController.categoryList[index].name
+                                  : commonController.locationList[index].name,
                               style: GoogleFonts.roboto(
-                                  fontSize: 16.sp,
+                                  fontSize: 14.sp,
                                   fontWeight: FontWeight.w400,
                                   color: Color(0xff272727)),
                             ),
