@@ -46,8 +46,10 @@ class SignInController extends GetxController {
         if(!isLogged){
           Get.offAll(SignInPage());
            // Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>SignInPage()));
+           }else{
+              Fluttertoast.showToast(msg: "Invalid email or password.",);
            }
-        Fluttertoast.showToast(msg: "Invalid email or password.",);
+        
         debugPrint("Opps sign in Error $result");
       } else {
         
