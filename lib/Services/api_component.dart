@@ -39,5 +39,5 @@ String smsTemplateApi = "${baseUrl}sms_templates/";
 
 
 
-String changeUserModeApi="${baseUrl}profile/change_user_type/";
+String changeUserModeApi="${baseUrl}profile/change-user-type/";
 String logoutUserApi="${baseUrl}logout/";
