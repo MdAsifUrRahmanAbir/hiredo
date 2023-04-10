@@ -331,7 +331,7 @@ class ApiServices {
 // change user mode
 
   static Future<bool> changeUserMode(
-      {required bool is_user, required bool is_professional}) async {
+      {required bool isUser, required bool isProfessional}) async {
     var accessToken = await MyPreference.getToken();
 
     try {
@@ -341,7 +341,7 @@ class ApiServices {
       };
       var request = http.Request('PATCH', Uri.parse(changeUserModeApi));
       request.body =
-          json.encode({"is_professional": is_professional, "is_user": is_user});
+          json.encode({"is_professional": isProfessional, "is_user": isUser});
       request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();

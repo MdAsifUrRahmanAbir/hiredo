@@ -79,7 +79,7 @@ class DataController extends GetxController {
 
   modeChange() async {
     var result = await ApiServices.changeUserMode(
-        is_user: isUser.value, is_professional: isProfessional.value);
+        isUser: isUser.value, isProfessional: isProfessional.value);
 
     if (result) {
       isProfessional.value = !isProfessional.value;
