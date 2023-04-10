@@ -32,7 +32,7 @@ class ApiServices {
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       if (kDebugMode) {
         print(await response.stream.bytesToString());
       }
