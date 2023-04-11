@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
+
 
 import '../TabsScreen/trackingpost.dart';
 import '../TabsScreen/trackingpostorder.dart';
@@ -10,4 +11,15 @@ class TrackingController extends GetxController {
   List screen = [TrackingPostOrder(), TrackingPostOrderTwo()];
 
   var currentIndex = 0.obs;
+
+
+
+
+  @override
+  void onInit() {
+    super.onInit();
+
+  }
+
+  
 }

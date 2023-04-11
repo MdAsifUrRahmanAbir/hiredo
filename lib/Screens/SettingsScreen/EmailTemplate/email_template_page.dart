@@ -1,19 +1,14 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Screens/SettingsScreen/EmailTemplate/Controller/email_templete_controller.dart';
-import 'package:homelyknock/Screens/SettingsScreen/EmailTemplate/Model/email_template_model.dart';
+
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 
 class EmailTemplatePage extends StatelessWidget {
   EmailTemplatePage({Key? key}) : super(key: key);
-
-
-
 
   final _emailTemplateController = Get.put(EmailTemplateController());
 
@@ -210,89 +205,77 @@ class EmailTemplatePage extends StatelessWidget {
                 )
               ],
             ),
-         
             SizedBox(
               height: 15.h,
             ),
-            StreamBuilder(
-              
-              stream: _emailTemplateController.getEmailTemplateData(),
-              builder: (context,AsyncSnapshot<List<EmailTemplateModel>> snapshot) {
-                if(!snapshot.hasData){
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }else{
-                
-
-                     return Obx(()=>
-                        ListView.separated(
-                                     shrinkWrap: true,
-                                     physics: const NeverScrollableScrollPhysics(),
-                                       itemBuilder: (context, index) {
-                                         var result = snapshot.data![index];
-                                         return Container(
-                        height: 52.h,
-                        width: double.infinity,
-                        padding: EdgeInsets.only(left: 10.w),
-                        margin: EdgeInsets.only(left: 10.w),
-                        decoration: BoxDecoration(
-                            color: const Color(0xFFFFFFFF),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.grey.withOpacity(0.1),
-                                  spreadRadius: 1,
-                                  blurRadius: 1)
-                            ],
-                            borderRadius: BorderRadius.circular(3.r)),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                result.templateName,
-                                style: GoogleFonts.roboto(
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: const Color(0xFF272727)),
-                              ),
-                            ),
-                            Container(
-                              height: 24.h,
-                              width: 48.w,
-                              decoration: BoxDecoration(
-                                  color: const Color(0xFF187949),
-                                  borderRadius: BorderRadius.circular(3.r)),
-                              child: Center(
+            Obx(
+              () => _emailTemplateController.isLoading.value
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        var result =
+                            _emailTemplateController.emailTemplateModel[index];
+                        return Container(
+                          height: 52.h,
+                          width: double.infinity,
+                          padding: EdgeInsets.only(left: 10.w),
+                          margin: EdgeInsets.only(left: 10.w),
+                          decoration: BoxDecoration(
+                              color: const Color(0xFFFFFFFF),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.grey.withOpacity(0.1),
+                                    spreadRadius: 1,
+                                    blurRadius: 1)
+                              ],
+                              borderRadius: BorderRadius.circular(3.r)),
+                          child: Row(
+                            children: [
+                              Expanded(
                                 child: Text(
-                                  'Edit',
+                                  result.templateName,
                                   style: GoogleFonts.roboto(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w400,
-                                      color: const Color(0xFFFFFFFF)),
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: const Color(0xFF272727)),
                                 ),
                               ),
-                            ),
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.delete_sweep,
-                                  color: Color(0xFF848484),
-                                ))
-                          ],
-                        ),
-                                         );
-                                       },
-                                       separatorBuilder: (context, index) => const SizedBox(),
-                                       itemCount: snapshot.data!.length),
-                     );
-               
-                }
-               
-              },
-              
+                              Container(
+                                height: 24.h,
+                                width: 48.w,
+                                decoration: BoxDecoration(
+                                    color: const Color(0xFF187949),
+                                    borderRadius: BorderRadius.circular(3.r)),
+                                child: Center(
+                                  child: Text(
+                                    'Edit',
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w400,
+                                        color: const Color(0xFFFFFFFF)),
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                  onPressed: () {
+                                    _emailTemplateController.deleteItem(index);
+                                  },
+                                  icon: const Icon(
+                                    Icons.delete_sweep,
+                                    color: Color(0xFF848484),
+                                  ))
+                            ],
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) => const SizedBox(),
+                      itemCount:
+                          _emailTemplateController.emailTemplateModel.length),
             ),
-
-         
             Row(
               children: [
                 const Icon(
@@ -316,7 +299,4 @@ class EmailTemplatePage extends StatelessWidget {
       ),
     );
   }
-
-
-
 }

@@ -1,11 +1,15 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:homelyknock/Screens/SettingsScreen/EmailTemplate/Model/email_template_model.dart';
-import 'package:homelyknock/Services/api_component.dart';
 
+import 'package:homelyknock/Screens/SettingsScreen/EmailTemplate/Model/email_template_model.dart';
+import 'package:homelyknock/Screens/TrackingScreen/Model/pending_post_model.dart';
+
+import '../Screens/DocumentScreen/Model/real_time_model.dart';
 import '../local/my_local.dart';
 import 'package:http/http.dart' as http;
+
+import 'api_component.dart';
 
 class ApiServicesByLimon {
   static var client = http.Client();
@@ -51,8 +55,7 @@ class ApiServicesByLimon {
   static dynamic smsTemplate(
       {required String smsTemplate,
       required String messageTemplate,
-      required int user
-      }) async {
+      required int user}) async {
     var accessToken = await MyPreference.getToken();
 
     try {
@@ -128,10 +131,12 @@ class ApiServicesByLimon {
       var headers = {
         'Authorization': 'Bearer $accessToken',
       };
-      var response = await client.get(Uri.parse(fetchEmailTemplateApi));
+      var response =
+          await client.get(Uri.parse(emailTemplateApi), headers: headers);
+
       if (response.statusCode == 200) {
         debugPrint("Data :${jsonDecode(response.body)}");
-    
+
         return emailTemplateModelFromJson(response.body);
       } else {
         return response.statusCode;
@@ -140,5 +145,47 @@ class ApiServicesByLimon {
       debugPrint("Data fetch Error. Reason ${e.toString()}");
       return 0;
     }
+  }
+
+//fetch RealTimeServices
+
+  static dynamic fetchRealTimeService() async {
+    try {
+      var response = await client.get(Uri.parse(realTimeServiceApi));
+
+      if (response.statusCode == 200) {
+       
+        return realTimeServiceModelFromJson(response.body);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      debugPrint("Data fetch Error. Reason ${e.toString()}");
+      return 0;
+    }
+  }
+
+// fetch pending post
+
+  static dynamic fetchPending() async {
+
+    var accessToken = await MyPreference.getToken();
+
+    try {
+  var headers = {
+    'Authorization': 'Bearer $accessToken',
+  };
+  var response =
+      await client.get(Uri.parse(pendingPostApi), headers: headers);
+      if(response.statusCode == 200){
+        return pendingPostModelFromJson(response.body);
+      }else{
+        return response.statusCode;
+      }
+} on Exception catch (e) {
+    debugPrint("Data fetch Error. Reason ${e.toString()}");
+      return 0;
+
+}
   }
 }

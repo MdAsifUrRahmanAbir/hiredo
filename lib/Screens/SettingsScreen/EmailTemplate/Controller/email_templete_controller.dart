@@ -10,9 +10,7 @@ class EmailTemplateController extends GetxController {
 
   var isLoading = false.obs;
 
-  final Rx<List<EmailTemplateModel>> _emailTemplateModel =
-      Rx<List<EmailTemplateModel>>([]);
-  List<EmailTemplateModel> get emailTemplateModel => _emailTemplateModel.value;
+  List<EmailTemplateModel> emailTemplateModel = [];
 
   @override
   void onInit() {
@@ -31,16 +29,15 @@ class EmailTemplateController extends GetxController {
       if (result) {
         if (kDebugMode) {
           print("Add Template $result");
-           debugPrint('Template Added Successfull');
+          debugPrint('Template Added Successfull');
           Get.snackbar('Success', 'Template Add Successfull',
               colorText: Colors.white);
-       
 
           isLoading(true);
         }
       } else {
         Get.snackbar('Error', 'Template Add Fail', colorText: Colors.white);
-          
+
         isLoading(false);
       }
     } on Exception catch (e) {
@@ -54,16 +51,31 @@ class EmailTemplateController extends GetxController {
   }
 
   getEmailList() async {
-    _emailTemplateModel.bindStream(getEmailTemplateData());
+    isLoading(true);
+
+    try {
+      var result = await ApiServicesByLimon.fetchEmailTemplate();  
+
+      if (result.runtimeType == int) {
+        if (kDebugMode) {
+          print('$result');
+        }
+      } else {
+        List<EmailTemplateModel> demoList = result;
+        emailTemplateModel = demoList;
+ 
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print('Fetch Error $e');
+      }
+    } finally {
+      isLoading(false);
+    }
   }
 
-// fetchEmailTemplate
-  Stream<List<EmailTemplateModel>> getEmailTemplateData() async* {
-    while (true) {
-      await Future.delayed(const Duration(seconds: 1));
-      var result = await ApiServicesByLimon.fetchEmailTemplate();
-      List<EmailTemplateModel> demoList = result;
-      yield demoList;
-    }
+  void deleteItem(int index){
+    emailTemplateModel.removeAt(index);
+    update();
   }
 }

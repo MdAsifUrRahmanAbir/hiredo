@@ -23,8 +23,10 @@ String forgotPasswordApi="${baseUrl}reset-password-otp/";
 
 String changePasswordApi = "${baseUrl}change-password/";
 String emailTemplateApi = "${baseUrl}email_templates/";
-String fetchEmailTemplateApi = "${baseUrl}email_templates/";
+
 String smsTemplateApi = "${baseUrl}sms_templates/";
+String realTimeServiceApi = "${baseUrl}lead/RealTimeService/";
+String pendingPostApi = "${baseUrl}lead/PendingPost/";
 
 
 

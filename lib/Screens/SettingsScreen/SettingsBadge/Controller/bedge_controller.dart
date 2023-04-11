@@ -33,7 +33,7 @@ class BedgeController extends GetxController {
         List<BedgeModel> demoList = result;
         bedgeList = demoList;
 
-        print(demoList);
+        print(bedgeList);
        
       }
     } on Exception catch (e) {
