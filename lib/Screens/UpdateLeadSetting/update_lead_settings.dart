@@ -163,7 +163,7 @@ class UpdateLeadSettings extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () {
-                                updatLeadController.submiteService();
+                               
                               },
                               child: Container(
                                 height: 50.h,

@@ -33,41 +33,7 @@ class UpdateController extends GetxController {
   }
 
 // add services data
-  submiteService() async {
-    isLoading(true);
-
-    try {
-      var result = await ApiServices.addServicePost(
-          design: desginController.text,
-          description: descriptionController.text);
-      if (result.runtimeType == int) {
-        if (kDebugMode) {
-          print('Service Add Failed $result');
-          Get.snackbar(
-            "title",
-            "Creation Failed",
-            colorText: Colors.white,
-          );
-        }
-      } else {
-        print('Data Added Successful');
-        print(accessToken);
-
-        Get.snackbar(
-          "title",
-          "Creation Successful",
-          colorText: Colors.white,
-        );
-      }
-    } on Exception catch (e) {
-      if (kDebugMode) {
-        print('Feature Error $e');
-      }
-    } finally {
-      isLoading(false);
-    }
-  }
-
+ 
 // fetch services data
 
   fetchServices() async {

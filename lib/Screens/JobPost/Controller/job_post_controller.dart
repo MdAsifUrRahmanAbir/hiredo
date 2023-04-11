@@ -9,11 +9,4 @@ var isCategoryError=false.obs;
 var isLocationError=false.obs;
 var isSelectCategory=false.obs;
 int? locationId;
-
-
-
-
-
-
-
 }

@@ -16,6 +16,8 @@ import 'package:homelyknock/Services/api_component.dart';
 import 'package:homelyknock/local/my_local.dart';
 
 import '../../Screens/QuestionScreen/Model/job_post_model.dart';
+import '../Screens/LeadsScreen/Model/leads_model.dart';
+import '../Screens/Service/Model/service_model.dart';
 import '../widgets/data_controller.dart';
 
 class ApiServices {
@@ -101,29 +103,24 @@ class ApiServices {
 
 // add service
   static Future<bool> addServicePost(
-      {required String design, required String description}) async {
+      {required int id, required String description}) async {
     var accessToken = await MyPreference.getToken();
-    // SharedPreferences preferences = await SharedPreferences.getInstance();
-    // var accessToken = preferences.getString('token');
+    
     try {
       var headers = {
         'Authorization': "Bearer $accessToken",
-        'Cookie':
-            'csrftoken=pwnIa5wXWizyqYO2ybhtX0GLZ0NxqhtU; sessionid=gg5ikg2sfd8r50skh2zkn4d9uahf6lue'
+         'Content-Type': 'application/json',
+        
       };
-      var request = http.MultipartRequest('POST', Uri.parse(addService));
-      request.fields
-          .addAll({'service_name': design, 'service_description': description});
-
-      request.headers.addAll(headers);
-
-      http.StreamedResponse response = await request.send();
-
+      var response =await client.post(Uri.parse(serviceApi),body:jsonEncode({
+        "service_name":id,
+        "service_description":description}),headers:headers);
+   
       if (response.statusCode == 201) {
         return true;
       } else {
         if (kDebugMode) {
-          print(response.reasonPhrase);
+          print(response.statusCode);
         }
         return false;
       }
@@ -154,7 +151,7 @@ class ApiServices {
 
       if (response.statusCode == 200) {
         var data = await response.stream.bytesToString();
-        return addServicesModelFromMap(data);
+        return serviceModelFromJson(data);
       } else {
         return response.statusCode;
       }
@@ -390,6 +387,38 @@ class ApiServices {
       // TODO
     }
   }
+
+
+// fetch leads 
+
+
+  static dynamic fetchLeads() async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client.get( Uri.parse(leadsApi),headers: headers);
+     
+      
+      if (response.statusCode == 200) {
+        return leadsModelFromJson(response.body);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        return print(" Leads fetch Error. Reason ${e.toString()}");
+      }
+      return 0;
+    }
+  }
+
+
+
+  
 
 
 }
