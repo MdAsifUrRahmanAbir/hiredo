@@ -34,12 +34,14 @@ class _SplashPageState extends State<SplashPage> {
           _signInController.userSignIn(isLogged: false, email: isLoggedEmail, password:isLoggedPassword);
       } else {
         
-        print(isOnBoard);
+       
         if(isOnBoard){
-          Get.off(const SignIntroPage());
+       //   Get.off(const SignIntroPage());
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>SignIntroPage()));
         }else{
-          print(isOnBoard);
-          Get.off(OnboardinScreen);
+          debugPrint("navigate on board screen $isOnBoard");
+          // Get.off(OnboardinScreen);
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>OnboardinScreen()));
            
         }
       
