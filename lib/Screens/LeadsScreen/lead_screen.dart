@@ -7,6 +7,7 @@ import 'package:homelyknock/Screens/LeadsDetailsScreen/leads_details_screen.dart
 
 import '../../nav_bar_page/main_controller.dart';
 import '../../utils/colors.dart';
+import '../ProfileScreen/Controller/profile_controller.dart';
 
 class LeadsScreen extends StatefulWidget {
   static const String routename = '/leadscreen';
@@ -17,53 +18,9 @@ class LeadsScreen extends StatefulWidget {
 }
 
 class _LeadsScreenState extends State<LeadsScreen> {
-  List<Map> item = [
-    {
-      'image': 'images/kumar.png',
-      'title': 'Kumar',
-      'time': '3m ago',
-      'locationImage': 'images/location.png',
-      'address': '4517 Washington Ave, Kentucky',
-      'bImage': 'images/b.png',
-      'credit': '2 Credits'
-    },
-    {
-      'image': 'images/rahman.png',
-      'title': 'Reduan',
-      'time': '5m ago',
-      'locationImage': 'images/location.png',
-      'address': '4517 Washington Ave, Kentucky',
-      'bImage': 'images/b.png',
-      'credit': '2 Credits'
-    },
-    {
-      'image': 'images/haq.png',
-      'title': 'Jhon Smith',
-      'time': '7m ago',
-      'locationImage': 'images/location.png',
-      'address': '4517 Washington Ave, Kentucky',
-      'bImage': 'images/b.png',
-      'credit': '2 Credits'
-    },
-    {
-      'image': 'images/rahman.png',
-      'title': 'Rahman',
-      'time': '7m ago',
-      'locationImage': 'images/location.png',
-      'address': '4517 Washington Ave, Kentucky',
-      'bImage': 'images/b.png',
-      'credit': '2 Credits'
-    },
-    {
-      'image': 'images/haq.png',
-      'title': 'Tasmia Haq',
-      'time': '9m ago',
-      'locationImage': 'images/location.png',
-      'address': '4517 Washington Ave, Kentucky',
-      'bImage': 'images/b.png',
-      'credit': '2 Credits'
-    },
-  ];
+
+  final _profileController = Get.put(ProfileController());
+  
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +119,7 @@ class _LeadsScreenState extends State<LeadsScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      '431 matching leads',
+                      '${_profileController.leadsList.length} matching leads',
                       style: GoogleFonts.roboto(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w500,
@@ -178,7 +135,7 @@ class _LeadsScreenState extends State<LeadsScreen> {
                           width: 2.w,
                         ),
                         Text(
-                          '61 Services',
+                          '${_profileController.serviceList.length} Services',
                           style: GoogleFonts.roboto(
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w400,
@@ -200,7 +157,7 @@ class _LeadsScreenState extends State<LeadsScreen> {
                           width: 2.w,
                         ),
                         Text(
-                          '61 Services',
+                          'Locations',
                           style: GoogleFonts.roboto(
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w400,
@@ -243,7 +200,7 @@ class _LeadsScreenState extends State<LeadsScreen> {
             height: 15.h,
           ),
           Text(
-            'Showing all 431 leads',
+            'Showing all ${_profileController.leadsList.length} leads',
             style: GoogleFonts.roboto(
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w400,
@@ -256,20 +213,21 @@ class _LeadsScreenState extends State<LeadsScreen> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
+              var data=_profileController.leadsList[index];
               return InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => LeadsDetailsScreen(
-                                image: item[index]['image'],
-                                name: item[index]['title'],
-                                time: item[index]['time'],
-                                locationImage: item[index]['locationImage'],
-                                address: item[index]['address'],
-                                bImage: item[index]['bImage'],
-                                credit: item[index]['credit'],
-                              )));
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (_) => LeadsDetailsScreen(
+                  //               image: item[index]['image'],
+                  //               name: item[index]['title'],
+                  //               time: item[index]['time'],
+                  //               locationImage: item[index]['locationImage'],
+                  //               address: item[index]['address'],
+                  //               bImage: item[index]['bImage'],
+                  //               credit: item[index]['credit'],
+                  //             )));
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -280,7 +238,7 @@ class _LeadsScreenState extends State<LeadsScreen> {
                       children: [
                         CircleAvatar(
                           radius: 20.r,
-                          backgroundImage: AssetImage(item[index]['image']),
+                          backgroundImage: NetworkImage("http://ringknock.pythonanywhere.com${data.category.image}"),
                         ),
                         SizedBox(
                           width: 8.w,
@@ -292,7 +250,7 @@ class _LeadsScreenState extends State<LeadsScreen> {
                             Row(
                               children: [
                                 Text(
-                                  item[index]['title'],
+                                  data.user.fullName,
                                   style: GoogleFonts.roboto(
                                       fontSize: 16.sp,
                                       fontWeight: FontWeight.w500,
@@ -306,11 +264,14 @@ class _LeadsScreenState extends State<LeadsScreen> {
                                   width: 5.w,
                                 ),
                                 Text(
-                                  'Plumbing',
+                                  data.category.name,
                                   style: GoogleFonts.roboto(
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
-                                      color: const Color(0xFF424242)),
+                                      
+                                      color: const Color(0xFF424242),),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
                                 )
                               ],
                             ),
@@ -319,12 +280,12 @@ class _LeadsScreenState extends State<LeadsScreen> {
                             ),
                             Row(
                               children: [
-                                Image.asset(item[index]['locationImage']),
+                                Image.asset("images/location.png"),
                                 SizedBox(
                                   width: 5.w,
                                 ),
                                 Text(
-                                  item[index]['address'],
+                                  data.location ?? "",
                                   style: GoogleFonts.roboto(
                                       fontSize: 12.sp,
                                       fontWeight: FontWeight.w400),
@@ -349,8 +310,8 @@ class _LeadsScreenState extends State<LeadsScreen> {
                                 Icons.access_time_filled_rounded,
                                 color: Color(0xFF187949),
                               ),
-                              Text(
-                                item[index]['time'],
+                              Text("30.min"
+                                ,
                                 style: GoogleFonts.roboto(
                                     fontSize: 12.sp,
                                     fontWeight: FontWeight.w400,
@@ -386,12 +347,12 @@ class _LeadsScreenState extends State<LeadsScreen> {
                     ),
                     Row(
                       children: [
-                        Image.asset(item[index]['bImage']),
+                        Image.asset("images/b.png"),
                         SizedBox(
                           width: 3.w,
                         ),
                         Text(
-                          item[index]['credit'],
+                          "2 Credits",
                           style: GoogleFonts.roboto(
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
@@ -409,7 +370,7 @@ class _LeadsScreenState extends State<LeadsScreen> {
                 ),
               );
             },
-            itemCount: item.length,
+            itemCount: _profileController.leadsList.length,
             separatorBuilder: (BuildContext context, int index) {
               return SizedBox(
                 height: 25.h,

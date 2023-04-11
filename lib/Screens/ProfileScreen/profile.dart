@@ -16,6 +16,7 @@ import '../../widgets/data_controller.dart';
 import '../LocationScreen/locationpage.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
+import '../Service/service.dart';
 import 'Controller/profile_controller.dart';
 
  final _mainController = Get.put(MainScreenController());
@@ -28,6 +29,7 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  
     return Scaffold(
       backgroundColor: scaffoldClr,
       appBar: AppBar(
@@ -369,7 +371,7 @@ _isProfational(){
             height: 20.h,
           ),
           Container(
-            height: 152.h,
+            
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
             color: containerClr,
@@ -383,48 +385,21 @@ _isProfational(){
                 SizedBox(
                   height: 5.h,
                 ),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            '#Bathroom_installation',
-                            style: myStyle(14, FontWeight.w400, backIconClr),
-                          ),
-                          Text(
-                            '#Kitchen Refurbishment',
-                            style: myStyle(14, FontWeight.w400, textClr),
-                          ),
-                          Text(
-                            '#Kitchen Refurbishment',
-                            style: myStyle(14, FontWeight.w400, textClr),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            '#Bathroom_installation',
-                            style: myStyle(14, FontWeight.w400, textClr),
-                          ),
-                          Text(
-                            '#Kitchen Design',
-                            style: myStyle(14, FontWeight.w400, textClr),
-                          ),
-                          Text(
-                            'View More',
-                            style: myStyle(14, FontWeight.w400, backIconClr),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
+      
+                
+                GridView.builder(
+                  physics:const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                 
+                  itemCount:_profileController.serviceList.length<6?_profileController.serviceList.length:6,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+               mainAxisExtent:25.sp,
+              crossAxisSpacing: 15.w,
+             
+             
+              crossAxisCount: 2
+              ), 
+              itemBuilder: (context,index)=>Text(_profileController.serviceList[index].serviceName.toString(),style: GoogleFonts.roboto(fontSize:16.sp,color: Colors.black),overflow: TextOverflow.ellipsis,maxLines:1,)),
               ],
             ),
           ),
@@ -438,7 +413,7 @@ _isProfational(){
               icon: Icons.star_border_outlined,
               text: 'Leads',
               isCount: true,
-              count: 450.toString()),
+              count:_profileController.leadsList.length.toString()),
           _cardItem(
               onTap: () {
                 Get.to(MyResponse());
@@ -470,12 +445,12 @@ _isProfational(){
           ),
           _cardItem(
               onTap: () {
-                Get.to(Service());
+                Get.to(ServiceScreen());
               },
               icon: Icons.rotate_right,
               text: 'Services',
               isCount: true,
-              count: 50.toString()),
+              count:_profileController.serviceList.length.toString()),
           _cardItem(
               onTap: () {
                 Get.to(LocationPage());

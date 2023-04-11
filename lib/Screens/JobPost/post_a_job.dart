@@ -60,6 +60,9 @@ class PostAJob extends StatelessWidget {
                   dropdownButtonProps: const DropdownButtonProps(
                     icon: SizedBox(),
                   ),
+                   popupProps:const PopupProps.menu(
+                      showSearchBox: true
+                    ),
                   dropdownDecoratorProps: DropDownDecoratorProps(
                     dropdownSearchDecoration: InputDecoration(
                       labelText: "What service do you need?",
