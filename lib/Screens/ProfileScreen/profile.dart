@@ -29,7 +29,7 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  
+    _profileController.getData();
     return Scaffold(
       backgroundColor: scaffoldClr,
       appBar: AppBar(
@@ -138,7 +138,7 @@ class Profile extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                   _profileController.hendleLogout();
+                   _profileController.hendleLogout(context);
                   },
                   child: Container(
                       height: 43.h,

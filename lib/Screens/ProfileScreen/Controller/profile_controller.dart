@@ -8,16 +8,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../local/my_local.dart';
 import '../../LeadsScreen/Model/leads_model.dart';
 import '../../Service/Model/service_model.dart';
+import 'package:flutter/material.dart';
 
 class ProfileController extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
-    getData();
+    
     super.onInit();
   }
 
   var isLoading = false.obs;
+  var isLeadLoading =false.obs;
 
   RxList<ServiceModel> serviceList =
       List<ServiceModel>.empty(growable: true).obs;
@@ -26,11 +28,11 @@ class ProfileController extends GetxController {
   getData() async {
     isLoading(true);
     await getServices();
-    await getLeads();
+    await getLeads(false);
     isLoading(false);
   }
 
-  hendleLogout() async {
+  hendleLogout(BuildContext context) async {
     try {
       isLoading(true);
       var result = await ApiServices.logoutUser();
@@ -40,7 +42,7 @@ class ProfileController extends GetxController {
         preferences.clear();
         MyPreference.setOnBoard(isOnBoard);
         Fluttertoast.showToast(msg: "Logout Successfull");
-        Get.offAll(SignInPage());
+       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>SignInPage()), (route) => false);
       } else {
         isLoading(false);
         debugPrint("User not logout");
@@ -73,8 +75,11 @@ class ProfileController extends GetxController {
     }
   }
 
-  getLeads() async {
+  getLeads(bool isLead) async {
     try {
+      if(isLead){
+        isLeadLoading.value=true;
+      }
       var result = await ApiServices.fetchLeads();
       if (result.runtimeType == int) {
         if (kDebugMode) {
@@ -87,6 +92,10 @@ class ProfileController extends GetxController {
     } on Exception catch (e) {
       if (kDebugMode) {
         print("Fetch Error $e");
+      }
+    }finally{
+      if(isLead){
+        isLeadLoading.value=false;
       }
     }
   }

@@ -1,11 +1,8 @@
-// To parse this JSON data, do
-//
-//     final leadsModel = leadsModelFromJson(jsonString);
+
 
 import 'dart:convert';
 
 List<LeadsModel> leadsModelFromJson(String str) => List<LeadsModel>.from(json.decode(str).map((x) => LeadsModel.fromJson(x)));
-
 
 class LeadsModel {
     LeadsModel({
@@ -16,6 +13,7 @@ class LeadsModel {
         required this.postObject,
         required this.responseCount,
         required this.created,
+        required this.postCredit,
     });
 
     int id;
@@ -24,16 +22,18 @@ class LeadsModel {
     Category category;
     List<PostObject> postObject;
     int responseCount;
-    DateTime created;
+    String created;
+    int postCredit;
 
     factory LeadsModel.fromJson(Map<String, dynamic> json) => LeadsModel(
         id: json["id"],
         user: User.fromJson(json["user"]),
-        location: json["location"],
+        location: json["location"]??"",
         category: Category.fromJson(json["category"]),
         postObject: List<PostObject>.from(json["post_object"].map((x) => PostObject.fromJson(x))),
         responseCount: json["response_count"],
-        created: DateTime.parse(json["created"]),
+        created: json["created"],
+        postCredit: json["post_credit"],
     );
 
    
@@ -46,7 +46,7 @@ class Category {
         required this.image,
         required this.created,
         required this.popularity,
-        required this.parent,
+        this.parent,
     });
 
     int id;
@@ -54,7 +54,7 @@ class Category {
     String image;
     DateTime created;
     int popularity;
-    int parent;
+    dynamic parent;
 
     factory Category.fromJson(Map<String, dynamic> json) => Category(
         id: json["id"],
@@ -68,31 +68,69 @@ class Category {
    
 }
 
+
+
+
 class PostObject {
     PostObject({
+        required this.id,
+        this.location,
+        required this.created,
+        required this.postUser,
         required this.category,
         required this.question,
-        this.location,
         required this.pAnswer,
     });
 
-    int category;
-    int question;
+    int id;
     dynamic location;
-    int pAnswer;
+    DateTime created;
+    PostUser postUser;
+    Category category;
+    Question question;
+    PAnswer pAnswer;
 
     factory PostObject.fromJson(Map<String, dynamic> json) => PostObject(
-        category: json["category"],
-        question: json["question"],
+        id: json["id"],
         location: json["location"],
-        pAnswer: json["p_answer"],
+        created: DateTime.parse(json["created"]),
+        postUser: PostUser.fromJson(json["post_user"]),
+        category: Category.fromJson(json["category"]),
+        question: Question.fromJson(json["question"]),
+        pAnswer: PAnswer.fromJson(json["p_answer"]),
     );
 
-    
+   
 }
 
-class User {
-    User({
+class PAnswer {
+    PAnswer({
+        required this.id,
+        required this.options,
+        required this.credit,
+        required this.created,
+        required this.question,
+    });
+
+    int id;
+    String options;
+    int credit;
+    DateTime created;
+    int question;
+
+    factory PAnswer.fromJson(Map<String, dynamic> json) => PAnswer(
+        id: json["id"],
+        options: json["options"],
+        credit: json["credit"],
+        created: DateTime.parse(json["created"]),
+        question: json["question"],
+    );
+
+   
+}
+
+class PostUser {
+    PostUser({
         required this.id,
         required this.password,
         required this.isSuperuser,
@@ -138,14 +176,14 @@ class User {
     List<dynamic> groups;
     List<dynamic> userPermissions;
 
-    factory User.fromJson(Map<String, dynamic> json) => User(
+    factory PostUser.fromJson(Map<String, dynamic> json) => PostUser(
         id: json["id"],
         password: json["password"],
         isSuperuser: json["is_superuser"],
         fullName: json["full_name"],
         email: json["email"],
         dateOfBirth: DateTime.parse(json["date_of_birth"]),
-        corporationName: json["corporation_name"],
+        corporationName:json["corporation_name"],
         corporationNumber: json["corporation_number"],
         phoneNumber: json["phone_number"],
         lastLogin: DateTime.parse(json["last_login"]),
@@ -162,5 +200,99 @@ class User {
         userPermissions: List<dynamic>.from(json["user_permissions"].map((x) => x)),
     );
 
-  
+ 
+}
+
+
+
+
+
+
+
+class Question {
+    Question({
+        required this.id,
+        required this.qs,
+        required this.cat,
+    });
+
+    int id;
+    String qs;
+    int cat;
+
+    factory Question.fromJson(Map<String, dynamic> json) => Question(
+        id: json["id"],
+        qs: json["qs"],
+        cat: json["cat"],
+    );
+
+    
+}
+
+
+
+class User {
+    User({
+        required this.id,
+        required this.fullName,
+        this.userProfilePic,
+        required this.email,
+        required this.dateOfBirth,
+        required this.phoneNumber,
+        required this.corporationName,
+        required this.corporationNumber,
+        required this.isProfessional,
+        required this.isUser,
+        required this.password,
+    });
+
+    int id;
+    String fullName;
+    UserProfilePic? userProfilePic;
+    String email;
+    DateTime dateOfBirth;
+    String phoneNumber;
+    String corporationName;
+    String corporationNumber;
+    bool isProfessional;
+    bool isUser;
+    String password;
+
+    factory User.fromJson(Map<String, dynamic> json) => User(
+        id: json["id"],
+        fullName: json["full_name"],
+        userProfilePic: json["user_profile_pic"] == null ? null : UserProfilePic.fromJson(json["user_profile_pic"]),
+        email: json["email"],
+        dateOfBirth: DateTime.parse(json["date_of_birth"]),
+        phoneNumber: json["phone_number"],
+        corporationName:json["corporation_name"],
+        corporationNumber: json["corporation_number"],
+        isProfessional: json["is_professional"],
+        isUser: json["is_user"],
+        password: json["password"],
+    );
+
+   
+}
+
+class UserProfilePic {
+    UserProfilePic({
+        required this.id,
+        required this.user,
+        required this.picture,
+    });
+
+    int id;
+    int user;
+    String picture;
+
+    factory UserProfilePic.fromJson(Map<String, dynamic> json) => UserProfilePic(
+        id: json["id"],
+        user: json["user"],
+        picture: json["picture"],
+    );
+
+   
+
+
 }

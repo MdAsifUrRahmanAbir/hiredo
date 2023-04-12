@@ -57,6 +57,7 @@ dependencies:
   dart_code_metrics: ^5.7.0       # added by abir
   logger:                         # added by abir
   flutter_widget_from_html: ^0.10.0
+  jiffy: ^6.1.0
 
 
 dev_dependencies:
