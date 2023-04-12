@@ -6,16 +6,25 @@ import 'package:homelyknock/Services/api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../local/my_local.dart';
+import '../../../widgets/logger.dart';
 import '../../LeadsScreen/Model/leads_model.dart';
 import '../../Service/Model/service_model.dart';
 import 'package:flutter/material.dart';
-
+final log = logger(ProfileController);
 class ProfileController extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
-    
+    getData();
     super.onInit();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    leadsList.clear();
+    serviceList.close();
+    super.dispose();
   }
 
   var isLoading = false.obs;
@@ -42,7 +51,8 @@ class ProfileController extends GetxController {
         preferences.clear();
         MyPreference.setOnBoard(isOnBoard);
         Fluttertoast.showToast(msg: "Logout Successfull");
-       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>SignInPage()), (route) => false);
+        Get.offAll(SignInPage());
+      // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>SignInPage()), (route) => false);
       } else {
         isLoading(false);
         debugPrint("User not logout");
@@ -64,9 +74,11 @@ class ProfileController extends GetxController {
         if (kDebugMode) {
           print('Error $result');
         }
+          log.e(result);
       } else {
         serviceList.value = result;
         debugPrint(serviceList.length.toString());
+        log.i(result);
       }
     } on Exception catch (e) {
       if (kDebugMode) {
@@ -85,9 +97,11 @@ class ProfileController extends GetxController {
         if (kDebugMode) {
           print('Error $result');
         }
+         log.e(result);
       } else {
         leadsList.value = result;
         debugPrint(leadsList.length.toString());
+        log.i(result);
       }
     } on Exception catch (e) {
       if (kDebugMode) {
