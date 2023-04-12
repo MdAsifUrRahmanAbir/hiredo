@@ -13,6 +13,7 @@ import 'package:homelyknock/utils/colors.dart';
 import '../../nav_bar_page/main_controller.dart';
 import '../../widgets/custom_loader.dart';
 import '../../widgets/data_controller.dart';
+import '../JobPost/post_a_job.dart';
 import '../LocationScreen/locationpage.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -29,7 +30,7 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  
+   // _profileController.getData();
     return Scaffold(
       backgroundColor: scaffoldClr,
       appBar: AppBar(
@@ -130,7 +131,7 @@ class Profile extends StatelessWidget {
                 ),
           
                 _dataController.isUser.value?
-                _isUser():_isProfational(),
+                _isUser():_isProfational(context),
             
               
                 SizedBox(
@@ -138,7 +139,7 @@ class Profile extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                   _profileController.hendleLogout();
+                   _profileController.hendleLogout(context);
                   },
                   child: Container(
                       height: 43.h,
@@ -175,7 +176,7 @@ class Profile extends StatelessWidget {
     );
   }
 
-_isProfational(){
+_isProfational(context){
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -198,7 +199,13 @@ _isProfational(){
               title: Text("Corporation number",style: GoogleFonts.roboto(fontSize:20.sp,color:Colors.black),),
               subtitle: Text("01796165636",style: GoogleFonts.roboto(fontSize:16.sp,color:Colors.black),),
             )
-          )
+          ),
+
+
+          ElevatedButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (_)=>PostAJob()));
+          }, 
+          child:Text("Create Post",style:GoogleFonts.roboto(fontSize:16.sp,fontWeight: FontWeight.w600),))
 
          
 
