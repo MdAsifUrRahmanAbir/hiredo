@@ -96,7 +96,7 @@ class TrackingScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                        SizedBox(width: 27.w,),
+                       
                         Obx(
                         () => InkWell(
                           onTap: (){

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homelyknock/Screens/SettingsScreen/SMSTemplate/Model/sms_template_model.dart';
 
 import 'package:homelyknock/Services/api_services_by_limon.dart';
 import 'package:homelyknock/widgets/data_controller.dart';
@@ -12,10 +13,12 @@ class SmsTemplateController extends GetxController {
   final _dataController = Get.put(DataController());
 
   var isLoading = false.obs;
+  var isAddLoading=false.obs;
+ 
+  var smsTemplateModel = <SmSTemplateModel>[].obs;
 
   addSmsTemplate() async {
-    isLoading(true);
-
+     isAddLoading(true);
     try {
       var result = await ApiServicesByLimon.smsTemplate(
           smsTemplate: smsNameController.text,
@@ -26,21 +29,56 @@ class SmsTemplateController extends GetxController {
         if (kDebugMode) {
           print("Add Template $result");
           debugPrint('SMS Template Added Successfull');
+          getSMSTemplate(true);
           Get.snackbar('Success', 'SMS Template Added Successfull',
               colorText: Colors.white);
-          isLoading(true);
+
+          
         }
       } else {
         Get.snackbar('Error', 'SMS Template Add Fail', colorText: Colors.white);
-        isLoading(false);
+       
       }
     } on Exception catch (e) {
       if (kDebugMode) {
         print('SMS Template Error : $e');
-        isLoading(false);
+    
       }
     } finally {
-      isLoading(false);
+          isAddLoading(false);
     }
   }
+
+
+getSMSTemplate(bool isAdd)async{
+  if(!isAdd){
+        isLoading(true);
+  }
+
+
+  try {
+  var result = await ApiServicesByLimon.fetchSMSTemplate();
+  
+  if(result.runtimeType == int){
+    if(kDebugMode){
+      print("$result");
+    }
+  }else{
+
+    
+    smsTemplateModel.assignAll(result);
+    print(smsTemplateModel);
+  }
+} on Exception catch (e) {
+  if(kDebugMode){
+           print('Fetch Error $e');
+  }
+}finally{
+if(!isAdd){
+        isLoading(false);
+  }
+}
+
+}
+
 }
