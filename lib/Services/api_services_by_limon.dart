@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:homelyknock/Screens/ProfileScreen/Controller/profile_controller.dart';
 
 import 'package:homelyknock/Screens/SettingsScreen/EmailTemplate/Model/email_template_model.dart';
 import 'package:homelyknock/Screens/SettingsScreen/SMSTemplate/Model/sms_template_model.dart';
@@ -172,24 +173,51 @@ class ApiServicesByLimon {
     }
   }
 
-// Update Email Template
+  // Update SMS Template
 
-  static dynamic updateEmail(Map<String, dynamic> body,String id) async {
+  static dynamic updateSMS(Map<String, dynamic> body, int id) async {
     var accessToken = await MyPreference.getToken();
 
     try {
       var headers = {
         'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
       };
-
-      var response =
-          await client.put(Uri.parse("$emailTemplateApi$id"), 
-          body: jsonEncode(body),
-          headers: headers);
+      var response = await client.put(Uri.parse("$smsTemplateApi$id/"),
+          body: json.encode(body), headers: headers);
 
       if (response.statusCode == 200) {
         return response.body;
       } else {
+        debugPrint("SMS tamplate updeate error");
+        return 1;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print('Not Update Data $e');
+      }
+    }
+    return 1;
+  }
+
+// Update Email Template
+
+  static dynamic updateEmail(Map<String, dynamic> body, int id) async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+
+      var response = await client.put(Uri.parse("$emailTemplateApi$id/"),
+          body: json.encode(body), headers: headers);
+
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        debugPrint("Email tamplate updeate error");
         return 1;
       }
     } on Exception catch (e) {
@@ -202,18 +230,18 @@ class ApiServicesByLimon {
 
 // delete email template
 
-  static dynamic deleteById(String id) async {
+  static dynamic deleteById(int id) async {
     var accessToken = await MyPreference.getToken();
 
     try {
       var headers = {
         'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
       };
-      var response = await client.delete(Uri.parse("$emailTemplateApi$id"),
+      var response = await client.delete(Uri.parse("$emailTemplateApi$id/"),
           headers: headers);
       if (response.statusCode == 204) {
-        print("Body : ${response.body}");
-        return jsonDecode(response.body);
+        return jsonEncode(response.body);
       } else {
         return response.statusCode;
       }

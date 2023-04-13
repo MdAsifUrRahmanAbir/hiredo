@@ -7,6 +7,8 @@ import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 
+import '../../../widgets/data_controller.dart';
+
 
 
 class SMSTemplatePage extends StatelessWidget {
@@ -15,6 +17,7 @@ class SMSTemplatePage extends StatelessWidget {
 
 
   final _smsTemplateController = Get.put(SmsTemplateController());
+    final _dataController = Get.put(DataController());
 
   @override
   Widget build(BuildContext context) {
@@ -122,19 +125,148 @@ class SMSTemplatePage extends StatelessWidget {
                                 fontSize: 18.sp, fontWeight: FontWeight.w500),
                           ),
                         ),
-                        Container(
-                          height: 24.h,
-                          width: 48.w,
-                          decoration: BoxDecoration(
-                              color: const Color(0xFF187949),
-                              borderRadius: BorderRadius.circular(3.r)),
-                          child: Center(
-                            child: Text(
-                              'Edit',
-                              style: GoogleFonts.roboto(
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w400,
-                                  color: const Color(0xFFFFFFFF)),
+                        InkWell(
+                          onTap: (){
+
+                            _smsTemplateController.upNameController.text = result.templateName;
+                            _smsTemplateController.upMessageTemplateController.text = result.message;
+                            _dataController.id.value = result.id;
+                            
+
+                            showModalBottomSheet(
+                      context: context,
+                      isDismissible: true,
+                      backgroundColor: const Color(0xFFFFFFFF),
+                      shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15.r),
+                              topRight: Radius.circular(15.r))),
+                      builder: (ctx) {
+                        return Container(
+                          padding: EdgeInsets.symmetric(horizontal: 17.w),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 20.h,
+                              ),
+                              Text(
+                                'Update SMS Templates',
+                                style: GoogleFonts.roboto(
+                                    fontSize: 20.sp,
+                                    color: const Color(0xFF272727),
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              SizedBox(
+                                height: 20.h,
+                              ),
+                              TextFormField(
+                                controller: _smsTemplateController.smsNameController,
+                                decoration: const InputDecoration(
+                                  hintText: 'Template Name',
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xFF000000),
+                                          width: 0.5)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xFF000000),
+                                          width: 0.5)),
+                                  border: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xFF000000),
+                                          width: 0)),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10.h,
+                              ),
+                              TextFormField(
+                                controller: _smsTemplateController.messageTemplateController,
+                                decoration: const InputDecoration(
+                                  hintText: 'Message',
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xFF000000),
+                                          width: 0.5)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xFF000000),
+                                          width: 0.5)),
+                                  border: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xFF000000),
+                                          width: 0)),
+                                ),
+                              ),
+                            
+                              SizedBox(
+                                height: 20.h,
+                              ),
+                              InkWell(
+                                onTap: () {
+                         _smsTemplateController.updateSMS(result.id);
+                                
+                                },
+                                child: Container(
+                                  height: 50.h,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xFF187949),
+                                      borderRadius:
+                                          BorderRadius.circular(8.r)),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Update',
+                                        style: GoogleFonts.roboto(
+                                            color: const Color(0xFFFFFFFF),
+                                            fontSize: 18.sp,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      Obx(()=>
+                                         SizedBox(
+                                          width: _smsTemplateController.isAddLoading.value? 5.0.w:0,
+                                        ),
+                                      ),
+                                      Obx((){
+                                        if(_smsTemplateController.isAddLoading.value){
+                                          return SizedBox(
+                                            height: 10.0.h,
+                                            width: 10.0.w,
+                                            child: const CircularProgressIndicator(
+                                              color: Colors.white,
+                                            ),
+                                          );
+                                        }else{
+                                          return const SizedBox();
+                                        }
+                                      })
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      });
+
+                          },
+                          child: Container(
+                            height: 24.h,
+                            width: 48.w,
+                            decoration: BoxDecoration(
+                                color: const Color(0xFF187949),
+                                borderRadius: BorderRadius.circular(3.r)),
+                            child: Center(
+                              child: Text(
+                                'Edit',
+                                style: GoogleFonts.roboto(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xFFFFFFFF)),
+                              ),
                             ),
                           ),
                         ),

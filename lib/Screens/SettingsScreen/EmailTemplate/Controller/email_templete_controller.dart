@@ -10,6 +10,8 @@ import '../../../../widgets/data_controller.dart';
 class EmailTemplateController extends GetxController {
   final TextEditingController templeteNameController = TextEditingController();
   final TextEditingController messageController = TextEditingController();
+    final TextEditingController upNameController = TextEditingController();
+  final TextEditingController upMessageController = TextEditingController();
     final _dataController = Get.put(DataController());
 
   var isLoading = false.obs;
@@ -45,7 +47,7 @@ class EmailTemplateController extends GetxController {
           getEmailList(true);
           Get.snackbar('Success', 'Template Add Successfull',
               colorText: Colors.white);
-              textFieldClear();
+             // textFieldClear();
         }
       } else {
         Get.snackbar('Error', 'Template Add Fail', colorText: Colors.white);
@@ -85,28 +87,25 @@ class EmailTemplateController extends GetxController {
     }
   }
 
-  updateData(String id) async {
+  updateData(int id) async {
     isAddLoading(true);
     try {
       final body = {
-        "template_name": templeteNameController.text,
-        "message": messageController.text,
-   
+        "template_name": upNameController.text,
+        "message": upMessageController.text,
       };
 
       var result = await ApiServicesByLimon.updateEmail(body, id);
       if (result.runtimeType == int) {
         if (kDebugMode) {
-          print('Update Data  $result');
-          log.i(result);
-          getEmailList(true);
-          Get.snackbar('Success', 'Template Update Successfull',
-              colorText: Colors.white);
+          print('update data error  $result');
+       
+            log.e(result);
         }
       } else {
-        debugPrint('Update Data Faild');
-        log.e(result);
-        Get.snackbar('Success', 'Template Update Faild',
+         log.i(result);
+           getEmailList(true);
+        Get.snackbar('Success', 'Template Update Success',
             colorText: Colors.white);
       }
     } on Exception catch (e) {
@@ -120,15 +119,17 @@ class EmailTemplateController extends GetxController {
 
 
 
-  Future<void> deleteEmail(String id) async {
+  Future<void> deleteEmail(int id) async {
     try {
       var result = await ApiServicesByLimon.deleteById(id);
       if (result.runtimeType == int) {
         if (kDebugMode) {
           print('Delete Faild: $result');
+          log.e(result);
         }
       } else {
-        getEmailList(false);
+        log.i(result);
+        getEmailList(true);
         Get.snackbar('Delete Data', 'Success');
       }
     } on Exception catch (e) {

@@ -247,7 +247,10 @@ class EmailTemplatePage extends StatelessWidget {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                       showModalBottomSheet(
+                                        _emailTemplateController.upNameController.text=result.templateName;
+                                        _emailTemplateController.upMessageController.text=result.message;
+
+                                  showModalBottomSheet(
                           context: context,
                           isDismissible: true,
                           backgroundColor: const Color(0xFFFFFFFF),
@@ -276,7 +279,7 @@ class EmailTemplatePage extends StatelessWidget {
                                   ),
                                   TextFormField(
                                     controller: _emailTemplateController
-                                        .templeteNameController,
+                                        .upNameController,
                                     decoration: const InputDecoration(
                                       hintText: 'Template Name',
                                       focusedBorder: OutlineInputBorder(
@@ -298,7 +301,7 @@ class EmailTemplatePage extends StatelessWidget {
                                   ),
                                   TextFormField(
                                     controller: _emailTemplateController
-                                        .messageController,
+                                        .upMessageController,
                                     decoration: const InputDecoration(
                                       hintText: 'Message',
                                       focusedBorder: OutlineInputBorder(
@@ -317,10 +320,10 @@ class EmailTemplatePage extends StatelessWidget {
                                   ),
                                   SizedBox(
                                     height: 20.h,
-                                  ),
+                                      ),
                                   InkWell(
                                     onTap: () {
-                                       _emailTemplateController.updateData("${result.id}");
+                                       _emailTemplateController.updateData(result.id);
                                     },
                                     child: Container(
                                       height: 50.h,
@@ -389,13 +392,13 @@ class EmailTemplatePage extends StatelessWidget {
                                             fontWeight: FontWeight.w400,
                                             color: const Color(0xFFFFFFFF)),
                                       ),
-                                    ),
+                                    ), 
                                   ),
                                 ),
                                 IconButton(
                                     onPressed: () {
                                      
-                                     _emailTemplateController.deleteEmail("${result.id}");
+                                     _emailTemplateController.deleteEmail(result.id);
                                     },
                                     icon: const Icon(
                                       Icons.delete_sweep,
