@@ -38,6 +38,7 @@ class ProfileController extends GetxController {
     isLoading(true);
     await getServices();
     await getLeads(false);
+    debugPrint("Get leads data check in on time ");
     isLoading(false);
   }
 
@@ -51,8 +52,8 @@ class ProfileController extends GetxController {
         preferences.clear();
         MyPreference.setOnBoard(isOnBoard);
         Fluttertoast.showToast(msg: "Logout Successfull");
-        Get.offAll(SignInPage());
-      // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>SignInPage()), (route) => false);
+       
+       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>SignInPage()), (route) => false);
       } else {
         isLoading(false);
         debugPrint("User not logout");
