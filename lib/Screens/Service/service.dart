@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/utils/colors.dart';
 
 
@@ -127,7 +128,8 @@ class ServiceScreen extends StatelessWidget {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(backgroundColor: themeColorGreen),
         onPressed: () {
-          Get.to(ServiceAdd());
+          Get.toNamed(Routes.serviceAddPage);
+         
         },
         child: Text(
           "Add Service",

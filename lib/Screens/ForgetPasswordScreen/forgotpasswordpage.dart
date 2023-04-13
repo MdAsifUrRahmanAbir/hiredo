@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Route/routes.dart';
 
 import 'package:homelyknock/Screens/EmailVerifiyScreen/enterverificationpage.dart';
 import 'package:homelyknock/Screens/ForgetPasswordScreen/Controller/forget_controller.dart';
@@ -50,7 +51,7 @@ class ForegPasswordPage extends StatelessWidget {
                   size: 18.sp,
                 ),
                 onPressed: () {
-                  Navigator.pop(context);
+                 Get.back();
                 },
               )),
         ),
@@ -131,8 +132,9 @@ class ForegPasswordPage extends StatelessWidget {
               ),
               customButton(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => VerificationPage()));
+                  Get.toNamed(Routes.forgotVerification);
+
+                 
                 },
                 title: 'Next',
               )

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/Screens/SettingsScreen/ChangePassword/change_password_screen.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
@@ -177,7 +178,7 @@ class AccountDetailsPage extends StatelessWidget {
               InkWell
               (
                 onTap: (){
-                  Get.to(ChangePasswordScreen());
+                  Get.toNamed(Routes.changePasswordScreen);
                 },
                 child: Container(
                   alignment: Alignment.center,

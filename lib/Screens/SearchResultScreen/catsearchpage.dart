@@ -11,6 +11,7 @@ import '../HomeScreen/Controller/home_controller.dart';
 import 'search_controller.dart';
 
 final homeController = Get.put(HomeController());
+
 class SearchResult extends StatelessWidget {
   SearchResult({super.key});
 

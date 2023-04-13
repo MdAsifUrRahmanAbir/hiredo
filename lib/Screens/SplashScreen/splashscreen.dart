@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Route/routes.dart';
 
 
 import 'package:homelyknock/Screens/IntroScreen/onBoarding_screen.dart';
@@ -36,12 +37,14 @@ class _SplashPageState extends State<SplashPage> {
         
        
         if(isOnBoard){
-       //   Get.off(const SignIntroPage());
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>SignIntroPage()));
+      
+       Get.offAllNamed(Routes.signIntroPage);
+         
         }else{
           debugPrint("navigate on board screen $isOnBoard");
-          // Get.off(OnboardinScreen);
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>OnboardinScreen()));
+       
+          Get.offAllNamed(Routes.onboard);
+         
            
         }
       

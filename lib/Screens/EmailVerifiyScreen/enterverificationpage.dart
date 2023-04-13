@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Route/routes.dart';
 
 
 
@@ -155,10 +156,9 @@ class VerificationPage extends StatelessWidget {
 
                   }else{
                     _verificationController.timer.cancel();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => ResetPasswordPage()));
+
+                    Get.toNamed(Routes.resetpasswordpage);
+                   
 
 
                   }

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';
 import 'package:homelyknock/Services/api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -36,8 +37,8 @@ class ProfileController extends GetxController {
 
   getData() async {
     isLoading(true);
-    await getServices();
-    await getLeads(false);
+    // await getServices();
+    
     debugPrint("Get leads data check in on time ");
     isLoading(false);
   }
@@ -52,8 +53,8 @@ class ProfileController extends GetxController {
         preferences.clear();
         MyPreference.setOnBoard(isOnBoard);
         Fluttertoast.showToast(msg: "Logout Successfull");
-       
-       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>SignInPage()), (route) => false);
+       Get.offAllNamed(Routes.signinPage);
+    
       } else {
         isLoading(false);
         debugPrint("User not logout");

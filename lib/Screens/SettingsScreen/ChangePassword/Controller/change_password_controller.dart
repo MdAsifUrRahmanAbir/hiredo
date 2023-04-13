@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';
 import 'package:homelyknock/Services/api_services_by_limon.dart';
 
@@ -27,7 +28,8 @@ class ChangePasswordController extends GetxController {
         debugPrint("$result");
 
         debugPrint('Change Password Successful');
-        Get.to(SignInPage());
+        
+        Get.offAllNamed(Routes.signinPage);
       } else {
         debugPrint(" Password Change Faield");
         isLoading(false);

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/Screens/CategoriesScreen/subcategory.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/nav_bar_page/main_controller.dart';
@@ -405,13 +406,14 @@ class CategoriesPage extends StatelessWidget {
           )),
           InkWell(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (_) => SubCategoryPage(
-                            categorieName: data.name,
-                            allSubCategories: data.children,
-                          )));
+                List<LeadCategoriesModel> catData=data.children;
+            Map<String,dynamic> response = {
+              "name":data.name,
+              "subCategory":catData
+            };
+              //Get.toNamed(Routes.subCategoryPage,arguments:catData );
+              Get.to(SubCategoryPage(), arguments: response);
+             
             },
             child: Container(
               height: 34.h,
