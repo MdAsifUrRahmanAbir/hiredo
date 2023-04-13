@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:get/get.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 
 class BadgesSecondPage extends StatelessWidget {
-   BadgesSecondPage({Key? key, required this.image, required this.title,
-   required this.longDescription}) : super(key: key);
-
-   String image;
-   String title;
-   String longDescription;
+   BadgesSecondPage({Key? key,}) : super(key: key);
+    Map data =Get.arguments;
+   
 
   @override
   Widget build(BuildContext context) {
+    String image=data["image"];
+   String title=data["title"];
+   String longDescription=data["des"];
     return Scaffold(
     
       appBar: AppBar(

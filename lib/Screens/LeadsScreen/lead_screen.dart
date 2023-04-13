@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/Screens/HomeScreen/home.dart';
 import 'package:homelyknock/Screens/LeadsDetailsScreen/leads_details_screen.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
@@ -218,12 +219,9 @@ class LeadsScreen extends StatelessWidget {
                       var data = _profileController.leadsList[index];
                       return InkWell(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => LeadsDetailsScreen(
-                                        leadData: data,
-                                      )));
+
+                          Get.toNamed(Routes.leadDetailsPage);
+                         
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,

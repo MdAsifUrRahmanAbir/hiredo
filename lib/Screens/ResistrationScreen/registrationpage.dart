@@ -13,13 +13,13 @@ import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';
 import '../../utils/colors.dart';
 
 class RegistrationPage extends StatelessWidget {
-  RegistrationPage({Key? key, required this.userType}) : super(key: key);
+  RegistrationPage({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
 
   final _registrationController = Get.put(RegistrationController());
 
-  String userType;
+  var userType= Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class RegistrationPage extends StatelessWidget {
                   color: themeColorGreen,
                 ),
                 onPressed: () {
-                  Navigator.pop(context);
+                 Get.back();
                 },
               )),
         ),
@@ -313,7 +313,7 @@ class RegistrationPage extends StatelessWidget {
                         if (_formKey.currentState!.validate()) {
                           _registrationController.signUp(context, userType);
                         }
-                       // Get.to(SignInPage());
+                      
                       },
                       child: Container(
                         height: 50.h,

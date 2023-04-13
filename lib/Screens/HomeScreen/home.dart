@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:homelyknock/Route/routes.dart';
 
 import 'package:homelyknock/Screens/CategoriesScreen/categories.dart';
 import 'package:homelyknock/Screens/HomeScreen/Controller/home_controller.dart';
@@ -313,8 +314,9 @@ class Home extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => CategoriesPage()));
+
+                  Get.toNamed(Routes.categoriesPage);
+                  
                 },
                 child: Text(
                   "See All",
@@ -395,11 +397,9 @@ class Home extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => FeturedServiceScreen(
-                              data: _homeController.subCategoryList)));
+
+                  Get.toNamed(Routes.feturedServiceScreen,arguments: _homeController.subCategoryList);
+                
                 },
                 child: Text(
                   "See All",
@@ -498,9 +498,7 @@ class Home extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Get.to(PostAJob(
-                selectIndex: index,
-              ));
+              Get.toNamed(Routes.postAJob,arguments:index);  
             },
             child: Container(
               height: 30.h,

@@ -1,0 +1,130 @@
+import 'package:get/get.dart';
+import 'package:homelyknock/Screens/CategoriesScreen/categories.dart';
+import 'package:homelyknock/Screens/FeturedService/fetured_service.dart';
+import 'package:homelyknock/Screens/ForgetPasswordScreen/forgotpasswordpage.dart';
+import 'package:homelyknock/Screens/IntroScreen/introonepage.dart';
+import 'package:homelyknock/Screens/IntroScreen/onBoarding_screen.dart';
+import 'package:homelyknock/Screens/IntroScreen/signupintropage.dart';
+import 'package:homelyknock/Screens/JobPost/post_a_job.dart';
+import 'package:homelyknock/Screens/LeadsDetailsScreen/leads_details_screen.dart';
+import 'package:homelyknock/Screens/LeadsScreen/lead_screen.dart';
+import 'package:homelyknock/Screens/LocationScreen/locationpage.dart';
+import 'package:homelyknock/Screens/MyResponse/my_response.dart';
+import 'package:homelyknock/Screens/OrderScreen/ordername.dart';
+import 'package:homelyknock/Screens/Service/service.dart';
+import 'package:homelyknock/Screens/SettingsScreen/ChangePassword/change_password_screen.dart';
+import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
+import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';
+import 'package:homelyknock/Screens/SignUpAccountScreen/signupaccountchoosepage.dart';
+import 'package:homelyknock/Screens/SplashScreen/splashscreen.dart';
+import 'package:homelyknock/Screens/TrackingScreen/TabsScreen/trackingpost.dart';
+import 'package:homelyknock/Screens/WishListScreen/wish_list_screen.dart';
+import 'package:homelyknock/nav_bar_page/main_screen.dart';
+import '../Screens/CategoriesScreen/subcategory.dart';
+import '../Screens/EmailVerifiyScreen/enterverificationpage.dart';
+import '../Screens/IntroScreen/introtwopage.dart';
+import '../Screens/QuestionScreen/question_screen.dart';
+import '../Screens/ResistrationScreen/registrationpage.dart';
+import '../Screens/RestPasswordScreen/resetpasswordpage.dart';
+import '../Screens/Service/add_service.dart';
+import '../Screens/SettingsScreen/SettingsBadge/badges_second_page.dart';
+
+class Routes {
+  static String splash = '/splash';
+  static String onboard = '/onboard';
+  static String introOne = '/intro_one';
+  static String introTwo = '/intro_two';
+  static String signIntroPage = '/signin_intro_page';
+  static String signinPage = '/signin_page';
+  static String signInAccountChoosePage = '/sign_in_account_choose_page';
+  static String signUpPage = '/sign_up_page';
+  static String forgotpasswordpage = "/forgot_password";
+  static String mainPage = "/main_page";
+  static String forgotVerification = '/forgot_verification';
+  static String resetpasswordpage = '/reset_password_page';
+  static String postAJob="/post_a_job";
+  static String categoriesPage='/categories_page';
+  static String feturedServiceScreen='/fetured_service_screen';
+  static String subCategoryPage ='/sub_category_screen';
+  static String trackingPostPage = '/tracking_post_screen';
+  static String orderNamePage = '/order_name_screen';
+  static String locationPage = '/location_screen';
+  static String servicePage = '/service_screen';
+  static String serviceAddPage = '/service_add_screen';
+  static String helpPage = '/help_screen';
+  static String leadPage = '/lead_screen';
+  static String leadDetailsPage = '/lead_details_screen';
+  static String questionScreen='/question_screen';
+  static String myResponse='/my_response';
+  static String wishListScreen='/wish_list_screen';
+  static String settingPage='/setting_page';
+  static String changePasswordScreen='/change_password_screen';
+  static String badgeDetails='/badges_details';
+
+}
+
+/// Add this list variable into your GetMaterialApp as the value of getPages parameter.
+/// You can get the reference to the above GetMaterialApp code.
+final getPages = [
+  GetPage(
+    name: Routes.splash,
+    page: () => const SplashPage(),
+  ),
+  GetPage(
+    name: Routes.onboard,
+    page: () => const OnboardinScreen(),
+  ),
+  GetPage(
+    name: Routes.introOne,
+    page: () => const IntroOnePage(),
+  ),
+  GetPage(
+    name: Routes.introTwo,
+    page: () => const IntroTwoPage(),
+  ),
+  GetPage(
+    name: Routes.signIntroPage,
+    page: () => const SignIntroPage(),
+  ),
+  GetPage(
+    name: Routes.signinPage,
+    page: () => SignInPage(),
+  ),
+  GetPage(
+    name: Routes.signInAccountChoosePage,
+    page: () => const SignAccountChoosePage(),
+  ),
+  GetPage(
+    name: Routes.signUpPage,
+    page: () => RegistrationPage(),
+  ),
+  GetPage(
+    name: Routes.forgotpasswordpage,
+    page: () => ForegPasswordPage(),
+  ),
+  GetPage(
+    name: Routes.mainPage,
+    page: () => MainScreen(),
+  ),
+  GetPage(name: Routes.forgotVerification, page: () => VerificationPage()),
+  GetPage(name: Routes.resetpasswordpage, page: () => ResetPasswordPage()),
+   GetPage(name: Routes.postAJob, page: () => PostAJob()),
+   GetPage(name: Routes.categoriesPage, page:()=>CategoriesPage()),
+   GetPage(name: Routes.feturedServiceScreen, page:()=>FeturedServiceScreen()),
+   GetPage(name: Routes.subCategoryPage, page: ()=> SubCategoryPage()),
+   GetPage(name: Routes.trackingPostPage, page:()=> TrackingPostOrder()),
+   GetPage(name: Routes.orderNamePage, page: ()=>const OrderName()),
+   GetPage(name: Routes.locationPage, page: ()=> LocationPage()),
+   GetPage(name: Routes.servicePage, page: ()=> ServiceScreen()),
+   GetPage(name: Routes.serviceAddPage, page: ()=> ServiceAdd()),
+   GetPage(name: Routes.leadPage, page:()=> LeadsScreen()),
+   GetPage(name: Routes.leadDetailsPage, page:()=>LeadsDetailsScreen()),
+   GetPage(name: Routes.questionScreen, page: ()=>QuestionScreen()),
+    GetPage(name: Routes.myResponse, page: ()=>MyResponse()),
+    GetPage(name: Routes.wishListScreen, page:()=> WishListScreen()),
+    GetPage(name: Routes.settingPage, page:()=>SettingsPage()),
+    GetPage(name: Routes.changePasswordScreen, page:()=>ChangePasswordScreen()),
+    GetPage(name: Routes.badgeDetails, page:()=>BadgesSecondPage() ),
+
+    
+];

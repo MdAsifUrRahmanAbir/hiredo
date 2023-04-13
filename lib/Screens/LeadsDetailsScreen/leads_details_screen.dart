@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:homelyknock/Screens/LeadsDetailsScreen/component/custom_maps.dart';
-import 'package:homelyknock/Screens/ResistrationScreen/registrationpage.dart';
 import 'package:homelyknock/Services/api_component.dart';
 import 'package:homelyknock/utils/colors.dart';
 import 'package:jiffy/jiffy.dart';
@@ -14,52 +12,11 @@ import 'package:jiffy/jiffy.dart';
 import '../LeadsScreen/Model/leads_model.dart';
 
 class LeadsDetailsScreen extends StatelessWidget {
-  LeadsDetailsScreen({super.key, required this.leadData});
+  LeadsDetailsScreen({
+    super.key,
+  });
 
-  LeadsModel leadData;
-
-  List<Map> item = [
-    {
-      'title': 'What type of property needs cleaning?',
-      'subTitle': 'House',
-    },
-    {
-      'title': 'How often do you need cleaning services?',
-      'subTitle': 'Every other week',
-    },
-    {
-      'title': 'How many bedroom(s) need cleaning?',
-      'subTitle': '3 bedrooms',
-    },
-    {
-      'title': 'How many bathroom(s) need cleaning?',
-      'subTitle': '3 bathrooms',
-    },
-    {
-      'title': 'How many reception room(s) need cleaning?',
-      'subTitle': '1',
-    },
-    {
-      'title': 'How many staircases need cleaning?',
-      'subTitle': 'None',
-    },
-    {
-      'title': 'Which additional service(s) would you like?',
-      'subTitle': 'I have pets, No extra requirements',
-    },
-    {
-      'title': 'How many staircases need cleaning?',
-      'subTitle': 'None',
-    },
-    {
-      'title': 'When are the best days for cleaning?',
-      'subTitle': 'Friday',
-    },
-    {
-      'title': 'Are you ready to hire someone?',
-      'subTitle': 'Yes, I need this service ASAP',
-    }
-  ];
+  LeadsModel leadData = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -67,39 +24,37 @@ class LeadsDetailsScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        iconTheme:const IconThemeData(color:themeColorGreen,),
+        iconTheme: const IconThemeData(
+          color: themeColorGreen,
+        ),
         backgroundColor: Colors.white,
         title: ListTile(
           dense: true,
           contentPadding: EdgeInsets.zero,
           minVerticalPadding: 0,
           horizontalTitleGap: 0,
-
-          leading: leadData.user.userProfilePic==null
+          leading: leadData.user.userProfilePic == null
               ? CircleAvatar(
                   radius: 20.r,
                   backgroundColor: Colors.grey.shade400,
                 )
               : CircleAvatar(
                   radius: 20.r,
-                  backgroundImage:
-                      NetworkImage("$baseUrl${leadData.user.userProfilePic!.picture}"),
+                  backgroundImage: NetworkImage(
+                      "$baseUrl${leadData.user.userProfilePic!.picture}"),
                 ),
-                title: Text(
-                    leadData.user.fullName,
-                    style: GoogleFonts.roboto(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w500,
-                        color: const Color(0xFF272727)),
-                  ), 
+          title: Text(
+            leadData.user.fullName,
+            style: GoogleFonts.roboto(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w500,
+                color: const Color(0xFF272727)),
+          ),
         ),
-        actions: [
-           Image.asset('images/notification.png')
-        ],
+        actions: [Image.asset('images/notification.png')],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-  
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
@@ -114,63 +69,73 @@ class LeadsDetailsScreen extends StatelessWidget {
                       height: 10.h,
                     ),
                     Container(
-                      
                       width: double.infinity,
-                      padding: EdgeInsets.symmetric(horizontal:5.w,vertical: 10.h),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
                       decoration: BoxDecoration(
                           color: const Color(0xFFFAFAFA),
                           borderRadius: BorderRadius.circular(3.r)),
                       child: Column(
                         children: [
-              
                           Row(
                             children: [
-                               Expanded(
-                                 child: Text(
-                                                       leadData.category.name,
-                                                       style: GoogleFonts.roboto(
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: const Color(0xFF272727)),
-                                                     ),
-                               ),
-              
-                            Container(
-                              height: 27.h,
-                              padding: EdgeInsets.symmetric(horizontal:8.w,vertical: 6.h),
-                              decoration: BoxDecoration(
-                                  color: const Color(0xFFE8FAF1),
-                                  borderRadius: BorderRadius.circular(5.r)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                   Icon(Icons.access_time_filled,size:15.h,color:const Color(0xFF187949),),
-                                 
-                                 SizedBox(width: 8.w,),
-                                  Text(
-                                    Jiffy.parse(leadData.created).fromNow(),
-                                    style: GoogleFonts.roboto(
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: const Color(0xFF187949)),
-                                  )
-                                ],
+                              Expanded(
+                                child: Text(
+                                  leadData.category.name,
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: const Color(0xFF272727)),
+                                ),
                               ),
-                            ),
-                       
-                       
-              
+                              Container(
+                                height: 27.h,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 8.w, vertical: 6.h),
+                                decoration: BoxDecoration(
+                                    color: const Color(0xFFE8FAF1),
+                                    borderRadius: BorderRadius.circular(5.r)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.access_time_filled,
+                                      size: 15.h,
+                                      color: const Color(0xFF187949),
+                                    ),
+                                    SizedBox(
+                                      width: 8.w,
+                                    ),
+                                    Text(
+                                      Jiffy.parse(leadData.created).fromNow(),
+                                      style: GoogleFonts.roboto(
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: const Color(0xFF187949)),
+                                    )
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                           // ListTile(
-                         
+
                           Row(
                             children: [
-                              Image.asset("images/location.png",height:15.h,width:11.w,),
+                              Image.asset(
+                                "images/location.png",
+                                height: 15.h,
+                                width: 11.w,
+                              ),
                               SizedBox(
                                 width: 8.w,
                               ),
-                              Text(leadData.location,style: GoogleFonts.roboto(fontSize:14.sp,color:const Color(0xFF424242)),)
+                              Text(
+                                leadData.location,
+                                style: GoogleFonts.roboto(
+                                    fontSize: 14.sp,
+                                    color: const Color(0xFF424242)),
+                              )
                             ],
                           )
                         ],
@@ -181,7 +146,7 @@ class LeadsDetailsScreen extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                         Icon(
+                        Icon(
                           Icons.phone,
                           color: Color(0xFF187949),
                           size: 20.sp,
@@ -197,7 +162,7 @@ class LeadsDetailsScreen extends StatelessWidget {
                               color: const Color(0xFF272727)),
                         ),
                         SizedBox(
-                          width: 5 .w,
+                          width: 5.w,
                         ),
                         Container(
                           height: 12.h,
@@ -225,12 +190,12 @@ class LeadsDetailsScreen extends StatelessWidget {
                         )
                       ],
                     ),
-                     SizedBox(
+                    SizedBox(
                       height: 5.h,
                     ),
                     Row(
                       children: [
-                         Icon(
+                        Icon(
                           Icons.email,
                           color: Color(0xFF187949),
                           size: 20.sp,
@@ -249,7 +214,7 @@ class LeadsDetailsScreen extends StatelessWidget {
                     ),
                     SizedBox(
                       height: 20.h,
-                    ), 
+                    ),
                     Container(
                       height: 40.h,
                       width: double.infinity,
@@ -258,42 +223,44 @@ class LeadsDetailsScreen extends StatelessWidget {
                         children: [
                           CircleAvatar(
                             radius: 8.r,
-                            backgroundColor:const Color(0xFF187949),
+                            backgroundColor: const Color(0xFF187949),
                           ),
                           SizedBox(
                             width: 2.w,
                           ),
                           CircleAvatar(
                             radius: 8.r,
-                            backgroundColor:const Color(0xFF187949),
-                          ),
-                          SizedBox(
-                            width: 2.w,
-                          ), 
-                          CircleAvatar(
-                            radius: 8.r,
-                            backgroundColor:const Color(0xFF187949),
+                            backgroundColor: const Color(0xFF187949),
                           ),
                           SizedBox(
                             width: 2.w,
                           ),
                           CircleAvatar(
                             radius: 8.r,
-                            backgroundColor:const Color(0xFFF2F2F2),
+                            backgroundColor: const Color(0xFF187949),
                           ),
                           SizedBox(
                             width: 2.w,
                           ),
                           CircleAvatar(
                             radius: 8.r,
-                            backgroundColor:const Color(0xFFF2F2F2),
+                            backgroundColor: const Color(0xFFF2F2F2),
+                          ),
+                          SizedBox(
+                            width: 2.w,
+                          ),
+                          CircleAvatar(
+                            radius: 8.r,
+                            backgroundColor: const Color(0xFFF2F2F2),
                           ),
                           SizedBox(
                             width: 15.w,
                           ),
                           const Spacer(),
                           Text(
-                           leadData.responseCount==0?"${leadData.responseCount} Professionals did not respond":'${leadData.responseCount-1}/${leadData.responseCount-1} professionals have responded',
+                            leadData.responseCount == 0
+                                ? "${leadData.responseCount} Professionals did not respond"
+                                : '${leadData.responseCount - 1}/${leadData.responseCount - 1} professionals have responded',
                             style: GoogleFonts.roboto(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w400,
@@ -307,7 +274,8 @@ class LeadsDetailsScreen extends StatelessWidget {
                             width: 14.w,
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                border: Border.all(color: const Color(0xFF292D32))),
+                                border:
+                                    Border.all(color: const Color(0xFF292D32))),
                             child: const Center(
                               child: Text('!'),
                             ),
@@ -343,7 +311,8 @@ class LeadsDetailsScreen extends StatelessWidget {
                           height: 50.h,
                           width: 148.w,
                           decoration: BoxDecoration(
-                              border: Border.all(color: const Color(0xFF187949)),
+                              border:
+                                  Border.all(color: const Color(0xFF187949)),
                               borderRadius: BorderRadius.circular(5.r)),
                           child: Center(
                             child: Text(
@@ -369,7 +338,7 @@ class LeadsDetailsScreen extends StatelessWidget {
                           width: 5.w,
                         ),
                         Text(
-                         "${leadData.postCredit} Credits",
+                          "${leadData.postCredit} Credits",
                           style: GoogleFonts.roboto(
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
@@ -402,13 +371,13 @@ class LeadsDetailsScreen extends StatelessWidget {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        final qansData=leadData.postObject[index];
+                        final qansData = leadData.postObject[index];
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                             qansData.question.qs,
+                              qansData.question.qs,
                               style: GoogleFonts.roboto(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w400,
@@ -418,7 +387,7 @@ class LeadsDetailsScreen extends StatelessWidget {
                               height: 10.h,
                             ),
                             Text(
-                             qansData.pAnswer.options,
+                              qansData.pAnswer.options,
                               style: GoogleFonts.roboto(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w400,
@@ -427,17 +396,16 @@ class LeadsDetailsScreen extends StatelessWidget {
                           ],
                         );
                       },
-                      itemCount:leadData.postObject.length,
-                      separatorBuilder: (BuildContext context, int index) => SizedBox(
+                      itemCount: leadData.postObject.length,
+                      separatorBuilder: (BuildContext context, int index) =>
+                          SizedBox(
                         height: 20.h,
                       ),
                     ),
                     SizedBox(
                       height: 20.h,
                     ),
-                   
-                    
-                    
+
                     // SizedBox(
                     //   height: 20.h,
                     // ),
@@ -487,17 +455,13 @@ class LeadsDetailsScreen extends StatelessWidget {
                     //     )
                     //   ],
                     // ),
-                   
-                   
-                   
-                   
                   ],
                 ),
-              ), 
-               SizedBox(height: 200.h, child: CustomMaps()),
-                     SizedBox(
-                      height: 20.h,
-                    ),
+              ),
+              SizedBox(height: 200.h, child: CustomMaps()),
+              SizedBox(
+                height: 20.h,
+              ),
             ],
           ),
         ),

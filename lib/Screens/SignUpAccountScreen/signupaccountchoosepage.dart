@@ -8,6 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Screens/ResistrationScreen/registrationpage.dart';
 import 'package:homelyknock/utils/colors.dart';
 
+import '../../Route/routes.dart';
+
 class SignAccountChoosePage extends StatefulWidget {
   const SignAccountChoosePage({Key? key}) : super(key: key);
 
@@ -205,9 +207,9 @@ class _SignAccountChoosePageState extends State<SignAccountChoosePage> {
           ),
           InkWell(
             onTap: () {
-              Get.to(RegistrationPage(
-                userType: accounttype,
-              ));
+
+              Get.toNamed(Routes.signUpPage,arguments:accounttype);
+            
             },
             child: Container(
               height: 50.h,

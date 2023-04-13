@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/Screens/HelpScreen/help_screen.dart';
 import 'package:homelyknock/Screens/LeadsScreen/lead_screen.dart';
 import 'package:homelyknock/Screens/MyResponse/my_response.dart';
@@ -203,7 +204,7 @@ _isProfational(context){
 
 
           ElevatedButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (_)=>PostAJob()));
+            Get.toNamed(Routes.postAJob,arguments:null);
           }, 
           child:Text("Create Post",style:GoogleFonts.roboto(fontSize:16.sp,fontWeight: FontWeight.w600),))
 
@@ -415,7 +416,8 @@ _isProfational(context){
           ),
           _cardItem(
               onTap: () {
-                Get.to(LeadsScreen());
+                Get.toNamed(Routes.leadPage);
+              
               },
               icon: Icons.star_border_outlined,
               text: 'Leads',
@@ -423,7 +425,7 @@ _isProfational(context){
               count:_profileController.leadsList.length.toString()),
           _cardItem(
               onTap: () {
-                Get.to(MyResponse());
+                Get.toNamed(Routes.myResponse);            
               },
               icon: Icons.sports_handball_rounded,
               text: 'My Responces',
@@ -431,28 +433,32 @@ _isProfational(context){
               count: 450.toString()),
           _cardItem(
             onTap: () {
-              Get.to(WishListScreen());
+            
+               Get.toNamed(Routes.wishListScreen);  
             },
             icon: Icons.favorite_border,
             text: 'Wishlist',
           ),
           _cardItem(
             onTap: () {
-              Get.to(SettingsPage());
+            
+              Get.toNamed(Routes.settingPage);
             },
             icon: Icons.settings,
             text: 'Settings',
           ),
           _cardItem(
             onTap: () {
-              Get.to(HelpScreen());
+              Get.toNamed(Routes.helpPage);
+             
             },
             icon: Icons.help_outline,
             text: 'Help',
           ),
           _cardItem(
               onTap: () {
-                Get.to(ServiceScreen());
+                Get.toNamed(Routes.servicePage);
+                
               },
               icon: Icons.rotate_right,
               text: 'Services',
@@ -460,7 +466,8 @@ _isProfational(context){
               count:_profileController.serviceList.length.toString()),
           _cardItem(
               onTap: () {
-                Get.to(LocationPage());
+                Get.toNamed(Routes.locationPage);
+              
               },
               icon: Icons.location_pin,
               text: 'Locations',

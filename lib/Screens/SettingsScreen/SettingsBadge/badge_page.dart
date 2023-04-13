@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/Screens/SettingsScreen/SettingsBadge/Controller/bedge_controller.dart';
 
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
@@ -26,7 +27,7 @@ class BadgePage extends StatelessWidget {
         backgroundColor: Colors.white,
         leading: IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              Get.back();
             },
             icon: const Icon(
               Icons.arrow_back,
@@ -139,11 +140,12 @@ class BadgePage extends StatelessWidget {
                         ),
                         GestureDetector(
                 onTap: (){
-                  Get.to(BadgesSecondPage(
-                    title: result.title,
-                    image: baseUrl+result.image,
-                    longDescription: result.longDescription,
-                  ));
+                  Get.toNamed(Routes.badgeDetails,arguments:{
+                    "image":baseUrl+result.image,
+                    "title":result.title,
+                    "des":result.longDescription
+                  });
+
                 },
                 child: Container(
                   alignment: Alignment.center,

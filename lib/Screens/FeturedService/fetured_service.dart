@@ -5,14 +5,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../Route/routes.dart';
 import '../HomeScreen/Model/lead_category_model.dart';
 import '../JobPost/post_a_job.dart';
 import '../QuestionScreen/question_screen.dart';
 
 class FeturedServiceScreen extends StatelessWidget {
-   FeturedServiceScreen({super.key,required this.data});
+   FeturedServiceScreen({super.key,});
 
-   List<LeadCategoriesModel> data;
+   List<LeadCategoriesModel> data =Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +126,7 @@ body:  GridView.builder(
           InkWell(
             onTap: (){
                
-                   Get.to(PostAJob(selectIndex:index,));
+                    Get.toNamed(Routes.postAJob,arguments:index); 
               
             },
             child: Container(

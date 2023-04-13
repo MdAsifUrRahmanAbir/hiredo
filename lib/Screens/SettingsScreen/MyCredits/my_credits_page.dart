@@ -399,7 +399,7 @@ class _MyCreditsPageState extends State<MyCreditsPage> {
                         'Auto top-up next time',
                         style: myStyle(14.sp, FontWeight.w400, textClr),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Container(
                         alignment: Alignment.center,
                         height: 34.h,
