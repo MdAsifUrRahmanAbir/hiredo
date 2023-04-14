@@ -22,6 +22,7 @@ import 'package:homelyknock/Screens/WishListScreen/wish_list_screen.dart';
 import 'package:homelyknock/nav_bar_page/main_screen.dart';
 import '../Screens/CategoriesScreen/subcategory.dart';
 import '../Screens/EmailVerifiyScreen/enterverificationpage.dart';
+import '../Screens/HelpScreen/help_screen.dart';
 import '../Screens/IntroScreen/introtwopage.dart';
 import '../Screens/QuestionScreen/question_screen.dart';
 import '../Screens/ResistrationScreen/registrationpage.dart';
@@ -125,6 +126,8 @@ final getPages = [
     GetPage(name: Routes.settingPage, page:()=>SettingsPage()),
     GetPage(name: Routes.changePasswordScreen, page:()=>ChangePasswordScreen()),
     GetPage(name: Routes.badgeDetails, page:()=>BadgesSecondPage() ),
+
+    GetPage(name: Routes.helpPage, page:()=> const HelpScreen() ),
 
     
 ];
