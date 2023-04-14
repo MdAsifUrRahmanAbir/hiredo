@@ -161,7 +161,7 @@ class SMSTemplatePage extends StatelessWidget {
                                 height: 20.h,
                               ),
                               TextFormField(
-                                controller: _smsTemplateController.smsNameController,
+                                controller: _smsTemplateController.upNameController,
                                 decoration: const InputDecoration(
                                   hintText: 'Template Name',
                                   focusedBorder: OutlineInputBorder(
@@ -182,12 +182,12 @@ class SMSTemplatePage extends StatelessWidget {
                                 height: 10.h,
                               ),
                               TextFormField(
-                                controller: _smsTemplateController.messageTemplateController,
+                                controller: _smsTemplateController.upMessageTemplateController,
                                 decoration: const InputDecoration(
                                   hintText: 'Message',
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Color(0xFF000000),
+                                                      color: Color(0xFF000000),
                                           width: 0.5)),
                                   enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
@@ -205,7 +205,7 @@ class SMSTemplatePage extends StatelessWidget {
                               ),
                               InkWell(
                                 onTap: () {
-                         _smsTemplateController.updateSMS(result.id);
+                         _smsTemplateController.updateSMS(result.id);                                           
                                 
                                 },
                                 child: Container(

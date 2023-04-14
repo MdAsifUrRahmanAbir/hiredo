@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:homelyknock/Screens/SettingsScreen/SMSTemplate/Model/sms_template_model.dart';
 
 import 'package:homelyknock/Services/api_services_by_limon.dart';
-import 'package:homelyknock/widgets/data_controller.dart';
+
 
 import '../../../../widgets/common_dashboard_controller.dart';
 
@@ -16,7 +16,7 @@ class SmsTemplateController extends GetxController {
   final TextEditingController upNameController = TextEditingController();
   final TextEditingController upMessageTemplateController =TextEditingController();
 
-  final _dataController = Get.put(DataController());
+
 
   var isLoading = false.obs;
   var isAddLoading = false.obs;
@@ -28,8 +28,7 @@ class SmsTemplateController extends GetxController {
     try {
       var result = await ApiServicesByLimon.smsTemplate(
           smsTemplate: smsNameController.text,
-          messageTemplate: messageTemplateController.text,
-          user: _dataController.id.value);
+          messageTemplate: messageTemplateController.text,);
 
       if (result) {
         if (kDebugMode) {
@@ -83,7 +82,7 @@ class SmsTemplateController extends GetxController {
     final body = {
       "template_name": upNameController.text,
       "message": upMessageTemplateController.text,
-      "user": _dataController.id.value
+   
     };
 
     try {
@@ -93,10 +92,11 @@ class SmsTemplateController extends GetxController {
         if (kDebugMode) {
           print('update data error  $result');
 
-          log.e(result);
+          log.e(" error : $result");
         }
       } else {
         log.i(result);
+      
         getSMSTemplate(true);
         Get.snackbar('Success', 'Template Update Success',
             colorText: Colors.white);

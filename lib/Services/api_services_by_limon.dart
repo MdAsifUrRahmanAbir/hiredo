@@ -56,15 +56,14 @@ class ApiServicesByLimon {
 
   static dynamic smsTemplate(
       {required String smsTemplate,
-      required String messageTemplate,
-      required int user}) async {
+      required String messageTemplate,}) async {
     var accessToken = await MyPreference.getToken();
 
     try {
       final body = {
         'template_name': smsTemplate,
         'message': messageTemplate,
-        'user': user
+    
       };
 
       var headers = {
@@ -187,6 +186,7 @@ class ApiServicesByLimon {
           body: json.encode(body), headers: headers);
 
       if (response.statusCode == 200) {
+        print(response.body);
         return response.body;
       } else {
         debugPrint("SMS tamplate updeate error");
