@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:get/get.dart';
 
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 
-class OneClickResponcePage extends StatefulWidget {
+import 'controller/on_click_response_controller.dart';
+
+class OneClickResponcePage extends StatelessWidget {
 
   OneClickResponcePage({Key? key}) : super(key: key);
 
-  @override
-  State<OneClickResponcePage> createState() => _OneClickResponcePageState();
-}
-
-class _OneClickResponcePageState extends State<OneClickResponcePage> {
-  bool status = false;
-  List<String> items = ['Bathroom', 'Kitchen', 'Renovation'];
-  String? selectedValue = 'Bathroom';
+  final _onClickResponseController = Get.put(OnClickResponseController());
 
   @override
   Widget build(BuildContext context) {
@@ -50,20 +46,20 @@ class _OneClickResponcePageState extends State<OneClickResponcePage> {
           children: [
             Row(
               children: [
-                FlutterSwitch(
-                  activeColor: themeColorGreen,
-                  width: 52.0.w,
-                  height: 27.0.h,
-                  toggleSize: 21.0.sp,
-                  value: status,
-                  borderRadius: 30.0.r,
-                  padding: 4.0.w,
-                  showOnOff: false,
-                  onToggle: (val) {
-                    setState(() {
-                      status = val;
-                    });
-                  },
+                Obx(()=>
+                   FlutterSwitch(
+                    activeColor: themeColorGreen,
+                    width: 52.0.w,
+                    height: 27.0.h,
+                    toggleSize: 21.0.sp,
+                    value: _onClickResponseController.status.value,
+                    borderRadius: 30.0.r,
+                    padding: 4.0.w,
+                    showOnOff: false,
+                    onToggle: (val) {
+                   _onClickResponseController.status.value = val;
+                    },
+                  ),
                 ),
                 SizedBox(
                   width: 15.w,
@@ -87,37 +83,32 @@ class _OneClickResponcePageState extends State<OneClickResponcePage> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10.w),
               height: 50.h,
-              width: double.infinity,
+              width: MediaQuery.of(context).size.width,
               decoration:
                   BoxDecoration(border: Border.all(color: textClr.withOpacity(0.3), width: 0.5)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    selectedValue!,
-                    style: myStyle(18.sp, FontWeight.w500, textClr),
-                  ),
-                  DropdownButtonHideUnderline(
-                    child: DropdownButton(
-                      style: myStyle(18.sp, FontWeight.w500, offWhite),
-                      focusColor: themeColorGreen,
-                      dropdownColor: scaffoldClr,
-                      items: items
-                          .map((item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(
-                                  item,
-                                ),
-                              ))
-                          .toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          selectedValue = value as String;
-                        });
-                      },
-                    ),
-                  )
-                ],
+              child: Obx(()=>
+                 DropdownButtonHideUnderline(
+                   child: DropdownButton(
+                     style: myStyle(18.sp, FontWeight.w500, offWhite),
+                     focusColor: themeColorGreen,
+                     dropdownColor: scaffoldClr,
+                  
+                     hint: Text(_onClickResponseController.selectedValue.value),
+                     items:_onClickResponseController. items
+                         .map((item) => DropdownMenuItem(
+                               value: item,
+                               child: Text(
+                                 item,
+                               ),
+                             ))
+                         .toList(),
+                     onChanged: (value) {
+                     
+                         _onClickResponseController.selectedValue.value = '$value';
+                     
+                     },
+                   ),
+                 ),
               ),
             ),
             SizedBox(
@@ -125,7 +116,8 @@ class _OneClickResponcePageState extends State<OneClickResponcePage> {
             ),
             Row(
               children: [
-                const Icon(Icons.error_outline),
+               const Icon(Icons.error),
+                
                 SizedBox(
                   width: 3.w,
                 ),

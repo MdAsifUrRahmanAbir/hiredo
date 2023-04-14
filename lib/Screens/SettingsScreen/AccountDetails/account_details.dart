@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Route/routes.dart';
-import 'package:homelyknock/Screens/SettingsScreen/ChangePassword/change_password_screen.dart';
+
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/custom_widgets.dart';
@@ -127,7 +127,7 @@ class AccountDetailsPage extends StatelessWidget {
                       style: GoogleFonts.roboto(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w400,
-                          color: Color(0xff555957)),
+                          color: const Color(0xff555957)),
                     ),
                     SizedBox(
                       height: 5.h,
@@ -146,7 +146,7 @@ class AccountDetailsPage extends StatelessWidget {
                       style: GoogleFonts.roboto(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w400,
-                          color: Color(0xff555957)),
+                          color: const Color(0xff555957)),
                     ),
                     SizedBox(
                       height: 5.h,
