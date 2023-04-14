@@ -5,7 +5,6 @@ import 'package:homelyknock/Screens/SettingsScreen/SMSTemplate/Model/sms_templat
 
 import 'package:homelyknock/Services/api_services_by_limon.dart';
 
-
 import '../../../../widgets/common_dashboard_controller.dart';
 
 class SmsTemplateController extends GetxController {
@@ -14,9 +13,8 @@ class SmsTemplateController extends GetxController {
       TextEditingController();
 
   final TextEditingController upNameController = TextEditingController();
-  final TextEditingController upMessageTemplateController =TextEditingController();
-
-
+  final TextEditingController upMessageTemplateController =
+      TextEditingController();
 
   var isLoading = false.obs;
   var isAddLoading = false.obs;
@@ -27,8 +25,9 @@ class SmsTemplateController extends GetxController {
     isAddLoading(true);
     try {
       var result = await ApiServicesByLimon.smsTemplate(
-          smsTemplate: smsNameController.text,
-          messageTemplate: messageTemplateController.text,);
+        smsTemplate: smsNameController.text,
+        messageTemplate: messageTemplateController.text,
+      );
 
       if (result) {
         if (kDebugMode) {
@@ -82,7 +81,6 @@ class SmsTemplateController extends GetxController {
     final body = {
       "template_name": upNameController.text,
       "message": upMessageTemplateController.text,
-   
     };
 
     try {
@@ -96,7 +94,7 @@ class SmsTemplateController extends GetxController {
         }
       } else {
         log.i(result);
-      
+
         getSMSTemplate(true);
         Get.snackbar('Success', 'Template Update Success',
             colorText: Colors.white);
@@ -107,6 +105,25 @@ class SmsTemplateController extends GetxController {
       }
     } finally {
       isAddLoading(false);
+    }
+  }
+
+  Future<void> deleteSmS(int id) async {
+    try {
+      var result = await ApiServicesByLimon.deleteSMSById(id);
+
+      if (result.runtimeType == int) {
+        if (kDebugMode) {
+          print('Delete Faild: $result ');
+          log.e(result);
+        }
+      } else {
+        log.i(result);
+        getSMSTemplate(true);
+        Get.snackbar('Delete Data', 'Success');
+      }
+    } on Exception catch (e) {
+      print('Not Delete Item ${e.toString()}');
     }
   }
 }
