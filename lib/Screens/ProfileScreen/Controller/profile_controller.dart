@@ -13,12 +13,13 @@ import '../../Service/Model/service_model.dart';
 import 'package:flutter/material.dart';
 final log = logger(ProfileController);
 class ProfileController extends GetxController {
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    getData();
-    super.onInit();
-  }
+  // @override
+  // void onInit() {
+  //   // TODO: implement onInit
+  //   getData();
+  //   super.onInit();
+  // }
+  //
 
   @override
   void dispose() {
