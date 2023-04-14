@@ -1,24 +1,14 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Route/routes.dart';
-import 'package:homelyknock/Screens/HelpScreen/help_screen.dart';
-import 'package:homelyknock/Screens/LeadsScreen/lead_screen.dart';
-import 'package:homelyknock/Screens/MyResponse/my_response.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
-import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';
-import 'package:homelyknock/Screens/WishListScreen/wish_list_screen.dart';
 import 'package:homelyknock/utils/colors.dart';
 import '../../nav_bar_page/main_controller.dart';
 import '../../widgets/custom_loader.dart';
 import '../../widgets/data_controller.dart';
-import '../JobPost/post_a_job.dart';
-import '../LocationScreen/locationpage.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-
-import '../Service/service.dart';
 import 'Controller/profile_controller.dart';
 
  final _mainController = Get.put(MainScreenController());
@@ -272,7 +262,7 @@ _isProfational(context){
                 ),
                 Text(
                   'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. ',
-                  style: myStyle(14, FontWeight.w400, Color(0xff424242)),
+                  style: myStyle(14, FontWeight.w400, const Color(0xff424242)),
                 )
               ],
             ),
@@ -538,7 +528,7 @@ _isProfational(context){
                               fontSize: 12.sp, color: themeColorGreen),
                         )),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
                 const Icon(
                   Icons.navigate_next,
                   color: themeColorGreen,
