@@ -43,3 +43,5 @@ String pendingPostApi = "${baseUrl}lead/PendingPost/";
 String changeUserModeApi="${baseUrl}profile/change-user-type/";
 String logoutUserApi="${baseUrl}logout/";
 String leadsApi="${baseUrl}ServiceWiseLead/";
+
+String needHelpsApi="${baseUrl}profile/still-need-help/";

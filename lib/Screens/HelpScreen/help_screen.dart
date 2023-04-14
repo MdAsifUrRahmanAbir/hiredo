@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'help_screen_controller.dart';
+
 class HelpScreen extends StatelessWidget {
-  const HelpScreen({super.key});
+  HelpScreen({super.key});
+
+  final controller = Get.put(HelpScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +44,7 @@ class HelpScreen extends StatelessWidget {
 
   _bodyWidget() {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Padding(
         padding: EdgeInsets.only(left: 15.w, right: 15.w),
         child: Column(
@@ -50,7 +56,11 @@ class HelpScreen extends StatelessWidget {
             _guidItemsListWidget(),
             _topItemListWidget(),
             _testFormFieldWidget(),
-            _sendButton()
+            _sendButton(),
+
+            SizedBox(
+              height: 20.h,
+            ),
           ],
         ),
       ),
@@ -59,6 +69,7 @@ class HelpScreen extends StatelessWidget {
 
   _testFormFieldWidget() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
           height: 25.h,
@@ -94,8 +105,9 @@ class HelpScreen extends StatelessWidget {
           height: 10.h,
         ),
         TextFormField(
+          controller: controller.emailController,
           decoration: InputDecoration(
-            hintText: 'Search',
+            hintText: 'Email',
             filled: true,
             hintStyle: const TextStyle(color: Colors.grey),
             enabledBorder: OutlineInputBorder(
@@ -126,6 +138,7 @@ class HelpScreen extends StatelessWidget {
           height: 10.h,
         ),
         TextFormField(
+          controller: controller.messageController,
           maxLines: 5,
           decoration: InputDecoration(
             hintText: 'Message',
@@ -154,6 +167,8 @@ class HelpScreen extends StatelessWidget {
 
   _searchWidget() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+
       children: [
         Text(
           'FAQs',
@@ -168,6 +183,7 @@ class HelpScreen extends StatelessWidget {
         SizedBox(
           height: 50.h,
           child: TextFormField(
+            controller: controller.searchController,
             decoration: InputDecoration(
               hintText: 'Search',
               fillColor: Colors.white,
@@ -207,6 +223,8 @@ class HelpScreen extends StatelessWidget {
 
   _popularItemListWidget() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+
       children: [
         SizedBox(
           height: 25.h,
@@ -258,6 +276,8 @@ class HelpScreen extends StatelessWidget {
 
   _guidItemsListWidget() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+
       children: [
         SizedBox(
           height: 25.h,
@@ -313,6 +333,7 @@ class HelpScreen extends StatelessWidget {
 
   _topItemListWidget() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
 
         SizedBox(
@@ -368,7 +389,7 @@ class HelpScreen extends StatelessWidget {
 
   _sendButton() {
     return InkWell(
-      onTap: () {},
+      onTap: controller.sendButtonClicked,
       child: Container(
         height: 50.h,
         width: double.infinity,
