@@ -127,7 +127,7 @@ final getPages = [
     GetPage(name: Routes.changePasswordScreen, page:()=>ChangePasswordScreen()),
     GetPage(name: Routes.badgeDetails, page:()=>BadgesSecondPage() ),
 
-    GetPage(name: Routes.helpPage, page:()=> const HelpScreen() ),
+    GetPage(name: Routes.helpPage, page:()=> HelpScreen() ),
 
     
 ];
