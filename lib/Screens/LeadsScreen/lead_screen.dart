@@ -15,7 +15,7 @@ import 'package:jiffy/jiffy.dart';
 
 class LeadsScreen extends StatelessWidget {
   static const String routename = '/leadscreen';
-  const LeadsScreen({super.key});
+  LeadsScreen({super.key});
 
   final _profileController = Get.put(ProfileController());
 
