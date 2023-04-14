@@ -54,16 +54,16 @@ class ApiServicesByLimon {
 
 // SMS Template Post
 
-  static dynamic smsTemplate(
-      {required String smsTemplate,
-      required String messageTemplate,}) async {
+  static dynamic smsTemplate({
+    required String smsTemplate,
+    required String messageTemplate,
+  }) async {
     var accessToken = await MyPreference.getToken();
 
     try {
       final body = {
         'template_name': smsTemplate,
         'message': messageTemplate,
-    
       };
 
       var headers = {
@@ -186,7 +186,6 @@ class ApiServicesByLimon {
           body: json.encode(body), headers: headers);
 
       if (response.statusCode == 200) {
-        print(response.body);
         return response.body;
       } else {
         debugPrint("SMS tamplate updeate error");
@@ -239,6 +238,30 @@ class ApiServicesByLimon {
         'Content-Type': 'application/json',
       };
       var response = await client.delete(Uri.parse("$emailTemplateApi$id/"),
+          headers: headers);
+      if (response.statusCode == 204) {
+        return jsonEncode(response.body);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print('Delete Data Error : $e');
+      }
+      return 1;
+    }
+  }
+
+  static dynamic deleteSMSById(int id) async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+
+      var response = await client.delete(Uri.parse("$smsTemplateApi$id/"),
           headers: headers);
       if (response.statusCode == 204) {
         return jsonEncode(response.body);

@@ -271,7 +271,10 @@ class SMSTemplatePage extends StatelessWidget {
                           ),
                         ),
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                           
+                              _smsTemplateController.deleteSmS(result.id);
+                            },
                             icon: const Icon(
                               Icons.delete_sweep,
                               color: Color(0xFF848484),
