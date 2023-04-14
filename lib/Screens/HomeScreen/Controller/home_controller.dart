@@ -6,6 +6,9 @@ import 'package:homelyknock/Screens/HomeScreen/Model/lead_category_model.dart';
 
 import '../../../Services/api_services.dart';
 
+final homeController = Get.put(HomeController());
+
+
 class HomeController extends GetxController {
   var isLoading = false.obs;
 

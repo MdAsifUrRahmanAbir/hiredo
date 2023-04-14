@@ -14,18 +14,20 @@ import '../QuestionScreen/question_screen.dart';
 import 'Controller/job_post_controller.dart';
 
 class PostAJob extends StatelessWidget {
-  PostAJob({super.key, });
+  PostAJob({
+    super.key,
+  });
 
-  dynamic selectIndex =Get.arguments;
+  dynamic selectIndex = Get.arguments;
   final _homeController = Get.put(HomeController());
   final _jobPostController = Get.put(JobPostController());
   final _commonDashboardController = Get.put(CommonDashboardController());
   @override
   Widget build(BuildContext context) {
-    _jobPostController.isCategoryError.value=false;
-    _jobPostController.isLocationError.value=false;
-    _jobPostController.locationId=null;
-    _jobPostController.cateName=[];
+    _jobPostController.isCategoryError.value = false;
+    _jobPostController.isLocationError.value = false;
+    _jobPostController.locationId = null;
+    _jobPostController.cateName = [];
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -61,28 +63,23 @@ class PostAJob extends StatelessWidget {
                   dropdownButtonProps: const DropdownButtonProps(
                     icon: SizedBox(),
                   ),
-                   popupProps:const PopupProps.menu(
-                      showSearchBox: true
-                    ),
+                  popupProps: const PopupProps.menu(showSearchBox: true),
                   dropdownDecoratorProps: DropDownDecoratorProps(
                     dropdownSearchDecoration: InputDecoration(
-                      labelText: "What service do you need?",
-                      hintText: "e.g. Personal Trainers,House Cleaning ",
-                      isDense: true,
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 16.w,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(3.r),
-                          borderSide: BorderSide(
-                              color: _jobPostController.isCategoryError.value
-                                  ? Colors.red
-                                  : const Color(0xFF848484))),
-
-                                   border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(3.r)
-                      )
-                    ),
+                        labelText: "What service do you need?",
+                        hintText: "e.g. Personal Trainers,House Cleaning ",
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 16.w,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(3.r),
+                            borderSide: BorderSide(
+                                color: _jobPostController.isCategoryError.value
+                                    ? Colors.red
+                                    : const Color(0xFF848484))),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(3.r))),
                   ),
                   itemAsString: (LeadCategoriesModel u) => u.name,
                   selectedItem: selectIndex == null
@@ -109,23 +106,20 @@ class PostAJob extends StatelessWidget {
                   ),
                   dropdownDecoratorProps: DropDownDecoratorProps(
                     dropdownSearchDecoration: InputDecoration(
-                      labelText: "What service do you need?",
-                      hintText: "e.g. Personal Trainers,House Cleaning ",
-                      isDense: true,
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 16.w,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(3.r),
-                          borderSide: BorderSide(
-                              color: _jobPostController.isLocationError.value
-                                  ? Colors.red
-                                  : const Color(0xFF848484))),
-
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(3.r)
-                      )
-                    ),
+                        labelText: "What is the location?",
+                        hintText: "e.g. London",
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 16.w,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(3.r),
+                            borderSide: BorderSide(
+                                color: _jobPostController.isLocationError.value
+                                    ? Colors.red
+                                    : const Color(0xFF848484))),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(3.r))),
                   ),
                   itemAsString: (GetLocationModel u) => u.name,
                   onChanged: (value) {
@@ -140,35 +134,33 @@ class PostAJob extends StatelessWidget {
 
               InkWell(
                 onTap: () {
-
-
-                  if (selectIndex != 10000000&&selectIndex!=null) {
+                  if (selectIndex != 10000000 && selectIndex != null) {
                     if (_jobPostController.locationId == null) {
                       _jobPostController.isLocationError.value = true;
                     } else if (_homeController
                         .subCategoryList[selectIndex!].catName.isNotEmpty) {
-                             Map<String, dynamic> data ={
-                                  "data":_homeController
+                      Map<String, dynamic> data = {
+                        "data": _homeController
                             .subCategoryList[selectIndex!].catName,
-                            "locationId":_jobPostController.locationId
-                  };
+                        "locationId": _jobPostController.locationId
+                      };
 
-                  Get.toNamed(Routes.questionScreen,arguments:data);
-                     
+                      Get.toNamed(Routes.questionScreen, arguments: data);
                     }
-                  } else {
+                  }
+
+                  else {
                     if (_jobPostController.cateName.isEmpty) {
                       _jobPostController.isCategoryError.value = true;
                     } else if (_jobPostController.locationId == null) {
                       _jobPostController.isLocationError.value = true;
                     } else if (_jobPostController.cateName.isNotEmpty) {
-                        Map<String, dynamic> data ={
-                                  "data":_jobPostController.cateName,
-                            "locationId":_jobPostController.locationId
-                  };
+                      Map<String, dynamic> data = {
+                        "data": _jobPostController.cateName,
+                        "locationId": _jobPostController.locationId
+                      };
 
-                     Get.toNamed(Routes.questionScreen,arguments:data);
-
+                      Get.toNamed(Routes.questionScreen, arguments: data);
                     }
                   }
                 },
