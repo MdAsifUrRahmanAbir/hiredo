@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Route/routes.dart';
 
 import 'package:homelyknock/Screens/ResistrationScreen/component/custome_text_field.dart';
 import 'package:homelyknock/Screens/SignInScreen/Contoller/signin_controller.dart';
@@ -22,7 +23,7 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _signInController. rememberMeGetData();
+    _signInController.rememberMeGetData();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -42,7 +43,7 @@ class SignInPage extends StatelessWidget {
                     color: Colors.grey.withOpacity(0.1),
                     spreadRadius: 1,
                     blurRadius: 1,
-                    offset:const Offset(0,2), // changes position of shadow
+                    offset: const Offset(0, 2), // changes position of shadow
                   ),
                 ],
               ),
@@ -52,7 +53,7 @@ class SignInPage extends StatelessWidget {
                   color: themeColorGreen,
                 ),
                 onPressed: () {
-                  Navigator.pop(context);
+                  Get.back();
                 },
               )),
         ),
@@ -199,13 +200,11 @@ class SignInPage extends StatelessWidget {
                     height: 5.h,
                   ),
 
-
                   // <------------------- remember me ---------------->
                   // InkWell(
                   //   onTap: () {
 
-                 //              Get.to(MainScreen());
-
+                  //              Get.to(MainScreen());
 
                   //     if(_formKey.currentState!.validate()){
                   //         _signInController.userSignIn(context);
@@ -234,7 +233,11 @@ class SignInPage extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
-                        _signInController.userSignIn(isLogged: true,email: _signInController.emailController.text,password: _signInController.passwordController.text);
+                        _signInController.userSignIn(
+                            isLogged: true,
+                            email: _signInController.emailController.text,
+                            password:
+                                _signInController.passwordController.text);
                       }
                       // Get.to(SignInPage());
                     },
@@ -254,9 +257,10 @@ class SignInPage extends StatelessWidget {
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.w500),
                           ),
-                          Obx(()=>
-                             SizedBox(
-                              width: _signInController.isLoading.value ? 15.w : 0,
+                          Obx(
+                            () => SizedBox(
+                              width:
+                                  _signInController.isLoading.value ? 15.w : 0,
                             ),
                           ),
                           Obx(() {
@@ -284,10 +288,7 @@ class SignInPage extends StatelessWidget {
                   Center(
                     child: TextButton(
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => ForegPasswordPage()));
+                          Get.toNamed(Routes.forgotpasswordpage);
                         },
                         child: Text(
                           'Forgot the password?',
@@ -307,11 +308,7 @@ class SignInPage extends StatelessWidget {
                       ),
                       InkWell(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) =>
-                                        const SignAccountChoosePage()));
+                          Get.toNamed(Routes.signInAccountChoosePage);
                           },
                           child: Text(
                             ' Sign Up',

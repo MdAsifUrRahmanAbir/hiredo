@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/common_dashboard_services/models/get_location_model.dart';
 import 'package:homelyknock/utils/colors.dart';
 
@@ -13,9 +14,9 @@ import '../QuestionScreen/question_screen.dart';
 import 'Controller/job_post_controller.dart';
 
 class PostAJob extends StatelessWidget {
-  PostAJob({super.key, this.selectIndex});
+  PostAJob({super.key, });
 
-  int? selectIndex;
+  dynamic selectIndex =Get.arguments;
   final _homeController = Get.put(HomeController());
   final _jobPostController = Get.put(JobPostController());
   final _commonDashboardController = Get.put(CommonDashboardController());
@@ -139,16 +140,21 @@ class PostAJob extends StatelessWidget {
 
               InkWell(
                 onTap: () {
+
+
                   if (selectIndex != 10000000&&selectIndex!=null) {
                     if (_jobPostController.locationId == null) {
                       _jobPostController.isLocationError.value = true;
                     } else if (_homeController
                         .subCategoryList[selectIndex!].catName.isNotEmpty) {
-                      Get.to(QuestionScreen(
-                        data: _homeController
+                             Map<String, dynamic> data ={
+                                  "data":_homeController
                             .subCategoryList[selectIndex!].catName,
-                        locationId: 1,
-                      ));
+                            "locationId":_jobPostController.locationId
+                  };
+
+                  Get.toNamed(Routes.questionScreen,arguments:data);
+                     
                     }
                   } else {
                     if (_jobPostController.cateName.isEmpty) {
@@ -156,10 +162,13 @@ class PostAJob extends StatelessWidget {
                     } else if (_jobPostController.locationId == null) {
                       _jobPostController.isLocationError.value = true;
                     } else if (_jobPostController.cateName.isNotEmpty) {
-                      Get.to(QuestionScreen(
-                        data: _jobPostController.cateName,
-                        locationId: _jobPostController.locationId,
-                      ));
+                        Map<String, dynamic> data ={
+                                  "data":_jobPostController.cateName,
+                            "locationId":_jobPostController.locationId
+                  };
+
+                     Get.toNamed(Routes.questionScreen,arguments:data);
+
                     }
                   }
                 },

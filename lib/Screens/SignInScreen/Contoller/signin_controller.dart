@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';
 
 import 'package:homelyknock/nav_bar_page/main_screen.dart';
@@ -44,8 +45,8 @@ class SignInController extends GetxController {
 
       if (result.runtimeType == int) {
         if(!isLogged){
-          Get.offAll(SignInPage());
-           // Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>SignInPage()));
+          Get.offAllNamed(Routes.signinPage);
+          
            }else{
               Fluttertoast.showToast(msg: "Invalid email or password.",);
            }
@@ -69,8 +70,7 @@ class SignInController extends GetxController {
             );
 
             debugPrint(_dataController.id.toString());
-        Get.offAll(MainScreen());
-          // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>MainScreen()), (route) => false);
+        Get.offAllNamed(Routes.mainPage);
        
         if(isChecked.value){
         await  rememberMeSetData();

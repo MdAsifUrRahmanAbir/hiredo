@@ -11,7 +11,7 @@ class PendingController extends GetxController{
 
     @override
   void onInit() {
-    getPendingPost();
+   // getPendingPost();
     super.onInit();
   }
 

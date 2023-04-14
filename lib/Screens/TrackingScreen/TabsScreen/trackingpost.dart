@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/Screens/OrderScreen/ordername.dart';
 
 import 'package:homelyknock/widgets/custom_loader.dart';
@@ -133,7 +134,8 @@ class TrackingPostOrder extends StatelessWidget {
                                 child: result.category == null?Container(
                                   color: Colors.pink,
                                 ):
-                                Image.network(result.category!.image)
+                                Image.network(result.category!.image,
+                                fit: BoxFit.cover,)
                               ),
                             )),
                         Expanded(
@@ -157,7 +159,7 @@ class TrackingPostOrder extends StatelessWidget {
                                         color: Color(0xff272727)),
                                   ),
                                   SizedBox(
-                                    height: 10.h,
+                                    height: 15.h,
                                   ),
                                   result.category == null?Text(''):
                                   Text(
@@ -177,72 +179,72 @@ class TrackingPostOrder extends StatelessWidget {
                                         fontWeight: FontWeight.w400,
                                         color: Color(0xff272727)),
                                   ),
-                                
-                                  // Row(
-                                  //   mainAxisAlignment:
-                                  //       MainAxisAlignment.spaceBetween,
-                                  //   children: [
-                                  //     InkWell(
-                                  //       onTap: () {
-                                  //         Navigator.push(
-                                  //             context,
-                                  //             MaterialPageRoute(
-                                  //                 builder: (_) =>
-                                  //                     OrderName()));
-                                  //       },
-                                  //       child: Container(
-                                  //         height: 34.h,
-                                  //         width: 115.w,
-                                  //         decoration: BoxDecoration(
-                                  //             borderRadius:
-                                  //                 BorderRadius.circular(
-                                  //                     4.r),
-                                  //             color: Color(0xff187949)),
-                                  //         child: Center(
-                                  //           child: Text(
-                                  //             "view details",
-                                  //             style: GoogleFonts.roboto(
-                                  //                 fontSize: 14.sp,
-                                  //                 fontWeight:
-                                  //                     FontWeight.w400,
-                                  //                 color: Colors.white),
-                                  //           ),
-                                  //         ),
-                                  //       ),
-                                  //     ),
-                                  //     Container(
-                                  //       height: 34.h,
-                                  //       width: 80.w,
-                                  //       decoration: BoxDecoration(
-                                  //           borderRadius:
-                                  //               BorderRadius.circular(4.r),
-                                  //           border: Border.all(
-                                  //               color: Color(0xff0187949)),
-                                  //           color: Colors.white),
-                                  //       child: Row(
-                                  //         mainAxisAlignment:
-                                  //             MainAxisAlignment.center,
-                                  //         children: [
-                                  //           Image.asset(
-                                  //             'images/edit.png',
-                                  //             color: Color(0xFF187949),
-                                  //           ),
-                                  //           SizedBox(
-                                  //             width: 8.w,
-                                  //           ),
-                                  //           Text(
-                                  //             "Edit",
-                                  //             style: GoogleFonts.roboto(
-                                  //                 fontSize: 14.sp,
-                                  //                 fontWeight:
-                                  //                     FontWeight.w400,
-                                  //                 color: Color(0xFF187949)),
-                                  //           ),
-                                  //         ],
-                                  //       ),
-                                  //     )
-                                  //   ],
-                                  // ),
+                                  SizedBox(height: 10.h,),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          
+                                          Get.toNamed(Routes.orderNamePage);
+
+                                      
+                                        },
+                                        child: Container(
+                                          height: 34.h,
+                                          width: 115.w,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      4.r),
+                                              color: Color(0xff187949)),
+                                          child: Center(
+                                            child: Text(
+                                              "view details",
+                                              style: GoogleFonts.roboto(
+                                                  fontSize: 14.sp,
+                                                  fontWeight:
+                                                      FontWeight.w400,
+                                                  color: Colors.white),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 34.h,
+                                        width: 80.w,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(4.r),
+                                            border: Border.all(
+                                           
+                                                color: Color(0xff0187949)),
+                                            color: Colors.white),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Image.asset(
+                                              'images/edit.png',
+                                              color: Color(0xFF187949),
+                                            ),
+                                            SizedBox(
+                                              width: 8.w,
+                                            ),
+                                            Text(
+                                              "Edit",
+                                              style: GoogleFonts.roboto(
+                                                  fontSize: 14.sp,
+                                                  fontWeight:
+                                                      FontWeight.w400,
+                                                  color: Color(0xFF187949)),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                
                                
                                

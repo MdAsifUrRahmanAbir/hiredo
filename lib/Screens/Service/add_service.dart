@@ -130,7 +130,7 @@ class ServiceAdd extends StatelessWidget {
                     onTap: () {
                       if (_serviceController.selectedServiceId != 0 &&
                           _formKey.currentState!.validate()) {
-                            _serviceController.submiteService();
+                            _serviceController.submitedService();
                       } else if (_serviceController.selectedServiceId == 0) {
                         _serviceController.isServieselect.value = true;
                       }

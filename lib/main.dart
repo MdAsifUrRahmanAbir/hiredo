@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:homelyknock/Screens/SplashScreen/splashscreen.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 
+import 'Route/routes.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -33,8 +35,8 @@ class MyApp extends StatelessWidget {
                 ],
                 background: Container(color: const Color(0xFFF5F5F5))),
               
-            initialRoute: "/",
-            home: const SplashPage(),
+            initialRoute: Routes.splash,
+      getPages: getPages,
           );
         });
   }

@@ -21,7 +21,7 @@ class ServiceController extends GetxController{
 
 
 // add services data
-  submiteService() async {
+  submitedService() async {
     isLoading(true);
     try {
       var result = await ApiServices.addServicePost(
@@ -29,6 +29,7 @@ class ServiceController extends GetxController{
           description: descriptionController.text);
       if (result) {
         _profileController.getServices();
+        _profileController.getLeads(false);
         descriptionController.clear();
           Get.snackbar(
             "Success",

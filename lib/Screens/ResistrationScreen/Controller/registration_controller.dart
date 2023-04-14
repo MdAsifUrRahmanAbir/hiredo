@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homelyknock/Route/routes.dart';
 import 'package:intl/intl.dart';
 
 import 'package:homelyknock/Screens/ResistrationScreen/Model/registration_model.dart';
@@ -91,7 +92,7 @@ var isVisible = false.obs;
 
         print('User create successful');
 
-        Get.to(SignInPage());
+        Get.toNamed(Routes.signinPage);
         textFieldClear();
 
     

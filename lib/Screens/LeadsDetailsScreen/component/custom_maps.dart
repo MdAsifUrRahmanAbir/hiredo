@@ -16,6 +16,14 @@ class CustomMaps extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GoogleMap(
+        rotateGesturesEnabled: false,
+        scrollGesturesEnabled: false,
+        zoomControlsEnabled: false,
+        zoomGesturesEnabled: false,
+        liteModeEnabled: false,
+        tiltGesturesEnabled: false,
+        myLocationButtonEnabled: false,
+        myLocationEnabled: false,
         mapType: MapType.normal,
         initialCameraPosition: _kGooglePlex,
         onMapCreated: (GoogleMapController controller) {

@@ -11,15 +11,19 @@ import 'Controller/question_controller.dart';
 import 'Model/job_post_model.dart';
 
 class QuestionScreen extends StatelessWidget {
-  QuestionScreen({super.key,required  this.data,this.locationId});
-   List<CatName> data;
-   int? locationId;
+  QuestionScreen({super.key,});
+
+var allData = Get.arguments;
+
+
 
 
   final _questionController = Get.put(QuestionController());
 
   @override
   Widget build(BuildContext context) {
+       List<CatName> data = allData['data'];
+   int? locationId = allData['locationId'];
 
     _questionController.selectedQuestionIndex.value=0;
     _questionController.selectedItemIndex.value=0;

@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:homelyknock/Screens/ProfileScreen/Controller/profile_controller.dart';
 
 import 'package:homelyknock/Screens/SettingsScreen/EmailTemplate/Model/email_template_model.dart';
+import 'package:homelyknock/Screens/SettingsScreen/SMSTemplate/Model/sms_template_model.dart';
 import 'package:homelyknock/Screens/TrackingScreen/Model/pending_post_model.dart';
 
 import '../Screens/DocumentScreen/Model/real_time_model.dart';
@@ -123,6 +125,30 @@ class ApiServicesByLimon {
     }
   }
 
+// Fetch SMS Template
+
+  static dynamic fetchSMSTemplate() async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+      };
+      var response =
+          await client.get(Uri.parse(smsTemplateApi), headers: headers);
+
+      if (response.statusCode == 200) {
+        debugPrint("Data :${jsonDecode(response.body)}");
+        return smSTemplateModelFromJson(response.body);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      debugPrint("Data fetch Error. Reason ${e.toString()}");
+      return 0;
+    }
+  }
+
 // fetch Email Template
 
   static dynamic fetchEmailTemplate() async {
@@ -147,6 +173,86 @@ class ApiServicesByLimon {
     }
   }
 
+  // Update SMS Template
+
+  static dynamic updateSMS(Map<String, dynamic> body, int id) async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client.put(Uri.parse("$smsTemplateApi$id/"),
+          body: json.encode(body), headers: headers);
+
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        debugPrint("SMS tamplate updeate error");
+        return 1;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print('Not Update Data $e');
+      }
+    }
+    return 1;
+  }
+
+// Update Email Template
+
+  static dynamic updateEmail(Map<String, dynamic> body, int id) async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+
+      var response = await client.put(Uri.parse("$emailTemplateApi$id/"),
+          body: json.encode(body), headers: headers);
+
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        debugPrint("Email tamplate updeate error");
+        return 1;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print('Not Update Data $e');
+      }
+    }
+    return 1;
+  }
+
+// delete email template
+
+  static dynamic deleteById(int id) async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client.delete(Uri.parse("$emailTemplateApi$id/"),
+          headers: headers);
+      if (response.statusCode == 204) {
+        return jsonEncode(response.body);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print('Delete Data Error : $e');
+      }
+      return 1;
+    }
+  }
+
 //fetch RealTimeServices
 
   static dynamic fetchRealTimeService() async {
@@ -154,7 +260,6 @@ class ApiServicesByLimon {
       var response = await client.get(Uri.parse(realTimeServiceApi));
 
       if (response.statusCode == 200) {
-       
         return realTimeServiceModelFromJson(response.body);
       } else {
         return response.statusCode;
@@ -168,24 +273,22 @@ class ApiServicesByLimon {
 // fetch pending post
 
   static dynamic fetchPending() async {
-
     var accessToken = await MyPreference.getToken();
 
     try {
-  var headers = {
-    'Authorization': 'Bearer $accessToken',
-  };
-  var response =
-      await client.get(Uri.parse(pendingPostApi), headers: headers);
-      if(response.statusCode == 200){
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+      };
+      var response =
+          await client.get(Uri.parse(pendingPostApi), headers: headers);
+      if (response.statusCode == 200) {
         return pendingPostModelFromJson(response.body);
-      }else{
+      } else {
         return response.statusCode;
       }
-} on Exception catch (e) {
-    debugPrint("Data fetch Error. Reason ${e.toString()}");
+    } on Exception catch (e) {
+      debugPrint("Data fetch Error. Reason ${e.toString()}");
       return 0;
-
-}
+    }
   }
 }

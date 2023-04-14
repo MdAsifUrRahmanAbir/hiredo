@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class WishListScreen extends StatefulWidget {
+class WishListScreen extends StatelessWidget {
   WishListScreen({super.key});
 
-  @override
-  State<WishListScreen> createState() => _WishListScreenState();
-}
-
-class _WishListScreenState extends State<WishListScreen> {
   final List<Map<String, dynamic>> item = [
     {
       'image': 'images/servImage.png',
@@ -182,7 +177,7 @@ class _WishListScreenState extends State<WishListScreen> {
                                   borderRadius: BorderRadius.circular(12.r),
                                   child: Image.asset(
                                     item[index]['image'],
-                                    height: 112.h,
+                                    height: 108.h,
                                     width: double.infinity,
                                     fit: BoxFit.cover,
                                   ),

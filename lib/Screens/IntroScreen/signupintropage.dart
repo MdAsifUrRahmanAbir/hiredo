@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';
 
+import '../../Route/routes.dart';
 import '../SignUpAccountScreen/signupaccountchoosepage.dart';
 import '../../utils/colors.dart';
 
@@ -60,8 +61,8 @@ class _SignIntroPageState extends State<SignIntroPage> {
           padding: EdgeInsets.only(left: 15.w, right: 15.w),
           child: InkWell(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => SignAccountChoosePage()));
+               Get.toNamed(Routes.signInAccountChoosePage);
+            
             },
             child: Container(
               height: 50.h,
@@ -97,8 +98,8 @@ class _SignIntroPageState extends State<SignIntroPage> {
             
             InkWell(
               onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => SignInPage()));
+                Get.toNamed(Routes.signinPage);
+               
               },
               child: Text(
                 ' Sign in',
