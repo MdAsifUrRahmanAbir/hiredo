@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:homelyknock/utils/colors.dart';
 
 import '../../../Services/api_services.dart';
+import '../../../nav_bar_page/main_screen.dart';
 import '../../ProfileScreen/Controller/profile_controller.dart';
 
 class ServiceController extends GetxController{
@@ -35,7 +36,8 @@ class ServiceController extends GetxController{
             colorText:Colors.black,
             backgroundColor: themeColorGreen.withOpacity(0.5)
           );
-        
+
+          Get.offAll(MainScreen());
       } else {
         debugPrint('Opps add service error ');
        

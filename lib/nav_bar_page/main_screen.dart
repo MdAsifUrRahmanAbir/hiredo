@@ -7,7 +7,9 @@ import 'package:homelyknock/utils/colors.dart';
 
 
 
+import '../Screens/ProfileScreen/Controller/profile_controller.dart';
 import '../utils/app_icon.dart';
+
 
 class MainScreen extends StatelessWidget {
    MainScreen({super.key});
@@ -16,7 +18,6 @@ class MainScreen extends StatelessWidget {
 
    @override
   Widget build(BuildContext context) {
-   
     return Scaffold(
       extendBody: true,
         body: Obx(

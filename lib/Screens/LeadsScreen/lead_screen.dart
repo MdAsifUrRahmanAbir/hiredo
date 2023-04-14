@@ -11,7 +11,7 @@ import '../ProfileScreen/Controller/profile_controller.dart';
 
 class LeadsScreen extends StatefulWidget {
   static const String routename = '/leadscreen';
-  LeadsScreen({super.key});
+  const LeadsScreen({super.key});
 
   @override
   State<LeadsScreen> createState() => _LeadsScreenState();

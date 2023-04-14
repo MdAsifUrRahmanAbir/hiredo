@@ -10,12 +10,13 @@ import '../../LeadsScreen/Model/leads_model.dart';
 import '../../Service/Model/service_model.dart';
 
 class ProfileController extends GetxController {
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    getData();
-    super.onInit();
-  }
+  // @override
+  // void onInit() {
+  //   // TODO: implement onInit
+  //   getData();
+  //   super.onInit();
+  // }
+  //
 
   var isLoading = false.obs;
 

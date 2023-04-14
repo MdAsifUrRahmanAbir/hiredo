@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../Screens/DocumentScreen/document.dart';
 import '../Screens/HomeScreen/home.dart';
+import '../Screens/ProfileScreen/Controller/profile_controller.dart';
 import '../Screens/ProfileScreen/profile.dart';
 import '../Screens/SearchResultScreen/catsearchpage.dart';
 import '../Screens/TrackingScreen/tracking_screen.dart';
@@ -10,12 +11,15 @@ import '../widgets/common_dashboard_controller.dart';
 
 class MainScreenController extends GetxController {
 
+  final _profileController = Get.put(ProfileController());
+
   final commonController = Get.put(CommonDashboardController(), permanent: true);
 
   var initIndex =0.obs;
   @override
   void onInit() {
     commonController.getLocations();
+    _profileController.getData();
     super.onInit();
   }
 
