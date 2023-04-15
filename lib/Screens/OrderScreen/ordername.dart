@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Screens/TrackingScreen/Model/pending_post_model.dart';
 
 class OrderName extends StatefulWidget {
   const OrderName({super.key});
@@ -12,11 +14,12 @@ class OrderName extends StatefulWidget {
 }
 
 class _OrderNameState extends State<OrderName> {
-  final GlobalKey<FormState> _formKey = GlobalKey();
+    PendingPostModel data=Get.arguments;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
         child: Scaffold(
       backgroundColor: Colors.white,
@@ -36,7 +39,7 @@ class _OrderNameState extends State<OrderName> {
         title: Text(
           "Order Name",
           style: GoogleFonts.roboto(
-              fontSize: 20,
+              fontSize: 20.sp,
               fontWeight: FontWeight.w500,
               color: Color(0xff272727)),
         ),
@@ -44,18 +47,22 @@ class _OrderNameState extends State<OrderName> {
           InkWell(
             onTap: () {},
             child: Container(
-              height: 40,
-              width: 40,
+              height: 40.h,
+              width: 40.h,
+             
               decoration: BoxDecoration(
+                color: Colors.grey,
                   image: DecorationImage(
-                      image: AssetImage("images/img2.png"), fit: BoxFit.cover),
+                      image: NetworkImage(data.user.userProfilePic.picture), fit: BoxFit.fill),
                   shape: BoxShape.circle),
             ),
-          )
+          ),
+          SizedBox(width:20.w,)
         ],
         automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Container(
           padding: EdgeInsets.all(20.0),
           child: Column(
@@ -149,7 +156,7 @@ class _OrderNameState extends State<OrderName> {
                   TextButton(
                       onPressed: () {},
                       child: Text(
-                        "Showing all 120 request",
+                        "Showing all ${data.responseCount} request",
                         style: GoogleFonts.roboto(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
@@ -192,11 +199,13 @@ class _OrderNameState extends State<OrderName> {
                 height: 185.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
                     image:
-                        DecorationImage(image: AssetImage('images/hand.png'))),
+                        DecorationImage(image: NetworkImage(data.category.image),fit: BoxFit.fill)),
               ),
+              SizedBox(height:10.h,),
               Text(
-                'Commercial Cleaning by Expertise',
+                data.category.name,
                 style: GoogleFonts.roboto(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w500,
@@ -205,13 +214,13 @@ class _OrderNameState extends State<OrderName> {
               SizedBox(
                 height: 8.h,
               ),
-              Text(
-                'Contrary to popular belief, Lorem Ipsum is not simply random text.',
-                style: GoogleFonts.roboto(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xFF555957)),
-              ),
+              // Text(
+              //   'Contrary to popular belief, Lorem Ipsum is not simply random text.',
+              //   style: GoogleFonts.roboto(
+              //       fontSize: 14.sp,
+              //       fontWeight: FontWeight.w400,
+              //       color: Color(0xFF555957)),
+              // ),
               SizedBox(
                 height: 20.h,
               ),

@@ -6,46 +6,39 @@ import 'dart:convert';
 
 List<PendingPostModel> pendingPostModelFromJson(String str) => List<PendingPostModel>.from(json.decode(str).map((x) => PendingPostModel.fromJson(x)));
 
-String pendingPostModelToJson(List<PendingPostModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
 class PendingPostModel {
     PendingPostModel({
         required this.id,
         required this.user,
-        this.location,
-        this.category,
+        required this.location,
+        required this.category,
         required this.postObject,
         required this.responseCount,
+        required this.postCredit,
         required this.created,
     });
 
     int id;
     User user;
-    dynamic location;
-    Category? category;
+    String location;
+    Category category;
     List<PostObject> postObject;
     int responseCount;
+    int postCredit;
     DateTime created;
 
     factory PendingPostModel.fromJson(Map<String, dynamic> json) => PendingPostModel(
         id: json["id"],
         user: User.fromJson(json["user"]),
         location: json["location"],
-        category: json["category"] == null ? null : Category.fromJson(json["category"]),
+        category: Category.fromJson(json["category"]),
         postObject: List<PostObject>.from(json["post_object"].map((x) => PostObject.fromJson(x))),
         responseCount: json["response_count"],
+        postCredit: json["post_credit"],
         created: DateTime.parse(json["created"]),
     );
 
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "user": user.toJson(),
-        "location": location,
-        "category": category?.toJson(),
-        "post_object": List<dynamic>.from(postObject.map((x) => x.toJson())),
-        "response_count": responseCount,
-        "created": created.toIso8601String(),
-    };
+    
 }
 
 class Category {
@@ -55,7 +48,7 @@ class Category {
         required this.image,
         required this.created,
         required this.popularity,
-        required this.parent,
+        this.parent,
     });
 
     int id;
@@ -63,7 +56,7 @@ class Category {
     String image;
     DateTime created;
     int popularity;
-    int parent;
+    dynamic parent;
 
     factory Category.fromJson(Map<String, dynamic> json) => Category(
         id: json["id"],
@@ -74,46 +67,71 @@ class Category {
         parent: json["parent"],
     );
 
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "image": image,
-        "created": created.toIso8601String(),
-        "popularity": popularity,
-        "parent": parent,
-    };
+  
 }
+
+
 
 class PostObject {
     PostObject({
+        required this.id,
+        this.location,
+        required this.created,
+        required this.postUser,
         required this.category,
         required this.question,
-        this.location,
         required this.pAnswer,
     });
 
-    int category;
-    int question;
+    int id;
     dynamic location;
-    int pAnswer;
+    DateTime created;
+    PostUser postUser;
+    Category category;
+    Question question;
+    PAnswer pAnswer;
 
     factory PostObject.fromJson(Map<String, dynamic> json) => PostObject(
-        category: json["category"],
-        question: json["question"],
+        id: json["id"],
         location: json["location"],
-        pAnswer: json["p_answer"],
+        created: DateTime.parse(json["created"]),
+        postUser: PostUser.fromJson(json["post_user"]),
+        category: Category.fromJson(json["category"]),
+        question: Question.fromJson(json["question"]),
+        pAnswer: PAnswer.fromJson(json["p_answer"]),
     );
 
-    Map<String, dynamic> toJson() => {
-        "category": category,
-        "question": question,
-        "location": location,
-        "p_answer": pAnswer,
-    };
+
 }
 
-class User {
-    User({
+class PAnswer {
+    PAnswer({
+        required this.id,
+        required this.options,
+        required this.credit,
+        required this.created,
+        required this.question,
+    });
+
+    int id;
+    String options;
+    int credit;
+    DateTime created;
+    int question;
+
+    factory PAnswer.fromJson(Map<String, dynamic> json) => PAnswer(
+        id: json["id"],
+        options: json["options"],
+        credit: json["credit"],
+        created: DateTime.parse(json["created"]),
+        question: json["question"],
+    );
+
+  
+}
+
+class PostUser {
+    PostUser({
         required this.id,
         required this.password,
         required this.isSuperuser,
@@ -159,7 +177,7 @@ class User {
     List<dynamic> groups;
     List<dynamic> userPermissions;
 
-    factory User.fromJson(Map<String, dynamic> json) => User(
+    factory PostUser.fromJson(Map<String, dynamic> json) => PostUser(
         id: json["id"],
         password: json["password"],
         isSuperuser: json["is_superuser"],
@@ -183,27 +201,99 @@ class User {
         userPermissions: List<dynamic>.from(json["user_permissions"].map((x) => x)),
     );
 
+    
+}
+
+class Question {
+    Question({
+        required this.id,
+        required this.qs,
+        required this.cat,
+    });
+
+    int id;
+    String qs;
+    int cat;
+
+    factory Question.fromJson(Map<String, dynamic> json) => Question(
+        id: json["id"],
+        qs: json["qs"],
+        cat: json["cat"],
+    );
+
     Map<String, dynamic> toJson() => {
         "id": id,
-        "password": password,
-        "is_superuser": isSuperuser,
-        "full_name": fullName,
-        "email": email,
-        "date_of_birth": "${dateOfBirth.year.toString().padLeft(4, '0')}-${dateOfBirth.month.toString().padLeft(2, '0')}-${dateOfBirth.day.toString().padLeft(2, '0')}",
-        "corporation_name": corporationName,
-        "corporation_number": corporationNumber,
-        "phone_number": phoneNumber,
-        "last_login": lastLogin.toIso8601String(),
-        "join_date": joinDate.toIso8601String(),
-        "is_active": isActive,
-        "is_staff": isStaff,
-        "is_admin": isAdmin,
-        "is_user": isUser,
-        "is_professional": isProfessional,
-        "otp_secret": otpSecret,
-        "otp": otp,
-        "otp_expire_time": otpExpireTime,
-        "groups": List<dynamic>.from(groups.map((x) => x)),
-        "user_permissions": List<dynamic>.from(userPermissions.map((x) => x)),
+        "qs": qs,
+        "cat": cat,
     };
 }
+
+class User {
+    User({
+        required this.id,
+        required this.fullName,
+        required this.userProfilePic,
+        required this.email,
+        required this.dateOfBirth,
+        required this.phoneNumber,
+        required this.corporationName,
+        required this.corporationNumber,
+        required this.isProfessional,
+        required this.isUser,
+        required this.password,
+    });
+
+    int id;
+    String fullName;
+    UserProfilePic userProfilePic;
+    String email;
+    DateTime dateOfBirth;
+    String phoneNumber;
+    String corporationName;
+    String corporationNumber;
+    bool isProfessional;
+    bool isUser;
+    String password;
+
+    factory User.fromJson(Map<String, dynamic> json) => User(
+        id: json["id"],
+        fullName: json["full_name"],
+        userProfilePic: UserProfilePic.fromJson(json["user_profile_pic"]),
+        email: json["email"],
+        dateOfBirth: DateTime.parse(json["date_of_birth"]),
+        phoneNumber: json["phone_number"],
+        corporationName: json["corporation_name"],
+        corporationNumber: json["corporation_number"],
+        isProfessional: json["is_professional"],
+        isUser: json["is_user"],
+        password: json["password"],
+    );
+
+  
+}
+
+class UserProfilePic {
+    UserProfilePic({
+        required this.id,
+        required this.user,
+        required this.picture,
+    });
+
+    int id;
+    int user;
+    String picture;
+
+    factory UserProfilePic.fromJson(Map<String, dynamic> json) => UserProfilePic(
+        id: json["id"],
+        user: json["user"],
+        picture: json["picture"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "user": user,
+        "picture": picture,
+    };
+}
+
+

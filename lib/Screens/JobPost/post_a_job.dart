@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Route/routes.dart';
+import 'package:homelyknock/Screens/JobPost/Model/location_model.dart';
+import 'package:homelyknock/Screens/UpdateLeadSetting/Model/location_model.dart';
 import 'package:homelyknock/common_dashboard_services/models/get_location_model.dart';
 import 'package:homelyknock/utils/colors.dart';
 
@@ -21,25 +23,24 @@ class PostAJob extends StatelessWidget {
   dynamic selectIndex = Get.arguments;
   final _homeController = Get.put(HomeController());
   final _jobPostController = Get.put(JobPostController());
-  final _commonDashboardController = Get.put(CommonDashboardController());
   @override
   Widget build(BuildContext context) {
     _jobPostController.isCategoryError.value = false;
     _jobPostController.isLocationError.value = false;
-    _jobPostController.locationId = null;
+    _jobPostController.locationData = null;
     _jobPostController.cateName = [];
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color:themeColorGreen),
         centerTitle: true,
         title: Text(
-          "Create a job post",
+          "Order",
           style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w700,
-              color: Colors.black),
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w500,
+              color:const Color(0xFF272727)),
         ),
       ),
       backgroundColor: Colors.white,
@@ -47,13 +48,20 @@ class PostAJob extends StatelessWidget {
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 18.w),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+          
             children: [
-              SizedBox(
-                height: 205.h,
-              ),
+              
               Text("Place a new request",
                   style: GoogleFonts.roboto(
-                      fontSize: 25.sp, fontWeight: FontWeight.w600)),
+                      fontSize: 20.sp, fontWeight: FontWeight.w500)),
+                SizedBox(
+                height: 8.h,
+              ),
+              Text("Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint",
+                  style: GoogleFonts.roboto(
+                      fontSize: 14.sp, fontWeight: FontWeight.w400,color:const Color(0xFF424242))),
+             
               SizedBox(
                 height: 25.h,
               ),
@@ -63,6 +71,7 @@ class PostAJob extends StatelessWidget {
                   dropdownButtonProps: const DropdownButtonProps(
                     icon: SizedBox(),
                   ),
+                  enabled:selectIndex == null?true:false,
                   popupProps: const PopupProps.menu(showSearchBox: true),
                   dropdownDecoratorProps: DropDownDecoratorProps(
                     dropdownSearchDecoration: InputDecoration(
@@ -86,8 +95,6 @@ class PostAJob extends StatelessWidget {
                       ? null
                       : _homeController.subCategoryList[selectIndex!],
                   onChanged: (value) {
-                    selectIndex = 10000000;
-
                     _jobPostController.cateName = value!.catName;
                     debugPrint(value.catName.length.toString());
                   },
@@ -99,8 +106,9 @@ class PostAJob extends StatelessWidget {
 
               // location
               Obx(
-                () => DropdownSearch<GetLocationModel>(
-                  items: _commonDashboardController.locationList,
+                () => DropdownSearch<LocationDataModel>(
+                  items: _jobPostController.locationList,
+                  popupProps: const PopupProps.menu(showSearchBox: true),
                   dropdownButtonProps: const DropdownButtonProps(
                     icon: SizedBox(),
                   ),
@@ -121,10 +129,10 @@ class PostAJob extends StatelessWidget {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(3.r))),
                   ),
-                  itemAsString: (GetLocationModel u) => u.name,
+                  itemAsString: (LocationDataModel u) => u.location,
                   onChanged: (value) {
-                    _jobPostController.locationId = value!.id;
-                    debugPrint(_jobPostController.locationId.toString());
+                    _jobPostController.locationData = value!;
+                   
                   },
                 ),
               ),
@@ -132,52 +140,54 @@ class PostAJob extends StatelessWidget {
                 height: 50.h,
               ),
 
-              InkWell(
-                onTap: () {
-                  if (selectIndex != 10000000 && selectIndex != null) {
-                    if (_jobPostController.locationId == null) {
-                      _jobPostController.isLocationError.value = true;
-                    } else if (_homeController
-                        .subCategoryList[selectIndex!].catName.isNotEmpty) {
-                      Map<String, dynamic> data = {
-                        "data": _homeController
-                            .subCategoryList[selectIndex!].catName,
-                        "locationId": _jobPostController.locationId
-                      };
-
-                      Get.toNamed(Routes.questionScreen, arguments: data);
+              Center(
+                child: InkWell(
+                  onTap: () {
+                    if (selectIndex != null) {
+                      if (_jobPostController.locationData==null) {
+                        _jobPostController.isLocationError.value = true;
+                      } else if (_homeController
+                          .subCategoryList[selectIndex!].catName.isNotEmpty) {
+                        Map<String, dynamic> data = {
+                          "data": _homeController
+                              .subCategoryList[selectIndex!].catName,
+                          "locationData": _jobPostController.locationData
+                        };
+              
+                        Get.toNamed(Routes.questionScreen, arguments: data);
+                      }
                     }
-                  }
-
-                  else {
-                    if (_jobPostController.cateName.isEmpty) {
-                      _jobPostController.isCategoryError.value = true;
-                    } else if (_jobPostController.locationId == null) {
-                      _jobPostController.isLocationError.value = true;
-                    } else if (_jobPostController.cateName.isNotEmpty) {
-                      Map<String, dynamic> data = {
-                        "data": _jobPostController.cateName,
-                        "locationId": _jobPostController.locationId
-                      };
-
-                      Get.toNamed(Routes.questionScreen, arguments: data);
+              
+                    else {
+                      if (_jobPostController.cateName.isEmpty) {
+                        _jobPostController.isCategoryError.value = true;
+                      } else if (_jobPostController.locationData == null) {
+                        _jobPostController.isLocationError.value = true;
+                      } else if (_jobPostController.cateName.isNotEmpty) {
+                        Map<String, dynamic> data = {
+                          "data": _jobPostController.cateName,
+                          "locationData": _jobPostController.locationData
+                        };
+                        Get.toNamed(Routes.questionScreen, arguments:data);
+                      }
                     }
-                  }
-                },
-                child: Container(
-                  height: 50.h,
-                  width: 300.w,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.r),
-                    color: themeColorGreen,
-                  ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Next",
-                    style: GoogleFonts.roboto(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white),
+                  },
+                  child: Container(
+                    height: 50.h,
+                    width: 300.w,
+                    
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.r),
+                      color: themeColorGreen,
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Next",
+                      style: GoogleFonts.roboto(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white),
+                    ),
                   ),
                 ),
               )

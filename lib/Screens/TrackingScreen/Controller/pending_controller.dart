@@ -4,14 +4,16 @@ import 'package:get/get.dart';
 import '../../../Services/api_services_by_limon.dart';
 import '../Model/pending_post_model.dart';
 
-class PendingController extends GetxController{
-
+class PendingController extends GetxController {
   var isLoading = false.obs;
-    List<PendingPostModel> pendingPostModel = [];
+  late RxList<PendingPostModel> pendingPostList =
+      List<PendingPostModel>.empty(growable: true).obs;
+  late RxList<PendingPostModel> demoPandingPostList =
+      List<PendingPostModel>.empty(growable: true).obs;
 
-    @override
+  @override
   void onInit() {
-   // getPendingPost();
+    // getPendingPost();
     super.onInit();
   }
 
@@ -25,8 +27,8 @@ class PendingController extends GetxController{
           print("Error $result");
         }
       } else {
-        pendingPostModel = result;
-        print(pendingPostModel);
+        pendingPostList.value = result;
+        demoPandingPostList.value = result;
       }
     } on Exception catch (e) {
       if (kDebugMode) {
@@ -34,6 +36,43 @@ class PendingController extends GetxController{
       }
     } finally {
       isLoading(false);
+    }
+  }
+
+  searchPanddingPost({
+    String? text,
+    String? location,
+  }) async {
+    if (text!.isNotEmpty && location!.isNotEmpty) {
+      List<PendingPostModel> dataList = demoPandingPostList
+          .where((element) =>
+              element.location.toLowerCase().contains(location.toLowerCase()) &&
+              element.category.name.toLowerCase().contains(text.toLowerCase()))
+          .toList();
+      if (kDebugMode) {
+        print(dataList.length);
+      }
+      pendingPostList.value = dataList;
+    } else if (text.isNotEmpty) {
+      List<PendingPostModel> dataList = demoPandingPostList
+          .where((element) =>
+              element.category.name.toLowerCase().contains(text.toLowerCase()))
+          .toList();
+      if (kDebugMode) {
+        print(dataList.length);
+      }
+      pendingPostList.value = dataList;
+    } else if (location!.isNotEmpty) {
+      List<PendingPostModel> dataList = demoPandingPostList
+          .where((element) =>
+              element.location.toLowerCase().contains(location.toLowerCase()))
+          .toList();
+      if (kDebugMode) {
+        print(dataList.length);
+      }
+      pendingPostList.value = dataList;
+    } else {
+      pendingPostList.value = demoPandingPostList;
     }
   }
 }
