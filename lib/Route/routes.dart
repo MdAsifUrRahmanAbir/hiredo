@@ -138,6 +138,7 @@ final getPages = [
   ),
   GetPage(name: Routes.forgotVerification, page: () => VerificationPage()),
   GetPage(name: Routes.resetpasswordpage, page: () => ResetPasswordPage()),
+
   GetPage(name: Routes.postAJob, page: () => PostAJob()),
   GetPage(name: Routes.categoriesPage, page: () => CategoriesPage()),
   GetPage(
@@ -157,7 +158,7 @@ final getPages = [
   GetPage(
       name: Routes.changePasswordScreen, page: () => ChangePasswordScreen()),
   GetPage(name: Routes.badgeDetails, page: () => BadgesSecondPage()),
-  GetPage(name: Routes.helpPage, page: () => const HelpScreen()),
+  GetPage(name: Routes.helpPage, page: () =>  HelpScreen()),
   GetPage(name: Routes.myProfile, page: () => Profile()),
   GetPage(name: Routes.reviewPage, page: () => ReviewsPage()),
   GetPage(name: Routes.elitProPage, page: () => EliteProPage()),
@@ -170,5 +171,28 @@ final getPages = [
   GetPage(name: Routes.invoiceAndBilling, page:()=> BillingDetails()),
   GetPage(name: Routes.myPaymentDetails, page: ()=> PaymentDetailsPage() ),
   GetPage(name: Routes.emailNotification, page: ()=> EmailNotification()),
-  GetPage(name: Routes.browserNotification, page: ()=> BrowserNotification())
+  GetPage(name: Routes.browserNotification, page: ()=> BrowserNotification()),
+
+  //  GetPage(name: Routes.postAJob, page: () => PostAJob()),
+  //  GetPage(name: Routes.categoriesPage, page:()=>CategoriesPage()),
+  //  GetPage(name: Routes.feturedServiceScreen, page:()=>FeturedServiceScreen()),
+  //  GetPage(name: Routes.subCategoryPage, page: ()=> SubCategoryPage()),
+  //  GetPage(name: Routes.trackingPostPage, page:()=> TrackingPostOrder()),
+  //  GetPage(name: Routes.orderNamePage, page: ()=>const OrderName()),
+  //  GetPage(name: Routes.locationPage, page: ()=> LocationPage()),
+  //  GetPage(name: Routes.servicePage, page: ()=> ServiceScreen()),
+  //  GetPage(name: Routes.serviceAddPage, page: ()=> ServiceAdd()),
+  //  GetPage(name: Routes.leadPage, page:()=> LeadsScreen()),
+  //  GetPage(name: Routes.leadDetailsPage, page:()=>LeadsDetailsScreen()),
+  //  GetPage(name: Routes.questionScreen, page: ()=>QuestionScreen()),
+  //   GetPage(name: Routes.myResponse, page: ()=>MyResponse()),
+  //   GetPage(name: Routes.wishListScreen, page:()=> WishListScreen()),
+  //   GetPage(name: Routes.settingPage, page:()=>SettingsPage()),
+  //   GetPage(name: Routes.changePasswordScreen, page:()=>ChangePasswordScreen()),
+  //   GetPage(name: Routes.badgeDetails, page:()=>BadgesSecondPage() ),
+
+  //   GetPage(name: Routes.helpPage, page:()=> HelpScreen() ),
+
+    
+
 ];

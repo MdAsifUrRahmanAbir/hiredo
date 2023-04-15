@@ -6,6 +6,8 @@ import '../../HomeScreen/Controller/home_controller.dart';
 import '../../HomeScreen/Model/lead_category_model.dart';
 
 class CategorisController extends GetxController {
+
+
   final homeController = Get.put(HomeController());
   final TextEditingController searchController = TextEditingController();
   List<String> list = <String>['All Category', "Most Popular"];
@@ -23,6 +25,12 @@ class CategorisController extends GetxController {
 
   late RxList<LeadCategoriesModel> sortList =
       List<LeadCategoriesModel>.empty(growable: true).obs;
+      
+  @override
+  void onInit() {
+    setData();
+    super.onInit();
+  }
 
   setData() {
     demoList.value = homeController.categoryList;

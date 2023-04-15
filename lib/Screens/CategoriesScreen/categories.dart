@@ -21,7 +21,6 @@ class CategoriesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _categoriesController.setData();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -406,13 +405,12 @@ class CategoriesPage extends StatelessWidget {
           )),
           InkWell(
             onTap: () {
-                List<LeadCategoriesModel> catData=data.children;
-            Map<String,dynamic> response = {
+              
+             
+              Get.to(SubCategoryPage(), arguments:{
               "name":data.name,
-              "subCategory":catData
-            };
-              //Get.toNamed(Routes.subCategoryPage,arguments:catData );
-              Get.to(SubCategoryPage(), arguments: response);
+              "subCategory":data.children
+            });
              
             },
             child: Container(

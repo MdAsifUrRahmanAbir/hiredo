@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Screens/JobPost/Model/location_model.dart';
 import 'package:homelyknock/Screens/ResistrationScreen/component/custom_button.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 
@@ -23,7 +24,7 @@ var allData = Get.arguments;
   @override
   Widget build(BuildContext context) {
        List<CatName> data = allData['data'];
-   int? locationId = allData['locationId'];
+   LocationDataModel? locationData = allData['locationData'];
 
     _questionController.selectedQuestionIndex.value=0;
     _questionController.selectedItemIndex.value=0;
@@ -143,20 +144,32 @@ var allData = Get.arguments;
                 CustomButton(title: data.length==_questionController.selectedQuestionIndex.value+1?"Submit":'Next', onTap: () {
                     if(data.length>_questionController.selectedQuestionIndex.value+1){
                      
-                      JobPostModel setdata=JobPostModel(category:data[_questionController.selectedQuestionIndex.value].cat.id, question: data[_questionController.selectedQuestionIndex.value].id, location:locationId!, pAnswer:data[_questionController.selectedQuestionIndex.value].answers[_questionController.selectedItemIndex.value].id);
+                      JobPostModel setdata=JobPostModel(
+                        category:data[_questionController.selectedQuestionIndex.value].cat.id,
+                       question: data[_questionController.selectedQuestionIndex.value].id,
+                        location:locationData!.location,
+                        latitude: locationData.latitude,
+                        longitude: locationData.longitude,
+
+                         pAnswer:data[_questionController.selectedQuestionIndex.value].answers[_questionController.selectedItemIndex.value].id);
       
-                        print(
-                           data[_questionController.selectedQuestionIndex.value].answers[_questionController.selectedItemIndex.value].id
-      
+                        debugPrint(
+                           data[_questionController.selectedQuestionIndex.value].answers[_questionController.selectedItemIndex.value].id.toString()
                         );
                     
                       _questionController.allAnswer.add(setdata);
                        _questionController.selectedQuestionIndex.value++;
                       _questionController.selectedItemIndex.value=0;
                     }else{
-                       JobPostModel setdata=JobPostModel(category:data[_questionController.selectedQuestionIndex.value].cat.id, question: data[_questionController.selectedQuestionIndex.value].id, location:locationId!, pAnswer:data[_questionController.selectedQuestionIndex.value].answers[_questionController.selectedItemIndex.value].id);
-                      _questionController.allAnswer.add(setdata);
-
+                       JobPostModel setdata=JobPostModel(
+                        category:data[_questionController.selectedQuestionIndex.value].cat.id, 
+                       question: data[_questionController.selectedQuestionIndex.value].id,
+                        location:locationData!.location,
+                        latitude: locationData.latitude,
+                        longitude: locationData.longitude,
+                         pAnswer:data[_questionController.selectedQuestionIndex.value].answers[_questionController.selectedItemIndex.value].id);
+                        _questionController.allAnswer.add(setdata);
+                  
 
                       _questionController.submitJobPost(context);
                       
