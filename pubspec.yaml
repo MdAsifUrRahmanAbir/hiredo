@@ -58,6 +58,7 @@ dependencies:
   logger:                         # added by abir
   flutter_widget_from_html: ^0.10.0
   jiffy: ^6.1.0
+  shimmer: ^2.0.0
 
 
 dev_dependencies:
