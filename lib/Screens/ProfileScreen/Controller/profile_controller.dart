@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';
 import 'package:homelyknock/Services/api_services.dart';
+import 'package:homelyknock/Services/api_services_by_limon.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../local/my_local.dart';
@@ -11,7 +15,9 @@ import '../../../widgets/logger.dart';
 import '../../LeadsScreen/Model/leads_model.dart';
 import '../../Service/Model/service_model.dart';
 import 'package:flutter/material.dart';
+
 final log = logger(ProfileController);
+
 class ProfileController extends GetxController {
   // @override
   // void onInit() {
@@ -20,6 +26,39 @@ class ProfileController extends GetxController {
   //   super.onInit();
   // }
   //
+
+  RxString imagePath = ''.obs;
+
+  Future getImage() async {
+    isLoading(true);
+
+    try {
+      final ImagePicker _picked = ImagePicker();
+      final image = await _picked.pickImage(source: ImageSource.gallery);
+      if (image != null) {
+        imagePath.value = image.path.toString();
+
+        var result =
+            await ApiServicesByLimon.uploadeProfilePic(File(imagePath.value));
+        if (result.runtimeType == int) {
+          if (kDebugMode) {
+            debugPrint("$result");
+            log.e(result);
+            Get.snackbar('Error', 'Image Upload Faild');
+          }
+        } else {
+          imagePath.value = result;
+          Get.snackbar('success', 'Image Upload success');
+        }
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        debugPrint('Faild $e');
+      }
+    } finally {
+      isLoading(false);
+    }
+  }
 
   @override
   void dispose() {
@@ -30,7 +69,7 @@ class ProfileController extends GetxController {
   }
 
   var isLoading = false.obs;
-  var isLeadLoading =false.obs;
+  var isLeadLoading = false.obs;
 
   RxList<ServiceModel> serviceList =
       List<ServiceModel>.empty(growable: true).obs;
@@ -39,7 +78,7 @@ class ProfileController extends GetxController {
   getData() async {
     isLoading(true);
     // await getServices();
-    
+
     debugPrint("Get leads data check in on time ");
     isLoading(false);
   }
@@ -54,8 +93,7 @@ class ProfileController extends GetxController {
         preferences.clear();
         MyPreference.setOnBoard(isOnBoard);
         Fluttertoast.showToast(msg: "Logout Successfull");
-       Get.offAllNamed(Routes.signinPage);
-    
+        Get.offAllNamed(Routes.signinPage);
       } else {
         isLoading(false);
         debugPrint("User not logout");
@@ -77,7 +115,7 @@ class ProfileController extends GetxController {
         if (kDebugMode) {
           print('Error $result');
         }
-          log.e(result);
+        log.e(result);
       } else {
         serviceList.value = result;
         debugPrint(serviceList.length.toString());
@@ -92,15 +130,15 @@ class ProfileController extends GetxController {
 
   getLeads(bool isLead) async {
     try {
-      if(isLead){
-        isLeadLoading.value=true;
+      if (isLead) {
+        isLeadLoading.value = true;
       }
       var result = await ApiServices.fetchLeads();
       if (result.runtimeType == int) {
         if (kDebugMode) {
           print('Error $result');
         }
-         log.e(result);
+        log.e(result);
       } else {
         leadsList.value = result;
         debugPrint(leadsList.length.toString());
@@ -110,9 +148,9 @@ class ProfileController extends GetxController {
       if (kDebugMode) {
         print("Fetch Error $e");
       }
-    }finally{
-      if(isLead){
-        isLeadLoading.value=false;
+    } finally {
+      if (isLead) {
+        isLeadLoading.value = false;
       }
     }
   }

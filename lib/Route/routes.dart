@@ -1,3 +1,7 @@
+
+
+import 'dart:core';
+
 import 'package:get/get.dart';
 import 'package:homelyknock/Screens/CategoriesScreen/categories.dart';
 import 'package:homelyknock/Screens/FeturedService/fetured_service.dart';
@@ -11,8 +15,21 @@ import 'package:homelyknock/Screens/LeadsScreen/lead_screen.dart';
 import 'package:homelyknock/Screens/LocationScreen/locationpage.dart';
 import 'package:homelyknock/Screens/MyResponse/my_response.dart';
 import 'package:homelyknock/Screens/OrderScreen/ordername.dart';
+import 'package:homelyknock/Screens/ProfileScreen/profile.dart';
+import 'package:homelyknock/Screens/ReviewScreen/reviews_page.dart';
 import 'package:homelyknock/Screens/Service/service.dart';
+import 'package:homelyknock/Screens/SettingsScreen/AccountDetails/account_details.dart';
+import 'package:homelyknock/Screens/SettingsScreen/BillingDetails/billing_details.dart';
+import 'package:homelyknock/Screens/SettingsScreen/BrowserNotification/browser_notification.dart';
 import 'package:homelyknock/Screens/SettingsScreen/ChangePassword/change_password_screen.dart';
+import 'package:homelyknock/Screens/SettingsScreen/ElitePro/elite_pro_page.dart';
+import 'package:homelyknock/Screens/SettingsScreen/EmailNotification/email_notification.dart';
+import 'package:homelyknock/Screens/SettingsScreen/EmailTemplate/email_template_page.dart';
+import 'package:homelyknock/Screens/SettingsScreen/MyCredits/my_credits_page.dart';
+import 'package:homelyknock/Screens/SettingsScreen/OneClickResponce/one_click_responce_page.dart';
+import 'package:homelyknock/Screens/SettingsScreen/PaymentDetails/payment_details_page.dart';
+import 'package:homelyknock/Screens/SettingsScreen/SMSTemplate/sms_template_page.dart';
+import 'package:homelyknock/Screens/SettingsScreen/SettingsBadge/badge_page.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';
 import 'package:homelyknock/Screens/SignUpAccountScreen/signupaccountchoosepage.dart';
@@ -43,10 +60,10 @@ class Routes {
   static String mainPage = "/main_page";
   static String forgotVerification = '/forgot_verification';
   static String resetpasswordpage = '/reset_password_page';
-  static String postAJob="/post_a_job";
-  static String categoriesPage='/categories_page';
-  static String feturedServiceScreen='/fetured_service_screen';
-  static String subCategoryPage ='/sub_category_screen';
+  static String postAJob = "/post_a_job";
+  static String categoriesPage = '/categories_page';
+  static String feturedServiceScreen = '/fetured_service_screen';
+  static String subCategoryPage = '/sub_category_screen';
   static String trackingPostPage = '/tracking_post_screen';
   static String orderNamePage = '/order_name_screen';
   static String locationPage = '/location_screen';
@@ -55,13 +72,25 @@ class Routes {
   static String helpPage = '/help_screen';
   static String leadPage = '/lead_screen';
   static String leadDetailsPage = '/lead_details_screen';
-  static String questionScreen='/question_screen';
-  static String myResponse='/my_response';
-  static String wishListScreen='/wish_list_screen';
-  static String settingPage='/setting_page';
-  static String changePasswordScreen='/change_password_screen';
-  static String badgeDetails='/badges_details';
-
+  static String questionScreen = '/question_screen';
+  static String myResponse = '/my_response';
+  static String wishListScreen = '/wish_list_screen';
+  static String settingPage = '/setting_page';
+  static String changePasswordScreen = '/change_password_screen';
+  static String badgeDetails = '/badges_details';
+  static String myProfile = '/my_profile';
+  static String reviewPage = '/review_screen';
+  static String elitProPage = '/elit_pro_screen';
+  static String badgePage = '/badge_screen';
+  static String accountDetails = '/account_details';
+  static String oneClickResponsePage = '/one_click_response_screen';
+  static String emailTemplate = '/email_template_screen';
+  static String smsTemplate = '/sms_template_screen';
+  static String myCredits = '/my_credits_screen';
+  static String invoiceAndBilling = '/invoice_and_billing_screen';
+  static String myPaymentDetails = '/my_payment_details_screen';
+  static String emailNotification = '/email_notification_screen';
+  static String browserNotification = '/browser_notification_screen';
 }
 
 /// Add this list variable into your GetMaterialApp as the value of getPages parameter.
@@ -109,25 +138,61 @@ final getPages = [
   ),
   GetPage(name: Routes.forgotVerification, page: () => VerificationPage()),
   GetPage(name: Routes.resetpasswordpage, page: () => ResetPasswordPage()),
-   GetPage(name: Routes.postAJob, page: () => PostAJob()),
-   GetPage(name: Routes.categoriesPage, page:()=>CategoriesPage()),
-   GetPage(name: Routes.feturedServiceScreen, page:()=>FeturedServiceScreen()),
-   GetPage(name: Routes.subCategoryPage, page: ()=> SubCategoryPage()),
-   GetPage(name: Routes.trackingPostPage, page:()=> TrackingPostOrder()),
-   GetPage(name: Routes.orderNamePage, page: ()=>const OrderName()),
-   GetPage(name: Routes.locationPage, page: ()=> LocationPage()),
-   GetPage(name: Routes.servicePage, page: ()=> ServiceScreen()),
-   GetPage(name: Routes.serviceAddPage, page: ()=> ServiceAdd()),
-   GetPage(name: Routes.leadPage, page:()=> LeadsScreen()),
-   GetPage(name: Routes.leadDetailsPage, page:()=>LeadsDetailsScreen()),
-   GetPage(name: Routes.questionScreen, page: ()=>QuestionScreen()),
-    GetPage(name: Routes.myResponse, page: ()=>MyResponse()),
-    GetPage(name: Routes.wishListScreen, page:()=> WishListScreen()),
-    GetPage(name: Routes.settingPage, page:()=>SettingsPage()),
-    GetPage(name: Routes.changePasswordScreen, page:()=>ChangePasswordScreen()),
-    GetPage(name: Routes.badgeDetails, page:()=>BadgesSecondPage() ),
 
-    GetPage(name: Routes.helpPage, page:()=> HelpScreen() ),
+  GetPage(name: Routes.postAJob, page: () => PostAJob()),
+  GetPage(name: Routes.categoriesPage, page: () => CategoriesPage()),
+  GetPage(
+      name: Routes.feturedServiceScreen, page: () => FeturedServiceScreen()),
+  GetPage(name: Routes.subCategoryPage, page: () => SubCategoryPage()),
+  GetPage(name: Routes.trackingPostPage, page: () => TrackingPostOrder()),
+  GetPage(name: Routes.orderNamePage, page: () => const OrderName()),
+  GetPage(name: Routes.locationPage, page: () => LocationPage()),
+  GetPage(name: Routes.servicePage, page: () => ServiceScreen()),
+  GetPage(name: Routes.serviceAddPage, page: () => ServiceAdd()),
+  GetPage(name: Routes.leadPage, page: () => LeadsScreen()),
+  GetPage(name: Routes.leadDetailsPage, page: () => LeadsDetailsScreen()),
+  GetPage(name: Routes.questionScreen, page: () => QuestionScreen()),
+  GetPage(name: Routes.myResponse, page: () => MyResponse()),
+  GetPage(name: Routes.wishListScreen, page: () => WishListScreen()),
+  GetPage(name: Routes.settingPage, page: () => SettingsPage()),
+  GetPage(
+      name: Routes.changePasswordScreen, page: () => ChangePasswordScreen()),
+  GetPage(name: Routes.badgeDetails, page: () => BadgesSecondPage()),
+  GetPage(name: Routes.helpPage, page: () =>  HelpScreen()),
+  GetPage(name: Routes.myProfile, page: () => Profile()),
+  GetPage(name: Routes.reviewPage, page: () => ReviewsPage()),
+  GetPage(name: Routes.elitProPage, page: () => EliteProPage()),
+  GetPage(name: Routes.badgePage, page: () => BadgePage()),
+  GetPage(name: Routes.accountDetails, page: () => AccountDetailsPage()),
+  GetPage(name: Routes.oneClickResponsePage, page: ()=> OneClickResponcePage()),
+  GetPage(name: Routes.emailTemplate, page: ()=> EmailTemplatePage()),
+  GetPage(name: Routes.smsTemplate, page: ()=> SMSTemplatePage()),
+  GetPage(name: Routes.myCredits, page: ()=> MyCreditsPage()),
+  GetPage(name: Routes.invoiceAndBilling, page:()=> BillingDetails()),
+  GetPage(name: Routes.myPaymentDetails, page: ()=> PaymentDetailsPage() ),
+  GetPage(name: Routes.emailNotification, page: ()=> EmailNotification()),
+  GetPage(name: Routes.browserNotification, page: ()=> BrowserNotification()),
+
+  //  GetPage(name: Routes.postAJob, page: () => PostAJob()),
+  //  GetPage(name: Routes.categoriesPage, page:()=>CategoriesPage()),
+  //  GetPage(name: Routes.feturedServiceScreen, page:()=>FeturedServiceScreen()),
+  //  GetPage(name: Routes.subCategoryPage, page: ()=> SubCategoryPage()),
+  //  GetPage(name: Routes.trackingPostPage, page:()=> TrackingPostOrder()),
+  //  GetPage(name: Routes.orderNamePage, page: ()=>const OrderName()),
+  //  GetPage(name: Routes.locationPage, page: ()=> LocationPage()),
+  //  GetPage(name: Routes.servicePage, page: ()=> ServiceScreen()),
+  //  GetPage(name: Routes.serviceAddPage, page: ()=> ServiceAdd()),
+  //  GetPage(name: Routes.leadPage, page:()=> LeadsScreen()),
+  //  GetPage(name: Routes.leadDetailsPage, page:()=>LeadsDetailsScreen()),
+  //  GetPage(name: Routes.questionScreen, page: ()=>QuestionScreen()),
+  //   GetPage(name: Routes.myResponse, page: ()=>MyResponse()),
+  //   GetPage(name: Routes.wishListScreen, page:()=> WishListScreen()),
+  //   GetPage(name: Routes.settingPage, page:()=>SettingsPage()),
+  //   GetPage(name: Routes.changePasswordScreen, page:()=>ChangePasswordScreen()),
+  //   GetPage(name: Routes.badgeDetails, page:()=>BadgesSecondPage() ),
+
+  //   GetPage(name: Routes.helpPage, page:()=> HelpScreen() ),
 
     
+
 ];

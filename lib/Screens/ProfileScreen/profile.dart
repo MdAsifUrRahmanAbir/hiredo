@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -11,17 +13,17 @@ import '../../widgets/data_controller.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'Controller/profile_controller.dart';
 
- final _mainController = Get.put(MainScreenController());
-class Profile extends StatelessWidget {
- 
-   Profile({super.key});
+final _mainController = Get.put(MainScreenController());
 
-  final _dataController=Get.put(DataController());
+class Profile extends StatelessWidget {
+  Profile({super.key});
+
+  final _dataController = Get.put(DataController());
   final _profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
-   // _profileController.getData();
+    // _profileController.getData();
     return Scaffold(
       backgroundColor: scaffoldClr,
       appBar: AppBar(
@@ -44,428 +46,435 @@ class Profile extends StatelessWidget {
           Image.asset('images/notification.png'),
         ],
       ),
-      body: Obx(()=>_profileController.isLoading.value?const CustomLoader():
-         SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          padding: EdgeInsets.symmetric(horizontal: 26.w),
-          child: 
-             Column(
-              children: [
-                SizedBox(
-                  height: 32.h,
-                ),
-                Row(
-                 
+      body: Obx(
+        () => _profileController.isLoading.value
+            ? const CustomLoader()
+            : SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                padding: EdgeInsets.symmetric(horizontal: 26.w),
+                child: Column(
                   children: [
-                    Stack(
-                      alignment: Alignment.bottomRight,
+                    SizedBox(
+                      height: 32.h,
+                    ),
+                    Row(
                       children: [
-                        Container(
-                          height:63.h,
-                          width: 63.h,
-                         decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(width:1,color: Colors.grey.shade500),
-                          color: Colors.grey.shade400
-                         ),
+                        Stack(
+                          alignment: Alignment.bottomRight,
+                          children: [
+                            Container(
+                              height: 63.h,
+                              width: 63.h,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                    width: 1, color: Colors.grey.shade500),
+                                color: Colors.grey.shade400,
+                              ),
+                              child: CircleAvatar(
+                                backgroundImage:
+                                    _profileController.imagePath.isNotEmpty
+                                        ? FileImage(File(_profileController
+                                            .imagePath
+                                            .toString()))
+                                        : null,
+                              ),
+                            ),
+                            Positioned(
+                                bottom: -20.h,
+                                right: -20.h,
+                                child: IconButton(
+                                    onPressed: () {
+                                      _profileController.getImage();
+                                    },
+                                    icon: Icon(
+                                      Icons.camera_alt,
+                                      size: 25.sp,
+                                    )))
+                          ],
                         ),
-                       
-                        Positioned(
-                            bottom: -20.h,
-                            right: -20.h,
-                            child: IconButton(
-                                onPressed: () {},
-                                icon:  Icon(
-                                  Icons.camera_alt,
-                                  size:25.sp,
-                                )))
+                        SizedBox(
+                          width: 15.w,
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                _dataController.fullName.value,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: myStyle(16.sp, FontWeight.w500, textClr),
+                              ),
+                              Text(
+                                _dataController.email.value,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: myStyle(14.sp, FontWeight.w400,
+                                    const Color(0xff424242)),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        InkWell(
+                            onTap: () {
+                              _dataController.modeChange();
+                            },
+                            child: Image.asset(
+                              "images/switchimg.png",
+                              height: 26.h,
+                              width: 26.w,
+                            )),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        const Icon(Icons.more_vert)
                       ],
                     ),
-                    SizedBox(width:15.w,),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            _dataController.fullName.value,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          
-                            style: myStyle(16.sp, FontWeight.w500, textClr),
-                          ),
-                          Text(
-                            _dataController.email.value,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: myStyle(14.sp, FontWeight.w400, const Color(0xff424242)),
-                          ),
-                        ],
-                      ),
-                    ),
                     SizedBox(
-                      width: 10.w,
+                      height: 20.h,
+                    ),
+                    _dataController.isUser.value
+                        ? _isUser()
+                        : _isProfational(context),
+                    SizedBox(
+                      height: 37.h,
                     ),
                     InkWell(
-                      onTap: (){
-                       _dataController.modeChange();
+                      onTap: () {
+                        _profileController.hendleLogout(context);
                       },
-                      
-                      child: Image.asset("images/switchimg.png",height:26.h,width: 26.w,)),
-                    SizedBox(
-                      width: 10.w,
+                      child: Container(
+                          height: 43.h,
+                          width: 124.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5.r),
+                              color: const Color(0xffDF2929)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.logout_outlined,
+                                color: scaffoldClr,
+                                size: 18,
+                              ),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              Text(
+                                'Logout',
+                                style:
+                                    myStyle(16, FontWeight.w500, scaffoldClr),
+                              ),
+                            ],
+                          )),
                     ),
-                    const Icon(Icons.more_vert)
+                    SizedBox(
+                      height: 80.h,
+                    )
                   ],
                 ),
-                SizedBox(
-                  height: 20.h,
-                ),
-          
-                _dataController.isUser.value?
-                _isUser():_isProfational(context),
-            
-              
-                SizedBox(
-                  height: 37.h,
-                ),
-                InkWell(
-                  onTap: () {
-                   _profileController.hendleLogout(context);
-                  },
-                  child: Container(
-                      height: 43.h,
-                      width: 124.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.r),
-                          color: const Color(0xffDF2929)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.logout_outlined,
-                            color: scaffoldClr,
-                            size: 18,
-                          ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          Text(
-                            'Logout',
-                            style: myStyle(16, FontWeight.w500, scaffoldClr),
-                          ),
-                        ],
-                      )),
-                ),
-                SizedBox(
-                  height: 80.h,
-                )
-              ],
-            ),
-          
-        ),
+              ),
       ),
     );
   }
 
-_isProfational(context){
-
+  _isProfational(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-       
-          Card(
+      children: [
+        Card(
             child: ListTile(
-              title: Text("Phone number",style: GoogleFonts.roboto(fontSize:20.sp,color:Colors.black),),
-              subtitle: Text("01796165636",style: GoogleFonts.roboto(fontSize:16.sp,color:Colors.black),),
-            )
+          title: Text(
+            "Phone number",
+            style: GoogleFonts.roboto(fontSize: 20.sp, color: Colors.black),
           ),
-           Card(
+          subtitle: Text(
+            "01796165636",
+            style: GoogleFonts.roboto(fontSize: 16.sp, color: Colors.black),
+          ),
+        )),
+        Card(
             child: ListTile(
-              title: Text("Corporation name",style: GoogleFonts.roboto(fontSize:20.sp,color:Colors.black),),
-              subtitle: Text("Developer",style: GoogleFonts.roboto(fontSize:16.sp,color:Colors.black),),
-            )
+          title: Text(
+            "Corporation name",
+            style: GoogleFonts.roboto(fontSize: 20.sp, color: Colors.black),
           ),
-           Card(
+          subtitle: Text(
+            "Developer",
+            style: GoogleFonts.roboto(fontSize: 16.sp, color: Colors.black),
+          ),
+        )),
+        Card(
             child: ListTile(
-              title: Text("Corporation number",style: GoogleFonts.roboto(fontSize:20.sp,color:Colors.black),),
-              subtitle: Text("01796165636",style: GoogleFonts.roboto(fontSize:16.sp,color:Colors.black),),
-            )
+          title: Text(
+            "Corporation number",
+            style: GoogleFonts.roboto(fontSize: 20.sp, color: Colors.black),
           ),
-
-
-          ElevatedButton(onPressed: (){
-            Get.toNamed(Routes.postAJob,arguments:null);
-          }, 
-          child:Text("Create Post",style:GoogleFonts.roboto(fontSize:16.sp,fontWeight: FontWeight.w600),))
-
-         
-
-          
-          
-
-
-
-        ],
-
-
-
-
+          subtitle: Text(
+            "01796165636",
+            style: GoogleFonts.roboto(fontSize: 16.sp, color: Colors.black),
+          ),
+        )),
+        ElevatedButton(
+            onPressed: () {
+              Get.toNamed(Routes.postAJob, arguments: null);
+            },
+            child: Text(
+              "Create Post",
+              style: GoogleFonts.roboto(
+                  fontSize: 16.sp, fontWeight: FontWeight.w600),
+            ))
+      ],
     );
+  }
 
-}
-
- _isUser() {
+  _isUser() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          height: 150.h,
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.r), color: containerClr),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Your profile is 80% complete",
+                      style: myStyle(16, FontWeight.w500, textClr)),
+                  Image.asset(
+                    "images/editicon.png",
+                    height: 22.h,
+                    width: 22.w,
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: LinearPercentIndicator(
+                      animation: true,
+                      animationDuration: 1000,
+                      lineHeight: 8.h,
+                      percent: 0.8,
+                      barRadius: Radius.circular(30.r),
+                      progressColor: backIconClr,
+                      backgroundColor: scaffoldClr,
+                    ),
+                  ),
+                  Text(
+                    '8/10',
+                    style: myStyle(14, FontWeight.w500, textClr),
+                  )
+                ],
+              ),
+              Text(
+                'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. ',
+                style: myStyle(14, FontWeight.w400, const Color(0xff424242)),
+              )
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 20.h,
+        ),
+        Container(
+          height: 167.h,
+          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(6.r), color: containerClr),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-                  Container(
-            height: 150.h,
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.r),
-                color: containerClr),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Your profile is 80% complete",
-                        style: myStyle(16, FontWeight.w500, textClr)),
-                    Image.asset(
-                      "images/editicon.png",
-                      height: 22.h,
-                      width: 22.w,
-                    )
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: LinearPercentIndicator(
-                        animation: true,
-                        animationDuration: 1000,
-                        lineHeight: 8.h,
-                        percent: 0.8,
-                        barRadius: Radius.circular(30.r),
-                        progressColor: backIconClr,
-                        backgroundColor: scaffoldClr,
+              Text(
+                'OverView',
+                style: myStyle(20.sp, FontWeight.w500, textClr),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Image.asset('images/eliteicon.png'),
+                      SizedBox(
+                        width: 4.w,
                       ),
-                    ),
-                    Text(
-                      '8/10',
-                      style: myStyle(14, FontWeight.w500, textClr),
-                    )
-                  ],
-                ),
-                Text(
-                  'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. ',
-                  style: myStyle(14, FontWeight.w400, const Color(0xff424242)),
-                )
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 20.h,
-          ),
-          Container(
-            height: 167.h,
-           
-           
-            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6.r),
-                color: containerClr),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'OverView',
-                  style: myStyle(20.sp, FontWeight.w500, textClr),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Image.asset('images/eliteicon.png'),
-                        SizedBox(
-                          width: 4.w,
-                        ),
-                        Text(
-                          'Elite Pro',
-                          style: myStyle(14.sp, FontWeight.w500, textClr),
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Image.asset('images/tick.png'),
-                        SizedBox(
-                          width: 4.w,
-                        ),
-                        Text(
-                          '14 Hires on Ringknock',
-                          style: myStyle(14.sp, FontWeight.w500, textClr),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Image.asset('images/moon.png'),
-                        SizedBox(
-                          width: 4.w,
-                        ),
-                        Text(
-                          '7 Years in business',
-                          style: myStyle(14.sp, FontWeight.w500, textClr),
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Image.asset('images/tick.png'),
-                        SizedBox(
-                          width: 4.w,
-                        ),
-                        Text(
-                          '6 Hour response  time',
-                          style: myStyle(14.sp, FontWeight.w500, textClr),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.person_rounded,
-                      size: 18.sp,
-                    ),
-                    SizedBox(
-                      width: 4.w,
-                    ),
-                    Text(
-                      '11-50 Staff',
-                      style: GoogleFonts.roboto(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                          color: const Color(0xFF272727)),
-                    )
-                  ],
-                )
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 20.h,
-          ),
-          Container(
-            
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-            color: containerClr,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Service Tags',
-                  style: myStyle(20, FontWeight.w500, textClr),
-                ),
-                SizedBox(
-                  height: 5.h,
-                ),
-      
-                
-                GridView.builder(
-                  physics:const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                 
-                  itemCount:_profileController.serviceList.length<6?_profileController.serviceList.length:6,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-               mainAxisExtent:25.sp,
-              crossAxisSpacing: 15.w,
-             
-             
-              crossAxisCount: 2
-              ), 
-              itemBuilder: (context,index)=>Text(_profileController.serviceList[index].serviceName.toString(),style: GoogleFonts.roboto(fontSize:16.sp,color: Colors.black),overflow: TextOverflow.ellipsis,maxLines:1,)),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 20.h,
-          ),
-          _cardItem(
-              onTap: () {
-                Get.toNamed(Routes.leadPage);
-              
-              },
-              icon: Icons.star_border_outlined,
-              text: 'Leads',
-              isCount: true,
-              count:_profileController.leadsList.length.toString()),
-          _cardItem(
-              onTap: () {
-                Get.toNamed(Routes.myResponse);            
-              },
-              icon: Icons.sports_handball_rounded,
-              text: 'My Responces',
-              isCount: true,
-              count: 450.toString()),
-          _cardItem(
-            onTap: () {
-            
-               Get.toNamed(Routes.wishListScreen);  
-            },
-            icon: Icons.favorite_border,
-            text: 'Wishlist',
-          ),
-          _cardItem(
-            onTap: () {
-            
-              Get.toNamed(Routes.settingPage);
-            },
-            icon: Icons.settings,
-            text: 'Settings',
-          ),
-          _cardItem(
-            onTap: () {
-              Get.toNamed(Routes.helpPage);
-             
-            },
-            icon: Icons.help_outline,
-            text: 'Help',
-          ),
-          _cardItem(
-              onTap: () {
-                Get.toNamed(Routes.servicePage);
-                
-              },
-              icon: Icons.rotate_right,
-              text: 'Services',
-              isCount: true,
-              count:_profileController.serviceList.length.toString()),
-          _cardItem(
-              onTap: () {
-                Get.toNamed(Routes.locationPage);
-              
-              },
-              icon: Icons.location_pin,
-              text: 'Locations',
-              isCount: true,
-              count: 50.toString()),
-        
+                      Text(
+                        'Elite Pro',
+                        style: myStyle(14.sp, FontWeight.w500, textClr),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Image.asset('images/tick.png'),
+                      SizedBox(
+                        width: 4.w,
+                      ),
+                      Text(
+                        '14 Hires on Ringknock',
+                        style: myStyle(14.sp, FontWeight.w500, textClr),
+                      )
+                    ],
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Image.asset('images/moon.png'),
+                      SizedBox(
+                        width: 4.w,
+                      ),
+                      Text(
+                        '7 Years in business',
+                        style: myStyle(14.sp, FontWeight.w500, textClr),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Image.asset('images/tick.png'),
+                      SizedBox(
+                        width: 4.w,
+                      ),
+                      Text(
+                        '6 Hour response  time',
+                        style: myStyle(14.sp, FontWeight.w500, textClr),
+                      )
+                    ],
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.person_rounded,
+                    size: 18.sp,
+                  ),
+                  SizedBox(
+                    width: 4.w,
+                  ),
+                  Text(
+                    '11-50 Staff',
+                    style: GoogleFonts.roboto(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
+                        color: const Color(0xFF272727)),
+                  )
+                ],
+              )
             ],
-          );
+          ),
+        ),
+        SizedBox(
+          height: 20.h,
+        ),
+        Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+          color: containerClr,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Service Tags',
+                style: myStyle(20, FontWeight.w500, textClr),
+              ),
+              SizedBox(
+                height: 5.h,
+              ),
+              GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: _profileController.serviceList.length < 6
+                      ? _profileController.serviceList.length
+                      : 6,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisExtent: 25.sp,
+                      crossAxisSpacing: 15.w,
+                      crossAxisCount: 2),
+                  itemBuilder: (context, index) => Text(
+                        _profileController.serviceList[index].serviceName
+                            .toString(),
+                        style: GoogleFonts.roboto(
+                            fontSize: 16.sp, color: Colors.black),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      )),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 20.h,
+        ),
+        _cardItem(
+            onTap: () {
+              Get.toNamed(Routes.leadPage);
+            },
+            icon: Icons.star_border_outlined,
+            text: 'Leads',
+            isCount: true,
+            count: _profileController.leadsList.length.toString()),
+        _cardItem(
+            onTap: () {
+              Get.toNamed(Routes.myResponse);
+            },
+            icon: Icons.sports_handball_rounded,
+            text: 'My Responces',
+            isCount: true,
+            count: 450.toString()),
+        _cardItem(
+          onTap: () {
+            Get.toNamed(Routes.wishListScreen);
+          },
+          icon: Icons.favorite_border,
+          text: 'Wishlist',
+        ),
+        _cardItem(
+          onTap: () {
+            Get.toNamed(Routes.settingPage);
+          },
+          icon: Icons.settings,
+          text: 'Settings',
+        ),
+        _cardItem(
+          onTap: () {
+            Get.toNamed(Routes.helpPage);
+          },
+          icon: Icons.help_outline,
+          text: 'Help',
+        ),
+        _cardItem(
+            onTap: () {
+              Get.toNamed(Routes.servicePage);
+            },
+            icon: Icons.rotate_right,
+            text: 'Services',
+            isCount: true,
+            count: _profileController.serviceList.length.toString()),
+        _cardItem(
+            onTap: () {
+              Get.toNamed(Routes.locationPage);
+            },
+            icon: Icons.location_pin,
+            text: 'Locations',
+            isCount: true,
+            count: 50.toString()),
+      ],
+    );
   }
 
   _cardItem(
