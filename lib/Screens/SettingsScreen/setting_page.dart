@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/Screens/ProfileScreen/profile.dart';
 import 'package:homelyknock/Screens/ReviewScreen/reviews_page.dart';
 import 'package:homelyknock/Screens/SettingsScreen/AccountDetails/account_details.dart';
@@ -16,64 +18,10 @@ import 'package:homelyknock/Screens/SettingsScreen/SMSTemplate/sms_template_page
 import 'package:homelyknock/Screens/SettingsScreen/SettingsBadge/badge_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 
-class SettingsPage extends StatefulWidget {
+class SettingsPage extends StatelessWidget {
   static const String routename = '/settings';
 
   SettingsPage({Key? key}) : super(key: key);
-
-  @override
-  State<SettingsPage> createState() => _SettingsPageState();
-}
-
-class _SettingsPageState extends State<SettingsPage> {
-  List<Map> myProfile = [
-    {'icon': 'images/user.png', 'title': 'My Profile'},
-    {'icon': 'images/reviews.png', 'title': 'Reviews'},
-    {'icon': 'images/elite_pro.png', 'title': 'Elite pro'},
-    {'icon': 'images/badge.png', 'title': 'Badges'},
-    {'icon': 'images/account_details.png', 'title': 'Account Details'},
-  ];
-
-  List<Map> communications = [
-    {'icon': 'images/one_click.png', 'title': 'One Click Responce'},
-    {'icon': 'images/email.png', 'title': 'Email Templates'},
-    {'icon': 'images/sms.png', 'title': 'SMS Templates'},
-  ];
-
-  List<Map> credits = [
-    {'icon': 'images/credit.png', 'title': 'My Credits'},
-    {'icon': 'images/invoice.png', 'title': 'Invoices and billing details'},
-    {'icon': 'images/payment.png', 'title': 'My payment details'},
-  ];
-
-  List<Map> intergrations = [
-    {'icon': 'images/email.png', 'title': 'Email'},
-    {'icon': 'images/browser.png', 'title': 'Browser'},
-  ];
-
-  List profile = [
-    Profile(),
-    ReviewsPage(),
-    EliteProPage(),
-    BadgePage(),
-    AccountDetailsPage()
-  ];
-
-  List credits_payment = [
-    MyCreditsPage(),
-    BillingDetails(),
-    PaymentDetailsPage()
-  ];
-
-  List communication = [
-    OneClickResponcePage(),
-    EmailTemplatePage(),
-    SMSTemplatePage()
-  ];
-
-  List intergration_screen = [EmailNotification(), BrowserNotification()];
-  int pageIndex = 0;
-  var seletced = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -109,265 +57,115 @@ class _SettingsPageState extends State<SettingsPage> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'My Profile',
-                style: myStyle(18.sp, FontWeight.w500, textClr),
-              ),
+              _headerText('My Profile'),
               SizedBox(
                 height: 10.h,
               ),
-              Flexible(
-                  child: ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => InkWell(
-                            onTap: () {
-                              setState(() {
-                                seletced = index;
-                                pageIndex = seletced;
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => profile[pageIndex]));
-                              });
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 15.w),
-                              height: 55.h,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5.r),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.1),
-                                    spreadRadius: 1,
-                                    blurRadius: 1, // changes position of shadow
-                                  ),
-                                ],
-                              ),
-                              child: Row(
-                                children: [
-                                  Image.asset(myProfile[index]['icon']),
-                                  SizedBox(
-                                    width: 15.w,
-                                  ),
-                                  Text(
-                                    myProfile[index]['title'],
-                                    style: myStyle(
-                                        16.sp, FontWeight.w500, textClr),
-                                  ),
-                                  const Spacer(),
-                                  Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 14.sp,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                      separatorBuilder: (context, index) => SizedBox(
-                            height: 10.h,
-                          ),
-                      itemCount: myProfile.length)),
+              // <------------ My Profile ------->
+              _profileCard(
+                  title: 'My Profile', icon: 'images/user.png', onTap: () {
+                    Get.toNamed(Routes.myProfile);
+                  }),
+              _profileCard(
+                  title: 'Reviews', icon: 'images/reviews.png', onTap: () {
+                    Get.toNamed(Routes.reviewPage);
+                  }),
+
+              _profileCard(
+                  title: 'Elite Pro',
+                  icon: 'images/elite_pro.png',
+                  onTap: () {
+                    Get.toNamed(Routes.elitProPage);
+                  }),
+              _profileCard(
+                  title: 'Badges', icon: 'images/badge.png', onTap: () {
+                    Get.toNamed(Routes.badgePage);
+                  }),
+              _profileCard(
+                  title: 'Account Details',
+                  icon: 'images/account_details.png',
+                  onTap: () {
+                    Get.toNamed(Routes.accountDetails);
+                  }),
+
               SizedBox(
                 height: 30.h,
               ),
-              Text(
-                'Communication',
-                style: myStyle(18.sp, FontWeight.bold, textClr),
-              ),
+              _headerText('Communication'),
+
               SizedBox(
                 height: 10.h,
               ),
-              Flexible(
-                  child: ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                seletced = index;
-                                pageIndex = seletced;
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      communication[pageIndex],
-                                ));
-                              });
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 15.w),
-                              height: 55.h,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5.r),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.1),
-                                    spreadRadius: 1,
-                                    blurRadius: 1,
-                                    // changes position of shadow
-                                  ),
-                                ],
-                              ),
-                              child: Row(
-                                children: [
-                                  Image.asset(communications[index]['icon']),
-                                  SizedBox(
-                                    width: 15.w,
-                                  ),
-                                  Text(
-                                    communications[index]['title'],
-                                    style: myStyle(
-                                        16.sp, FontWeight.w500, textClr),
-                                  ),
-                                  const Spacer(),
-                                  Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 14.sp,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                      separatorBuilder: (context, index) => SizedBox(
-                            height: 10.h,
-                          ),
-                      itemCount: communications.length)),
+              // ------> Communication --------->
+              _profileCard(
+                  title: 'One Click Responce',
+                  icon: 'images/one_click.png',
+                  onTap: () {
+                    Get.toNamed(Routes.oneClickResponsePage);
+                  }),
+              _profileCard(
+                  title: 'Email Templates',
+                  icon: 'images/email.png',
+                  onTap: () {
+                       Get.toNamed(Routes.emailTemplate);
+                  }),
+
+              _profileCard(
+                  title: 'SMS Templates', icon: 'images/sms.png',
+                   onTap: () {
+                      Get.toNamed(Routes.smsTemplate);
+                   }),
+
               SizedBox(
                 height: 30.h,
               ),
-              Text(
-                'Credits & Payments',
-                style: myStyle(18.sp, FontWeight.bold, textClr),
-              ),
+              _headerText('Credits & Payments'),
               SizedBox(
                 height: 10.h,
               ),
-              Flexible(
-                  child: ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                seletced = index;
-                                pageIndex = seletced;
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) =>
-                                            credits_payment[pageIndex]));
-                              });
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 15.w),
-                              height: 55.h,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5.r),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.1),
-                                    spreadRadius: 1,
-                                    blurRadius: 1,
-                                  ),
-                                ],
-                              ),
-                              child: Row(
-                                children: [
-                                  Image.asset(credits[index]['icon']),
-                                  SizedBox(
-                                    width: 15.w,
-                                  ),
-                                  Text(
-                                    credits[index]['title'],
-                                    style: myStyle(
-                                        16.sp, FontWeight.w500, textClr),
-                                  ),
-                                  const Spacer(),
-                                  Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 14.sp,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                      separatorBuilder: (context, index) => SizedBox(
-                            height: 10.h,
-                          ),
-                      itemCount: credits.length)),
+
+              // -------> Credits & Payment <----------
+              _profileCard(
+                  title: 'My Credits', icon: 'images/credit.png', onTap: () {
+                    Get.toNamed(Routes.myCredits);
+                  }),
+              _profileCard(
+                  title: 'Invoices and billing details',
+                  icon: 'images/invoice.png',
+                  onTap: () {
+                    Get.toNamed(Routes.invoiceAndBilling);
+                  }),
+
+              _profileCard(
+                  title: 'My payment details',
+                  icon: 'images/payment.png',
+                  onTap: () {
+                    Get.toNamed(Routes.myPaymentDetails);
+                  }),
+
               SizedBox(
                 height: 30.h,
               ),
-              Text(
-                'Intergrations',
-                style: myStyle(18.sp, FontWeight.bold, textClr),
-              ),
+
+              _headerText('Intergrations'),
               SizedBox(
                 height: 10.h,
               ),
-              Flexible(
-                  child: ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => InkWell(
-                            onTap: () {
-                              setState(() {
-                                seletced = index;
-                                pageIndex = seletced;
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) =>
-                                            intergration_screen[pageIndex]));
-                              });
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 15.w),
-                              height: 55.h,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5.r),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.1),
-                                    spreadRadius: 1,
-                                    blurRadius: 1,
-                                  ),
-                                ],
-                              ),
-                              child: Row(
-                                children: [
-                                  Image.asset(intergrations[index]['icon']),
-                                  SizedBox(
-                                    width: 15.w,
-                                  ),
-                                  Text(
-                                    intergrations[index]['title'],
-                                    style: myStyle(
-                                        16.sp, FontWeight.w500, textClr),
-                                  ),
-                                  const Spacer(),
-                                  Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 14.sp,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                      separatorBuilder: (context, index) => SizedBox(
-                            height: 10.h,
-                          ),
-                      itemCount: intergrations.length)),
+              // --------> Intergration <--------
+
+              _profileCard(
+                  title: 'Email', icon: 'images/email.png', onTap: () {
+                    Get.toNamed(Routes.emailNotification);
+                  }),
+              _profileCard(
+                  title: 'Browser', icon: 'images/browser.png', onTap: () {
+                     Get.toNamed(Routes.browserNotification);
+                  }),
+
               SizedBox(
                 height: 30.h,
               ),
+
               Align(
                 alignment: Alignment.center,
                 child: Container(
@@ -396,6 +194,55 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
         ),
       ),
+    );
+  }
+
+  _profileCard(
+      {required String title,
+      required String icon,
+      required Function() onTap}) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 15.w),
+        height: 55.h,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(5.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 1,
+              blurRadius: 1, // changes position of shadow
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Image.asset(icon),
+            SizedBox(
+              width: 15.w,
+            ),
+            Text(
+              title,
+              style: myStyle(16.sp, FontWeight.w500, textClr),
+            ),
+            const Spacer(),
+            Icon(
+              Icons.arrow_forward_ios,
+              size: 14.sp,
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Text _headerText(String text) {
+    return Text(
+      text,
+      style: myStyle(18.sp, FontWeight.bold, textClr),
     );
   }
 }

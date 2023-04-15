@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:homelyknock/Screens/ProfileScreen/Controller/profile_controller.dart';
@@ -311,6 +312,35 @@ class ApiServicesByLimon {
       }
     } on Exception catch (e) {
       debugPrint("Data fetch Error. Reason ${e.toString()}");
+      return 0;
+    }
+  }
+
+  static Future<dynamic> uploadeProfilePic(File file) async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+         
+      };
+      var request = http.MultipartRequest('POST', Uri.parse(profilePicPostApi));
+     
+      request.files.add(await http.MultipartFile.fromPath('picture', file.path));
+      request.headers.addAll(headers);
+
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 201) {
+        print(await response.stream.bytesToString());
+        return true;
+      } 
+      else {
+        print('Error');
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      debugPrint("Image Upload Faild. Reason ${e.toString()}");
       return 0;
     }
   }
