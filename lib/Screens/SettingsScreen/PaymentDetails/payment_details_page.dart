@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:homelyknock/Route/routes.dart';
-import 'package:homelyknock/Screens/ProfileScreen/profile.dart';
 import 'package:homelyknock/Screens/SettingsScreen/PaymentDetails/Model/payment_model.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 
-class PaymentDetailsPage extends StatefulWidget {
+import '../../../Services/stripe_service.dart';
 
+class PaymentDetailsPage extends StatefulWidget {
   const PaymentDetailsPage({Key? key}) : super(key: key);
 
   @override
@@ -40,6 +39,7 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
   ];
 
   int buttonSelected = 0;
+  var paymentController = StripeService();
 
   Future showModalBS() {
     return showModalBottomSheet(
@@ -114,8 +114,7 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
               padding: EdgeInsets.all(10.w),
               width: double.infinity,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4.r),
-                  color: backIconClr),
+                  borderRadius: BorderRadius.circular(4.r), color: backIconClr),
               child: Text(
                 'Add Card',
                 style: myStyle(16.sp, FontWeight.w400, scaffoldClr),
@@ -144,10 +143,7 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                 Row(
                   children: [
                     GestureDetector(
-                        onTap: () {
-                       
-                         
-                        },
+                        onTap: () {},
                         child: Image.asset('images/payment_img.png')),
                     SizedBox(
                       width: 8.w,
@@ -214,7 +210,8 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                           ),
                           Text(
                             '\$150 00',
-                            style: myStyle(14, FontWeight.w400, themeColorGreen),
+                            style:
+                                myStyle(14, FontWeight.w400, themeColorGreen),
                           )
                         ],
                       ),
@@ -245,7 +242,8 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                                 ),
                                 Text(
                                   paymentmedium[index].name,
-                                  style: myStyle(16.sp, FontWeight.w500, textClr),
+                                  style:
+                                      myStyle(16.sp, FontWeight.w500, textClr),
                                 ),
                                 Spacer(),
                                 GestureDetector(
@@ -256,13 +254,14 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
-                                  height: 35,
+                                    height: 35,
                                     width: 75,
                                     decoration: BoxDecoration(
                                         color: buttonSelected == index
                                             ? backIconClr
                                             : null,
-                                        borderRadius: BorderRadius.circular(4.r),
+                                        borderRadius:
+                                            BorderRadius.circular(4.r),
                                         border: Border.all(
                                             width: 1, color: backIconClr)),
                                     child: Text(
@@ -310,14 +309,15 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                         ),
                         Text(
                           'Add new card',
-                          style:
-                              myStyle(14.sp, FontWeight.w400, backIconClr),
+                          style: myStyle(14.sp, FontWeight.w400, backIconClr),
                         )
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height: 20.h,),
+                SizedBox(
+                  height: 20.h,
+                ),
                 Row(
                   children: [
                     Container(
@@ -336,16 +336,23 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                       width: 14.w,
                     ),
                     Expanded(
-                        child: Container(
-                          height: 51.h,
-                      alignment: Alignment.center,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4.r),
-                          color: backIconClr),
-                      child: Text(
-                        'Next',
-                        style: myStyle(16.sp, FontWeight.w400, scaffoldClr),
+                        child: InkWell(
+                      onTap: () {
+                        paymentController.makePayment(
+                            amount: '9', currency: 'USD');
+                        Get.back();
+                      },
+                      child: Container(
+                        height: 51.h,
+                        alignment: Alignment.center,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4.r),
+                            color: backIconClr),
+                        child: Text(
+                          'Next',
+                          style: myStyle(16.sp, FontWeight.w400, scaffoldClr),
+                        ),
                       ),
                     ))
                   ],

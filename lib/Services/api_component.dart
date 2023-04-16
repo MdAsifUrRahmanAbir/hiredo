@@ -30,6 +30,16 @@ String profilePicPostApi = "${baseUrl}profile_pic_add/";
 
 
 
+const String stripeUrl = "https://api.stripe.com/v1/payment_intents";
+const String stripeSecretKey =
+        "sk_test_51MvmB4BjAkDiQKQNL5Jdp2HS8bbG4rDruFf43JGh03rX2PxoMHYul0kbUh7hRCi2T5ux8AFkfvmbWllvFqDaF2n000bKD76MjZ";
+
+const String stripePublishKey =
+        "pk_test_51MvmB4BjAkDiQKQNWHzjwWU9Pmmv3WtHEwXa3TzUqzAV83v3T0tzB2F8yPdV7CiDvdWvwwR4oaNzLhBex6wploqs0052FpuPxX";
+
+
+
+
 
 
 
