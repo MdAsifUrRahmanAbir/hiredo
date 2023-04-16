@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:homelyknock/Screens/SettingsScreen/PaymentDetails/Model/payment_model.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
@@ -340,7 +339,6 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                       onTap: () {
                         paymentController.makePayment(
                             amount: '9', currency: 'USD');
-                        Get.back();
                       },
                       child: Container(
                         height: 51.h,
