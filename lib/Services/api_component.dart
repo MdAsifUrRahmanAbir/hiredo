@@ -43,7 +43,9 @@ String profilePicPostApi = "${baseUrl}profile_pic_add/";
 
 String changeUserModeApi="${baseUrl}profile/change-user-type/";
 String logoutUserApi="${baseUrl}logout/";
-String leadsApi="${baseUrl}ServiceWiseLead/";
+String leadsCountApi="${baseUrl}ServiceWiseLeadCount/";
 
 String needHelpsApi="${baseUrl}profile/still-need-help/";
 String profileApi="${baseUrl}profile/profile-update/";
+String deleteServiceApi="${baseUrl}services/";
+String leadsApi="${baseUrl}ServiceWiseLead/?page=";

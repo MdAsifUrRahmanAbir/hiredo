@@ -24,15 +24,17 @@ class ProfileController extends GetxController {
   @override
   void onInit() {
     fetchProfileData();
+    getLeadCount();
     super.onInit();
   }
 
   var isLoading = false.obs;
   var isLeadLoading = false.obs;
+  var leadsCount=0.obs;
   late SharedPreferences preferences;
   RxList<ServiceModel> serviceList =
       List<ServiceModel>.empty(growable: true).obs;
-  RxList<LeadsModel> leadsList = List<LeadsModel>.empty(growable: true).obs;
+
 
    ProfileModel? profileData;
   var isProfessional = false.obs;
@@ -150,20 +152,20 @@ class ProfileController extends GetxController {
     }
   }
 
-  getLeads(bool isLead) async {
+  getLeadCount() async {
     try {
-      if (isLead) {
+      
         isLeadLoading.value = true;
-      }
-      var result = await ApiServices.fetchLeads();
+      
+      var result = await ApiServices.fetchLeadCount();
       if (result.runtimeType == int) {
         if (kDebugMode) {
           print('Error $result');
         }
         log.e(result);
       } else {
-        leadsList.value = result;
-        debugPrint(leadsList.length.toString());
+        leadsCount.value = result["total_lead"];
+       
         log.i(result);
       }
     } on Exception catch (e) {
@@ -171,11 +173,13 @@ class ProfileController extends GetxController {
         print("Fetch Error $e");
       }
     } finally {
-      if (isLead) {
+      
         isLeadLoading.value = false;
-      }
+      
     }
   }
+
+
 
   modeChange() async {
     try {
