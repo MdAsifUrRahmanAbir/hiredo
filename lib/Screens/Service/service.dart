@@ -18,6 +18,7 @@ class ServiceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(_profileController.serviceList.length);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,

@@ -32,7 +32,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if(!_profileController.isProfessional.value){
+    if(_profileController.isUser.value==true){
       _profileController.modeChange();
     }
     return Scaffold(

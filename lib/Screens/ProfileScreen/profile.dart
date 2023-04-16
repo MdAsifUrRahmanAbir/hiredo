@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ import '../../widgets/custom_loader.dart';
 
 import 'package:percent_indicator/percent_indicator.dart';
 import '../../widgets/data_controller.dart';
+import '../Service/service.dart';
 import 'Controller/profile_controller.dart';
 
 final _mainController = Get.put(MainScreenController());
@@ -26,6 +28,7 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _dataController.getData();
+    _profileController.getServices();
     return Scaffold(
       backgroundColor: scaffoldClr,
       appBar: AppBar(
@@ -103,13 +106,13 @@ class Profile extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                               _profileController.profileData.user.fullName,
+                               _profileController.profileData!.user.fullName,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: myStyle(16.sp, FontWeight.w500, textClr),
                               ),
                               Text(
-                               _profileController.profileData.user.email,
+                               _profileController.profileData!.user.email,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: myStyle(14.sp, FontWeight.w400,
@@ -195,7 +198,7 @@ class Profile extends StatelessWidget {
             style: GoogleFonts.roboto(fontSize: 20.sp, color: Colors.black),
           ),
           subtitle: Text(
-            "01796165636",
+            _profileController.profileData!.user.phoneNumber,
             style: GoogleFonts.roboto(fontSize: 16.sp, color: Colors.black),
           ),
         )),
@@ -206,7 +209,7 @@ class Profile extends StatelessWidget {
             style: GoogleFonts.roboto(fontSize: 20.sp, color: Colors.black),
           ),
           subtitle: Text(
-            "Developer",
+           _profileController.profileData!.user.corporationName,
             style: GoogleFonts.roboto(fontSize: 16.sp, color: Colors.black),
           ),
         )),
@@ -217,7 +220,7 @@ class Profile extends StatelessWidget {
             style: GoogleFonts.roboto(fontSize: 20.sp, color: Colors.black),
           ),
           subtitle: Text(
-            "01796165636",
+           _profileController.profileData!.user.corporationNumber,
             style: GoogleFonts.roboto(fontSize: 16.sp, color: Colors.black),
           ),
         )),
@@ -225,6 +228,7 @@ class Profile extends StatelessWidget {
             onPressed: () {
               Get.toNamed(Routes.postAJob, arguments: null);
             },
+            style: ElevatedButton.styleFrom(backgroundColor: themeColorGreen,fixedSize: Size(150.w, 50.h)),
             child: Text(
               "Create Post",
               style: GoogleFonts.roboto(
@@ -461,7 +465,8 @@ class Profile extends StatelessWidget {
         ),
         _cardItem(
             onTap: () {
-              Get.toNamed(Routes.servicePage);
+            //  Get.toNamed(Routes.servicePage);
+            Get.to(ServiceScreen());
             },
             icon: Icons.rotate_right,
             text: 'Services',
