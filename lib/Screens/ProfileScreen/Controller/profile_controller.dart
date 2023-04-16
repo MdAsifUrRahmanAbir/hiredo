@@ -34,7 +34,7 @@ class ProfileController extends GetxController {
       List<ServiceModel>.empty(growable: true).obs;
   RxList<LeadsModel> leadsList = List<LeadsModel>.empty(growable: true).obs;
 
-  late ProfileModel profileData;
+   ProfileModel? profileData;
   var isProfessional = false.obs;
   var isUser = false.obs;
 
@@ -83,8 +83,8 @@ class ProfileController extends GetxController {
         log.e(result);
       } else {
         profileData = result;
-        isProfessional.value = profileData.user.isProfessional;
-        isUser.value = profileData.user.isUser;
+        isProfessional.value = profileData!.user.isProfessional;
+        isUser.value = profileData!.user.isUser;
 
         log.i(result);
       }
@@ -104,12 +104,18 @@ class ProfileController extends GetxController {
       isLoading(true);
       var result = await ApiServices.logoutUser();
       if (result) {
+        Get.offAllNamed(Routes.signinPage);
         SharedPreferences preferences = await SharedPreferences.getInstance();
         bool isOnBoard = preferences.getBool(Constance.isOnboard) ?? false;
+        String email= preferences.getString("rememberEmail",)??"";
+        String password=   preferences.getString("rememberPassword",)??"";
+
         preferences.clear();
+        preferences.setString("rememberEmail", email);
+        preferences.setString("rememberPassword", password);
         MyPreference.setOnBoard(isOnBoard);
         Fluttertoast.showToast(msg: "Logout Successfull");
-        Get.offAllNamed(Routes.signinPage);
+        
       } else {
         isLoading(false);
         debugPrint("User not logout");
@@ -134,7 +140,7 @@ class ProfileController extends GetxController {
         log.e(result);
       } else {
         serviceList.value = result;
-        debugPrint(serviceList.length.toString());
+        debugPrint("service list length: ${serviceList.length.toString()}");
         log.i(result);
       }
     } on Exception catch (e) {
@@ -192,4 +198,23 @@ class ProfileController extends GetxController {
       isLoading(false);
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -29,7 +29,6 @@ class ServiceController extends GetxController{
           description: descriptionController.text);
       if (result) {
         _profileController.getServices();
-        _profileController.getLeads(false);
         descriptionController.clear();
           Get.snackbar(
             "Success",
@@ -38,7 +37,7 @@ class ServiceController extends GetxController{
             backgroundColor: themeColorGreen.withOpacity(0.5)
           );
 
-          Get.offAll(MainScreen());
+        Get.back();
       } else {
         debugPrint('Opps add service error ');
        
