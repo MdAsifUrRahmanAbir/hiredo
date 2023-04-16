@@ -57,6 +57,10 @@ class LeadsScreen extends StatelessWidget {
                         child: SizedBox(
                           height: 50.h,
                           child: TextFormField(
+                            controller: _leadController.searchController,
+                            onChanged: (v){
+                            
+                            },
                             decoration: InputDecoration(
                               hintText: 'Search',
                               fillColor: Colors.white,
@@ -78,27 +82,32 @@ class LeadsScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10.w),
-                        height: 50.h,
-                        color: const Color(0xff187949),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Filter',
-                              style: GoogleFonts.roboto(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w400,
-                                  color: const Color(0xFFFFFFFF)),
-                            ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            const Icon(
-                              Icons.filter_list_sharp,
-                              color: Colors.white,
-                            )
-                          ],
+                      InkWell(
+                        onTap: (){
+                        
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10.w),
+                          height: 50.h,
+                          color: const Color(0xff187949),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Filter',
+                                style: GoogleFonts.roboto(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xFFFFFFFF)),
+                              ),
+                              SizedBox(
+                                width: 5.w,
+                              ),
+                              const Icon(
+                                Icons.filter_list_sharp,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
                         ),
                       )
                     ],

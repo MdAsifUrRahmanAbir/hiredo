@@ -7,7 +7,7 @@ import 'package:homelyknock/Services/api_services.dart';
 
 class LeadController extends GetxController {
   late ScrollController scrolController;
-
+ TextEditingController searchController=TextEditingController();
   @override
   void onInit() {
     firstLoad();
@@ -23,6 +23,7 @@ class LeadController extends GetxController {
   var isLoadMoreRunning = false.obs;
 
   RxList<Result> leadsList = List<Result>.empty(growable: true).obs;
+  
   LeadModel? demoData;
 
   void loadMore() async {
@@ -43,6 +44,7 @@ class LeadController extends GetxController {
            demoData = res;
           if (demoData!.totalPages>=page) {
             leadsList.addAll(demoData!.result);
+           
           } else {
             hasNextPage.value = false;
             debugPrint("leadsList.length==${leadsList.length}");
@@ -67,6 +69,7 @@ class LeadController extends GetxController {
     } else {
        demoData = res;
       leadsList.value = demoData!.result;
+     
       print("leadsList.length:${leadsList.length}");
     }
 } on Exception catch (e) {
@@ -77,4 +80,5 @@ class LeadController extends GetxController {
 }
     
   }
+
 }
