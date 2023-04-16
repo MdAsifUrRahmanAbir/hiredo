@@ -46,14 +46,22 @@ class _OrderNameState extends State<OrderName> {
         actions: [
           InkWell(
             onTap: () {},
-            child: Container(
+            child:data.user.userProfilePic==null? Container(
+              height: 40.h,
+              width: 40.h,
+             
+              decoration: BoxDecoration(
+                color: Colors.grey,
+                 
+                  shape: BoxShape.circle),
+            ):Container(
               height: 40.h,
               width: 40.h,
              
               decoration: BoxDecoration(
                 color: Colors.grey,
                   image: DecorationImage(
-                      image: NetworkImage(data.user.userProfilePic.picture), fit: BoxFit.fill),
+                      image: NetworkImage(data.user.userProfilePic!.picture), fit: BoxFit.fill),
                   shape: BoxShape.circle),
             ),
           ),

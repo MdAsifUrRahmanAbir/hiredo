@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:core';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/Screens/HomeScreen/Model/lead_category_model.dart';
@@ -123,6 +124,10 @@ class ApiServices {
         if (kDebugMode) {
           print(response.statusCode);
         }
+        var data = jsonDecode(response.body);
+        Get.snackbar("Error", data["message"],
+            backgroundColor: Colors.red.shade300, colorText: Colors.white);
+        print(response.body);
         return false;
       }
     } on Exception catch (e) {
@@ -389,7 +394,7 @@ class ApiServices {
 
 // fetch leads
 
-  static dynamic fetchLeads() async {
+  static dynamic fetchLeadCount() async {
     var accessToken = await MyPreference.getToken();
 
     try {
@@ -397,16 +402,17 @@ class ApiServices {
         'Authorization': 'Bearer $accessToken',
         'Content-Type': 'application/json',
       };
-      var response = await client.get(Uri.parse(leadsApi), headers: headers);
+      var response =
+          await client.get(Uri.parse(leadsCountApi), headers: headers);
 
       if (response.statusCode == 200) {
-        return leadsModelFromJson(response.body);
+        return jsonDecode(response.body);
       } else {
         return response.statusCode;
       }
     } on Exception catch (e) {
       if (kDebugMode) {
-        return print(" Leads fetch Error. Reason ${e.toString()}");
+        return print(" Leads count error. Reason ${e.toString()}");
       }
       return 0;
     }
@@ -433,7 +439,60 @@ class ApiServices {
     }
   }
 
+  static Future<bool> deleteService(int id) async {
+    var accessToken = await MyPreference.getToken();
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client.delete(
+          Uri.parse("${deleteServiceApi + id.toString()}/"),
+          headers: headers);
+      if (response.statusCode == 204) {
+        return true;
+      } else {
+        return false;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("Delete service error. Reason ${e.toString()}");
+      }
+      return false;
+    }
+  }
+ 
 
+  static  fetchLeads(int page)async{
+
+     var accessToken = await MyPreference.getToken();
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client.get(Uri.parse(leadsApi+page.toString()), headers: headers);
+      if (response.statusCode == 200) {
+       
+        return leadModelFromJson(response.body);
+        
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+         print("Leads fetch Error. Reason ${e.toString()}");
+      }
+      return 0;
+    }
+
+
+
+
+
+
+
+}
 
 
 

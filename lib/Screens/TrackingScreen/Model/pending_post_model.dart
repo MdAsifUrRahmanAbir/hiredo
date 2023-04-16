@@ -232,7 +232,7 @@ class User {
     User({
         required this.id,
         required this.fullName,
-        required this.userProfilePic,
+         this.userProfilePic,
         required this.email,
         required this.dateOfBirth,
         required this.phoneNumber,
@@ -245,7 +245,7 @@ class User {
 
     int id;
     String fullName;
-    UserProfilePic userProfilePic;
+    dynamic userProfilePic;
     String email;
     DateTime dateOfBirth;
     String phoneNumber;
@@ -258,7 +258,7 @@ class User {
     factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         fullName: json["full_name"],
-        userProfilePic: UserProfilePic.fromJson(json["user_profile_pic"]),
+        userProfilePic:json["user_profile_pic"]==null?null:UserProfilePic.fromJson(json["user_profile_pic"]),
         email: json["email"],
         dateOfBirth: DateTime.parse(json["date_of_birth"]),
         phoneNumber: json["phone_number"],
@@ -274,14 +274,14 @@ class User {
 
 class UserProfilePic {
     UserProfilePic({
-        required this.id,
-        required this.user,
-        required this.picture,
+         this.id,
+         this.user,
+         this.picture,
     });
 
-    int id;
-    int user;
-    String picture;
+    int? id;
+    int? user;
+    String? picture;
 
     factory UserProfilePic.fromJson(Map<String, dynamic> json) => UserProfilePic(
         id: json["id"],
