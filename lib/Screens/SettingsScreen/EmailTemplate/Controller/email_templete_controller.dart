@@ -12,7 +12,7 @@ class EmailTemplateController extends GetxController {
   final TextEditingController messageController = TextEditingController();
     final TextEditingController upNameController = TextEditingController();
   final TextEditingController upMessageController = TextEditingController();
-    final _dataController = Get.put(DataController());
+   
 
   var isLoading = false.obs;
   var isAddLoading = false.obs;

@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/Screens/HomeScreen/Model/lead_category_model.dart';
+import 'package:homelyknock/Screens/ProfileScreen/Model/profile_model.dart';
 
 import 'package:homelyknock/Screens/ResistrationScreen/Model/registration_model.dart';
 import 'package:http/http.dart' as http;
@@ -105,17 +106,17 @@ class ApiServices {
   static Future<bool> addServicePost(
       {required int id, required String description}) async {
     var accessToken = await MyPreference.getToken();
-    
+
     try {
       var headers = {
         'Authorization': "Bearer $accessToken",
-         'Content-Type': 'application/json',
-        
+        'Content-Type': 'application/json',
       };
-      var response =await client.post(Uri.parse(serviceApi),body:jsonEncode({
-        "service_name":id,
-        "service_description":description}),headers:headers);
-   
+      var response = await client.post(Uri.parse(serviceApi),
+          body: jsonEncode(
+              {"service_name": id, "service_description": description}),
+          headers: headers);
+
       if (response.statusCode == 201) {
         return true;
       } else {
@@ -359,27 +360,25 @@ class ApiServices {
   }
 
   // user logOut
-    static Future<bool> logoutUser() async {
+  static Future<bool> logoutUser() async {
     var accessToken = await MyPreference.getToken();
 
-              try {
-                var headers = {
-                  'Authorization': 'Bearer $accessToken',
-                  'Content-Type': 'application/json',
-                };
-                  var request = http.Request('POST', Uri.parse(logoutUserApi));
-              request.body = '''\r\n''';
-              request.headers.addAll(headers);
-              http.StreamedResponse response = await request.send();
-              if (response.statusCode == 200) {
-                  debugPrint(await response.stream.bytesToString());
-                return true;
-              }
-              else {
-                debugPrint(response.reasonPhrase);
-                return false;
-              }
-                    
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var request = http.Request('POST', Uri.parse(logoutUserApi));
+      request.body = '''\r\n''';
+      request.headers.addAll(headers);
+      http.StreamedResponse response = await request.send();
+      if (response.statusCode == 200) {
+        debugPrint(await response.stream.bytesToString());
+        return true;
+      } else {
+        debugPrint(response.reasonPhrase);
+        return false;
+      }
     } on Exception catch (e) {
       debugPrint("Change user mode error :  $e");
 
@@ -388,9 +387,7 @@ class ApiServices {
     }
   }
 
-
-// fetch leads 
-
+// fetch leads
 
   static dynamic fetchLeads() async {
     var accessToken = await MyPreference.getToken();
@@ -400,9 +397,8 @@ class ApiServices {
         'Authorization': 'Bearer $accessToken',
         'Content-Type': 'application/json',
       };
-      var response = await client.get( Uri.parse(leadsApi),headers: headers);
-     
-      
+      var response = await client.get(Uri.parse(leadsApi), headers: headers);
+
       if (response.statusCode == 200) {
         return leadsModelFromJson(response.body);
       } else {
@@ -416,9 +412,29 @@ class ApiServices {
     }
   }
 
+  static Future<dynamic> fetchProfileData() async {
+    var accessToken = await MyPreference.getToken();
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client.get(Uri.parse(profileApi), headers: headers);
+      if (response.statusCode == 200) {
+        return profileModelFromJson(response.body);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        return print("Profile fetch Error. Reason ${e.toString()}");
+      }
+      return 0;
+    }
+  }
 
 
-  
+
 
 
 }
