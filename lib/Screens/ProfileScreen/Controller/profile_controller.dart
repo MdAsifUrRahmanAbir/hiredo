@@ -4,13 +4,15 @@ import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/Route/routes.dart';
-import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';
+import 'package:homelyknock/Screens/ProfileScreen/Model/profile_model.dart';
+
 import 'package:homelyknock/Services/api_services.dart';
 import 'package:homelyknock/Services/api_services_by_limon.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../local/my_local.dart';
+import '../../../widgets/common_data.dart';
 import '../../../widgets/logger.dart';
 import '../../LeadsScreen/Model/leads_model.dart';
 import '../../Service/Model/service_model.dart';
@@ -19,17 +21,26 @@ import 'package:flutter/material.dart';
 final log = logger(ProfileController);
 
 class ProfileController extends GetxController {
-  // @override
-  // void onInit() {
-  //   // TODO: implement onInit
-  //   getData();
-  //   super.onInit();
-  // }
-  //
+  @override
+  void onInit() {
+    fetchProfileData();
+    super.onInit();
+  }
+
+  var isLoading = false.obs;
+  var isLeadLoading = false.obs;
+  late SharedPreferences preferences;
+  RxList<ServiceModel> serviceList =
+      List<ServiceModel>.empty(growable: true).obs;
+  RxList<LeadsModel> leadsList = List<LeadsModel>.empty(growable: true).obs;
+
+  late ProfileModel profileData;
+  var isProfessional = false.obs;
+  var isUser = false.obs;
 
   RxString imagePath = ''.obs;
 
-  Future getImage() async {
+  getImage() async {
     isLoading(true);
 
     try {
@@ -60,28 +71,33 @@ class ProfileController extends GetxController {
     }
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    leadsList.clear();
-    serviceList.close();
-    super.dispose();
+//<----------- fetch profile data------------>
+  fetchProfileData() async {
+    try {
+      isLoading(true);
+      var result = await ApiServices.fetchProfileData();
+      if (result.runtimeType == int) {
+        if (kDebugMode) {
+          print('Error $result');
+        }
+        log.e(result);
+      } else {
+        profileData = result;
+        isProfessional.value = profileData.user.isProfessional;
+        isUser.value = profileData.user.isUser;
+
+        log.i(result);
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("Fetch profile data error : $e");
+      }
+    } finally {
+      isLoading(false);
+    }
   }
 
-  var isLoading = false.obs;
-  var isLeadLoading = false.obs;
-
-  RxList<ServiceModel> serviceList =
-      List<ServiceModel>.empty(growable: true).obs;
-  RxList<LeadsModel> leadsList = List<LeadsModel>.empty(growable: true).obs;
-
-  getData() async {
-    isLoading(true);
-    // await getServices();
-
-    debugPrint("Get leads data check in on time ");
-    isLoading(false);
-  }
+//<-----------  logout------------>
 
   hendleLogout(BuildContext context) async {
     try {
@@ -152,6 +168,28 @@ class ProfileController extends GetxController {
       if (isLead) {
         isLeadLoading.value = false;
       }
+    }
+  }
+
+  modeChange() async {
+    try {
+      isLoading(true);
+      var result = await ApiServices.changeUserMode(
+          isUser: isUser.value, isProfessional: isProfessional.value);
+
+      if (result) {
+        isProfessional.value = !isProfessional.value;
+        isUser.value = !isUser.value;
+        preferences = await SharedPreferences.getInstance();
+        preferences.setBool(CommonData.isProfessional, isProfessional.value);
+        preferences.setBool(CommonData.isUser, isUser.value);
+      } else {
+        debugPrint("User not mode change");
+      }
+    } on Exception catch (e) {
+      debugPrint("User not mode change error : $e");
+    } finally {
+      isLoading(false);
     }
   }
 }

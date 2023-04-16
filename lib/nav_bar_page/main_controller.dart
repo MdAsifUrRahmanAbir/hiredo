@@ -11,7 +11,7 @@ import '../widgets/common_dashboard_controller.dart';
 
 class MainScreenController extends GetxController {
 
-  final _profileController = Get.put(ProfileController());
+
 
   final commonController = Get.put(CommonDashboardController(), permanent: true);
 
@@ -19,7 +19,7 @@ class MainScreenController extends GetxController {
   @override
   void onInit() {
     commonController.getLocations();
-    _profileController.getData();
+    
     super.onInit();
   }
 

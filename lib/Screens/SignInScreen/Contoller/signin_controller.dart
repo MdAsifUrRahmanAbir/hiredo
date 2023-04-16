@@ -20,6 +20,7 @@ class SignInController extends GetxController {
 
   final _dataController = Get.put(DataController());
      final _mainController =Get.put(MainScreenController());
+  
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -57,6 +58,7 @@ class SignInController extends GetxController {
       } else {
         
         LoginModel allData = result;
+        print(allData);
         _dataController.setData(
             idD: allData.user.id,
             corporationNameD: allData.user.corporationName,
@@ -73,7 +75,9 @@ class SignInController extends GetxController {
 
             debugPrint(_dataController.id.toString());
              _mainController.initIndex.value=0;
-        Get.offAllNamed(Routes.mainPage);
+        Get.offNamed(Routes.mainPage);
+      
+  
        
         if(isChecked.value){
         await  rememberMeSetData();

@@ -7,6 +7,7 @@ import 'dart:convert';
 LoginModel loginModelFromJson(String str) => LoginModel.fromJson(json.decode(str));
 
 
+
 class LoginModel {
     LoginModel({
         required this.token,
@@ -24,12 +25,14 @@ class LoginModel {
         user: User.fromJson(json["user"]),
     );
 
+  
 }
 
 class User {
     User({
         required this.id,
         required this.fullName,
+        
         required this.email,
         required this.dateOfBirth,
         required this.phoneNumber,
@@ -42,6 +45,7 @@ class User {
 
     int id;
     String fullName;
+    UserProfilePic? userProfilePic;
     String email;
     String dateOfBirth;
     String phoneNumber;
@@ -54,6 +58,7 @@ class User {
     factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         fullName: json["full_name"],
+       
         email: json["email"],
         dateOfBirth: json["date_of_birth"],
         phoneNumber: json["phone_number"],
@@ -62,6 +67,26 @@ class User {
         isProfessional: json["is_professional"],
         isUser: json["is_user"],
         password: json["password"],
+    );
+
+ 
+}
+
+class UserProfilePic {
+    UserProfilePic({
+        required this.id,
+        required this.user,
+        required this.picture,
+    });
+
+    int id;
+    int user;
+    String picture;
+
+    factory UserProfilePic.fromJson(Map<String, dynamic> json) => UserProfilePic(
+        id: json["id"],
+        user: json["user"],
+        picture: json["picture"],
     );
 
 }
