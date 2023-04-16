@@ -63,7 +63,7 @@ dependencies:
   
 
   shimmer: ^2.0.0
-
+  flutter_stripe: ^8.0.0+1         # added by abir
 
 
 dev_dependencies:
