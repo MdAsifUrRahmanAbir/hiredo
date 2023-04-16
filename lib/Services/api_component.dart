@@ -46,3 +46,4 @@ String logoutUserApi="${baseUrl}logout/";
 String leadsApi="${baseUrl}ServiceWiseLead/";
 
 String needHelpsApi="${baseUrl}profile/still-need-help/";
+String profileApi="${baseUrl}profile/profile-update/";

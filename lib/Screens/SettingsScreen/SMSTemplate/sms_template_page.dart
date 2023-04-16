@@ -17,7 +17,7 @@ class SMSTemplatePage extends StatelessWidget {
 
 
   final _smsTemplateController = Get.put(SmsTemplateController());
-    final _dataController = Get.put(DataController());
+   
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +130,7 @@ class SMSTemplatePage extends StatelessWidget {
 
                             _smsTemplateController.upNameController.text = result.templateName;
                             _smsTemplateController.upMessageTemplateController.text = result.message;
-                            _dataController.id.value = result.id;
+                    
                             
 
                             showModalBottomSheet(

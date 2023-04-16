@@ -77,18 +77,5 @@ class DataController extends GetxController {
     preferences.setString(CommonData.bearerToken, bearerTokenD);
   }
 
-  modeChange() async {
-    var result = await ApiServices.changeUserMode(
-        isUser: isUser.value, isProfessional: isProfessional.value);
-
-    if (result) {
-      isProfessional.value = !isProfessional.value;
-      isUser.value = !isUser.value;
-      preferences = await SharedPreferences.getInstance();
-      preferences.setBool(CommonData.isProfessional, isProfessional.value);
-      preferences.setBool(CommonData.isUser, isUser.value);
-    } else {
-      debugPrint("User not mode change");
-    }
-  }
+ 
 }

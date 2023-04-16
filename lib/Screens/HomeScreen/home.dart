@@ -18,9 +18,11 @@ import '../../nav_bar_page/main_controller.dart';
 import '../FeturedService/fetured_service.dart';
 import '../JobPost/post_a_job.dart';
 
+import '../ProfileScreen/Controller/profile_controller.dart';
 import 'Model/lead_category_model.dart';
 
 final mainController = Get.put(MainScreenController());
+  final _profileController = Get.put(ProfileController());
 
 class Home extends StatelessWidget {
   Home({super.key});
@@ -30,6 +32,9 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if(!_profileController.isProfessional.value){
+      _profileController.modeChange();
+    }
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,

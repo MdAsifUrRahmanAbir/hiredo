@@ -9,8 +9,9 @@ import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 import '../../nav_bar_page/main_controller.dart';
 import '../../widgets/custom_loader.dart';
-import '../../widgets/data_controller.dart';
+
 import 'package:percent_indicator/percent_indicator.dart';
+import '../../widgets/data_controller.dart';
 import 'Controller/profile_controller.dart';
 
 final _mainController = Get.put(MainScreenController());
@@ -18,12 +19,13 @@ final _mainController = Get.put(MainScreenController());
 class Profile extends StatelessWidget {
   Profile({super.key});
 
-  final _dataController = Get.put(DataController());
+ 
+  final _dataController=Get.put(DataController());
   final _profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
-    // _profileController.getData();
+    _dataController.getData();
     return Scaffold(
       backgroundColor: scaffoldClr,
       appBar: AppBar(
@@ -101,13 +103,13 @@ class Profile extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                _dataController.fullName.value,
+                               _profileController.profileData.user.fullName,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: myStyle(16.sp, FontWeight.w500, textClr),
                               ),
                               Text(
-                                _dataController.email.value,
+                               _profileController.profileData.user.email,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: myStyle(14.sp, FontWeight.w400,
@@ -121,7 +123,7 @@ class Profile extends StatelessWidget {
                         ),
                         InkWell(
                             onTap: () {
-                              _dataController.modeChange();
+                              _profileController.modeChange();
                             },
                             child: Image.asset(
                               "images/switchimg.png",
@@ -137,7 +139,7 @@ class Profile extends StatelessWidget {
                     SizedBox(
                       height: 20.h,
                     ),
-                    _dataController.isUser.value
+                   _profileController.isUser.value
                         ? _isUser()
                         : _isProfational(context),
                     SizedBox(
