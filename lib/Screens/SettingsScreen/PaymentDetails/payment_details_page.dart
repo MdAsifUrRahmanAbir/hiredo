@@ -334,25 +334,7 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                     SizedBox(
                       width: 14.w,
                     ),
-                    Expanded(
-                        child: InkWell(
-                      onTap: () {
-                        paymentController.makePayment(
-                            amount: '9', currency: 'USD');
-                      },
-                      child: Container(
-                        height: 51.h,
-                        alignment: Alignment.center,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4.r),
-                            color: backIconClr),
-                        child: Text(
-                          'Next',
-                          style: myStyle(16.sp, FontWeight.w400, scaffoldClr),
-                        ),
-                      ),
-                    ))
+                    _payButtonWidget()
                   ],
                 ),
               ],
@@ -361,5 +343,25 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
         ),
       ),
     );
+  }
+
+  _payButtonWidget() {
+    return Expanded(
+        child: InkWell(
+      onTap: () {
+        paymentController.makePayment(amount: '9', currency: 'USD');
+      },
+      child: Container(
+        height: 51.h,
+        alignment: Alignment.center,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4.r), color: backIconClr),
+        child: Text(
+          'Next',
+          style: myStyle(16.sp, FontWeight.w400, scaffoldClr),
+        ),
+      ),
+    ));
   }
 }
