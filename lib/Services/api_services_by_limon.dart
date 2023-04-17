@@ -316,25 +316,53 @@ class ApiServicesByLimon {
     }
   }
 
-  static Future<dynamic> uploadeProfilePic(File file) async {
+  static Future<dynamic> uploadeProfilePic(String file) async {
     var accessToken = await MyPreference.getToken();
 
     try {
-      var headers = {
-        'Authorization': 'Bearer $accessToken',
-      };
-      var request = http.MultipartRequest('POST', Uri.parse(profilePicPostApi));
-
-      request.files
-          .add(await http.MultipartFile.fromPath('picture', file.path));
-      request.headers.addAll(headers);
-
-      http.StreamedResponse response = await request.send();
+      final request = http.MultipartRequest(
+        'POST',
+        Uri.parse(profilePicPostApi),
+      )
+        ..headers.addAll({
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $accessToken'
+        })
+        ..files.add(await http.MultipartFile.fromPath("picture", file));
+      var response = await request.send();
 
       if (response.statusCode == 201) {
-        debugPrint(await response.stream.bytesToString());
-        var data=await response.stream.bytesToString();
-        return data ;
+        return true ;
+      } else {
+        if (kDebugMode) {
+          print('Error image upload statuscode : ${response.statusCode}');
+        }
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      debugPrint("Image Upload Faild. Reason ${e.toString()}");
+      return 0;
+    }
+  }
+  static Future<dynamic> updateProfilePic(String file) async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      final request = http.MultipartRequest(
+        'PUT',
+        Uri.parse(profilePicUpdateApi),
+      )
+        ..headers.addAll({
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $accessToken'
+        })
+        ..files.add(await http.MultipartFile.fromPath("picture", file));
+      var response = await request.send();
+
+      if (response.statusCode == 200) {
+        return true ;
       } else {
         if (kDebugMode) {
           print('Error image upload statuscode : ${response.statusCode}');

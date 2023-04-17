@@ -43,14 +43,14 @@ class ProfileController extends GetxController {
 
   getImage(bool isAdd) async {
     try {
-      final ImagePicker _picked = ImagePicker();
-      final image = await _picked.pickImage(source: ImageSource.gallery);
+      final ImagePicker picked = ImagePicker();
+      final image = await picked.pickImage(source: ImageSource.gallery);
       if (image != null) {
         imagePath.value = image.path.toString();
         if(isAdd){
           addImage();
         }else{
-          
+          updateImage();
         }
       }
     } on Exception catch (e) {
@@ -64,7 +64,25 @@ class ProfileController extends GetxController {
   addImage() async {
     try {
       var result =
-          await ApiServicesByLimon.uploadeProfilePic(File(imagePath.value));
+          await ApiServicesByLimon.uploadeProfilePic(imagePath.value);
+      if (result.runtimeType == int) {
+        if (kDebugMode) {
+          debugPrint("$result");
+          log.e(result);
+          Get.snackbar('Error', 'Image Upload Faild');
+        }
+      } else {
+        fetchProfileData();
+        Get.snackbar('success', 'Image Upload success');
+      }
+    } on Exception catch (e) {
+      debugPrint("Error $e");
+    }
+  }
+  updateImage() async {
+    try {
+      var result =
+          await ApiServicesByLimon.updateProfilePic(imagePath.value);
       if (result.runtimeType == int) {
         if (kDebugMode) {
           debugPrint("$result");
