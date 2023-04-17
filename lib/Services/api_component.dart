@@ -21,6 +21,7 @@ String smsTemplateApi = "${baseUrl}sms_templates/";
 String realTimeServiceApi = "${baseUrl}lead/RealTimeService/";
 String pendingPostApi = "${baseUrl}lead/PendingPost/";
 String profilePicPostApi = "${baseUrl}profile_pic_add/";
+String profilePicUpdateApi = "${baseUrl}profile_picture_update/";
 String helpGetApi = "${baseUrl}profile/help/";
 String getLocationApi = "${baseUrl}locations/";
 
