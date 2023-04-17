@@ -14,7 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../local/my_local.dart';
 import '../../../widgets/common_data.dart';
 import '../../../widgets/logger.dart';
-import '../../LeadsScreen/Model/leads_model.dart';
+
 import '../../Service/Model/service_model.dart';
 import 'package:flutter/material.dart';
 
@@ -47,11 +47,14 @@ class ProfileController extends GetxController {
       final image = await picked.pickImage(source: ImageSource.gallery);
       if (image != null) {
         imagePath.value = image.path.toString();
-        if(isAdd){
+        if (isAdd) {
           addImage();
-        }else{
+
+        } else {}
+       
           updateImage();
         }
+
       }
     } on Exception catch (e) {
       if (kDebugMode) {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../JobPost/Model/location_model.dart';
-import '../UpdateLeadSetting/Model/location_model.dart';
 
 class LocationController extends GetxController {
   TextEditingController searchCtrl = TextEditingController();
