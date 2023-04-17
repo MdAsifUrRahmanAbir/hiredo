@@ -18,6 +18,7 @@ import 'package:homelyknock/Services/api_component.dart';
 import 'package:homelyknock/local/my_local.dart';
 
 import '../../Screens/QuestionScreen/Model/job_post_model.dart';
+import '../Screens/LeadsScreen/Model/lead_search_model.dart';
 import '../Screens/LeadsScreen/Model/leads_model.dart';
 import '../Screens/Service/Model/service_model.dart';
 import '../widgets/data_controller.dart';
@@ -159,6 +160,10 @@ class ApiServices {
         var data = await response.stream.bytesToString();
         return serviceModelFromJson(data);
       } else {
+        if (kDebugMode) {
+          return print(
+              "Service fetch Error. Reason ${await response.stream.bytesToString()}");
+        }
         return response.statusCode;
       }
     } on Exception catch (e) {
@@ -452,6 +457,9 @@ class ApiServices {
       if (response.statusCode == 204) {
         return true;
       } else {
+        if (kDebugMode) {
+          print("Delete service error. Reason ${response.body}");
+        }
         return false;
       }
     } on Exception catch (e) {
@@ -461,39 +469,72 @@ class ApiServices {
       return false;
     }
   }
- 
 
-  static  fetchLeads(int page)async{
-
-     var accessToken = await MyPreference.getToken();
+  static fetchLeads(int page) async {
+    var accessToken = await MyPreference.getToken();
     try {
       var headers = {
         'Authorization': 'Bearer $accessToken',
         'Content-Type': 'application/json',
       };
-      var response = await client.get(Uri.parse(leadsApi+page.toString()), headers: headers);
+      var response = await client.get(Uri.parse(leadsApi + page.toString()),
+          headers: headers);
       if (response.statusCode == 200) {
-       
         return leadModelFromJson(response.body);
-        
       } else {
         return response.statusCode;
       }
     } on Exception catch (e) {
       if (kDebugMode) {
-         print("Leads fetch Error. Reason ${e.toString()}");
+        print("Leads fetch Error. Reason ${e.toString()}");
       }
       return 0;
     }
+  }
 
+  static Future<bool> deletePendingPost(int id) async {
+    var accessToken = await MyPreference.getToken();
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client.get(
+          Uri.parse("${pandingPostDeleteApi + id.toString()}/"),
+          headers: headers);
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        debugPrint("Delete pandding post Error}");
+        return false;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("Delete pandding post Error. Reason ${e.toString()}");
+      }
+      return false;
+    }
+  }
 
-
-
-
-
-
-}
-
-
-
+ static fetchLeadSearch(String text) async {
+    var accessToken = await MyPreference.getToken();
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client
+          .get(Uri.parse(leadSearchApi + text.toString()), headers: headers);
+      if (response.statusCode == 200) {
+        return leadSearchModelFromJson(response.body);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("Leads fetch Error. Reason ${e.toString()}");
+      }
+      return 0;
+    }
+  }
 }

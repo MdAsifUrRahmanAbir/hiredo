@@ -59,7 +59,9 @@ class LeadsScreen extends StatelessWidget {
                           child: TextFormField(
                             controller: _leadController.searchController,
                             onChanged: (v){
-                            
+                            if(v.isEmpty){
+                              _leadController.isSearch.value=false;
+                            }
                             },
                             decoration: InputDecoration(
                               hintText: 'Search',
@@ -84,6 +86,13 @@ class LeadsScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: (){
+                          if(_leadController.searchController.text.isNotEmpty){
+                             _leadController.isSearch.value=true;
+                             _leadController.searchLeads();
+
+                          }
+                         
+
                         
                         },
                         child: Container(
@@ -224,8 +233,9 @@ class LeadsScreen extends StatelessWidget {
                   ListView.separated(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
+                    itemCount:_leadController.isSearch.value?_leadController.searchLeadList.length:_leadController.leadsList.length,
                     itemBuilder: (context, index) {
-                      var data = _leadController.leadsList[index];
+                      var data = _leadController.isSearch.value?_leadController.searchLeadList[index]:_leadController.leadsList[index];
                       return InkWell(
                         onTap: () {
                           Get.toNamed(Routes.leadDetailsPage,arguments:data);
@@ -386,7 +396,7 @@ class LeadsScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    itemCount: _leadController.leadsList.length,
+                    
                     separatorBuilder: (BuildContext context, int index) {
                       return SizedBox(
                         height: 25.h,

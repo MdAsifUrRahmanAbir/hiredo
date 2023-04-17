@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Route/routes.dart';
 
 class TrackingPostOrderTwo extends StatelessWidget {
   TrackingPostOrderTwo({super.key});
@@ -194,19 +196,24 @@ class TrackingPostOrderTwo extends StatelessWidget {
                             SizedBox(
                               width: 90.w,
                             ),
-                            Container(
-                              height: 34.h,
-                              width: 115.w,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4.r),
-                                  color: Color(0xff187949)),
-                              child: Center(
-                                child: Text(
-                                  "view details",
-                                  style: GoogleFonts.roboto(
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white),
+                            InkWell(
+                              onTap: (){
+                                Get.toNamed(Routes.completePostDetails);
+                              },
+                              child: Container(
+                                height: 34.h,
+                                width: 115.w,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4.r),
+                                    color: Color(0xff187949)),
+                                child: Center(
+                                  child: Text(
+                                    "view details",
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white),
+                                  ),
                                 ),
                               ),
                             ),

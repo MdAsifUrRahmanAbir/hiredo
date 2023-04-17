@@ -5,9 +5,13 @@ import 'package:get/get.dart';
 import 'package:homelyknock/Screens/LeadsScreen/Model/leads_model.dart';
 import 'package:homelyknock/Services/api_services.dart';
 
+import '../Model/lead_search_model.dart';
+
 class LeadController extends GetxController {
   late ScrollController scrolController;
  TextEditingController searchController=TextEditingController();
+  var isSearch=false.obs;
+
   @override
   void onInit() {
     firstLoad();
@@ -23,6 +27,8 @@ class LeadController extends GetxController {
   var isLoadMoreRunning = false.obs;
 
   RxList<Result> leadsList = List<Result>.empty(growable: true).obs;
+
+   RxList<Result> searchLeadList = List<Result>.empty(growable: true).obs;
   
   LeadModel? demoData;
 
@@ -71,6 +77,28 @@ class LeadController extends GetxController {
       leadsList.value = demoData!.result;
      
       print("leadsList.length:${leadsList.length}");
+    }
+} on Exception catch (e) {
+  print('Something went wrong');
+ 
+}finally{
+  isFirstLoadRunning.value =false;
+}
+    
+  }
+
+
+  void searchLeads() async {
+    try {
+  isFirstLoadRunning.value = true;
+    final res = await ApiServices.fetchLeadSearch(searchController.text);
+    if (res.runtimeType == int) {
+      debugPrint("lead fetch error : $res");
+    } else {
+        LeadSearchModel  seaechData = res;
+      searchLeadList.value = seaechData.result;
+     
+      debugPrint("leadsList.length:${leadsList.length}");
     }
 } on Exception catch (e) {
   print('Something went wrong');

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:homelyknock/Services/api_services.dart';
 
 import '../../../Services/api_services_by_limon.dart';
 import '../Model/pending_post_model.dart';
@@ -17,8 +18,13 @@ class PendingController extends GetxController {
     super.onInit();
   }
 
-  getPendingPost() async {
-    isLoading(true);
+  getPendingPost(bool isFast) async {
+
+    if(isFast){
+        isLoading(true);
+
+    }
+   
 
     try {
       var result = await ApiServicesByLimon.fetchPending();
@@ -35,8 +41,36 @@ class PendingController extends GetxController {
         print('Fetch Error: ${e.toString()}');
       }
     } finally {
+     if(isFast){
+        isLoading(false);
+
+    }
+    }
+  }
+  deletePendingPost(int id)async{
+    try {
+      isLoading(true);
+      var result = await ApiServices.deletePendingPost(id);
+      if (result) {
+        getPendingPost(false);
+        Get.snackbar("Success", "Delete Complete");
+
+        
+      } else {
+         if (kDebugMode) {
+        print('Opps delete pandding post error');
+      }
+      
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print('Opps delete pandding post error: ${e.toString()}');
+      }
+    } finally {
       isLoading(false);
     }
+
+
   }
 
   searchPanddingPost({

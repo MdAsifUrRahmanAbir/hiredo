@@ -470,7 +470,7 @@ class LeadsDetailsScreen extends StatelessWidget {
         myLocationButtonEnabled: false,
         myLocationEnabled: false,
         mapType: MapType.normal,
-        initialCameraPosition: CameraPosition(target:LatLng(double.parse(leadData.latitude), double.parse(leadData.latitude))),
+        initialCameraPosition: CameraPosition(target:LatLng(double.parse(leadData.latitude ?? "0.0"), double.parse(leadData.latitude??"0.0"))),
         onMapCreated: (GoogleMapController controller) {
          
         },

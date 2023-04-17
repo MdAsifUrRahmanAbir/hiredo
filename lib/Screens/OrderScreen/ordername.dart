@@ -65,6 +65,9 @@ class _OrderNameState extends State<OrderName> {
                   shape: BoxShape.circle),
             ),
           ),
+         
+         
+         
           SizedBox(width:20.w,)
         ],
         automaticallyImplyLeading: false,
