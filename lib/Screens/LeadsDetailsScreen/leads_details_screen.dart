@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:homelyknock/Screens/LeadsDetailsScreen/component/custom_maps.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:homelyknock/Services/api_component.dart';
 import 'package:homelyknock/utils/colors.dart';
 import 'package:jiffy/jiffy.dart';
@@ -16,7 +16,7 @@ class LeadsDetailsScreen extends StatelessWidget {
     super.key,
   });
 
-  LeadsModel leadData = Get.arguments;
+  Result leadData = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -458,7 +458,26 @@ class LeadsDetailsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 200.h, child: CustomMaps()),
+              SizedBox(
+                height: 200.h,
+                child: GoogleMap(
+        rotateGesturesEnabled: false,
+        scrollGesturesEnabled: false,
+        zoomControlsEnabled: false,
+        zoomGesturesEnabled: false,
+        liteModeEnabled: false,
+        tiltGesturesEnabled: false,
+        myLocationButtonEnabled: false,
+        myLocationEnabled: false,
+        mapType: MapType.normal,
+        initialCameraPosition: CameraPosition(target:LatLng(double.parse(leadData.latitude ?? "0.0"), double.parse(leadData.latitude??"0.0"))),
+        onMapCreated: (GoogleMapController controller) {
+         
+        },
+      ),
+              ),
+          
+             
               SizedBox(
                 height: 20.h,
               ),
@@ -466,6 +485,8 @@ class LeadsDetailsScreen extends StatelessWidget {
           ),
         ),
       ),
+   
+   
     );
   }
 

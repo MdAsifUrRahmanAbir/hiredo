@@ -57,7 +57,6 @@ class HelpScreen extends StatelessWidget {
             _topItemListWidget(),
             _testFormFieldWidget(),
             _sendButton(),
-
             SizedBox(
               height: 20.h,
             ),
@@ -168,7 +167,6 @@ class HelpScreen extends StatelessWidget {
   _searchWidget() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-
       children: [
         Text(
           'FAQs',
@@ -224,7 +222,6 @@ class HelpScreen extends StatelessWidget {
   _popularItemListWidget() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-
       children: [
         SizedBox(
           height: 25.h,
@@ -240,31 +237,35 @@ class HelpScreen extends StatelessWidget {
           height: 25.h,
         ),
         ListView.separated(
-          itemCount: popularItem.length,
+          itemCount: 5,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
-            return Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      popularItem[index]['title'],
-                      style: GoogleFonts.roboto(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
-                          color: const Color(0xFF424242)),
-                    ),
-                    const Icon(Icons.keyboard_arrow_down)
-                  ],
-                ),
-                Divider(
-                  thickness: 3,
-                  color: const Color(0xFF848484).withOpacity(0.05),
-                )
-              ],
+            return ExpansionTile(
+              title: Text('Title'),
             );
+
+            // Column(
+            //   children: [
+            //     Row(
+            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //       children: [
+            //         Text(
+            //           popularItem[index]['title'],
+            //           style: GoogleFonts.roboto(
+            //               fontSize: 14.sp,
+            //               fontWeight: FontWeight.w400,
+            //               color: const Color(0xFF424242)),
+            //         ),
+            //         const Icon(Icons.keyboard_arrow_down)
+            //       ],
+            //     ),
+            //     Divider(
+            //       thickness: 3,
+            //       color: const Color(0xFF848484).withOpacity(0.05),
+            //     )
+            //   ],
+            // );
           },
           separatorBuilder: (BuildContext context, int index) => SizedBox(
             height: 12.h,
@@ -277,7 +278,6 @@ class HelpScreen extends StatelessWidget {
   _guidItemsListWidget() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-
       children: [
         SizedBox(
           height: 25.h,
@@ -330,12 +330,10 @@ class HelpScreen extends StatelessWidget {
     );
   }
 
-
   _topItemListWidget() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
         SizedBox(
           height: 25.h,
         ),

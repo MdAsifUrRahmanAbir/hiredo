@@ -7,11 +7,12 @@ import 'dart:convert';
 ProfileModel profileModelFromJson(String str) => ProfileModel.fromJson(json.decode(str));
 
 
+
 class ProfileModel {
     ProfileModel({
         required this.id,
         required this.user,
-         this.image,
+        this.image,
         required this.credit,
         required this.badges,
         required this.updatedAt,
@@ -19,9 +20,9 @@ class ProfileModel {
 
     int id;
     User user;
-    String? image;
+    dynamic image;
     int credit;
-    List<dynamic> badges;
+    List<Badge> badges;
     DateTime updatedAt;
 
     factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
@@ -29,11 +30,43 @@ class ProfileModel {
         user: User.fromJson(json["user"]),
         image: json["image"]??"",
         credit: json["credit"],
-        badges: List<dynamic>.from(json["badges"].map((x) => x)),
+        badges: List<Badge>.from(json["badges"].map((x) => Badge.fromJson(x))),
         updatedAt: DateTime.parse(json["updated_at"]),
     );
 
-    
+  
+}
+
+class Badge {
+    Badge({
+        required this.id,
+        required this.title,
+        required this.description,
+        required this.image,
+        required this.longDescription,
+        required this.created,
+        required this.user,
+    });
+
+    int id;
+    String title;
+    String description;
+    String image;
+    String longDescription;
+    DateTime created;
+    int user;
+
+    factory Badge.fromJson(Map<String, dynamic> json) => Badge(
+        id: json["id"],
+        title: json["title"],
+        description: json["description"],
+        image: json["image"],
+        longDescription: json["long_description"],
+        created: DateTime.parse(json["created"]),
+        user: json["user"],
+    );
+
+   
 }
 
 class User {
@@ -47,11 +80,11 @@ class User {
         required this.corporationName,
         required this.corporationNumber,
         required this.phoneNumber,
-        // required this.lastLogin,
-        // required this.joinDate,
-        // required this.isActive,
-        // required this.isStaff,
-        // required this.isAdmin,
+        required this.lastLogin,
+        required this.joinDate,
+        required this.isActive,
+        required this.isStaff,
+        required this.isAdmin,
         required this.isUser,
         required this.isProfessional,
         this.otpSecret,
@@ -70,11 +103,11 @@ class User {
     String corporationName;
     String corporationNumber;
     String phoneNumber;
-    // DateTime lastLogin;
-    // DateTime joinDate;
-    // bool isActive;
-    // bool isStaff;
-    // bool isAdmin;
+    DateTime lastLogin;
+    DateTime joinDate;
+    bool isActive;
+    bool isStaff;
+    bool isAdmin;
     bool isUser;
     bool isProfessional;
     dynamic otpSecret;
@@ -93,11 +126,11 @@ class User {
         corporationName: json["corporation_name"],
         corporationNumber: json["corporation_number"],
         phoneNumber: json["phone_number"],
-        // lastLogin: DateTime.parse(json["last_login"]),
-        // joinDate: DateTime.parse(json["join_date"]),
-        // isActive: json["is_active"],
-        // isStaff: json["is_staff"],
-        // isAdmin: json["is_admin"],
+        lastLogin: DateTime.parse(json["last_login"]),
+        joinDate: DateTime.parse(json["join_date"]),
+        isActive: json["is_active"],
+        isStaff: json["is_staff"],
+        isAdmin: json["is_admin"],
         isUser: json["is_user"],
         isProfessional: json["is_professional"],
         otpSecret: json["otp_secret"],
@@ -106,6 +139,8 @@ class User {
         groups: List<dynamic>.from(json["groups"].map((x) => x)),
         userPermissions: List<dynamic>.from(json["user_permissions"].map((x) => x)),
     );
+
+   
 
 
 }

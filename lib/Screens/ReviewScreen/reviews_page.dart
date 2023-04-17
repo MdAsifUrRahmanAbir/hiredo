@@ -4,15 +4,9 @@ import 'package:homelyknock/utils/colors.dart';
 
 import '../SettingsScreen/setting_page.dart';
 
-class ReviewsPage extends StatefulWidget {
-  static const String routename = '/reviews';
+class ReviewsPage extends StatelessWidget {
   ReviewsPage({Key? key}) : super(key: key);
 
-  @override
-  State<ReviewsPage> createState() => _ReviewsPageState();
-}
-
-class _ReviewsPageState extends State<ReviewsPage> {
   List<Map> reviews = [
     {
       'imgUrl': 'images/haq.png',
@@ -154,7 +148,9 @@ class _ReviewsPageState extends State<ReviewsPage> {
                     '4.9',
                     style: myStyle(20.sp, FontWeight.w500, textClr),
                   ),
-                  SizedBox(width: 3.w,),
+                  SizedBox(
+                    width: 3.w,
+                  ),
                   Text(
                     '(500)',
                     style: myStyle(14.sp, FontWeight.w300, Color(0xff848484)),
@@ -272,8 +268,10 @@ class _ReviewsPageState extends State<ReviewsPage> {
                                             reviews[index]['details'],
                                             maxLines: 6,
                                             overflow: TextOverflow.ellipsis,
-                                            style: myStyle(14.sp,
-                                                FontWeight.w400, Color(0xff848484)),
+                                            style: myStyle(
+                                                14.sp,
+                                                FontWeight.w400,
+                                                Color(0xff848484)),
                                           ))
                                     ],
                                   ),
@@ -285,16 +283,20 @@ class _ReviewsPageState extends State<ReviewsPage> {
                             height: 10.h,
                           ),
                       itemCount: reviews.length)),
-              SizedBox(height: 20.h,),
+              SizedBox(
+                height: 20.h,
+              ),
               Container(
                 alignment: Alignment.center,
                 height: 50.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Color(0xff187949)
+                    borderRadius: BorderRadius.circular(5.r),
+                    color: Color(0xff187949)),
+                child: Text(
+                  'See All Review',
+                  style: myStyle(16.sp, FontWeight.w500, Color(0xffF2F2F2)),
                 ),
-                child: Text('See All Review', style: myStyle(16.sp, FontWeight.w500, Color(0xffF2F2F2)),),
               )
             ],
           ),
