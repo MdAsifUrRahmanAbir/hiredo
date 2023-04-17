@@ -53,7 +53,6 @@ class ProfileController extends GetxController {
           updateImage();
         }
 
-      }
     } on Exception catch (e) {
       if (kDebugMode) {
         debugPrint('Faild $e');
