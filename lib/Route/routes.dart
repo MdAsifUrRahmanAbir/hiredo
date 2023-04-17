@@ -38,6 +38,7 @@ import 'package:homelyknock/Screens/TrackingScreen/TabsScreen/trackingpost.dart'
 import 'package:homelyknock/Screens/WishListScreen/wish_list_screen.dart';
 import 'package:homelyknock/nav_bar_page/main_screen.dart';
 import '../Screens/CategoriesScreen/subcategory.dart';
+import '../Screens/CompletePostDetails/complete_post.dart';
 import '../Screens/EmailVerifiyScreen/enterverificationpage.dart';
 import '../Screens/HelpScreen/help_screen.dart';
 import '../Screens/IntroScreen/introtwopage.dart';
@@ -91,6 +92,7 @@ class Routes {
   static String myPaymentDetails = '/my_payment_details_screen';
   static String emailNotification = '/email_notification_screen';
   static String browserNotification = '/browser_notification_screen';
+  static String completePostDetails="/complete_post_delete";
 }
 
 /// Add this list variable into your GetMaterialApp as the value of getPages parameter.
@@ -190,8 +192,9 @@ final getPages = [
   //   GetPage(name: Routes.settingPage, page:()=>SettingsPage()),
   //   GetPage(name: Routes.changePasswordScreen, page:()=>ChangePasswordScreen()),
   //   GetPage(name: Routes.badgeDetails, page:()=>BadgesSecondPage() ),
-
   //   GetPage(name: Routes.helpPage, page:()=> HelpScreen() ),
+
+  GetPage(name: Routes.completePostDetails, page:()=>CompletePostDetails())
 
     
 

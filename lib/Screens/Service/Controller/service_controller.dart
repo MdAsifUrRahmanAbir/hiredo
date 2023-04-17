@@ -6,9 +6,9 @@ import 'package:homelyknock/utils/colors.dart';
 import '../../../Services/api_services.dart';
 import '../../../nav_bar_page/main_screen.dart';
 import '../../ProfileScreen/Controller/profile_controller.dart';
+import '../../ProfileScreen/profile.dart';
 
 class ServiceController extends GetxController {
-  final _profileController = Get.put(ProfileController());
 
   TextEditingController descriptionController = TextEditingController();
   var isServieselect = false.obs;
@@ -23,8 +23,8 @@ class ServiceController extends GetxController {
         var result = await ApiServices.addServicePost(
             id: selectedServiceId, description: descriptionController.text);
         if (result) {
-          _profileController.getServices();
-          _profileController.getLeadCount();
+          profileController.getServices();
+          profileController.getLeadCount();
           descriptionController.clear();
           Get.snackbar("Success", "Added Service",
               colorText: Colors.black,
@@ -54,8 +54,8 @@ class ServiceController extends GetxController {
   var res = await ApiServices.deleteService(id);
   if (res) {
     Get.snackbar("Success", "Delete Service");
-    _profileController.getServices();
-    _profileController.leadsCount();
+    profileController.getServices();
+    profileController.getLeadCount();
   } else {
     Get.snackbar("Error", "Service delete error");
   }

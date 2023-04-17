@@ -36,8 +36,8 @@ class Result {
         required this.id,
         required this.user,
         required this.location,
-        required this.latitude,
-        required this.longitude,
+         this.latitude,
+         this.longitude,
         required this.category,
         required this.postObject,
         required this.responseCount,
@@ -48,8 +48,8 @@ class Result {
     int id;
     User user;
     String location;
-    String latitude;
-    String  longitude;
+    String? latitude;
+    String?  longitude;
     Category category;
     List<PostObject> postObject;
     int responseCount;
@@ -60,8 +60,8 @@ class Result {
         id: json["id"],
         user: User.fromJson(json["user"]),
         location: json["location"],
-        latitude: json["latitude"],
-        longitude: json["longitude"],
+        latitude: json["latitude"]??"",
+        longitude: json["longitude"]??"",
         category: Category.fromJson(json["category"]),
         postObject: List<PostObject>.from(json["post_object"].map((x) => PostObject.fromJson(x))),
         responseCount: json["response_count"],
