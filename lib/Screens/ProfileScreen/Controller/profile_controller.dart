@@ -45,11 +45,14 @@ class ProfileController extends GetxController {
       final image = await picked.pickImage(source: ImageSource.gallery);
       if (image != null) {
         imagePath.value = image.path.toString();
-        if(isAdd){
+        if (isAdd) {
           addImage();
-        }else{
+
+        } else {}
+       
           updateImage();
         }
+
       }
     } on Exception catch (e) {
       if (kDebugMode) {
