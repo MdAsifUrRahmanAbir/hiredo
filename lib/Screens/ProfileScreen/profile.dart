@@ -94,7 +94,7 @@ class Profile extends StatelessWidget {
                                 right: -20.h,
                                 child: IconButton(
                                     onPressed: () {
-                                      profileController.getImage();
+                                      
                                     },
                                     icon: Icon(
                                       Icons.camera_alt,

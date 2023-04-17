@@ -28,7 +28,7 @@ class ProfileModel {
     factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
         id: json["id"],
         user: User.fromJson(json["user"]),
-        image: json["image"],
+        image: json["image"]??"",
         credit: json["credit"],
         badges: List<Badge>.from(json["badges"].map((x) => Badge.fromJson(x))),
         updatedAt: DateTime.parse(json["updated_at"]),

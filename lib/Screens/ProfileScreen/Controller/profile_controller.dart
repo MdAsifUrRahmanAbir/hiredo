@@ -30,46 +30,53 @@ class ProfileController extends GetxController {
 
   var isLoading = false.obs;
   var isLeadLoading = false.obs;
-  var leadsCount=0.obs;
+  var leadsCount = 0.obs;
   late SharedPreferences preferences;
   RxList<ServiceModel> serviceList =
       List<ServiceModel>.empty(growable: true).obs;
 
-
-   ProfileModel? profileData;
+  ProfileModel? profileData;
   var isProfessional = false.obs;
   var isUser = false.obs;
 
   RxString imagePath = ''.obs;
 
-  getImage() async {
-    isLoading(true);
-
+  getImage(bool isAdd) async {
     try {
       final ImagePicker _picked = ImagePicker();
       final image = await _picked.pickImage(source: ImageSource.gallery);
       if (image != null) {
         imagePath.value = image.path.toString();
-
-        var result =
-            await ApiServicesByLimon.uploadeProfilePic(File(imagePath.value));
-        if (result.runtimeType == int) {
-          if (kDebugMode) {
-            debugPrint("$result");
-            log.e(result);
-            Get.snackbar('Error', 'Image Upload Faild');
-          }
-        } else {
-          imagePath.value = result;
-          Get.snackbar('success', 'Image Upload success');
+        if(isAdd){
+          addImage();
+        }else{
+          
         }
       }
     } on Exception catch (e) {
       if (kDebugMode) {
         debugPrint('Faild $e');
       }
-    } finally {
-      isLoading(false);
+    }
+  }
+  // add image
+
+  addImage() async {
+    try {
+      var result =
+          await ApiServicesByLimon.uploadeProfilePic(File(imagePath.value));
+      if (result.runtimeType == int) {
+        if (kDebugMode) {
+          debugPrint("$result");
+          log.e(result);
+          Get.snackbar('Error', 'Image Upload Faild');
+        }
+      } else {
+        fetchProfileData();
+        Get.snackbar('success', 'Image Upload success');
+      }
+    } on Exception catch (e) {
+      debugPrint("Error $e");
     }
   }
 
@@ -109,15 +116,20 @@ class ProfileController extends GetxController {
         Get.offAllNamed(Routes.signinPage);
         SharedPreferences preferences = await SharedPreferences.getInstance();
         bool isOnBoard = preferences.getBool(Constance.isOnboard) ?? false;
-        String email= preferences.getString("rememberEmail",)??"";
-        String password=   preferences.getString("rememberPassword",)??"";
+        String email = preferences.getString(
+              "rememberEmail",
+            ) ??
+            "";
+        String password = preferences.getString(
+              "rememberPassword",
+            ) ??
+            "";
 
         preferences.clear();
         preferences.setString("rememberEmail", email);
         preferences.setString("rememberPassword", password);
         MyPreference.setOnBoard(isOnBoard);
         Fluttertoast.showToast(msg: "Logout Successfull");
-        
       } else {
         isLoading(false);
         debugPrint("User not logout");
@@ -154,9 +166,8 @@ class ProfileController extends GetxController {
 
   getLeadCount() async {
     try {
-      
-        isLeadLoading.value = true;
-      
+      isLeadLoading.value = true;
+
       var result = await ApiServices.fetchLeadCount();
       if (result.runtimeType == int) {
         if (kDebugMode) {
@@ -165,7 +176,7 @@ class ProfileController extends GetxController {
         log.e(result);
       } else {
         leadsCount.value = result["total_lead"];
-       
+
         log.i(result);
       }
     } on Exception catch (e) {
@@ -173,13 +184,9 @@ class ProfileController extends GetxController {
         print("Fetch Error $e");
       }
     } finally {
-      
-        isLeadLoading.value = false;
-      
+      isLeadLoading.value = false;
     }
   }
-
-
 
   modeChange() async {
     try {
@@ -202,23 +209,4 @@ class ProfileController extends GetxController {
       isLoading(false);
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
