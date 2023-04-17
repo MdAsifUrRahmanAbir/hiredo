@@ -5,14 +5,12 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/Screens/JobPost/Model/location_model.dart';
-import 'package:homelyknock/Screens/UpdateLeadSetting/Model/location_model.dart';
-import 'package:homelyknock/common_dashboard_services/models/get_location_model.dart';
+
 import 'package:homelyknock/utils/colors.dart';
 
-import '../../widgets/common_dashboard_controller.dart';
 import '../HomeScreen/Controller/home_controller.dart';
 import '../HomeScreen/Model/lead_category_model.dart';
-import '../QuestionScreen/question_screen.dart';
+
 import 'Controller/job_post_controller.dart';
 
 class PostAJob extends StatelessWidget {
@@ -33,14 +31,14 @@ class PostAJob extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        iconTheme: const IconThemeData(color:themeColorGreen),
+        iconTheme: const IconThemeData(color: themeColorGreen),
         centerTitle: true,
         title: Text(
           "Order",
           style: TextStyle(
               fontSize: 20.sp,
               fontWeight: FontWeight.w500,
-              color:const Color(0xFF272727)),
+              color: const Color(0xFF272727)),
         ),
       ),
       backgroundColor: Colors.white,
@@ -49,19 +47,20 @@ class PostAJob extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 18.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-          
             children: [
-              
               Text("Place a new request",
                   style: GoogleFonts.roboto(
                       fontSize: 20.sp, fontWeight: FontWeight.w500)),
-                SizedBox(
+              SizedBox(
                 height: 8.h,
               ),
-              Text("Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint",
+              Text(
+                  "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint",
                   style: GoogleFonts.roboto(
-                      fontSize: 14.sp, fontWeight: FontWeight.w400,color:const Color(0xFF424242))),
-             
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                      color: const Color(0xFF424242))),
+
               SizedBox(
                 height: 25.h,
               ),
@@ -71,7 +70,7 @@ class PostAJob extends StatelessWidget {
                   dropdownButtonProps: const DropdownButtonProps(
                     icon: SizedBox(),
                   ),
-                  enabled:selectIndex == null?true:false,
+                  enabled: selectIndex == null ? true : false,
                   popupProps: const PopupProps.menu(showSearchBox: true),
                   dropdownDecoratorProps: DropDownDecoratorProps(
                     dropdownSearchDecoration: InputDecoration(
@@ -132,7 +131,6 @@ class PostAJob extends StatelessWidget {
                   itemAsString: (LocationDataModel u) => u.location,
                   onChanged: (value) {
                     _jobPostController.locationData = value!;
-                   
                   },
                 ),
               ),
@@ -144,7 +142,7 @@ class PostAJob extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     if (selectIndex != null) {
-                      if (_jobPostController.locationData==null) {
+                      if (_jobPostController.locationData == null) {
                         _jobPostController.isLocationError.value = true;
                       } else if (_homeController
                           .subCategoryList[selectIndex!].catName.isNotEmpty) {
@@ -153,12 +151,10 @@ class PostAJob extends StatelessWidget {
                               .subCategoryList[selectIndex!].catName,
                           "locationData": _jobPostController.locationData
                         };
-              
+
                         Get.toNamed(Routes.questionScreen, arguments: data);
                       }
-                    }
-              
-                    else {
+                    } else {
                       if (_jobPostController.cateName.isEmpty) {
                         _jobPostController.isCategoryError.value = true;
                       } else if (_jobPostController.locationData == null) {
@@ -168,14 +164,13 @@ class PostAJob extends StatelessWidget {
                           "data": _jobPostController.cateName,
                           "locationData": _jobPostController.locationData
                         };
-                        Get.toNamed(Routes.questionScreen, arguments:data);
+                        Get.toNamed(Routes.questionScreen, arguments: data);
                       }
                     }
                   },
                   child: Container(
                     height: 50.h,
                     width: 300.w,
-                    
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5.r),
                       color: themeColorGreen,

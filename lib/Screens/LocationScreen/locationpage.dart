@@ -6,6 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Screens/JobPost/Model/location_model.dart';
+import 'package:homelyknock/Screens/UpdateLeadSetting/Model/location_model.dart';
 
 import 'location_controller.dart';
 
@@ -262,18 +264,68 @@ class LocationPage extends StatelessWidget {
                                               SizedBox(
                                                 height: 20.h,
                                               ),
-                                              DropdownSearch(
-                                                popupProps: PopupProps.dialog(
-                                                  showSelectedItems: false,
-                                                  showSearchBox: true,
+
+                                              DropdownSearch<LocationDataModel>(
+                                                items:
+                                                    _locationController.country,
+                                                dropdownButtonProps:
+                                                    const DropdownButtonProps(
+                                                  icon: SizedBox(),
                                                 ),
-                                                items: _locationController
-                                                    .country
-                                                    .map((e) => e)
-                                                    .toList(),
-                                                onChanged: (value) {},
-                                                selectedItem: "",
+                                                popupProps:
+                                                    const PopupProps.menu(
+                                                        showSearchBox: true),
+                                                dropdownDecoratorProps:
+                                                    DropDownDecoratorProps(
+                                                  dropdownSearchDecoration:
+                                                      InputDecoration(
+                                                          labelText:
+                                                              "What is your Location?",
+                                                          hintText:
+                                                              "Search Your Location",
+                                                          isDense: true,
+                                                          contentPadding:
+                                                              EdgeInsets
+                                                                  .symmetric(
+                                                            horizontal: 16.w,
+                                                          ),
+                                                          enabledBorder: OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          3.r),
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                      color: Colors
+                                                                          .red)),
+                                                          border: OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          3.r))),
+                                                ),
+                                                itemAsString:
+                                                    (LocationDataModel u) =>
+                                                        u.location,
+                                                onChanged: (value) {
+                                                  _locationController
+                                                      .locationData = value!;
+                                                },
                                               ),
+
+                                              // DropdownSearch<LocationModel>(
+                                              //   popupProps: PopupProps.dialog(
+                                              //     showSelectedItems: false,
+                                              //     showSearchBox: true,
+                                              //   ),
+                                              //   items: _locationController
+                                              //       .country
+                                              //       .map((e) => e)
+                                              //       .toList(),
+                                              //   onChanged: (value) {},
+                                              //   selectedItem: "",
+                                              // ),
+
                                               SizedBox(
                                                 height: 10.h,
                                               ),

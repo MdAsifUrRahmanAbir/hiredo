@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:homelyknock/Screens/ProfileScreen/Controller/profile_controller.dart';
+import 'package:homelyknock/Screens/HelpScreen/help_model.dart';
 
 import 'package:homelyknock/Screens/SettingsScreen/EmailTemplate/Model/email_template_model.dart';
 import 'package:homelyknock/Screens/SettingsScreen/SMSTemplate/Model/sms_template_model.dart';
@@ -322,11 +322,11 @@ class ApiServicesByLimon {
     try {
       var headers = {
         'Authorization': 'Bearer $accessToken',
-         
       };
       var request = http.MultipartRequest('POST', Uri.parse(profilePicPostApi));
-     
-      request.files.add(await http.MultipartFile.fromPath('picture', file.path));
+
+      request.files
+          .add(await http.MultipartFile.fromPath('picture', file.path));
       request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();
@@ -334,13 +334,32 @@ class ApiServicesByLimon {
       if (response.statusCode == 201) {
         print(await response.stream.bytesToString());
         return true;
-      } 
-      else {
+      } else {
         print('Error');
         return response.statusCode;
       }
     } on Exception catch (e) {
       debugPrint("Image Upload Faild. Reason ${e.toString()}");
+      return 0;
+    }
+  }
+
+  static dynamic fetchHelpTopic() async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+      };
+
+      var response = await client.get(Uri.parse(helpGetApi), headers: headers);
+      if (response.statusCode == 200) {
+        return helpModelFromJson(response.body);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      debugPrint("Data fetch Error. Reason ${e.toString()}");
       return 0;
     }
   }
