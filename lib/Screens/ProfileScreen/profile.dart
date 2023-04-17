@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
+import 'package:homelyknock/Services/api_component.dart';
 import 'package:homelyknock/utils/colors.dart';
 import '../../nav_bar_page/main_controller.dart';
 import '../../widgets/custom_loader.dart';
@@ -31,6 +32,7 @@ class Profile extends StatelessWidget {
     _dataController.getData();
     profileController.getServices();
     profileController.getLeadCount();
+    profileController.fetchProfileData();
     return Scaffold(
       backgroundColor: scaffoldClr,
       appBar: AppBar(
@@ -311,14 +313,27 @@ class Profile extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
+               profileController.profileData!.badges!=[]? Row(
                     children: [
                       Image.asset('images/eliteicon.png'),
                       SizedBox(
                         width: 4.w,
                       ),
                       Text(
-                        'Elite Pro',
+                        "Elite Pro",
+                        style: myStyle(14.sp, FontWeight.w500, textClr),
+                      )
+                    ],
+                  ): 
+               
+                Row(
+                    children: [
+                      Image.network(baseUrl+profileController.profileData!.badges[0].image,height:15.sp,width: 15.sp,),
+                      SizedBox(
+                        width: 4.w,
+                      ),
+                      Text(
+                        profileController.profileData!.badges[0].title,
                         style: myStyle(14.sp, FontWeight.w500, textClr),
                       )
                     ],

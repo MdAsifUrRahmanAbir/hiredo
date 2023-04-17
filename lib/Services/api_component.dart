@@ -59,3 +59,5 @@ String needHelpsApi="${baseUrl}profile/still-need-help/";
 String profileApi="${baseUrl}profile/profile-update/";
 String deleteServiceApi="${baseUrl}services/";
 String leadsApi="${baseUrl}ServiceWiseLead/?page=";
+String pandingPostDeleteApi="${baseUrl}lead/JobPostListDelete/";
+String leadSearchApi="${baseUrl}ServiceWiseLead/?q=";
