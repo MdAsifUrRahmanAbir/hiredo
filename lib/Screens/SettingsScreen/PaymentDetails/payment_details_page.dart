@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:homelyknock/Screens/SettingsScreen/PaymentDetails/Model/payment_model.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
@@ -335,26 +334,7 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                     SizedBox(
                       width: 14.w,
                     ),
-                    Expanded(
-                        child: InkWell(
-                      onTap: () {
-                        paymentController.makePayment(
-                            amount: '9', currency: 'USD');
-                        Get.back();
-                      },
-                      child: Container(
-                        height: 51.h,
-                        alignment: Alignment.center,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4.r),
-                            color: backIconClr),
-                        child: Text(
-                          'Next',
-                          style: myStyle(16.sp, FontWeight.w400, scaffoldClr),
-                        ),
-                      ),
-                    ))
+                    _payButtonWidget()
                   ],
                 ),
               ],
@@ -363,5 +343,25 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
         ),
       ),
     );
+  }
+
+  _payButtonWidget() {
+    return Expanded(
+        child: InkWell(
+      onTap: () {
+        paymentController.makePayment(amount: '9', currency: 'USD');
+      },
+      child: Container(
+        height: 51.h,
+        alignment: Alignment.center,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4.r), color: backIconClr),
+        child: Text(
+          'Next',
+          style: myStyle(16.sp, FontWeight.w400, scaffoldClr),
+        ),
+      ),
+    ));
   }
 }
