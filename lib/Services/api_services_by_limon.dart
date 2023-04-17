@@ -332,10 +332,13 @@ class ApiServicesByLimon {
       http.StreamedResponse response = await request.send();
 
       if (response.statusCode == 201) {
-        print(await response.stream.bytesToString());
-        return true;
+        debugPrint(await response.stream.bytesToString());
+        var data=await response.stream.bytesToString();
+        return data ;
       } else {
-        print('Error');
+        if (kDebugMode) {
+          print('Error image upload statuscode : ${response.statusCode}');
+        }
         return response.statusCode;
       }
     } on Exception catch (e) {
