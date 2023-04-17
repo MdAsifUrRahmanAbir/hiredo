@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -14,7 +13,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../local/my_local.dart';
 import '../../../widgets/common_data.dart';
 import '../../../widgets/logger.dart';
-import '../../LeadsScreen/Model/leads_model.dart';
 import '../../Service/Model/service_model.dart';
 import 'package:flutter/material.dart';
 
@@ -79,6 +77,7 @@ class ProfileController extends GetxController {
       debugPrint("Error $e");
     }
   }
+
   updateImage() async {
     try {
       var result =
@@ -154,7 +153,7 @@ class ProfileController extends GetxController {
       }
     } on Exception catch (e) {
       isLoading(false);
-      debugPrint("Opps logout error ");
+      debugPrint("Opps logout error $e");
 
       // TODO
     } finally {
