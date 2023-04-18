@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 import '../../Services/api_component.dart';
+import '../LeadsDetailsScreen/Controller/lead_details_controller.dart';
 import '../ProfileScreen/Controller/profile_controller.dart';
 import 'package:jiffy/jiffy.dart';
 
@@ -17,10 +18,12 @@ class LeadsScreen extends StatelessWidget {
 
   final _profileController = Get.put(ProfileController());
   final _leadController = Get.put(LeadController());
+   final   _leadDetailsController=Get.put(LeadDetailsController());
 
   @override
   Widget build(BuildContext context) {
     _leadController.firstLoad();
+    _leadDetailsController.isContect.clear();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
