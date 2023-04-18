@@ -24,7 +24,7 @@ String profilePicPostApi = "${baseUrl}profile_pic_add/";
 String profilePicUpdateApi = "${baseUrl}profile_picture_update/";
 String helpGetApi = "${baseUrl}profile/help/";
 String getLocationApi = "${baseUrl}locations/";
-String getReviewApi = "${baseUrl}profile/UserFilter/1/";
+String getReviewApi = "${baseUrl}profile/UserFilter/";
 
 const String stripeUrl = "https://api.stripe.com/v1/payment_intents";
 const String stripeSecretKey =

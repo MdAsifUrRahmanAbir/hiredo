@@ -178,19 +178,17 @@ class ApiServicesByLimon {
   // fetch review
   static dynamic fetchReview(int id) async {
     var accessToken = await MyPreference.getToken();
-
     try {
       var headers = {
         'Authorization': 'Bearer $accessToken',
       };
 
       var response = await client.get(
-          Uri.parse(
-              "http://ringknock.pythonanywhere.com//profile/UserFilter/$id/"),
+          Uri.parse("${getReviewApi+id.toString()}/"),
           headers: headers);
       if (response.statusCode == 200) {
         debugPrint("Data :${jsonDecode(response.body)}");
-        return reviewModelFromJson(response.body);
+        return reviewsModelFromJson(response.body);
       } else {
         log.e(response.body);
         return response.statusCode;
