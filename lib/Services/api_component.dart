@@ -43,7 +43,19 @@ String deleteServiceApi = "${baseUrl}services/";
 String leadsApi = "${baseUrl}ServiceWiseLead/?page=";
 String pandingPostDeleteApi = "${baseUrl}lead/JobPostListDelete/";
 String leadSearchApi = "${baseUrl}ServiceWiseLead/?q=";
+
 String leadContactApi="${baseUrl}lead/contact-with-buyer/";
 String panddingResquestListApi="${baseUrl}lead/post-request-detail/";
 String pendingPostAcceptApi="${baseUrl}lead/request-accept-reject/";
 
+
+String wishListCompanyApi = "${baseUrl}lead/WishlistServiceViewSet/";
+String wishListServiceApi = "${baseUrl}lead/WishlistFeatureViewSet/";
+String addWishListApi = "$baseUrl/lead/WishlistServiceViewSet/";
+
+// String changeUserModeApi = "${baseUrl}profile/change-user-type/";
+// String logoutUserApi = "${baseUrl}logout/";
+// String leadsApi = "${baseUrl}ServiceWiseLead/";
+
+// String needHelpsApi = "${baseUrl}profile/still-need-help/";
+// String profileApi = "${baseUrl}profile/profile-update/";
