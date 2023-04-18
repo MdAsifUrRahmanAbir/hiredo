@@ -1,3 +1,4 @@
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -13,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../local/my_local.dart';
 import '../../../widgets/common_data.dart';
 import '../../../widgets/logger.dart';
+
 import '../../Service/Model/service_model.dart';
 import 'package:flutter/material.dart';
 
@@ -47,12 +49,10 @@ class ProfileController extends GetxController {
         imagePath.value = image.path.toString();
         if (isAdd) {
           addImage();
-
-        } else {}
-       
+        } else {
           updateImage();
         }
-
+      }
     } on Exception catch (e) {
       if (kDebugMode) {
         debugPrint('Faild $e');
@@ -63,8 +63,7 @@ class ProfileController extends GetxController {
 
   addImage() async {
     try {
-      var result =
-          await ApiServicesByLimon.uploadeProfilePic(imagePath.value);
+      var result = await ApiServicesByLimon.uploadeProfilePic(imagePath.value);
       if (result.runtimeType == int) {
         if (kDebugMode) {
           debugPrint("$result");
@@ -82,8 +81,7 @@ class ProfileController extends GetxController {
 
   updateImage() async {
     try {
-      var result =
-          await ApiServicesByLimon.updateProfilePic(imagePath.value);
+      var result = await ApiServicesByLimon.updateProfilePic(imagePath.value);
       if (result.runtimeType == int) {
         if (kDebugMode) {
           debugPrint("$result");
@@ -155,7 +153,7 @@ class ProfileController extends GetxController {
       }
     } on Exception catch (e) {
       isLoading(false);
-      debugPrint("Opps logout error $e");
+      debugPrint("Opps logout error ");
 
       // TODO
     } finally {
