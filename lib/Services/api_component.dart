@@ -45,4 +45,5 @@ String pandingPostDeleteApi = "${baseUrl}lead/JobPostListDelete/";
 String leadSearchApi = "${baseUrl}ServiceWiseLead/?q=";
 String leadContactApi="${baseUrl}lead/contact-with-buyer/";
 String panddingResquestListApi="${baseUrl}lead/post-request-detail/";
+String pendingPostAcceptApi="${baseUrl}lead/request-accept-reject/";
 

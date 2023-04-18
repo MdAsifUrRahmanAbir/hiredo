@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Screens/OrderScreen/order_controller.dart';
 import 'package:homelyknock/Screens/TrackingScreen/Model/pending_post_model.dart';
+import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 
 class OrderName extends StatefulWidget {
@@ -23,6 +24,7 @@ class _OrderNameState extends State<OrderName> {
   @override
   Widget build(BuildContext context) {
     _orderController.fetchRequestList(data.id);
+   
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -244,8 +246,9 @@ class _OrderNameState extends State<OrderName> {
                   ListView.separated(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: 3,
+                    itemCount: _orderController.requestList.length,
                     itemBuilder: (BuildContext context, int index) {
+                      var data=_orderController.requestList[index];
                       return Container(
                         height: 147.h,
                         width: double.infinity,
@@ -258,7 +261,7 @@ class _OrderNameState extends State<OrderName> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'HBO Work',
+                              data.profileName,
                               style: GoogleFonts.roboto(
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.w500,
@@ -272,12 +275,13 @@ class _OrderNameState extends State<OrderName> {
                                 Icon(
                                   Icons.star,
                                   color: Color(0xFFEACA23),
+                                  size:25.sp,
                                 ),
                                 SizedBox(
                                   width: 3.w,
                                 ),
                                 Text(
-                                  '4.9',
+                                  data.rating.toString(),
                                   style: GoogleFonts.roboto(
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
@@ -286,30 +290,34 @@ class _OrderNameState extends State<OrderName> {
                                 SizedBox(
                                   width: 3.w,
                                 ),
-                                Text(
-                                  "(100)",
-                                  style: GoogleFonts.roboto(
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400,
-                                      color: Color(0xFF424242)),
-                                )
+                                // Text(
+                                //   "(100)",
+                                //   style: GoogleFonts.roboto(
+                                //       fontSize: 14.sp,
+                                //       fontWeight: FontWeight.w400,
+                                //       color: Color(0xFF424242)),
+                                // )
                               ],
                             ),
                             SizedBox(
                               height: 5.h,
                             ),
-                            Text('Total 500 work complete',
-                                style: GoogleFonts.roboto(
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xFF424242))),
+                            // Text('Total 500 work complete',
+                            //     style: GoogleFonts.roboto(
+                            //         fontSize: 14.sp,
+                            //         fontWeight: FontWeight.w400,
+                            //         color: Color(0xFF424242))),
                             SizedBox(
                               height: 15.h,
                             ),
                             Row(
                               children: [
                                 InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    if(_orderController.isAccept.value==0&&_orderController.isStatusLoading.value==false){
+                                        _orderController.hendleAcceptAndReject(true, data.id.toString(),index);
+                                    }
+                                  },
                                   child: Container(
                                     height: 34.h,
                                     width: 81.w,
@@ -317,13 +325,22 @@ class _OrderNameState extends State<OrderName> {
                                         color: Color(0xFF187949),
                                         borderRadius:
                                             BorderRadius.circular(3.r)),
-                                    child: Center(
-                                      child: Text(
-                                        'Accept',
-                                        style: GoogleFonts.roboto(
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w400,
-                                            color: Color(0xFFF2F2F2)),
+                                    child: Obx(()=>
+                                       Center(
+                                        child:_orderController.isSelectIndex.value==index&&_orderController.isStatus.value==true&&_orderController.isStatusLoading.value?SizedBox(
+                                          height: 10.h,
+                                          width: 10.h,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 1,
+                                            color: Colors.white,
+                                          ),
+                                        ): Text(
+                                         _orderController.isAccept.value==data.id? 'Accepted':"Accept",
+                                          style: GoogleFonts.roboto(
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w400,
+                                              color: Color(0xFFF2F2F2)),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -332,7 +349,15 @@ class _OrderNameState extends State<OrderName> {
                                   width: 8.w,
                                 ),
                                 InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    bool isReJect=_orderController.isReject.contains(data.id);
+                                    
+                                    if(isReJect==false&&_orderController.isStatusLoading.value==false&&_orderController.isAccept.value!=data.id){
+                                        _orderController.hendleAcceptAndReject(false, data.id.toString(),index);
+                                       
+                                    }
+                                    
+                                  },
                                   child: Container(
                                     height: 34.h,
                                     width: 76.w,
@@ -341,13 +366,22 @@ class _OrderNameState extends State<OrderName> {
                                             color: Color(0xFF187949)),
                                         borderRadius:
                                             BorderRadius.circular(3.r)),
-                                    child: Center(
-                                      child: Text(
-                                        'Reject',
-                                        style: GoogleFonts.roboto(
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w400,
-                                            color: Color(0xFF424242)),
+                                    child: Obx(()=>
+                                       Center(
+                                        child:_orderController.isSelectIndex.value==index&&_orderController.isStatus.value==false&&_orderController.isStatusLoading.value?SizedBox(
+                                          height: 10.h,
+                                          width: 10.h,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 1,
+                                            color:themeColorGreen,
+                                          ),
+                                        ): Text(
+                                         _orderController.isReject.contains(data.id)?"Rejected" :'Reject',
+                                          style: GoogleFonts.roboto(
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w400,
+                                              color: Color(0xFF424242)),
+                                        ),
                                       ),
                                     ),
                                   ),

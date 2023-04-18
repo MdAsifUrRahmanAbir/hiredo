@@ -21,6 +21,7 @@ import 'package:homelyknock/local/my_local.dart';
 import '../../Screens/QuestionScreen/Model/job_post_model.dart';
 import '../Screens/LeadsScreen/Model/lead_search_model.dart';
 import '../Screens/LeadsScreen/Model/leads_model.dart';
+import '../Screens/OrderScreen/pending_request_list_model.dart';
 import '../Screens/Service/Model/service_model.dart';
 import '../widgets/data_controller.dart';
 
@@ -566,38 +567,57 @@ class ApiServices {
     }
   }
 
- static getPanddingRequestList(int id)async{
-     var accessToken = await MyPreference.getToken();
+  static getPanddingRequestList(int id) async {
+    var accessToken = await MyPreference.getToken();
     try {
       var headers = {
         'Authorization': 'Bearer $accessToken',
         'Content-Type': 'application/json',
       };
-      var response = await client
-          .get(Uri.parse("${panddingResquestListApi + id.toString()}/"), headers: headers);
+      var response = await client.get(
+          Uri.parse("${panddingResquestListApi + id.toString()}/"),
+          headers: headers);
       if (response.statusCode == 200) {
-        return jsonDecode(response.body);
+        return pendingRequestListModelFromJson(response.body);
       } else {
-         if (kDebugMode) {
-        print("Leads fetch Error. Reason ${response.statusCode}");
-      }
+        if (kDebugMode) {
+          print(
+              "Pending Request list fetch Error. Reason ${response.statusCode}");
+        }
         return response.statusCode;
       }
     } on Exception catch (e) {
       if (kDebugMode) {
-        print("Leads fetch Error. Reason ${e.toString()}");
+        print("Pending request list fetch Error. Reason ${e.toString()}");
       }
       return 0;
     }
-      
-
-
-
-
-
   }
 
+  static pendingPostAccetp(Map<String, dynamic> data) async {
+    var accessToken = await MyPreference.getToken();
 
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+       
+      };
 
+      var response = await client.post(Uri.parse(pendingPostAcceptApi),
+          body:jsonEncode(data), headers: headers);
 
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+
+        debugPrint("Accept post error status code : ${response.body}");
+        return 1;
+      }
+    } on Exception catch (e) {
+      
+      debugPrint("Accept post error  : $e");
+      return 1;
+    }
+  }
 }
