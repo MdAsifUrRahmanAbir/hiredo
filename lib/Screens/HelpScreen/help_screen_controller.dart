@@ -1,27 +1,25 @@
-
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homelyknock/Screens/HelpScreen/help_model.dart';
+import 'package:homelyknock/Services/api_services_by_limon.dart';
 
 import '../../Route/routes.dart';
 import '../../Services/api_services_by_abir.dart';
 import '../../widgets/logger.dart';
 
-
 final log = logger(HelpScreenController);
 
-class HelpScreenController extends GetxController{
+class HelpScreenController extends GetxController {
   final searchController = TextEditingController();
   final emailController = TextEditingController();
   final messageController = TextEditingController();
-
 
   @override
   void onInit() {
     /// get helps api get method or response
     super.onInit();
   }
-
 
   @override
   void dispose() {
@@ -31,29 +29,27 @@ class HelpScreenController extends GetxController{
     super.dispose();
   }
 
-
   void sendButtonClicked() {
-    if(emailController.text.isNotEmpty && messageController.text.isNotEmpty){
+    if (emailController.text.isNotEmpty && messageController.text.isNotEmpty) {
       _updateStillNeedHelpAPI(emailController.text, messageController.text);
-    }else{
+    } else {
       Get.snackbar("Blank Field", "Please submit email and message here");
     }
   }
 
-  void _updateStillNeedHelpAPI(String email, String message)  async{
-    try{
-      var result = await ApiServicesByAbir.addStillNeedPost(email: email, message: message);
+  void _updateStillNeedHelpAPI(String email, String message) async {
+    try {
+      var result = await ApiServicesByAbir.addStillNeedPost(
+          email: email, message: message);
 
-      if(result){
+      if (result) {
         Get.snackbar("Need Help", "Need Help post Successfully done.");
         Get.offAllNamed(Routes.mainPage);
-      }else{
+      } else {
         log.i("ApiServicesByAbir.addStillNeedPost method return false");
       }
     } on Exception catch (e) {
-        log.i("Opps fetch slider error $e");
+      log.i("Opps fetch slider error $e");
     }
-
   }
-
 }

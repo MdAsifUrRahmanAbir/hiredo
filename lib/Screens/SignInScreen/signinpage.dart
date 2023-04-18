@@ -8,13 +8,8 @@ import 'package:homelyknock/Route/routes.dart';
 
 import 'package:homelyknock/Screens/ResistrationScreen/component/custome_text_field.dart';
 import 'package:homelyknock/Screens/SignInScreen/Contoller/signin_controller.dart';
-import 'package:homelyknock/nav_bar_page/main_screen.dart';
 
 import 'package:homelyknock/utils/colors.dart';
-
-import '../ForgetPasswordScreen/forgotpasswordpage.dart';
-
-import '../SignUpAccountScreen/signupaccountchoosepage.dart';
 
 class SignInPage extends StatelessWidget {
   SignInPage({Key? key}) : super(key: key);
@@ -308,7 +303,7 @@ class SignInPage extends StatelessWidget {
                       ),
                       InkWell(
                           onTap: () {
-                          Get.toNamed(Routes.signInAccountChoosePage);
+                            Get.toNamed(Routes.signInAccountChoosePage);
                           },
                           child: Text(
                             ' Sign Up',

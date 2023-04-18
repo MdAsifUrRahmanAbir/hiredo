@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -7,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
+import 'package:homelyknock/Services/api_component.dart';
 import 'package:homelyknock/utils/colors.dart';
 import '../../nav_bar_page/main_controller.dart';
 import '../../widgets/custom_loader.dart';
@@ -17,18 +17,19 @@ import '../Service/service.dart';
 import 'Controller/profile_controller.dart';
 
 final _mainController = Get.put(MainScreenController());
+final profileController = Get.put(ProfileController());
 
 class Profile extends StatelessWidget {
   Profile({super.key});
 
- 
-  final _dataController=Get.put(DataController());
-  final _profileController = Get.put(ProfileController());
+  final _dataController = Get.put(DataController());
 
   @override
   Widget build(BuildContext context) {
     _dataController.getData();
-    _profileController.getServices();
+    profileController.getServices();
+    profileController.getLeadCount();
+    profileController.fetchProfileData();
     return Scaffold(
       backgroundColor: scaffoldClr,
       appBar: AppBar(
@@ -52,7 +53,7 @@ class Profile extends StatelessWidget {
         ],
       ),
       body: Obx(
-        () => _profileController.isLoading.value
+        () => profileController.isLoading.value
             ? const CustomLoader()
             : SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
@@ -77,12 +78,11 @@ class Profile extends StatelessWidget {
                                 color: Colors.grey.shade400,
                               ),
                               child: CircleAvatar(
-                                backgroundImage:
-                                    _profileController.imagePath.isNotEmpty
-                                        ? FileImage(File(_profileController
-                                            .imagePath
-                                            .toString()))
-                                        : null,
+                                backgroundImage: profileController
+                                        .imagePath.isNotEmpty
+                                    ? FileImage(File(
+                                        profileController.imagePath.toString()))
+                                    : null,
                               ),
                             ),
                             Positioned(
@@ -90,7 +90,7 @@ class Profile extends StatelessWidget {
                                 right: -20.h,
                                 child: IconButton(
                                     onPressed: () {
-                                      _profileController.getImage();
+                                      profileController.getImage(false);
                                     },
                                     icon: Icon(
                                       Icons.camera_alt,
@@ -106,13 +106,13 @@ class Profile extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                               _profileController.profileData!.user.fullName,
+                                profileController.profileData!.user.fullName,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: myStyle(16.sp, FontWeight.w500, textClr),
                               ),
                               Text(
-                               _profileController.profileData!.user.email,
+                                profileController.profileData!.user.email,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: myStyle(14.sp, FontWeight.w400,
@@ -126,7 +126,7 @@ class Profile extends StatelessWidget {
                         ),
                         InkWell(
                             onTap: () {
-                              _profileController.modeChange();
+                              profileController.modeChange();
                             },
                             child: Image.asset(
                               "images/switchimg.png",
@@ -142,7 +142,7 @@ class Profile extends StatelessWidget {
                     SizedBox(
                       height: 20.h,
                     ),
-                   _profileController.isUser.value
+                    profileController.isUser.value
                         ? _isUser()
                         : _isProfational(context),
                     SizedBox(
@@ -150,7 +150,7 @@ class Profile extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        _profileController.hendleLogout(context);
+                        profileController.hendleLogout(context);
                       },
                       child: Container(
                           height: 43.h,
@@ -198,7 +198,7 @@ class Profile extends StatelessWidget {
             style: GoogleFonts.roboto(fontSize: 20.sp, color: Colors.black),
           ),
           subtitle: Text(
-            _profileController.profileData!.user.phoneNumber,
+            profileController.profileData!.user.phoneNumber,
             style: GoogleFonts.roboto(fontSize: 16.sp, color: Colors.black),
           ),
         )),
@@ -209,7 +209,7 @@ class Profile extends StatelessWidget {
             style: GoogleFonts.roboto(fontSize: 20.sp, color: Colors.black),
           ),
           subtitle: Text(
-           _profileController.profileData!.user.corporationName,
+            profileController.profileData!.user.corporationName,
             style: GoogleFonts.roboto(fontSize: 16.sp, color: Colors.black),
           ),
         )),
@@ -220,7 +220,7 @@ class Profile extends StatelessWidget {
             style: GoogleFonts.roboto(fontSize: 20.sp, color: Colors.black),
           ),
           subtitle: Text(
-           _profileController.profileData!.user.corporationNumber,
+            profileController.profileData!.user.corporationNumber,
             style: GoogleFonts.roboto(fontSize: 16.sp, color: Colors.black),
           ),
         )),
@@ -228,7 +228,8 @@ class Profile extends StatelessWidget {
             onPressed: () {
               Get.toNamed(Routes.postAJob, arguments: null);
             },
-            style: ElevatedButton.styleFrom(backgroundColor: themeColorGreen,fixedSize: Size(150.w, 50.h)),
+            style: ElevatedButton.styleFrom(
+                backgroundColor: themeColorGreen, fixedSize: Size(150.w, 50.h)),
             child: Text(
               "Create Post",
               style: GoogleFonts.roboto(
@@ -309,18 +310,37 @@ class Profile extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Image.asset('images/eliteicon.png'),
-                      SizedBox(
-                        width: 4.w,
-                      ),
-                      Text(
-                        'Elite Pro',
-                        style: myStyle(14.sp, FontWeight.w500, textClr),
-                      )
-                    ],
-                  ),
+                  profileController.profileData!.badges != []
+                      ? Row(
+                          children: [
+                            Image.asset('images/eliteicon.png'),
+                            SizedBox(
+                              width: 4.w,
+                            ),
+                            Text(
+                              "Elite Pro",
+                              style: myStyle(14.sp, FontWeight.w500, textClr),
+                            )
+                          ],
+                        )
+                      : Row(
+                          children: [
+                            Image.network(
+                              baseUrl +
+                                  profileController
+                                      .profileData!.badges[0].image,
+                              height: 15.sp,
+                              width: 15.sp,
+                            ),
+                            SizedBox(
+                              width: 4.w,
+                            ),
+                            Text(
+                              profileController.profileData!.badges[0].title,
+                              style: myStyle(14.sp, FontWeight.w500, textClr),
+                            )
+                          ],
+                        ),
                   Row(
                     children: [
                       Image.asset('images/tick.png'),
@@ -405,15 +425,15 @@ class Profile extends StatelessWidget {
               GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: _profileController.serviceList.length < 6
-                      ? _profileController.serviceList.length
+                  itemCount: profileController.serviceList.length < 6
+                      ? profileController.serviceList.length
                       : 6,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       mainAxisExtent: 25.sp,
                       crossAxisSpacing: 15.w,
                       crossAxisCount: 2),
                   itemBuilder: (context, index) => Text(
-                        _profileController.serviceList[index].serviceName
+                        profileController.serviceList[index].serviceName.name
                             .toString(),
                         style: GoogleFonts.roboto(
                             fontSize: 16.sp, color: Colors.black),
@@ -433,7 +453,8 @@ class Profile extends StatelessWidget {
             icon: Icons.star_border_outlined,
             text: 'Leads',
             isCount: true,
-            count: _profileController.leadsList.length.toString()),
+            isLoading: profileController.isLeadLoading.value,
+            count: profileController.leadsCount.value.toString()),
         _cardItem(
             onTap: () {
               Get.toNamed(Routes.myResponse);
@@ -465,13 +486,13 @@ class Profile extends StatelessWidget {
         ),
         _cardItem(
             onTap: () {
-            //  Get.toNamed(Routes.servicePage);
-            Get.to(ServiceScreen());
+              //  Get.toNamed(Routes.servicePage);
+              Get.to(ServiceScreen());
             },
             icon: Icons.rotate_right,
             text: 'Services',
             isCount: true,
-            count: _profileController.serviceList.length.toString()),
+            count: profileController.serviceList.length.toString()),
         _cardItem(
             onTap: () {
               Get.toNamed(Routes.locationPage);
@@ -487,6 +508,7 @@ class Profile extends StatelessWidget {
   _cardItem(
       {required String text,
       String? count,
+      bool? isLoading,
       required Function() onTap,
       required IconData icon,
       bool? isCount = false}) {
@@ -531,19 +553,27 @@ class Profile extends StatelessWidget {
             Row(
               children: [
                 isCount!
-                    ? Container(
-                        height: 18.h,
-                        width: 40.w,
-                        decoration: BoxDecoration(
-                            color: themeColorGreen.withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Center(
-                            child: Text(
-                          count!,
-                          style: TextStyle(
-                              fontSize: 12.sp, color: themeColorGreen),
-                        )),
-                      )
+                    ? isLoading == true
+                        ? SizedBox(
+                            height: 18.h,
+                            width: 18.h,
+                            child: const CircularProgressIndicator(
+                              strokeWidth: 1,
+                            ),
+                          )
+                        : Container(
+                            height: 18.h,
+                            width: 40.w,
+                            decoration: BoxDecoration(
+                                color: themeColorGreen.withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Center(
+                                child: Text(
+                              count!,
+                              style: TextStyle(
+                                  fontSize: 12.sp, color: themeColorGreen),
+                            )),
+                          )
                     : const SizedBox(),
                 const Icon(
                   Icons.navigate_next,

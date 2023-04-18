@@ -2,12 +2,14 @@ import 'dart:convert';
 import 'dart:core';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/Screens/HomeScreen/Model/lead_category_model.dart';
 import 'package:homelyknock/Screens/ProfileScreen/Model/profile_model.dart';
 
 import 'package:homelyknock/Screens/ResistrationScreen/Model/registration_model.dart';
+import 'package:homelyknock/utils/colors.dart';
 import 'package:http/http.dart' as http;
 import 'package:homelyknock/Screens/SettingsScreen/SettingsBadge/Model/bedge_mode.dart';
 import 'package:homelyknock/Screens/SignInScreen/Model/login_model.dart';
@@ -17,6 +19,7 @@ import 'package:homelyknock/Services/api_component.dart';
 import 'package:homelyknock/local/my_local.dart';
 
 import '../../Screens/QuestionScreen/Model/job_post_model.dart';
+import '../Screens/LeadsScreen/Model/lead_search_model.dart';
 import '../Screens/LeadsScreen/Model/leads_model.dart';
 import '../Screens/Service/Model/service_model.dart';
 import '../widgets/data_controller.dart';
@@ -123,6 +126,10 @@ class ApiServices {
         if (kDebugMode) {
           print(response.statusCode);
         }
+        var data = jsonDecode(response.body);
+        Get.snackbar("Error", data["message"],
+            backgroundColor: Colors.red.shade300, colorText: Colors.white);
+        print(response.body);
         return false;
       }
     } on Exception catch (e) {
@@ -154,6 +161,10 @@ class ApiServices {
         var data = await response.stream.bytesToString();
         return serviceModelFromJson(data);
       } else {
+        if (kDebugMode) {
+          return print(
+              "Service fetch Error. Reason ${await response.stream.bytesToString()}");
+        }
         return response.statusCode;
       }
     } on Exception catch (e) {
@@ -389,7 +400,7 @@ class ApiServices {
 
 // fetch leads
 
-  static dynamic fetchLeads() async {
+  static dynamic fetchLeadCount() async {
     var accessToken = await MyPreference.getToken();
 
     try {
@@ -397,16 +408,17 @@ class ApiServices {
         'Authorization': 'Bearer $accessToken',
         'Content-Type': 'application/json',
       };
-      var response = await client.get(Uri.parse(leadsApi), headers: headers);
+      var response =
+          await client.get(Uri.parse(leadsCountApi), headers: headers);
 
       if (response.statusCode == 200) {
-        return leadsModelFromJson(response.body);
+        return jsonDecode(response.body);
       } else {
         return response.statusCode;
       }
     } on Exception catch (e) {
       if (kDebugMode) {
-        return print(" Leads fetch Error. Reason ${e.toString()}");
+        return print(" Leads count error. Reason ${e.toString()}");
       }
       return 0;
     }
@@ -433,6 +445,157 @@ class ApiServices {
     }
   }
 
+  static Future<bool> deleteService(int id) async {
+    var accessToken = await MyPreference.getToken();
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client.delete(
+          Uri.parse("${deleteServiceApi + id.toString()}/"),
+          headers: headers);
+      if (response.statusCode == 204) {
+        return true;
+      } else {
+        if (kDebugMode) {
+          print("Delete service error. Reason ${response.body}");
+        }
+        return false;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("Delete service error. Reason ${e.toString()}");
+      }
+      return false;
+    }
+  }
+
+  static fetchLeads(int page) async {
+    var accessToken = await MyPreference.getToken();
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client.get(Uri.parse(leadsApi + page.toString()),
+          headers: headers);
+      if (response.statusCode == 200) {
+        return leadModelFromJson(response.body);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("Leads fetch Error. Reason ${e.toString()}");
+      }
+      return 0;
+    }
+  }
+
+  static Future<bool> deletePendingPost(int id) async {
+    var accessToken = await MyPreference.getToken();
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client.get(
+          Uri.parse("${pandingPostDeleteApi + id.toString()}/"),
+          headers: headers);
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        debugPrint("Delete pandding post Error}");
+        return false;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("Delete pandding post Error. Reason ${e.toString()}");
+      }
+      return false;
+    }
+  }
+
+  static fetchLeadSearch(String text) async {
+    var accessToken = await MyPreference.getToken();
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client
+          .get(Uri.parse(leadSearchApi + text.toString()), headers: headers);
+      if (response.statusCode == 200) {
+        return leadSearchModelFromJson(response.body);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("Leads fetch Error. Reason ${e.toString()}");
+      }
+      return 0;
+    }
+  }
+
+  static Future<bool> leadContact(int id) async {
+    var accessToken = await MyPreference.getToken();
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client.get(
+          Uri.parse("${leadContactApi + id.toString()}/"),
+          headers: headers);
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        var data = jsonDecode(response.body);
+        debugPrint("Lead Contact error ${data["message"]}");
+        Get.snackbar("Error", data["message"],
+            backgroundColor: Colors.red.shade500, colorText: Colors.white);
+        return false;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("Leads contact Error. Reason ${e.toString()}");
+      }
+      return false;
+    }
+  }
+
+ static getPanddingRequestList(int id)async{
+     var accessToken = await MyPreference.getToken();
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client
+          .get(Uri.parse("${panddingResquestListApi + id.toString()}/"), headers: headers);
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+         if (kDebugMode) {
+        print("Leads fetch Error. Reason ${response.statusCode}");
+      }
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("Leads fetch Error. Reason ${e.toString()}");
+      }
+      return 0;
+    }
+      
+
+
+
+
+
+  }
 
 
 

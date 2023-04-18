@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/utils/colors.dart';
 
 
 
@@ -21,13 +22,13 @@ class TrackingScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.arrow_back,
-              size: 25.sp,
-              color: const Color(0xff187949),
-            )),
+        // leading: IconButton(
+        //     onPressed: () {},
+        //     icon: Icon(
+        //       Icons.arrow_back,
+        //       size: 25.sp,
+        //       color: const Color(0xff187949),
+        //     )),
         title: Text(
           "Tracking Post/Order",
           style: GoogleFonts.roboto(
@@ -144,10 +145,8 @@ class TrackingScreen extends StatelessWidget {
                 SizedBox(height: 25.h,),
           Obx(()=> Expanded(child: _trackingController.currentIndex.value==0?TrackingPostOrder(): TrackingPostOrderTwo() ))
 
-          
-          
-           
-          ,
+        , 
+        
           
             
           ],

@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Route/routes.dart';
 
-import 'package:homelyknock/Screens/EmailVerifiyScreen/enterverificationpage.dart';
 import 'package:homelyknock/Screens/ForgetPasswordScreen/Controller/forget_controller.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/widgets/custom_widgets.dart';
@@ -51,7 +50,7 @@ class ForegPasswordPage extends StatelessWidget {
                   size: 18.sp,
                 ),
                 onPressed: () {
-                 Get.back();
+                  Get.back();
                 },
               )),
         ),
@@ -60,7 +59,6 @@ class ForegPasswordPage extends StatelessWidget {
           style: myStyle(20, FontWeight.w500, textClr),
         ),
       ),
-    
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 26.w),
@@ -133,8 +131,6 @@ class ForegPasswordPage extends StatelessWidget {
               customButton(
                 onTap: () {
                   Get.toNamed(Routes.forgotVerification);
-
-                 
                 },
                 title: 'Next',
               )

@@ -1,71 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:homelyknock/Screens/ReviewScreen/controller/review_controller.dart';
 import 'package:homelyknock/utils/colors.dart';
+import 'package:homelyknock/widgets/custom_loader.dart';
 
 import '../SettingsScreen/setting_page.dart';
 
-class ReviewsPage extends StatefulWidget {
-  static const String routename = '/reviews';
+class ReviewsPage extends StatelessWidget {
   ReviewsPage({Key? key}) : super(key: key);
 
-  @override
-  State<ReviewsPage> createState() => _ReviewsPageState();
-}
-
-class _ReviewsPageState extends State<ReviewsPage> {
-  List<Map> reviews = [
-    {
-      'imgUrl': 'images/haq.png',
-      'name': 'Jasim Uddin',
-      'date': '15 Jan 2023',
-      'ratings': '5.0',
-      'details':
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
-    },
-    {
-      'imgUrl': 'images/jhon.png',
-      'name': 'Jhon Smith',
-      'date': '12 Jan 2023',
-      'ratings': '4.9',
-      'details':
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
-    },
-    {
-      'imgUrl': 'images/kumar.png',
-      'name': 'Barak Uddin',
-      'date': '10 Jan 2023',
-      'ratings': '4.8',
-      'details':
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
-    },
-    {
-      'imgUrl': 'images/redun.png',
-      'name': 'Mr. Karun',
-      'date': '15 Jan 2023',
-      'ratings': '4.7',
-      'details':
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
-    },
-    {
-      'imgUrl': 'images/rahman.png',
-      'name': 'Josef Benjamin',
-      'date': '15 Jan 2023',
-      'ratings': '5.0',
-      'details':
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
-    },
-    {
-      'imgUrl': 'images/haq.png',
-      'name': 'Henry Feyol',
-      'date': '15 Jan 2023',
-      'ratings': '4.0',
-      'details':
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
-    },
-  ];
+  final _reviewController = Get.put(ReviewController());
 
   @override
   Widget build(BuildContext context) {
+    // _reviewController.fetchReviw();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -103,8 +52,9 @@ class _ReviewsPageState extends State<ReviewsPage> {
                   color: Color(0xffC3F6D7),
                 ),
                 child: Text(
-                  '4.9',
-                  style: myStyle(20.sp, FontWeight.w700, Colors.black),
+                  "${_reviewController.reviewData.avgRating}",
+                  style: myStyle(
+                      20.sp, FontWeight.w700, Color.fromARGB(255, 154, 89, 89)),
                 ),
               ),
               SizedBox(
@@ -115,27 +65,27 @@ class _ReviewsPageState extends State<ReviewsPage> {
                 children: [
                   Icon(
                     Icons.star,
-                    color: Color(0xffEACA23),
+                    color: const Color(0xffEACA23),
                     size: 20.sp,
                   ),
                   Icon(
                     Icons.star,
-                    color: Color(0xffEACA23),
+                    color: const Color(0xffEACA23),
                     size: 20.sp,
                   ),
                   Icon(
                     Icons.star,
-                    color: Color(0xffEACA23),
+                    color: const Color(0xffEACA23),
                     size: 20.sp,
                   ),
                   Icon(
                     Icons.star,
-                    color: Color(0xffEACA23),
+                    color: const Color(0xffEACA23),
                     size: 20.sp,
                   ),
                   Icon(
                     Icons.star,
-                    color: Color(0xffEACA23),
+                    color: const Color(0xffEACA23),
                     size: 20.sp,
                   ),
                 ],
@@ -151,13 +101,16 @@ class _ReviewsPageState extends State<ReviewsPage> {
                   ),
                   Spacer(),
                   Text(
-                    '4.9',
+                    "${_reviewController.reviewData.avgRating}",
                     style: myStyle(20.sp, FontWeight.w500, textClr),
                   ),
-                  SizedBox(width: 3.w,),
+                  SizedBox(
+                    width: 3.w,
+                  ),
                   Text(
                     '(500)',
-                    style: myStyle(14.sp, FontWeight.w300, Color(0xff848484)),
+                    style: myStyle(
+                        14.sp, FontWeight.w300, const Color(0xff848484)),
                   ),
                   Spacer(),
                   Container(
@@ -191,110 +144,119 @@ class _ReviewsPageState extends State<ReviewsPage> {
               ),
               Flexible(
                   child: ListView.separated(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemBuilder: (context, index) => Container(
-                            padding: EdgeInsets.all(10.w),
-                            decoration: BoxDecoration(
-                                color: Color(0xffF8F8F8),
-                                borderRadius: BorderRadius.circular(3.r)),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                CircleAvatar(
+                      itemBuilder: (context, index) {
+                        var result = _reviewController
+                            .reviewData.result.reviewsReceived![index];
+                        return Container(
+                          padding: EdgeInsets.all(10.w),
+                          decoration: BoxDecoration(
+                              color: const Color(0xffF8F8F8),
+                              borderRadius: BorderRadius.circular(3.r)),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CircleAvatar(
                                   radius: 22.r,
-                                  backgroundImage:
-                                      AssetImage(reviews[index]['imgUrl']),
+                                  backgroundImage: NetworkImage(result
+                                      .reviewedBy.userProfilePic!.picture)),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          result.reviewedBy.fullName,
+                                          style: myStyle(
+                                              18.sp, FontWeight.w500, textClr),
+                                        ),
+                                        Spacer(),
+                                        Text(
+                                          "",
+                                          style: myStyle(14.sp, FontWeight.w400,
+                                              Colors.black),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 6.h,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.star,
+                                          color: const Color(0xffEACA23),
+                                          size: 20.sp,
+                                        ),
+                                        Icon(
+                                          Icons.star,
+                                          color: const Color(0xffEACA23),
+                                          size: 20.sp,
+                                        ),
+                                        Icon(
+                                          Icons.star,
+                                          color: const Color(0xffEACA23),
+                                          size: 20.sp,
+                                        ),
+                                        Icon(
+                                          Icons.star,
+                                          color: const Color(0xffEACA23),
+                                          size: 20.sp,
+                                        ),
+                                        Icon(
+                                          Icons.star,
+                                          color: const Color(0xffEACA23),
+                                          size: 20.sp,
+                                        ),
+                                        SizedBox(
+                                          width: 4.w,
+                                        ),
+                                        Text("")
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 8.h,
+                                    ),
+                                    SizedBox(
+                                        width: double.infinity,
+                                        child: Text(
+                                          "",
+                                          maxLines: 6,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: myStyle(14.sp, FontWeight.w400,
+                                              const Color(0xff848484)),
+                                        ))
+                                  ],
                                 ),
-                                SizedBox(
-                                  width: 10.w,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            reviews[index]['name'],
-                                            style: myStyle(18.sp,
-                                                FontWeight.w500, textClr),
-                                          ),
-                                          Spacer(),
-                                          Text(
-                                            reviews[index]['date'],
-                                            style: myStyle(14.sp,
-                                                FontWeight.w400, Colors.black),
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 6.h,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.star,
-                                            color: Color(0xffEACA23),
-                                            size: 20.sp,
-                                          ),
-                                          Icon(
-                                            Icons.star,
-                                            color: Color(0xffEACA23),
-                                            size: 20.sp,
-                                          ),
-                                          Icon(
-                                            Icons.star,
-                                            color: Color(0xffEACA23),
-                                            size: 20.sp,
-                                          ),
-                                          Icon(
-                                            Icons.star,
-                                            color: Color(0xffEACA23),
-                                            size: 20.sp,
-                                          ),
-                                          Icon(
-                                            Icons.star,
-                                            color: Color(0xffEACA23),
-                                            size: 20.sp,
-                                          ),
-                                          SizedBox(
-                                            width: 4.w,
-                                          ),
-                                          Text(reviews[index]['ratings'])
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 8.h,
-                                      ),
-                                      SizedBox(
-                                          width: double.infinity,
-                                          child: Text(
-                                            reviews[index]['details'],
-                                            maxLines: 6,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: myStyle(14.sp,
-                                                FontWeight.w400, Color(0xff848484)),
-                                          ))
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
+                        );
+                      },
                       separatorBuilder: (context, index) => SizedBox(
                             height: 10.h,
                           ),
-                      itemCount: reviews.length)),
-              SizedBox(height: 20.h,),
+                      itemCount: _reviewController
+                          .reviewData!.result.reviewsReceived!.length)),
+              SizedBox(
+                height: 20.h,
+              ),
               Container(
                 alignment: Alignment.center,
                 height: 50.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Color(0xff187949)
+                    borderRadius: BorderRadius.circular(5.r),
+                    color: const Color(0xff187949)),
+                child: Text(
+                  'See All Review',
+                  style:
+                      myStyle(16.sp, FontWeight.w500, const Color(0xffF2F2F2)),
                 ),
-                child: Text('See All Review', style: myStyle(16.sp, FontWeight.w500, Color(0xffF2F2F2)),),
               )
             ],
           ),

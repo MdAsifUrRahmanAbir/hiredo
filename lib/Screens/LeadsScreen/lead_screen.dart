@@ -3,25 +3,27 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Route/routes.dart';
-import 'package:homelyknock/Screens/HomeScreen/home.dart';
-import 'package:homelyknock/Screens/LeadsDetailsScreen/leads_details_screen.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
-
 import '../../Services/api_component.dart';
-import '../../nav_bar_page/main_controller.dart';
-import '../../utils/colors.dart';
+import '../LeadsDetailsScreen/Controller/lead_details_controller.dart';
 import '../ProfileScreen/Controller/profile_controller.dart';
 import 'package:jiffy/jiffy.dart';
+
+import '../ProfileScreen/profile.dart';
+import 'Controller/lead_controller.dart';
 
 class LeadsScreen extends StatelessWidget {
   static const String routename = '/leadscreen';
   LeadsScreen({super.key});
 
   final _profileController = Get.put(ProfileController());
+  final _leadController = Get.put(LeadController());
+   final   _leadDetailsController=Get.put(LeadDetailsController());
 
   @override
   Widget build(BuildContext context) {
-    _profileController.getLeads(true);
+    _leadController.firstLoad();
+    _leadDetailsController.isContect.clear();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -45,11 +47,12 @@ class LeadsScreen extends StatelessWidget {
         actions: [Image.asset('images/notification.png')],
       ),
       body: Obx(
-        () => _profileController.isLeadLoading.value
+        () => _leadController.isFirstLoadRunning.value
             ? const CustomLoader()
             : ListView(
                 physics: const BouncingScrollPhysics(),
                 padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 10.h),
+                controller: _leadController.scrolController,
                 children: [
                   Row(
                     children: [
@@ -57,6 +60,12 @@ class LeadsScreen extends StatelessWidget {
                         child: SizedBox(
                           height: 50.h,
                           child: TextFormField(
+                            controller: _leadController.searchController,
+                            onChanged: (v){
+                            if(v.isEmpty){
+                              _leadController.isSearch.value=false;
+                            }
+                            },
                             decoration: InputDecoration(
                               hintText: 'Search',
                               fillColor: Colors.white,
@@ -78,27 +87,39 @@ class LeadsScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10.w),
-                        height: 50.h,
-                        color: const Color(0xff187949),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Filter',
-                              style: GoogleFonts.roboto(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w400,
-                                  color: const Color(0xFFFFFFFF)),
-                            ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            const Icon(
-                              Icons.filter_list_sharp,
-                              color: Colors.white,
-                            )
-                          ],
+                      InkWell(
+                        onTap: (){
+                          if(_leadController.searchController.text.isNotEmpty){
+                             _leadController.isSearch.value=true;
+                             _leadController.searchLeads();
+
+                          }
+                         
+
+                        
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10.w),
+                          height: 50.h,
+                          color: const Color(0xff187949),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Filter',
+                                style: GoogleFonts.roboto(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xFFFFFFFF)),
+                              ),
+                              SizedBox(
+                                width: 5.w,
+                              ),
+                              const Icon(
+                                Icons.filter_list_sharp,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
                         ),
                       )
                     ],
@@ -122,7 +143,7 @@ class LeadsScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              '${_profileController.leadsList.length} matching leads',
+                              '${profileController.leadsCount.value} matching leads',
                               style: GoogleFonts.roboto(
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.w500,
@@ -203,7 +224,7 @@ class LeadsScreen extends StatelessWidget {
                     height: 15.h,
                   ),
                   Text(
-                    'Showing all ${_profileController.leadsList.length} leads',
+                    'Showing all ${profileController.leadsCount.value} leads',
                     style: GoogleFonts.roboto(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w400,
@@ -215,13 +236,12 @@ class LeadsScreen extends StatelessWidget {
                   ListView.separated(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
+                    itemCount:_leadController.isSearch.value?_leadController.searchLeadList.length:_leadController.leadsList.length,
                     itemBuilder: (context, index) {
-                      var data = _profileController.leadsList[index];
+                      var data = _leadController.isSearch.value?_leadController.searchLeadList[index]:_leadController.leadsList[index];
                       return InkWell(
                         onTap: () {
-
-                          Get.toNamed(Routes.leadDetailsPage);
-                         
+                          Get.toNamed(Routes.leadDetailsPage,arguments:data);
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -287,7 +307,7 @@ class LeadsScreen extends StatelessWidget {
                                             width: 5.w,
                                           ),
                                           Text(
-                                            data.location ?? "",
+                                            data.location,
                                             style: GoogleFonts.roboto(
                                                 fontSize: 12.sp,
                                                 fontWeight: FontWeight.w400),
@@ -379,13 +399,27 @@ class LeadsScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    itemCount: _profileController.leadsList.length,
+                    
                     separatorBuilder: (BuildContext context, int index) {
                       return SizedBox(
                         height: 25.h,
                       );
                     },
                   )
+                ,
+                  if (_leadController.isLoadMoreRunning.value == true)
+               Padding(
+                padding: EdgeInsets.only(top: 10.h, bottom: 40.h),
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+                
+                
+                
+                
+                
+                
                 ],
               ),
       ),

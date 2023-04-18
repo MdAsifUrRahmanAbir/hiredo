@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
-import 'package:homelyknock/Screens/SplashScreen/splashscreen.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 
 import 'Route/routes.dart';
+import 'Services/api_component.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
+  Stripe.publishableKey = stripePublishKey;
 
   runApp(const MyApp());
 }
