@@ -9,6 +9,7 @@ import 'package:homelyknock/Screens/HomeScreen/Model/lead_category_model.dart';
 import 'package:homelyknock/Screens/ProfileScreen/Model/profile_model.dart';
 
 import 'package:homelyknock/Screens/ResistrationScreen/Model/registration_model.dart';
+import 'package:homelyknock/utils/colors.dart';
 import 'package:http/http.dart' as http;
 import 'package:homelyknock/Screens/SettingsScreen/SettingsBadge/Model/bedge_mode.dart';
 import 'package:homelyknock/Screens/SignInScreen/Model/login_model.dart';
@@ -516,7 +517,7 @@ class ApiServices {
     }
   }
 
- static fetchLeadSearch(String text) async {
+  static fetchLeadSearch(String text) async {
     var accessToken = await MyPreference.getToken();
     try {
       var headers = {
@@ -537,4 +538,66 @@ class ApiServices {
       return 0;
     }
   }
+
+  static Future<bool> leadContact(int id) async {
+    var accessToken = await MyPreference.getToken();
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client.get(
+          Uri.parse("${leadContactApi + id.toString()}/"),
+          headers: headers);
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        var data = jsonDecode(response.body);
+        debugPrint("Lead Contact error ${data["message"]}");
+        Get.snackbar("Error", data["message"],
+            backgroundColor: Colors.red.shade500, colorText: Colors.white);
+        return false;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("Leads contact Error. Reason ${e.toString()}");
+      }
+      return false;
+    }
+  }
+
+ static getPanddingRequestList(int id)async{
+     var accessToken = await MyPreference.getToken();
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client
+          .get(Uri.parse("${panddingResquestListApi + id.toString()}/"), headers: headers);
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+         if (kDebugMode) {
+        print("Leads fetch Error. Reason ${response.statusCode}");
+      }
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("Leads fetch Error. Reason ${e.toString()}");
+      }
+      return 0;
+    }
+      
+
+
+
+
+
+  }
+
+
+
+
 }

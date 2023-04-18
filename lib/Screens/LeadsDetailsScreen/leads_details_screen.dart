@@ -200,7 +200,7 @@ class LeadsDetailsScreen extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.email,
-                            color: Color(0xFF187949),
+                            color:const Color(0xFF187949),
                             size: 20.sp,
                           ),
                           SizedBox(
@@ -294,7 +294,7 @@ class LeadsDetailsScreen extends StatelessWidget {
                           InkWell(
                             onTap: () {
                               if(!_leadDetailsController.isContect.contains(leadData.id)){
-                                   _leadDetailsController.isContect.add(leadData.id);
+                                   _leadDetailsController.handleContact(leadData.id);
                               }
                             
                             },
