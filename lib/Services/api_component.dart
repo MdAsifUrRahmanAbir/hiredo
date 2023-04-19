@@ -26,6 +26,10 @@ String helpGetApi = "${baseUrl}profile/help/";
 String getLocationApi = "${baseUrl}locations/";
 String getReviewApi = "${baseUrl}profile/UserFilter/";
 
+String getCreditApi = "${baseUrl}payment/UserCreditAmount/";
+String paymentSetCreditApi = "${baseUrl}payment/SetCreditRetrive/";
+String paymentUserCreditPurchasedApi = "${baseUrl}payment/UserCreditPurchased/";
+
 const String stripeUrl = "https://api.stripe.com/v1/payment_intents";
 const String stripeSecretKey =
     "sk_test_51MvmB4BjAkDiQKQNL5Jdp2HS8bbG4rDruFf43JGh03rX2PxoMHYul0kbUh7hRCi2T5ux8AFkfvmbWllvFqDaF2n000bKD76MjZ";
@@ -44,10 +48,9 @@ String leadsApi = "${baseUrl}ServiceWiseLead/?page=";
 String pandingPostDeleteApi = "${baseUrl}lead/JobPostListDelete/";
 String leadSearchApi = "${baseUrl}ServiceWiseLead/?q=";
 
-String leadContactApi="${baseUrl}lead/contact-with-buyer/";
-String panddingResquestListApi="${baseUrl}lead/post-request-detail/";
-String pendingPostAcceptApi="${baseUrl}lead/request-accept-reject/";
-
+String leadContactApi = "${baseUrl}lead/contact-with-buyer/";
+String panddingResquestListApi = "${baseUrl}lead/post-request-detail/";
+String pendingPostAcceptApi = "${baseUrl}lead/request-accept-reject/";
 
 String wishListCompanyApi = "${baseUrl}lead/WishlistServiceViewSet/";
 String wishListServiceApi = "${baseUrl}lead/WishlistFeatureViewSet/";

@@ -7,10 +7,12 @@ import 'package:homelyknock/Screens/HelpScreen/help_screen_controller.dart';
 import 'package:homelyknock/Screens/ReviewScreen/model/review_model.dart';
 
 import 'package:homelyknock/Screens/SettingsScreen/EmailTemplate/Model/email_template_model.dart';
+import 'package:homelyknock/Screens/SettingsScreen/MyCredits/Model/credit_model.dart';
 import 'package:homelyknock/Screens/SettingsScreen/SMSTemplate/Model/sms_template_model.dart';
 import 'package:homelyknock/Screens/TrackingScreen/Model/pending_post_model.dart';
 
 import '../Screens/DocumentScreen/Model/real_time_model.dart';
+import '../Screens/SettingsScreen/MyCredits/Model/user_credit_model.dart';
 import '../local/my_local.dart';
 import 'package:http/http.dart' as http;
 
@@ -183,9 +185,8 @@ class ApiServicesByLimon {
         'Authorization': 'Bearer $accessToken',
       };
 
-      var response = await client.get(
-          Uri.parse("${getReviewApi+id.toString()}/"),
-          headers: headers);
+      var response = await client
+          .get(Uri.parse("${getReviewApi + id.toString()}/"), headers: headers);
       if (response.statusCode == 200) {
         debugPrint("Data :${jsonDecode(response.body)}");
         return reviewsModelFromJson(response.body);
@@ -199,7 +200,56 @@ class ApiServicesByLimon {
     }
   }
 
-  // Update SMS Template
+// fetch credit
+  static dynamic fetchCredit() async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+      };
+
+      var response =
+          await client.get(Uri.parse(getCreditApi), headers: headers);
+
+      if (response.statusCode == 200) {
+        debugPrint("Data :${jsonDecode(response.body)}");
+        return creaditModelFromJson(response.body);
+      } else {
+        debugPrint(" Error : ${response.body}");
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      debugPrint("Data fetch Error. Reason ${e.toString()}");
+      return 0;
+    }
+  }
+
+  // fetch user credit
+
+  static dynamic paymentSetCredit() async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+      };
+
+      var response =
+          await client.get(Uri.parse(paymentSetCreditApi), headers: headers);
+
+      if (response.statusCode == 200) {
+        debugPrint("Data :${jsonDecode(response.body)}");
+        return userCreaditModelFromJson(response.body);
+      } else {
+        debugPrint(" Error : ${response.body}");
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      debugPrint("Data fetch Error. Reason ${e.toString()}");
+      return 0;
+    }
+  }
 
   static dynamic updateSMS(Map<String, dynamic> body, int id) async {
     var accessToken = await MyPreference.getToken();
@@ -338,6 +388,31 @@ class ApiServicesByLimon {
       }
     } on Exception catch (e) {
       debugPrint("Data fetch Error. Reason ${e.toString()}");
+      return 0;
+    }
+  }
+
+  // payment user credit purchase method
+
+  static Future<dynamic> paymentUserCreditPurchase(String body) async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      };
+      var response = await client.post(Uri.parse(paymentUserCreditPurchasedApi),
+          body: jsonEncode(body), headers: headers);
+
+      if (response.statusCode == 200) {
+        debugPrint(response.body);
+        return true;
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      debugPrint("Payment Faild. Reason ${e.toString()}");
       return 0;
     }
   }
