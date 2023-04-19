@@ -11,17 +11,15 @@ import 'api_component.dart';
 class StripeService {
   Map<String, dynamic>? paymentIntentData;
 
-
-  Future<void> makePayment({
-    required String amount, required String currency
-  }) async{
-    try{
+  Future<void> makePayment(
+      {required String amount, required String currency}) async {
+    try {
       debugPrint("Start Payment");
       paymentIntentData = await createPaymentIntent(amount, currency);
 
       debugPrint("After payment intent");
 
-      if(paymentIntentData != null){
+      if (paymentIntentData != null) {
         // CardEditController cardEditController = CardEditController(
         //   initialDetails: CardFieldInputDetails(
         //     complete: true,
@@ -38,82 +36,70 @@ class StripeService {
         debugPrint(" payment intent is not null .........");
         await Stripe.instance.initPaymentSheet(
             paymentSheetParameters: SetupPaymentSheetParameters(
-              customFlow: true,
-              merchantDisplayName: 'Prospects',
-              customerId: paymentIntentData!['customer'],
-              paymentIntentClientSecret: paymentIntentData!['client_secret'],
-              // applePay: const PaymentSheetApplePay(merchantCountryCode: '+92'),
-              googlePay: const PaymentSheetGooglePay(merchantCountryCode: '+92', testEnv: true),
-              style: ThemeMode.dark,
-            )
-        );
+          customFlow: true,
+          merchantDisplayName: 'Prospects',
+          customerId: paymentIntentData!['customer'],
+          paymentIntentClientSecret: paymentIntentData!['client_secret'],
+          // applePay: const PaymentSheetApplePay(merchantCountryCode: '+92'),
+          googlePay: const PaymentSheetGooglePay(
+              merchantCountryCode: '+92', testEnv: true),
+          style: ThemeMode.dark,
+        ));
         debugPrint(" initPaymentSheet  .........");
         displayPaymentSheet();
       }
-    }catch(e, s){
+    } catch (e, s) {
       debugPrint("After payment intent Error: ${e.toString()}");
       debugPrint("After payment intent s Error: ${s.toString()}");
     }
   }
 
-  displayPaymentSheet() async{
-    try{
+  displayPaymentSheet() async {
+    try {
       await Stripe.instance.presentPaymentSheet();
       Get.snackbar('Payment Successful', "Payment Successful Done");
       updateUserPlan();
-    }on Exception catch(e){
-      if(e is StripeException){
+    } on Exception catch (e) {
+      if (e is StripeException) {
         debugPrint("Error from Stripe: ${e.error.localizedMessage}");
-      }else{
+      } else {
         debugPrint("Unforcen Error: $e");
       }
-    } catch(e){
+    } catch (e) {
       debugPrint("Exception $e");
     }
   }
 
-  createPaymentIntent(
-      String amount,
-      String currency) async{
-    try{
+  createPaymentIntent(String amount, String currency) async {
+    try {
       Map<String, dynamic> body = {
         'amount': calculate(amount),
         'currency': currency,
         'payment_method_types[]': 'card',
       };
 
-
       debugPrint("Start Payment Intent http rwq post method");
 
-
-      var response = await http.post(
-        Uri.parse(stripeUrl) ,
-        body: body,
-        headers: {
-          "Authorization": "Bearer $stripeSecretKey",
-          "Content-Type": 'application/x-www-form-urlencoded'
-        }
-      );
+      var response =
+          await http.post(Uri.parse(stripeUrl), body: body, headers: {
+        "Authorization": "Bearer $stripeSecretKey",
+        "Content-Type": 'application/x-www-form-urlencoded'
+      });
       debugPrint("End Payment Intent http rwq post method");
       debugPrint(response.body.toString());
 
       return jsonDecode(response.body);
-    }catch(e){
+    } catch (e) {
       debugPrint('err charging user: ${e.toString()}');
     }
   }
 
-
-  calculate(String amount){
+  calculate(String amount) {
     final a = (int.parse(amount)) * 100;
     return a.toString();
   }
 
-
-
-
   updateUserPlan() async {
-
-    Get.offNamedUntil(Routes.mainPage, (route) => false);
+    Get.offNamedUntil(Routes.myCredits, (route) => false);
   }
 }
