@@ -25,12 +25,15 @@ class ProfileController extends GetxController {
   void onInit() {
     fetchProfileData();
     getLeadCount();
+    getMyResponseCount();
     super.onInit();
   }
 
   var isLoading = false.obs;
   var isLeadLoading = false.obs;
+  var isMyresponseLoading=false.obs;
   var leadsCount = 0.obs;
+  var myResponseCount=0.obs;
   late SharedPreferences preferences;
   RxList<ServiceModel> serviceList =
       List<ServiceModel>.empty(growable: true).obs;
@@ -224,6 +227,31 @@ class ProfileController extends GetxController {
       debugPrint("User not mode change error : $e");
     } finally {
       isLoading(false);
+    }
+  }
+
+
+   getMyResponseCount() async {
+    try {
+      isMyresponseLoading.value = true;
+
+      var result = await ApiServices.fetchMyResponseCount();
+      if (result.runtimeType == int) {
+        if (kDebugMode) {
+          print('Error $result');
+        }
+        log.e(result);
+      } else {
+       myResponseCount.value = result["my_response_count"];
+
+        log.i(result);
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("Fetch Error $e");
+      }
+    } finally {
+      isMyresponseLoading.value = false;
     }
   }
 }

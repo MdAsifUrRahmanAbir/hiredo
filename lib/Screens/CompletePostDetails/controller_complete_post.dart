@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CompletePostController extends GetxController{
+class CompletePostDetailsController extends GetxController{
 
 
     TextEditingController desTextController=TextEditingController();

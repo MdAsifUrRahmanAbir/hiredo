@@ -315,7 +315,7 @@ class _OrderNameState extends State<OrderName> {
                                 InkWell(
                                   onTap: () {
                                     if(_orderController.isAccept.value==0&&_orderController.isStatusLoading.value==false){
-                                        _orderController.hendleAcceptAndReject(true, data.id.toString(),index);
+                                        _orderController.hendleAcceptAndReject(true, data.id.toString(),data.userId,index);
                                     }
                                   },
                                   child: Container(
@@ -353,7 +353,7 @@ class _OrderNameState extends State<OrderName> {
                                     bool isReJect=_orderController.isReject.contains(data.id);
                                     
                                     if(isReJect==false&&_orderController.isStatusLoading.value==false&&_orderController.isAccept.value!=data.id){
-                                        _orderController.hendleAcceptAndReject(false, data.id.toString(),index);
+                                        _orderController.hendleAcceptAndReject(false, data.id.toString(),data.userId,index);
                                        
                                     }
                                     

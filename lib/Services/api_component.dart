@@ -48,9 +48,14 @@ String leadsApi = "${baseUrl}ServiceWiseLead/?page=";
 String pandingPostDeleteApi = "${baseUrl}lead/JobPostListDelete/";
 String leadSearchApi = "${baseUrl}ServiceWiseLead/?q=";
 
-String leadContactApi = "${baseUrl}lead/contact-with-buyer/";
-String panddingResquestListApi = "${baseUrl}lead/post-request-detail/";
-String pendingPostAcceptApi = "${baseUrl}lead/request-accept-reject/";
+String leadContactApi="${baseUrl}lead/contact-with-buyer/";
+String panddingResquestListApi="${baseUrl}lead/post-request-detail/";
+String pendingPostAcceptApi="${baseUrl}lead/request-accept-reject/";
+String completePostApi="${baseUrl}lead/complete-post-list/";
+String myResponseApi="${baseUrl}lead/my-reponse/?page=";
+String myResponseCountApi="${baseUrl}lead/my-reponse-count/";
+
+
 
 String wishListCompanyApi = "${baseUrl}lead/WishlistServiceViewSet/";
 String wishListServiceApi = "${baseUrl}lead/WishlistFeatureViewSet/";
