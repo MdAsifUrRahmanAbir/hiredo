@@ -21,8 +21,10 @@ import 'package:homelyknock/local/my_local.dart';
 import '../../Screens/QuestionScreen/Model/job_post_model.dart';
 import '../Screens/LeadsScreen/Model/lead_search_model.dart';
 import '../Screens/LeadsScreen/Model/leads_model.dart';
+import '../Screens/MyResponse/Model/my_response_model.dart';
 import '../Screens/OrderScreen/pending_request_list_model.dart';
 import '../Screens/Service/Model/service_model.dart';
+import '../Screens/TrackingScreen/Model/complete_post_model.dart';
 import '../widgets/data_controller.dart';
 
 class ApiServices {
@@ -620,4 +622,90 @@ class ApiServices {
       return 1;
     }
   }
+
+static completedPost()async{
+     var accessToken = await MyPreference.getToken();
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client.get(
+          Uri.parse(completePostApi),
+          headers: headers);
+      if (response.statusCode == 200) {
+        return completePostModelFromJson(response.body);
+      } else {
+        if (kDebugMode) {
+          print(
+              "Complete post fetch Error. Reason ${response.statusCode}");
+        }
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("Complete post fetch Error. Reason ${e.toString()}");
+      }
+      return 0;
+    }
+
+
+
+
+}
+
+
+ static fetchMyResponse(int page) async {
+    var accessToken = await MyPreference.getToken();
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client.get(Uri.parse(myResponseApi + page.toString()),
+          headers: headers);
+      if (response.statusCode == 200) {
+        return myResponseModelFromJson(response.body);
+      } else {
+         if (kDebugMode) {
+        print("My response fetch Error code : ${response.statusCode}");
+      }
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("My response fetch Error. Reason ${e.toString()}");
+      }
+      return 0;
+    }
+  }
+
+
+  static dynamic fetchMyResponseCount() async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response =
+          await client.get(Uri.parse(myResponseCountApi), headers: headers);
+
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        return print(" Myresponse count error. Reason ${e.toString()}");
+      }
+      return 0;
+    }
+  }
+
+
+
+
 }

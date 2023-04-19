@@ -16,7 +16,7 @@ class CompletePostDetails extends StatelessWidget {
     super.key,
   });
 
-  final _completeController = Get.put(CompletePostController());
+  final _completeController = Get.put(CompletePostDetailsController());
 
   @override
   Widget build(BuildContext context) {

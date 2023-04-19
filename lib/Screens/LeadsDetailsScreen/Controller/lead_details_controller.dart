@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homelyknock/Screens/ProfileScreen/profile.dart';
 import 'package:homelyknock/Services/api_services.dart';
 
 class LeadDetailsController extends GetxController {
@@ -13,6 +14,7 @@ class LeadDetailsController extends GetxController {
       var result = await ApiServices.leadContact(id);
       if (result) {
         isContect.add(id);
+        profileController.getMyResponseCount();
          debugPrint("Contect sucessfull");
       } else {
         debugPrint("Contect error reson");

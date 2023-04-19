@@ -37,7 +37,7 @@ class OrderController extends GetxController {
     }
   }
 
-hendleAcceptAndReject(bool accept, String id,int index)async{
+hendleAcceptAndReject(bool accept, String id,userId, int index)async{
 
   try {
     isStatus.value=accept;
@@ -47,6 +47,7 @@ hendleAcceptAndReject(bool accept, String id,int index)async{
    
   Map<String,dynamic> data={
     "postId": id,
+    "userId":userId,
     "response": accept
   };
   var result=await ApiServices.pendingPostAccetp(data);

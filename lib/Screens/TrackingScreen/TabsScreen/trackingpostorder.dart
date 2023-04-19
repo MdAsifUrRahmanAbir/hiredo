@@ -5,6 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Route/routes.dart';
+import 'package:shimmer/shimmer.dart';
+
+
+import '../../../Services/api_component.dart';
+import '../Controller/complete_controller.dart';
 
 class TrackingPostOrderTwo extends StatelessWidget {
   TrackingPostOrderTwo({super.key});
@@ -14,219 +19,282 @@ class TrackingPostOrderTwo extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
 
+  final _completePostController=Get.put(CompletePostController());
+
   @override
   Widget build(BuildContext context) {
+    _completePostController.fetchCompletePost();
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
-      child: Column(
-        children: [
-          IntrinsicHeight(
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4.r),
-                  border: Border.all(color: Colors.green)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 50.h,
-                    width: 120.w,
-                    child: Container(
-                      padding: EdgeInsets.all(8.0.w),
-                      child: TextFormField(
-                        controller: nameController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          fillColor: Colors.white,
-                          hintText: "Search ",
-                          hintStyle: GoogleFonts.roboto(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: 1,
-                              color: Color(0xffB7B7B7)),
-                        ),
-                      ),
-                    ),
-                  ),
-                  VerticalDivider(
-                    width: 20.w,
-                    thickness: 1,
-                    indent: 10,
-                    endIndent: 10,
-                    color: Colors.grey,
-                  ),
-                  SizedBox(
-                    height: 50.h,
-                    width: 120.w,
-                    child: Container(
-                      padding: EdgeInsets.all(5.r),
-                      child: TextFormField(
-                        controller: locationController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          fillColor: Colors.white,
-                          hintText: "Location",
-                          prefix: InkWell(
-                            onTap: () {},
-                            child: Icon(
-                              Icons.location_pin,
-                              color: Colors.grey,
-                              size: 20.sp,
-                            ),
-                          ),
-                          hintStyle: GoogleFonts.roboto(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: 1,
-                              color: Color(0xffB7B7B7)),
-                        ),
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      color: Color(0xff187949),
+      child: Obx(()=>
+         Column(
+          children: [
+            IntrinsicHeight(
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4.r),
+                    border: Border.all(color: Colors.green)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
                       height: 50.h,
-                      width: 45.w,
-                      child: Icon(
-                        Icons.search,
-                        color: Color(0xffFFFFFF),
+                      width: 120.w,
+                      child: Container(
+                        padding: EdgeInsets.all(8.0.w),
+                        child: TextFormField(
+                          controller: nameController,
+                          onChanged: (value){
+                              if (nameController.text.isEmpty &&
+                                locationController.text.isEmpty) {
+                              _completePostController.completePostList.value =
+                                  _completePostController.demoCompletePostList;
+                            }
+                          },
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            fillColor: Colors.white,
+                            hintText: "Search ",
+                            hintStyle: GoogleFonts.roboto(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w400,
+                                letterSpacing: 1,
+                                color: Color(0xffB7B7B7)),
+                          ),
+                        ),
                       ),
                     ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 20.h,
-          ),
-          ListView.separated(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) => Container(
-                    height: 171.h,
-                    width: double.infinity,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(5.r),
-                        boxShadow: [
-                          BoxShadow(
-                              color: const Color(0xFF187949).withOpacity(0.07),
-                              blurRadius: 7,
-                              spreadRadius: 0)
-                        ]),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(3.r),
-                              child: Image.asset(
-                                'images/intro1.jpg',
-                                height: 89.h,
-                                width: 80.w,
-                                fit: BoxFit.cover,
+                    VerticalDivider(
+                      width: 20.w,
+                      thickness: 1,
+                      indent: 10,
+                      endIndent: 10,
+                      color: Colors.grey,
+                    ),
+                    SizedBox(
+                      height: 50.h,
+                      width: 120.w,
+                      child: Container(
+                        padding: EdgeInsets.all(5.r),
+                        child: TextFormField(
+                          controller: locationController,
+                          onChanged: (value){
+                              if (nameController.text.isEmpty &&
+                                locationController.text.isEmpty) {
+                              _completePostController.completePostList.value =
+                                  _completePostController.demoCompletePostList;
+                            }
+                          },
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            fillColor: Colors.white,
+                            hintText: "Location",
+                            prefix: InkWell(
+                              onTap: () {},
+                              child: Icon(
+                                Icons.location_pin,
+                                color: Colors.grey,
+                                size: 20.sp,
                               ),
                             ),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('Designing My New Website',
-                                      style: GoogleFonts.roboto(
-                                          fontSize: 18.sp,
-                                          fontWeight: FontWeight.w500,
-                                          color: Color(0xFF272727)),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                  Text(
-                                    'Contrary to popular belief, Lorem Ipsum is not simply random text.',
-                                    style: GoogleFonts.roboto(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: Color(0xFF555957)),
-                                  ),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                  RichText(
-                                    text: TextSpan(
-                                      text: 'Completed by ',
+                            hintStyle: GoogleFonts.roboto(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w400,
+                                letterSpacing: 1,
+                                color: Color(0xffB7B7B7)),
+                          ),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                         _completePostController.searchPanddingPost(
+                            text: nameController.text.trim(),
+                            location: locationController.text.trim());
+                      },
+                      child: Container(
+                        color: Color(0xff187949),
+                        height: 50.h,
+                        width: 45.w,
+                        child: Icon(
+                          Icons.search,
+                          color: Color(0xffFFFFFF),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+            _completePostController.isLoading.value?ListView.builder(
+                      itemCount: 8,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Shimmer.fromColors(
+                          baseColor: Colors.grey.withOpacity(0.1),
+                          highlightColor: Colors.grey.withOpacity(0.5),
+                          child: Column(
+                            children: [
+                              ListTile(
+                                leading: Container(
+                                  height: 89.h,
+                                  width: 80.w,
+                                  color: Colors.white,
+                                ),
+                                title: Container(
+                                  height: 15.h,
+                                  width: 100.w,
+                                  color: Colors.white,
+                                ),
+                                subtitle: Container(
+                                  width: double.infinity,
+                                  height: 15.h,
+                                  color: Colors.white,
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      })
+                  
+                  :
+            ListView.separated(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  var data=_completePostController.completePostList[index];
+                  return Container(
+                      height: 171.h,
+                      width: double.infinity,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5.r),
+                          boxShadow: [
+                            BoxShadow(
+                                color: const Color(0xFF187949).withOpacity(0.07),
+                                blurRadius: 7,
+                                spreadRadius: 0)
+                          ]),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(3.r),
+                                child: Image.network(
+                                  baseUrl+data.post.category.image,
+                                  height: 89.h,
+                                  width: 80.w,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(data.post.category.name,
+                                        style: GoogleFonts.roboto(
+                                            fontSize: 18.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: Color(0xFF272727)),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    Text(
+                                      data.post.postObject[0].question.qs,
                                       style: GoogleFonts.roboto(
                                           fontSize: 14.sp,
                                           fontWeight: FontWeight.w400,
-                                          color: Color(0xFF848484)),
-                                      children: [
-                                        TextSpan(
-                                            text: 'HBO Work',
-                                            style: GoogleFonts.roboto(
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w600,
-                                                color: Color(0xFF272727))),
-                                      ],
+                                          color: Color(0xFF555957)),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                ],
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    RichText(
+                                      text: TextSpan(
+                                        text: 'Completed by ',
+                                        style: GoogleFonts.roboto(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w400,
+                                            color: Color(0xFF848484)),
+                                        children: [
+                                          TextSpan(
+                                              text:data.profileName,
+                                              style: GoogleFonts.roboto(
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Color(0xFF272727))),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 90.w,
                               ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: 90.w,
-                            ),
-                            InkWell(
-                              onTap: (){
-                                Get.toNamed(Routes.completePostDetails);
-                              },
-                              child: Container(
-                                height: 34.h,
-                                width: 115.w,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4.r),
-                                    color: Color(0xff187949)),
-                                child: Center(
-                                  child: Text(
-                                    "view details",
-                                    style: GoogleFonts.roboto(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.white),
+                              InkWell(
+                                onTap: (){
+                                  Get.toNamed(Routes.completePostDetails);
+                                },
+                                child: Container(
+                                  height: 34.h,
+                                  width: 115.w,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      color: Color(0xff187949)),
+                                  child: Center(
+                                    child: Text(
+                                      "view details",
+                                      style: GoogleFonts.roboto(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.white),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+              
+                },
+              
+              
+              
+                separatorBuilder: (_, index) => SizedBox(
+                      height: 10.h,
                     ),
-                  ),
-              separatorBuilder: (_, index) => SizedBox(
-                    height: 10.h,
-                  ),
-              itemCount: 10)
-        ],
+                itemCount: _completePostController.completePostList.length)
+          ],
+        ),
       ),
     );
   }

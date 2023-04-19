@@ -30,6 +30,7 @@ class Profile extends StatelessWidget {
     profileController.getServices();
     profileController.getLeadCount();
     profileController.fetchProfileData();
+    profileController.getMyResponseCount();
     return Scaffold(
       backgroundColor: scaffoldClr,
       appBar: AppBar(
@@ -462,7 +463,9 @@ class Profile extends StatelessWidget {
             icon: Icons.sports_handball_rounded,
             text: 'My Responces',
             isCount: true,
-            count: 450.toString()),
+            isLoading: profileController.isMyresponseLoading.value,
+            count: profileController.myResponseCount.value.toString()
+            ),
         _cardItem(
           onTap: () {
             Get.toNamed(Routes.wishListScreen);

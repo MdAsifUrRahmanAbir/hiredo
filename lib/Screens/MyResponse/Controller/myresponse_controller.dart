@@ -1,0 +1,92 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:homelyknock/Screens/MyResponse/Model/my_response_model.dart';
+
+import '../../../Services/api_services.dart';
+
+class MyResponseController extends GetxController{
+
+    late ScrollController scrolController;
+
+@override
+  void onInit() {
+    firstLoad();
+    scrolController = ScrollController()..addListener(loadMore);
+    super.onInit();
+  }
+
+    int page = 1;
+
+  var isFirstLoadRunning = false.obs;
+  var hasNextPage = true.obs;
+
+  var isLoadMoreRunning = false.obs;
+
+  RxList<Result> myResponseList = List<Result>.empty(growable: true).obs;
+
+   RxList<Result> searchMyResponseList = List<Result>.empty(growable: true).obs;
+  
+  MyResponseModel? demoData;
+
+  void loadMore() async {
+    if (hasNextPage.value == true &&
+        isFirstLoadRunning.value == false &&
+        isLoadMoreRunning.value == false &&
+        scrolController.position.extentAfter < 300) {
+      isLoadMoreRunning.value =
+          true; // Display a progress indicator at the bottom
+
+      page += 1; // Increase _page by 1
+
+      try {
+        final res = await ApiServices.fetchLeads(page);
+        if (res.runtimeType == int) {
+          debugPrint("Response fetch error : $res");
+        } else {
+           demoData = res;
+          if (demoData!.totalPages>=page) {
+            myResponseList.addAll(demoData!.result);
+           
+          } else {
+            hasNextPage.value = false;
+            debugPrint("Response.length==${myResponseList.length}");
+          }
+        }
+      } catch (err) {
+        if (kDebugMode) {
+          print('Something went wrong!');
+        }
+      } finally {
+        isLoadMoreRunning.value = false;
+      }
+    }
+  }
+
+  void firstLoad() async {
+    try {
+  isFirstLoadRunning.value = true;
+    final res = await ApiServices.fetchMyResponse(page);
+    if (res.runtimeType == int) {
+      debugPrint("lead fetch error : $res");
+    } else {
+       demoData = res;
+      myResponseList.value = demoData!.result;
+     
+      print("leadsList.length:${myResponseList.length}");
+    }
+} on Exception catch (e) {
+  print('Something went wrong');
+ 
+}finally{
+  isFirstLoadRunning.value =false;
+}
+    
+  }
+
+
+
+
+
+
+}
