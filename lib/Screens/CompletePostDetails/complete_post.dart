@@ -5,10 +5,12 @@ import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:homelyknock/Screens/TrackingScreen/Model/complete_post_model.dart';
 
 import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/custom_widgets.dart';
 
+import '../../Services/api_component.dart';
 import 'controller_complete_post.dart';
 
 class CompletePostDetails extends StatelessWidget {
@@ -17,6 +19,9 @@ class CompletePostDetails extends StatelessWidget {
   });
 
   final _completeController = Get.put(CompletePostDetailsController());
+
+
+  CompletePostModel data=Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -58,15 +63,15 @@ class CompletePostDetails extends StatelessWidget {
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: Colors.grey.shade300,
-                        // image:
-                        //     DecorationImage(image: NetworkImage(""),fit: BoxFit.fill)
+                        image:
+                            DecorationImage(image: NetworkImage(baseUrl+data.post.category.image),fit: BoxFit.fill)
                       ),
                     ),
                     SizedBox(
                       height: 10.h,
                     ),
                     Text(
-                      "data.category.name",
+                      data.post.category.name,
                       style: GoogleFonts.roboto(
                           fontSize: 20.sp,
                           fontWeight: FontWeight.w500,
@@ -76,7 +81,7 @@ class CompletePostDetails extends StatelessWidget {
                       height: 18.h,
                     ),
                     Text(
-                      "Jakir Hossin",
+                      data.profileName,
                       style: GoogleFonts.roboto(
                           fontSize: 20.sp,
                           fontWeight: FontWeight.w500,
@@ -93,11 +98,11 @@ class CompletePostDetails extends StatelessWidget {
                           width: 3.w,
                         ),
                         Text(
-                          '4.9',
+                          data.rating.toString(),
                           style: GoogleFonts.roboto(
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w400,
-                              color: Color(0xFF424242)),
+                              color:const Color(0xFF424242)),
                         ),
                         SizedBox(
                           width: 3.w,
@@ -107,11 +112,11 @@ class CompletePostDetails extends StatelessWidget {
                     SizedBox(
                       height: 5.h,
                     ),
-                    Text('Total 500 work complete',
-                        style: GoogleFonts.roboto(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                            color: const Color(0xFF424242))),
+                    // Text('Total 500 work complete',
+                    //     style: GoogleFonts.roboto(
+                    //         fontSize: 14.sp,
+                    //         fontWeight: FontWeight.w400,
+                    //         color: const Color(0xFF424242))),
 
                     SizedBox(
                       height: 15.h,
@@ -175,7 +180,7 @@ class CompletePostDetails extends StatelessWidget {
                           width: 5.w,
                         ),
                         Text(
-                          "20 Credits",
+                          data.post.postCredit.toString(),
                           //  "${leadData.postCredit} Credits",
                           style: GoogleFonts.roboto(
                               fontSize: 14.sp,
@@ -209,13 +214,13 @@ class CompletePostDetails extends StatelessWidget {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        //final qansData = leadData.postObject[index];
+                        final qansData = data.post.postObject[index];
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "qansData.question.qs",
+                              qansData.question.qs,
                               style: GoogleFonts.roboto(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w400,
@@ -225,7 +230,7 @@ class CompletePostDetails extends StatelessWidget {
                               height: 10.h,
                             ),
                             Text(
-                              "  qansData.pAnswer.options",
+                               qansData.pAnswer.options,
                               style: GoogleFonts.roboto(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w400,
@@ -234,7 +239,7 @@ class CompletePostDetails extends StatelessWidget {
                           ],
                         );
                       },
-                      itemCount: 0,
+                      itemCount:data.post.postObject.length,
                       separatorBuilder: (BuildContext context, int index) =>
                           SizedBox(
                         height: 20.h,

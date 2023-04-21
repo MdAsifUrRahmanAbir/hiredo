@@ -79,7 +79,7 @@ class Posts {
     List<PostObject> postObject;
     int responseCount;
     int postCredit;
-    DateTime created;
+    String created;
 
     factory Posts.fromJson(Map<String, dynamic> json) => Posts(
         id: json["id"],
@@ -91,7 +91,7 @@ class Posts {
         postObject: List<PostObject>.from(json["post_object"].map((x) => PostObject.fromJson(x))),
         responseCount: json["response_count"],
         postCredit: json["post_credit"],
-        created: DateTime.parse(json["created"]),
+        created:json["created"],
     );
 
  

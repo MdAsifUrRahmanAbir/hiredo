@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
+import 'package:homelyknock/Services/api_services.dart';
 import 'package:http/http.dart' as http;
 
 import '../Route/routes.dart';
@@ -12,7 +13,10 @@ class StripeService {
   Map<String, dynamic>? paymentIntentData;
 
   Future<void> makePayment(
-      {required String amount, required String currency}) async {
+      {required String amount,
+      required String currency,
+      required int id,
+      required int cradit}) async {
     try {
       debugPrint("Start Payment");
       paymentIntentData = await createPaymentIntent(amount, currency);
@@ -46,7 +50,7 @@ class StripeService {
           style: ThemeMode.dark,
         ));
         debugPrint(" initPaymentSheet  .........");
-        displayPaymentSheet();
+        displayPaymentSheet(amount: int.parse(amount), id: id, cradit: cradit);
       }
     } catch (e, s) {
       debugPrint("After payment intent Error: ${e.toString()}");
@@ -54,11 +58,28 @@ class StripeService {
     }
   }
 
-  displayPaymentSheet() async {
+  displayPaymentSheet(
+      {required int amount, required int id, required int cradit}) async {
     try {
       await Stripe.instance.presentPaymentSheet();
-      Get.snackbar('Payment Successful', "Payment Successful Done");
-      updateUserPlan();
+
+      Map<String, dynamic> body = {
+        "user": id,
+        "credit_amount": amount,
+        "credit_price": cradit,
+        "transaction_id": "645646",
+        "payment_id": "546654"
+      };
+
+      try {
+        var result = await ApiServices.paymentUserCreditPurchase(body);
+        if (result) {
+          updateUserPlan();
+          Get.snackbar('Payment Successful', "Payment Successful Done");
+        }
+      } on Exception catch (e) {
+        debugPrint("payment error : $e");
+      }
     } on Exception catch (e) {
       if (e is StripeException) {
         debugPrint("Error from Stripe: ${e.error.localizedMessage}");
