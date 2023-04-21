@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
+import 'package:homelyknock/Screens/ProfileScreen/Controller/profile_controller.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
+import 'package:homelyknock/widgets/common_data.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Services/stripe_service.dart';
 import 'Controller/credit_controller.dart';
@@ -265,7 +268,7 @@ class MyCreditsPage extends StatelessWidget {
                                     ),
                                     const Spacer(),
                                     InkWell(
-                                      onTap: () {
+                                      onTap: ()async {
                                         var amount = _creditController
                                             .userCreditData[index].priceAmount
                                             .toInt();
@@ -273,8 +276,13 @@ class MyCreditsPage extends StatelessWidget {
                                         //     .userCreditData[index].priceAmount
                                         //     .toString());
                                         // print(amount);
+                                    var    sharedPreferences = await SharedPreferences.getInstance();
+                              var      id = sharedPreferences.getInt(CommonData.id) ?? 0;
                                         StripeService().makePayment(
+                                          id:id,
                                             amount: amount.toString(),
+                                            cradit:_creditController
+                                            .userCreditData[index].creditAmount ,
                                             currency: "USD");
                                       },
                                       child: Container(

@@ -42,6 +42,7 @@ import '../Screens/CompletePostDetails/complete_post.dart';
 import '../Screens/EmailVerifiyScreen/enterverificationpage.dart';
 import '../Screens/HelpScreen/help_screen.dart';
 import '../Screens/IntroScreen/introtwopage.dart';
+import '../Screens/MyResponseDetails/my_response_details.dart';
 import '../Screens/QuestionScreen/question_screen.dart';
 import '../Screens/ResistrationScreen/registrationpage.dart';
 import '../Screens/RestPasswordScreen/resetpasswordpage.dart';
@@ -93,6 +94,7 @@ class Routes {
   static String emailNotification = '/email_notification_screen';
   static String browserNotification = '/browser_notification_screen';
   static String completePostDetails="/complete_post_delete";
+  static String myresponseDetailsScreen="/myresponse_details_screen";
 }
 
 /// Add this list variable into your GetMaterialApp as the value of getPages parameter.
@@ -194,7 +196,8 @@ final getPages = [
   //   GetPage(name: Routes.badgeDetails, page:()=>BadgesSecondPage() ),
   //   GetPage(name: Routes.helpPage, page:()=> HelpScreen() ),
 
-  GetPage(name: Routes.completePostDetails, page:()=>CompletePostDetails())
+  GetPage(name: Routes.completePostDetails, page:()=>CompletePostDetails()),
+  GetPage(name:Routes.myresponseDetailsScreen,page:()=>MyresponseDetailsScreen())
 
     
 

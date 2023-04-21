@@ -707,5 +707,29 @@ static completedPost()async{
 
 
 
+  static Future<dynamic> paymentUserCreditPurchase(Map<String,dynamic> body) async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      };
+      var response = await client.post(Uri.parse(paymentUserCreditPurchasedApi),
+          body: jsonEncode(body), headers: headers);
+
+      if (response.statusCode == 200) {
+        debugPrint(response.body);
+        return true;
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      debugPrint("Payment Faild. Reason ${e.toString()}");
+      return 0;
+    }
+  }
+
+
 
 }

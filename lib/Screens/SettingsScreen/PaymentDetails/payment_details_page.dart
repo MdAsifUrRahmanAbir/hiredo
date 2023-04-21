@@ -349,7 +349,7 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
     return Expanded(
         child: InkWell(
       onTap: () {
-        paymentController.makePayment(amount: '9', currency: 'USD');
+      //  paymentController.makePayment(amount: '9', currency: 'USD');
       },
       child: Container(
         height: 51.h,

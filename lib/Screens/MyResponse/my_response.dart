@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:jiffy/jiffy.dart';
 
+import '../../Route/routes.dart';
 import '../../Services/api_component.dart';
 import '../../widgets/custom_loader.dart';
 import 'Controller/myresponse_controller.dart';
@@ -209,150 +210,155 @@ class _MyResponseState extends State<MyResponse> {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       var data = _myResponseController.myResponseList[index];
-                      return Column(
-                        children: [
-                          Row(
-                            children: [
-                              data.posts.user.userProfilePic == null
-                                  ? CircleAvatar(
-                                      radius: 20.r,
-                                      backgroundColor: Colors.grey.shade500,
-                                    )
-                                  : CircleAvatar(
-                                      radius: 20.r,
-                                      backgroundImage: NetworkImage(baseUrl +
-                                          data.posts.user.userProfilePic
-                                              .picture),
-                                    ),
-                              SizedBox(
-                                width: 8.w,
-                              ),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          data.posts.user.fullName,
-                                          style: myStyle(14.sp, FontWeight.bold,
-                                              Colors.black),
-                                        ),
-                                        Icon(
-                                          Icons.restaurant,
-                                          color: Colors.green,
-                                          size: 15.sp,
-                                        ),
-                                        Text(
-                                          data.posts.category.name,
-                                          style: myStyle(12.sp, FontWeight.w400,
-                                              Colors.black),
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 8.w, vertical: 5.w),
-                                          decoration: BoxDecoration(
-                                              color: const Color(0xffF2F2F2),
-                                              borderRadius:
-                                                  BorderRadius.circular(4.r)),
-                                          child: Row(
-                                            children: [
-                                              Icon(
-                                                Icons.circle,
-                                                color: Colors.pink,
-                                                size: 18.sp,
-                                              ),
-                                              SizedBox(
-                                                width: 6.w,
-                                              ),
-                                              Text(
-                                                data.status,
-                                                style: myStyle(
-                                                    12.sp,
-                                                    FontWeight.w400,
-                                                    Colors.black),
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.location_on_outlined,
-                                          color: Colors.green,
-                                          size: 16.sp,
-                                        ),
-                                        SizedBox(
-                                          width: 5.w,
-                                        ),
-                                        Text(
-                                          data.posts.location,
-                                          style: myStyle(12.sp, FontWeight.w400,
-                                              Colors.grey),
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 15.sp,
-                          ),
-                          RichText(
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                              text: TextSpan(
-                                text: '',
-                                style: GoogleFonts.roboto(
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400,
-                                    color: const Color(0xFF187949)),
-                                children: data.posts.postObject
-                                    .map((e) => TextSpan(
-                                        text: e.question.qs,
-                                        style: GoogleFonts.roboto(
-                                            fontSize: 13.sp,
-                                            fontWeight: FontWeight.w400,
-                                            color: const Color(0xFF848484))))
-                                    .toList(),
-                              )),
-                          SizedBox(
-                            height: 15.sp,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(8.w),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4.r),
-                                color: const Color(0xffF3F3F6)),
-                            child: Row(
+                      return InkWell(
+                        onTap:(){
+                          Get.toNamed(Routes.myresponseDetailsScreen,arguments:data);
+                        },
+                        child: Column(
+                          children: [
+                            Row(
                               children: [
-                                Icon(
-                                  Icons.beenhere_outlined,
-                                  size: 16.sp,
-                                ),
+                                data.posts.user.userProfilePic == null
+                                    ? CircleAvatar(
+                                        radius: 20.r,
+                                        backgroundColor: Colors.grey.shade500,
+                                      )
+                                    : CircleAvatar(
+                                        radius: 20.r,
+                                        backgroundImage: NetworkImage(baseUrl +
+                                            data.posts.user.userProfilePic
+                                                .picture),
+                                      ),
                                 SizedBox(
-                                  width: 10.w,
+                                  width: 8.w,
                                 ),
-                                Text(
-                                  'You send ${data.user.fullName} an email',
-                                  style: myStyle(
-                                      14.sp, FontWeight.w400, Colors.black),
-                                ),
-                             const   Spacer(),
-                                Text(Jiffy.parse(data.createdAt).fromNow(),
-                                    style: myStyle(
-                                        14.sp, FontWeight.w400, Colors.black))
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            data.posts.user.fullName,
+                                            style: myStyle(14.sp, FontWeight.bold,
+                                                Colors.black),
+                                          ),
+                                          Icon(
+                                            Icons.restaurant,
+                                            color: Colors.green,
+                                            size: 15.sp,
+                                          ),
+                                          Text(
+                                            data.posts.category.name,
+                                            style: myStyle(12.sp, FontWeight.w400,
+                                                Colors.black),
+                                          ),
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 8.w, vertical: 5.w),
+                                            decoration: BoxDecoration(
+                                                color: const Color(0xffF2F2F2),
+                                                borderRadius:
+                                                    BorderRadius.circular(4.r)),
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.circle,
+                                                  color: Colors.pink,
+                                                  size: 18.sp,
+                                                ),
+                                                SizedBox(
+                                                  width: 6.w,
+                                                ),
+                                                Text(
+                                                  data.status,
+                                                  style: myStyle(
+                                                      12.sp,
+                                                      FontWeight.w400,
+                                                      Colors.black),
+                                                )
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.location_on_outlined,
+                                            color: Colors.green,
+                                            size: 16.sp,
+                                          ),
+                                          SizedBox(
+                                            width: 5.w,
+                                          ),
+                                          Text(
+                                            data.posts.location,
+                                            style: myStyle(12.sp, FontWeight.w400,
+                                                Colors.grey),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                )
                               ],
                             ),
-                          ),
-                        const  Divider(),
-                        ],
+                            SizedBox(
+                              height: 15.sp,
+                            ),
+                            RichText(
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                                text: TextSpan(
+                                  text: '',
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w400,
+                                      color: const Color(0xFF187949)),
+                                  children: data.posts.postObject
+                                      .map((e) => TextSpan(
+                                          text: e.question.qs,
+                                          style: GoogleFonts.roboto(
+                                              fontSize: 13.sp,
+                                              fontWeight: FontWeight.w400,
+                                              color: const Color(0xFF848484))))
+                                      .toList(),
+                                )),
+                            SizedBox(
+                              height: 15.sp,
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(8.w),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4.r),
+                                  color: const Color(0xffF3F3F6)),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.beenhere_outlined,
+                                    size: 16.sp,
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  Text(
+                                    'You send ${data.user.fullName} an email',
+                                    style: myStyle(
+                                        14.sp, FontWeight.w400, Colors.black),
+                                  ),
+                               const   Spacer(),
+                                  Text(Jiffy.parse(data.createdAt).fromNow(),
+                                      style: myStyle(
+                                          14.sp, FontWeight.w400, Colors.black))
+                                ],
+                              ),
+                            ),
+                          const  Divider(),
+                          ],
+                        ),
                       );
                     },
                     separatorBuilder: (context, index) => const SizedBox(

@@ -260,7 +260,7 @@ class TrackingPostOrderTwo extends StatelessWidget {
                               ),
                               InkWell(
                                 onTap: (){
-                                  Get.toNamed(Routes.completePostDetails);
+                                  Get.toNamed(Routes.completePostDetails,arguments: data);
                                 },
                                 child: Container(
                                   height: 34.h,
