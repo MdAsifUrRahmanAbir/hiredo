@@ -121,6 +121,6 @@ class StripeService {
   }
 
   updateUserPlan() async {
-    Get.offNamedUntil(Routes.myCredits, (route) => false);
+    Get.offNamedUntil(Routes.mainPage, (route) => false);
   }
 }
