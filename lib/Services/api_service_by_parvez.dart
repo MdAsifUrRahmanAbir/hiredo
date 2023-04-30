@@ -57,11 +57,11 @@ class ApiServicesByParvez {
   }
 
   //Add WishList
-  static dynamic addWishList(int wishedUserId) async {
+  static dynamic addWishList(int serviceId) async {
     var accessToken = await MyPreference.getToken();
 
     try {
-      final body = {'wished_user': wishedUserId};
+      final body = {"category_service":serviceId};
 
       var headers = {
         'Authorization': 'Bearer $accessToken',
@@ -70,7 +70,7 @@ class ApiServicesByParvez {
 
       var response = await client.post(
           Uri.parse(
-              'http://ringknock.pythonanywhere.com//lead/WishlistServiceViewSet/'),
+              wishListServiceApi),
           body: jsonEncode(body),
           headers: headers);
 
@@ -80,6 +80,37 @@ class ApiServicesByParvez {
         return true;
       } else {
         print('WishList Add Failed ${response.statusCode}');
+        return false;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print('Wish List Add Failed ${e.toString()}');
+      }
+      return false;
+    }
+  }
+
+  static dynamic removeServiceWishList(int serviceId) async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+     
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+
+      var response = await client.post(
+          Uri.parse(
+              "$wishListServiceApi/$serviceId/"),
+          headers: headers);
+
+      if (response.statusCode == 200) {
+        debugPrint('Wish list service remove Successfull');
+        
+        return true;
+      } else {
+        debugPrint('WishList Add Failed ${response.statusCode}');
         return false;
       }
     } on Exception catch (e) {

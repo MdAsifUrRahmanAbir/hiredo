@@ -59,6 +59,7 @@ String wishListCompanyApi = "${baseUrl}lead/WishlistServiceViewSet/";
 String wishListServiceApi = "${baseUrl}lead/WishlistFeatureViewSet/";
 String addWishListPostApi = "${baseUrl}lead/WishlistServiceViewSet/";
 
+
 // String changeUserModeApi = "${baseUrl}profile/change-user-type/";
 // String logoutUserApi = "${baseUrl}logout/";
 // String leadsApi = "${baseUrl}ServiceWiseLead/";
