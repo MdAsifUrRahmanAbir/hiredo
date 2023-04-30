@@ -67,28 +67,5 @@ class WishListController extends GetxController {
     }
   }
 
-  addWishList(int wishedUserId) async {
-    isLoading(true);
-    try {
-      var result = await ApiServicesByParvez.addWishList(wishedUserId);
-
-      if (result) {
-        if (kDebugMode) {
-          print("Add Wish List $result");
-          debugPrint('Wish List Added Successfull');
-
-          Get.snackbar('Success', 'Wish List Added Successfull',
-              colorText: Colors.white);
-        }
-      } else {
-        Get.snackbar('Error', 'Wish List Add Fail', colorText: Colors.red);
-      }
-    } on Exception catch (e) {
-      if (kDebugMode) {
-        print('Wish List Error : $e');
-      }
-    } finally {
-      isLoading(false);
-    }
-  }
+ 
 }

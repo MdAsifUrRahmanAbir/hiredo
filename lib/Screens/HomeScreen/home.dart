@@ -31,6 +31,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _homeController.fetchWishListService();
     if (_profileController.isUser.value == true) {
       _profileController.modeChange();
     }
@@ -467,18 +468,32 @@ class Home extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
-                  right: 10.w,
-                  top: 10.h,
-                  child: IconButton(
-                    onPressed: () {
-                      _wishListController.addWishList(data.id);
-                    },
-                    icon: Icon(
-                      Icons.favorite_border,
-                      color: Color(0xFF187949),
+           
+                 Positioned(
+                    right: 10.w,
+                    top: 10.h,
+                    child: Obx(()=>
+                       IconButton(
+                        onPressed: () {
+                          if(_homeController.wishList.contains(data.id)){
+                               //     _homeController.removeWishList(data.id);
+                          }else{
+                            _homeController.addWishList(data.id);
+                                  
+                          }
+                          
+                         
+                        },
+                        icon:_homeController.wishList.contains(data.id)?Icon(
+                          Icons.favorite,
+                          color: Color(0xFF174E31),
+                        ): Icon(
+                          Icons.favorite_border,
+                          color: Color(0xFF187949),
+                        ),
+                      ),
                     ),
-                  ))
+              )
             ],
           ),
           SizedBox(
