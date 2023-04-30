@@ -675,6 +675,9 @@ class MyresponseDetailsScreen extends StatelessWidget {
                           _mydetailsController.sendEmail(postId:leadData.posts.id, sub:_mydetailsController.subTextCtrl.text, message:_mydetailsController.messageTextCtrl.text, userId: leadData.user.id);
                         
                         }
+
+                       
+ 
                        
                       },
                       child: Container(
@@ -775,17 +778,22 @@ class MyresponseDetailsScreen extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                           color: Colors.black),
                     ),
-                    trailing: Container(
-                      height: 50.h,
-                      width: 50.h,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.r),
-                          color: themeColorGreen),
-                      child: Icon(
-                        Icons.call,
-                        color: Colors.white,
-                        size: 25.h,
+                    trailing: InkWell(
+                      onTap: (){
+                        _mydetailsController.sendLaunchUrl(uri:Uri.parse("tel:${leadData.user.phoneNumber}"));
+                      },
+                      child: Container(
+                        height: 50.h,
+                        width: 50.h,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5.r),
+                            color: themeColorGreen),
+                        child: Icon(
+                          Icons.call,
+                          color: Colors.white,
+                          size: 25.h,
+                        ),
                       ),
                     ),
                   )

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/Services/api_services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../Services/api_services_by_limon.dart';
 import '../../SettingsScreen/EmailTemplate/Model/email_template_model.dart';
@@ -67,4 +68,17 @@ class MyresponseDetailesController extends GetxController {
       isLoading(false);
     }
   }
+
+    
+
+  Future<void> sendLaunchUrl({required Uri uri}) async {
+    if (!await canLaunchUrl(uri)) {
+      throw 'Could not launch $uri';
+    }
+
+    await launchUrl(uri);
+  }
+
+
+
 }
