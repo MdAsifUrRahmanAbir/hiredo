@@ -65,26 +65,26 @@ class ApiServicesByParvez {
 
       var headers = {
         'Authorization': 'Bearer $accessToken',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       };
 
-      var response = await client.post(Uri.parse(addWishListApi),
-          body: jsonEncode(body), headers: headers);
+      var response = await client.post(
+          Uri.parse(
+              'http://ringknock.pythonanywhere.com//lead/WishlistServiceViewSet/'),
+          body: jsonEncode(body),
+          headers: headers);
 
       if (response.statusCode == 200) {
-        debugPrint('WishList Add Successfull');
+        debugPrint('Wish List Add Successfull');
         print(response.body);
         return true;
       } else {
-        if (kDebugMode) {
-          print(
-              'WishList Add Failed ${response.statusCode} & ${response.body}');
-        }
+        print('WishList Add Failed ${response.statusCode}');
         return false;
       }
     } on Exception catch (e) {
       if (kDebugMode) {
-        print('SMS Template Add Failed ${e.toString()}');
+        print('Wish List Add Failed ${e.toString()}');
       }
       return false;
     }

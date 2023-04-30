@@ -167,8 +167,9 @@ class WishedUser {
   factory WishedUser.fromJson(Map<String, dynamic> json) => WishedUser(
         id: json["id"],
         fullName: json["full_name"],
-        userProfilePic: json["user_profile_pic"] ??
-            UserProfilePic.fromJson(json["user_profile_pic"]),
+        userProfilePic: json["user_profile_pic"] == null
+            ? ""
+            : UserProfilePic.fromJson(json["user_profile_pic"]),
         email: json["email"],
         dateOfBirth: DateTime.parse(json["date_of_birth"]),
         phoneNumber: json["phone_number"],

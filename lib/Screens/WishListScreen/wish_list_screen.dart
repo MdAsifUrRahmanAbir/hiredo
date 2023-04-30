@@ -11,28 +11,28 @@ WishListController wishListController = Get.put(WishListController());
 class WishListScreen extends StatelessWidget {
   WishListScreen({super.key});
 
-  final List<Map<String, dynamic>> item = [
-    {
-      'image': 'images/servImage.png',
-      'title': 'Commercial cleaning by expertise',
-      'subTitle': '200+ Company work'
-    },
-    {
-      'image': 'images/servImage.png',
-      'title': 'Commercial cleaning by expertise',
-      'subTitle': '200+ Company work'
-    },
-    {
-      'image': 'images/servImage.png',
-      'title': 'Commercial cleaning by expertise',
-      'subTitle': '200+ Company work'
-    },
-    {
-      'image': 'images/servImage.png',
-      'title': 'Commercial cleaning by expertise',
-      'subTitle': '200+ Company work'
-    }
-  ];
+  // final List<Map<String, dynamic>> item = [
+  //   {
+  //     'image': 'images/servImage.png',
+  //     'title': 'Commercial cleaning by expertise',
+  //     'subTitle': '200+ Company work'
+  //   },
+  //   {
+  //     'image': 'images/servImage.png',
+  //     'title': 'Commercial cleaning by expertise',
+  //     'subTitle': '200+ Company work'
+  //   },
+  //   {
+  //     'image': 'images/servImage.png',
+  //     'title': 'Commercial cleaning by expertise',
+  //     'subTitle': '200+ Company work'
+  //   },
+  //   {
+  //     'image': 'images/servImage.png',
+  //     'title': 'Commercial cleaning by expertise',
+  //     'subTitle': '200+ Company work'
+  //   }
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -76,84 +76,6 @@ class WishListScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Sub Category',
-                          style: GoogleFonts.roboto(
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xFF272727)),
-                        ),
-                        SizedBox(
-                          height: 30.h,
-                        ),
-                        ListView.separated(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              height: 86.h,
-                              width: double.infinity,
-                              color: Color(0xFFFFFFFF),
-                              child: Padding(
-                                padding: EdgeInsets.only(top: 10.h),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 35.r,
-                                      backgroundColor: Color(0xFFE8F2ED),
-                                      child: Image.asset(
-                                          'images/housecleaner.png'),
-                                    ),
-                                    SizedBox(
-                                      width: 5.w,
-                                    ),
-                                    Column(
-                                      children: [
-                                        Text(
-                                          'House Cleaning',
-                                          style: GoogleFonts.roboto(
-                                              fontSize: 18.sp,
-                                              fontWeight: FontWeight.w500,
-                                              color: Color(0xFF272727)),
-                                        ),
-                                        Text(
-                                          '100+ Company Work',
-                                          style: GoogleFonts.roboto(
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w400,
-                                              color: Color(0xFF272727)),
-                                        ),
-                                      ],
-                                    ),
-                                    IconButton(
-                                        onPressed: () {},
-                                        icon: const Icon(
-                                          Icons.favorite,
-                                          color: Color(0xFF174E31),
-                                        )),
-                                    ElevatedButton(
-                                        onPressed: () {},
-                                        style: ElevatedButton.styleFrom(
-                                            backgroundColor:
-                                                const Color(0xFF187949)),
-                                        child: Text('Services'))
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                          itemCount: 3,
-                          separatorBuilder: (BuildContext context, int index) =>
-                              SizedBox(
-                            height: 10.h,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-
                         //<------------------ services ---------------->
                         Text(
                           'Services',
@@ -178,6 +100,8 @@ class WishListScreen extends StatelessWidget {
                             itemCount:
                                 wishListController.serviceWishListModel.length,
                             itemBuilder: (context, index) {
+                              var result = wishListController
+                                  .serviceWishListModel[index];
                               return Container(
                                 decoration: BoxDecoration(
                                     color: const Color(0xFFFFFFFF),
@@ -195,10 +119,7 @@ class WishListScreen extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(12.r),
                                             child: Image.network(
-                                              wishListController
-                                                  .serviceWishListModel[index]
-                                                  .categoryService
-                                                  .image,
+                                              result.categoryService.image,
                                               height: 108.h,
                                               width: double.infinity,
                                               fit: BoxFit.cover,
@@ -218,11 +139,7 @@ class WishListScreen extends StatelessWidget {
                                         height: 10.h,
                                       ),
                                       Text(
-                                        // item[index]['title'],
-                                        wishListController
-                                            .serviceWishListModel[index]
-                                            .categoryService
-                                            .name,
+                                        result.categoryService.name,
                                         style: GoogleFonts.roboto(
                                             fontSize: 14.sp,
                                             fontWeight: FontWeight.w400,
@@ -232,7 +149,7 @@ class WishListScreen extends StatelessWidget {
                                         height: 10.h,
                                       ),
                                       Text(
-                                        item[index]['subTitle'],
+                                        " ${result.categoryService.popularity} Company work",
                                         style: GoogleFonts.roboto(
                                             fontSize: 10.sp,
                                             fontWeight: FontWeight.w400,
@@ -278,6 +195,8 @@ class WishListScreen extends StatelessWidget {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
+                            var result =
+                                wishListController.wishlistModel[index];
                             return Container(
                               height: 230.h,
                               width: double.infinity,
@@ -288,12 +207,12 @@ class WishListScreen extends StatelessWidget {
                                 children: [
                                   Row(
                                     children: [
-                                      Image.asset('images/clean.png'),
-                                      // Image.network(wishListController
-                                      //     .wishlistModel[index]
-                                      //     .wishedUser
-                                      //     .userProfilePic
-                                      //     .picture),
+                                      Image.network(
+                                        result
+                                            .wishedUser.userProfilePic.picture,
+                                        height: 70.h,
+                                        width: 100.w,
+                                      ),
                                       SizedBox(
                                         width: 10.w,
                                       ),
@@ -304,10 +223,7 @@ class WishListScreen extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            wishListController
-                                                .wishlistModel[index]
-                                                .wishedUser
-                                                .corporationName,
+                                            result.wishedUser.corporationName,
                                             style: GoogleFonts.roboto(
                                                 fontSize: 18.sp,
                                                 fontWeight: FontWeight.w500,
@@ -320,8 +236,7 @@ class WishListScreen extends StatelessWidget {
                                                 color: Color(0xFFEACA23),
                                               ),
                                               Text(
-                                                // '4.9 (200)',
-                                                '${wishListController.wishlistModel[index].productRatingAvg}',
+                                                '${result.productRatingAvg}',
                                                 style: GoogleFonts.roboto(
                                                     fontSize: 14.sp,
                                                     fontWeight: FontWeight.w400,
@@ -330,13 +245,6 @@ class WishListScreen extends StatelessWidget {
                                               )
                                             ],
                                           ),
-                                          Text(
-                                            'Total 500 work complete',
-                                            style: GoogleFonts.roboto(
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w400,
-                                                color: const Color(0xFF424242)),
-                                          )
                                         ],
                                       ),
                                       SizedBox(
@@ -349,16 +257,6 @@ class WishListScreen extends StatelessWidget {
                                             color: Color(0xFF174E31),
                                           ))
                                     ],
-                                  ),
-                                  SizedBox(
-                                    height: 20.h,
-                                  ),
-                                  Text(
-                                    'There are many variations of passages of Lorem Ipsum available.',
-                                    style: GoogleFonts.roboto(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: Color(0xFF424242)),
                                   ),
                                   SizedBox(
                                     height: 25.h,
@@ -411,9 +309,7 @@ class WishListScreen extends StatelessWidget {
                           },
                           itemCount: wishListController.wishlistModel.length,
                           separatorBuilder: (BuildContext context, int index) =>
-                              SizedBox(
-                            height: 10.h,
-                          ),
+                              SizedBox(),
                         )
                       ],
                     ),
