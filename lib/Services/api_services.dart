@@ -603,42 +603,37 @@ class ApiServices {
       var headers = {
         'Authorization': 'Bearer $accessToken',
         'Content-Type': 'application/json',
-       
       };
 
       var response = await client.post(Uri.parse(pendingPostAcceptApi),
-          body:jsonEncode(data), headers: headers);
+          body: jsonEncode(data), headers: headers);
 
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
       } else {
-
         debugPrint("Accept post error status code : ${response.body}");
         return 1;
       }
     } on Exception catch (e) {
-      
       debugPrint("Accept post error  : $e");
       return 1;
     }
   }
 
-static completedPost()async{
-     var accessToken = await MyPreference.getToken();
+  static completedPost() async {
+    var accessToken = await MyPreference.getToken();
     try {
       var headers = {
         'Authorization': 'Bearer $accessToken',
         'Content-Type': 'application/json',
       };
-      var response = await client.get(
-          Uri.parse(completePostApi),
-          headers: headers);
+      var response =
+          await client.get(Uri.parse(completePostApi), headers: headers);
       if (response.statusCode == 200) {
         return completePostModelFromJson(response.body);
       } else {
         if (kDebugMode) {
-          print(
-              "Complete post fetch Error. Reason ${response.statusCode}");
+          print("Complete post fetch Error. Reason ${response.statusCode}");
         }
         return response.statusCode;
       }
@@ -648,28 +643,23 @@ static completedPost()async{
       }
       return 0;
     }
+  }
 
-
-
-
-}
-
-
- static fetchMyResponse(int page) async {
+  static fetchMyResponse(int page) async {
     var accessToken = await MyPreference.getToken();
     try {
       var headers = {
         'Authorization': 'Bearer $accessToken',
         'Content-Type': 'application/json',
       };
-      var response = await client.get(Uri.parse(myResponseApi + page.toString()),
-          headers: headers);
+      var response = await client
+          .get(Uri.parse(myResponseApi + page.toString()), headers: headers);
       if (response.statusCode == 200) {
         return myResponseModelFromJson(response.body);
       } else {
-         if (kDebugMode) {
-        print("My response fetch Error code : ${response.statusCode}");
-      }
+        if (kDebugMode) {
+          print("My response fetch Error code : ${response.statusCode}");
+        }
         return response.statusCode;
       }
     } on Exception catch (e) {
@@ -679,7 +669,6 @@ static completedPost()async{
       return 0;
     }
   }
-
 
   static dynamic fetchMyResponseCount() async {
     var accessToken = await MyPreference.getToken();
@@ -705,9 +694,8 @@ static completedPost()async{
     }
   }
 
-
-
-  static Future<dynamic> paymentUserCreditPurchase(Map<String,dynamic> body) async {
+  static Future<dynamic> paymentUserCreditPurchase(
+      Map<String, dynamic> body) async {
     var accessToken = await MyPreference.getToken();
 
     try {
@@ -730,6 +718,30 @@ static completedPost()async{
     }
   }
 
+  static Future<dynamic> sendEmail(Map<String, dynamic> body) async {
+    var accessToken = await MyPreference.getToken();
 
+    try {
+      var headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      };
+      var request = http.Request('POST', Uri.parse(sendCustomEmailApi));
+      request.body = json.encode(body);
+      request.headers.addAll(headers);
 
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        debugPrint(await response.stream.bytesToString());
+        return true;
+      } else {
+        debugPrint(response.reasonPhrase);
+        return 1;
+      }
+    } on Exception catch (e) {
+      debugPrint("Send email. Reason ${e.toString()}");
+      return 0;
+    }
+  }
 }

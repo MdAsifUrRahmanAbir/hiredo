@@ -12,11 +12,13 @@ class CustomeTextField extends StatelessWidget {
       this.obscureText = false,
       this.onTap,
       this.keyboardType,
+      this.maxLines,
       this.validator});
 
   TextEditingController? controller;
   String? hintText;
   Widget? suffixIcon;
+  int? maxLines;
   String? Function(String?)? validator;
   bool obscureText;
   Function()? onTap;
@@ -30,24 +32,24 @@ class CustomeTextField extends StatelessWidget {
       controller: controller,
       validator: validator,
       obscureText: obscureText,
-      
+      maxLines: maxLines,
       decoration: InputDecoration(
         filled: true,
         isDense: true,
         contentPadding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w),
-        fillColor:const Color(0xFFD9F1E5).withOpacity(0.62),
+        fillColor: const Color(0xFFD9F1E5).withOpacity(0.62),
         focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color:const Color(0xFF187949).withOpacity(0.2), width: 0.5)),
-        enabledBorder:  OutlineInputBorder(
-            borderSide: BorderSide(color:const Color(0xFF187949).withOpacity(0.2), width: 0.5)),
-       border:  OutlineInputBorder(
-           borderSide: BorderSide(color:const Color(0xFF1879492B).withOpacity(0.2), width: 0)),
+            borderSide: BorderSide(
+                color: const Color(0xFF187949).withOpacity(0.2), width: 0.5)),
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: const Color(0xFF187949).withOpacity(0.2), width: 0.5)),
+        border: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: const Color(0xFF1879492B).withOpacity(0.2), width: 0)),
         hintText: hintText,
         suffixIcon: suffixIcon,
-          suffixIconConstraints: BoxConstraints(
-                      minHeight:14.h,
-                      minWidth:45.w
-                    ),
+        suffixIconConstraints: BoxConstraints(minHeight: 14.h, minWidth: 45.w),
       ),
     );
   }
