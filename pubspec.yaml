@@ -65,6 +65,8 @@ dependencies:
 
   shimmer: ^2.0.0
   flutter_stripe: ^8.0.0+1         # added by abir
+  url_launcher: ^6.1.10
+
 
 
 dev_dependencies:
