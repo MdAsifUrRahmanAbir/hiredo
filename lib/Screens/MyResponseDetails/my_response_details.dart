@@ -7,6 +7,7 @@ import 'package:homelyknock/Screens/ResistrationScreen/component/custom_button.d
 import 'package:homelyknock/Screens/ResistrationScreen/component/custome_text_field.dart';
 import 'package:homelyknock/Services/api_component.dart';
 import 'package:homelyknock/utils/colors.dart';
+import 'package:homelyknock/widgets/custom_loader.dart';
 import 'package:jiffy/jiffy.dart';
 
 import '../MyResponse/Model/my_response_model.dart';
@@ -57,380 +58,382 @@ class MyresponseDetailsScreen extends StatelessWidget {
         ),
         actions: [Image.asset('images/notification.png')],
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 17.w, vertical: 17.h),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
-                      decoration: BoxDecoration(
-                          color: const Color(0xFFFAFAFA),
-                          borderRadius: BorderRadius.circular(3.r)),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  leadData.posts.category.name,
+      body: Obx(()=>_mydetailsController.isLoading.value?const CustomLoader():
+         SafeArea(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 17.w, vertical: 17.h),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFFAFAFA),
+                            borderRadius: BorderRadius.circular(3.r)),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    leadData.posts.category.name,
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 18.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: const Color(0xFF272727)),
+                                  ),
+                                ),
+                                Container(
+                                  height: 27.h,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 8.w, vertical: 6.h),
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xFFE8FAF1),
+                                      borderRadius: BorderRadius.circular(5.r)),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.access_time_filled,
+                                        size: 15.h,
+                                        color: const Color(0xFF187949),
+                                      ),
+                                      SizedBox(
+                                        width: 8.w,
+                                      ),
+                                      Text(
+                                        Jiffy.parse(leadData.posts.created)
+                                            .fromNow(),
+                                        style: GoogleFonts.roboto(
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w400,
+                                            color: const Color(0xFF187949)),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            // ListTile(
+      
+                            Row(
+                              children: [
+                                Image.asset(
+                                  "images/location.png",
+                                  height: 15.h,
+                                  width: 11.w,
+                                ),
+                                SizedBox(
+                                  width: 8.w,
+                                ),
+                                Text(
+                                  leadData.posts.location,
                                   style: GoogleFonts.roboto(
-                                      fontSize: 18.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: const Color(0xFF272727)),
-                                ),
-                              ),
-                              Container(
-                                height: 27.h,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 8.w, vertical: 6.h),
-                                decoration: BoxDecoration(
-                                    color: const Color(0xFFE8FAF1),
-                                    borderRadius: BorderRadius.circular(5.r)),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.access_time_filled,
-                                      size: 15.h,
-                                      color: const Color(0xFF187949),
-                                    ),
-                                    SizedBox(
-                                      width: 8.w,
-                                    ),
-                                    Text(
-                                      Jiffy.parse(leadData.posts.created)
-                                          .fromNow(),
-                                      style: GoogleFonts.roboto(
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w400,
-                                          color: const Color(0xFF187949)),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
+                                      fontSize: 14.sp,
+                                      color: const Color(0xFF424242)),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15.h,
+                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.phone,
+                            color: Color(0xFF187949),
+                            size: 20.sp,
                           ),
-                          // ListTile(
-
-                          Row(
-                            children: [
-                              Image.asset(
-                                "images/location.png",
-                                height: 15.h,
-                                width: 11.w,
-                              ),
-                              SizedBox(
-                                width: 8.w,
-                              ),
-                              Text(
-                                leadData.posts.location,
-                                style: GoogleFonts.roboto(
-                                    fontSize: 14.sp,
-                                    color: const Color(0xFF424242)),
-                              )
-                            ],
+                          SizedBox(
+                            width: 8.w,
+                          ),
+                          Text(
+                            leadData.posts.user.phoneNumber,
+                            style: GoogleFonts.roboto(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                                color: const Color(0xFF272727)),
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          Container(
+                            height: 12.h,
+                            width: 40.w,
+                            decoration: BoxDecoration(
+                                color: const Color(0xFFE8FAF1),
+                                borderRadius: BorderRadius.circular(3.r)),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'images/righttick.png',
+                                ),
+                                SizedBox(
+                                  width: 2.w,
+                                ),
+                                Text(
+                                  'verified',
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 8.sp,
+                                      fontWeight: FontWeight.w400,
+                                      color: const Color(0xFF187949)),
+                                )
+                              ],
+                            ),
                           )
                         ],
                       ),
-                    ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.phone,
-                          color: Color(0xFF187949),
-                          size: 20.sp,
-                        ),
-                        SizedBox(
-                          width: 8.w,
-                        ),
-                        Text(
-                          leadData.posts.user.phoneNumber,
-                          style: GoogleFonts.roboto(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400,
-                              color: const Color(0xFF272727)),
-                        ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        Container(
-                          height: 12.h,
-                          width: 40.w,
-                          decoration: BoxDecoration(
-                              color: const Color(0xFFE8FAF1),
-                              borderRadius: BorderRadius.circular(3.r)),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                'images/righttick.png',
-                              ),
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              Text(
-                                'verified',
-                                style: GoogleFonts.roboto(
-                                    fontSize: 8.sp,
-                                    fontWeight: FontWeight.w400,
-                                    color: const Color(0xFF187949)),
-                              )
-                            ],
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.email,
+                            color: const Color(0xFF187949),
+                            size: 20.sp,
                           ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.email,
-                          color: const Color(0xFF187949),
-                          size: 20.sp,
-                        ),
-                        SizedBox(
-                          width: 8.w,
-                        ),
-                        Text(
-                          leadData.posts.user.email,
-                          style: GoogleFonts.roboto(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400,
-                              color: const Color(0xFF272727)),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-
-                    Row(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            showNumber(context);
-                          },
-                          child: Container(
-                            height: 50.h,
-                            width: 148.w,
-                            decoration: BoxDecoration(
-                                color: const Color(0xFF187949),
-                                borderRadius: BorderRadius.circular(5.r)),
-                            child: Center(
-                              child: Text(
-                                'Show Contact',
-                                style: GoogleFonts.roboto(
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: const Color(0xFFFFFFFF)),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10.w,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            _sendEmail(context);
-                          },
-                          child: Container(
-                            height: 50.h,
-                            width: 148.w,
-                            decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: const Color(0xFF187949)),
-                                borderRadius: BorderRadius.circular(5.r)),
-                            child: Center(
-                              child: Text(
-                                'Send email',
-                                style: GoogleFonts.roboto(
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: const Color(0xFF187949)),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-                    Row(
-                      children: [
-                        Image.asset(
-                          "images/b.png",
-                        ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        Text(
-                          "${leadData.posts.postCredit} Credits",
-                          style: GoogleFonts.roboto(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xFF848484)),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    // if(_leadDetailsController.isContect.contains(leadData.id))
-                    // _contactVisiable(context),
-
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Text(
-                      'Details',
-                      style: GoogleFonts.roboto(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w500,
-                          color: const Color(0xFF272727)),
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Divider(
-                      color: const Color(0xFF848484).withOpacity(0.05),
-                      height: 1,
-                      thickness: 2,
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        final qansData = leadData.posts.postObject[index];
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              qansData.question.qs,
-                              style: GoogleFonts.roboto(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400,
-                                  color: const Color(0xFF424242)),
-                            ),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            Text(
-                              qansData.pAnswer.options,
-                              style: GoogleFonts.roboto(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400,
-                                  color: const Color(0xFF424242)),
-                            ),
-                          ],
-                        );
-                      },
-                      itemCount: leadData.posts.postObject.length,
-                      separatorBuilder: (BuildContext context, int index) =>
                           SizedBox(
+                            width: 8.w,
+                          ),
+                          Text(
+                            leadData.posts.user.email,
+                            style: GoogleFonts.roboto(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                                color: const Color(0xFF272727)),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
                         height: 20.h,
                       ),
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-
-                    // SizedBox(
-                    //   height: 20.h,
-                    // ),
-                    // Padding(
-                    //   padding: EdgeInsets.only(left: 10.w, right: 10.w),
-                    //   child: Divider(
-                    //     color: const Color(0xFF848484).withOpacity(0.05),
-                    //     height: 5.h,
-                    //     thickness: 3,
-                    //   ),
-                    // ),
-                    // SizedBox(
-                    //   height: 15.h,
-                    // ),
-                    // Text(
-                    //   'Not seeing the right leads?',
-                    //   style: GoogleFonts.roboto(
-                    //       fontSize: 14.sp,
-                    //       fontWeight: FontWeight.w400,
-                    //       color: const Color(0xFF272727)),
-                    // ),
-                    // SizedBox(
-                    //   height: 15.h,
-                    // ),
-                    // Text(
-                    //   'Stop seeing leads with specific answers by customising your settings.',
-                    //   style: GoogleFonts.roboto(
-                    //       fontSize: 14.sp,
-                    //       fontWeight: FontWeight.w400,
-                    //       color: const Color(0xFF424242)),
-                    // ),
-                    // SizedBox(
-                    //   height: 20.h,
-                    // ),
-                    // Row(
-                    //   children: [
-                    //     Image.asset('images/settings2.png'),
-                    //     SizedBox(
-                    //       width: 5.w,
-                    //     ),
-                    //     Text(
-                    //       'Update lead settings',
-                    //       style: GoogleFonts.roboto(
-                    //           fontSize: 14.sp,
-                    //           fontWeight: FontWeight.w400,
-                    //           color: const Color(0xFF187949)),
-                    //     )
-                    //   ],
-                    // ),
-                  ],
+      
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              showNumber(context);
+                            },
+                            child: Container(
+                              height: 50.h,
+                              width: 148.w,
+                              decoration: BoxDecoration(
+                                  color: const Color(0xFF187949),
+                                  borderRadius: BorderRadius.circular(5.r)),
+                              child: Center(
+                                child: Text(
+                                  'Show Contact',
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: const Color(0xFFFFFFFF)),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10.w,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              _sendEmail(context);
+                            },
+                            child: Container(
+                              height: 50.h,
+                              width: 148.w,
+                              decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: const Color(0xFF187949)),
+                                  borderRadius: BorderRadius.circular(5.r)),
+                              child: Center(
+                                child: Text(
+                                  'Send email',
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: const Color(0xFF187949)),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15.h,
+                      ),
+                      Row(
+                        children: [
+                          Image.asset(
+                            "images/b.png",
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          Text(
+                            "${leadData.posts.postCredit} Credits",
+                            style: GoogleFonts.roboto(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                                color: const Color(0xFF848484)),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      // if(_leadDetailsController.isContect.contains(leadData.id))
+                      // _contactVisiable(context),
+      
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      Text(
+                        'Details',
+                        style: GoogleFonts.roboto(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w500,
+                            color: const Color(0xFF272727)),
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      Divider(
+                        color: const Color(0xFF848484).withOpacity(0.05),
+                        height: 1,
+                        thickness: 2,
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          final qansData = leadData.posts.postObject[index];
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                qansData.question.qs,
+                                style: GoogleFonts.roboto(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xFF424242)),
+                              ),
+                              SizedBox(
+                                height: 10.h,
+                              ),
+                              Text(
+                                qansData.pAnswer.options,
+                                style: GoogleFonts.roboto(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xFF424242)),
+                              ),
+                            ],
+                          );
+                        },
+                        itemCount: leadData.posts.postObject.length,
+                        separatorBuilder: (BuildContext context, int index) =>
+                            SizedBox(
+                          height: 20.h,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+      
+                      // SizedBox(
+                      //   height: 20.h,
+                      // ),
+                      // Padding(
+                      //   padding: EdgeInsets.only(left: 10.w, right: 10.w),
+                      //   child: Divider(
+                      //     color: const Color(0xFF848484).withOpacity(0.05),
+                      //     height: 5.h,
+                      //     thickness: 3,
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 15.h,
+                      // ),
+                      // Text(
+                      //   'Not seeing the right leads?',
+                      //   style: GoogleFonts.roboto(
+                      //       fontSize: 14.sp,
+                      //       fontWeight: FontWeight.w400,
+                      //       color: const Color(0xFF272727)),
+                      // ),
+                      // SizedBox(
+                      //   height: 15.h,
+                      // ),
+                      // Text(
+                      //   'Stop seeing leads with specific answers by customising your settings.',
+                      //   style: GoogleFonts.roboto(
+                      //       fontSize: 14.sp,
+                      //       fontWeight: FontWeight.w400,
+                      //       color: const Color(0xFF424242)),
+                      // ),
+                      // SizedBox(
+                      //   height: 20.h,
+                      // ),
+                      // Row(
+                      //   children: [
+                      //     Image.asset('images/settings2.png'),
+                      //     SizedBox(
+                      //       width: 5.w,
+                      //     ),
+                      //     Text(
+                      //       'Update lead settings',
+                      //       style: GoogleFonts.roboto(
+                      //           fontSize: 14.sp,
+                      //           fontWeight: FontWeight.w400,
+                      //           color: const Color(0xFF187949)),
+                      //     )
+                      //   ],
+                      // ),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 200.h,
-                child: GoogleMap(
-                  rotateGesturesEnabled: false,
-                  scrollGesturesEnabled: false,
-                  zoomControlsEnabled: false,
-                  zoomGesturesEnabled: false,
-                  liteModeEnabled: false,
-                  tiltGesturesEnabled: false,
-                  myLocationButtonEnabled: false,
-                  myLocationEnabled: false,
-                  mapType: MapType.normal,
-                  initialCameraPosition: CameraPosition(
-                      target: LatLng(double.parse(leadData.posts.latitude),
-                          double.parse(leadData.posts.latitude))),
-                  onMapCreated: (GoogleMapController controller) {},
+                SizedBox(
+                  height: 200.h,
+                  child: GoogleMap(
+                    rotateGesturesEnabled: false,
+                    scrollGesturesEnabled: false,
+                    zoomControlsEnabled: false,
+                    zoomGesturesEnabled: false,
+                    liteModeEnabled: false,
+                    tiltGesturesEnabled: false,
+                    myLocationButtonEnabled: false,
+                    myLocationEnabled: false,
+                    mapType: MapType.normal,
+                    initialCameraPosition: CameraPosition(
+                        target: LatLng(double.parse(leadData.posts.latitude),
+                            double.parse(leadData.posts.latitude))),
+                    onMapCreated: (GoogleMapController controller) {},
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-            ],
+                SizedBox(
+                  height: 20.h,
+                ),
+              ],
+            ),
           ),
         ),
       ),
