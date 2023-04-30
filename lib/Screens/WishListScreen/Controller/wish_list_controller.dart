@@ -33,8 +33,6 @@ class WishListController extends GetxController {
         }
       } else {
         wishlistModel = result;
-
-        print("accsse: $accessToken");
       }
     } on Exception catch (e) {
       if (kDebugMode) {
@@ -76,14 +74,14 @@ class WishListController extends GetxController {
 
       if (result) {
         if (kDebugMode) {
-          print("Add Template $result");
+          print("Add Wish List $result");
           debugPrint('Wish List Added Successfull');
-          addWishList(wishedUserId);
+
           Get.snackbar('Success', 'Wish List Added Successfull',
               colorText: Colors.white);
         }
       } else {
-        Get.snackbar('Error', 'Wish List Add Fail', colorText: Colors.white);
+        Get.snackbar('Error', 'Wish List Add Fail', colorText: Colors.red);
       }
     } on Exception catch (e) {
       if (kDebugMode) {

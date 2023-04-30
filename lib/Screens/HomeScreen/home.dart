@@ -9,20 +9,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:homelyknock/Route/routes.dart';
 
-import 'package:homelyknock/Screens/CategoriesScreen/categories.dart';
 import 'package:homelyknock/Screens/HomeScreen/Controller/home_controller.dart';
+import 'package:homelyknock/Screens/WishListScreen/Controller/wish_list_controller.dart';
 
 import 'package:homelyknock/widgets/custom_loader.dart';
 
 import '../../nav_bar_page/main_controller.dart';
-import '../FeturedService/fetured_service.dart';
-import '../JobPost/post_a_job.dart';
 
 import '../ProfileScreen/Controller/profile_controller.dart';
 import 'Model/lead_category_model.dart';
 
 final mainController = Get.put(MainScreenController());
-  final _profileController = Get.put(ProfileController());
+final _profileController = Get.put(ProfileController());
+final _wishListController = Get.put(WishListController());
 
 class Home extends StatelessWidget {
   Home({super.key});
@@ -32,7 +31,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if(_profileController.isUser.value==true){
+    if (_profileController.isUser.value == true) {
       _profileController.modeChange();
     }
     return Scaffold(
@@ -275,7 +274,6 @@ class Home extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         margin: EdgeInsets.symmetric(horizontal: 5.0),
                         decoration: BoxDecoration(
-                          
                             image: DecorationImage(
                                 image: NetworkImage(i), fit: BoxFit.cover)),
                       );
@@ -285,17 +283,19 @@ class Home extends StatelessWidget {
               ),
               Positioned(
                 bottom: 9.h,
-                child:_homeController.carouselImages.isNotEmpty? DotsIndicator(
-                  dotsCount: _homeController.carouselImages.length,
-                  position: _homeController.dotPosition.value.toDouble(),
-                  decorator: DotsDecorator(
-                    activeColor: Color(0xff187949),
-                    color: const Color(0xff174E31).withOpacity(0.3),
-                    spacing: EdgeInsets.all(2),
-                    activeSize: Size(8, 8),
-                    size: Size(8, 8),
-                  ),
-                ):SizedBox(),
+                child: _homeController.carouselImages.isNotEmpty
+                    ? DotsIndicator(
+                        dotsCount: _homeController.carouselImages.length,
+                        position: _homeController.dotPosition.value.toDouble(),
+                        decorator: DotsDecorator(
+                          activeColor: Color(0xff187949),
+                          color: const Color(0xff174E31).withOpacity(0.3),
+                          spacing: EdgeInsets.all(2),
+                          activeSize: Size(8, 8),
+                          size: Size(8, 8),
+                        ),
+                      )
+                    : SizedBox(),
               ),
             ],
           ),
@@ -319,9 +319,7 @@ class Home extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-
                   Get.toNamed(Routes.categoriesPage);
-                  
                 },
                 child: Text(
                   "See All",
@@ -402,9 +400,8 @@ class Home extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-
-                  Get.toNamed(Routes.feturedServiceScreen,arguments: _homeController.subCategoryList);
-                
+                  Get.toNamed(Routes.feturedServiceScreen,
+                      arguments: _homeController.subCategoryList);
                 },
                 child: Text(
                   "See All",
@@ -473,9 +470,14 @@ class Home extends StatelessWidget {
               Positioned(
                   right: 10.w,
                   top: 10.h,
-                  child: Icon(
-                    Icons.favorite_border,
-                    color: Color(0xFF187949),
+                  child: IconButton(
+                    onPressed: () {
+                      _wishListController.addWishList(data.id);
+                    },
+                    icon: Icon(
+                      Icons.favorite_border,
+                      color: Color(0xFF187949),
+                    ),
                   ))
             ],
           ),
@@ -503,7 +505,7 @@ class Home extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Get.toNamed(Routes.postAJob,arguments:index);  
+              Get.toNamed(Routes.postAJob, arguments: index);
             },
             child: Container(
               height: 30.h,
