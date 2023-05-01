@@ -78,14 +78,14 @@ class WishListScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         //<------------------ services ---------------->
-                        if(wishListController.serviceWishListModel.isNotEmpty)
-                        Text(
-                          'Services',
-                          style: GoogleFonts.roboto(
-                              color: const Color(0xFF272727),
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w500),
-                        ),
+                        if (wishListController.serviceWishListModel.isNotEmpty)
+                          Text(
+                            'Services',
+                            style: GoogleFonts.roboto(
+                                color: const Color(0xFF272727),
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w500),
+                          ),
                         SizedBox(
                           height: 20.h,
                         ),
@@ -161,8 +161,10 @@ class WishListScreen extends StatelessWidget {
                                         height: 25.h,
                                       ),
                                       InkWell(
-                                        onTap:(){
-                                             Get.toNamed(Routes.postAJob, arguments:result.categoryService);
+                                        onTap: () {
+                                          Get.toNamed(Routes.postAJob,
+                                              arguments:
+                                                  result.categoryService);
                                         },
                                         child: Container(
                                           height: 40.h,
@@ -177,7 +179,8 @@ class WishListScreen extends StatelessWidget {
                                               style: GoogleFonts.roboto(
                                                   fontSize: 12.sp,
                                                   fontWeight: FontWeight.w500,
-                                                  color: const Color(0xFFFFFFFF)),
+                                                  color:
+                                                      const Color(0xFFFFFFFF)),
                                             ),
                                           ),
                                         ),
@@ -190,12 +193,12 @@ class WishListScreen extends StatelessWidget {
                         SizedBox(
                           height: 25.h,
                         ),
-                        if(wishListController.wishlistModel.isNotEmpty)
-                        Text('Company',
-                            style: GoogleFonts.roboto(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.w500,
-                                color: const Color(0xFF272727))),
+                        if (wishListController.wishlistModel.isNotEmpty)
+                          Text('Company',
+                              style: GoogleFonts.roboto(
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: const Color(0xFF272727))),
                         SizedBox(
                           height: 25.h,
                         ),

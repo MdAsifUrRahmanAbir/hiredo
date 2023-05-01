@@ -329,12 +329,33 @@ class SubCategoryPage extends StatelessWidget {
                                       ),
                                     ],
                                   )),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.favorite_border,
-                                        color: Color(0xFF187949),
-                                      )),
+                                  Obx(()=>
+                       IconButton(
+                        onPressed: () {
+                          if(_homeController.wishList.contains(data.id)){
+                               //     _homeController.removeWishList(data.id);
+                          }else{
+                            _homeController.addWishList(data.id);
+                                  
+                          }
+                          
+                         
+                        },
+                        icon:_homeController.wishList.contains(data.id)?Icon(
+                          Icons.favorite,
+                          color: Color(0xFF174E31),
+                        ): Icon(
+                          Icons.favorite_border,
+                          color: Color(0xFF187949),
+                        ),
+                      ),
+                    ),
+                                  // IconButton(
+                                  //     onPressed: () {},
+                                  //     icon: Icon(
+                                  //       Icons.favorite_border,
+                                  //       color: Color(0xFF187949),
+                                  //     )),
                                   InkWell(
                                     onTap: () {
                                      
