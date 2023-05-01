@@ -744,4 +744,42 @@ class ApiServices {
       return 0;
     }
   }
+
+  static Future<dynamic> reviewAdd(Map<String ,dynamic> body)async{
+     var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      };  
+      // var request = http.Request('POST', Uri.parse(reviewAddApi));
+      // request.body = json.encode(body);
+      // request.headers.addAll(headers);
+
+      // http.StreamedResponse response = await request.send();
+      var response= await client.post(Uri.parse(reviewAddApi),body:jsonEncode(body),headers: headers);
+
+      if (response.statusCode == 201) {
+        var data =jsonDecode(response.body);
+        return data ;
+      } else {
+        debugPrint(response.reasonPhrase);
+        var data =jsonDecode(response.body);
+        debugPrint(data);
+       // Fluttertoast.showToast(msg:data["status"]);
+        return 1;
+      }
+    } on Exception catch (e) {
+      debugPrint("Send review. Reason ${e.toString()}");
+      return 0;
+    }
+
+
+
+
+
+  }
+
+
 }
