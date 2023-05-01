@@ -232,10 +232,11 @@ class HelpScreen extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
+            var result = controller.helpData[index];
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(controller.helpData[index].title,
+                Text(result.title,
                     style: GoogleFonts.roboto(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w500,
@@ -247,8 +248,6 @@ class HelpScreen extends StatelessWidget {
                     itemBuilder: (context, idx) {
                       var data = controller.helpData[index].helps[idx];
                       return ExpansionTile(
-                        initiallyExpanded: true,
-                        maintainState: true,
                         title: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -262,6 +261,8 @@ class HelpScreen extends StatelessWidget {
                             ),
                             Divider(
                               height: 6.h,
+                              thickness: 1.h,
+                              color: const Color(0xFF848484).withOpacity(0.08),
                             )
                           ],
                         ),
