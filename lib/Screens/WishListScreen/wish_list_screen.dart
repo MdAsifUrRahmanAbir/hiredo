@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 
+import '../../Route/routes.dart';
 import 'Controller/wish_list_controller.dart';
 
 WishListController wishListController = Get.put(WishListController());
@@ -77,6 +78,7 @@ class WishListScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         //<------------------ services ---------------->
+                        if(wishListController.serviceWishListModel.isNotEmpty)
                         Text(
                           'Services',
                           style: GoogleFonts.roboto(
@@ -119,7 +121,7 @@ class WishListScreen extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(12.r),
                                             child: Image.network(
-                                              result.categoryService.image,
+                                              result.categoryService.image!,
                                               height: 108.h,
                                               width: double.infinity,
                                               fit: BoxFit.cover,
@@ -158,20 +160,25 @@ class WishListScreen extends StatelessWidget {
                                       SizedBox(
                                         height: 25.h,
                                       ),
-                                      Container(
-                                        height: 40.h,
-                                        width: 84.w,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0xFF187949),
-                                            borderRadius:
-                                                BorderRadius.circular(3.r)),
-                                        child: Center(
-                                          child: Text(
-                                            'Post a Job',
-                                            style: GoogleFonts.roboto(
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w500,
-                                                color: const Color(0xFFFFFFFF)),
+                                      InkWell(
+                                        onTap:(){
+                                             Get.toNamed(Routes.postAJob, arguments:result.categoryService);
+                                        },
+                                        child: Container(
+                                          height: 40.h,
+                                          width: 84.w,
+                                          decoration: BoxDecoration(
+                                              color: const Color(0xFF187949),
+                                              borderRadius:
+                                                  BorderRadius.circular(3.r)),
+                                          child: Center(
+                                            child: Text(
+                                              'Post a Job',
+                                              style: GoogleFonts.roboto(
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: const Color(0xFFFFFFFF)),
+                                            ),
                                           ),
                                         ),
                                       )
@@ -183,6 +190,7 @@ class WishListScreen extends StatelessWidget {
                         SizedBox(
                           height: 25.h,
                         ),
+                        if(wishListController.wishlistModel.isNotEmpty)
                         Text('Company',
                             style: GoogleFonts.roboto(
                                 fontSize: 20.sp,

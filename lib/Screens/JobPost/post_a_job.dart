@@ -18,7 +18,7 @@ class PostAJob extends StatelessWidget {
     super.key,
   });
 
-  dynamic selectIndex = Get.arguments;
+  dynamic catagory  = Get.arguments;
   final _homeController = Get.put(HomeController());
   final _jobPostController = Get.put(JobPostController());
   @override
@@ -27,6 +27,10 @@ class PostAJob extends StatelessWidget {
     _jobPostController.isLocationError.value = false;
     _jobPostController.locationData = null;
     _jobPostController.cateName = [];
+    LeadCategoriesModel? catagoryData;
+    if(catagory!=null){
+      catagoryData=catagory;
+    }
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -64,13 +68,25 @@ class PostAJob extends StatelessWidget {
               SizedBox(
                 height: 25.h,
               ),
+              catagory!=null?
+              Container(
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.symmetric(horizontal:15.w,vertical: 18.h),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.r),
+                  border: Border.all(color: Colors.grey.shade300)
+                ),
+                child:Text(catagoryData!.name),
+              )
+              
+              :
               Obx(
                 () => DropdownSearch<LeadCategoriesModel>(
                   items: _homeController.subCategoryList,
                   dropdownButtonProps: const DropdownButtonProps(
                     icon: SizedBox(),
                   ),
-                  enabled: selectIndex == null ? true : false,
+               
                   popupProps: const PopupProps.menu(showSearchBox: true),
                   dropdownDecoratorProps: DropDownDecoratorProps(
                     dropdownSearchDecoration: InputDecoration(
@@ -90,9 +106,7 @@ class PostAJob extends StatelessWidget {
                             borderRadius: BorderRadius.circular(3.r))),
                   ),
                   itemAsString: (LeadCategoriesModel u) => u.name,
-                  selectedItem: selectIndex == null
-                      ? null
-                      : _homeController.subCategoryList[selectIndex!],
+                 
                   onChanged: (value) {
                     _jobPostController.cateName = value!.catName;
                     debugPrint(value.catName.length.toString());
@@ -141,14 +155,13 @@ class PostAJob extends StatelessWidget {
               Center(
                 child: InkWell(
                   onTap: () {
-                    if (selectIndex != null) {
+                    if (catagory!= null) {
+                      LeadCategoriesModel categorieData=catagory;
                       if (_jobPostController.locationData == null) {
                         _jobPostController.isLocationError.value = true;
-                      } else if (_homeController
-                          .subCategoryList[selectIndex!].catName.isNotEmpty) {
+                      } else if (categorieData.catName.isNotEmpty) {
                         Map<String, dynamic> data = {
-                          "data": _homeController
-                              .subCategoryList[selectIndex!].catName,
+                          "data":categorieData.catName,
                           "locationData": _jobPostController.locationData
                         };
 

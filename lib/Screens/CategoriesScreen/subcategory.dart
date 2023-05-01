@@ -337,18 +337,8 @@ class SubCategoryPage extends StatelessWidget {
                                       )),
                                   InkWell(
                                     onTap: () {
-                                      int selectIndex = 0;
-                                      for (int i = 0;
-                                          i <
-                                              _homeController
-                                                  .subCategoryList.length;
-                                          i++) {
-                                        if (data.id ==
-                                            _homeController.subCategoryList[i].id) {
-                                          selectIndex = i;
-                                        }
-                                      }
-                                       Get.toNamed(Routes.postAJob,arguments:selectIndex); 
+                                     
+                                       Get.toNamed(Routes.postAJob,arguments:data); 
                                      
                                       
                                     },
