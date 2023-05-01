@@ -66,7 +66,4 @@ String addWishListPostApi = "${baseUrl}lead/WishlistServiceViewSet/";
 // String needHelpsApi = "${baseUrl}profile/still-need-help/";
 // String profileApi = "${baseUrl}profile/profile-update/";
 
-
-
-
-String sendCustomEmailApi="${baseUrl}lead/SendEmailTemplate/";
+String sendCustomEmailApi = "${baseUrl}lead/SendEmailTemplate/";

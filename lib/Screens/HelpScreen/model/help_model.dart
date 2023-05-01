@@ -1,59 +1,60 @@
+
 // To parse this JSON data, do
 //
-//     final helpModel = helpModelFromJson(jsonString);
+//     final helpsModel = helpsModelFromJson(jsonString);
 
 import 'dart:convert';
 
-List<HelpModel> helpModelFromJson(String str) =>
-    List<HelpModel>.from(json.decode(str).map((x) => HelpModel.fromJson(x)));
+List<HelpsModel> helpsModelFromJson(String str) =>
+    List<HelpsModel>.from(json.decode(str).map((x) => HelpsModel.fromJson(x)));
 
-String helpModelToJson(List<HelpModel> data) =>
+String helpsModelToJson(List<HelpsModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class HelpModel {
-  HelpModel({
+class HelpsModel {
+  int id;
+  String title;
+  List<Help> helps;
+
+  HelpsModel({
     required this.id,
-    required this.topic,
+    required this.title,
+    required this.helps,
+  });
+
+  factory HelpsModel.fromJson(Map<String, dynamic> json) => HelpsModel(
+        id: json["id"],
+        title: json["title"],
+        helps: List<Help>.from(json["helps"].map((x) => Help.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "title": title,
+        "helps": List<dynamic>.from(helps.map((x) => x.toJson())),
+      };
+}
+
+class Help {
+  int id;
+  String question;
+  String answer;
+
+  Help({
+    required this.id,
     required this.question,
     required this.answer,
   });
 
-  int id;
-  Topic topic;
-  String question;
-  String answer;
-
-  factory HelpModel.fromJson(Map<String, dynamic> json) => HelpModel(
+  factory Help.fromJson(Map<String, dynamic> json) => Help(
         id: json["id"],
-        topic: Topic.fromJson(json["topic"]),
         question: json["question"],
         answer: json["answer"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "topic": topic.toJson(),
         "question": question,
         "answer": answer,
-      };
-}
-
-class Topic {
-  Topic({
-    required this.id,
-    required this.title,
-  });
-
-  int id;
-  String title;
-
-  factory Topic.fromJson(Map<String, dynamic> json) => Topic(
-        id: json["id"],
-        title: json["title"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "title": title,
       };
 }
