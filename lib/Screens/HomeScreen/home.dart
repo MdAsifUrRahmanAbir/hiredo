@@ -520,7 +520,7 @@ class Home extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Get.toNamed(Routes.postAJob, arguments: index);
+              Get.toNamed(Routes.postAJob, arguments:data);
             },
             child: Container(
               height: 30.h,
