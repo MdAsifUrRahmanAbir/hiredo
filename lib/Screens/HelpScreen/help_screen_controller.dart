@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:homelyknock/Screens/HelpScreen/help_model.dart';
+import 'package:homelyknock/Screens/HelpScreen/model/help_model.dart';
 import 'package:homelyknock/Services/api_services_by_limon.dart';
 
 import '../../Route/routes.dart';
@@ -15,9 +15,13 @@ class HelpScreenController extends GetxController {
   final emailController = TextEditingController();
   final messageController = TextEditingController();
 
+  RxList<HelpsModel> helpData = List<HelpsModel>.empty(growable: true).obs;
+  var isLoading = false.obs;
+
   @override
   void onInit() {
     /// get helps api get method or response
+    getHelp();
     super.onInit();
   }
 
@@ -27,6 +31,22 @@ class HelpScreenController extends GetxController {
     emailController.dispose();
     messageController.dispose();
     super.dispose();
+  }
+
+  getHelp() async {
+    isLoading(true);
+    try {
+      var result = await ApiServicesByLimon.fetchHelp();
+      if (result.runtimeType == int) {
+        debugPrint("Error Help data  :$result");
+      } else {
+        helpData.value = result;
+      }
+    } on Exception catch (e) {
+      debugPrint('Fetch Error :$e');
+    } finally {
+      isLoading(false);
+    }
   }
 
   void sendButtonClicked() {
