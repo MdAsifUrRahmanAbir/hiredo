@@ -123,25 +123,25 @@ class CompletePostDetails extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Container(
-                          height: 50.h,
-                          width: 148.w,
-                          decoration: BoxDecoration(
-                              color: const Color(0xFF187949),
-                              borderRadius: BorderRadius.circular(5.r)),
-                          child: Center(
-                            child: Text(
-                              'Contact',
-                              style: GoogleFonts.roboto(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: const Color(0xFFFFFFFF)),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10.w,
-                        ),
+                        // Container(
+                        //   height: 50.h,
+                        //   width: 148.w,
+                        //   decoration: BoxDecoration(
+                        //       color: const Color(0xFF187949),
+                        //       borderRadius: BorderRadius.circular(5.r)),
+                        //   child: Center(
+                        //     child: Text(
+                        //       'Contact',
+                        //       style: GoogleFonts.roboto(
+                        //           fontSize: 14.sp,
+                        //           fontWeight: FontWeight.w500,
+                        //           color: const Color(0xFFFFFFFF)),
+                        //     ),
+                        //   ),
+                        // ),
+                        // SizedBox(
+                        //   width: 10.w,
+                        // ),
                         InkWell(
                           onTap: () {
                             showDialog(
@@ -335,7 +335,7 @@ class CompletePostDetails extends StatelessWidget {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         RatingBar.builder(
-                                          initialRating: 0,
+                                          initialRating:_completeController.reating.value,
                                           minRating: 1,
                                           direction: Axis.horizontal,
                                           allowHalfRating: true,
@@ -347,7 +347,9 @@ class CompletePostDetails extends StatelessWidget {
                                             color: Colors.amber,
                                             size: 25.sp,
                                           ),
-                                          onRatingUpdate: (rating) {},
+                                          onRatingUpdate: (rating) {
+                                            _completeController.reating.value=rating;
+                                          },
                                         ),
                                         SizedBox(
                                           height: 25.h,
@@ -360,25 +362,55 @@ class CompletePostDetails extends StatelessWidget {
                                         SizedBox(
                                           height: 25.h,
                                         ),
-                                        InkWell(
-                                          onTap: () {},
-                                          child: Container(
-                                            height: 50.h,
-                                            width: 150.w,
-                                            alignment: Alignment.center,
-                                            decoration: BoxDecoration(
-                                                color: themeColorGreen,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        5.r)),
-                                            child: Text(
-                                              "Submit",
-                                              style: TextStyle(
-                                                  fontSize: 18.sp,
-                                                  color: Colors.white),
-                                            ),
-                                          ),
-                                        )
+                                             InkWell(
+                    onTap: () {
+                      _completeController.hendleReviewAdd(int.parse(data.userId));
+                      // Get.to(SignInPage());
+                    },
+                    child: Container(
+                      height: 50.h,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: const Color(0xFF187949),
+                          borderRadius: BorderRadius.circular(4.r)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Submit',
+                            style: GoogleFonts.roboto(
+                                color: Colors.white,
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          Obx(
+                            () => SizedBox(
+                              width:
+                                  _completeController.isLoading.value ? 15.w : 0,
+                            ),
+                          ),
+                          Obx(() {
+                            if (_completeController.isLoading.value) {
+                              return SizedBox(
+                                height: 15.sp,
+                                width: 15.sp,
+                                child: const CircularProgressIndicator(
+                                  strokeWidth: 3,
+                                  color: Colors.white,
+                                ),
+                              );
+                            } else {
+                              return SizedBox();
+                            }
+                          })
+                        ],
+                      ),
+                    ),
+                  ),
+
+                                       
+                                     
+                                     
                                       ],
                                     ),
                                   );

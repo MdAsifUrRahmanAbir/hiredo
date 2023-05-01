@@ -9,6 +9,7 @@ import 'package:shimmer/shimmer.dart';
 
 
 import '../../../Services/api_component.dart';
+import '../../../utils/colors.dart';
 import '../Controller/complete_controller.dart';
 
 class TrackingPostOrderTwo extends StatelessWidget {
@@ -293,6 +294,29 @@ class TrackingPostOrderTwo extends StatelessWidget {
                       height: 10.h,
                     ),
                 itemCount: _completePostController.completePostList.length)
+          ,
+           _completePostController.isLoading.value?SizedBox(): InkWell(
+              onTap: (){
+                 Get.toNamed(Routes.postAJob, arguments: null);
+              },
+              child: Container(height: 50.h,
+                      width:double.infinity,
+                      decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.r),
+              color: themeColorGreen,
+              
+                      ),
+                      alignment: Alignment.center,
+                      child: Text("Add a new job post",style: GoogleFonts.roboto(fontSize:16.sp,fontWeight: FontWeight.w500,color: Colors.white),),
+                      
+                      
+                      ),
+            )
+            
+             
+          
+          
+          
           ],
         ),
       ),

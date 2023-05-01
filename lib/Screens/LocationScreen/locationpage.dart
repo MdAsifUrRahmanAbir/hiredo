@@ -234,187 +234,7 @@ class LocationPage extends StatelessWidget {
                           if (index == 9)
                             TextButton(
                                 onPressed: () {
-                                  showModalBottomSheet(
-                                      context: context,
-                                      isDismissible: true,
-                                      backgroundColor: Colors.white,
-                                      shape: OutlineInputBorder(
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(15.r),
-                                              topRight: Radius.circular(15.r))),
-                                      builder: (context) {
-                                        return Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 17.w),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              SizedBox(
-                                                height: 20.h,
-                                              ),
-                                              Text(
-                                                "Add Location",
-                                                style: TextStyle(
-                                                    fontSize: 18.sp,
-                                                    color: Colors.black,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              SizedBox(
-                                                height: 20.h,
-                                              ),
-
-                                              DropdownSearch<LocationDataModel>(
-                                                items:
-                                                    _locationController.country,
-                                                dropdownButtonProps:
-                                                    const DropdownButtonProps(
-                                                  icon: SizedBox(),
-                                                ),
-                                                popupProps:
-                                                    const PopupProps.menu(
-                                                        showSearchBox: true),
-                                                dropdownDecoratorProps:
-                                                    DropDownDecoratorProps(
-                                                  dropdownSearchDecoration:
-                                                      InputDecoration(
-                                                          labelText:
-                                                              "What is your Location?",
-                                                          hintText:
-                                                              "Search Your Location",
-                                                          isDense: true,
-                                                          contentPadding:
-                                                              EdgeInsets
-                                                                  .symmetric(
-                                                            horizontal: 16.w,
-                                                          ),
-                                                          enabledBorder: OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          3.r),
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                      color: Colors
-                                                                          .red)),
-                                                          border: OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          3.r))),
-                                                ),
-                                                itemAsString:
-                                                    (LocationDataModel u) =>
-                                                        u.location,
-                                                onChanged: (value) {
-                                                  _locationController
-                                                      .locationData = value!;
-                                                },
-                                              ),
-
-                                              // DropdownSearch<LocationModel>(
-                                              //   popupProps: PopupProps.dialog(
-                                              //     showSelectedItems: false,
-                                              //     showSearchBox: true,
-                                              //   ),
-                                              //   items: _locationController
-                                              //       .country
-                                              //       .map((e) => e)
-                                              //       .toList(),
-                                              //   onChanged: (value) {},
-                                              //   selectedItem: "",
-                                              // ),
-
-                                              SizedBox(
-                                                height: 10.h,
-                                              ),
-                                              TextFormField(
-                                                controller: _locationController
-                                                    .distanceController,
-                                                decoration:
-                                                    const InputDecoration(
-                                                  hintText:
-                                                      'Add Location Distance',
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  width: 0.5)),
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  width: 0.5)),
-                                                  border: OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Colors.black,
-                                                          width: 0)),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 20.h,
-                                              ),
-                                              InkWell(
-                                                onTap: () {},
-                                                child: Container(
-                                                  height: 50.h,
-                                                  width: double.infinity,
-                                                  decoration: BoxDecoration(
-                                                      color: const Color(
-                                                          0xFF187949),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.r)),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        'Submit',
-                                                        style: GoogleFonts.roboto(
-                                                            fontSize: 18.sp,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            color: const Color(
-                                                                0xFFFFFFFF)),
-                                                      ),
-                                                      // Obx(() => SizedBox(
-                                                      //       width: updatLeadController
-                                                      //               .isLoading.value
-                                                      //           ? 5.w
-                                                      //           : 0,
-                                                      //     )),
-                                                      // Obx(() {
-                                                      //   if (updatLeadController.isLoading.value) {
-                                                      //     return SizedBox(
-                                                      //       height: 10.h,
-                                                      //       width: 10.w,
-                                                      //       child:
-                                                      //           const CircularProgressIndicator(
-                                                      //         color: Colors.white,
-                                                      //       ),
-                                                      //     );
-                                                      // } else {
-                                                      //   return const SizedBox();
-                                                      // }
-                                                      //    })
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 20.h,
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      });
+                                  _addLocation(context);
                                 },
                                 child: Text(
                                   "+ Add a location",
@@ -439,5 +259,189 @@ class LocationPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _addLocation(BuildContext context) {
+    return showModalBottomSheet(
+                                    context: context,
+                                    isDismissible: true,
+                                    backgroundColor: Colors.white,
+                                    shape: OutlineInputBorder(
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(15.r),
+                                            topRight: Radius.circular(15.r))),
+                                    builder: (context) {
+                                      return Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 17.w),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: 20.h,
+                                            ),
+                                            Text(
+                                              "Add Location",
+                                              style: TextStyle(
+                                                  fontSize: 18.sp,
+                                                  color: Colors.black,
+                                                  fontWeight:
+                                                      FontWeight.bold),
+                                            ),
+                                            SizedBox(
+                                              height: 20.h,
+                                            ),
+
+                                            DropdownSearch<LocationDataModel>(
+                                              items:
+                                                  _locationController.country,
+                                              dropdownButtonProps:
+                                                  const DropdownButtonProps(
+                                                icon: SizedBox(),
+                                              ),
+                                              popupProps:
+                                                  const PopupProps.menu(
+                                                      showSearchBox: true),
+                                              dropdownDecoratorProps:
+                                                  DropDownDecoratorProps(
+                                                dropdownSearchDecoration:
+                                                    InputDecoration(
+                                                        labelText:
+                                                            "What is your Location?",
+                                                        hintText:
+                                                            "Search Your Location",
+                                                        isDense: true,
+                                                        contentPadding:
+                                                            EdgeInsets
+                                                                .symmetric(
+                                                          horizontal: 16.w,
+                                                        ),
+                                                        enabledBorder: OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        3.r),
+                                                            borderSide:
+                                                                BorderSide(
+                                                                    color: Colors
+                                                                        .red)),
+                                                        border: OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        3.r))),
+                                              ),
+                                              itemAsString:
+                                                  (LocationDataModel u) =>
+                                                      u.location,
+                                              onChanged: (value) {
+                                                _locationController
+                                                    .locationData = value!;
+                                              },
+                                            ),
+
+                                            // DropdownSearch<LocationModel>(
+                                            //   popupProps: PopupProps.dialog(
+                                            //     showSelectedItems: false,
+                                            //     showSearchBox: true,
+                                            //   ),
+                                            //   items: _locationController
+                                            //       .country
+                                            //       .map((e) => e)
+                                            //       .toList(),
+                                            //   onChanged: (value) {},
+                                            //   selectedItem: "",
+                                            // ),
+
+                                            SizedBox(
+                                              height: 10.h,
+                                            ),
+                                            TextFormField(
+                                              controller: _locationController
+                                                  .distanceController,
+                                              decoration:
+                                                  const InputDecoration(
+                                                hintText:
+                                                    'Add Location Distance',
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                        borderSide:
+                                                            BorderSide(
+                                                                color: Colors
+                                                                    .black,
+                                                                width: 0.5)),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                        borderSide:
+                                                            BorderSide(
+                                                                color: Colors
+                                                                    .black,
+                                                                width: 0.5)),
+                                                border: OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Colors.black,
+                                                        width: 0)),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 20.h,
+                                            ),
+                                            InkWell(
+                                              onTap: () {},
+                                              child: Container(
+                                                height: 50.h,
+                                                width: double.infinity,
+                                                decoration: BoxDecoration(
+                                                    color: const Color(
+                                                        0xFF187949),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.r)),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .center,
+                                                  children: [
+                                                    Text(
+                                                      'Submit',
+                                                      style: GoogleFonts.roboto(
+                                                          fontSize: 18.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: const Color(
+                                                              0xFFFFFFFF)),
+                                                    ),
+                                                    // Obx(() => SizedBox(
+                                                    //       width: updatLeadController
+                                                    //               .isLoading.value
+                                                    //           ? 5.w
+                                                    //           : 0,
+                                                    //     )),
+                                                    // Obx(() {
+                                                    //   if (updatLeadController.isLoading.value) {
+                                                    //     return SizedBox(
+                                                    //       height: 10.h,
+                                                    //       width: 10.w,
+                                                    //       child:
+                                                    //           const CircularProgressIndicator(
+                                                    //         color: Colors.white,
+                                                    //       ),
+                                                    //     );
+                                                    // } else {
+                                                    //   return const SizedBox();
+                                                    // }
+                                                    //    })
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 20.h,
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    });
   }
 }
