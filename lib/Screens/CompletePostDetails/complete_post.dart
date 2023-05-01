@@ -123,25 +123,25 @@ class CompletePostDetails extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Container(
-                          height: 50.h,
-                          width: 148.w,
-                          decoration: BoxDecoration(
-                              color: const Color(0xFF187949),
-                              borderRadius: BorderRadius.circular(5.r)),
-                          child: Center(
-                            child: Text(
-                              'Contact',
-                              style: GoogleFonts.roboto(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: const Color(0xFFFFFFFF)),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10.w,
-                        ),
+                        // Container(
+                        //   height: 50.h,
+                        //   width: 148.w,
+                        //   decoration: BoxDecoration(
+                        //       color: const Color(0xFF187949),
+                        //       borderRadius: BorderRadius.circular(5.r)),
+                        //   child: Center(
+                        //     child: Text(
+                        //       'Contact',
+                        //       style: GoogleFonts.roboto(
+                        //           fontSize: 14.sp,
+                        //           fontWeight: FontWeight.w500,
+                        //           color: const Color(0xFFFFFFFF)),
+                        //     ),
+                        //   ),
+                        // ),
+                        // SizedBox(
+                        //   width: 10.w,
+                        // ),
                         InkWell(
                           onTap: () {
                             showDialog(

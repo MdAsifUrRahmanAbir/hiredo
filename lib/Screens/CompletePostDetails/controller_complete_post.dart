@@ -6,5 +6,7 @@ class CompletePostDetailsController extends GetxController{
 
     TextEditingController desTextController=TextEditingController();
 
+    var isLoading =false.obs;
+
 
 }
