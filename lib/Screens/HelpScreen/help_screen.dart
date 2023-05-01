@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/widgets/custom_loader.dart';
 
 import 'help_screen_controller.dart';
 
@@ -13,9 +15,10 @@ class HelpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBarWidget(context),
-      body: _bodyWidget(),
-    );
+        appBar: _appBarWidget(context),
+        body: Obx(
+          () => controller.isLoading.value ? CustomLoader() : _bodyWidget(),
+        ));
   }
 
   _appBarWidget(BuildContext context) {
@@ -53,8 +56,6 @@ class HelpScreen extends StatelessWidget {
           children: [
             _searchWidget(),
             _popularItemListWidget(),
-            _guidItemsListWidget(),
-            _topItemListWidget(),
             _testFormFieldWidget(),
             _sendButton(),
             SizedBox(
@@ -226,154 +227,55 @@ class HelpScreen extends StatelessWidget {
         SizedBox(
           height: 25.h,
         ),
-        Text(
-          'Popular',
-          style: GoogleFonts.roboto(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w500,
-              color: const Color(0xFF272727)),
-        ),
-        SizedBox(
-          height: 25.h,
-        ),
         ListView.separated(
-          itemCount: 5,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return ExpansionTile(
-              title: Text('Title'),
-            );
-
-            // Column(
-            //   children: [
-            //     Row(
-            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //       children: [
-            //         Text(
-            //           popularItem[index]['title'],
-            //           style: GoogleFonts.roboto(
-            //               fontSize: 14.sp,
-            //               fontWeight: FontWeight.w400,
-            //               color: const Color(0xFF424242)),
-            //         ),
-            //         const Icon(Icons.keyboard_arrow_down)
-            //       ],
-            //     ),
-            //     Divider(
-            //       thickness: 3,
-            //       color: const Color(0xFF848484).withOpacity(0.05),
-            //     )
-            //   ],
-            // );
-          },
-          separatorBuilder: (BuildContext context, int index) => SizedBox(
-            height: 12.h,
-          ),
-        )
-      ],
-    );
-  }
-
-  _guidItemsListWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: 25.h,
-        ),
-        Text(
-          'Guides',
-          style: GoogleFonts.roboto(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w500,
-              color: const Color(0xFF272727)),
-        ),
-        SizedBox(
-          height: 25.h,
-        ),
-        ListView.separated(
-          itemCount: guidesItem.length,
+          itemCount: controller.helpData.length,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        guidesItem[index]['title'],
-                        style: GoogleFonts.roboto(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
-                          color: const Color(0xFF424242),
+                Text(controller.helpData[index].title,
+                    style: GoogleFonts.roboto(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w500,
+                        color: const Color(0xFF272727))),
+                ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: controller.helpData[index].helps.length,
+                    itemBuilder: (context, idx) {
+                      var data = controller.helpData[index].helps[idx];
+                      return ExpansionTile(
+                        initiallyExpanded: true,
+                        maintainState: true,
+                        title: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              data.question,
+                              style: GoogleFonts.roboto(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: const Color(0xFF424242)),
+                            ),
+                            Divider(
+                              height: 6.h,
+                            )
+                          ],
                         ),
-                      ),
-                    ),
-                    const Icon(Icons.keyboard_arrow_down)
-                  ],
-                ),
-                Divider(
-                  thickness: 3,
-                  color: const Color(0xFF848484).withOpacity(0.05),
-                )
-              ],
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) => SizedBox(
-            height: 12.h,
-          ),
-        )
-      ],
-    );
-  }
-
-  _topItemListWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: 25.h,
-        ),
-        Text(
-          'Topics',
-          style: GoogleFonts.roboto(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w500,
-              color: const Color(0xFF272727)),
-        ),
-        SizedBox(
-          height: 25.h,
-        ),
-        ListView.separated(
-          itemCount: topicItem.length,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        topicItem[index]['title'],
-                        style: GoogleFonts.roboto(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
-                          color: const Color(0xFF424242),
-                        ),
-                      ),
-                    ),
-                    const Icon(Icons.keyboard_arrow_down)
-                  ],
-                ),
-                Divider(
-                  thickness: 3,
-                  color: const Color(0xFF848484).withOpacity(0.05),
-                )
+                        children: [
+                          HtmlWidget(
+                            data.answer,
+                            textStyle: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                                color: const Color(0xFF424242)),
+                          )
+                        ],
+                      );
+                    })
               ],
             );
           },
@@ -407,66 +309,3 @@ class HelpScreen extends StatelessWidget {
     );
   }
 }
-
-List<Map> popularItem = [
-  {
-    "title": "What is Ringknock  and how does it work?",
-  },
-  {
-    "title": "What are Credit Pack Subscriptions?",
-  },
-  {
-    "title": "How many responses can a customer receive?",
-  },
-  {
-    "title": "What’s Elite Pro and what’s included?",
-  },
-  {
-    "title": "Refer a friend!",
-  },
-];
-
-List<Map> guidesItem = [
-  {
-    "title": "Welcome to Ringknock ",
-  },
-  {
-    "title": "Getting Started",
-  },
-  {
-    "title": "How Ringknock works for professionals",
-  },
-  {
-    "title": "Personalising your One-Click Response",
-  },
-  {
-    "title": "How to use Email Templates",
-  },
-  {
-    "title": "How does Ringknock Connect work?",
-  },
-  {
-    "title": "How to use SMS templates?",
-  },
-  {
-    "title": "How to use Ringknock: Everything you need to knowemplates",
-  },
-];
-
-List<Map> topicItem = [
-  {
-    "title": "Profile",
-  },
-  {
-    "title": "How to get hired",
-  },
-  {
-    "title": "For Customers",
-  },
-  {
-    "title": "Managing Responses",
-  },
-  {
-    "title": "Lead Preferences",
-  },
-];
