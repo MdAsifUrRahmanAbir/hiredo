@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:homelyknock/Screens/HelpScreen/help_model.dart';
+
 import 'package:homelyknock/Screens/HelpScreen/help_screen_controller.dart';
 import 'package:homelyknock/Screens/ReviewScreen/model/review_model.dart';
 
@@ -12,6 +12,7 @@ import 'package:homelyknock/Screens/SettingsScreen/SMSTemplate/Model/sms_templat
 import 'package:homelyknock/Screens/TrackingScreen/Model/pending_post_model.dart';
 
 import '../Screens/DocumentScreen/Model/real_time_model.dart';
+import '../Screens/HelpScreen/model/help_model.dart';
 import '../Screens/SettingsScreen/MyCredits/Model/user_credit_model.dart';
 import '../local/my_local.dart';
 import 'package:http/http.dart' as http;
@@ -198,6 +199,28 @@ class ApiServicesByLimon {
       debugPrint("Data fetch Error. Reason ${e.toString()}");
       return 0;
     }
+  }
+
+  // fetch help
+  static dynamic fetchHelp() async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+      };
+
+      var response = await client.get(Uri.parse(helpGetApi), headers: headers);
+      if (response.statusCode == 200) {
+        debugPrint("Data : ${jsonDecode(response.body)}");
+        return helpsModelFromJson(response.body);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      debugPrint("Data fetch Error. Reason ${e.toString()}");
+    }
+    return 0;
   }
 
 // fetch credit
@@ -473,26 +496,6 @@ class ApiServicesByLimon {
       }
     } on Exception catch (e) {
       debugPrint("Image Upload Faild. Reason ${e.toString()}");
-      return 0;
-    }
-  }
-
-  static dynamic fetchHelpTopic() async {
-    var accessToken = await MyPreference.getToken();
-
-    try {
-      var headers = {
-        'Authorization': 'Bearer $accessToken',
-      };
-
-      var response = await client.get(Uri.parse(helpGetApi), headers: headers);
-      if (response.statusCode == 200) {
-        return helpModelFromJson(response.body);
-      } else {
-        return response.statusCode;
-      }
-    } on Exception catch (e) {
-      debugPrint("Data fetch Error. Reason ${e.toString()}");
       return 0;
     }
   }
