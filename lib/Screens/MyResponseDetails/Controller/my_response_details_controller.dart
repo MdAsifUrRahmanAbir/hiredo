@@ -7,16 +7,20 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../Services/api_services_by_limon.dart';
 import '../../SettingsScreen/EmailTemplate/Model/email_template_model.dart';
+import '../../SettingsScreen/SMSTemplate/Model/sms_template_model.dart';
 
 class MyresponseDetailesController extends GetxController {
   TextEditingController subTextCtrl = TextEditingController();
   TextEditingController messageTextCtrl = TextEditingController();
+    TextEditingController smsTextCtrl = TextEditingController();
 
   var isSendEmailLoading = false.obs;
   var isLoading = false.obs;
   var isSelectTemplete = 0.obs;
+   var isSelectSmsTemplete = 0.obs;
 
   var emailTemplateList = <EmailTemplateModel>[].obs;
+   var smsTemplateList = <SmSTemplateModel>[].obs;
 
   sendEmail(
       {required int postId,
@@ -69,6 +73,25 @@ class MyresponseDetailesController extends GetxController {
     }
   }
 
+ getSmsTemplete() async {
+ 
+    try {
+      var result = await ApiServicesByLimon.fetchSMSTemplate();
+
+      if (result.runtimeType == int) {
+        if (kDebugMode) {
+          print('$result');
+        }
+      } else {
+        smsTemplateList.assignAll(result);
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print('Fetch Error $e');
+      }
+    } 
+  }
+
     
 
   Future<void> sendLaunchUrl({required Uri uri}) async {
@@ -77,6 +100,13 @@ class MyresponseDetailesController extends GetxController {
     }
 
     await launchUrl(uri);
+  }
+
+   String? encodeQueryParameters(Map<String, String> params) {
+    return params.entries
+        .map((MapEntry<String, String> e) =>
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .join('&');
   }
 
 
