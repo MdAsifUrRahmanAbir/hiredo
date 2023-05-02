@@ -18,56 +18,56 @@ class MyResponse extends StatefulWidget {
 }
 
 class _MyResponseState extends State<MyResponse> {
-  List<Map> pending = [
-    {
-      'imgUrl': 'images/img.png',
-      'name': 'Kumar',
-      'title': 'Kitchen Refurbishment',
-      'location': '4517 Washington Ave, Kentucky',
-      'details':
-          'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit ...'
-    },
-    {
-      'imgUrl': 'images/img.png',
-      'name': 'Kumar',
-      'title': 'Kitchen Refurbishment',
-      'location': '4517 Washington Ave, Kentucky',
-      'details':
-          'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit ...'
-    },
-    {
-      'imgUrl': 'images/img.png',
-      'name': 'Kumar',
-      'title': 'Kitchen Refurbishment',
-      'location': '4517 Washington Ave, Kentucky',
-      'details':
-          'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit ...'
-    },
-    {
-      'imgUrl': 'images/img.png',
-      'name': 'Kumar',
-      'title': 'Kitchen Refurbishment',
-      'location': '4517 Washington Ave, Kentucky',
-      'details':
-          'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit ...'
-    },
-    {
-      'imgUrl': 'images/img.png',
-      'name': 'Kumar',
-      'title': 'Kitchen Refurbishment',
-      'location': '4517 Washington Ave, Kentucky',
-      'details':
-          'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit ...'
-    },
-    {
-      'imgUrl': 'images/img.png',
-      'name': 'Kumar',
-      'title': 'Kitchen Refurbishment',
-      'location': '4517 Washington Ave, Kentucky',
-      'details':
-          'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit ...'
-    }
-  ];
+  // List<Map> pending = [
+  //   {
+  //     'imgUrl': 'images/img.png',
+  //     'name': 'Kumar',
+  //     'title': 'Kitchen Refurbishment',
+  //     'location': '4517 Washington Ave, Kentucky',
+  //     'details':
+  //         'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit ...'
+  //   },
+  //   {
+  //     'imgUrl': 'images/img.png',
+  //     'name': 'Kumar',
+  //     'title': 'Kitchen Refurbishment',
+  //     'location': '4517 Washington Ave, Kentucky',
+  //     'details':
+  //         'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit ...'
+  //   },
+  //   {
+  //     'imgUrl': 'images/img.png',
+  //     'name': 'Kumar',
+  //     'title': 'Kitchen Refurbishment',
+  //     'location': '4517 Washington Ave, Kentucky',
+  //     'details':
+  //         'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit ...'
+  //   },
+  //   {
+  //     'imgUrl': 'images/img.png',
+  //     'name': 'Kumar',
+  //     'title': 'Kitchen Refurbishment',
+  //     'location': '4517 Washington Ave, Kentucky',
+  //     'details':
+  //         'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit ...'
+  //   },
+  //   {
+  //     'imgUrl': 'images/img.png',
+  //     'name': 'Kumar',
+  //     'title': 'Kitchen Refurbishment',
+  //     'location': '4517 Washington Ave, Kentucky',
+  //     'details':
+  //         'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit ...'
+  //   },
+  //   {
+  //     'imgUrl': 'images/img.png',
+  //     'name': 'Kumar',
+  //     'title': 'Kitchen Refurbishment',
+  //     'location': '4517 Washington Ave, Kentucky',
+  //     'details':
+  //         'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit ...'
+  //   }
+  // ];
 
   final _myResponseController = Get.put(MyResponseController());
 
@@ -115,6 +115,12 @@ class _MyResponseState extends State<MyResponse> {
                         child: SizedBox(
                           height: 50.h,
                           child: TextFormField(
+                            controller: _myResponseController.searchController,
+                            onChanged: (value) {
+                              if (value.isEmpty) {
+                                _myResponseController.isSearch.value = false;
+                              }
+                            },
                             decoration: InputDecoration(
                               hintText: 'Search',
                               fillColor: Colors.white,
@@ -136,25 +142,34 @@ class _MyResponseState extends State<MyResponse> {
                           ),
                         ),
                       ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10.w),
-                        height: 50.h,
-                        color: const Color(0xff187949),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Filter',
-                              style: myStyle(
-                                  16.sp, FontWeight.normal, Colors.white),
-                            ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            const Icon(
-                              Icons.filter_list_sharp,
-                              color: Colors.white,
-                            )
-                          ],
+                      InkWell(
+                        onTap: () {
+                          if (_myResponseController
+                              .searchController.text.isNotEmpty) {
+                            _myResponseController.isSearch.value = true;
+                            _myResponseController.getSearchPendingResponse();
+                          }
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10.w),
+                          height: 50.h,
+                          color: const Color(0xff187949),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Filter',
+                                style: myStyle(
+                                    16.sp, FontWeight.normal, Colors.white),
+                              ),
+                              SizedBox(
+                                width: 5.w,
+                              ),
+                              const Icon(
+                                Icons.filter_list_sharp,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
                         ),
                       )
                     ],

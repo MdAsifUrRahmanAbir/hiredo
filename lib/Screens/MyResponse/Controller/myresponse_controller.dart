@@ -2,12 +2,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/Screens/MyResponse/Model/my_response_model.dart';
+import 'package:homelyknock/Screens/MyResponse/Model/my_response_search_model.dart';
 import 'package:homelyknock/Services/api_services_by_limon.dart';
 
 import '../../../Services/api_services.dart';
 
 class MyResponseController extends GetxController {
   late ScrollController scrolController;
+  var isSearch = false.obs;
 
   @override
   void onInit() {
@@ -22,6 +24,7 @@ class MyResponseController extends GetxController {
   var hasNextPage = true.obs;
 
   var isLoadMoreRunning = false.obs;
+  TextEditingController searchController = TextEditingController();
 
   RxList<Result> myResponseList = List<Result>.empty(growable: true).obs;
 
@@ -30,6 +33,25 @@ class MyResponseController extends GetxController {
   MyResponseModel? demoData;
 
   var data;
+
+  getSearchPendingResponse() async {
+    isFirstLoadRunning(true);
+    try {
+      var result =
+          await ApiServicesByLimon.fetchSearchAndFilter(searchController.text);
+      if (result.runtimeType == int) {
+        debugPrint("pending response fetch error : $result");
+      } else {
+        MyResponseSearchModel searchResponseData = result;
+
+        debugPrint("Pending Response:$searchResponseData");
+      }
+    } on Exception catch (e) {
+      print('Something went wrong');
+    } finally {
+      isFirstLoadRunning(false);
+    }
+  }
 
   getPendingResponse() async {
     try {
@@ -84,7 +106,7 @@ class MyResponseController extends GetxController {
       if (res.runtimeType == int) {
         debugPrint("lead fetch error : $res");
       } else {
-        getPendingResponse();
+        await getPendingResponse();
         demoData = res;
         myResponseList.value = demoData!.result;
 
@@ -93,6 +115,7 @@ class MyResponseController extends GetxController {
     } on Exception catch (e) {
       print('Something went wrong');
     } finally {
+      getPendingResponse();
       isFirstLoadRunning.value = false;
     }
   }

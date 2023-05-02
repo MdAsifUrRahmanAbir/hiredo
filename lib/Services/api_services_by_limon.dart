@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 
 import 'package:homelyknock/Screens/HelpScreen/help_screen_controller.dart';
+import 'package:homelyknock/Screens/MyResponse/Model/my_response_model.dart';
 import 'package:homelyknock/Screens/ReviewScreen/model/review_model.dart';
 
 import 'package:homelyknock/Screens/SettingsScreen/EmailTemplate/Model/email_template_model.dart';
@@ -13,6 +14,7 @@ import 'package:homelyknock/Screens/TrackingScreen/Model/pending_post_model.dart
 
 import '../Screens/DocumentScreen/Model/real_time_model.dart';
 import '../Screens/HelpScreen/model/help_model.dart';
+import '../Screens/MyResponse/Model/my_response_search_model.dart';
 import '../Screens/SettingsScreen/MyCredits/Model/user_credit_model.dart';
 import '../local/my_local.dart';
 import 'package:http/http.dart' as http;
@@ -197,6 +199,31 @@ class ApiServicesByLimon {
       }
     } on Exception catch (e) {
       debugPrint("Data fetch Error. Reason ${e.toString()}");
+      return 0;
+    }
+  }
+
+  // fetch pending search and filtering
+
+  static dynamic fetchSearchAndFilter(String text) async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+      };
+      var response = await client.get(
+          Uri.parse(pendingResponseSearch + text.toString()),
+          headers: headers);
+      if (response.statusCode == 200) {
+        return myResponseSearchModelFromJson(response.body);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print("Pending Response fetch Error. Reason ${e.toString()}");
+      }
       return 0;
     }
   }
