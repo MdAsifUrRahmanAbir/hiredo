@@ -54,7 +54,7 @@ class HelpScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            _searchWidget(),
+          //  _searchWidget(),
             _popularItemListWidget(),
             _testFormFieldWidget(),
             _sendButton(),

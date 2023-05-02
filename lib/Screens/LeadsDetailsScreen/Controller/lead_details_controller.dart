@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/Screens/ProfileScreen/profile.dart';
+import 'package:homelyknock/Screens/SettingsScreen/SMSTemplate/Model/sms_template_model.dart';
 import 'package:homelyknock/Services/api_services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../Services/api_services_by_limon.dart';
+import '../../LeadsScreen/Controller/lead_controller.dart';
 import '../../SettingsScreen/EmailTemplate/Model/email_template_model.dart';
 
 class LeadDetailsController extends GetxController {
-  var isContect = [].obs;
-
+  // var isContect = [].obs;
+final _leadController = Get.put(LeadController());
   var isContectLoading = false.obs;
 
   handleContact(int id) async {
@@ -19,27 +21,32 @@ class LeadDetailsController extends GetxController {
       isContectLoading(true);
       var result = await ApiServices.leadContact(id);
       if (result) {
-        isContect.add(id);
+        _leadController.isContect.add(id);
         profileController.getMyResponseCount();
-         debugPrint("Contect sucessfull");
+        debugPrint("Contect sucessfull");
       } else {
         debugPrint("Contect error reson");
       }
     } on Exception catch (e) {
-      debugPrint("Contect error reson");
+      debugPrint("Contect error reson $e");
       // TODO
     } finally {
       isContectLoading(false);
     }
   }
-   TextEditingController subTextCtrl = TextEditingController();
+
+  TextEditingController subTextCtrl = TextEditingController();
   TextEditingController messageTextCtrl = TextEditingController();
+   
+  TextEditingController smsTextCtrl = TextEditingController();
 
   var isSendEmailLoading = false.obs;
   var isLoading = false.obs;
   var isSelectTemplete = 0.obs;
+  var isSelectSmsTemplete = 0.obs;
 
   var emailTemplateList = <EmailTemplateModel>[].obs;
+  var smsTemplateList = <SmSTemplateModel>[].obs;
 
   sendEmail(
       {required int postId,
@@ -70,9 +77,15 @@ class LeadDetailsController extends GetxController {
       isSendEmailLoading(false);
     }
   }
+  getData()async{
+    isLoading(true);
+   await getEmailTemplete();
+   await getSmsTemplete();
+    isLoading(false);
+  }
 
   getEmailTemplete() async {
-    isLoading(true);
+  
     try {
       var result = await ApiServicesByLimon.fetchEmailTemplate();
 
@@ -87,20 +100,44 @@ class LeadDetailsController extends GetxController {
       if (kDebugMode) {
         print('Fetch Error $e');
       }
-    } finally {
-      isLoading(false);
     }
+  }
+
+  getSmsTemplete() async {
+ 
+    try {
+      var result = await ApiServicesByLimon.fetchSMSTemplate();
+
+      if (result.runtimeType == int) {
+        if (kDebugMode) {
+          print('$result');
+        }
+      } else {
+        smsTemplateList.assignAll(result);
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print('Fetch Error $e');
+      }
+    } 
   }
 
   Future<void> sendLaunchUrl({required Uri uri}) async {
-    if (!await canLaunchUrl(uri)) {
-      throw 'Could not launch $uri';
-    }
+    try {
+      if (!await canLaunchUrl(uri)) {
+        throw 'Could not launch $uri';
+      }
 
-    await launchUrl(uri);
+      await launchUrl(uri);
+    } on Exception catch (e) {
+      debugPrint("$e");
+    }
   }
 
-
-
-
+  String? encodeQueryParameters(Map<String, String> params) {
+    return params.entries
+        .map((MapEntry<String, String> e) =>
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .join('&');
+  }
 }

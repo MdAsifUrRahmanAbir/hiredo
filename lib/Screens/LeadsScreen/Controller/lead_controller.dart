@@ -9,8 +9,11 @@ import '../Model/lead_search_model.dart';
 
 class LeadController extends GetxController {
   late ScrollController scrolController;
+
   TextEditingController searchController = TextEditingController();
   var isSearch = false.obs;
+
+  var isContect = [].obs;
 
   @override
   void onInit() {
