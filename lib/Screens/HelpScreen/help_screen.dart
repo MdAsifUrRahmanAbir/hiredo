@@ -240,40 +240,50 @@ class HelpScreen extends StatelessWidget {
                     style: GoogleFonts.roboto(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w500,
-                        color: const Color(0xFF272727))),
+                             color: const Color(0xFF272727))),
                 ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: controller.helpData[index].helps.length,
                     itemBuilder: (context, idx) {
                       var data = controller.helpData[index].helps[idx];
-                      return ExpansionTile(
-                        title: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              data.question,
-                              style: GoogleFonts.roboto(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400,
-                                  color: const Color(0xFF424242)),
-                            ),
-                            Divider(
-                              height: 6.h,
-                              thickness: 1.h,
-                              color: const Color(0xFF848484).withOpacity(0.08),
-                            )
-                          ],
-                        ),
+                      return Column(
                         children: [
-                          HtmlWidget(
-                            data.answer,
-                            textStyle: TextStyle(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400,
-                                color: const Color(0xFF424242)),
-                          )
+                          Theme(
+                            data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                            child: ListTileTheme(
+                              contentPadding: EdgeInsets.zero,
+                              minVerticalPadding: 0,
+                              dense: true,
+                              child: ExpansionTile(
+                                tilePadding: EdgeInsets.zero,
+                                title: Text(
+                                  data.question,
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w400,
+                                      color: const Color(0xFF424242)),
+                                ),
+                                children: [
+                                  HtmlWidget(
+                                    data.answer,
+                                    textStyle: TextStyle(
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400,
+                                        color: const Color(0xFF424242)),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                       Divider(
+                                height: 1,
+                               
+
+                                color: const Color(0xFF848484).withOpacity(0.08),
+                              )
+                       
+                       
                         ],
                       );
                     })
