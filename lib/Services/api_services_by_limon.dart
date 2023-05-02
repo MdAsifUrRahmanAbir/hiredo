@@ -1,10 +1,10 @@
 import 'dart:convert';
-import 'dart:io';
+
 
 import 'package:flutter/foundation.dart';
 
 import 'package:homelyknock/Screens/HelpScreen/help_screen_controller.dart';
-import 'package:homelyknock/Screens/MyResponse/Model/my_response_model.dart';
+
 import 'package:homelyknock/Screens/ReviewScreen/model/review_model.dart';
 
 import 'package:homelyknock/Screens/SettingsScreen/EmailTemplate/Model/email_template_model.dart';
@@ -14,6 +14,7 @@ import 'package:homelyknock/Screens/TrackingScreen/Model/pending_post_model.dart
 
 import '../Screens/DocumentScreen/Model/real_time_model.dart';
 import '../Screens/HelpScreen/model/help_model.dart';
+
 import '../Screens/MyResponse/Model/my_response_search_model.dart';
 import '../Screens/SettingsScreen/MyCredits/Model/user_credit_model.dart';
 import '../local/my_local.dart';
@@ -213,7 +214,7 @@ class ApiServicesByLimon {
         'Authorization': 'Bearer $accessToken',
       };
       var response = await client.get(
-          Uri.parse(pendingResponseSearch + text.toString()),
+          Uri.parse(myResponseSearchApi+text),
           headers: headers);
       if (response.statusCode == 200) {
         return myResponseSearchModelFromJson(response.body);
