@@ -5,7 +5,7 @@
  
 
    <application
-        android:label="Homely Knock"
+        android:label="Hiredo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
