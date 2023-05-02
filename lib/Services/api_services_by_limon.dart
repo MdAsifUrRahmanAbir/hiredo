@@ -201,6 +201,29 @@ class ApiServicesByLimon {
     }
   }
 
+  // fetch pending my response
+
+  static dynamic fetchPendingResponse() async {
+    var accessToken = await MyPreference.getToken();
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+      };
+
+      var response =
+          await client.get(Uri.parse(pendingResponseGetApi), headers: headers);
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+        return data;
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      debugPrint("Data fetch Error. Reason ${e.toString()}");
+      return 0;
+    }
+  }
+
   // fetch help
   static dynamic fetchHelp() async {
     var accessToken = await MyPreference.getToken();

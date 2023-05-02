@@ -25,6 +25,7 @@ String profilePicUpdateApi = "${baseUrl}profile_picture_update/";
 String helpGetApi = "${baseUrl}profile/help/";
 String getLocationApi = "${baseUrl}locations/";
 String getReviewApi = "${baseUrl}profile/UserFilter/";
+String pendingResponseGetApi = "${baseUrl}lead/pending-my-reponse-count/";
 
 String getCreditApi = "${baseUrl}payment/UserCreditAmount/";
 String paymentSetCreditApi = "${baseUrl}payment/SetCreditRetrive/";
@@ -59,7 +60,6 @@ String wishListCompanyApi = "${baseUrl}lead/WishlistServiceViewSet/";
 String wishListServiceApi = "${baseUrl}lead/WishlistFeatureViewSet/";
 String addWishListPostApi = "${baseUrl}lead/WishlistServiceViewSet/";
 
-
 // String changeUserModeApi = "${baseUrl}profile/change-user-type/";
 // String logoutUserApi = "${baseUrl}logout/";
 // String leadsApi = "${baseUrl}ServiceWiseLead/";
@@ -67,12 +67,5 @@ String addWishListPostApi = "${baseUrl}lead/WishlistServiceViewSet/";
 // String needHelpsApi = "${baseUrl}profile/still-need-help/";
 // String profileApi = "${baseUrl}profile/profile-update/";
 
-
-
-
-
-String sendCustomEmailApi="${baseUrl}lead/SendEmailTemplate/";
-String reviewAddApi="${baseUrl}profile/create_review/";
-
-
-
+String sendCustomEmailApi = "${baseUrl}lead/SendEmailTemplate/";
+String reviewAddApi = "${baseUrl}profile/create_review/";
