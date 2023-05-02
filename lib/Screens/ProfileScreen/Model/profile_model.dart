@@ -4,119 +4,99 @@
 
 import 'dart:convert';
 
-ProfileModel profileModelFromJson(String str) => ProfileModel.fromJson(json.decode(str));
+ProfileModel profileModelFromJson(String str) =>
+    ProfileModel.fromJson(json.decode(str));
 
-
+String profileModelToJson(ProfileModel data) => json.encode(data.toJson());
 
 class ProfileModel {
-    ProfileModel({
-        required this.id,
-        required this.user,
-        this.image,
-        required this.credit,
-        required this.badges,
-        required this.updatedAt,
-    });
+  int id;
+  User user;
+  dynamic image;
+  int credit;
+  List<dynamic> badges;
+  DateTime updatedAt;
+  int percentageComplete;
 
-    int id;
-    User user;
-    dynamic image;
-    int credit;
-    List<Badge> badges;
-    DateTime updatedAt;
+  ProfileModel({
+    required this.id,
+    required this.user,
+    this.image,
+    required this.credit,
+    required this.badges,
+    required this.updatedAt,
+    required this.percentageComplete,
+  });
 
-    factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
+  factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
         id: json["id"],
         user: User.fromJson(json["user"]),
-        image: json["image"]??"",
-        credit: json["credit"],
-        badges: List<Badge>.from(json["badges"].map((x) => Badge.fromJson(x))),
-        updatedAt: DateTime.parse(json["updated_at"]),
-    );
-
-  
-}
-
-class Badge {
-    Badge({
-        required this.id,
-        required this.title,
-        required this.description,
-        required this.image,
-        required this.longDescription,
-        required this.created,
-        required this.user,
-    });
-
-    int id;
-    String title;
-    String description;
-    String image;
-    String longDescription;
-    DateTime created;
-    int user;
-
-    factory Badge.fromJson(Map<String, dynamic> json) => Badge(
-        id: json["id"],
-        title: json["title"],
-        description: json["description"],
         image: json["image"],
-        longDescription: json["long_description"],
-        created: DateTime.parse(json["created"]),
-        user: json["user"],
-    );
+        credit: json["credit"],
+        badges: List<dynamic>.from(json["badges"].map((x) => x)),
+        updatedAt: DateTime.parse(json["updated_at"]),
+        percentageComplete: json["percentage_complete"],
+      );
 
-   
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "user": user.toJson(),
+        "image": image,
+        "credit": credit,
+        "badges": List<dynamic>.from(badges.map((x) => x)),
+        "updated_at": updatedAt.toIso8601String(),
+        "percentage_complete": percentageComplete,
+      };
 }
 
 class User {
-    User({
-        required this.id,
-        required this.password,
-        required this.isSuperuser,
-        required this.fullName,
-        required this.email,
-        required this.dateOfBirth,
-        required this.corporationName,
-        required this.corporationNumber,
-        required this.phoneNumber,
-        required this.lastLogin,
-        required this.joinDate,
-        required this.isActive,
-        required this.isStaff,
-        required this.isAdmin,
-        required this.isUser,
-        required this.isProfessional,
-        this.otpSecret,
-        this.otp,
-        this.otpExpireTime,
-        required this.groups,
-        required this.userPermissions,
-    });
+  int id;
+  String password;
+  bool isSuperuser;
+  String fullName;
+  String email;
+  DateTime dateOfBirth;
+  String corporationName;
+  String corporationNumber;
+  String phoneNumber;
+  DateTime lastLogin;
+  DateTime joinDate;
+  bool isActive;
+  bool isStaff;
+  bool isAdmin;
+  bool isUser;
+  bool isProfessional;
+  dynamic otpSecret;
+  dynamic otp;
+  dynamic otpExpireTime;
+  List<dynamic> groups;
+  List<dynamic> userPermissions;
 
-    int id;
-    String password;
-    bool isSuperuser;
-    String fullName;
-    String email;
-    DateTime dateOfBirth;
-    String corporationName;
-    String corporationNumber;
-    String phoneNumber;
-    DateTime lastLogin;
-    DateTime joinDate;
-    bool isActive;
-    bool isStaff;
-    bool isAdmin;
-    bool isUser;
-    bool isProfessional;
-    dynamic otpSecret;
-    dynamic otp;
-    dynamic otpExpireTime;
-    List<dynamic> groups;
-    List<dynamic> userPermissions;
+  User({
+    required this.id,
+    required this.password,
+    required this.isSuperuser,
+    required this.fullName,
+    required this.email,
+    required this.dateOfBirth,
+    required this.corporationName,
+    required this.corporationNumber,
+    required this.phoneNumber,
+    required this.lastLogin,
+    required this.joinDate,
+    required this.isActive,
+    required this.isStaff,
+    required this.isAdmin,
+    required this.isUser,
+    required this.isProfessional,
+    this.otpSecret,
+    this.otp,
+    this.otpExpireTime,
+    required this.groups,
+    required this.userPermissions,
+  });
 
-    factory User.fromJson(Map<String, dynamic> json) => User(
+  factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         password: json["password"],
         isSuperuser: json["is_superuser"],
@@ -137,10 +117,32 @@ class User {
         otp: json["otp"],
         otpExpireTime: json["otp_expire_time"],
         groups: List<dynamic>.from(json["groups"].map((x) => x)),
-        userPermissions: List<dynamic>.from(json["user_permissions"].map((x) => x)),
-    );
+        userPermissions:
+            List<dynamic>.from(json["user_permissions"].map((x) => x)),
+      );
 
-   
-
-
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "password": password,
+        "is_superuser": isSuperuser,
+        "full_name": fullName,
+        "email": email,
+        "date_of_birth":
+            "${dateOfBirth.year.toString().padLeft(4, '0')}-${dateOfBirth.month.toString().padLeft(2, '0')}-${dateOfBirth.day.toString().padLeft(2, '0')}",
+        "corporation_name": corporationName,
+        "corporation_number": corporationNumber,
+        "phone_number": phoneNumber,
+        "last_login": lastLogin.toIso8601String(),
+        "join_date": joinDate.toIso8601String(),
+        "is_active": isActive,
+        "is_staff": isStaff,
+        "is_admin": isAdmin,
+        "is_user": isUser,
+        "is_professional": isProfessional,
+        "otp_secret": otpSecret,
+        "otp": otp,
+        "otp_expire_time": otpExpireTime,
+        "groups": List<dynamic>.from(groups.map((x) => x)),
+        "user_permissions": List<dynamic>.from(userPermissions.map((x) => x)),
+      };
 }

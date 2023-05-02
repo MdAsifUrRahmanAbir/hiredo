@@ -54,7 +54,7 @@ class HelpScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-          //  _searchWidget(),
+            //  _searchWidget(),
             _popularItemListWidget(),
             _testFormFieldWidget(),
             _sendButton(),
@@ -240,7 +240,7 @@ class HelpScreen extends StatelessWidget {
                     style: GoogleFonts.roboto(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w500,
-                             color: const Color(0xFF272727))),
+                        color: const Color(0xFF272727))),
                 ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -250,7 +250,8 @@ class HelpScreen extends StatelessWidget {
                       return Column(
                         children: [
                           Theme(
-                            data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                            data: ThemeData()
+                                .copyWith(dividerColor: Colors.transparent),
                             child: ListTileTheme(
                               contentPadding: EdgeInsets.zero,
                               minVerticalPadding: 0,
@@ -276,14 +277,10 @@ class HelpScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                       Divider(
-                                height: 1,
-                               
-
-                                color: const Color(0xFF848484).withOpacity(0.08),
-                              )
-                       
-                       
+                          Divider(
+                            height: 1,
+                            color: const Color(0xFF848484).withOpacity(0.08),
+                          )
                         ],
                       );
                     })

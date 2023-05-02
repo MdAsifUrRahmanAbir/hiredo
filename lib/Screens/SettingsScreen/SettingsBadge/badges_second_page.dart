@@ -6,17 +6,17 @@ import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 
 class BadgesSecondPage extends StatelessWidget {
-   BadgesSecondPage({Key? key,}) : super(key: key);
-    Map data =Get.arguments;
-   
+  BadgesSecondPage({
+    Key? key,
+  }) : super(key: key);
+  Map data = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
-    String image=data["image"];
-   String title=data["title"];
-   String longDescription=data["des"];
+    String image = data["image"];
+    String title = data["title"];
+    String longDescription = data["des"];
     return Scaffold(
-    
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
@@ -51,7 +51,11 @@ class BadgesSecondPage extends StatelessWidget {
                   color: containerClr),
               child: Row(
                 children: [
-                  Image.network(image),
+                  Image.network(
+                    image,
+                    height: 100.h,
+                    width: 80.w,
+                  ),
                   SizedBox(
                     width: 15.w,
                   ),
@@ -132,11 +136,10 @@ class BadgesSecondPage extends StatelessWidget {
             SizedBox(
               height: 20.h,
             ),
-            
             HtmlWidget(longDescription),
-
-        SizedBox(height: 20.h,),
-
+            SizedBox(
+              height: 20.h,
+            ),
             Text(
               'See How to get Dimond Badge Member',
               style: myStyle(18.sp, FontWeight.w500, themeColorGreenbright),

@@ -6,7 +6,7 @@ import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/custom_widgets.dart';
 
 class BillingDetails extends StatelessWidget {
-   BillingDetails({Key? key}) : super(key: key);
+  BillingDetails({Key? key}) : super(key: key);
 
   List<Map> downloads = [
     {
@@ -156,7 +156,7 @@ class BillingDetails extends StatelessWidget {
                 style: GoogleFonts.roboto(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xff555957)),
+                    color: const Color(0xff555957)),
               ),
               SizedBox(
                 height: 5.h,
@@ -172,7 +172,7 @@ class BillingDetails extends StatelessWidget {
                 style: GoogleFonts.roboto(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xff555957)),
+                    color: const Color(0xff555957)),
               ),
               SizedBox(
                 height: 5.h,
@@ -194,7 +194,7 @@ class BillingDetails extends StatelessWidget {
                         style: GoogleFonts.roboto(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w400,
-                            color: Color(0xff555957)),
+                            color: const Color(0xff555957)),
                       ),
                       SizedBox(
                         height: 5.h,
@@ -216,7 +216,7 @@ class BillingDetails extends StatelessWidget {
                         style: GoogleFonts.roboto(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w400,
-                            color: Color(0xff555957)),
+                            color: const Color(0xff555957)),
                       ),
                       SizedBox(
                         height: 5.h,
@@ -236,7 +236,7 @@ class BillingDetails extends StatelessWidget {
                 style: GoogleFonts.roboto(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xff555957)),
+                    color: const Color(0xff555957)),
               ),
               SizedBox(
                 height: 5.h,
@@ -303,7 +303,7 @@ class BillingDetails extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) => Container(
-                    height: 40.h,
+                        height: 40.h,
                         width: double.infinity,
                         decoration:
                             BoxDecoration(color: downloads[index]['color']),
@@ -330,7 +330,8 @@ class BillingDetails extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(4.r),
                                   color: backIconClr),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Icon(
                                     Icons.arrow_circle_down,

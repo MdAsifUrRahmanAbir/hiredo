@@ -257,7 +257,8 @@ class Profile extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Your profile is 80% complete",
+                  Text(
+                      "Your profile is ${profileController.profileData!.percentageComplete}% complete",
                       style: myStyle(16, FontWeight.w500, textClr)),
                   Image.asset(
                     "images/editicon.png",
@@ -273,14 +274,16 @@ class Profile extends StatelessWidget {
                       animation: true,
                       animationDuration: 1000,
                       lineHeight: 8.h,
-                      percent: 0.8,
+                      percent:
+                          profileController.profileData!.percentageComplete /
+                              100,
                       barRadius: Radius.circular(30.r),
                       progressColor: backIconClr,
                       backgroundColor: scaffoldClr,
                     ),
                   ),
                   Text(
-                    '8/10',
+                    "${profileController.profileData!.percentageComplete / 10}/10",
                     style: myStyle(14, FontWeight.w500, textClr),
                   )
                 ],
@@ -464,8 +467,7 @@ class Profile extends StatelessWidget {
             text: 'My Responces',
             isCount: true,
             isLoading: profileController.isMyresponseLoading.value,
-            count: profileController.myResponseCount.value.toString()
-            ),
+            count: profileController.myResponseCount.value.toString()),
         _cardItem(
           onTap: () {
             Get.toNamed(Routes.wishListScreen);
