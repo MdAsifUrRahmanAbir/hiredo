@@ -8,6 +8,7 @@ import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 import 'package:jiffy/jiffy.dart';
 
+import '../LeadsScreen/Controller/lead_controller.dart';
 import '../LeadsScreen/Model/leads_model.dart';
 import '../ResistrationScreen/component/custome_text_field.dart';
 import 'Controller/lead_details_controller.dart';
@@ -20,11 +21,12 @@ class LeadsDetailsScreen extends StatelessWidget {
   Result leadData = Get.arguments;
 
   final _leadDetailsController = Get.put(LeadDetailsController());
+  final _leadController = Get.put(LeadController());
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    _leadDetailsController.getEmailTemplete();
+    _leadDetailsController.getData();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -306,7 +308,7 @@ class LeadsDetailsScreen extends StatelessWidget {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      if (!_leadDetailsController.isContect
+                                      if (!_leadController.isContect
                                           .contains(leadData.id)) {
                                         _leadDetailsController
                                             .handleContact(leadData.id);
@@ -314,7 +316,8 @@ class LeadsDetailsScreen extends StatelessWidget {
                                     },
                                     child: Container(
                                       height: 50.h,
-                                      width: 148.w,
+                                      width: 100.w,
+                                      padding: EdgeInsets.symmetric(horizontal: 3.w),
                                       decoration: BoxDecoration(
                                           color: const Color(0xFF187949),
                                           borderRadius:
@@ -330,12 +333,40 @@ class LeadsDetailsScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
+
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                    Container(
+                                    height: 50.h,
+                                    width: 110.w,
+                                    padding: EdgeInsets.symmetric(horizontal: 3.w),
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: const Color(0xFF187949)),
+                                        borderRadius:
+                                            BorderRadius.circular(5.r)),
+                                    child: Center(
+                                      child: Text(
+                                        'One Click Responce',
+                                        style: GoogleFonts.roboto(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w500,
+                                            
+                                            color: const Color(0xFF187949)),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ),
+                                  
                                   SizedBox(
                                     width: 10.w,
                                   ),
                                   Container(
                                     height: 50.h,
-                                    width: 148.w,
+                                    width: 100.w,
+                                    padding: EdgeInsets.symmetric(horizontal: 3.w),
                                     decoration: BoxDecoration(
                                         border: Border.all(
                                             color: const Color(0xFF187949)),
@@ -376,7 +407,7 @@ class LeadsDetailsScreen extends StatelessWidget {
                               SizedBox(
                                 height: 20.h,
                               ),
-                              if (_leadDetailsController.isContect
+                              if (_leadController.isContect
                                   .contains(leadData.id))
                                 _contactVisiable(context),
 
@@ -526,7 +557,7 @@ class LeadsDetailsScreen extends StatelessWidget {
     );
   }
 
-  Column _contactVisiable(BuildContext context) {
+  _contactVisiable(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -635,7 +666,70 @@ class LeadsDetailsScreen extends StatelessWidget {
                   )),
             ],
           ),
-        )
+        ),
+        ListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
+          minLeadingWidth: 0,
+          minVerticalPadding: 0,
+          title: Text(
+            "Send an Sms",
+            style: TextStyle(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w600,
+                color: Colors.black),
+          ),
+          subtitle: Text(
+            "Send a template or custom Sms to introduce yourself",
+            style: TextStyle(fontSize: 14.sp, color: Colors.grey),
+          ),
+          leading: CircleAvatar(
+              radius: 30.r,
+              backgroundColor: const Color(0xFFF3F3F6),
+              child: Icon(
+                Icons.message,
+                size: 25.sp,
+              )),
+          trailing: Column(
+            children: [
+              InkWell(
+                onTap: () {
+                  _sendSmsTemplete(context);
+                },
+                child: Container(
+                  height: 40.h,
+                  width: 120.w,
+                  padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.r),
+                      color: themeColorGreen),
+                  child: Text(
+                    "Use Sms template",
+                    style: GoogleFonts.roboto(
+                        fontSize: 16.sp, color: Colors.white),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 5.h,
+              ),
+              InkWell(
+                  onTap: () {
+                    _sendCustomSms(context);
+                  },
+                  child: Text(
+                    "Send a custom Sms",
+                    style: GoogleFonts.roboto(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                        decoration: TextDecoration.underline),
+                  )),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -800,17 +894,32 @@ class LeadsDetailsScreen extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    _leadDetailsController.sendEmail(
-                        postId: leadData.id,
-                        sub: _leadDetailsController
-                            .emailTemplateList[
-                                _leadDetailsController.isSelectTemplete.value]
-                            .templateName,
-                        message: _leadDetailsController
-                            .emailTemplateList[
-                                _leadDetailsController.isSelectTemplete.value]
-                            .message,
-                        userId: leadData.user.id);
+                    Uri uri = Uri(
+                        scheme: 'mailto',
+                        path: leadData.user.email,
+                        query: _leadDetailsController
+                            .encodeQueryParameters(<String, String>{
+                          'subject': _leadDetailsController
+                              .emailTemplateList[
+                                  _leadDetailsController.isSelectTemplete.value]
+                              .templateName,
+                          'body': _leadDetailsController
+                              .emailTemplateList[
+                                  _leadDetailsController.isSelectTemplete.value]
+                              .message
+                        }));
+                    _leadDetailsController.sendLaunchUrl(uri: uri);
+                    // _leadDetailsController.sendEmail(
+                    //     postId: leadData.id,
+                    //     sub: _leadDetailsController
+                    //         .emailTemplateList[
+                    //             _leadDetailsController.isSelectTemplete.value]
+                    //         .templateName,
+                    //     message: _leadDetailsController
+                    //         .emailTemplateList[
+                    //             _leadDetailsController.isSelectTemplete.value]
+                    //         .message,
+                    //     userId: leadData.user.id);
                   },
                   child: Container(
                     height: 50.h,
@@ -917,14 +1026,23 @@ class LeadsDetailsScreen extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      if (_formKey.currentState!.validate()) {
-                        _leadDetailsController.sendEmail(
-                            postId: leadData.id,
-                            sub: _leadDetailsController.subTextCtrl.text,
-                            message:
-                                _leadDetailsController.messageTextCtrl.text,
-                            userId: leadData.user.id);
-                      }
+                      Uri uri = Uri(
+                          scheme: 'mailto',
+                          path: leadData.user.email,
+                          query: _leadDetailsController
+                              .encodeQueryParameters(<String, String>{
+                            'subject': _leadDetailsController.subTextCtrl.text,
+                            'body': _leadDetailsController.messageTextCtrl.text
+                          }));
+                      _leadDetailsController.sendLaunchUrl(uri: uri);
+                      // if (_formKey.currentState!.validate()) {
+                      //   _leadDetailsController.sendEmail(
+                      //       postId: leadData.id,
+                      //       sub: _leadDetailsController.subTextCtrl.text,
+                      //       message:
+                      //           _leadDetailsController.messageTextCtrl.text,
+                      //       userId: leadData.user.id);
+                      // }
                     },
                     child: Container(
                       height: 50.h,
@@ -937,6 +1055,274 @@ class LeadsDetailsScreen extends StatelessWidget {
                         children: [
                           Text(
                             'Send email',
+                            style: GoogleFonts.roboto(
+                                color: Colors.white,
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          Obx(
+                            () => SizedBox(
+                              width: _leadDetailsController
+                                      .isSendEmailLoading.value
+                                  ? 15.w
+                                  : 0,
+                            ),
+                          ),
+                          Obx(() {
+                            if (_leadDetailsController
+                                .isSendEmailLoading.value) {
+                              return SizedBox(
+                                height: 15.sp,
+                                width: 15.sp,
+                                child: const CircularProgressIndicator(
+                                  strokeWidth: 3,
+                                  color: Colors.white,
+                                ),
+                              );
+                            } else {
+                              return const SizedBox();
+                            }
+                          })
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ));
+
+  _sendSmsTemplete(BuildContext context) => showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  children: [
+                    const Spacer(),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: CircleAvatar(
+                        radius: 20.r,
+                        backgroundColor: const Color(0xFFF3F3F6),
+                        child: Icon(
+                          Icons.close,
+                          size: 15.r,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Text(
+                  "Use a template",
+                  style: GoogleFonts.roboto(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black),
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+                Text(
+                  "Select your template to send to Mark",
+                  style: GoogleFonts.roboto(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.grey),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Obx(
+                  () => SizedBox(
+                    height: 250.h,
+                    width: double.infinity,
+                    child: ListView.builder(
+                        itemCount:
+                            _leadDetailsController.smsTemplateList.length,
+                        itemBuilder: (context, index) {
+                          var data =
+                              _leadDetailsController.smsTemplateList[index];
+                          return InkWell(
+                            onTap: () {
+                              _leadDetailsController.isSelectSmsTemplete.value =
+                                  index;
+                            },
+                            child: Obx(
+                              () => Container(
+                                width: double.infinity,
+                                margin: EdgeInsets.symmetric(vertical: 3.h),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 18.w, vertical: 15.h),
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: _leadDetailsController
+                                                  .isSelectSmsTemplete.value ==
+                                              index
+                                          ? themeColorGreen
+                                          : Colors.grey,
+                                    ),
+                                    borderRadius: BorderRadius.circular(5.r)),
+                                child: Text(
+                                  data.templateName,
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 16.sp, color: Colors.black),
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
+                  ),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                InkWell(
+                  onTap: () {
+                    Uri uri = Uri(
+                        scheme: 'sms',
+                        path: leadData.user.phoneNumber,
+                        queryParameters: <String, String>{
+                          'body': Uri.encodeComponent(_leadDetailsController
+                              .smsTemplateList[_leadDetailsController
+                                  .isSelectSmsTemplete.value]
+                              .message)
+                        });
+                    _leadDetailsController.sendLaunchUrl(uri: uri);
+                    // _leadDetailsController.sendEmail(
+                    //     postId: leadData.id,
+                    //     sub: _leadDetailsController
+                    //         .emailTemplateList[
+                    //             _leadDetailsController.isSelectTemplete.value]
+                    //         .templateName,
+                    //     message: _leadDetailsController
+                    //         .emailTemplateList[
+                    //             _leadDetailsController.isSelectTemplete.value]
+                    //         .message,
+                    //     userId: leadData.user.id);
+                  },
+                  child: Container(
+                    height: 50.h,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: const Color(0xFF187949),
+                        borderRadius: BorderRadius.circular(4.r)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Send Sms',
+                          style: GoogleFonts.roboto(
+                              color: Colors.white,
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Obx(
+                          () => SizedBox(
+                            width:
+                                _leadDetailsController.isSendEmailLoading.value
+                                    ? 15.w
+                                    : 0,
+                          ),
+                        ),
+                        Obx(() {
+                          if (_leadDetailsController.isSendEmailLoading.value) {
+                            return SizedBox(
+                              height: 15.sp,
+                              width: 15.sp,
+                              child: const CircularProgressIndicator(
+                                strokeWidth: 3,
+                                color: Colors.white,
+                              ),
+                            );
+                          } else {
+                            return const SizedBox();
+                          }
+                        })
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ));
+
+  _sendCustomSms(BuildContext context) => showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => AlertDialog(
+            content: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    children: [
+                      const Spacer(),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: CircleAvatar(
+                          radius: 20.r,
+                          backgroundColor: const Color(0xFFF3F3F6),
+                          child: Icon(
+                            Icons.close,
+                            size: 15.r,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15.h,
+                  ),
+                  CustomeTextField(
+                    hintText: "Enter your message",
+                    maxLines: 5,
+                    controller: _leadDetailsController.smsTextCtrl,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Field is Empty';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: 15.h,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Uri uri = Uri(
+                          scheme: 'sms',
+                          path: leadData.user.phoneNumber,
+                          queryParameters: <String, String>{
+                            'body': Uri.encodeComponent(_leadDetailsController.smsTextCtrl.text)
+                          });
+                      _leadDetailsController.sendLaunchUrl(uri: uri);
+                      // if (_formKey.currentState!.validate()) {
+                      //   _leadDetailsController.sendEmail(
+                      //       postId: leadData.id,
+                      //       sub: _leadDetailsController.subTextCtrl.text,
+                      //       message:
+                      //           _leadDetailsController.messageTextCtrl.text,
+                      //       userId: leadData.user.id);
+                      // }
+                    },
+                    child: Container(
+                      height: 50.h,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: const Color(0xFF187949),
+                          borderRadius: BorderRadius.circular(4.r)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Send Sms',
                             style: GoogleFonts.roboto(
                                 color: Colors.white,
                                 fontSize: 18.sp,

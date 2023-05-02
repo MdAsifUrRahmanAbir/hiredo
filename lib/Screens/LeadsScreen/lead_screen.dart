@@ -18,12 +18,12 @@ class LeadsScreen extends StatelessWidget {
 
   final _profileController = Get.put(ProfileController());
   final _leadController = Get.put(LeadController());
-   final   _leadDetailsController=Get.put(LeadDetailsController());
+ 
 
   @override
   Widget build(BuildContext context) {
     _leadController.firstLoad();
-    _leadDetailsController.isContect.clear();
+    _leadController.isContect.clear();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
