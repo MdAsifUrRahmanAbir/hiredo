@@ -176,7 +176,7 @@ class _MyResponseState extends State<MyResponse> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '431 Pending Responces',
+                              "${_myResponseController.data.toString()} Pending Responces",
                               style:
                                   myStyle(18.sp, FontWeight.w500, Colors.black),
                             ),
@@ -211,8 +211,9 @@ class _MyResponseState extends State<MyResponse> {
                     itemBuilder: (context, index) {
                       var data = _myResponseController.myResponseList[index];
                       return InkWell(
-                        onTap:(){
-                          Get.toNamed(Routes.myresponseDetailsScreen,arguments:data);
+                        onTap: () {
+                          Get.toNamed(Routes.myresponseDetailsScreen,
+                              arguments: data);
                         },
                         child: Column(
                           children: [
@@ -234,7 +235,8 @@ class _MyResponseState extends State<MyResponse> {
                                 ),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
                                         mainAxisAlignment:
@@ -242,8 +244,8 @@ class _MyResponseState extends State<MyResponse> {
                                         children: [
                                           Text(
                                             data.posts.user.fullName,
-                                            style: myStyle(14.sp, FontWeight.bold,
-                                                Colors.black),
+                                            style: myStyle(14.sp,
+                                                FontWeight.bold, Colors.black),
                                           ),
                                           Icon(
                                             Icons.restaurant,
@@ -252,8 +254,8 @@ class _MyResponseState extends State<MyResponse> {
                                           ),
                                           Text(
                                             data.posts.category.name,
-                                            style: myStyle(12.sp, FontWeight.w400,
-                                                Colors.black),
+                                            style: myStyle(12.sp,
+                                                FontWeight.w400, Colors.black),
                                           ),
                                           Container(
                                             padding: EdgeInsets.symmetric(
@@ -296,8 +298,8 @@ class _MyResponseState extends State<MyResponse> {
                                           ),
                                           Text(
                                             data.posts.location,
-                                            style: myStyle(12.sp, FontWeight.w400,
-                                                Colors.grey),
+                                            style: myStyle(12.sp,
+                                                FontWeight.w400, Colors.grey),
                                           )
                                         ],
                                       )
@@ -349,14 +351,14 @@ class _MyResponseState extends State<MyResponse> {
                                     style: myStyle(
                                         14.sp, FontWeight.w400, Colors.black),
                                   ),
-                               const   Spacer(),
+                                  const Spacer(),
                                   Text(Jiffy.parse(data.createdAt).fromNow(),
                                       style: myStyle(
                                           14.sp, FontWeight.w400, Colors.black))
                                 ],
                               ),
                             ),
-                          const  Divider(),
+                            const Divider(),
                           ],
                         ),
                       );
