@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:homelyknock/Screens/ResistrationScreen/component/custom_button.dart';
 import 'package:homelyknock/Screens/ResistrationScreen/component/custome_text_field.dart';
 import 'package:homelyknock/Services/api_component.dart';
 import 'package:homelyknock/utils/colors.dart';
