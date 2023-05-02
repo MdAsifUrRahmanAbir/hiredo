@@ -9,8 +9,10 @@ import '../Model/lead_search_model.dart';
 
 class LeadController extends GetxController {
   late ScrollController scrolController;
- TextEditingController searchController=TextEditingController();
-  var isSearch=false.obs;
+
+  TextEditingController searchController = TextEditingController();
+  var isSearch = false.obs;
+
   var isContect = [].obs;
 
   @override
@@ -29,8 +31,8 @@ class LeadController extends GetxController {
 
   RxList<Result> leadsList = List<Result>.empty(growable: true).obs;
 
-   RxList<Result> searchLeadList = List<Result>.empty(growable: true).obs;
-  
+  RxList<Result> searchLeadList = List<Result>.empty(growable: true).obs;
+
   LeadModel? demoData;
 
   void loadMore() async {
@@ -48,10 +50,9 @@ class LeadController extends GetxController {
         if (res.runtimeType == int) {
           debugPrint("lead fetch error : $res");
         } else {
-           demoData = res;
-          if (demoData!.totalPages>=page) {
+          demoData = res;
+          if (demoData!.totalPages >= page) {
             leadsList.addAll(demoData!.result);
-           
           } else {
             hasNextPage.value = false;
             debugPrint("leadsList.length==${leadsList.length}");
@@ -69,45 +70,39 @@ class LeadController extends GetxController {
 
   void firstLoad() async {
     try {
-  isFirstLoadRunning.value = true;
-    final res = await ApiServices.fetchLeads(page);
-    if (res.runtimeType == int) {
-      debugPrint("lead fetch error : $res");
-    } else {
-       demoData = res;
-      leadsList.value = demoData!.result;
-     
-      print("leadsList.length:${leadsList.length}");
-    }
-} on Exception catch (e) {
-  print('Something went wrong');
- 
-}finally{
-  isFirstLoadRunning.value =false;
-}
-    
-  }
+      isFirstLoadRunning.value = true;
+      final res = await ApiServices.fetchLeads(page);
+      if (res.runtimeType == int) {
+        debugPrint("lead fetch error : $res");
+      } else {
+        demoData = res;
+        leadsList.value = demoData!.result;
 
+        print("leadsList.length:${leadsList.length}");
+      }
+    } on Exception catch (e) {
+      print('Something went wrong');
+    } finally {
+      isFirstLoadRunning.value = false;
+    }
+  }
 
   void searchLeads() async {
     try {
-  isFirstLoadRunning.value = true;
-    final res = await ApiServices.fetchLeadSearch(searchController.text);
-    if (res.runtimeType == int) {
-      debugPrint("lead fetch error : $res");
-    } else {
-        LeadSearchModel  seaechData = res;
-      searchLeadList.value = seaechData.result;
-     
-      debugPrint("leadsList.length:${leadsList.length}");
-    }
-} on Exception catch (e) {
-  print('Something went wrong');
- 
-}finally{
-  isFirstLoadRunning.value =false;
-}
-    
-  }
+      isFirstLoadRunning.value = true;
+      final res = await ApiServices.fetchLeadSearch(searchController.text);
+      if (res.runtimeType == int) {
+        debugPrint("lead fetch error : $res");
+      } else {
+        LeadSearchModel seaechData = res;
+        searchLeadList.value = seaechData.result;
 
+        debugPrint("leadsList.length:${leadsList.length}");
+      }
+    } on Exception catch (e) {
+      print('Something went wrong');
+    } finally {
+      isFirstLoadRunning.value = false;
+    }
+  }
 }
