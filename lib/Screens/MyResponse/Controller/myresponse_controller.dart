@@ -28,26 +28,30 @@ class MyResponseController extends GetxController {
 
   RxList<Result> myResponseList = List<Result>.empty(growable: true).obs;
 
-  RxList<Result> searchMyResponseList = List<Result>.empty(growable: true).obs;
+  RxList<MyResponseSearchModel> searchMyResponseList =
+      List<MyResponseSearchModel>.empty(growable: true).obs;
 
   MyResponseModel? demoData;
 
-  var data;
+  var data = 0;
 
-  getSearchPendingResponse() async {
+  getSearchMyResponse() async {
     isFirstLoadRunning(true);
     try {
       var result =
           await ApiServicesByLimon.fetchSearchAndFilter(searchController.text);
       if (result.runtimeType == int) {
-        debugPrint("pending response fetch error : $result");
+        debugPrint("My  response search fetch error : $result");
       } else {
-        MyResponseSearchModel searchResponseData = result;
+        //  MyResponseSearchModel searchResponseData = result;
+        searchMyResponseList.clear();
 
-        debugPrint("Pending Response:$searchResponseData");
+        searchMyResponseList.addAll(result);
+        debugPrint(
+            "My Response search data length:${searchMyResponseList.length}");
       }
     } on Exception catch (e) {
-      print('Something went wrong');
+      debugPrint('Something went wrong $e');
     } finally {
       isFirstLoadRunning(false);
     }
