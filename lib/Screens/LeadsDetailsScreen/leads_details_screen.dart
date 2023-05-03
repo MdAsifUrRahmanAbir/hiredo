@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -27,6 +29,8 @@ class LeadsDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _leadDetailsController.getData();
+    print(leadData.latitude);
+    print(leadData.longitude);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -529,22 +533,7 @@ class LeadsDetailsScreen extends StatelessWidget {
                       ),
                       SizedBox(
                         height: 200.h,
-                        child: GoogleMap(
-                          rotateGesturesEnabled: false,
-                          scrollGesturesEnabled: false,
-                          zoomControlsEnabled: false,
-                          zoomGesturesEnabled: false,
-                          liteModeEnabled: false,
-                          tiltGesturesEnabled: false,
-                          myLocationButtonEnabled: false,
-                          myLocationEnabled: false,
-                          mapType: MapType.normal,
-                          initialCameraPosition: CameraPosition(
-                              target: LatLng(
-                                  double.parse(leadData.latitude ?? "0.0"),
-                                  double.parse(leadData.latitude ?? "0.0"))),
-                          onMapCreated: (GoogleMapController controller) {},
-                        ),
+                        child: GoogleMapsShow(leadData: leadData),
                       ),
                       SizedBox(
                         height: 20.h,
@@ -1367,6 +1356,58 @@ class LeadsDetailsScreen extends StatelessWidget {
           fontSize: 14.sp,
           fontWeight: FontWeight.w400,
           color: const Color(0xFF424242)),
+    );
+  }
+}
+
+class GoogleMapsShow extends StatefulWidget {
+  const GoogleMapsShow({
+    super.key,
+    required this.leadData,
+  });
+
+  final Result leadData;
+
+  @override
+  State<GoogleMapsShow> createState() => _GoogleMapsShowState();
+}
+
+class _GoogleMapsShowState extends State<GoogleMapsShow> {
+
+
+final Completer<GoogleMapController> _controller =
+      Completer<GoogleMapController>();
+
+    late CameraPosition _kGooglePlex ;
+    
+
+    @override
+  void initState() {
+    
+    _kGooglePlex = CameraPosition(
+    target: LatLng(double.parse(widget.leadData.latitude!), double.parse(widget.leadData.longitude!)),
+    zoom: 14.4746,
+  );
+    super.initState();
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return GoogleMap(
+      rotateGesturesEnabled: false,
+      scrollGesturesEnabled: false,
+      zoomControlsEnabled: false,
+      zoomGesturesEnabled: false,
+      liteModeEnabled: false,
+      tiltGesturesEnabled: false,
+      myLocationButtonEnabled: false,
+      myLocationEnabled: false,
+      mapType: MapType.normal,
+      initialCameraPosition:_kGooglePlex,
+      onMapCreated: (GoogleMapController controller) {
+         _controller.complete(controller);
+      },
     );
   }
 }

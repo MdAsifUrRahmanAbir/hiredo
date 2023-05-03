@@ -31,7 +31,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _homeController.fetchWishListService();
+    
     if (_profileController.isUser.value == true) {
       _profileController.modeChange();
     }
