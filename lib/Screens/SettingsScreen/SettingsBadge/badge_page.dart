@@ -92,9 +92,8 @@ class BadgePage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 15.h,
+                      height: 25.h,
                     ),
-
                     ListView.separated(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -116,7 +115,7 @@ class BadgePage extends StatelessWidget {
                             ],
                           ),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               // add image
 
@@ -143,6 +142,9 @@ class BadgePage extends StatelessWidget {
                                         14.sp, FontWeight.w400, textClr),
                                   )
                                 ],
+                              ),
+                              SizedBox(
+                                width: 90.w,
                               ),
                               GestureDetector(
                                 onTap: () {
@@ -176,13 +178,8 @@ class BadgePage extends StatelessWidget {
                         );
                       },
                     ),
-
-                    //   text: 'The Professional Badge',
-                    //   onTap: () {},
-                    // ),
-
                     SizedBox(
-                      height: 15.h,
+                      height: 25.h,
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 15.w),
@@ -215,73 +212,15 @@ class BadgePage extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(top: 5.h),
-                                child: Icon(
-                                  Icons.circle,
-                                  size: 6.sp,
-                                  color: textClr,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 5.w,
-                              ),
-                              Expanded(
-                                  child: Text(
-                                'Upgrading your app with a ringknock badge helps boost search engine rankings (SEO) and attractsmore customers',
-                                style: myStyle(
-                                    14.sp, FontWeight.w400, Color(0xff424242)),
-                              ))
-                            ],
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(top: 5.h),
-                                child: Icon(
-                                  Icons.circle,
-                                  size: 6.sp,
-                                  color: textClr,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 5.w,
-                              ),
-                              Expanded(
-                                  child: Text(
-                                'Visitors to your website will be able to see your reviews and leave their own. This increases customer trust, gaining you more business - for free',
-                                style: myStyle(
-                                    14.sp, FontWeight.w400, Color(0xff424242)),
-                                overflow: TextOverflow.clip,
-                              ))
-                            ],
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(top: 5.h),
-                                child: Icon(
-                                  Icons.circle,
-                                  size: 6.sp,
-                                  color: textClr,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 5.w,
-                              ),
-                              Expanded(
-                                  child: Text(
-                                'Customers are much more likely to hire professionals with 1 or more badges on display',
-                                style: myStyle(
-                                    14.sp, FontWeight.w400, Color(0xff424242)),
-                              ))
-                            ],
-                          )
+                          _itemRow(
+                              title:
+                                  'Upgrading your app with a ringknock badge helps boost search engine rankings (SEO) and attractsmore customers'),
+                          _itemRow(
+                              title:
+                                  'Visitors to your website will be able to see your reviews and leave their own. This increases customer trust, gaining you more business - for free'),
+                          _itemRow(
+                              title:
+                                  'Customers are much more likely to hire professionals with 1 or more badges on display'),
                         ],
                       ),
                     )
@@ -289,6 +228,30 @@ class BadgePage extends StatelessWidget {
                 ),
               ),
       ),
+    );
+  }
+
+  _itemRow({required String title}) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(top: 5.h),
+          child: Icon(
+            Icons.circle,
+            size: 6.sp,
+            color: textClr,
+          ),
+        ),
+        SizedBox(
+          width: 5.w,
+        ),
+        Expanded(
+            child: Text(
+          title,
+          style: myStyle(14.sp, FontWeight.w400, const Color(0xff424242)),
+        ))
+      ],
     );
   }
 }

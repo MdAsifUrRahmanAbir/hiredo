@@ -56,7 +56,7 @@ class _DocumentState extends State<Document> {
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w400,
                                   letterSpacing: 1,
-                                  color: Color(0xffB7B7B7)),
+                                  color: const Color(0xffB7B7B7)),
                             ),
                           ),
                         ),
@@ -91,7 +91,7 @@ class _DocumentState extends State<Document> {
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w400,
                                   letterSpacing: 1,
-                                  color: Color(0xffB7B7B7)),
+                                  color: const Color(0xffB7B7B7)),
                             ),
                           ),
                         ),
@@ -99,10 +99,10 @@ class _DocumentState extends State<Document> {
                       GestureDetector(
                         onTap: () {},
                         child: Container(
-                          color: Color(0xff187949),
+                          color: const Color(0xff187949),
                           height: 50.h,
                           width: 45.w,
-                          child: Icon(
+                          child: const Icon(
                             Icons.search,
                             color: Color(0xffFFFFFF),
                           ),
@@ -120,7 +120,7 @@ class _DocumentState extends State<Document> {
                 style: GoogleFonts.roboto(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w500,
-                    color: Color(0xff555957),
+                    color: const Color(0xff555957),
                     letterSpacing: 1),
               ),
               SizedBox(
@@ -171,6 +171,7 @@ class _DocumentState extends State<Document> {
                                       child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(10.r),
+
                                           child: //result.serviceName == null
                                               //     ? Container(
                                               //         color: Colors.purple,
@@ -178,6 +179,7 @@ class _DocumentState extends State<Document> {
                                               //     :
                                               Image.network(
                                                   result.serviceName.image!)),
+
                                     ),
                                     Positioned(
                                         right: 10.w,
