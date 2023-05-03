@@ -25,8 +25,8 @@ class TrackingPostOrder extends StatelessWidget {
     _pendingPostontroller.getPendingPost(true);
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
-      child: Obx(()=>
-         Column(
+      child: Obx(
+        () => Column(
           children: [
             IntrinsicHeight(
               child: Container(
@@ -164,11 +164,11 @@ class TrackingPostOrder extends StatelessWidget {
                       })
                   : ListView.separated(
                       shrinkWrap: true,
-                      
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: _pendingPostontroller.pendingPostList.length,
                       itemBuilder: (context, index) {
-                        var result = _pendingPostontroller.pendingPostList[index];
+                        var result =
+                            _pendingPostontroller.pendingPostList[index];
                         return Container(
                           height: 171.h,
                           width: double.infinity,
@@ -179,8 +179,8 @@ class TrackingPostOrder extends StatelessWidget {
                               borderRadius: BorderRadius.circular(5.r),
                               boxShadow: [
                                 BoxShadow(
-                                    color:
-                                        const Color(0xFF187949).withOpacity(0.07),
+                                    color: const Color(0xFF187949)
+                                        .withOpacity(0.07),
                                     blurRadius: 7,
                                     spreadRadius: 0)
                               ]),
@@ -201,7 +201,8 @@ class TrackingPostOrder extends StatelessWidget {
                                   ),
                                   Expanded(
                                       child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
@@ -237,7 +238,8 @@ class TrackingPostOrder extends StatelessWidget {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      Get.toNamed(Routes.orderNamePage,arguments:result);
+                                      Get.toNamed(Routes.orderNamePage,
+                                          arguments: result);
                                     },
                                     child: Container(
                                       height: 34.h,
@@ -261,19 +263,22 @@ class TrackingPostOrder extends StatelessWidget {
                                     width: 24.w,
                                   ),
                                   InkWell(
-                                    onTap: (){
-                                      _pendingPostontroller.deletePendingPost(result.id);
+                                    onTap: () {
+                                      _pendingPostontroller
+                                          .deletePendingPost(result.id);
                                     },
                                     child: Container(
                                       height: 34.h,
                                       width: 80.w,
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(4.r),
-                                          border:
-                                              Border.all(color:themeColorGreen),
+                                          borderRadius:
+                                              BorderRadius.circular(4.r),
+                                          border: Border.all(
+                                              color: themeColorGreen),
                                           color: Colors.white),
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           Icon(
                                             Icons.delete,
@@ -296,37 +301,40 @@ class TrackingPostOrder extends StatelessWidget {
                                   )
                                 ],
                               ),
-      
+
                               //
                             ],
                           ),
                         );
                       },
                       separatorBuilder: (_, index) => SizedBox(
-                            height: 10.h,
-                          ),
+                        height: 10.h,
                       ),
+                    ),
             ),
-            _pendingPostontroller.isLoading.value?SizedBox(): InkWell(
-              onTap: (){
-                 Get.toNamed(Routes.postAJob, arguments: null);
-              },
-              child: Container(height: 50.h,
-                      width:double.infinity,
+            _pendingPostontroller.isLoading.value
+                ? SizedBox()
+                : InkWell(
+                    onTap: () {
+                      Get.toNamed(Routes.postAJob, arguments: null);
+                    },
+                    child: Container(
+                      height: 50.h,
+                      width: double.infinity,
                       decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.r),
-              color: themeColorGreen,
-              
+                        borderRadius: BorderRadius.circular(5.r),
+                        color: themeColorGreen,
                       ),
                       alignment: Alignment.center,
-                      child: Text("Add a new job post",style: GoogleFonts.roboto(fontSize:16.sp,fontWeight: FontWeight.w500,color: Colors.white),),
-                      
-                      
+                      child: Text(
+                        "Add a new job post",
+                        style: GoogleFonts.roboto(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white),
                       ),
-            )
-            
-             
-            ,
+                    ),
+                  ),
           ],
         ),
       ),
