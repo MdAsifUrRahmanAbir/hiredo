@@ -14,6 +14,7 @@ class LeadController extends GetxController {
   var isSearch = false.obs;
 
   var isContect = [].obs;
+  var isNotInterested=[].obs;
 
   @override
   void onInit() {

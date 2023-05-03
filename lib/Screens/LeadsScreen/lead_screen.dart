@@ -24,6 +24,7 @@ class LeadsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     _leadController.firstLoad();
     _leadController.isContect.clear();
+    _leadController.isNotInterested.clear();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,

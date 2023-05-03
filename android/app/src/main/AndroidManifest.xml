@@ -2,6 +2,8 @@
     package="com.homely.knock">
 
        <uses-permission android:name="android.permission.INTERNET" />
+       <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
  
 
    <application
@@ -10,7 +12,7 @@
         android:icon="@mipmap/ic_launcher">
 
 <meta-data android:name="com.google.android.geo.API_KEY"
-           android:value="AIzaSyB0-c09LjQk5dT2_LA0lyvzJoV3cfXMjZ0"/>
+           android:value="AIzaSyBZnf5onshAa2c5-oJcBXEVid8bNaMQtbA"/>
 
         <activity
             android:name=".MainActivity"
