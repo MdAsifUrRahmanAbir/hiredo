@@ -71,3 +71,4 @@ String addWishListPostApi = "${baseUrl}lead/WishlistServiceViewSet/";
 String sendCustomEmailApi = "${baseUrl}lead/SendEmailTemplate/";
 String reviewAddApi = "${baseUrl}profile/create_review/";
 String notInterestedLeadApi="${baseUrl}lead/not-interested/";
+String bookNowApi="${baseUrl}lead/RealTimeBookNowServiceCreate/";

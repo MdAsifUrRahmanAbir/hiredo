@@ -23,6 +23,7 @@ import '../Screens/LeadsScreen/Model/lead_search_model.dart';
 import '../Screens/LeadsScreen/Model/leads_model.dart';
 import '../Screens/MyResponse/Model/my_response_model.dart';
 import '../Screens/OrderScreen/pending_request_list_model.dart';
+import '../Screens/QuestionScreen/Model/booking_Model.dart';
 import '../Screens/Service/Model/service_model.dart';
 import '../Screens/TrackingScreen/Model/complete_post_model.dart';
 import '../widgets/data_controller.dart';
@@ -801,4 +802,34 @@ class ApiServices {
       return 0;
     }
   }
+
+  // book now
+  static Future<dynamic> bookNow(
+      {required List<BookNowModel> data}) async {
+    try {
+      var accessToken = await MyPreference.getToken();
+
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var request = http.Request('POST', Uri.parse(bookNowApi));
+      request.body = bookNowModelToJson(data);
+      request.headers.addAll(headers);
+
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        debugPrint(await response.stream.bytesToString());
+        return "success";
+      } else {
+        debugPrint("error:  ${response.reasonPhrase}");
+        return 1;
+      }
+    } on Exception catch (e) {
+      debugPrint("Book now  Error. Reason ${e.toString()}");
+      return 1;
+    }
+  }
+
 }

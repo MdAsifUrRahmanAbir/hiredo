@@ -227,7 +227,8 @@ class Profile extends StatelessWidget {
         )),
         ElevatedButton(
             onPressed: () {
-              Get.toNamed(Routes.postAJob, arguments: null);
+              Get.toNamed(Routes.postAJob,
+                  arguments: {"isBookId": null, "category": null});
             },
             style: ElevatedButton.styleFrom(
                 backgroundColor: themeColorGreen, fixedSize: Size(150.w, 50.h)),

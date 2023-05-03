@@ -9,6 +9,7 @@ import 'package:homelyknock/widgets/custom_loader.dart';
 
 import '../HomeScreen/Model/lead_category_model.dart';
 import 'Controller/question_controller.dart';
+import 'Model/booking_Model.dart';
 import 'Model/job_post_model.dart';
 
 class QuestionScreen extends StatelessWidget {
@@ -25,6 +26,7 @@ var allData = Get.arguments;
   Widget build(BuildContext context) {
        List<CatName> data = allData['data'];
    LocationDataModel? locationData = allData['locationData'];
+   var bookingUserId=allData["bookingUserId"];
 
     _questionController.selectedQuestionIndex.value=0;
     _questionController.selectedItemIndex.value=0;
@@ -144,7 +146,9 @@ var allData = Get.arguments;
                 CustomButton(title: data.length==_questionController.selectedQuestionIndex.value+1?"Submit":'Next', onTap: () {
                     if(data.length>_questionController.selectedQuestionIndex.value+1){
                      
-                      JobPostModel setdata=JobPostModel(
+
+                     if(bookingUserId==null){
+                          JobPostModel setdata=JobPostModel(
                         category:data[_questionController.selectedQuestionIndex.value].cat.id,
                        question: data[_questionController.selectedQuestionIndex.value].id,
                         location:locationData!.location,
@@ -158,9 +162,30 @@ var allData = Get.arguments;
                         );
                     
                       _questionController.allAnswer.add(setdata);
+
+
+                     }else{
+
+                      BookNowModel setdata=BookNowModel(
+                         category:data[_questionController.selectedQuestionIndex.value].cat.id,
+                       question: data[_questionController.selectedQuestionIndex.value].id,
+                        location:locationData!.location,
+                        latitude: locationData.latitude,
+                        longitude: locationData.longitude,
+
+                         pAnswer:data[_questionController.selectedQuestionIndex.value].answers[_questionController.selectedItemIndex.value].id,
+                         bookedInUser: bookingUserId);
+
+                         _questionController.allBookNowAnswer.add(setdata);
+      
+                      
+
+                     }
+                  
                        _questionController.selectedQuestionIndex.value++;
                       _questionController.selectedItemIndex.value=0;
                     }else{
+                      if(bookingUserId==null){
                        JobPostModel setdata=JobPostModel(
                         category:data[_questionController.selectedQuestionIndex.value].cat.id, 
                        question: data[_questionController.selectedQuestionIndex.value].id,
@@ -172,6 +197,24 @@ var allData = Get.arguments;
                   
 
                       _questionController.submitJobPost(context);
+
+                      }else{
+                         BookNowModel setdata=BookNowModel(
+                         category:data[_questionController.selectedQuestionIndex.value].cat.id,
+                       question: data[_questionController.selectedQuestionIndex.value].id,
+                        location:locationData!.location,
+                        latitude: locationData.latitude,
+                        longitude: locationData.longitude,
+
+                         pAnswer:data[_questionController.selectedQuestionIndex.value].answers[_questionController.selectedItemIndex.value].id,
+                         bookedInUser: bookingUserId);
+
+                         _questionController.allBookNowAnswer.add(setdata);
+
+                         _questionController.submitBookNow(context);
+
+
+                      }
                       
                       
                     }

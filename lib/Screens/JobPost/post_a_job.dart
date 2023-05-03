@@ -21,7 +21,9 @@ class PostAJob extends StatelessWidget {
     super.key,
   });
 
-  dynamic catagory = Get.arguments;
+  dynamic catagory = Get.arguments["category"];
+  var bookUserId=Get.arguments["isBookId"];
+  
   final _homeController = Get.put(HomeController());
   final _jobPostController = Get.put(JobPostController());
   @override
@@ -188,7 +190,8 @@ class PostAJob extends StatelessWidget {
                       } else if (categorieData.catName.isNotEmpty) {
                         Map<String, dynamic> data = {
                           "data": categorieData.catName,
-                          "locationData": _jobPostController.locationData
+                          "locationData": _jobPostController.locationData,
+                          "bookingUserId":bookUserId
                         };
 
                         Get.toNamed(Routes.questionScreen, arguments: data);
@@ -201,7 +204,8 @@ class PostAJob extends StatelessWidget {
                       } else if (_jobPostController.cateName.isNotEmpty) {
                         Map<String, dynamic> data = {
                           "data": _jobPostController.cateName,
-                          "locationData": _jobPostController.locationData
+                          "locationData": _jobPostController.locationData,
+                          "bookingUserId":bookUserId
                         };
                         Get.toNamed(Routes.questionScreen, arguments: data);
                       }
