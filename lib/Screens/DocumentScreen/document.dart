@@ -171,8 +171,15 @@ class _DocumentState extends State<Document> {
                                       child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(10.r),
-                                          child: Image.network(
-                                              result.serviceName.image)),
+
+                                          child: //result.serviceName == null
+                                              //     ? Container(
+                                              //         color: Colors.purple,
+                                              //       )
+                                              //     :
+                                              Image.network(
+                                                  result.serviceName.image!)),
+
                                     ),
                                     Positioned(
                                         right: 10.w,
