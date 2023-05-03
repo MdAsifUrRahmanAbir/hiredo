@@ -177,7 +177,7 @@ class _DocumentState extends State<Document> {
                                               //       )
                                               //     :
                                               Image.network(
-                                                  result.serviceName.image)),
+                                                  result.serviceName.image!)),
                                     ),
                                     Positioned(
                                         right: 10.w,
