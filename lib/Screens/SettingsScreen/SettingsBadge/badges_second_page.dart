@@ -136,7 +136,10 @@ class BadgesSecondPage extends StatelessWidget {
             SizedBox(
               height: 20.h,
             ),
-            HtmlWidget(longDescription),
+            HtmlWidget(
+              longDescription,
+              textStyle: TextStyle(fontSize: 18.sp),
+            ),
             SizedBox(
               height: 20.h,
             ),
