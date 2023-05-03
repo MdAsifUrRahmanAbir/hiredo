@@ -211,6 +211,9 @@ class ProfileController extends GetxController {
   modeChange() async {
     try {
       isLoading(true);
+        print(isUser.value);
+         print(isProfessional.value);
+
       var result = await ApiServices.changeUserMode(
           isUser: isUser.value, isProfessional: isProfessional.value);
 
