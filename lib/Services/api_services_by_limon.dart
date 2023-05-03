@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:flutter/foundation.dart';
 
 import 'package:homelyknock/Screens/HelpScreen/help_screen_controller.dart';
@@ -213,8 +212,7 @@ class ApiServicesByLimon {
       var headers = {
         'Authorization': 'Bearer $accessToken',
       };
-      var response = await client.get(
-          Uri.parse(myResponseSearchApi+text),
+      var response = await client.get(Uri.parse(myResponseSearchApi + text),
           headers: headers);
       if (response.statusCode == 200) {
         return myResponseSearchModelFromJson(response.body);
@@ -436,6 +434,7 @@ class ApiServicesByLimon {
       if (response.statusCode == 200) {
         return realTimeServiceModelFromJson(response.body);
       } else {
+        print('Error');
         return response.statusCode;
       }
     } on Exception catch (e) {

@@ -1,13 +1,9 @@
-// ignore_for_file: prefer_const_constructors, unused_field
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Screens/DocumentScreen/Controller/real_time_controller.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
-
-
 
 class Document extends StatefulWidget {
   static const String routename = '/documentpage';
@@ -33,7 +29,9 @@ class _DocumentState extends State<Document> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 23.h,),
+              SizedBox(
+                height: 23.h,
+              ),
               IntrinsicHeight(
                 child: Container(
                   decoration: BoxDecoration(
@@ -114,7 +112,9 @@ class _DocumentState extends State<Document> {
                   ),
                 ),
               ),
-             SizedBox(height: 22.h,),
+              SizedBox(
+                height: 22.h,
+              ),
               Text(
                 "Real Time Services",
                 style: GoogleFonts.roboto(
@@ -123,106 +123,117 @@ class _DocumentState extends State<Document> {
                     color: Color(0xff555957),
                     letterSpacing: 1),
               ),
-               SizedBox(height: 24.h,),
+              SizedBox(
+                height: 24.h,
+              ),
+              Obx(
+                () => _realTimeController.isLoading.value
+                    ? CustomLoader()
+                    : GridView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount:
+                            _realTimeController.realTimeServiceModel.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            mainAxisExtent: 231.h,
+                            crossAxisSpacing: 15.w,
+                            mainAxisSpacing: 23.h,
+                            crossAxisCount: 2),
+                        itemBuilder: (_, index) {
+                          var result =
+                              _realTimeController.realTimeServiceModel[index];
 
-              Obx(()=> _realTimeController.isLoading.value?CustomLoader():
-                 GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: _realTimeController.realTimeServiceModel.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisExtent: 231.h,
-                crossAxisSpacing: 15.w,
-                mainAxisSpacing: 23.h,
-                crossAxisCount: 2),
-                    itemBuilder: (_, index) {
-                      var result = _realTimeController.realTimeServiceModel[index];
-                 
-                  
-                    return Container(
-                    padding: EdgeInsets.all(10.w),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.r),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                  blurRadius: 1,
-                  spreadRadius: 0,
-                  color: Colors.black.withOpacity(0.1),
-                  offset: Offset(0, 1))
-                        ]),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Stack(
-                          children: [
-                Container(
-                  height: 114.h,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10.r),
-                    child: result.userProfilePic == null?Container(
-                      color: Colors.purple,
-                    ):
-                     Image.network(result.userProfilePic!.picture)
-                  ),
-                ),
-                Positioned(
-                    right: 10.w,
-                    top: 10.h,
-                    child: Icon(
-                      Icons.favorite_border,
-                      color: Color(0xFF187949),
-                    ))
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        Text(result.corporationName,
-                style: GoogleFonts.roboto(
-                  fontSize: 14.sp,
-                  color: Color(0xFF272727),
-                  fontWeight: FontWeight.w400,
-                )),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        // Text(
-                        //   '200+ Company work',
-                        //   style: GoogleFonts.roboto(
-                        //       fontSize: 10.sp,
-                        //       fontWeight: FontWeight.w400,
-                        //       color: Color(0xFF848484)),
-                        // ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        Container(
-                          height: 30.h,
-                          width: 84.w,
-                          decoration: BoxDecoration(
-                  color: Color(0xFF187949),
-                  borderRadius: BorderRadius.circular(5.r)),
-                          child: Center(
-                child: Text(
-                  'Book Now',
-                  style: GoogleFonts.roboto(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xFFFFFFFF)),
-                ),
-                          ),
-                        )
-                      ],
-                    ),
-                  );
-                   
-                    }),
+                          return Container(
+                            padding: EdgeInsets.all(10.w),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.r),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 1,
+                                      spreadRadius: 0,
+                                      color: Colors.black.withOpacity(0.1),
+                                      offset: const Offset(0, 1))
+                                ]),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Stack(
+                                  children: [
+                                    Container(
+                                      height: 114.h,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10.r),
+                                      ),
+                                      child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10.r),
+                                          child: //result.serviceName == null
+                                              //     ? Container(
+                                              //         color: Colors.purple,
+                                              //       )
+                                              //     :
+                                              Image.network(
+                                                  result.serviceName.image)),
+                                    ),
+                                    Positioned(
+                                        right: 10.w,
+                                        top: 10.h,
+                                        child: const Icon(
+                                          Icons.favorite_border,
+                                          color: Color(0xFF187949),
+                                        ))
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5.h,
+                                ),
+                                Text(result.serviceName.name,
+                                    style: GoogleFonts.roboto(
+                                      fontSize: 14.sp,
+                                      color: const Color(0xFF272727),
+                                      fontWeight: FontWeight.w400,
+                                    )),
+                                SizedBox(
+                                  height: 5.h,
+                                ),
+                                // Text(
+                                //   '200+ Company work',
+                                //   style: GoogleFonts.roboto(
+                                //       fontSize: 10.sp,
+                                //       fontWeight: FontWeight.w400,
+                                //       color: Color(0xFF848484)),
+                                // ),
+                                SizedBox(
+                                  height: 15.h,
+                                ),
+                                InkWell(
+                                  onTap: () {},
+                                  child: Container(
+                                    height: 30.h,
+                                    width: 84.w,
+                                    decoration: BoxDecoration(
+                                        color: const Color(0xFF187949),
+                                        borderRadius:
+                                            BorderRadius.circular(5.r)),
+                                    child: Center(
+                                      child: Text(
+                                        'Book Now',
+                                        style: GoogleFonts.roboto(
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: const Color(0xFFFFFFFF)),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        }),
               ),
             ],
           ),
@@ -231,8 +242,7 @@ class _DocumentState extends State<Document> {
     );
   }
 
- 
- itemCard() {
+  itemCard() {
     return Container(
       padding: EdgeInsets.all(10.w),
       decoration: BoxDecoration(
@@ -316,7 +326,4 @@ class _DocumentState extends State<Document> {
       ),
     );
   }
-
-
-
 }
