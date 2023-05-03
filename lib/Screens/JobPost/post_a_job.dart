@@ -122,7 +122,7 @@ class PostAJob extends StatelessWidget {
               TypeAheadField(
                 textFieldConfiguration: TextFieldConfiguration(
                     controller: _jobPostController.searchTextController,
-                    autofocus: true,
+                    autofocus: false,
                     style:  TextStyle(
                       fontSize: 16.sp,
                     ),

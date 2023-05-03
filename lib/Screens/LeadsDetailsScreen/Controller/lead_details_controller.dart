@@ -13,7 +13,7 @@ import '../../SettingsScreen/EmailTemplate/Model/email_template_model.dart';
 
 class LeadDetailsController extends GetxController {
   // var isContect = [].obs;
-final _leadController = Get.put(LeadController());
+  final _leadController = Get.put(LeadController());
   var isContectLoading = false.obs;
 
   handleContact(int id) async {
@@ -37,7 +37,7 @@ final _leadController = Get.put(LeadController());
 
   TextEditingController subTextCtrl = TextEditingController();
   TextEditingController messageTextCtrl = TextEditingController();
-   
+
   TextEditingController smsTextCtrl = TextEditingController();
 
   var isSendEmailLoading = false.obs;
@@ -77,15 +77,15 @@ final _leadController = Get.put(LeadController());
       isSendEmailLoading(false);
     }
   }
-  getData()async{
+
+  getData() async {
     isLoading(true);
-   await getEmailTemplete();
-   await getSmsTemplete();
+    await getEmailTemplete();
+    await getSmsTemplete();
     isLoading(false);
   }
 
   getEmailTemplete() async {
-  
     try {
       var result = await ApiServicesByLimon.fetchEmailTemplate();
 
@@ -104,7 +104,6 @@ final _leadController = Get.put(LeadController());
   }
 
   getSmsTemplete() async {
- 
     try {
       var result = await ApiServicesByLimon.fetchSMSTemplate();
 
@@ -119,7 +118,7 @@ final _leadController = Get.put(LeadController());
       if (kDebugMode) {
         print('Fetch Error $e');
       }
-    } 
+    }
   }
 
   Future<void> sendLaunchUrl({required Uri uri}) async {
@@ -139,5 +138,23 @@ final _leadController = Get.put(LeadController());
         .map((MapEntry<String, String> e) =>
             '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
         .join('&');
+  }
+
+  var isNotInterestedLoading = false.obs;
+
+  hendleNotInterested(int id) async {
+    try {
+      isNotInterestedLoading.value = true;
+      var result = await ApiServices.notInterestedLead(id.toString());
+      if (result.runtimeType == int) {
+        debugPrint("Error not enterested");
+      } else {
+        _leadController.isNotInterested.add(id);
+      }
+    } on Exception catch (e) {
+      debugPrint("Not enterested error : $e");
+    } finally {
+      isNotInterestedLoading(false);
+    }
   }
 }

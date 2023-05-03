@@ -312,11 +312,11 @@ class LeadsDetailsScreen extends StatelessWidget {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      if (!_leadController.isContect
-                                          .contains(leadData.id)) {
-                                        _leadDetailsController
+                                      if(!_leadController.isNotInterested.contains(leadData.id)&&!_leadController.isContect.contains(leadData.id)){
+                                           _leadDetailsController
                                             .handleContact(leadData.id);
-                                      }
+                                        }
+                                     
                                     },
                                     child: Container(
                                       height: 50.h,
@@ -367,22 +367,39 @@ class LeadsDetailsScreen extends StatelessWidget {
                                   SizedBox(
                                     width: 10.w,
                                   ),
-                                  Container(
-                                    height: 50.h,
-                                    width: 100.w,
-                                    padding: EdgeInsets.symmetric(horizontal: 3.w),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: const Color(0xFF187949)),
-                                        borderRadius:
-                                            BorderRadius.circular(5.r)),
-                                    child: Center(
-                                      child: Text(
-                                        'Not interested',
-                                        style: GoogleFonts.roboto(
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w500,
-                                            color: const Color(0xFF187949)),
+                                  Obx(()=>
+                                     InkWell(
+                                      onTap: (){
+                                        if(!_leadController.isNotInterested.contains(leadData.id)&&!_leadController.isContect.contains(leadData.id)){
+                                            _leadDetailsController.hendleNotInterested(leadData.id);
+                                        }
+                                        
+                                      },
+                                      child: Container(
+                                        height: 50.h,
+                                        width: 100.w,
+                                        padding: EdgeInsets.symmetric(horizontal: 3.w),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color:!_leadController.isNotInterested.contains(leadData.id)&&!_leadController.isContect.contains(leadData.id)? const Color(0xFF187949):Colors.grey),
+                                            borderRadius:
+                                                BorderRadius.circular(5.r)),
+                                        child: Center(
+                                          child:_leadDetailsController.isNotInterestedLoading.value?SizedBox(
+                                            height:10.h,
+                                            width: 10.h,
+                                            child: const CircularProgressIndicator(
+                                              strokeWidth:1,
+                                              color: themeColorGreen,
+                                            ),
+                                          ):Text(
+                                            'Not interested',
+                                            style: GoogleFonts.roboto(
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w500,
+                                                color:!_leadController.isNotInterested.contains(leadData.id)&&!_leadController.isContect.contains(leadData.id)? const Color(0xFF187949):Colors.grey),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   )
