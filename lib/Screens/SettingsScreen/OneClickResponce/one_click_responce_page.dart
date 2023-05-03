@@ -9,7 +9,6 @@ import 'package:homelyknock/utils/colors.dart';
 import 'controller/on_click_response_controller.dart';
 
 class OneClickResponcePage extends StatelessWidget {
-
   OneClickResponcePage({Key? key}) : super(key: key);
 
   final _onClickResponseController = Get.put(OnClickResponseController());
@@ -81,20 +80,20 @@ class OneClickResponcePage extends StatelessWidget {
   _switchWidget() {
     return Row(
       children: [
-        Obx(()=>
-            FlutterSwitch(
-              activeColor: themeColorGreen,
-              width: 52.0.w,
-              height: 27.0.h,
-              toggleSize: 21.0.sp,
-              value: _onClickResponseController.status.value,
-              borderRadius: 30.0.r,
-              padding: 4.0.w,
-              showOnOff: false,
-              onToggle: (val) {
-                _onClickResponseController.status.value = val;
-              },
-            ),
+        Obx(
+          () => FlutterSwitch(
+            activeColor: themeColorGreen,
+            width: 52.0.w,
+            height: 27.0.h,
+            toggleSize: 21.0.sp,
+            value: _onClickResponseController.status.value,
+            borderRadius: 30.0.r,
+            padding: 4.0.w,
+            showOnOff: false,
+            onToggle: (val) {
+              _onClickResponseController.status.value = val;
+            },
+          ),
         ),
         SizedBox(
           width: 15.w,
@@ -109,51 +108,47 @@ class OneClickResponcePage extends StatelessWidget {
 
   _dropDownWidget(BuildContext context) {
     return Container(
-          padding: EdgeInsets.symmetric(horizontal: 10.w),
-          height: 50.h,
-          width: MediaQuery.of(context).size.width,
-          decoration:
-              BoxDecoration(border: Border.all(color: textClr.withOpacity(0.3), width: 0.5)),
-          child: Obx(()=>
-             DropdownButtonHideUnderline(
-               child: DropdownButton(
-                 style: myStyle(18.sp, FontWeight.w500, offWhite),
-                 focusColor: themeColorGreen,
-                 dropdownColor: scaffoldClr,
-
-                 hint: Text(_onClickResponseController.selectedValue.value),
-                 items:_onClickResponseController. items
-                     .map((item) => DropdownMenuItem(
-                           value: item,
-                           child: Text(
-                             item,
-                           ),
-                         ))
-                     .toList(),
-                 onChanged: (value) {
-
-                     _onClickResponseController.selectedValue.value = '$value';
-
-                 },
-               ),
-             ),
+      padding: EdgeInsets.symmetric(horizontal: 10.w),
+      height: 50.h,
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+          border: Border.all(color: textClr.withOpacity(0.3), width: 0.5)),
+      child: Obx(
+        () => DropdownButtonHideUnderline(
+          child: DropdownButton(
+            style: myStyle(18.sp, FontWeight.w500, offWhite),
+            focusColor: themeColorGreen,
+            dropdownColor: scaffoldClr,
+            hint: Text(_onClickResponseController.selectedValue.value),
+            items: _onClickResponseController.items
+                .map((item) => DropdownMenuItem(
+                      value: item,
+                      child: Text(
+                        item,
+                      ),
+                    ))
+                .toList(),
+            onChanged: (value) {
+              _onClickResponseController.selectedValue.value = '$value';
+            },
           ),
-        );
+        ),
+      ),
+    );
   }
 
   _errorRowWidget() {
     return Row(
       children: [
         const Icon(Icons.error),
-
         SizedBox(
           width: 3.w,
         ),
         Expanded(
             child: Text(
-              'You can view, edit and manage your email templates in email templates',
-              style: myStyle(10.sp, FontWeight.w400, textClr),
-            ))
+          'You can view, edit and manage your email templates in email templates',
+          style: myStyle(10.sp, FontWeight.w400, textClr),
+        ))
       ],
     );
   }
@@ -161,8 +156,8 @@ class OneClickResponcePage extends StatelessWidget {
   _onClickBoxWidget() {
     return Container(
       padding: EdgeInsets.all(15.w),
-      decoration:
-      BoxDecoration(border: Border.all(color: textClr.withOpacity(0.3), width: 0.5)),
+      decoration: BoxDecoration(
+          border: Border.all(color: textClr.withOpacity(0.3), width: 0.5)),
       child: Column(
         children: [
           Row(
@@ -295,5 +290,4 @@ class OneClickResponcePage extends StatelessWidget {
       ),
     );
   }
-
 }
