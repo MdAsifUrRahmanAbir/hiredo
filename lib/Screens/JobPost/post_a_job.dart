@@ -1,8 +1,11 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/GoogleMapService/Model/prediction_model.dart';
 import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/Screens/JobPost/Model/location_model.dart';
 
@@ -18,18 +21,17 @@ class PostAJob extends StatelessWidget {
     super.key,
   });
 
-  dynamic catagory  = Get.arguments;
+  dynamic catagory = Get.arguments;
   final _homeController = Get.put(HomeController());
   final _jobPostController = Get.put(JobPostController());
   @override
   Widget build(BuildContext context) {
     _jobPostController.isCategoryError.value = false;
-    _jobPostController.isLocationError.value = false;
     _jobPostController.locationData = null;
     _jobPostController.cateName = [];
     LeadCategoriesModel? catagoryData;
-    if(catagory!=null){
-      catagoryData=catagory;
+    if (catagory != null) {
+      catagoryData = catagory;
     }
     return Scaffold(
       appBar: AppBar(
@@ -68,86 +70,110 @@ class PostAJob extends StatelessWidget {
               SizedBox(
                 height: 25.h,
               ),
-              catagory!=null?
-              Container(
-                alignment: Alignment.centerLeft,
-                padding: EdgeInsets.symmetric(horizontal:15.w,vertical: 18.h),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  border: Border.all(color: Colors.grey.shade300)
-                ),
-                child:Text(catagoryData!.name),
-              )
-              
-              :
-              Obx(
-                () => DropdownSearch<LeadCategoriesModel>(
-                  items: _homeController.subCategoryList,
-                  dropdownButtonProps: const DropdownButtonProps(
-                    icon: SizedBox(),
-                  ),
-               
-                  popupProps: const PopupProps.menu(showSearchBox: true),
-                  dropdownDecoratorProps: DropDownDecoratorProps(
-                    dropdownSearchDecoration: InputDecoration(
-                        labelText: "What service do you need?",
-                        hintText: "e.g. Personal Trainers,House Cleaning ",
-                        isDense: true,
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 16.w,
+              catagory != null
+                  ? Container(
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 15.w, vertical: 18.h),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(3.r),
+                          border: Border.all(color: Colors.grey.shade300)),
+                      child: Text(catagoryData!.name),
+                    )
+                  : Obx(
+                      () => DropdownSearch<LeadCategoriesModel>(
+                        items: _homeController.subCategoryList,
+                        dropdownButtonProps: const DropdownButtonProps(
+                          icon: SizedBox(),
                         ),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(3.r),
-                            borderSide: BorderSide(
-                                color: _jobPostController.isCategoryError.value
-                                    ? Colors.red
-                                    : const Color(0xFF848484))),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(3.r))),
-                  ),
-                  itemAsString: (LeadCategoriesModel u) => u.name,
-                 
-                  onChanged: (value) {
-                    _jobPostController.cateName = value!.catName;
-                    debugPrint(value.catName.length.toString());
-                  },
-                ),
-              ),
+                        popupProps: const PopupProps.menu(showSearchBox: true),
+                        dropdownDecoratorProps: DropDownDecoratorProps(
+                          dropdownSearchDecoration: InputDecoration(
+                              labelText: "What service do you need?",
+                              hintText:
+                                  "e.g. Personal Trainers,House Cleaning ",
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16.w,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(3.r),
+                                  borderSide: BorderSide(
+                                      color: _jobPostController
+                                              .isCategoryError.value
+                                          ? Colors.red
+                                          : const Color(0xFF848484))),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(3.r))),
+                        ),
+                        itemAsString: (LeadCategoriesModel u) => u.name,
+                        onChanged: (value) {
+                          _jobPostController.cateName = value!.catName;
+                          debugPrint(value.catName.length.toString());
+                        },
+                      ),
+                    ),
               SizedBox(
                 height: 25.h,
               ),
 
               // location
-              Obx(
-                () => DropdownSearch<LocationDataModel>(
-                  items: _jobPostController.locationList,
-                  popupProps: const PopupProps.menu(showSearchBox: true),
-                  dropdownButtonProps: const DropdownButtonProps(
-                    icon: SizedBox(),
-                  ),
-                  dropdownDecoratorProps: DropDownDecoratorProps(
-                    dropdownSearchDecoration: InputDecoration(
-                        labelText: "What is the location?",
-                        hintText: "e.g. London",
-                        isDense: true,
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 16.w,
-                        ),
+
+              TypeAheadField(
+                textFieldConfiguration: TextFieldConfiguration(
+                    controller: _jobPostController.searchTextController,
+                    autofocus: true,
+                    style:  TextStyle(
+                      fontSize: 16.sp,
+                    ),
+                    decoration: InputDecoration(
+                      hintText: "e.g. London",
                         enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(3.r),
-                            borderSide: BorderSide(
-                                color: _jobPostController.isLocationError.value
-                                    ? Colors.red
-                                    : const Color(0xFF848484))),
+                          borderRadius: BorderRadius.circular(3.r),
+                          borderSide:const BorderSide(
+                            color:  Color(0xFF848484),
+                            width: 1,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:const BorderSide(
+                            color: Colors.blue,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(3.r),
+                        ),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(3.r))),
-                  ),
-                  itemAsString: (LocationDataModel u) => u.location,
-                  onChanged: (value) {
-                    _jobPostController.locationData = value!;
-                  },
-                ),
+                          borderRadius: BorderRadius.circular(3.r),
+                          borderSide:const BorderSide(
+                            color:  Color(0xFF848484),
+                            width: 1,
+                          ),
+                        ))),
+                suggestionsCallback: (pattern) async {
+                  return await _jobPostController.searchLocation(
+                      context, pattern);
+                },
+                itemBuilder: (context, Prediction suggestion) {
+                  return ListTile(
+                    leading: const Icon(Icons.location_pin),
+                    title: Text(suggestion.description),
+                  );
+                },
+                onSuggestionSelected: (Prediction suggestion)async{
+                  _jobPostController.searchTextController.text =
+                      suggestion.description;
+                      List<Location> locations = await locationFromAddress(suggestion.description);
+                      _jobPostController.lat.value=locations.last.latitude;
+                      _jobPostController.leng.value=locations.last.longitude;
+
+                      _jobPostController.locationData=LocationDataModel(location:suggestion.description, latitude: _jobPostController.lat.value.toString(), longitude: _jobPostController.leng.value.toString());
+                      debugPrint(_jobPostController.lat.value.toString());
+                      debugPrint(_jobPostController.leng.value.toString());
+                },
               ),
+
+             
+
               SizedBox(
                 height: 50.h,
               ),
@@ -155,13 +181,13 @@ class PostAJob extends StatelessWidget {
               Center(
                 child: InkWell(
                   onTap: () {
-                    if (catagory!= null) {
-                      LeadCategoriesModel categorieData=catagory;
+                    if (catagory != null) {
+                      LeadCategoriesModel categorieData = catagory;
                       if (_jobPostController.locationData == null) {
-                        _jobPostController.isLocationError.value = true;
+                       Get.snackbar("Error", "Please select location");
                       } else if (categorieData.catName.isNotEmpty) {
                         Map<String, dynamic> data = {
-                          "data":categorieData.catName,
+                          "data": categorieData.catName,
                           "locationData": _jobPostController.locationData
                         };
 
@@ -171,7 +197,7 @@ class PostAJob extends StatelessWidget {
                       if (_jobPostController.cateName.isEmpty) {
                         _jobPostController.isCategoryError.value = true;
                       } else if (_jobPostController.locationData == null) {
-                        _jobPostController.isLocationError.value = true;
+                         Get.snackbar("Error", "Please select location");
                       } else if (_jobPostController.cateName.isNotEmpty) {
                         Map<String, dynamic> data = {
                           "data": _jobPostController.cateName,
