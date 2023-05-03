@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Screens/DocumentScreen/Controller/real_time_controller.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 
+import '../../Route/routes.dart';
+
 class Document extends StatefulWidget {
   static const String routename = '/documentpage';
   const Document({super.key});
@@ -213,7 +215,12 @@ class _DocumentState extends State<Document> {
                                   height: 15.h,
                                 ),
                                 InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.toNamed(Routes.postAJob,arguments:{
+                                        "isBookId":result.user!.id,
+                                        "category":result.serviceName
+                                       }); 
+                                  },
                                   child: Container(
                                     height: 30.h,
                                     width: 84.w,

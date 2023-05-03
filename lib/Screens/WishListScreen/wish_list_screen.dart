@@ -163,8 +163,11 @@ class WishListScreen extends StatelessWidget {
                                       InkWell(
                                         onTap: () {
                                           Get.toNamed(Routes.postAJob,
-                                              arguments:
-                                                  result.categoryService);
+                                              arguments: {
+                                                "isBookId": null,
+                                                "category":
+                                                    result.categoryService
+                                              });
                                         },
                                         child: Container(
                                           height: 40.h,

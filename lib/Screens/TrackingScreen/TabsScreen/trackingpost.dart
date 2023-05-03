@@ -316,7 +316,10 @@ class TrackingPostOrder extends StatelessWidget {
                 ? SizedBox()
                 : InkWell(
                     onTap: () {
-                      Get.toNamed(Routes.postAJob, arguments: null);
+                      Get.toNamed(Routes.postAJob, arguments:{
+                         "isBookId":null,
+                                        "category":null
+                      });
                     },
                     child: Container(
                       height: 50.h,

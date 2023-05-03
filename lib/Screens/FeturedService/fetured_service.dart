@@ -126,7 +126,8 @@ body:  GridView.builder(
           InkWell(
             onTap: (){
                
-                    Get.toNamed(Routes.postAJob,arguments:data); 
+                    Get.toNamed(Routes.postAJob,arguments:{ "isBookId":null,
+                                        "category":data}); 
               
             },
             child: Container(
