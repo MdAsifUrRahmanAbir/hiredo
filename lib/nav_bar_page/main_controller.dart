@@ -25,7 +25,7 @@ class MainScreenController extends GetxController {
 
 final pages = [
   Home(),
-  const Document(),
+   Document(),
   TrackingScreen(),
   SearchResult(),
    Profile(),

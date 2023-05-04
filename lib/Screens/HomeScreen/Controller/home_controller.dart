@@ -22,7 +22,7 @@ class HomeController extends GetxController {
   final TextEditingController locationController = TextEditingController();
   List<String> carouselImages = [];
   
-   RxList wishList=List.empty(growable: true).obs;
+   var wishList=[].obs;
   var dotPosition =0.obs;
 
   @override
@@ -101,7 +101,7 @@ fetchWishListService() async {
       } else {
         List<ServiceWishList> demoList =result;
         for (var element in demoList) {
-          wishList.add(element.id);
+          wishList.add(element.categoryService.id);
           debugPrint("Wish List id : ${element.categoryService.id}");
          }
         

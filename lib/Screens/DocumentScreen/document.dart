@@ -6,27 +6,31 @@ import 'package:homelyknock/Screens/DocumentScreen/Controller/real_time_controll
 import 'package:homelyknock/widgets/custom_loader.dart';
 
 import '../../Route/routes.dart';
+import '../ProfileScreen/Controller/profile_controller.dart';
 
-class Document extends StatefulWidget {
-  static const String routename = '/documentpage';
-  const Document({super.key});
+class Document extends StatelessWidget {
+   Document({super.key});
 
-  @override
-  State<Document> createState() => _DocumentState();
-}
+  
 
-class _DocumentState extends State<Document> {
-  final GlobalKey<FormState> _formKey = GlobalKey();
   final TextEditingController nameController = TextEditingController();
+
   final TextEditingController locationController = TextEditingController();
+
   final _realTimeController = Get.put(RealTimeServiceController());
+
+  final _profileController = Get.put(ProfileController());
+
   @override
   Widget build(BuildContext context) {
+    if (_profileController.isUser.value == true) {
+      _profileController.modeChange();
+    }
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.symmetric(horizontal: 17.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +134,7 @@ class _DocumentState extends State<Document> {
               ),
               Obx(
                 () => _realTimeController.isLoading.value
-                    ? CustomLoader()
+                    ?const CustomLoader()
                     : GridView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
@@ -174,13 +178,9 @@ class _DocumentState extends State<Document> {
                                           borderRadius:
                                               BorderRadius.circular(10.r),
 
-                                          child: //result.serviceName == null
-                                              //     ? Container(
-                                              //         color: Colors.purple,
-                                              //       )
-                                              //     :
+                                          child: 
                                               Image.network(
-                                                  result.serviceName.image!)),
+                                                  result.serviceName.image!,fit: BoxFit.fill,)),
 
                                     ),
                                     Positioned(
@@ -195,7 +195,7 @@ class _DocumentState extends State<Document> {
                                 SizedBox(
                                   height: 5.h,
                                 ),
-                                Text(result.serviceName.name,
+                                Text(result.user!.corporationName,
                                     style: GoogleFonts.roboto(
                                       fontSize: 14.sp,
                                       color: const Color(0xFF272727),
@@ -204,13 +204,13 @@ class _DocumentState extends State<Document> {
                                 SizedBox(
                                   height: 5.h,
                                 ),
-                                // Text(
-                                //   '200+ Company work',
-                                //   style: GoogleFonts.roboto(
-                                //       fontSize: 10.sp,
-                                //       fontWeight: FontWeight.w400,
-                                //       color: Color(0xFF848484)),
-                                // ),
+                                Text(
+                                  result.serviceName.name,
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 10.sp,
+                                      fontWeight: FontWeight.w400,
+                                      color:const Color(0xFF848484)),
+                                ),
                                 SizedBox(
                                   height: 15.h,
                                 ),
