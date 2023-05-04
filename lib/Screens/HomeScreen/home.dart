@@ -21,7 +21,7 @@ import 'Model/lead_category_model.dart';
 
 final mainController = Get.put(MainScreenController());
 final _profileController = Get.put(ProfileController());
-final _wishListController = Get.put(WishListController());
+
 
 class Home extends StatelessWidget {
   Home({super.key});
