@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Screens/SalerBookingDetails/saler_booking_details.dart';
 
 import '../../../utils/colors.dart';
 
@@ -26,6 +28,7 @@ class BookingPandeingScreen extends StatelessWidget {
                     spreadRadius: 0)
               ]),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
@@ -48,24 +51,33 @@ class BookingPandeingScreen extends StatelessWidget {
                       Text(
                         'Commercial cleaning by Expertise',
                         style: GoogleFonts.roboto(
-                            fontSize: 14.sp,
+                            fontSize: 18.sp,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xff272727)),
+                            color:const Color(0xff272727)),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(
-                        height: 10.h,
+                        height: 8.h,
                       ),
                       Text(
-                        " Company Request",
+                        "WebDeveloper",
                         style: GoogleFonts.roboto(
-                            fontSize: 12.sp,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w400,
-                            color: const Color(0xff848484)),
+                            color: const Color(0xff555957)),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      Row(
+                        children: [
+                          Icon(Icons.location_pin,color:themeColorGreen,size:15.sp,),
+                          Text("Dhaka ,Bangladesh",style: GoogleFonts.roboto(fontSize:14.sp,color:const Color(0xFF848484)),)
+                        ],
+                      )
                     ],
                   ))
                 ],
@@ -74,11 +86,13 @@ class BookingPandeingScreen extends StatelessWidget {
                 height: 16.h,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(width: 90.w,),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(SalerBookingDetailsScreen(isPending: true,));
+                    },
                     child: Container(
                       height: 34.h,
                       width: 115.w,
@@ -96,40 +110,6 @@ class BookingPandeingScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: 24.w,
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      height: 34.h,
-                      width: 80.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4.r),
-                          border: Border.all(color: themeColorGreen),
-                          color: Colors.white),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.delete,
-                            size: 20.sp,
-                            color: themeColorGreen,
-                          ),
-                          SizedBox(
-                            width: 8.w,
-                          ),
-                          Text(
-                            "Delete",
-                            style: GoogleFonts.roboto(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400,
-                                color: const Color(0xFF187949)),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
                 ],
               )
             ],

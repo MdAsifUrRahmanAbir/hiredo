@@ -29,8 +29,6 @@ class LeadsDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _leadDetailsController.getData();
-    print(leadData.latitude);
-    print(leadData.longitude);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -64,6 +62,8 @@ class LeadsDetailsScreen extends StatelessWidget {
         ),
         actions: [Image.asset('images/notification.png')],
       ),
+    
+    
       body: Obx(
         () => _leadDetailsController.isLoading.value
             ? const CustomLoader()
@@ -161,6 +161,8 @@ class LeadsDetailsScreen extends StatelessWidget {
                                   ],
                                 ),
                               ),
+                             
+                             
                               SizedBox(
                                 height: 15.h,
                               ),
@@ -174,12 +176,14 @@ class LeadsDetailsScreen extends StatelessWidget {
                                   SizedBox(
                                     width: 8.w,
                                   ),
-                                  Text(
-                                    '+122******6***',
-                                    style: GoogleFonts.roboto(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: const Color(0xFF272727)),
+                                  Obx(()=>
+                                     Text(
+                                     _leadController.isContect.contains(leadData.id)?leadData.user.phoneNumber: '+122******6***',
+                                      style: GoogleFonts.roboto(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: const Color(0xFF272727)),
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 5.w,
@@ -211,6 +215,7 @@ class LeadsDetailsScreen extends StatelessWidget {
                                   )
                                 ],
                               ),
+                             
                               SizedBox(
                                 height: 5.h,
                               ),
@@ -224,18 +229,22 @@ class LeadsDetailsScreen extends StatelessWidget {
                                   SizedBox(
                                     width: 8.w,
                                   ),
-                                  Text(
-                                    'your******@email.com',
-                                    style: GoogleFonts.roboto(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: const Color(0xFF272727)),
+                                  Obx(()=>
+                                     Text(
+                                      _leadController.isContect.contains(leadData.id)?leadData.user.email:'your******@email.com',
+                                      style: GoogleFonts.roboto(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: const Color(0xFF272727)),
+                                    ),
                                   ),
                                 ],
                               ),
                               SizedBox(
                                 height: 20.h,
                               ),
+                            
+                            
                               Container(
                                 height: 40.h,
                                 width: double.infinity,
@@ -336,6 +345,8 @@ class LeadsDetailsScreen extends StatelessWidget {
                                         ),
                                       ),
                                     ),
+                                 
+                                 
                                   ),
 
                                   SizedBox(
@@ -550,7 +561,7 @@ class LeadsDetailsScreen extends StatelessWidget {
                       ),
                       SizedBox(
                         height: 200.h,
-                        child: GoogleMapsShow(leadData: leadData),
+                        child: GoogleMapsShow(lat:leadData.latitude,leng:leadData.longitude,),
                       ),
                       SizedBox(
                         height: 20.h,
@@ -1378,12 +1389,14 @@ class LeadsDetailsScreen extends StatelessWidget {
 }
 
 class GoogleMapsShow extends StatefulWidget {
-  const GoogleMapsShow({
+   GoogleMapsShow({
     super.key,
-    required this.leadData,
+    required this.lat,
+    required this.leng,
   });
 
-  final Result leadData;
+   var lat;
+   var leng;
 
   @override
   State<GoogleMapsShow> createState() => _GoogleMapsShowState();
@@ -1402,7 +1415,7 @@ final Completer<GoogleMapController> _controller =
   void initState() {
     
     _kGooglePlex = CameraPosition(
-    target: LatLng(double.parse(widget.leadData.latitude!), double.parse(widget.leadData.longitude!)),
+    target: LatLng(double.parse(widget.lat!), double.parse(widget.leng!)),
     zoom: 14.4746,
   );
     super.initState();
