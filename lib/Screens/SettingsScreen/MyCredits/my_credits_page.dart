@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Screens/ProfileScreen/Controller/profile_controller.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
@@ -211,8 +212,12 @@ class MyCreditsPage extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    SizedBox(
-                                      width: 30.w,
+                                    Text(
+                                      'About responses',
+                                      style: GoogleFonts.roboto(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: const Color(0xFF272727)),
                                     ),
                                     Row(
                                       children: [
@@ -268,7 +273,7 @@ class MyCreditsPage extends StatelessWidget {
                                     ),
                                     const Spacer(),
                                     InkWell(
-                                      onTap: ()async {
+                                      onTap: () async {
                                         var amount = _creditController
                                             .userCreditData[index].priceAmount
                                             .toInt();
@@ -276,13 +281,18 @@ class MyCreditsPage extends StatelessWidget {
                                         //     .userCreditData[index].priceAmount
                                         //     .toString());
                                         // print(amount);
-                                    var    sharedPreferences = await SharedPreferences.getInstance();
-                              var      id = sharedPreferences.getInt(CommonData.id) ?? 0;
+                                        var sharedPreferences =
+                                            await SharedPreferences
+                                                .getInstance();
+                                        var id = sharedPreferences
+                                                .getInt(CommonData.id) ??
+                                            0;
                                         StripeService().makePayment(
-                                          id:id,
+                                            id: id,
                                             amount: amount.toString(),
-                                            cradit:_creditController
-                                            .userCreditData[index].creditAmount ,
+                                            cradit: _creditController
+                                                .userCreditData[index]
+                                                .creditAmount,
                                             currency: "USD");
                                       },
                                       child: Container(

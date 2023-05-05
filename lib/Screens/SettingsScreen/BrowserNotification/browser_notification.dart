@@ -83,7 +83,7 @@ class BrowserNotification extends StatelessWidget {
               style: GoogleFonts.roboto(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
-                  color: Color(0xFF6E6874)),
+                  color: const Color(0xFF6E6874)),
             ),
             SizedBox(
               height: 15.h,
@@ -105,7 +105,7 @@ class BrowserNotification extends StatelessWidget {
                         style: GoogleFonts.roboto(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
-                            color: Color.fromRGBO(39, 39, 39, 1)),
+                            color: const Color.fromRGBO(39, 39, 39, 1)),
                       ),
                       trailing: Switch(
                           onChanged: (value) {
@@ -114,8 +114,8 @@ class BrowserNotification extends StatelessWidget {
                           value: _browserController.selected[index],
                           activeColor: Colors.white,
                           activeTrackColor: const Color(0xFF47BF9C),
-                          inactiveThumbColor: Colors.pink,
-                          inactiveTrackColor: Colors.green),
+                          inactiveThumbColor: const Color(0xFFFFFFFF),
+                          inactiveTrackColor: const Color(0xFFE6E8EA)),
                     ),
                   ),
                 );
