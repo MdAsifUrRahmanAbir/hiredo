@@ -92,8 +92,6 @@ class SignInController extends GetxController {
       }
     } on Exception catch (e) {
       debugPrint("Opps sign in Error $e");
-
-      // TODO
     } finally {
       if (isLogged) {
         isLoading(false);
