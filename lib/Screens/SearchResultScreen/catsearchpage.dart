@@ -2,14 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../widgets/common_dashboard_controller.dart';
 import '../HomeScreen/Controller/home_controller.dart';
+import '../JobPost/Model/location_model.dart';
 import 'search_controller.dart';
-
 
 class SearchResult extends StatelessWidget {
   SearchResult({super.key});
@@ -44,9 +45,11 @@ class SearchResult extends StatelessWidget {
       child: Column(
         children: [
           _categoriesBodyTopTitleWidget(),
-          Obx(() => controller.isTopCatSearchScreen.value
-              ? _gridViewCategoryWidget()
-              : _gridViewLocationWidget(),)
+          Obx(
+            () => controller.isTopCatSearchScreen.value
+                ? _gridViewCategoryWidget()
+                : _gridViewLocationWidget(),
+          )
         ],
       ),
     );
@@ -77,19 +80,29 @@ class SearchResult extends StatelessWidget {
     return GridView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: commonController.locationList.length,
+        itemCount: controller.predictionList.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 2.3,
         ),
         itemBuilder: (_, index) {
-
+          var data = controller.predictionList[index];
           return GestureDetector(
-            onTap: () {
-              controller.isTopCatSearchScreen.value = true;
-              controller.selectedLocationIndex.value = index;
+            onTap: () async {
+              List<Location> locations =
+                  await locationFromAddress(data.description);
+              var lat = locations.last.latitude;
 
-              controller.goToPostJobScreen();
+              var long = locations.last.longitude;
+
+          controller.locationData=    LocationDataModel(location: data.description, latitude:lat.toString(), longitude:long.toString());
+
+              controller.selectedLocationIndex.value = index;
+              if (controller.selectCategory != null) {
+                controller.goToPostJobScreen();
+              } else {
+                controller.isTopCatSearchScreen.value = true;
+              }
             },
             child: Container(
               padding:
@@ -99,25 +112,26 @@ class SearchResult extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(4.r),
                           border: Border.all(
-                            color: controller.selectedLocationIndex.value == index
-                                ? Color(0xff9CCDB5)
-                                : Color(0xffffffff),
+                            color:
+                                controller.selectedLocationIndex.value == index
+                                    ? Color(0xff9CCDB5)
+                                    : Color(0xffffffff),
                           )),
                       child: ListTile(
-                            leading: Text(
-                              commonController.locationList[index].name,
-                              style: GoogleFonts.roboto(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xff272727)),
-                            ),
-                            trailing: Icon(
-                              controller.isTopCatSearchScreen.value
-                                  ? Icons.fingerprint
-                                  : Icons.location_on_outlined,
-                              color: Color(0xff187949),
-                            ),
-                          ),
+                        title: Text(
+                          data.description,
+                          style: GoogleFonts.roboto(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xff272727)),
+                        ),
+                        trailing: Icon(
+                          controller.isTopCatSearchScreen.value
+                              ? Icons.fingerprint
+                              : Icons.location_on_outlined,
+                          color: Color(0xff187949),
+                        ),
+                      ),
                     )),
               ),
             ),
@@ -129,16 +143,20 @@ class SearchResult extends StatelessWidget {
     return GridView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: homeController.subCategoryList.length,
+        itemCount: controller.subcategory.length >= 8
+            ? 8
+            : controller.subcategory.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 2.3,
         ),
         itemBuilder: (_, index) {
+          var data = controller.subcategory[index];
 
           return GestureDetector(
             onTap: () {
               controller.selectedCategoryIndex.value = index;
+              controller.selectCategory = data;
               controller.isTopCatSearchScreen.value = false;
             },
             child: Container(
@@ -149,23 +167,24 @@ class SearchResult extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(4.r),
                           border: Border.all(
-                            color: controller.selectedCategoryIndex.value == index
-                                ? Color(0xff9CCDB5)
-                                : Color(0xffffffff),
+                            color:
+                                controller.selectedCategoryIndex.value == index
+                                    ? Color(0xff9CCDB5)
+                                    : Color(0xffffffff),
                           )),
                       child: ListTile(
-                            leading: Text(
-                              homeController.subCategoryList[index].name,
-                              style: GoogleFonts.roboto(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xff272727)),
-                            ),
-                            trailing: Icon(
-                                Icons.fingerprint,
-                              color: Color(0xff187949),
-                            ),
-                          ),
+                        title: Text(
+                          data.name,
+                          style: GoogleFonts.roboto(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xff272727)),
+                        ),
+                        trailing: Icon(
+                          Icons.fingerprint,
+                          color: Color(0xff187949),
+                        ),
+                      ),
                     )),
               ),
             ),
@@ -206,11 +225,12 @@ class SearchResult extends StatelessWidget {
   _searchButtonWidget() {
     return GestureDetector(
       onTap: () {
-
+        controller.searchSubCategory(controller.categoryController.text);
+        controller.searchLocation(controller.locationController.text);
       },
       child: Container(
         color: Color(0xff187949),
-        height: 50.h,
+        height: double.infinity,
         width: 45.w,
         child: Icon(
           Icons.search,
@@ -226,7 +246,12 @@ class SearchResult extends StatelessWidget {
       onTap: () {
         controller.isTopCatSearchScreen.value = true;
       },
-      readOnly: true,
+      //readOnly: true,
+      onChanged: (value) {
+        if (value.isEmpty) {
+          controller.subcategory.value = homeController.subCategoryList;
+        }
+      },
       decoration: InputDecoration(
           border: InputBorder.none,
           fillColor: Colors.white,
@@ -253,7 +278,7 @@ class SearchResult extends StatelessWidget {
       onTap: () {
         controller.isTopCatSearchScreen.value = false;
       },
-      readOnly: true,
+      //  readOnly: true,
       decoration: InputDecoration(
         border: InputBorder.none,
         fillColor: Colors.white,
