@@ -112,8 +112,10 @@ class ProfileController extends GetxController {
         log.e(result);
       } else {
         profileData = result;
-        isProfessional.value = profileData!.user.isProfessional;
-        isUser.value = profileData!.user.isUser;
+        isProfessional.value = result!.user.isProfessional;
+        isUser.value = result!.user.isUser;
+        debugPrint(isProfessional.value.toString());
+         debugPrint(isUser.value.toString());
 
         log.i(result);
       }
@@ -207,6 +209,14 @@ class ProfileController extends GetxController {
       isLeadLoading.value = false;
     }
   }
+
+getLocalData()async{
+  preferences = await SharedPreferences.getInstance();
+  isProfessional.value =
+        preferences.getBool(CommonData.isProfessional) ?? false;
+    isUser.value = preferences.getBool(CommonData.isUser) ?? false;
+
+}
 
   modeChange() async {
     try {
