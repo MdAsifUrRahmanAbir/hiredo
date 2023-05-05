@@ -6,11 +6,13 @@ import 'package:responsive_framework/responsive_wrapper.dart';
 
 import 'Route/routes.dart';
 import 'Services/api_component.dart';
+import 'network_check/dependency_injection.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   Stripe.publishableKey = stripePublishKey;
+  InternetCheckDependencyInjection.init();
 
   runApp(const MyApp());
 }
@@ -37,9 +39,8 @@ class MyApp extends StatelessWidget {
                   const ResponsiveBreakpoint.resize(1000, name: DESKTOP),
                 ],
                 background: Container(color: const Color(0xFFF5F5F5))),
-              
             initialRoute: Routes.splash,
-      getPages: getPages,
+            getPages: getPages,
           );
         });
   }
