@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Screens/JobPost/Model/location_model.dart';
-import 'package:homelyknock/Screens/UpdateLeadSetting/Model/location_model.dart';
 
 import 'location_controller.dart';
 
@@ -352,26 +351,6 @@ class LocationPage extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                               color: const Color(0xFFFFFFFF)),
                         ),
-                        // Obx(() => SizedBox(
-                        //       width: updatLeadController
-                        //               .isLoading.value
-                        //           ? 5.w
-                        //           : 0,
-                        //     )),
-                        // Obx(() {
-                        //   if (updatLeadController.isLoading.value) {
-                        //     return SizedBox(
-                        //       height: 10.h,
-                        //       width: 10.w,
-                        //       child:
-                        //           const CircularProgressIndicator(
-                        //         color: Colors.white,
-                        //       ),
-                        //     );
-                        // } else {
-                        //   return const SizedBox();
-                        // }
-                        //    })
                       ],
                     ),
                   ),
