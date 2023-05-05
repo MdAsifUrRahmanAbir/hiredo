@@ -26,7 +26,7 @@ class QuestionController extends GetxController {
         trandingPostController.getPendingPost(true);
        Fluttertoast.showToast(msg: "Complete job post create",toastLength: Toast.LENGTH_LONG);
         Get.back();
-        Get.back();
+       
         isLoading(false);
       }
     } on Exception catch (e) {
