@@ -1,15 +1,16 @@
-import 'dart:async';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import 'package:homelyknock/Services/api_component.dart';
 import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 import 'package:jiffy/jiffy.dart';
 
+import '../../GoogleMapService/google_map_show.dart';
 import '../LeadsScreen/Controller/lead_controller.dart';
 import '../LeadsScreen/Model/leads_model.dart';
 import '../ResistrationScreen/component/custome_text_field.dart';
@@ -1388,56 +1389,3 @@ class LeadsDetailsScreen extends StatelessWidget {
   }
 }
 
-class GoogleMapsShow extends StatefulWidget {
-   GoogleMapsShow({
-    super.key,
-    required this.lat,
-    required this.leng,
-  });
-
-   var lat;
-   var leng;
-
-  @override
-  State<GoogleMapsShow> createState() => _GoogleMapsShowState();
-}
-
-class _GoogleMapsShowState extends State<GoogleMapsShow> {
-
-
-final Completer<GoogleMapController> _controller =
-      Completer<GoogleMapController>();
-
-    late CameraPosition _kGooglePlex ;
-    
-
-    @override
-  void initState() {
-    
-    _kGooglePlex = CameraPosition(
-    target: LatLng(double.parse(widget.lat!), double.parse(widget.leng!)),
-    zoom: 14.4746,
-  );
-    super.initState();
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    return GoogleMap(
-      rotateGesturesEnabled: false,
-      scrollGesturesEnabled: false,
-      zoomControlsEnabled: false,
-      zoomGesturesEnabled: false,
-      liteModeEnabled: false,
-      tiltGesturesEnabled: false,
-      myLocationButtonEnabled: false,
-      myLocationEnabled: false,
-      mapType: MapType.normal,
-      initialCameraPosition:_kGooglePlex,
-      onMapCreated: (GoogleMapController controller) {
-         _controller.complete(controller);
-      },
-    );
-  }
-}

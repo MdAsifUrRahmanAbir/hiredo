@@ -10,6 +10,7 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../../Services/api_component.dart';
 import '../../../utils/colors.dart';
+import '../../BuyerBookingCompleteDetails/buyerbooking_complete_details.dart';
 import '../Controller/complete_controller.dart';
 
 class TrackingPostOrderTwo extends StatelessWidget {
@@ -131,6 +132,7 @@ class TrackingPostOrderTwo extends StatelessWidget {
             SizedBox(
               height: 20.h,
             ),
+            if(_completePostController.completePostList.isNotEmpty)
             _completePostController.isLoading.value?ListView.builder(
                       itemCount: 8,
                       shrinkWrap: true,
@@ -295,6 +297,171 @@ class TrackingPostOrderTwo extends StatelessWidget {
                     ),
                 itemCount: _completePostController.completePostList.length)
           ,
+           _completePostController.isLoading.value?ListView.builder(
+                      itemCount: 8,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Shimmer.fromColors(
+                          baseColor: Colors.grey.withOpacity(0.1),
+                          highlightColor: Colors.grey.withOpacity(0.5),
+                          child: Column(
+                            children: [
+                              ListTile(
+                                leading: Container(
+                                  height: 89.h,
+                                  width: 80.w,
+                                  color: Colors.white,
+                                ),
+                                title: Container(
+                                  height: 15.h,
+                                  width: 100.w,
+                                  color: Colors.white,
+                                ),
+                                subtitle: Container(
+                                  width: double.infinity,
+                                  height: 15.h,
+                                  color: Colors.white,
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      })
+                  
+                  :
+            ListView.separated(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  // var data=_completePostController.completePostList[index];
+                  return Container(
+                      height: 171.h,
+                      width: double.infinity,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5.r),
+                          boxShadow: [
+                            BoxShadow(
+                                color: const Color(0xFF187949).withOpacity(0.07),
+                                blurRadius: 7,
+                                spreadRadius: 0)
+                          ]),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(3.r),
+                                child: Image.network(
+                                  "https://media.istockphoto.com/id/1434054606/photo/traveler-backpacker-girl-is-watching-hot-air-balloons-and-the-fairy-chimneys-at-cappadocia.jpg?b=1&s=170667a&w=0&k=20&c=9eQP1EMSpMweCwGcc4uU6MV2y4CjnH2C82S7BYypIHk=",
+                                  height: 89.h,
+                                  width: 80.w,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("data.post.category.name",
+                                        style: GoogleFonts.roboto(
+                                            fontSize: 18.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: Color(0xFF272727)),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    Text(
+                                      "data.post.postObject[0].question.qs",
+                                      style: GoogleFonts.roboto(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xFF555957)),
+                                    ),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    RichText(
+                                      text: TextSpan(
+                                        text: 'Completed by ',
+                                        style: GoogleFonts.roboto(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w400,
+                                            color: Color(0xFF848484)),
+                                        children: [
+                                          TextSpan(
+                                              text:"data.profileName",
+                                              style: GoogleFonts.roboto(
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Color(0xFF272727))),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 90.w,
+                              ),
+                              InkWell(
+                                onTap: (){
+                                  Get.to(CompleteBuyerBookingDetails());
+                                 
+                                },
+                                child: Container(
+                                  height: 34.h,
+                                  width: 115.w,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      color: Color(0xff187949)),
+                                  child: Center(
+                                    child: Text(
+                                      "view details",
+                                      style: GoogleFonts.roboto(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+              
+                },
+              
+              
+              
+                separatorBuilder: (_, index) => SizedBox(
+                      height: 10.h,
+                    ),
+                itemCount:5)
+          ,
            _completePostController.isLoading.value?SizedBox(): InkWell(
               onTap: (){
                  Get.toNamed(Routes.postAJob, arguments:{ "isBookId":null,
@@ -312,7 +479,9 @@ class TrackingPostOrderTwo extends StatelessWidget {
                       
                       
                       ),
-            )
+            ),
+
+            SizedBox(height: 80.h,)
             
              
           
