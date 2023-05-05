@@ -239,7 +239,7 @@ class MyCreditsPage extends StatelessWidget {
                                           style: myStyle(
                                               12.sp, FontWeight.w400, textClr),
                                         ),
-                                        Text('\$${perCredit} credit',
+                                        Text('\$$perCredit credit',
                                             style: myStyle(12.sp,
                                                 FontWeight.w400, textClr))
                                       ],
