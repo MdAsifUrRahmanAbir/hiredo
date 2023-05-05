@@ -135,13 +135,7 @@ class BillingDetails extends StatelessWidget {
               SizedBox(
                 height: 20.h,
               ),
-              Text(
-                'Contact name',
-                style: GoogleFonts.roboto(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xff555957)),
-              ),
+              _titleText(title: 'Contact name'),
               SizedBox(
                 height: 5.h,
               ),
@@ -151,13 +145,7 @@ class BillingDetails extends StatelessWidget {
               SizedBox(
                 height: 10.h,
               ),
-              Text(
-                'Address line 1',
-                style: GoogleFonts.roboto(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xff555957)),
-              ),
+              _titleText(title: 'Address line 1'),
               SizedBox(
                 height: 5.h,
               ),
@@ -167,13 +155,7 @@ class BillingDetails extends StatelessWidget {
               SizedBox(
                 height: 10.h,
               ),
-              Text(
-                'Address line 2',
-                style: GoogleFonts.roboto(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xff555957)),
-              ),
+              _titleText(title: 'Address line 2'),
               SizedBox(
                 height: 5.h,
               ),
@@ -231,13 +213,7 @@ class BillingDetails extends StatelessWidget {
               SizedBox(
                 height: 10.h,
               ),
-              Text(
-                'Phone Number',
-                style: GoogleFonts.roboto(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xff555957)),
-              ),
+              _titleText(title: 'Phone Number'),
               SizedBox(
                 height: 5.h,
               ),
@@ -247,13 +223,7 @@ class BillingDetails extends StatelessWidget {
               SizedBox(
                 height: 10.h,
               ),
-              Text(
-                'Address line 2',
-                style: GoogleFonts.roboto(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xff555957)),
-              ),
+              _titleText(title: 'Address line 2'),
               SizedBox(
                 height: 5.h,
               ),
@@ -357,6 +327,16 @@ class BillingDetails extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  _titleText({required String title}) {
+    return Text(
+      title,
+      style: GoogleFonts.roboto(
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w400,
+          color: const Color(0xff555957)),
     );
   }
 }

@@ -118,8 +118,8 @@ class EmailNotification extends StatelessWidget {
                               value: _emailController.isSwitched[index],
                               activeColor: Colors.white,
                               activeTrackColor: const Color(0xFF47BF9C),
-                              inactiveThumbColor: Colors.pink,
-                              inactiveTrackColor: Colors.green)),
+                              inactiveThumbColor: const Color(0xFFFFFFFF),
+                              inactiveTrackColor: const Color(0xFFE6E8EA))),
                     ),
                   );
                 },
