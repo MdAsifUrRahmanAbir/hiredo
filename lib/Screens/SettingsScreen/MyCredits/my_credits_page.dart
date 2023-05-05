@@ -277,10 +277,7 @@ class MyCreditsPage extends StatelessWidget {
                                         var amount = _creditController
                                             .userCreditData[index].priceAmount
                                             .toInt();
-                                        // print(_creditController
-                                        //     .userCreditData[index].priceAmount
-                                        //     .toString());
-                                        // print(amount);
+
                                         var sharedPreferences =
                                             await SharedPreferences
                                                 .getInstance();

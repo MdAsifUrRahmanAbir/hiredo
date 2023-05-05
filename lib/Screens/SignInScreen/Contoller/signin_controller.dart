@@ -19,104 +19,105 @@ class SignInController extends GetxController {
   var isVisibility = false.obs;
 
   final _dataController = Get.put(DataController());
-     final _mainController =Get.put(MainScreenController());
-  
+  final _mainController = Get.put(MainScreenController());
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  
   late SharedPreferences preferences;
 
   @override
   onInit() {
-
     rememberMeGetData();
     super.onInit();
   }
 
   // handlesSignIn
 
-  userSignIn({required bool isLogged,required String email, required String password}) async {
-    if(isLogged){
-        isLoading(true);
+  userSignIn(
+      {required bool isLogged,
+      required String email,
+      required String password}) async {
+    if (isLogged) {
+      isLoading(true);
     }
-    
+
     try {
-      var result = await ApiServices.handelLogin(
-          email: email, password: password);
+      var result =
+          await ApiServices.handelLogin(email: email, password: password);
 
       if (result.runtimeType == int) {
-        if(!isLogged){
-          _mainController.initIndex.value=0;
+        if (!isLogged) {
+          _mainController.initIndex.value = 0;
           Get.offAllNamed(Routes.signinPage);
-           }else{
-              Fluttertoast.showToast(msg: "Invalid email or password.",);
-           }
-        
+        } else {
+          Fluttertoast.showToast(
+            msg: "Invalid email or password.",
+          );
+        }
+
         debugPrint("Opps sign in Error $result");
       } else {
-        
         LoginModel allData = result;
         print(allData);
         _dataController.setData(
-            idD: allData.user.id,
-            corporationNameD: allData.user.corporationName,
-            corporationNumberD: allData.user.corporationNumber,
-            fullNameD: allData.user.fullName,
-            dateOfBirthD: allData.user.dateOfBirth,
-            emailD: allData.user.email,
-            passwordD: allData.user.password,
-            phoneD: allData.user.phoneNumber,
-            isProfessionalD: allData.user.isProfessional,
-            isUserD: allData.user.isUser,
-            bearerTokenD: allData.token,
-            );
+          idD: allData.user.id,
+          corporationNameD: allData.user.corporationName,
+          corporationNumberD: allData.user.corporationNumber,
+          fullNameD: allData.user.fullName,
+          dateOfBirthD: allData.user.dateOfBirth,
+          emailD: allData.user.email,
+          passwordD: allData.user.password,
+          phoneD: allData.user.phoneNumber,
+          isProfessionalD: allData.user.isProfessional,
+          isUserD: allData.user.isUser,
+          bearerTokenD: allData.token,
+        );
 
-            debugPrint(_dataController.id.toString());
-             _mainController.initIndex.value=0;
-        Get.offNamed(Routes.mainPage);
-      
-  
-       
-        if(isChecked.value){
-        await  rememberMeSetData();
+        debugPrint(_dataController.id.toString());
+        _mainController.initIndex.value = 0;
+        Get.toNamed(Routes.mainPage);
+
+        if (isChecked.value) {
+          await rememberMeSetData();
         }
-        MyPreference.isLoggedSave(email:emailController.text,password:passwordController.text);
+        MyPreference.isLoggedSave(
+            email: emailController.text, password: passwordController.text);
         MyPreference.setToken(allData.token);
 
-         emailController.clear();
+        emailController.clear();
         passwordController.clear();
 
         debugPrint("Sign in Sucessfull");
       }
     } on Exception catch (e) {
       debugPrint("Opps sign in Error $e");
-      
+
       // TODO
     } finally {
-      if(isLogged){
+      if (isLogged) {
         isLoading(false);
-    }
+      }
     }
   }
 
-
-  rememberMeSetData()async{
-      preferences = await SharedPreferences.getInstance();
+  rememberMeSetData() async {
+    preferences = await SharedPreferences.getInstance();
     preferences.setString("rememberEmail", emailController.text);
     preferences.setString("rememberPassword", passwordController.text);
-
-
-  }
-rememberMeGetData()async{
- preferences = await SharedPreferences.getInstance();
-  String email= preferences.getString("rememberEmail",)??"";
-   String password=   preferences.getString("rememberPassword",)??"";
-   emailController.text=email;
-   passwordController.text=password;
-
   }
 
-
+  rememberMeGetData() async {
+    preferences = await SharedPreferences.getInstance();
+    String email = preferences.getString(
+          "rememberEmail",
+        ) ??
+        "";
+    String password = preferences.getString(
+          "rememberPassword",
+        ) ??
+        "";
+    emailController.text = email;
+    passwordController.text = password;
+  }
 }
