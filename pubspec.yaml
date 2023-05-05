@@ -84,6 +84,11 @@ dev_dependencies:
 
 #  flutter_launcher_icons:       # added by abir
 #flutter pub run flutter_launcher_icons:main
+  #flutter_app_name: ^0.1.1
+#flutter pub run flutter_app_name
+
+# flutter_app_name:
+#   name: "Hire Do"
 
 #flutter_icons:                  # added by abir
 #  android: "launcher_icon"
