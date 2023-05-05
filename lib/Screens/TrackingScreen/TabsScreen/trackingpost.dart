@@ -10,6 +10,7 @@ import 'package:homelyknock/utils/colors.dart';
 
 import 'package:shimmer/shimmer.dart';
 
+import '../../BuyerBookingDetails/buyer_booking_details.dart';
 import '../Controller/pending_controller.dart';
 
 class TrackingPostOrder extends StatelessWidget {
@@ -126,9 +127,11 @@ class TrackingPostOrder extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            
+           SizedBox(
               height: 20.h,
             ),
+             if(_pendingPostontroller.pendingPostList.isNotEmpty)
             Obx(
               () => _pendingPostontroller.isLoading.value
                   ? ListView.builder(
@@ -162,6 +165,7 @@ class TrackingPostOrder extends StatelessWidget {
                           ),
                         );
                       })
+                 
                   : ListView.separated(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
@@ -306,12 +310,208 @@ class TrackingPostOrder extends StatelessWidget {
                             ],
                           ),
                         );
+                    
+                    
                       },
                       separatorBuilder: (_, index) => SizedBox(
                         height: 10.h,
                       ),
                     ),
             ),
+          
+          
+          _pendingPostontroller.isLoading.value
+                ? ListView.builder(
+                      itemCount: 8,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Shimmer.fromColors(
+                          baseColor: Colors.grey.withOpacity(0.1),
+                          highlightColor: Colors.grey.withOpacity(0.5),
+                          child: Column(
+                            children: [
+                              ListTile(
+                                leading: Container(
+                                  height: 89.h,
+                                  width: 80.w,
+                                  color: Colors.white,
+                                ),
+                                title: Container(
+                                  height: 15.h,
+                                  width: 100.w,
+                                  color: Colors.white,
+                                ),
+                                subtitle: Container(
+                                  width: double.infinity,
+                                  height: 15.h,
+                                  color: Colors.white,
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      })
+                 :ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount:_pendingPostontroller.buyerPendingBookNowList.length,
+                  itemBuilder:(context,index){
+                    var data=_pendingPostontroller.buyerPendingBookNowList[index];
+                  return Container(
+                          height: 171.h,
+                          width: double.infinity,
+                          margin:EdgeInsets.symmetric(vertical:5.h),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 16.h),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(5.r),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: const Color(0xFF187949)
+                                        .withOpacity(0.07),
+                                    blurRadius: 7,
+                                    spreadRadius: 0)
+                              ]),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  ClipRRect(
+                                      borderRadius: BorderRadius.circular(3.r),
+                                      child: Image.network(
+                                        data.category.image,
+                                        height: 89.h,
+                                        width: 80.w,
+                                        fit: BoxFit.cover,
+                                      )),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  Expanded(
+                                      child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        data.category.name,
+                                        style: GoogleFonts.roboto(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: Color(0xff272727)),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      SizedBox(
+                                        height: 10.h,
+                                      ),
+                                       RichText(
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                                text: TextSpan(
+                                  text: '',
+                                  style: GoogleFonts.roboto(
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w400,
+                                            color: Color(0xff848484)),
+                                  children: data.realtimePostObject
+                                      .map((e) => TextSpan(
+                                          text: e.question.qs,
+                                          style: GoogleFonts.roboto(
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w400,
+                                            color: Color(0xff848484))))
+                                      .toList(),
+                                )),
+                                     
+                                    ],
+                                  ))
+                                ],
+                              ),
+                              SizedBox(
+                                height: 16.h,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                    Get.to(BuyerBookNowDetails(data: data,));
+                                    },
+                                    child: Container(
+                                      height: 34.h,
+                                      width: 115.w,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(4.r),
+                                          color: Color(0xff187949)),
+                                      child: Center(
+                                        child: Text(
+                                          "view details",
+                                          style: GoogleFonts.roboto(
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 24.w,
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                     
+                                    },
+                                    child: Container(
+                                      height: 34.h,
+                                      width: 80.w,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(4.r),
+                                          border: Border.all(
+                                              color: themeColorGreen),
+                                          color: Colors.white),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.delete,
+                                            size: 20.sp,
+                                            color: themeColorGreen,
+                                          ),
+                                          SizedBox(
+                                            width: 8.w,
+                                          ),
+                                          Text(
+                                            "Delete",
+                                            style: GoogleFonts.roboto(
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w400,
+                                                color: Color(0xFF187949)),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+
+                              //
+                            ],
+                          ),
+                        );
+                    
+
+
+                }),
+          
+          
+          
+          
             _pendingPostontroller.isLoading.value
                 ? SizedBox()
                 : InkWell(

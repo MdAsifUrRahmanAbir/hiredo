@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:homelyknock/Screens/TrackingScreen/Model/pending_book_now_model.dart';
 import 'package:homelyknock/Services/api_services.dart';
 
 import '../../../Services/api_services_by_limon.dart';
@@ -19,12 +20,9 @@ class PendingController extends GetxController {
   }
 
   getPendingPost(bool isFast) async {
-
-    if(isFast){
-        isLoading(true);
-
+    if (isFast) {
+      isLoading(true);
     }
-   
 
     try {
       var result = await ApiServicesByLimon.fetchPending();
@@ -35,32 +33,30 @@ class PendingController extends GetxController {
       } else {
         pendingPostList.value = result;
         demoPandingPostList.value = result;
+       await getPenddingBookNow();
       }
     } on Exception catch (e) {
       if (kDebugMode) {
         print('Fetch Error: ${e.toString()}');
       }
     } finally {
-     if(isFast){
+      if (isFast) {
         isLoading(false);
-
-    }
+      }
     }
   }
-  deletePendingPost(int id)async{
+
+  deletePendingPost(int id) async {
     try {
       isLoading(true);
       var result = await ApiServices.deletePendingPost(id);
       if (result) {
         getPendingPost(false);
         Get.snackbar("Success", "Delete Complete");
-
-        
       } else {
-         if (kDebugMode) {
-        print('Opps delete pandding post error');
-      }
-      
+        if (kDebugMode) {
+          print('Opps delete pandding post error');
+        }
       }
     } on Exception catch (e) {
       if (kDebugMode) {
@@ -69,8 +65,6 @@ class PendingController extends GetxController {
     } finally {
       isLoading(false);
     }
-
-
   }
 
   searchPanddingPost({
@@ -107,6 +101,23 @@ class PendingController extends GetxController {
       pendingPostList.value = dataList;
     } else {
       pendingPostList.value = demoPandingPostList;
+    }
+  }
+
+  late RxList<PendingBookNowModel> buyerPendingBookNowList =
+      List<PendingBookNowModel>.empty(growable: true).obs;
+
+  getPenddingBookNow() async {
+    try {
+      var result = await ApiServices.buyerPendingBookNow();
+      if (result.runtimeType == int) {
+        debugPrint("Fetch buyer book now pending error ");
+      } else {
+        buyerPendingBookNowList.value = result;
+        debugPrint("Fetch buyer pending book now  successful ");
+      }
+    } on Exception catch (e) {
+      debugPrint("Fetch buyer book now pending error resion:$e ");
     }
   }
 }

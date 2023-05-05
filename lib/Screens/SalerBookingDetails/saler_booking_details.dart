@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Screens/TrackingScreen/Model/pending_book_now_model.dart';
+import 'package:jiffy/jiffy.dart';
 
 import '../../utils/colors.dart';
 import '../LeadsDetailsScreen/leads_details_screen.dart';
 
-class SalerBookingDetailsScreen extends StatelessWidget {
-   SalerBookingDetailsScreen({super.key,required this.isPending});
+class SellerBookingDetailsScreen extends StatelessWidget {
+   SellerBookingDetailsScreen({super.key,required this.isPending, this.data});
 
-  var isPending;
+  bool isPending;
+  PendingBookNowModel? data;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +39,7 @@ class SalerBookingDetailsScreen extends StatelessWidget {
               //         "$baseUrl${leadData.user.userProfilePic!.picture}"),
               //   ),
           title: Text(
-            "johan smith",
+           data!.user.corporationName,
             style: GoogleFonts.roboto(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w500,
@@ -67,7 +71,7 @@ class SalerBookingDetailsScreen extends StatelessWidget {
                                             children: [
                                               Expanded(
                                                 child: Text(
-                                                  "House Clening Service",
+                                                  data!.category.name,
                                                   style: GoogleFonts.roboto(
                                                       fontSize: 18.sp,
                                                       fontWeight: FontWeight.w500,
@@ -95,9 +99,9 @@ class SalerBookingDetailsScreen extends StatelessWidget {
                                                       width: 8.w,
                                                     ),
                                                     Text(
-                                                      "2 min ago",
-                                                      // Jiffy.parse(leadData.created)
-                                                      //     .fromNow(),
+                                                      
+                                                      Jiffy.parse(data!.created)
+                                                          .fromNow(),
                                                       style: GoogleFonts.roboto(
                                                           fontSize: 12.sp,
                                                           fontWeight: FontWeight.w400,
@@ -122,7 +126,7 @@ class SalerBookingDetailsScreen extends StatelessWidget {
                                                 width: 8.w,
                                               ),
                                               Text(
-                                                "Dhaka Bengladesh",
+                                                data!.location,
                                                 style: GoogleFonts.roboto(
                                                     fontSize: 14.sp,
                                                     color: const Color(0xFF424242)),
@@ -137,14 +141,14 @@ class SalerBookingDetailsScreen extends StatelessWidget {
                                       children: [
                                         Icon(
                                           Icons.phone,
-                                          color: Color(0xFF187949),
+                                          color:const Color(0xFF187949),
                                           size: 20.sp,
                                         ),
                                         SizedBox(
                                           width: 8.w,
                                         ),
                                         Text(
-                                          '+122******6***',
+                                         data!.user.phoneNumber,
                                           style: GoogleFonts.roboto(
                                               fontSize: 14.sp,
                                               fontWeight: FontWeight.w400,
@@ -197,7 +201,7 @@ class SalerBookingDetailsScreen extends StatelessWidget {
                                         ),
                                         
                                            Text(
-                                            'your******@email.com',
+                                            data!.user.email,
                                             style: GoogleFonts.roboto(
                                                 fontSize: 14.sp,
                                                 fontWeight: FontWeight.w400,
@@ -283,15 +287,15 @@ class SalerBookingDetailsScreen extends StatelessWidget {
                                       shrinkWrap: true,
                                       physics: const NeverScrollableScrollPhysics(),
                                       itemBuilder: (context, index) {
-                                        // final qansData = leadData.postObject[index];
+                                         final qansData = data!.realtimePostObject[index];
                                         return Column(
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "What type of property needs cleaning?",
-                                            //  qansData.question.qs,
+                                              qansData.question.qs,
+                                           
                                               style: GoogleFonts.roboto(
                                                   fontSize: 14.sp,
                                                   fontWeight: FontWeight.w400,
@@ -300,8 +304,8 @@ class SalerBookingDetailsScreen extends StatelessWidget {
                                             SizedBox(
                                               height: 10.h,
                                             ),
-                                            Text("House",
-                                            //  qansData.pAnswer.options,
+                                            Text(
+                                             qansData.pAnswer.options,
                                               style: GoogleFonts.roboto(
                                                   fontSize: 14.sp,
                                                   fontWeight: FontWeight.w400,
@@ -310,7 +314,7 @@ class SalerBookingDetailsScreen extends StatelessWidget {
                                           ],
                                         );
                                       },
-                                      itemCount: 10,
+                                      itemCount:data!.realtimePostObject.length,
                                       separatorBuilder:
                                           (BuildContext context, int index) =>
                                               SizedBox(
@@ -328,7 +332,7 @@ class SalerBookingDetailsScreen extends StatelessWidget {
 
                                SizedBox(
                         height: 200.h,
-                        child: GoogleMapsShow(lat:"0.0",leng:"0.0",),
+                        child: GoogleMapsShow(lat:data!.latitude,leng:data!.longitude,),
                       ),
                       SizedBox(
                         height: 20.h,
