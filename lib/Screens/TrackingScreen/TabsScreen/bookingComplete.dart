@@ -91,7 +91,7 @@ class BookingCompleteScreen extends StatelessWidget {
                   SizedBox(width: 90.w,),
                   InkWell(
                     onTap: () {
-                      Get.to(SalerBookingDetailsScreen(isPending: false,));
+                      Get.to(SellerBookingDetailsScreen(isPending: false,));
                     },
                     child: Container(
                       height: 34.h,
