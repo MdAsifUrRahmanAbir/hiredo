@@ -855,4 +855,28 @@ class ApiServices {
       return 0;
     }
   }
+
+   static Future<dynamic> buyerPendingBookNow() async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client.get(Uri.parse(buyerPendingBookNowApi),
+          headers: headers);
+
+      if (response.statusCode == 200) {
+        return pendingBookNowModelFromJson(response.body);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        return print(" Book now buyer pending  error. Reason ${e.toString()}");
+      }
+      return 0;
+    }
+  }
 }
