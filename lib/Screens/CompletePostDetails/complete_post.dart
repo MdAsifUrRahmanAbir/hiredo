@@ -10,6 +10,7 @@ import 'package:homelyknock/Screens/TrackingScreen/Model/complete_post_model.dar
 import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/custom_widgets.dart';
 
+import '../../GoogleMapService/google_map_show.dart';
 import '../../Services/api_component.dart';
 import 'controller_complete_post.dart';
 
@@ -303,21 +304,7 @@ class CompletePostDetails extends StatelessWidget {
               ),
               SizedBox(
                 height: 200.h,
-                child: GoogleMap(
-                  rotateGesturesEnabled: false,
-                  scrollGesturesEnabled: false,
-                  zoomControlsEnabled: false,
-                  zoomGesturesEnabled: false,
-                  liteModeEnabled: false,
-                  tiltGesturesEnabled: false,
-                  myLocationButtonEnabled: false,
-                  myLocationEnabled: false,
-                  mapType: MapType.normal,
-                  initialCameraPosition: CameraPosition(
-                      target: LatLng(
-                          double.parse("0.255555"), double.parse("0.8888888"))),
-                  onMapCreated: (GoogleMapController controller) {},
-                ),
+                child:GoogleMapsShow(lat:data.post.latitude,leng:data.post.longitude,)
               ),
               SizedBox(
                 height: 20.h,
