@@ -7,8 +7,6 @@ import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-
 import 'Controller/tracking_controller.dart';
 import 'TabsScreen/bookingPending.dart';
 import 'TabsScreen/trackingpost.dart';
@@ -20,8 +18,8 @@ class TrackingScreen extends StatelessWidget {
   final _trackingController = Get.put(TrackingController());
 
   @override
-  Widget build(BuildContext context){
-   _trackingController.getUserMode();
+  Widget build(BuildContext context) {
+    _trackingController.getUserMode();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -56,30 +54,33 @@ class TrackingScreen extends StatelessWidget {
         // ],
         automaticallyImplyLeading: false,
       ),
-      body: Obx(()=>_trackingController.isLoading.value?const Center(child: CustomLoader(),):
-         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 26.w),
-          child: Column(
-            children: [
-      
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Obx(
+        () => _trackingController.isLoading.value
+            ? const Center(
+                child: CustomLoader(),
+              )
+            : Padding(
+                padding: EdgeInsets.symmetric(horizontal: 26.w),
+                child: Column(
                   children: [
-                       Obx(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Obx(
                           () => InkWell(
-                            onTap: (){
-                              _trackingController.currentIndex.value=0;
+                            onTap: () {
+                              _trackingController.currentIndex.value = 0;
                             },
                             child: AnimatedContainer(
-                              duration: const Duration(milliseconds:500),
-                              
+                              duration: const Duration(milliseconds: 500),
                               height: 40.h,
                               width: 180.w,
                               decoration: BoxDecoration(
-                                  color: _trackingController.currentIndex.value ==
-                                          0
-                                      ? const Color(0xFF187949)
-                                      : null,
+                                  color:
+                                      _trackingController.currentIndex.value ==
+                                              0
+                                          ? const Color(0xFF187949)
+                                          : null,
                                   border: Border.all(
                                       color: _trackingController
                                                   .currentIndex.value ==
@@ -103,22 +104,21 @@ class TrackingScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                         
-                          Obx(
+                        Obx(
                           () => InkWell(
-                            onTap: (){
-                              _trackingController.currentIndex.value=1;
+                            onTap: () {
+                              _trackingController.currentIndex.value = 1;
                             },
                             child: AnimatedContainer(
                               duration: const Duration(milliseconds: 500),
-                             
                               height: 40.h,
                               width: 180.w,
                               decoration: BoxDecoration(
-                                  color: _trackingController.currentIndex.value ==
-                                          1
-                                      ? const Color(0xFF187949)
-                                      : null,
+                                  color:
+                                      _trackingController.currentIndex.value ==
+                                              1
+                                          ? const Color(0xFF187949)
+                                          : null,
                                   border: Border.all(
                                       color: _trackingController
                                                   .currentIndex.value ==
@@ -142,23 +142,23 @@ class TrackingScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                    
-                    
-      
+                      ],
+                    ),
+                    SizedBox(
+                      height: 25.h,
+                    ),
+                    Obx(() => _trackingController.userRole.value
+                        ? Expanded(
+                            child: _trackingController.currentIndex.value == 0
+                                ? TrackingPostOrder()
+                                : TrackingPostOrderTwo())
+                        : Expanded(
+                            child: _trackingController.currentIndex.value == 0
+                                ? BookingPandeingScreen()
+                                : BookingCompleteScreen())),
                   ],
                 ),
-      
-                  SizedBox(height: 25.h,),
-            Obx(()=>_trackingController.userRole.value? Expanded(child: _trackingController.currentIndex.value==0?TrackingPostOrder(): TrackingPostOrderTwo() ):Expanded(child: _trackingController.currentIndex.value==0?BookingPandeingScreen(): BookingCompleteScreen()))
-      
-          , 
-          
-            
-              
-            ],
-      
-          ),
-        ),
+              ),
       ),
     );
   }
