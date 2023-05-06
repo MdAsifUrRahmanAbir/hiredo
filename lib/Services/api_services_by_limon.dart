@@ -15,6 +15,7 @@ import '../Screens/DocumentScreen/Model/real_time_model.dart';
 import '../Screens/HelpScreen/model/help_model.dart';
 
 import '../Screens/MyResponse/Model/my_response_search_model.dart';
+import '../Screens/Service/Model/service_model.dart';
 import '../Screens/SettingsScreen/MyCredits/Model/user_credit_model.dart';
 import '../local/my_local.dart';
 import 'package:http/http.dart' as http;
@@ -546,6 +547,31 @@ class ApiServicesByLimon {
       }
     } on Exception catch (e) {
       debugPrint("Image Upload Faild. Reason ${e.toString()}");
+      return 0;
+    }
+  }
+
+  // add location service
+
+  static Future<dynamic> addServicePost(
+      {required Map<String, dynamic> body}) async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      };
+      var response = await client.post(Uri.parse(addLocationServicePost),
+          body: jsonEncode(body), headers: headers);
+      if (response.statusCode == 201) {
+        debugPrint(response.body);
+        return true;
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+       debugPrint("Add Location Faild. Reason ${e.toString()}");
       return 0;
     }
   }

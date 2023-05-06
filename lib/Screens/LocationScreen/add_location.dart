@@ -5,6 +5,8 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Screens/ProfileScreen/profile.dart';
+import 'package:homelyknock/Screens/Service/Model/service_model.dart';
 
 import '../../GoogleMapService/Model/prediction_model.dart';
 import '../JobPost/Controller/job_post_controller.dart';
@@ -14,7 +16,6 @@ import 'location_controller.dart';
 class AddLoaction extends StatelessWidget {
   AddLoaction({super.key});
 
-  final _jobPostController = Get.put(JobPostController());
   final _locationController = Get.put(LocationController());
   final _popupCustomValidationKey = GlobalKey<DropdownSearchState<int>>();
 
@@ -49,7 +50,7 @@ class AddLoaction extends StatelessWidget {
           children: [
             TypeAheadField(
               textFieldConfiguration: TextFieldConfiguration(
-                  controller: _jobPostController.searchTextController,
+                  controller: _locationController.searchTextController,
                   autofocus: false,
                   style: TextStyle(
                     fontSize: 16.sp,
@@ -78,22 +79,18 @@ class AddLoaction extends StatelessWidget {
                         ),
                       ))),
               onSuggestionSelected: (Prediction suggestion) async {
-                _jobPostController.searchTextController.text =
+                _locationController.searchTextController.text =
                     suggestion.description;
                 List<Location> locations =
                     await locationFromAddress(suggestion.description);
-                _jobPostController.lat.value = locations.last.latitude;
-                _jobPostController.leng.value = locations.last.longitude;
 
-                _jobPostController.locationData = LocationDataModel(
+                _locationController.locationData = LocationDataModel(
                     location: suggestion.description,
-                    latitude: _jobPostController.lat.value.toString(),
-                    longitude: _jobPostController.leng.value.toString());
-                debugPrint(_jobPostController.lat.value.toString());
-                debugPrint(_jobPostController.leng.value.toString());
+                    latitude: locations.last.latitude.toString(),
+                    longitude: locations.last.longitude.toString());
               },
               suggestionsCallback: (pattern) async {
-                return await _jobPostController.searchLocation(
+                return await _locationController.searchLocation(
                     context, pattern);
               },
               itemBuilder: (context, Prediction suggestion) {
@@ -127,48 +124,64 @@ class AddLoaction extends StatelessWidget {
             SizedBox(
               height: 10.h,
             ),
-            DropdownSearch<int>.multiSelection(
-                key: _popupCustomValidationKey,
-                items: const [1, 2, 3, 4, 5, 6, 7],
-                popupProps: PopupPropsMultiSelection.dialog(
-                    validationWidgetBuilder: (ctx, selectedItems) {
-                  return Container(
-                    color: Colors.blue[200],
-                    height: 56.h,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: MaterialButton(
-                        child: Text(
-                          'OK',
-                          style: GoogleFonts.roboto(
-                              color: Colors.black,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        onPressed: () {
-                          _popupCustomValidationKey.currentState
-                              ?.popupOnValidate();
-                        },
-                      ),
-                    ),
-                  );
-                })),
+            DropdownSearch<ServiceModel>.multiSelection(
+              key: _popupCustomValidationKey,
+              dropdownDecoratorProps: const DropDownDecoratorProps(),
+              items: profileController.serviceList,
+              onChanged: (value) {
+                value.forEach((element) {
+                  _locationController.selectServiceList.clear();
+                  _locationController.selectServiceList.add(element.id);
+                  print(_locationController.selectServiceList);
+                });
+              },
+              itemAsString: (item) => item.serviceName.name,
+              popupProps:
+                  const PopupPropsMultiSelection.menu(showSearchBox: true),
+            ),
             SizedBox(
               height: 70.h,
             ),
-            Container(
-              height: 50.h,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  color: const Color(0xFF187949),
-                  borderRadius: BorderRadius.circular(8.w)),
-              child: Center(
-                child: Text(
-                  'Submit',
-                  style: GoogleFonts.roboto(
-                      fontSize: 16.sp,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600),
+            InkWell(
+              onTap: () {
+                _locationController.addLocationService();
+              },
+              child: Container(
+                height: 50.h,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    color: const Color(0xFF187949),
+                    borderRadius: BorderRadius.circular(8.w)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Submit',
+                      style: GoogleFonts.roboto(
+                          fontSize: 16.sp,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    Obx(
+                      () => SizedBox(
+                        width: _locationController.isLoading.value ? 15.w : 0,
+                      ),
+                    ),
+                    Obx(() {
+                      if (_locationController.isLoading.value) {
+                        return SizedBox(
+                          height: 15.sp,
+                          width: 15.sp,
+                          child: const CircularProgressIndicator(
+                            strokeWidth: 3,
+                            color: Colors.white,
+                          ),
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    })
+                  ],
                 ),
               ),
             )
