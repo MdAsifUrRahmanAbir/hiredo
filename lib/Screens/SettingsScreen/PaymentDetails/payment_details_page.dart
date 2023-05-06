@@ -42,171 +42,10 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
   ];
 
   final _paymentController = Get.put(PaymentController());
+   final _formKey = GlobalKey<FormState>();
 
   int buttonSelected = 0;
   var paymentController = StripeService();
-
-   showModalBS() {
-    return showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(topLeft:Radius.circular(8.r),topRight: Radius.circular(8.r))
-      ),
-      builder: (context) => Wrap(
-        children: [
-          Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 25.w,vertical: 20.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                    'Add New Card',
-                    style: myStyle(20.sp, FontWeight.w500, textClr),
-                  ),
-                  SizedBox(
-                    height: 21.h,
-                  ),
-                  Text(
-                    'Name on card',
-                    style: myStyle(14.sp, FontWeight.w400, offWhite),
-                  ),
-                  SizedBox(
-                    height: 13.h,
-                  ),
-                  TextFormField(
-                    controller: _paymentController.nameTextController,
-                    decoration: const InputDecoration(
-                        hintText: "Roronoa Zoro",
-                        contentPadding: EdgeInsets.zero,
-                        isDense: true),
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Text(
-                    'Card number',
-                    style: myStyle(14.sp, FontWeight.w400, offWhite),
-                  ),
-                  SizedBox(
-                    height: 13.h,
-                  ),
-                  TextField(
-                    controller: _paymentController.cardTextController,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(16),
-                      CardNumberInputFormatter(),
-                    ],
-                    decoration: const InputDecoration(
-                        hintText: "1234  4567  7890  1234",
-                        contentPadding: EdgeInsets.zero,
-                        isDense: true),
-                  ),
-                  SizedBox(
-                    height: 21.h,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Expiry date',
-                              style: myStyle(14.sp, FontWeight.w400, offWhite),
-                            ),
-                            SizedBox(
-                              height: 13.h,
-                            ),
-                            TextField(
-                              controller: _paymentController.expiryDataTextController,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly,
-                                LengthLimitingTextInputFormatter(4),
-                                CardMonthInputFormatter(),
-                              ],
-                              decoration: const InputDecoration(
-                                  hintText: "02/24",
-                                  contentPadding: EdgeInsets.zero,
-                                  isDense: true),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5.w,
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'CVV',
-                              style: myStyle(14.sp, FontWeight.w400, offWhite),
-                            ),
-                            SizedBox(
-                              height: 13.h,
-                            ),
-                            TextFormField(
-                              controller: _paymentController.cvvTextController,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly,
-                                LengthLimitingTextInputFormatter(4),
-                            
-                              ],
-                              obscureText: true,
-                              decoration: const InputDecoration(
-                                  hintText: "•••",
-                                  contentPadding: EdgeInsets.zero,
-                                  isDense: true),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30.h,
-                  ),
-                  Container(
-                    height: 50.h,
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.all(10.w),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4.r), color: backIconClr),
-                    child: Text(
-                      'Add Card',
-                      style: myStyle(16.sp, FontWeight.w400, scaffoldClr),
-                    ),
-                  ),
-                    SizedBox(height:56.h,),
-                 
-                   
-                   Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-            
-            
-            
-            ),
-              ],
-            ),
-          ),
-        
-
-
-          
-         
-        
-        
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -371,7 +210,7 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        showModalBS();
+                        _showBottomSheet();
                       },
                       child: Container(
                         height: 57.h,
@@ -430,6 +269,229 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
       ),
     );
   }
+
+
+
+
+
+
+   _showBottomSheet() {
+    return showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(topLeft:Radius.circular(8.r),topRight: Radius.circular(8.r))
+      ),
+      builder: (context) => Wrap(
+        children: [
+          Padding(
+            padding:  EdgeInsets.symmetric(horizontal: 25.w,vertical: 20.h),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                      'Add New Card',
+                      style: myStyle(20.sp, FontWeight.w500, textClr),
+                    ),
+                    SizedBox(
+                      height: 21.h,
+                    ),
+                    Text(
+                      'Name on card',
+                      style: myStyle(14.sp, FontWeight.w400, offWhite),
+                    ),
+                    SizedBox(
+                      height: 13.h,
+                    ),
+                    TextFormField(
+                      controller: _paymentController.nameTextController,
+                      decoration: const InputDecoration(
+                          hintText: "Roronoa Zoro",
+                          contentPadding: EdgeInsets.zero,
+                          isDense: true),
+                          validator:(value) {
+                            if(value == null || value.isEmpty){
+                              return "Enter your name on card name";
+                            }
+                            return null;
+                          },
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Text(
+                      'Card number',
+                      style: myStyle(14.sp, FontWeight.w400, offWhite),
+                    ),
+                    SizedBox(
+                      height: 13.h,
+                    ),
+                    TextFormField(
+                      controller: _paymentController.cardTextController,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        LengthLimitingTextInputFormatter(16),
+                        CardNumberInputFormatter(),
+                      ],
+                      onChanged: (value) {
+                        print(value);
+                        print(_paymentController.cardTextController.text);
+                      },
+                       validator:(value) {
+                            if(value == null || value.isEmpty){
+                              return "Enter your card number";
+                            }else if(value.length<16){
+                              return "Enter your valid card number";
+                            }
+                            return null;
+                          },
+                      decoration: const InputDecoration(
+                          hintText: "1234  4567  7890  1234",
+                          contentPadding: EdgeInsets.zero,
+                          isDense: true),
+                    ),
+                    SizedBox(
+                      height: 21.h,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Expiry date',
+                                style: myStyle(14.sp, FontWeight.w400, offWhite),
+                              ),
+                              SizedBox(
+                                height: 13.h,
+                              ),
+                              TextFormField(
+                                controller: _paymentController.expiryDataTextController,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  LengthLimitingTextInputFormatter(4),
+                                  CardMonthInputFormatter(),
+                                ],
+                                  validator:(value) {
+                            if(value == null || value.isEmpty){
+                              return "Enter your expiry date";
+                            }else if(value.length<4){
+                              return "Enter your valid expiry date";
+                            }
+                            return null;
+                          },
+                           onChanged: (value) {
+                        print(value);
+                        print(_paymentController.expiryDataTextController.text);
+                      },
+                                decoration: const InputDecoration(
+                                    hintText: "02/24",
+                                    contentPadding: EdgeInsets.zero,
+                                    isDense: true),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: 5.w,
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'CVV',
+                                style: myStyle(14.sp, FontWeight.w400, offWhite),
+                              ),
+                              SizedBox(
+                                height: 13.h,
+                              ),
+                              TextFormField(
+                                controller: _paymentController.cvvTextController,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  LengthLimitingTextInputFormatter(4),
+                              
+                                ],
+                                obscureText: true,
+                                  validator:(value) {
+                            if(value == null || value.isEmpty){
+                              return "Enter your  cvv";
+                            }else if(value.length<4){
+                              return "Enter your valid cvv ";
+                            }
+                            return null;
+                          },
+                           onChanged: (value) {
+                        print(value);
+                        print(_paymentController.cvvTextController.text);
+                      },
+                                decoration: const InputDecoration(
+                                    hintText: "•••",
+                                    contentPadding: EdgeInsets.zero,
+                                    isDense: true),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 30.h,
+                    ),
+                    InkWell(
+                      onTap: (){
+                      if(_formKey.currentState!.validate()){
+                        _paymentController.createTokenStripe();
+
+                      }
+
+                      },
+                      child: Container(
+                        height: 50.h,
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(10.w),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4.r), color: backIconClr),
+                        child: Text(
+                          'Add Card',
+                          style: myStyle(16.sp, FontWeight.w400, scaffoldClr),
+                        ),
+                      ),
+                    ),
+                      SizedBox(height:56.h,),
+                   
+                     
+                     Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+              
+              
+              
+              ),
+                ],
+              ),
+            ),
+          ),
+        
+
+
+          
+         
+        
+        
+        ],
+      ),
+    );
+  }
+
+
 
   _payButtonWidget() {
     return Expanded(
