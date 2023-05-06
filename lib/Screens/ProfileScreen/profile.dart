@@ -27,10 +27,10 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _dataController.getData();
-    profileController.getServices();
-    profileController.getLeadCount();
-    profileController.fetchProfileData();
-    profileController.getMyResponseCount();
+    // profileController.getServices();
+    // profileController.getLeadCount();
+    // profileController.fetchProfileData();
+    // profileController.getMyResponseCount();
     return Scaffold(
       backgroundColor: scaffoldClr,
       appBar: AppBar(
