@@ -2,14 +2,18 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/Services/api_services.dart';
+import 'package:homelyknock/Services/stripe_component.dart';
 import 'package:http/http.dart' as http;
 
 import '../Route/routes.dart';
 import 'api_component.dart';
 
 class StripeService {
+  static var client = http.Client();
+
   Map<String, dynamic>? paymentIntentData;
 
   Future<void> makePayment(
@@ -122,5 +126,58 @@ class StripeService {
 
   updateUserPlan() async {
     Get.offNamedUntil(Routes.mainPage, (route) => false);
+  }
+
+// card create token
+
+  static createToken({required Map<String, String> body}) async {
+    var headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer $stripeSecretKey',
+    };
+
+    try {
+      var response = await client.post(Uri.parse(createTokenApi),
+          body: body, headers: headers);
+
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        debugPrint(response.reasonPhrase);
+        var data = jsonDecode(response.body);
+        debugPrint(data.toString());
+        Fluttertoast.showToast(
+            msg: data["error"]["message"], toastLength: Toast.LENGTH_LONG);
+        return 1;
+      }
+    } on Exception catch (e) {
+      debugPrint("Create token error resion: $e");
+      return 1;
+    }
+  }
+
+  static createCard({required String token, required String customerId}) async {
+    var headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer $stripeSecretKey',
+    };
+    Map<String, dynamic> body = {'source': token};
+    try {
+      var response = await client.post(
+          Uri.parse("$createCardApi$customerId/sources"),
+          body: body,
+          headers: headers);
+
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        debugPrint(response.reasonPhrase);
+        debugPrint(response.body);
+        return 1;
+      }
+    } on Exception catch (e) {
+      debugPrint("Create card error resion: $e");
+      return 1;
+    }
   }
 }
