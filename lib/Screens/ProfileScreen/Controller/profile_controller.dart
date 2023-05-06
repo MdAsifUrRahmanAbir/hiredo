@@ -26,6 +26,10 @@ class ProfileController extends GetxController {
     fetchProfileData();
     getLeadCount();
     getMyResponseCount();
+    getServices();
+    // profileController.getLeadCount();
+    // profileController.fetchProfileData();
+    // profileController.getMyResponseCount();
     super.onInit();
   }
 
