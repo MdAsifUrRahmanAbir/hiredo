@@ -3,9 +3,11 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/Screens/JobPost/Model/location_model.dart';
 
 import 'location_controller.dart';
@@ -120,7 +122,7 @@ class LocationPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            height: 90.h,
+                            height: 102.h,
                             width: double.infinity,
                             padding: EdgeInsets.symmetric(
                                 horizontal: 16.w, vertical: 10.h),
@@ -140,6 +142,8 @@ class LocationPage extends StatelessWidget {
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
                                         children: [
@@ -166,6 +170,20 @@ class LocationPage extends StatelessWidget {
                                             ),
                                           ),
                                         ],
+                                      ),
+                                      SizedBox(
+                                        height: 8.h,
+                                      ),
+                                      Text(
+                                        '1 Service',
+                                        style: GoogleFonts.roboto(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w400,
+                                            color: Color(0xFF848484)
+                                                .withOpacity(0.5)),
+                                      ),
+                                      SizedBox(
+                                        height: 8.h,
                                       ),
                                       Row(
                                         children: [
@@ -233,7 +251,7 @@ class LocationPage extends StatelessWidget {
                           if (index == 9)
                             TextButton(
                                 onPressed: () {
-                                  _addLocation(context);
+                                  Get.toNamed(Routes.addLocationScreen);
                                 },
                                 child: Text(
                                   "+ Add a location",
@@ -258,109 +276,5 @@ class LocationPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  _addLocation(BuildContext context) {
-    return showModalBottomSheet(
-        context: context,
-        isDismissible: true,
-        backgroundColor: Colors.white,
-        shape: OutlineInputBorder(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(15.r),
-                topRight: Radius.circular(15.r))),
-        builder: (context) {
-          return Container(
-            padding: EdgeInsets.symmetric(horizontal: 17.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 20.h,
-                ),
-                Text(
-                  "Add Location",
-                  style: TextStyle(
-                      fontSize: 18.sp,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                DropdownSearch<LocationDataModel>(
-                  items: _locationController.country,
-                  dropdownButtonProps: const DropdownButtonProps(
-                    icon: SizedBox(),
-                  ),
-                  popupProps: const PopupProps.menu(showSearchBox: true),
-                  dropdownDecoratorProps: DropDownDecoratorProps(
-                    dropdownSearchDecoration: InputDecoration(
-                        labelText: "What is your Location?",
-                        hintText: "Search Your Location",
-                        isDense: true,
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 16.w,
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(3.r),
-                            borderSide: BorderSide(color: Colors.red)),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(3.r))),
-                  ),
-                  itemAsString: (LocationDataModel u) => u.location,
-                  onChanged: (value) {
-                    _locationController.locationData = value!;
-                  },
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                TextFormField(
-                  controller: _locationController.distanceController,
-                  decoration: const InputDecoration(
-                    hintText: 'Add Location Distance',
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.black, width: 0.5)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.black, width: 0.5)),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black, width: 0)),
-                  ),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    height: 50.h,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        color: const Color(0xFF187949),
-                        borderRadius: BorderRadius.circular(8.r)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Submit',
-                          style: GoogleFonts.roboto(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xFFFFFFFF)),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-              ],
-            ),
-          );
-        });
   }
 }

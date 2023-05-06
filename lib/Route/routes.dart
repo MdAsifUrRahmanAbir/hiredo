@@ -1,5 +1,3 @@
-
-
 import 'dart:core';
 
 import 'package:get/get.dart';
@@ -42,6 +40,7 @@ import '../Screens/CompletePostDetails/complete_post.dart';
 import '../Screens/EmailVerifiyScreen/enterverificationpage.dart';
 import '../Screens/HelpScreen/help_screen.dart';
 import '../Screens/IntroScreen/introtwopage.dart';
+import '../Screens/LocationScreen/add_location.dart';
 import '../Screens/MyResponseDetails/my_response_details.dart';
 import '../Screens/QuestionScreen/question_screen.dart';
 import '../Screens/ResistrationScreen/registrationpage.dart';
@@ -93,8 +92,9 @@ class Routes {
   static String myPaymentDetails = '/my_payment_details_screen';
   static String emailNotification = '/email_notification_screen';
   static String browserNotification = '/browser_notification_screen';
-  static String completePostDetails="/complete_post_delete";
-  static String myresponseDetailsScreen="/myresponse_details_screen";
+  static String completePostDetails = "/complete_post_delete";
+  static String myresponseDetailsScreen = "/myresponse_details_screen";
+  static String addLocationScreen = "/add_location_screen";
 }
 
 /// Add this list variable into your GetMaterialApp as the value of getPages parameter.
@@ -162,20 +162,21 @@ final getPages = [
   GetPage(
       name: Routes.changePasswordScreen, page: () => ChangePasswordScreen()),
   GetPage(name: Routes.badgeDetails, page: () => BadgesSecondPage()),
-  GetPage(name: Routes.helpPage, page: () =>  HelpScreen()),
+  GetPage(name: Routes.helpPage, page: () => HelpScreen()),
   GetPage(name: Routes.myProfile, page: () => Profile()),
   GetPage(name: Routes.reviewPage, page: () => ReviewsPage()),
   GetPage(name: Routes.elitProPage, page: () => EliteProPage()),
   GetPage(name: Routes.badgePage, page: () => BadgePage()),
   GetPage(name: Routes.accountDetails, page: () => AccountDetailsPage()),
-  GetPage(name: Routes.oneClickResponsePage, page: ()=> OneClickResponcePage()),
-  GetPage(name: Routes.emailTemplate, page: ()=> EmailTemplatePage()),
-  GetPage(name: Routes.smsTemplate, page: ()=> SMSTemplatePage()),
-  GetPage(name: Routes.myCredits, page: ()=> MyCreditsPage()),
-  GetPage(name: Routes.invoiceAndBilling, page:()=> BillingDetails()),
-  GetPage(name: Routes.myPaymentDetails, page: ()=> PaymentDetailsPage() ),
-  GetPage(name: Routes.emailNotification, page: ()=> EmailNotification()),
-  GetPage(name: Routes.browserNotification, page: ()=> BrowserNotification()),
+  GetPage(
+      name: Routes.oneClickResponsePage, page: () => OneClickResponcePage()),
+  GetPage(name: Routes.emailTemplate, page: () => EmailTemplatePage()),
+  GetPage(name: Routes.smsTemplate, page: () => SMSTemplatePage()),
+  GetPage(name: Routes.myCredits, page: () => MyCreditsPage()),
+  GetPage(name: Routes.invoiceAndBilling, page: () => BillingDetails()),
+  GetPage(name: Routes.myPaymentDetails, page: () => PaymentDetailsPage()),
+  GetPage(name: Routes.emailNotification, page: () => EmailNotification()),
+  GetPage(name: Routes.browserNotification, page: () => BrowserNotification()),
 
   //  GetPage(name: Routes.postAJob, page: () => PostAJob()),
   //  GetPage(name: Routes.categoriesPage, page:()=>CategoriesPage()),
@@ -196,9 +197,10 @@ final getPages = [
   //   GetPage(name: Routes.badgeDetails, page:()=>BadgesSecondPage() ),
   //   GetPage(name: Routes.helpPage, page:()=> HelpScreen() ),
 
-  GetPage(name: Routes.completePostDetails, page:()=>CompletePostDetails()),
-  GetPage(name:Routes.myresponseDetailsScreen,page:()=>MyresponseDetailsScreen())
+  GetPage(name: Routes.completePostDetails, page: () => CompletePostDetails()),
+  GetPage(
+      name: Routes.myresponseDetailsScreen,
+      page: () => MyresponseDetailsScreen()),
 
-    
-
+  GetPage(name: Routes.addLocationScreen, page: () => AddLoaction())
 ];
