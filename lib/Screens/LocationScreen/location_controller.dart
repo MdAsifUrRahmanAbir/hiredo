@@ -100,4 +100,21 @@ class LocationController extends GetxController {
       isLoading(false);
     }
   }
+
+  Future<void> deleteByLocation(int id) async {
+    try {
+      var result = await ApiServicesByLimon.deleteLocation(id);
+
+      if (result.runtimeType == int) {
+        if (kDebugMode) {
+          print('Delete Faild: $result ');
+        }
+      } else {
+        getServiceLocation();
+        Get.snackbar('Delete Data', 'Data Delete Successful');
+      }
+    } on Exception catch (e) {
+      print('Not Delete Data ${e.toString()}');
+    }
+  }
 }
