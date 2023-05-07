@@ -20,6 +20,8 @@ class LocationController extends GetxController {
 
   var isLoading = false.obs;
 
+  var isClick = false.obs;
+
   RxList<AddLocationModel> locationList =
       List<AddLocationModel>.empty(growable: true).obs;
 
@@ -51,6 +53,8 @@ class LocationController extends GetxController {
     return _predictionList;
   }
 
+  // add service location
+
   addLocationService() async {
     isLoading(true);
     try {
@@ -68,11 +72,11 @@ class LocationController extends GetxController {
         debugPrint('Data Added Successfull');
         getServiceLocation();
         Get.snackbar('Success', 'Data Added Successfull',
-            colorText: Colors.white, backgroundColor: Color(0xFF0C134F));
+            colorText: Colors.white, backgroundColor: const Color(0xFF0C134F));
       } else {
         debugPrint('Data added error ');
         Get.snackbar('Error', 'Data Added Faild',
-            colorText: Colors.red, backgroundColor: Color(0xFF0C134F));
+            colorText: Colors.red, backgroundColor: const Color(0xFF0C134F));
       }
     } on Exception catch (e) {
       if (kDebugMode) {
@@ -82,6 +86,8 @@ class LocationController extends GetxController {
       isLoading(false);
     }
   }
+
+// fetch service location
 
   getServiceLocation() async {
     isLoading(true);
@@ -103,6 +109,7 @@ class LocationController extends GetxController {
     }
   }
 
+// delete service location
   Future<void> deleteByLocation(int id) async {
     try {
       var result = await ApiServicesByLimon.deleteLocation(id);
@@ -119,4 +126,35 @@ class LocationController extends GetxController {
       print('Not Delete Data ${e.toString()}');
     }
   }
+
+  // update service location
+
+  // updateServiceLocation(int id) async {
+  //   try {
+  //     final body = {
+  //       "city": locationData!.location,
+  //       "distance": distanceController.text,
+  //       "latitude": locationData!.latitude,
+  //       "longitude": locationData!.longitude,
+  //       "service": selectServiceList
+  //     };
+
+  //     var result = await ApiServicesByLimon.updateService(body, id);
+  //     if (result.runtimeType != int) {
+  //       debugPrint('Data Update Successfull');
+  //       getServiceLocation();
+  //       Get.snackbar('Success', 'Data Update Successfull',
+  //           colorText: Colors.white, backgroundColor: const Color(0xFF0C134F));
+  //     } else {
+  //       debugPrint('Do Not Data Update ');
+  //       Get.snackbar('Error', 'Data UpdateFaild',
+  //           colorText: Colors.red, backgroundColor: const Color(0xFF0C134F));
+  //     }
+  //   } on Exception catch (e) {
+  //     if (kDebugMode) {
+  //       debugPrint('Data Update Error: $e');
+  //     }
+  //     return 0;
+  //   }
+  // }
 }

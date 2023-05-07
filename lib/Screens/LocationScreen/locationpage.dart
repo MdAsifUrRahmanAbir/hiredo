@@ -259,8 +259,10 @@ class LocationPage extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      GestureDetector(
-                                        onTap: () {},
+                                      InkWell(
+                                        onTap: () {
+                                          // Get.toNamed(Routes.addLocationScreen);
+                                        },
                                         child: Icon(
                                           Icons.edit,
                                           color: Color(0xFF848484),
@@ -288,6 +290,7 @@ class LocationPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.purpleAccent,
           onPressed: () {
             Get.toNamed(Routes.addLocationScreen);
           },

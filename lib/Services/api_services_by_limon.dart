@@ -600,6 +600,8 @@ class ApiServicesByLimon {
     }
   }
 
+// delete service location
+
   static dynamic deleteLocation(int id) async {
     var accessToken = await MyPreference.getToken();
 
@@ -623,4 +625,30 @@ class ApiServicesByLimon {
       return 0;
     }
   }
+
+// update service location
+  // static Future<dynamic> updateService(
+  //     Map<String, dynamic> body, int id) async {
+  //   var accessToken = await MyPreference.getToken();
+
+  //   try {
+  //     var headers = {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Bearer $accessToken',
+  //     };
+
+  //     var response = await client.put(Uri.parse("$addLocationServicePost$id"),
+  //         body: jsonEncode(body), headers: headers);
+
+  //     if (response.statusCode == 200) {
+  //       debugPrint(response.body);
+  //       return true;
+  //     } else {
+  //       return response.statusCode;
+  //     }
+  //   } on Exception catch (e) {
+  //     debugPrint('Do not updated data $e');
+  //     return 0;
+  //   }
+  // }
 }

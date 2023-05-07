@@ -9,7 +9,7 @@ import 'package:homelyknock/Screens/ProfileScreen/profile.dart';
 import 'package:homelyknock/Screens/Service/Model/service_model.dart';
 
 import '../../GoogleMapService/Model/prediction_model.dart';
-import '../JobPost/Controller/job_post_controller.dart';
+
 import '../JobPost/Model/location_model.dart';
 import 'location_controller.dart';
 
@@ -156,7 +156,7 @@ class AddLoaction extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Submit',
+                      "Submit",
                       style: GoogleFonts.roboto(
                           fontSize: 16.sp,
                           color: Colors.white,
@@ -184,7 +184,7 @@ class AddLoaction extends StatelessWidget {
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
