@@ -9,15 +9,15 @@ LoginModel loginModelFromJson(String str) => LoginModel.fromJson(json.decode(str
 
 
 class LoginModel {
+    String token;
+    String message;
+    User user;
+
     LoginModel({
         required this.token,
         required this.message,
         required this.user,
     });
-
-    String token;
-    String message;
-    User user;
 
     factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
         token: json["token"],
@@ -25,27 +25,13 @@ class LoginModel {
         user: User.fromJson(json["user"]),
     );
 
-  
+ 
 }
 
 class User {
-    User({
-        required this.id,
-        required this.fullName,
-        
-        required this.email,
-        required this.dateOfBirth,
-        required this.phoneNumber,
-        required this.corporationName,
-        required this.corporationNumber,
-        required this.isProfessional,
-        required this.isUser,
-        required this.password,
-    });
-
     int id;
     String fullName;
-    UserProfilePic? userProfilePic;
+    dynamic userProfilePic;
     String email;
     String dateOfBirth;
     String phoneNumber;
@@ -54,13 +40,30 @@ class User {
     bool isProfessional;
     bool isUser;
     String password;
+    String stripeCustomerId;
+
+    User({
+        required this.id,
+        required this.fullName,
+         this.userProfilePic,
+        required this.email,
+        required this.dateOfBirth,
+        required this.phoneNumber,
+        required this.corporationName,
+        required this.corporationNumber,
+        required this.isProfessional,
+        required this.isUser,
+        required this.password,
+        required this.stripeCustomerId
+    });
 
     factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         fullName: json["full_name"],
-       
+        stripeCustomerId:json["stripe_customerId"]??"",
+        userProfilePic: json["user_profile_pic"]==null?null:UserProfilePic.fromJson(json["user_profile_pic"]),
         email: json["email"],
-        dateOfBirth: json["date_of_birth"],
+        dateOfBirth:json["date_of_birth"],
         phoneNumber: json["phone_number"],
         corporationName: json["corporation_name"],
         corporationNumber: json["corporation_number"],
@@ -69,19 +72,19 @@ class User {
         password: json["password"],
     );
 
- 
+   
 }
 
 class UserProfilePic {
+    int id;
+    int user;
+    String picture;
+
     UserProfilePic({
         required this.id,
         required this.user,
         required this.picture,
     });
-
-    int id;
-    int user;
-    String picture;
 
     factory UserProfilePic.fromJson(Map<String, dynamic> json) => UserProfilePic(
         id: json["id"],
@@ -89,4 +92,5 @@ class UserProfilePic {
         picture: json["picture"],
     );
 
+    
 }

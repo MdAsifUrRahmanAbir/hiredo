@@ -130,6 +130,36 @@ class StripeService {
 
 // card create token
 
+
+
+
+
+  static Future<dynamic> createStripeAccount({required Map<String, String> body}) async {
+    var headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer $stripeSecretKey',
+    };
+
+    try {
+      var response = await client.post(Uri.parse(createStripeUserApi),
+          body: body, headers: headers);
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        debugPrint(response.reasonPhrase);
+        debugPrint(response.statusCode.toString());
+        
+        return 1;
+      }
+    } on Exception catch (e) {
+      debugPrint("Create user error resion: $e");
+      return 1;
+    }
+  }
+
+
+
+
   static createToken({required Map<String, String> body}) async {
     var headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -202,6 +232,31 @@ class StripeService {
       }
     } on Exception catch (e) {
       debugPrint("Fetch card error resion: $e");
+      return 1;
+    }
+  }
+
+  
+  static deleteCard({required String customerId,required String cardId}) async {
+    var headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer $stripeSecretKey',
+    };
+   
+    try {
+      var response = await client.delete(
+          Uri.parse(deleteCardApi(customerId,cardId)),
+          headers: headers);
+
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        debugPrint(response.reasonPhrase);
+        debugPrint(response.body);
+        return 1;
+      }
+    } on Exception catch (e) {
+      debugPrint("Delete card error resion: $e");
       return 1;
     }
   }
