@@ -75,3 +75,6 @@ String bookNowApi = "${baseUrl}lead/RealTimeBookNowServiceCreate/";
 String sellerPendingBookNowApi = "${baseUrl}lead/SellerPendingRealTimePost/";
 String buyerPendingBookNowApi = "${baseUrl}lead/RealTimeBookNowServiceCreate/";
 String addLocationServicePost = "${baseUrl}service-location/";
+String sellerPendingAcceptAndRejectBookNowApi="${baseUrl}lead/book-now-accept-reject/";
+String sellerCompleteBookNowApi="${baseUrl}lead/seller-completed-post/";
+
