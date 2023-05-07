@@ -164,18 +164,26 @@ class LocationPage extends StatelessWidget {
                                                   width: 3.w,
                                                 ),
                                                 Expanded(
-                                                  child: Text(
-                                                    data.city,
-                                                    style: GoogleFonts.roboto(
-                                                        fontSize: 16.sp,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Colors.black),
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    maxLines: 1,
-                                                  ),
-                                                ),
+                                                    child: Text.rich(
+                                                        TextSpan(children: [
+                                                  TextSpan(
+                                                      text:
+                                                          "${data.distance} miles of ",
+                                                      style: GoogleFonts.roboto(
+                                                          fontSize: 16.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Color(
+                                                              0xFF424242))),
+                                                  TextSpan(
+                                                      text: data.city,
+                                                      style: GoogleFonts.roboto(
+                                                          fontSize: 16.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Color(
+                                                              0xFF424242)))
+                                                ]))),
                                               ],
                                             ),
                                             SizedBox(
@@ -219,12 +227,16 @@ class LocationPage extends StatelessWidget {
                                                   width: 15,
                                                 ),
                                                 InkWell(
-                                                  onTap: () {},
+                                                  onTap: () {
+                                                    _locationController
+                                                        .deleteByLocation(
+                                                            data.id);
+                                                  },
                                                   child: Container(
                                                     decoration: BoxDecoration(
                                                         borderRadius:
                                                             BorderRadius
-                                                                .circular(4),
+                                                                .circular(4.r),
                                                         border: Border.all(
                                                             color: Color(
                                                                 0xff187949))),
@@ -258,18 +270,17 @@ class LocationPage extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                if (index == 9)
-                                  TextButton(
-                                      onPressed: () {
-                                        Get.toNamed(Routes.addLocationScreen);
-                                      },
-                                      child: Text(
-                                        "+ Add a location",
-                                        style: GoogleFonts.roboto(
-                                            fontSize: 16.sp,
-                                            color: Color(0xFF187949),
-                                            fontWeight: FontWeight.w600),
-                                      ))
+                                TextButton(
+                                    onPressed: () {
+                                      Get.toNamed(Routes.addLocationScreen);
+                                    },
+                                    child: Text(
+                                      "+ Add a location",
+                                      style: GoogleFonts.roboto(
+                                          fontSize: 16.sp,
+                                          color: Color(0xFF187949),
+                                          fontWeight: FontWeight.w600),
+                                    ))
                               ],
                             );
                           },

@@ -600,4 +600,28 @@ class ApiServicesByLimon {
       return 0;
     }
   }
+
+  static dynamic deleteLocation(int id) async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+      };
+
+      var response = await client
+          .delete(Uri.parse("$addLocationServicePost$id/"), headers: headers);
+
+      if (response.statusCode == 204) {
+        return jsonEncode(response.body);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print('Delete Data Error : $e');
+      }
+      return 0;
+    }
+  }
 }
