@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:homelyknock/Screens/ProfileScreen/Controller/profile_controller.dart';
+
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/common_data.dart';
@@ -176,9 +176,9 @@ class MyCreditsPage extends StatelessWidget {
                                     8.sp, FontWeight.w400, themeColorGreen),
                               ),
                             ),
-                            Spacer(),
+                         const   Spacer(),
                             Text(
-                              "You have ${_creditController.creaditData!.totalCredit} credits",
+                              "You have ${_creditController.totalCredit.value} credits",
                               style: myStyle(14.sp, FontWeight.w400, textClr),
                             ),
                           ],
