@@ -270,17 +270,6 @@ class LocationPage extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                TextButton(
-                                    onPressed: () {
-                                      Get.toNamed(Routes.addLocationScreen);
-                                    },
-                                    child: Text(
-                                      "+ Add a location",
-                                      style: GoogleFonts.roboto(
-                                          fontSize: 16.sp,
-                                          color: Color(0xFF187949),
-                                          fontWeight: FontWeight.w600),
-                                    ))
                               ],
                             );
                           },
@@ -298,6 +287,11 @@ class LocationPage extends StatelessWidget {
                 ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Get.toNamed(Routes.addLocationScreen);
+          },
+          child: Icon(Icons.add)),
     );
   }
 }
