@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/GoogleMapService/Model/prediction_model.dart';
+import 'package:homelyknock/Screens/LocationScreen/Model/add_location_model.dart';
 
 import 'package:homelyknock/Services/api_services_by_limon.dart';
 
@@ -19,7 +20,16 @@ class LocationController extends GetxController {
 
   var isLoading = false.obs;
 
+  RxList<AddLocationModel> locationList =
+      List<AddLocationModel>.empty(growable: true).obs;
+
   LocationDataModel? locationData;
+
+  @override
+  void onInit() {
+    super.onInit();
+    getServiceLocation();
+  }
 
 // google maps service
   TextEditingController searchTextController = TextEditingController();
@@ -65,6 +75,26 @@ class LocationController extends GetxController {
     } on Exception catch (e) {
       if (kDebugMode) {
         debugPrint('Data Added Error : $e');
+      }
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  getServiceLocation() async {
+    isLoading(true);
+    try {
+      var result = await ApiServicesByLimon.fetchServiceLocation();
+      if (result.runtimeType == int) {
+        print("Error $result");
+      } else {
+        locationList.value = result;
+
+        print(locationList);
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        debugPrint('Data Fetch Error: $e');
       }
     } finally {
       isLoading(false);

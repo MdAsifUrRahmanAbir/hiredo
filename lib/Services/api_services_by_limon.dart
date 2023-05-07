@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 import 'package:homelyknock/Screens/HelpScreen/help_screen_controller.dart';
+import 'package:homelyknock/Screens/LocationScreen/Model/add_location_model.dart';
 
 import 'package:homelyknock/Screens/ReviewScreen/model/review_model.dart';
 
@@ -571,7 +572,31 @@ class ApiServicesByLimon {
         return response.statusCode;
       }
     } on Exception catch (e) {
-       debugPrint("Add Location Faild. Reason ${e.toString()}");
+      debugPrint("Add Location Faild. Reason ${e.toString()}");
+      return 0;
+    }
+  }
+
+  // fetch service location
+
+  static dynamic fetchServiceLocation() async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+      };
+
+      var response =
+          await client.get(Uri.parse(addLocationServicePost), headers: headers);
+      if (response.statusCode == 200) {
+        debugPrint(jsonEncode(response.body));
+        return addLocationModelFromJson(response.body);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      debugPrint("Data fetch Error. Reason ${e.toString()}");
       return 0;
     }
   }
