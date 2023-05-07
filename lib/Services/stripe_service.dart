@@ -180,4 +180,32 @@ class StripeService {
       return 1;
     }
   }
+
+
+  static fetchCard({required String customerId}) async {
+    var headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer $stripeSecretKey',
+    };
+   
+    try {
+      var response = await client.get(
+          Uri.parse(fetchCardApi(customerId)),
+          headers: headers);
+
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        debugPrint(response.reasonPhrase);
+        debugPrint(response.body);
+        return 1;
+      }
+    } on Exception catch (e) {
+      debugPrint("Fetch card error resion: $e");
+      return 1;
+    }
+  }
+
+
+
 }

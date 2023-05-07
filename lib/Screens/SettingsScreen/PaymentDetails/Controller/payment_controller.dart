@@ -4,8 +4,16 @@ import 'package:get/get.dart';
 import 'package:homelyknock/Services/stripe_service.dart';
 import 'package:homelyknock/widgets/data_controller.dart';
 
+import '../Model/card_model.dart';
+
 class PaymentController extends GetxController {
   final _dataController = Get.put(DataController());
+
+  @override
+  void onInit() {
+    getPaymentCard(false);
+    super.onInit();
+  }
 
   TextEditingController nameTextController = TextEditingController();
   TextEditingController cardTextController = TextEditingController();
@@ -13,10 +21,18 @@ class PaymentController extends GetxController {
   TextEditingController cvvTextController = TextEditingController();
 
   var isLoading = false.obs;
+  var isCardAddLoading = false.obs;
+  var selectedCard=0.obs;
+
+  RxList<Datum> cardList=List<Datum>.empty(growable: true).obs;
+ 
+
+
+  
 
   createTokenStripe() async {
     try {
-      isLoading(true);
+      isCardAddLoading(true);
       Map<String, String> body = {
         'card[exp_month]': expiryDataTextController.text.substring(0, 2),
         'card[exp_year]': expiryDataTextController.text.substring(3, 5),
@@ -33,7 +49,7 @@ class PaymentController extends GetxController {
     } on Exception catch (e) {
       debugPrint("Error resion :$e");
     } finally {
-      isLoading(false);
+      isCardAddLoading(false);
     }
   }
 
@@ -46,12 +62,40 @@ class PaymentController extends GetxController {
         expiryDataTextController.clear();
         cardTextController.clear();
         cvvTextController.clear();
+        getPaymentCard(true);
         Fluttertoast.showToast(
             msg: "Card create successful", toastLength: Toast.LENGTH_LONG);
         Get.back();
       }
     } on Exception catch (e) {
       debugPrint("Error resion :$e");
+    }
+  }
+
+  getPaymentCard(bool isAddCard ) async {
+    if(!isAddCard){
+      isLoading(true);
+    }
+    
+    try {
+      var result =
+          await StripeService.fetchCard(customerId: "cus_NqP1hHKLffsHmu");
+      if (result.runtimeType != int) {
+      
+      CardModel  cardData = cardModelFromJson(result);
+      cardList.value=cardData.data;
+      update();
+      
+        debugPrint("Card fetch all successful");
+      }else{
+        debugPrint("Get payment card error ");
+      }
+    } on Exception catch (e) {
+      debugPrint("Error resion :$e");
+    } finally {
+       if(!isAddCard){
+      isLoading(false);
+    }
     }
   }
 
