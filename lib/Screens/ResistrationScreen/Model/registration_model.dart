@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-SignUpModel signUpModelFromJson(String str) => SignUpModel.fromJson(json.decode(str));
+
 
 String signUpModelToJson(SignUpModel data) => json.encode(data.toJson());
 
@@ -19,6 +19,7 @@ class SignUpModel {
         required this.isUser,
         required this.isProfessional,
         required this.password,
+        required this.stripeCustomerId,
     });
 
     String fullName;
@@ -30,18 +31,9 @@ class SignUpModel {
     bool isUser;
     bool isProfessional;
     String password;
+    String stripeCustomerId;
 
-    factory SignUpModel.fromJson(Map<String, dynamic> json) => SignUpModel(
-        fullName: json["full_name"],
-        email: json["email"],
-        dateOfBirth: json["date_of_birth"],
-        phoneNumber: json["phone_number"],
-        corporationName: json["corporation_name"],
-        corporationNumber: json["corporation_number"],
-        isUser: json["is_user"],
-        isProfessional: json["is_professional"],
-        password: json["password"],
-    );
+    
 
     Map<String, dynamic> toJson() => {
         "full_name": fullName,
@@ -53,5 +45,6 @@ class SignUpModel {
         "is_user": isUser,
         "is_professional": isProfessional,
         "password": password,
+        "stripe_customerId":stripeCustomerId,
     };
 }

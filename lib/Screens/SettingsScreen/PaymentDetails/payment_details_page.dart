@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:homelyknock/Screens/ProfileScreen/profile.dart';
 
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 
+import '../../../Services/api_component.dart';
+import '../../../widgets/data_controller.dart';
 import 'Controller/payment_controller.dart';
 import 'input_formetters.dart';
 
@@ -14,6 +17,7 @@ class PaymentDetailsPage extends StatelessWidget {
   PaymentDetailsPage({Key? key}) : super(key: key);
 
   final _paymentController = Get.put(PaymentController());
+  final _dataController = Get.put(DataController());
 
   final _formKey = GlobalKey<FormState>();
 
@@ -38,19 +42,30 @@ class PaymentDetailsPage extends StatelessWidget {
                             children: [
                               GestureDetector(
                                   onTap: () {},
-                                  child: Image.asset('images/payment_img.png')),
+                                  child:_dataController.profileImage.value==""?CircleAvatar(
+                                    backgroundColor: Colors.grey.shade300,
+                                    radius: 25.r,
+                                   
+                                  ) :CircleAvatar(
+                                    backgroundColor: Colors.grey.shade300,
+                                    radius: 25.r,
+                                    backgroundImage: NetworkImage(baseUrl+_dataController.profileImage.value),
+                                  )
+                                  // Image.asset('images/payment_img.png')
+                                  
+                                  ),
                               SizedBox(
                                 width: 8.w,
                               ),
                               Column(
                                 children: [
                                   Text(
-                                    'Good afternoon',
+                                    _dataController.fullName.value,
                                     style: myStyle(
                                         14.sp, FontWeight.w400, textClr),
                                   ),
                                   Text(
-                                    'Jacob Jones',
+                                    _dataController.corporationName.value,
                                     style: myStyle(
                                         18.sp, FontWeight.w500, textClr),
                                   )
@@ -102,12 +117,12 @@ class PaymentDetailsPage extends StatelessWidget {
                                           18.sp, FontWeight.w400, textClr),
                                     ),
                                     Text(
-                                      'My balance',
+                                      'My Credits',
                                       style: myStyle(
                                           14.sp, FontWeight.w400, offWhite),
                                     ),
                                     Text(
-                                      '\$150 00',
+                                      _paymentController.totalCredit.value.toString(),
                                       style: myStyle(
                                           14, FontWeight.w400, themeColorGreen),
                                     )
@@ -167,8 +182,8 @@ class PaymentDetailsPage extends StatelessWidget {
                                             child: Obx(
                                               () => Container(
                                                 alignment: Alignment.center,
-                                                height: 35,
-                                                width: 75,
+                                            height: 35.h,
+                                                width: 75.w,
                                                 decoration: BoxDecoration(
                                                     color: _paymentController
                                                                 .selectedCard
@@ -197,6 +212,40 @@ class PaymentDetailsPage extends StatelessWidget {
                                               ),
                                             ),
                                           )
+                                       ,
+                                       SizedBox(width:10.w,),
+                                        GestureDetector(
+                                            onTap: () {
+                                              _paymentController.deleteCard(data.id);
+                                            },
+                                            child: Container(
+                                                alignment: Alignment.center,
+                                                height: 35.h,
+                                                width: 75.w,
+                                                decoration: BoxDecoration(
+                                                    color:scaffoldClr,
+                                                       
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4.r),
+                                                    border: Border.all(
+                                                        width: 1,
+                                                        color: backIconClr)),
+                                                child: Text(
+                                                  'Delete',
+                                                  style: myStyle(
+                                                      14.sp,
+                                                      FontWeight.w400,
+                                                       backIconClr
+                                                          ),
+                                                ),
+                                              
+                                            ),
+                                          )
+                                       
+                                       
+                                       
+                                       
                                         ],
                                       ),
                                     );

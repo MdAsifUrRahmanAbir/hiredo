@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/Route/routes.dart';
+import 'package:homelyknock/Screens/LeadsScreen/Model/leads_model.dart';
+import 'package:homelyknock/Services/stripe_service.dart';
 import 'package:intl/intl.dart';
 
 import 'package:homelyknock/Screens/ResistrationScreen/Model/registration_model.dart';
@@ -13,7 +15,7 @@ import '../../../Services/api_services.dart';
 class RegistrationController extends GetxController {
   var isVisibility = false.obs;
 
-var isVisible = false.obs;
+  var isVisible = false.obs;
 
   final dateController = TextEditingController();
   final emailController = TextEditingController();
@@ -72,38 +74,47 @@ var isVisible = false.obs;
     isLoading(true);
 
     try {
-      SignUpModel signUpModel = SignUpModel(
-        fullName: nameController.text, 
-        email: emailController.text,
-       dateOfBirth: dateController.text, 
-       phoneNumber: numberController.text, 
-       corporationName: corpunameController.text, 
-       corporationNumber: corpunumController.text,
-        isUser: userType == 'User' ? true: false,
-         isProfessional: userType == 'Professional' ? true: false,
-          password: passwordController.text);
-   
+      Map<String, String> body = {
+        'email': emailController.text,
+        'name': nameController.text,
+        'phone': numberController.text
+      };
 
-      var result =
-           await ApiServices.handelRegistration(model: signUpModel);
-      if (result) {
-        isLoading(false);
-        debugPrint("$result");
+      var createAccountResult =
+          await StripeService.createStripeAccount(body: body);
 
-        print('User create successful');
+      if (createAccountResult.runtimeType != int) {
+            String stripeCustomerId=createAccountResult["id"];
+        
+        SignUpModel signUpModel = SignUpModel(
+            fullName: nameController.text,
+            email: emailController.text,
+            dateOfBirth: dateController.text,
+            phoneNumber: numberController.text,
+            corporationName: corpunameController.text,
+            corporationNumber: corpunumController.text,
+            isUser: userType == 'User' ? true : false,
+            isProfessional: userType == 'Professional' ? true : false,
+            stripeCustomerId:stripeCustomerId,
+            password: passwordController.text);
 
-        Get.toNamed(Routes.signinPage);
-        textFieldClear();
+        var result = await ApiServices.handelRegistration(model: signUpModel);
+        if (result) {
+          isLoading(false);
+          debugPrint("$result");
 
-    
+          debugPrint('User create successful');
 
-      } else {
-        debugPrint(" Sign in error");
-        isLoading(false);
+          Get.toNamed(Routes.signinPage);
+          textFieldClear();
+        } else {
+          debugPrint(" Sign in error");
+          isLoading(false);
+        }
       }
     } on Exception catch (e) {
       debugPrint("Ooops! Sign in error. ${e.toString()}");
-      isLoading(false);  
+      isLoading(false);
     } finally {
       isLoading(false);
     }

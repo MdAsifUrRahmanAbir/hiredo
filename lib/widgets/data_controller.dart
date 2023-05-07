@@ -8,6 +8,8 @@ import 'common_data.dart';
 class DataController extends GetxController {
   var id = 0.obs;
   var fullName = "".obs;
+  var profileImage="".obs;
+  var stripeCustomerId=''.obs;
   var email = "".obs;
   var dateOfBirth = "".obs;
   var phoneNumber = "".obs;
@@ -36,6 +38,8 @@ class DataController extends GetxController {
         preferences.getBool(CommonData.isProfessional) ?? false;
     isUser.value = preferences.getBool(CommonData.isUser) ?? false;
     bearerToken.value = preferences.getString(CommonData.bearerToken) ?? "";
+     stripeCustomerId.value= preferences.getString(CommonData.stripeCustomerId)??"";
+     profileImage.value=  preferences.getString(CommonData.profileImage)??"";
   }
 
   setData({
@@ -50,10 +54,14 @@ class DataController extends GetxController {
     required bool isProfessionalD,
     required bool isUserD,
     required String bearerTokenD,
+    required String stripeCustomerIdD,
+    required String profileImageD,
   }) async {
     id.value = idD;
     email.value = emailD;
     password.value = passwordD;
+    profileImage.value=profileImageD;
+    stripeCustomerId.value=stripeCustomerIdD;
     phoneNumber.value = phoneD;
     dateOfBirth.value = dateOfBirthD;
     corporationName.value = corporationNameD;
@@ -75,6 +83,10 @@ class DataController extends GetxController {
     preferences.setBool(CommonData.isProfessional, isProfessionalD);
     preferences.setBool(CommonData.isUser, isUserD);
     preferences.setString(CommonData.bearerToken, bearerTokenD);
+
+
+    preferences.setString(CommonData.stripeCustomerId, stripeCustomerIdD);
+    preferences.setString(CommonData.profileImage, profileImageD);
   }
 
  
