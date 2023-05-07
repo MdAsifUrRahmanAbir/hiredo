@@ -62,6 +62,14 @@ class SignInController extends GetxController {
         LoginModel allData = result;
         
      
+           if (isChecked.value) {
+          await rememberMeSetData();
+        }
+       await MyPreference.isLoggedSave(
+            email: emailController.text, password: passwordController.text);
+         
+       await MyPreference.setToken(allData.token);
+        
 
         debugPrint(_dataController.id.toString());
         _mainController.initIndex.value = 0;
@@ -85,9 +93,12 @@ class SignInController extends GetxController {
         if (isChecked.value) {
           await rememberMeSetData();
         }
-        MyPreference.isLoggedSave(
+       await MyPreference.isLoggedSave(
             email: emailController.text, password: passwordController.text);
-        MyPreference.setToken(allData.token);
+          print(allData.token);
+       await MyPreference.setToken(allData.token);
+         var accessToken = await MyPreference.getToken();
+          print("last token $accessToken");
 
         emailController.clear();
         passwordController.clear();

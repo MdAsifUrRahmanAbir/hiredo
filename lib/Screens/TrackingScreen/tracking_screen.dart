@@ -20,6 +20,7 @@ class TrackingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _trackingController.getUserMode();
+    _trackingController.currentIndex.value=0;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

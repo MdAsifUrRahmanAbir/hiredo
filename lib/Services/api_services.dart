@@ -856,7 +856,7 @@ class ApiServices {
     }
   }
 
-   static Future<dynamic> buyerPendingBookNow() async {
+  static Future<dynamic> buyerPendingBookNow() async {
     var accessToken = await MyPreference.getToken();
 
     try {
@@ -864,8 +864,8 @@ class ApiServices {
         'Authorization': 'Bearer $accessToken',
         'Content-Type': 'application/json',
       };
-      var response = await client.get(Uri.parse(buyerPendingBookNowApi),
-          headers: headers);
+      var response =
+          await client.get(Uri.parse(buyerPendingBookNowApi), headers: headers);
 
       if (response.statusCode == 200) {
         return pendingBookNowModelFromJson(response.body);
@@ -875,6 +875,61 @@ class ApiServices {
     } on Exception catch (e) {
       if (kDebugMode) {
         return print(" Book now buyer pending  error. Reason ${e.toString()}");
+      }
+      return 0;
+    }
+  }
+
+  static Future<dynamic> bookNowAcceptAndReject(
+      Map<String, dynamic> body) async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client.post(
+          Uri.parse(sellerPendingAcceptAndRejectBookNowApi),
+          body: jsonEncode(body),
+          headers: headers);
+
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        debugPrint(" accept and reject error : ${response.body}");
+        return false;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        return print(
+            " Book now accept and reject error. Reason ${e.toString()}");
+      }
+      return false;
+    }
+  }
+
+  static Future<dynamic> sellerCompleteBookNow() async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client.get(Uri.parse(sellerCompleteBookNowApi),
+          headers: headers);
+
+      if (response.statusCode == 200) {
+        return pendingBookNowModelFromJson(response.body);
+      } else {
+        debugPrint(" Book now seller complete  error. Reason ${response.body}");
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        return print(
+            " Book now seller complete  error. Reason ${e.toString()}");
       }
       return 0;
     }

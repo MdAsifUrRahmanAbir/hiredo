@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Screens/TrackingScreen/Controller/seller_book_now_pending_controller.dart';
 import 'package:homelyknock/Screens/TrackingScreen/Model/pending_book_now_model.dart';
 import 'package:jiffy/jiffy.dart';
 
 import '../../GoogleMapService/google_map_show.dart';
 import '../../utils/colors.dart';
-import '../LeadsDetailsScreen/leads_details_screen.dart';
 
 class SellerBookingDetailsScreen extends StatelessWidget {
    SellerBookingDetailsScreen({super.key,required this.isPending, this.data});
+
+   final SellerBookNowPendingController _sellerBookNowPendingController=Get.put(SellerBookNowPendingController());
 
   bool isPending;
   PendingBookNowModel? data;
@@ -30,15 +33,15 @@ class SellerBookingDetailsScreen extends StatelessWidget {
           contentPadding: EdgeInsets.zero,
           minVerticalPadding: 0,
           horizontalTitleGap: 0,
-          leading:CircleAvatar(
+          leading:data!.user.userProfilePic==null? CircleAvatar(
                   radius: 20.r,
                   backgroundColor: Colors.grey.shade400,
+                )
+              : CircleAvatar(
+                  radius: 20.r,
+                  backgroundImage: NetworkImage(
+                      data!.user.userProfilePic!.picture),
                 ),
-              // : CircleAvatar(
-              //     radius: 20.r,
-              //     backgroundImage: NetworkImage(
-              //         "$baseUrl${leadData.user.userProfilePic!.picture}"),
-              //   ),
           title: Text(
            data!.user.corporationName,
             style: GoogleFonts.roboto(
@@ -217,47 +220,83 @@ class SellerBookingDetailsScreen extends StatelessWidget {
                                   if(isPending)
                                     Row(
                                       children: [
-                                        Container(
-                                            height: 40.h,
-                                            width: 140.w,
-                                            padding: EdgeInsets.symmetric(horizontal: 3.w),
-                                            decoration: BoxDecoration(
-                                                color: const Color(0xFF187949),
-                                                borderRadius:
-                                                    BorderRadius.circular(5.r)),
-                                            child: Center(
-                                              child: Text(
-                                                'Accept',
-                                                style: GoogleFonts.roboto(
-                                                    fontSize: 14.sp,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: const Color(0xFFFFFFFF)),
+                                        Obx(()=>
+                                           InkWell(
+                                            onTap: (){
+                                              if(!_sellerBookNowPendingController.acceptList.contains(data!.id)&&!_sellerBookNowPendingController.rejectList.contains(data!.id)){
+                                                _sellerBookNowPendingController.acceptBookNow(postId: data!.id, userId: data!.bookedInUser.id);
+
+                                              }
+                                            },
+                                             child: Container(
+                                                height: 40.h,
+                                                width: 140.w,
+                                                padding: EdgeInsets.symmetric(horizontal: 3.w),
+                                                decoration: BoxDecoration(
+                                                    color: const Color(0xFF187949),
+                                                    borderRadius:
+                                                        BorderRadius.circular(5.r)),
+                                                child: Center(
+                                                  child:_sellerBookNowPendingController.isAcceptLoading.value?
+                                                  SizedBox(
+                                                                           height: 15.sp,
+                                                                           width: 15.sp,
+                                                                           child: const CircularProgressIndicator(
+                                                                             strokeWidth: 3,
+                                                                             color: Colors.white,
+                                                                           ),
+                                                                         ):Text(
+                                                  _sellerBookNowPendingController.acceptList.contains(data!.id)?"Accepted" : 'Accept',
+                                                    style: GoogleFonts.roboto(
+                                                        fontSize: 14.sp,
+                                                        fontWeight: FontWeight.w500,
+                                                        color: const Color(0xFFFFFFFF)),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                          ),
-                                          SizedBox(width:25.w,),
-                                            Container(
-                                          height: 40.h,
-                                          width: 140.w,
-                                          padding: EdgeInsets.symmetric(horizontal: 3.w),
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: const Color(0xFF187949)),
-                                              borderRadius:
-                                                  BorderRadius.circular(5.r)),
-                                          child: Center(
-                                            child: Text(
-                                              'Reject',
-                                              style: GoogleFonts.roboto(
-                                                  fontSize: 14.sp,
-                                                  fontWeight: FontWeight.w500,
-                                                  
-                                                  color: const Color(0xFF187949)),
-                                                  maxLines: 1,
-                                                  overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ),
+                                           ),
                                         ),
+                                          SizedBox(width:25.w,),
+                                            Obx(()=>
+                                               InkWell(
+                                                onTap: (){
+                                                   if(!_sellerBookNowPendingController.acceptList.contains(data!.id)&&!_sellerBookNowPendingController.rejectList.contains(data!.id)){
+                                                _sellerBookNowPendingController.rejectBookNow(postId: data!.id, userId: data!.bookedInUser.id);
+
+                                              }
+                                                },
+                                                 child: Container(
+                                                                                        height: 40.h,
+                                                                                        width: 140.w,
+                                                                                        padding: EdgeInsets.symmetric(horizontal: 3.w),
+                                                                                        decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: const Color(0xFF187949)),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5.r)),
+                                                                                        child: Center(
+                                                                                             child:_sellerBookNowPendingController.isRejectLoading.value?
+                                                  SizedBox(
+                                                                           height: 15.sp,
+                                                                           width: 15.sp,
+                                                                           child: const CircularProgressIndicator(
+                                                                             strokeWidth: 3,
+                                                                             color: Colors.white,
+                                                                           ),
+                                                                         ):Text(
+                                                  _sellerBookNowPendingController.rejectList.contains(data!.id)?"Rejected" : 'Reject',
+                                                  style: GoogleFonts.roboto(
+                                                      fontSize: 14.sp,
+                                                      fontWeight: FontWeight.w500,
+                                                      
+                                                      color: const Color(0xFF187949)),
+                                                      maxLines: 1,
+                                                      overflow: TextOverflow.ellipsis,
+                                                                                             ),
+                                                                                        ),
+                                                                                      ),
+                                               ),
+                                            ),
                                         
                                        
                                       ],
