@@ -8,7 +8,6 @@ import 'package:homelyknock/Screens/LocationScreen/Model/add_location_model.dart
 import 'package:homelyknock/Screens/ReviewScreen/model/review_model.dart';
 
 import 'package:homelyknock/Screens/SettingsScreen/EmailTemplate/Model/email_template_model.dart';
-import 'package:homelyknock/Screens/SettingsScreen/MyCredits/Model/credit_model.dart';
 import 'package:homelyknock/Screens/SettingsScreen/SMSTemplate/Model/sms_template_model.dart';
 import 'package:homelyknock/Screens/TrackingScreen/Model/pending_post_model.dart';
 
@@ -288,7 +287,7 @@ class ApiServicesByLimon {
 
       if (response.statusCode == 200) {
         debugPrint("Data :${jsonDecode(response.body)}");
-        return creaditModelFromJson(response.body);
+        return jsonDecode(response.body);
       } else {
         debugPrint(" Error : ${response.body}");
         return response.statusCode;

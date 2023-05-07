@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/Services/api_services_by_limon.dart';
 
-import '../Model/credit_model.dart';
 import '../Model/user_credit_model.dart';
 
 class CreditController extends GetxController {
@@ -12,7 +11,7 @@ class CreditController extends GetxController {
 
   var isLoading = false.obs;
 
-  CreaditModel? creaditData;
+  var totalCredit=0.obs ;
 
   RxList<UserCreaditModel> userCreditData =
       List<UserCreaditModel>.empty(growable: true).obs;
@@ -45,8 +44,8 @@ class CreditController extends GetxController {
       if (result.runtimeType == int) {
         debugPrint("Error credit data  :$result");
       } else {
-        creaditData = result;
-        debugPrint(creaditData.toString());
+        totalCredit.value = result["total_credit"];
+       
       }
     } on Exception catch (e) {
       debugPrint('Fetch Error :$e');
