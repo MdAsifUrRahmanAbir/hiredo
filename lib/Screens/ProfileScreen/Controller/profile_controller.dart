@@ -139,7 +139,11 @@ class ProfileController extends GetxController {
       isLoading(true);
       var result = await ApiServices.logoutUser();
       if (result) {
-        Get.offAllNamed(Routes.signinPage);
+         Get.offNamed(Routes.signIntroPage);
+
+
+        
+      
         SharedPreferences preferences = await SharedPreferences.getInstance();
         bool isOnBoard = preferences.getBool(Constance.isOnboard) ?? false;
         String email = preferences.getString(
@@ -156,17 +160,17 @@ class ProfileController extends GetxController {
         preferences.setString("rememberPassword", password);
         MyPreference.setOnBoard(isOnBoard);
         Fluttertoast.showToast(msg: "Logout Successfull");
-      } else {
         isLoading(false);
+      } else {
+       
         debugPrint("User not logout");
+        isLoading(false);
       }
     } on Exception catch (e) {
-      isLoading(false);
+   isLoading(false);
       debugPrint("Opps logout error ");
 
       // TODO
-    } finally {
-      isLoading(false);
     }
   }
 

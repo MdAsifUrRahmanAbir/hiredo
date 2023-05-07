@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:homelyknock/Services/api_services_by_limon.dart';
 import 'package:homelyknock/Services/stripe_service.dart';
 import 'package:homelyknock/widgets/data_controller.dart';
 
@@ -23,9 +24,9 @@ class PaymentController extends GetxController {
   var isLoading = false.obs;
   var isCardAddLoading = false.obs;
   var selectedCard=0.obs;
+   var totalCredit=0.obs ;
 
   RxList<Datum> cardList=List<Datum>.empty(growable: true).obs;
- 
 
 
   
@@ -56,7 +57,7 @@ class PaymentController extends GetxController {
   createCardStripe(String token) async {
     try {
       var result = await StripeService.createCard(
-          token: token, customerId: "cus_NqP1hHKLffsHmu");
+          token: token, customerId:_dataController.stripeCustomerId.value);
       if (result.runtimeType != int) {
         nameTextController.clear();
         expiryDataTextController.clear();
@@ -79,7 +80,7 @@ class PaymentController extends GetxController {
     
     try {
       var result =
-          await StripeService.fetchCard(customerId: "cus_NqP1hHKLffsHmu");
+          await StripeService.fetchCard(customerId:_dataController.stripeCustomerId.value);
       if (result.runtimeType != int) {
       
       CardModel  cardData = cardModelFromJson(result);
@@ -96,6 +97,44 @@ class PaymentController extends GetxController {
        if(!isAddCard){
       isLoading(false);
     }
+    }
+  }
+
+
+    deleteCard(String cardId)async{
+       try {
+      var result =
+          await StripeService.deleteCard(customerId: _dataController.stripeCustomerId.value,cardId:cardId);
+      if (result.runtimeType != int) {
+        Fluttertoast.showToast(msg: "Card delete successfull");
+        getPaymentCard(false);
+        debugPrint("Card delete all successful");
+      }else{
+        debugPrint("Get payment card error ");
+      }
+    } on Exception catch (e) {
+      debugPrint("Error resion :$e");
+    }
+
+    }
+
+
+
+
+
+
+    getCredit() async {
+    try {
+      var result = await ApiServicesByLimon.fetchCredit();
+
+      if (result.runtimeType == int) {
+        debugPrint("Error credit data  :$result");
+      } else {
+        totalCredit.value = result["total_credit"];
+       
+      }
+    } on Exception catch (e) {
+      debugPrint('Fetch Error :$e');
     }
   }
 

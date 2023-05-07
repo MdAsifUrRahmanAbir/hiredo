@@ -50,6 +50,7 @@ class SignInController extends GetxController {
         if (!isLogged) {
           _mainController.initIndex.value = 0;
           Get.offAllNamed(Routes.signinPage);
+            _dataController.getData();
         } else {
           Fluttertoast.showToast(
             msg: "Invalid email or password.",
@@ -59,8 +60,13 @@ class SignInController extends GetxController {
         debugPrint("Opps sign in Error $result");
       } else {
         LoginModel allData = result;
-        print(allData);
-        _dataController.setData(
+        
+     
+
+        debugPrint(_dataController.id.toString());
+        _mainController.initIndex.value = 0;
+        Get.offAllNamed(Routes.mainPage);
+           _dataController.setData(
           idD: allData.user.id,
           corporationNameD: allData.user.corporationName,
           corporationNumberD: allData.user.corporationNumber,
@@ -72,11 +78,9 @@ class SignInController extends GetxController {
           isProfessionalD: allData.user.isProfessional,
           isUserD: allData.user.isUser,
           bearerTokenD: allData.token,
+           profileImageD:allData.user.userProfilePic==null?"":allData.user.userProfilePic!.picture,
+          stripeCustomerIdD: allData.user.stripeCustomerId,
         );
-
-        debugPrint(_dataController.id.toString());
-        _mainController.initIndex.value = 0;
-        Get.toNamed(Routes.mainPage);
 
         if (isChecked.value) {
           await rememberMeSetData();
