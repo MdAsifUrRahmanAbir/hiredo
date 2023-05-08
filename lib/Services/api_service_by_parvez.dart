@@ -11,6 +11,9 @@ import '../Screens/WishListScreen/Model/add_service_wish_list_model.dart';
 
 class ApiServicesByParvez {
   static var client = http.Client();
+
+// wishlist compnay service
+
   static dynamic fetchWishListCompany() async {
     var accessToken = await MyPreference.getToken();
 
@@ -61,18 +64,15 @@ class ApiServicesByParvez {
     var accessToken = await MyPreference.getToken();
 
     try {
-      final body = {"category_service":serviceId};
+      final body = {"category_service": serviceId};
 
       var headers = {
         'Authorization': 'Bearer $accessToken',
         'Content-Type': 'application/json',
       };
 
-      var response = await client.post(
-          Uri.parse(
-              wishListServiceApi),
-          body: jsonEncode(body),
-          headers: headers);
+      var response = await client.post(Uri.parse(wishListServiceApi),
+          body: jsonEncode(body), headers: headers);
 
       if (response.statusCode == 200) {
         debugPrint('Wish list add and remove successfull');
@@ -94,20 +94,17 @@ class ApiServicesByParvez {
     var accessToken = await MyPreference.getToken();
 
     try {
-     
       var headers = {
         'Authorization': 'Bearer $accessToken',
         'Content-Type': 'application/json',
       };
 
-      var response = await client.post(
-          Uri.parse(
-              "$wishListServiceApi/$serviceId/"),
-          headers: headers);
+      var response = await client
+          .post(Uri.parse("$wishListServiceApi/$serviceId/"), headers: headers);
 
       if (response.statusCode == 200) {
         debugPrint('Wish list service remove Successfull');
-        
+
         return true;
       } else {
         debugPrint('WishList Add Failed ${response.statusCode}');

@@ -124,21 +124,24 @@ class AddLoaction extends StatelessWidget {
             SizedBox(
               height: 10.h,
             ),
-            DropdownSearch<ServiceModel>.multiSelection(
-              key: _popupCustomValidationKey,
-              dropdownDecoratorProps: const DropDownDecoratorProps(),
-              items: profileController.serviceList,
-              onChanged: (value) {
-                value.forEach((element) {
-                  _locationController.selectServiceList.clear();
-                  _locationController.selectServiceList.add(element.id);
-                  print(_locationController.selectServiceList);
-                });
-              },
-              itemAsString: (item) => item.serviceName.name,
-              popupProps:
-                  const PopupPropsMultiSelection.menu(showSearchBox: true),
-            ),
+
+            // DropdownSearch<ServiceModel>.multiSelection(
+            //   key: _popupCustomValidationKey,
+            //   dropdownDecoratorProps: const DropDownDecoratorProps(),
+            //   items: profileController.serviceList,
+            //   onChanged: (value) {
+            //     value.forEach((element) {
+            //       _locationController.selectServiceList.clear();
+            //       _locationController.selectServiceList.add(element.id);
+            //       print(_locationController.selectServiceList);
+            //     });
+            //   },
+            //   itemAsString: (item) => item.serviceName.name,
+            //   popupProps:
+            //       const PopupPropsMultiSelection.menu(showSearchBox: true),
+            // ),
+           
+           
             SizedBox(
               height: 70.h,
             ),

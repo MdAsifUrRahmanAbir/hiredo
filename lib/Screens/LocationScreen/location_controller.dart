@@ -2,15 +2,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/GoogleMapService/Model/prediction_model.dart';
-import 'package:homelyknock/Screens/LocationScreen/Model/add_location_model.dart';
 
 import 'package:homelyknock/Services/api_services_by_limon.dart';
 
 import '../../GoogleMapService/google_map_service.dart';
 import '../JobPost/Model/location_model.dart';
+import '../ProfileScreen/Controller/profile_controller.dart';
 
 class LocationController extends GetxController {
   TextEditingController searchCtrl = TextEditingController();
+  final _profileController = Get.put(ProfileController());
   TextEditingController locationSearchCtrl = TextEditingController();
 
   TextEditingController serviceController = TextEditingController();
@@ -22,16 +23,7 @@ class LocationController extends GetxController {
 
   var isClick = false.obs;
 
-  RxList<AddLocationModel> locationList =
-      List<AddLocationModel>.empty(growable: true).obs;
-
   LocationDataModel? locationData;
-
-  @override
-  void onInit() {
-    super.onInit();
-    getServiceLocation();
-  }
 
 // google maps service
   TextEditingController searchTextController = TextEditingController();
@@ -63,14 +55,13 @@ class LocationController extends GetxController {
         "distance": distanceController.text,
         "latitude": locationData!.latitude,
         "longitude": locationData!.longitude,
-        "service": selectServiceList
       };
 
       var result = await ApiServicesByLimon.addServicePost(body: body);
 
       if (result.runtimeType != int) {
         debugPrint('Data Added Successfull');
-        getServiceLocation();
+        _profileController.getServiceLocation();
         Get.snackbar('Success', 'Data Added Successfull',
             colorText: Colors.white, backgroundColor: const Color(0xFF0C134F));
       } else {
@@ -89,26 +80,6 @@ class LocationController extends GetxController {
 
 // fetch service location
 
-  getServiceLocation() async {
-    isLoading(true);
-    try {
-      var result = await ApiServicesByLimon.fetchServiceLocation();
-      if (result.runtimeType == int) {
-        print("Error $result");
-      } else {
-        locationList.value = result;
-
-        print(locationList);
-      }
-    } on Exception catch (e) {
-      if (kDebugMode) {
-        debugPrint('Data Fetch Error: $e');
-      }
-    } finally {
-      isLoading(false);
-    }
-  }
-
 // delete service location
   Future<void> deleteByLocation(int id) async {
     try {
@@ -119,7 +90,7 @@ class LocationController extends GetxController {
           print('Delete Faild: $result ');
         }
       } else {
-        getServiceLocation();
+        _profileController.getServiceLocation();
         Get.snackbar('Delete Data', 'Data Delete Successful');
       }
     } on Exception catch (e) {

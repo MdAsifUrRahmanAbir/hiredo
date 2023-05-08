@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:homelyknock/Screens/WishListScreen/Model/add_service_wish_list_model.dart';
-import 'package:homelyknock/Screens/WishListScreen/Model/add_wish_list_model.dart';
+
 import 'package:homelyknock/Screens/WishListScreen/Model/wish_list_model.dart';
 import 'package:homelyknock/Services/api_service_by_parvez.dart';
-import 'package:homelyknock/Services/api_services.dart';
+
 import 'package:homelyknock/local/my_local.dart';
 
 class WishListController extends GetxController {
@@ -66,6 +66,4 @@ class WishListController extends GetxController {
       isLoading(false);
     }
   }
-
- 
 }

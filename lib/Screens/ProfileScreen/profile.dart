@@ -506,7 +506,7 @@ class Profile extends StatelessWidget {
             icon: Icons.location_pin,
             text: 'Locations',
             isCount: true,
-            count: 50.toString()),
+            count: profileController.locationList.length.toString()),
       ],
     );
   }
