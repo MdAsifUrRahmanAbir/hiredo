@@ -55,7 +55,6 @@ class LocationController extends GetxController {
         "distance": distanceController.text,
         "latitude": locationData!.latitude,
         "longitude": locationData!.longitude,
-        "service": selectServiceList
       };
 
       var result = await ApiServicesByLimon.addServicePost(body: body);
