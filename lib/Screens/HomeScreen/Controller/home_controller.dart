@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/Screens/HomeScreen/Model/lead_category_model.dart';
 
-
 import '../../../Services/api_service_by_parvez.dart';
 import '../../../Services/api_services.dart';
 import '../../WishListScreen/Model/add_service_wish_list_model.dart';
 
 final homeController = Get.put(HomeController());
-
 
 class HomeController extends GetxController {
   var isLoading = false.obs;
@@ -17,13 +15,12 @@ class HomeController extends GetxController {
   late List<LeadCategoriesModel> categoryList = [];
   late List<LeadCategoriesModel> subCategoryList = [];
 
-
   final TextEditingController nameController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
   List<String> carouselImages = [];
-  
-   var wishList=[].obs;
-  var dotPosition =0.obs;
+
+  var wishList = [].obs;
+  var dotPosition = 0.obs;
 
   @override
   void onInit() {
@@ -41,7 +38,6 @@ class HomeController extends GetxController {
 
   getLeadOurCategories() async {
     try {
-    
       var result = await ApiServices.fetchLeadOurCategories();
       if (result.runtimeType == int) {
         if (kDebugMode) {
@@ -64,7 +60,7 @@ class HomeController extends GetxController {
       if (kDebugMode) {
         print('Fetch Error: ${e.toString()}');
       }
-    } 
+    }
   }
 
   getSlider() async {
@@ -84,14 +80,10 @@ class HomeController extends GetxController {
       if (kDebugMode) {
         print("Opps fetch slider error ");
       }
-
-     
     }
   }
 
-
-fetchWishListService() async {
-  
+  fetchWishListService() async {
     try {
       var result = await ApiServicesByParvez.fetchWishListService();
       if (result.runtimeType == int) {
@@ -99,37 +91,36 @@ fetchWishListService() async {
           print('Error $result');
         }
       } else {
-        List<ServiceWishList> demoList =result;
+        List<ServiceWishList> demoList = result;
         for (var element in demoList) {
           wishList.add(element.categoryService.id);
           debugPrint("Wish List id : ${element.categoryService.id}");
-         }
-        
+        }
+
         debugPrint("result : $result");
       }
     } on Exception catch (e) {
       if (kDebugMode) {
         print("Fetch Error $e");
       }
-    } 
+    }
   }
 
   // add wishList
 
-
-   addWishList(int wishedUserId) async {
+  addAndRemoveWishList(int wishedUserId) async {
     try {
-      var result = await ApiServicesByParvez.addWishList(wishedUserId);
+      var result = await ApiServicesByParvez.addAndRemoveWishList(wishedUserId);
 
       if (result) {
-       
-          debugPrint('Wish List Added Successfull');
+        debugPrint('Wish List Added Successfull');
+        if (wishList.contains(wishedUserId)) {
+          wishList.remove(wishedUserId);
+        } else {
           wishList.add(wishedUserId);
-        
-        
+        }
       } else {
         debugPrint('Wish list added error ');
-       
       }
     } on Exception catch (e) {
       if (kDebugMode) {
@@ -140,15 +131,13 @@ fetchWishListService() async {
 
   removeWishList(int wishedUserId) async {
     try {
-      var result = await ApiServicesByParvez.removeServiceWishList(wishedUserId);
+      var result =
+          await ApiServicesByParvez.removeServiceWishList(wishedUserId);
       if (result) {
-          debugPrint('Wish List remove Successfull');
-          wishList.remove(wishedUserId);
-        
-        
+        debugPrint('Wish List remove Successfull');
+        wishList.remove(wishedUserId);
       } else {
         debugPrint('Wish list remove error ');
-       
       }
     } on Exception catch (e) {
       if (kDebugMode) {
@@ -156,5 +145,4 @@ fetchWishListService() async {
       }
     }
   }
-
 }

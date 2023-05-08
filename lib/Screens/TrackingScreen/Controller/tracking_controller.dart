@@ -24,10 +24,11 @@ class TrackingController extends GetxController {
   isLoading(true);
   preferences = await SharedPreferences.getInstance();
      userRole.value =  preferences.getBool(CommonData.isProfessional)??false;
+     debugPrint(userRole.value.toString());
+     isLoading(false);
 } on Exception catch (e) {
-  debugPrint(e.toString());
-}finally{
   isLoading(false);
+  debugPrint(e.toString());
 }
 
     }

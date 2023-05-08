@@ -476,12 +476,10 @@ class Home extends StatelessWidget {
                     child: Obx(()=>
                        IconButton(
                         onPressed: () {
-                          if(_homeController.wishList.contains(data.id)){
-                               //     _homeController.removeWishList(data.id);
-                          }else{
-                            _homeController.addWishList(data.id);
+                        
+                            _homeController.addAndRemoveWishList(data.id);
                                   
-                          }
+                          
                           
                          
                         },
