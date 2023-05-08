@@ -21,12 +21,13 @@ class LocationController extends GetxController {
 
   var isLoading = false.obs;
 
-  var isClick = false.obs;
+  var isEdit = false.obs;
 
   LocationDataModel? locationData;
 
 // google maps service
   TextEditingController searchTextController = TextEditingController();
+
   List<Prediction> _predictionList = [];
 
   Future<List<Prediction>> searchLocation(
@@ -100,32 +101,31 @@ class LocationController extends GetxController {
 
   // update service location
 
-  // updateServiceLocation(int id) async {
-  //   try {
-  //     final body = {
-  //       "city": locationData!.location,
-  //       "distance": distanceController.text,
-  //       "latitude": locationData!.latitude,
-  //       "longitude": locationData!.longitude,
-  //       "service": selectServiceList
-  //     };
+  updateServiceLocation(int id) async {
+    try {
+      final body = {
+        "city": locationData!.location,
+        "distance": distanceController.text,
+        "latitude": locationData!.latitude,
+        "longitude": locationData!.longitude,
+      };
 
-  //     var result = await ApiServicesByLimon.updateService(body, id);
-  //     if (result.runtimeType != int) {
-  //       debugPrint('Data Update Successfull');
-  //       getServiceLocation();
-  //       Get.snackbar('Success', 'Data Update Successfull',
-  //           colorText: Colors.white, backgroundColor: const Color(0xFF0C134F));
-  //     } else {
-  //       debugPrint('Do Not Data Update ');
-  //       Get.snackbar('Error', 'Data UpdateFaild',
-  //           colorText: Colors.red, backgroundColor: const Color(0xFF0C134F));
-  //     }
-  //   } on Exception catch (e) {
-  //     if (kDebugMode) {
-  //       debugPrint('Data Update Error: $e');
-  //     }
-  //     return 0;
-  //   }
-  // }
+      var result = await ApiServicesByLimon.updateService(body, id);
+      if (result.runtimeType != int) {
+        debugPrint('Data Update Successfull');
+        // getServiceLocation();
+        Get.snackbar('Success', 'Data Update Successfull',
+            colorText: Colors.white, backgroundColor: const Color(0xFF0C134F));
+      } else {
+        debugPrint('Do Not Data Update ');
+        Get.snackbar('Error', 'Data UpdateFaild',
+            colorText: Colors.red, backgroundColor: const Color(0xFF0C134F));
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        debugPrint('Data Update Error: $e');
+      }
+      return 0;
+    }
+  }
 }

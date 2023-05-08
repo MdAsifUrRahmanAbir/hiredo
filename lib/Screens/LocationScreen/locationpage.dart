@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:geocoding/geocoding.dart';
 
 import 'package:get/get.dart';
 
@@ -10,6 +12,8 @@ import 'package:homelyknock/Route/routes.dart';
 
 import 'package:homelyknock/widgets/custom_loader.dart';
 
+import '../../GoogleMapService/Model/prediction_model.dart';
+import '../JobPost/Model/location_model.dart';
 import '../ProfileScreen/Controller/profile_controller.dart';
 import 'location_controller.dart';
 
@@ -169,7 +173,7 @@ class LocationPage extends StatelessWidget {
                                                         TextSpan(children: [
                                                   TextSpan(
                                                       text:
-                                                          "${data.distance} miles of ",
+                                                          "Within ${data.distance} miles of ",
                                                       style: GoogleFonts.roboto(
                                                           fontSize: 16.sp,
                                                           fontWeight:
@@ -190,14 +194,6 @@ class LocationPage extends StatelessWidget {
                                             SizedBox(
                                               height: 8.h,
                                             ),
-                                            // Text(
-                                            //   ' Service',
-                                            //   style: GoogleFonts.roboto(
-                                            //       fontSize: 14.sp,
-                                            //       fontWeight: FontWeight.w400,
-                                            //       color: Color(0xFF848484)
-                                            //           .withOpacity(0.5)),
-                                            // ),
                                             SizedBox(
                                               height: 8.h,
                                             ),
@@ -262,7 +258,11 @@ class LocationPage extends StatelessWidget {
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          Get.toNamed(Routes.addLocationScreen);
+                                          Get.toNamed(Routes.addLocationScreen,
+                                              arguments: {
+                                                "isEdit": true,
+                                                "data": data
+                                              });
                                         },
                                         child: Icon(
                                           Icons.edit,
@@ -292,7 +292,8 @@ class LocationPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Get.toNamed(Routes.addLocationScreen);
+            Get.toNamed(Routes.addLocationScreen,
+                arguments: {"isEdit": false, "data": null});
           },
           child: Icon(Icons.add)),
     );
