@@ -57,7 +57,7 @@ class ApiServicesByParvez {
   }
 
   //Add WishList
-  static dynamic addWishList(int serviceId) async {
+  static dynamic addAndRemoveWishList(int serviceId) async {
     var accessToken = await MyPreference.getToken();
 
     try {
@@ -75,16 +75,16 @@ class ApiServicesByParvez {
           headers: headers);
 
       if (response.statusCode == 200) {
-        debugPrint('Wish List Add Successfull');
-        print(response.body);
+        debugPrint('Wish list add and remove successfull');
+        debugPrint(response.body);
         return true;
       } else {
-        print('WishList Add Failed ${response.statusCode}');
+        debugPrint('WishList Add and remove Failed ${response.statusCode}');
         return false;
       }
     } on Exception catch (e) {
       if (kDebugMode) {
-        print('Wish List Add Failed ${e.toString()}');
+        print('Wish List Add and remove Failed ${e.toString()}');
       }
       return false;
     }

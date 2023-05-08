@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../local/my_local.dart';
 import '../../../widgets/common_data.dart';
+import '../../../widgets/data_controller.dart';
 import '../../../widgets/logger.dart';
 
 import '../../Service/Model/service_model.dart';
@@ -21,6 +22,8 @@ import 'package:flutter/material.dart';
 final log = logger(ProfileController);
 
 class ProfileController extends GetxController {
+
+    final dataController = Get.put(DataController());
   @override
   void onInit() {
     fetchProfileData();
@@ -238,6 +241,8 @@ getLocalData()async{
       if (result) {
         isProfessional.value = !isProfessional.value;
         isUser.value = !isUser.value;
+        dataController.isProfessional.value=!isProfessional.value;
+        dataController.isUser.value=!isUser.value;
         preferences = await SharedPreferences.getInstance();
         preferences.setBool(CommonData.isProfessional, isProfessional.value);
         preferences.setBool(CommonData.isUser, isUser.value);
