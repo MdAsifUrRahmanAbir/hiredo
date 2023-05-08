@@ -16,7 +16,8 @@ class BookingPandeingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _sellerPendingController.getPenddingBookNow();
-    return Obx(()=>_sellerPendingController.isLoading.value? ListView.builder(
+    return Obx(()=>_sellerPendingController.isLoading.value?
+     ListView.builder(
                       itemCount: 8,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -48,7 +49,10 @@ class BookingPandeingScreen extends StatelessWidget {
                         );
                       })
                   
-      : ListView.separated(
+      :_sellerPendingController.pendingSellerBookNowList.isEmpty? Text("No data available!",style: GoogleFonts.roboto(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w500,
+                              color:Colors.red)): ListView.separated(
         itemCount: _sellerPendingController.pendingSellerBookNowList.length,
         itemBuilder: (BuildContext context, int index) {
           var data=_sellerPendingController.pendingSellerBookNowList[index];
@@ -72,8 +76,13 @@ class BookingPandeingScreen extends StatelessWidget {
                   children: [
                     ClipRRect(
                         borderRadius: BorderRadius.circular(3.r),
-                        child: Image.asset(
+                        child: data.user.userProfilePic==null?Image.asset(
                           'images/ima3.png',
+                          height: 89.h,
+                          width: 80.w,
+                          fit: BoxFit.cover,
+                        ):Image.network(
+                          data.user.userProfilePic.picture,
                           height: 89.h,
                           width: 80.w,
                           fit: BoxFit.cover,
