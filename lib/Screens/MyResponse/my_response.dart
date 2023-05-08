@@ -18,56 +18,7 @@ class MyResponse extends StatefulWidget {
 }
 
 class _MyResponseState extends State<MyResponse> {
-  // List<Map> pending = [
-  //   {
-  //     'imgUrl': 'images/img.png',
-  //     'name': 'Kumar',
-  //     'title': 'Kitchen Refurbishment',
-  //     'location': '4517 Washington Ave, Kentucky',
-  //     'details':
-  //         'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit ...'
-  //   },
-  //   {
-  //     'imgUrl': 'images/img.png',
-  //     'name': 'Kumar',
-  //     'title': 'Kitchen Refurbishment',
-  //     'location': '4517 Washington Ave, Kentucky',
-  //     'details':
-  //         'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit ...'
-  //   },
-  //   {
-  //     'imgUrl': 'images/img.png',
-  //     'name': 'Kumar',
-  //     'title': 'Kitchen Refurbishment',
-  //     'location': '4517 Washington Ave, Kentucky',
-  //     'details':
-  //         'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit ...'
-  //   },
-  //   {
-  //     'imgUrl': 'images/img.png',
-  //     'name': 'Kumar',
-  //     'title': 'Kitchen Refurbishment',
-  //     'location': '4517 Washington Ave, Kentucky',
-  //     'details':
-  //         'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit ...'
-  //   },
-  //   {
-  //     'imgUrl': 'images/img.png',
-  //     'name': 'Kumar',
-  //     'title': 'Kitchen Refurbishment',
-  //     'location': '4517 Washington Ave, Kentucky',
-  //     'details':
-  //         'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit ...'
-  //   },
-  //   {
-  //     'imgUrl': 'images/img.png',
-  //     'name': 'Kumar',
-  //     'title': 'Kitchen Refurbishment',
-  //     'location': '4517 Washington Ave, Kentucky',
-  //     'details':
-  //         'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit ...'
-  //   }
-  // ];
+  
 
   final _myResponseController = Get.put(MyResponseController());
 
@@ -324,12 +275,16 @@ class _MyResponseState extends State<MyResponse> {
                                                 SizedBox(
                                                   width: 5.w,
                                                 ),
-                                                Text(
-                                                  data.posts.location,
-                                                  style: myStyle(
-                                                      12.sp,
-                                                      FontWeight.w400,
-                                                      Colors.grey),
+                                                Expanded(
+                                                  child: Text(
+                                                    data.posts.location,
+                                                    style: myStyle(
+                                                        12.sp,
+                                                        FontWeight.w400,
+                                                        Colors.grey),
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow.ellipsis,
+                                                  ),
                                                 )
                                               ],
                                             )
