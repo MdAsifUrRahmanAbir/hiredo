@@ -112,18 +112,16 @@ class ApiServices {
 
 // add service
   static Future<bool> addServicePost(
-      {required int id, required String description}) async {
+      {required Map<String, dynamic> body}) async {
     var accessToken = await MyPreference.getToken();
 
     try {
       var headers = {
-        'Authorization': "Bearer $accessToken",
         'Content-Type': 'application/json',
+        'Authorization': "Bearer $accessToken",
       };
       var response = await client.post(Uri.parse(serviceApi),
-          body: jsonEncode(
-              {"service_name": id, "service_description": description}),
-          headers: headers);
+          body: jsonEncode(body), headers: headers);
 
       if (response.statusCode == 201) {
         return true;
@@ -132,9 +130,7 @@ class ApiServices {
           print(response.statusCode);
         }
         var data = jsonDecode(response.body);
-        Get.snackbar("Error", data["message"],
-            backgroundColor: Colors.red.shade300, colorText: Colors.white);
-        print(response.body);
+        Fluttertoast.showToast(msg: data["message"]);
         return false;
       }
     } on Exception catch (e) {
