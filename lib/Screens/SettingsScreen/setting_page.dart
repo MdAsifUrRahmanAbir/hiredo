@@ -140,7 +140,7 @@ class SettingsPage extends StatelessWidget {
                   title: 'My payment details',
                   icon: 'images/payment.png',
                   onTap: () {
-                    Get.toNamed(Routes.myPaymentDetails);
+                    Get.toNamed(Routes.myPaymentDetails,arguments: null);
                   }),
 
               SizedBox(

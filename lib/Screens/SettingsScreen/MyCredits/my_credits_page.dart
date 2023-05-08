@@ -10,6 +10,7 @@ import 'package:homelyknock/widgets/common_data.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../Route/routes.dart';
 import '../../../Services/stripe_service.dart';
 import 'Controller/credit_controller.dart';
 
@@ -274,23 +275,27 @@ class MyCreditsPage extends StatelessWidget {
                                     const Spacer(),
                                     InkWell(
                                       onTap: () async {
-                                        var amount = _creditController
-                                            .userCreditData[index].priceAmount
-                                            .toInt();
 
-                                        var sharedPreferences =
-                                            await SharedPreferences
-                                                .getInstance();
-                                        var id = sharedPreferences
-                                                .getInt(CommonData.id) ??
-                                            0;
-                                        StripeService().makePayment(
-                                            id: id,
-                                            amount: amount.toString(),
-                                            cradit: _creditController
-                                                .userCreditData[index]
-                                                .creditAmount,
-                                            currency: "USD");
+                                         Get.toNamed(Routes.myPaymentDetails,arguments:_creditController
+                                             .userCreditData[index]);
+
+                                        // var amount = _creditController
+                                        //     .userCreditData[index].priceAmount
+                                        //     .toInt();
+
+                                        // var sharedPreferences =
+                                        //     await SharedPreferences
+                                        //         .getInstance();
+                                        // var id = sharedPreferences
+                                        //         .getInt(CommonData.id) ??
+                                        //     0;
+                                        // StripeService().makePayment(
+                                        //     id: id,
+                                        //     amount: amount.toString(),
+                                        //     cradit: _creditController
+                                        //         .userCreditData[index]
+                                        //         .creditAmount,
+                                        //     currency: "USD");
                                       },
                                       child: Container(
                                         alignment: Alignment.center,
