@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../GoogleMapService/google_map_show.dart';
 import '../TrackingScreen/Model/pending_book_now_model.dart';
 
 
@@ -77,41 +78,52 @@ class BuyerBookNowDetails extends StatelessWidget {
                   SizedBox(
                     height: 8.h,
                   ),
-                  RichText(
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                                text: TextSpan(
-                                  text: '',
-                                  style:GoogleFonts.roboto(
+                  Text(data.location,style: GoogleFonts.roboto(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
-                        color: Color(0xFF555957)),
-                                  children: data.realtimePostObject
-                                      .map((e) => TextSpan(
-                                          text: e.question.qs,
-                                          style:GoogleFonts.roboto(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xFF555957))))
-                                      .toList(),
-                                )),
+                        color: Color(0xFF555957)),),
+                  // RichText(
+                  //               overflow: TextOverflow.ellipsis,
+                  //               maxLines: 2,
+                  //               text: TextSpan(
+                  //                 text: '',
+                  //                 style:GoogleFonts.roboto(
+                  //       fontSize: 14.sp,
+                  //       fontWeight: FontWeight.w400,
+                  //       color: Color(0xFF555957)),
+                  //                 children: data.realtimePostObject
+                  //                     .map((e) => TextSpan(
+                  //                         text: e.question.qs,
+                  //                         style:GoogleFonts.roboto(
+                  //       fontSize: 14.sp,
+                  //       fontWeight: FontWeight.w400,
+                  //       color: Color(0xFF555957))))
+                  //                     .toList(),
+                  //               )),
                 
+                  
+                  
                   SizedBox(
                     height: 20.h,
                   ),
                   Container(
                       //  height: 147.h,
                         width: double.infinity,
-                        padding: EdgeInsets.only(top: 15.h, left: 5.w),
+                        padding: EdgeInsets.only(top: 15.h, left: 5.w,bottom:15.h),
                         decoration: BoxDecoration(
                             color: Color(0xFFF8F8F8),
                             borderRadius: BorderRadius.circular(5.r)),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            data.bookedInUser.userProfilePic==null?
                             CircleAvatar(
                               radius: 25.h,
                               backgroundColor: Colors.grey.shade400,
+                            ): CircleAvatar(
+                              radius: 25.h,
+                              backgroundColor: Colors.white,
+                              backgroundImage: NetworkImage(data.bookedInUser.userProfilePic.picture),
                             ),
                             SizedBox(width:10.w,),
                             Expanded(
@@ -144,32 +156,31 @@ class BuyerBookNowDetails extends StatelessWidget {
                                         color: Color(0xFF424242)),
                                   ),
 
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.star,
-                                        color: Color(0xFFEACA23),
-                                        size:20.sp,
-                                      ),
-                                      SizedBox(
-                                        width: 3.w,
-                                      ),
-                                      Text(
-                                        '3.5',
-                                        style: GoogleFonts.roboto(
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w400,
-                                            color: Color(0xFF424242)),
-                                      ),
-                                      SizedBox(
-                                        width: 3.w,
-                                      ),
+                                  // Row(
+                                  //   children: [
+                                  //     Icon(
+                                  //       Icons.star,
+                                  //       color: Color(0xFFEACA23),
+                                  //       size:20.sp,
+                                  //     ),
+                                  //     SizedBox(
+                                  //       width: 3.w,
+                                  //     ),
+                                  //     Text(
+                                  //       '3.5',
+                                  //       style: GoogleFonts.roboto(
+                                  //           fontSize: 14.sp,
+                                  //           fontWeight: FontWeight.w400,
+                                  //           color: Color(0xFF424242)),
+                                  //     ),
+                                  //     SizedBox(
+                                  //       width: 3.w,
+                                  //     ),
                                     
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 5.h,
-                                  ),
+                                  //   ],
+                                  // ),
+
+                              
                                   
                                        
                                  
@@ -179,7 +190,76 @@ class BuyerBookNowDetails extends StatelessWidget {
                             ),
                           ],
                         ),
-                      )
+                      ),
+                      
+                                      SizedBox(
+                      height: 20.h,
+                    ),
+                    Text(
+                      'Details',
+                      style: GoogleFonts.roboto(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xFF272727)),
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Divider(
+                      color: const Color(0xFF848484).withOpacity(0.05),
+                      height: 1,
+                      thickness: 2,
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                           final qansData = data.realtimePostObject[index];
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                               qansData.question.qs,
+                              style: GoogleFonts.roboto(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: const Color(0xFF424242)),
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            Text(
+                              qansData.pAnswer.options,
+                              style: GoogleFonts.roboto(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: const Color(0xFF424242)),
+                            ),
+                          ],
+                        );
+                      },
+                      itemCount: data.realtimePostObject.length,
+                      separatorBuilder: (BuildContext context, int index) =>
+                          SizedBox(
+                        height: 20.h,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                     SizedBox(
+                  height: 200.h,
+                  child: GoogleMapsShow(
+                    lat: data.latitude,
+                    leng: data.latitude,
+                  )),
+              SizedBox(
+                height: 20.h,
+              ),
                  
                 ],
               ),
