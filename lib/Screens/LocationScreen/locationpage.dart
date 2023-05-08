@@ -190,14 +190,14 @@ class LocationPage extends StatelessWidget {
                                             SizedBox(
                                               height: 8.h,
                                             ),
-                                            Text(
-                                              '${data.service.length} Service',
-                                              style: GoogleFonts.roboto(
-                                                  fontSize: 14.sp,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Color(0xFF848484)
-                                                      .withOpacity(0.5)),
-                                            ),
+                                            // Text(
+                                            //   ' Service',
+                                            //   style: GoogleFonts.roboto(
+                                            //       fontSize: 14.sp,
+                                            //       fontWeight: FontWeight.w400,
+                                            //       color: Color(0xFF848484)
+                                            //           .withOpacity(0.5)),
+                                            // ),
                                             SizedBox(
                                               height: 8.h,
                                             ),
@@ -262,7 +262,7 @@ class LocationPage extends StatelessWidget {
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          // Get.toNamed(Routes.addLocationScreen);
+                                          Get.toNamed(Routes.addLocationScreen);
                                         },
                                         child: Icon(
                                           Icons.edit,

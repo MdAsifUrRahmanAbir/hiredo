@@ -3,25 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/utils/colors.dart';
 
+import '../../../GoogleMapService/Model/prediction_model.dart';
+import '../../../GoogleMapService/google_map_service.dart';
 import '../../../Services/api_services.dart';
-import '../../../nav_bar_page/main_screen.dart';
-import '../../ProfileScreen/Controller/profile_controller.dart';
+
 import '../../ProfileScreen/profile.dart';
 
 class ServiceController extends GetxController {
-
   TextEditingController descriptionController = TextEditingController();
   var isServieselect = false.obs;
   int selectedServiceId = 0;
+  var locationList = [].obs;
   var isLoading = false.obs;
 
 // add services data
   submitedService() async {
     isLoading(true);
     try {
+      Map<String, dynamic> body = {
+        "service_name": selectedServiceId.toString(),
+        "service_description": descriptionController.text,
+        "service_location": locationList
+      };
+
       if (selectedServiceId != 0) {
-        var result = await ApiServices.addServicePost(
-            id: selectedServiceId, description: descriptionController.text);
+        var result = await ApiServices.addServicePost(body: body);
         if (result) {
           profileController.getServices();
           profileController.getLeadCount();
@@ -51,19 +57,18 @@ class ServiceController extends GetxController {
   deleteService(int id) async {
     try {
       isLoading(true);
-  var res = await ApiServices.deleteService(id);
-  if (res) {
-    Get.snackbar("Success", "Delete Service");
-    profileController.getServices();
-    profileController.getLeadCount();
-  } else {
-    Get.snackbar("Error", "Service delete error");
-  }
-} on Exception catch (e) {
-  debugPrint("Opps delete service error : $e");
-  
-}finally{
-  isLoading(false);
-}
+      var res = await ApiServices.deleteService(id);
+      if (res) {
+        Get.snackbar("Success", "Delete Service");
+        profileController.getServices();
+        profileController.getLeadCount();
+      } else {
+        Get.snackbar("Error", "Service delete error");
+      }
+    } on Exception catch (e) {
+      debugPrint("Opps delete service error : $e");
+    } finally {
+      isLoading(false);
+    }
   }
 }
