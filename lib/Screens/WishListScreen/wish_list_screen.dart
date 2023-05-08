@@ -12,29 +12,6 @@ WishListController wishListController = Get.put(WishListController());
 class WishListScreen extends StatelessWidget {
   WishListScreen({super.key});
 
-  // final List<Map<String, dynamic>> item = [
-  //   {
-  //     'image': 'images/servImage.png',
-  //     'title': 'Commercial cleaning by expertise',
-  //     'subTitle': '200+ Company work'
-  //   },
-  //   {
-  //     'image': 'images/servImage.png',
-  //     'title': 'Commercial cleaning by expertise',
-  //     'subTitle': '200+ Company work'
-  //   },
-  //   {
-  //     'image': 'images/servImage.png',
-  //     'title': 'Commercial cleaning by expertise',
-  //     'subTitle': '200+ Company work'
-  //   },
-  //   {
-  //     'image': 'images/servImage.png',
-  //     'title': 'Commercial cleaning by expertise',
-  //     'subTitle': '200+ Company work'
-  //   }
-  // ];
-
   @override
   Widget build(BuildContext context) {
     // wishListController.fetchWishListService();
@@ -55,7 +32,7 @@ class WishListScreen extends StatelessWidget {
             style: GoogleFonts.roboto(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w500,
-                color: Color(0xFF272727)),
+                color: const Color(0xFF272727)),
           ),
           centerTitle: true,
           actions: [
@@ -63,14 +40,14 @@ class WishListScreen extends StatelessWidget {
               padding: EdgeInsets.only(right: 8.0.w),
               child: CircleAvatar(
                 radius: 15.r,
-                backgroundImage: AssetImage('images/kumar.png'),
+                backgroundImage: const AssetImage('images/kumar.png'),
               ),
             )
           ],
         ),
         body: Obx(
           (() => wishListController.isLoading.value
-              ? CustomLoader()
+              ? const CustomLoader()
               : SingleChildScrollView(
                   child: Padding(
                     padding: EdgeInsets.only(left: 10.w, right: 10.w),

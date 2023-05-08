@@ -15,6 +15,7 @@ import '../../../local/my_local.dart';
 import '../../../widgets/common_data.dart';
 import '../../../widgets/logger.dart';
 
+import '../../LocationScreen/Model/add_location_model.dart';
 import '../../Service/Model/service_model.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +28,7 @@ class ProfileController extends GetxController {
     getLeadCount();
     getMyResponseCount();
     getServices();
+    getServiceLocation();
     // profileController.getLeadCount();
     // profileController.fetchProfileData();
     // profileController.getMyResponseCount();
@@ -35,12 +37,15 @@ class ProfileController extends GetxController {
 
   var isLoading = false.obs;
   var isLeadLoading = false.obs;
-  var isMyresponseLoading=false.obs;
+  var isMyresponseLoading = false.obs;
   var leadsCount = 0.obs;
-  var myResponseCount=0.obs;
+  var myResponseCount = 0.obs;
   late SharedPreferences preferences;
   RxList<ServiceModel> serviceList =
       List<ServiceModel>.empty(growable: true).obs;
+
+  RxList<AddLocationModel> locationList =
+      List<AddLocationModel>.empty(growable: true).obs;
 
   ProfileModel? profileData;
   var isProfessional = false.obs;
@@ -119,7 +124,7 @@ class ProfileController extends GetxController {
         isProfessional.value = result!.user.isProfessional;
         isUser.value = result!.user.isUser;
         debugPrint(isProfessional.value.toString());
-         debugPrint(isUser.value.toString());
+        debugPrint(isUser.value.toString());
 
         log.i(result);
       }
@@ -139,11 +144,8 @@ class ProfileController extends GetxController {
       isLoading(true);
       var result = await ApiServices.logoutUser();
       if (result) {
-         Get.offNamed(Routes.signIntroPage);
+        Get.offNamed(Routes.signIntroPage);
 
-
-        
-      
         SharedPreferences preferences = await SharedPreferences.getInstance();
         bool isOnBoard = preferences.getBool(Constance.isOnboard) ?? false;
         String email = preferences.getString(
@@ -162,12 +164,11 @@ class ProfileController extends GetxController {
         Fluttertoast.showToast(msg: "Logout Successfull");
         isLoading(false);
       } else {
-       
         debugPrint("User not logout");
         isLoading(false);
       }
     } on Exception catch (e) {
-   isLoading(false);
+      isLoading(false);
       debugPrint("Opps logout error ");
 
       // TODO
@@ -218,19 +219,18 @@ class ProfileController extends GetxController {
     }
   }
 
-getLocalData()async{
-  preferences = await SharedPreferences.getInstance();
-  isProfessional.value =
+  getLocalData() async {
+    preferences = await SharedPreferences.getInstance();
+    isProfessional.value =
         preferences.getBool(CommonData.isProfessional) ?? false;
     isUser.value = preferences.getBool(CommonData.isUser) ?? false;
-
-}
+  }
 
   modeChange() async {
     try {
       isLoading(true);
-        print(isUser.value);
-         print(isProfessional.value);
+      print(isUser.value);
+      print(isProfessional.value);
 
       var result = await ApiServices.changeUserMode(
           isUser: isUser.value, isProfessional: isProfessional.value);
@@ -251,8 +251,7 @@ getLocalData()async{
     }
   }
 
-
-   getMyResponseCount() async {
+  getMyResponseCount() async {
     try {
       isMyresponseLoading.value = true;
 
@@ -263,7 +262,7 @@ getLocalData()async{
         }
         log.e(result);
       } else {
-       myResponseCount.value = result["my_response_count"];
+        myResponseCount.value = result["my_response_count"];
 
         log.i(result);
       }
@@ -273,6 +272,25 @@ getLocalData()async{
       }
     } finally {
       isMyresponseLoading.value = false;
+    }
+  }
+
+  // service location
+
+  getServiceLocation() async {
+    try {
+      var result = await ApiServicesByLimon.fetchServiceLocation();
+      if (result.runtimeType == int) {
+        print("Error $result");
+      } else {
+        locationList.value = result;
+
+        print(locationList);
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        debugPrint('Data Fetch Error: $e');
+      }
     }
   }
 }

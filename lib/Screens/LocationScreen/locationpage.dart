@@ -10,16 +10,17 @@ import 'package:homelyknock/Route/routes.dart';
 
 import 'package:homelyknock/widgets/custom_loader.dart';
 
+import '../ProfileScreen/Controller/profile_controller.dart';
 import 'location_controller.dart';
 
 class LocationPage extends StatelessWidget {
   LocationPage({super.key});
 
   final _locationController = Get.put(LocationController());
+  final _profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
-    _locationController.getServiceLocation();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -122,7 +123,7 @@ class LocationPage extends StatelessWidget {
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (contex, index) {
-                            var data = _locationController.locationList[index];
+                            var data = _profileController.locationList[index];
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -280,7 +281,7 @@ class LocationPage extends StatelessWidget {
                               height: 10.h,
                             );
                           },
-                          itemCount: _locationController.locationList.length),
+                          itemCount: _profileController.locationList.length),
                       SizedBox(
                         height: 20.h,
                       )
@@ -290,7 +291,6 @@ class LocationPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.purpleAccent,
           onPressed: () {
             Get.toNamed(Routes.addLocationScreen);
           },
