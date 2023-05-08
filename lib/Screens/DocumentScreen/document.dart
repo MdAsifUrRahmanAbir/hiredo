@@ -9,9 +9,7 @@ import '../../Route/routes.dart';
 import '../ProfileScreen/Controller/profile_controller.dart';
 
 class Document extends StatelessWidget {
-   Document({super.key});
-
-  
+  Document({super.key});
 
   final TextEditingController nameController = TextEditingController();
 
@@ -54,6 +52,12 @@ class Document extends StatelessWidget {
                           padding: EdgeInsets.all(8.0.w),
                           child: TextFormField(
                             controller: nameController,
+                            onChanged: (value) {
+                              if (nameController.text.isEmpty &&
+                                  locationController.text.isEmpty) {
+                                _realTimeController.isSearch.value = false;
+                              }
+                            },
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               fillColor: Colors.white,
@@ -81,6 +85,12 @@ class Document extends StatelessWidget {
                           padding: EdgeInsets.all(5.r),
                           child: TextFormField(
                             controller: locationController,
+                            onChanged: (value) {
+                              if (nameController.text.isEmpty &&
+                                  locationController.text.isEmpty) {
+                                _realTimeController.isSearch.value = false;
+                              }
+                            },
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               fillColor: Colors.white,
@@ -103,7 +113,11 @@ class Document extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          _realTimeController.fetchRealTimeServiceSearchData(
+                              nameController.text.trim(), locationController.text.trim());
+                          _realTimeController.isSearch.value = true;
+                        },
                         child: Container(
                           color: const Color(0xff187949),
                           height: 50.h,
@@ -134,20 +148,24 @@ class Document extends StatelessWidget {
               ),
               Obx(
                 () => _realTimeController.isLoading.value
-                    ?const CustomLoader()
+                    ? const CustomLoader()
                     : GridView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount:
-                            _realTimeController.realTimeServiceModel.length,
+                        itemCount: _realTimeController.isSearch.value
+                            ? _realTimeController
+                                .realTimeServiceSearchList.length
+                            : _realTimeController.realTimeServiceModel.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             mainAxisExtent: 231.h,
                             crossAxisSpacing: 15.w,
                             mainAxisSpacing: 23.h,
                             crossAxisCount: 2),
                         itemBuilder: (_, index) {
-                          var result =
-                              _realTimeController.realTimeServiceModel[index];
+                          var result = _realTimeController.isSearch.value
+                              ? _realTimeController
+                                  .realTimeServiceSearchList[index]
+                              : _realTimeController.realTimeServiceModel[index];
 
                           return Container(
                             padding: EdgeInsets.all(10.w),
@@ -177,11 +195,10 @@ class Document extends StatelessWidget {
                                       child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(10.r),
-
-                                          child: 
-                                              Image.network(
-                                                  result.serviceName.image!,fit: BoxFit.fill,)),
-
+                                          child: Image.network(
+                                            result.serviceName.image!,
+                                            fit: BoxFit.fill,
+                                          )),
                                     ),
                                     Positioned(
                                         right: 10.w,
@@ -209,17 +226,17 @@ class Document extends StatelessWidget {
                                   style: GoogleFonts.roboto(
                                       fontSize: 10.sp,
                                       fontWeight: FontWeight.w400,
-                                      color:const Color(0xFF848484)),
+                                      color: const Color(0xFF848484)),
                                 ),
                                 SizedBox(
                                   height: 15.h,
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    Get.toNamed(Routes.postAJob,arguments:{
-                                        "isBookId":result.user!.id,
-                                        "category":result.serviceName
-                                       }); 
+                                    Get.toNamed(Routes.postAJob, arguments: {
+                                      "isBookId": result.user!.id,
+                                      "category": result.serviceName
+                                    });
                                   },
                                   child: Container(
                                     height: 30.h,

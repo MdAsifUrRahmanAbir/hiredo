@@ -19,6 +19,7 @@ import 'package:homelyknock/Services/api_component.dart';
 import 'package:homelyknock/local/my_local.dart';
 
 import '../../Screens/QuestionScreen/Model/job_post_model.dart';
+import '../Screens/DocumentScreen/Model/real_time_model.dart';
 import '../Screens/LeadsScreen/Model/lead_search_model.dart';
 import '../Screens/LeadsScreen/Model/leads_model.dart';
 import '../Screens/MyResponse/Model/my_response_model.dart';
@@ -962,4 +963,34 @@ class ApiServices {
       return 0;
     }
   }
+
+static realTimeServiceSearch(String serviceName,String location)async{
+  debugPrint("searchdata : $serviceName and $location");
+  var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      };
+      var response = await client.get(Uri.parse(realTimeServiceSearchApi(serviceName, location)),
+          headers: headers);
+
+      if (response.statusCode == 200) {
+        return realTimeServiceModelFromJson(response.body);
+      } else {
+        debugPrint(" Book now buyer complete  error. Reason ${response.body}");
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        return print(
+            " Book now buyer complete  error. Reason ${e.toString()}");
+      }
+      return 0;
+    }
+
+}
+
+
 }
