@@ -8,11 +8,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/utils/colors.dart';
 
 import '../../GoogleMapService/google_map_show.dart';
+import '../TrackingScreen/Model/pending_book_now_model.dart';
 
 class CompleteBuyerBookingDetails extends StatelessWidget {
-  CompleteBuyerBookingDetails({
-    super.key,
-  });
+  CompleteBuyerBookingDetails({super.key, required this.data});
+
+  PendingBookNowModel data;
 
   @override
   Widget build(BuildContext context) {
@@ -54,51 +55,110 @@ class CompleteBuyerBookingDetails extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: Colors.grey.shade300,
                           image: DecorationImage(
-                              image: NetworkImage(
-                                  "https://media.istockphoto.com/id/1466778028/photo/happy-easter-concept-frame-top-border-made-of-tulips-spring-flowers-and-colorful-easter-eggs.jpg?b=1&s=170667a&w=0&k=20&c=QpxQTYyE6cZ7-44AO7wK02sGEDH5wsYQrg5KBlXZkVo="),
+                              image: NetworkImage(data.category.image),
                               fit: BoxFit.fill)),
                     ),
                     SizedBox(
                       height: 10.h,
                     ),
                     Text(
-                      " data.post.category.name",
+                      data.category.name,
                       style: GoogleFonts.roboto(
                           fontSize: 20.sp,
                           fontWeight: FontWeight.w500,
                           color: const Color(0xFF272727)),
+                    ),
+                    Text(
+                      data.location,
+                      style: GoogleFonts.roboto(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.grey.shade700),
                     ),
                     SizedBox(
                       height: 18.h,
                     ),
-                    Text(
-                      "data.profileName",
-                      style: GoogleFonts.roboto(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w500,
-                          color: const Color(0xFF272727)),
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.star,
-                          color: const Color(0xFFEACA23),
-                          size: 25.sp,
-                        ),
-                        SizedBox(
-                          width: 3.w,
-                        ),
-                        Text(
-                          " data.rating.toString()",
-                          style: GoogleFonts.roboto(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400,
-                              color: const Color(0xFF424242)),
-                        ),
-                        SizedBox(
-                          width: 3.w,
-                        ),
-                      ],
+                    Container(
+                      //  height: 147.h,
+                      width: double.infinity,
+                      padding:
+                          EdgeInsets.only(top: 15.h, left: 5.w, bottom: 15.h),
+                      decoration: BoxDecoration(
+                          color: Color(0xFFF8F8F8),
+                          borderRadius: BorderRadius.circular(5.r)),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          data.bookedInUser.userProfilePic == null
+                              ? CircleAvatar(
+                                  radius: 25.h,
+                                  backgroundColor: Colors.grey.shade400,
+                                )
+                              : CircleAvatar(
+                                  radius: 25.h,
+                                  backgroundColor: Colors.white,
+                                  backgroundImage: NetworkImage(
+                                      data.bookedInUser.userProfilePic.picture),
+                                ),
+                          SizedBox(
+                            width: 10.w,
+                          ),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  data.bookedInUser.fullName,
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: const Color(0xFF272727)),
+                                ),
+                                SizedBox(
+                                  height: 3.h,
+                                ),
+                                Text(
+                                  data.bookedInUser.email,
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 14.sp,
+                                      color: Color(0xFF424242)),
+                                ),
+                                Text(
+                                  data.bookedInUser.phoneNumber,
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 14.sp,
+                                      color: Color(0xFF424242)),
+                                ),
+
+                                // Row(
+                                //   children: [
+                                //     Icon(
+                                //       Icons.star,
+                                //       color: Color(0xFFEACA23),
+                                //       size:20.sp,
+                                //     ),
+                                //     SizedBox(
+                                //       width: 3.w,
+                                //     ),
+                                //     Text(
+                                //       '3.5',
+                                //       style: GoogleFonts.roboto(
+                                //           fontSize: 14.sp,
+                                //           fontWeight: FontWeight.w400,
+                                //           color: Color(0xFF424242)),
+                                //     ),
+                                //     SizedBox(
+                                //       width: 3.w,
+                                //     ),
+
+                                //   ],
+                                // ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 20.h,
@@ -125,13 +185,13 @@ class CompleteBuyerBookingDetails extends StatelessWidget {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        //   final qansData = data.post.postObject[index];
+                        final qansData = data.realtimePostObject[index];
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              " qansData.question.qs",
+                              qansData.question.qs,
                               style: GoogleFonts.roboto(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w400,
@@ -141,7 +201,7 @@ class CompleteBuyerBookingDetails extends StatelessWidget {
                               height: 10.h,
                             ),
                             Text(
-                              "qansData.pAnswer.options",
+                              qansData.pAnswer.options,
                               style: GoogleFonts.roboto(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w400,
@@ -150,7 +210,7 @@ class CompleteBuyerBookingDetails extends StatelessWidget {
                           ],
                         );
                       },
-                      itemCount: 5,
+                      itemCount: data.realtimePostObject.length,
                       separatorBuilder: (BuildContext context, int index) =>
                           SizedBox(
                         height: 20.h,
@@ -165,8 +225,8 @@ class CompleteBuyerBookingDetails extends StatelessWidget {
               SizedBox(
                   height: 200.h,
                   child: GoogleMapsShow(
-                    lat: "0.0",
-                    leng: "0.0",
+                    lat: data.latitude,
+                    leng: data.longitude,
                   )),
               SizedBox(
                 height: 20.h,

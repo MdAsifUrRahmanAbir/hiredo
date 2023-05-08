@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 String baseUrl = "http://ringknock.pythonanywhere.com/";
 String signupApi = "${baseUrl}register/";
 String signInApi = "${baseUrl}login/";
@@ -77,4 +79,11 @@ String buyerPendingBookNowApi = "${baseUrl}lead/RealTimeBookNowServiceCreate/";
 String addLocationServicePost = "${baseUrl}service-location/";
 String sellerPendingAcceptAndRejectBookNowApi="${baseUrl}lead/book-now-accept-reject/";
 String sellerCompleteBookNowApi="${baseUrl}lead/seller-completed-post/";
+String buyerCompleteBookNowApi="${baseUrl}lead/buyer-completed-post/";
+
+
+String realTimeServiceSearchApi(String serviceName,String location){
+ 
+  return '${baseUrl}lead/RealTimeService/?service_name=$serviceName&service_location=$location';
+}
 
