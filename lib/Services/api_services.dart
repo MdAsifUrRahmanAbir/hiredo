@@ -696,7 +696,7 @@ class ApiServices {
     }
   }
 
-  static Future<dynamic> paymentUserCreditPurchase(
+  static Future<bool> paymentUserCreditPurchase(
       Map<String, dynamic> body) async {
     var accessToken = await MyPreference.getToken();
 
@@ -712,11 +712,12 @@ class ApiServices {
         debugPrint(response.body);
         return true;
       } else {
-        return response.statusCode;
+        debugPrint("Opps cradit purchase error ");
+        return false;
       }
     } on Exception catch (e) {
       debugPrint("Payment Faild. Reason ${e.toString()}");
-      return 0;
+      return false;
     }
   }
 

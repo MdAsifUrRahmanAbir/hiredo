@@ -19,6 +19,8 @@ class PaymentDetailsPage extends StatelessWidget {
   final _paymentController = Get.put(PaymentController());
   final _dataController = Get.put(DataController());
 
+  var carditData= Get.arguments;
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -121,10 +123,12 @@ class PaymentDetailsPage extends StatelessWidget {
                                       style: myStyle(
                                           14.sp, FontWeight.w400, offWhite),
                                     ),
-                                    Text(
-                                      _paymentController.totalCredit.value.toString(),
-                                      style: myStyle(
-                                          14, FontWeight.w400, themeColorGreen),
+                                    Obx(()=>
+                                       Text(
+                                        _paymentController.totalCredit.value.toString(),
+                                        style: myStyle(
+                                            14, FontWeight.w400, themeColorGreen),
+                                      ),
                                     )
                                   ],
                                 ),
@@ -174,10 +178,17 @@ class PaymentDetailsPage extends StatelessWidget {
                                                 FontWeight.w500, textClr),
                                           ),
                                           const Spacer(),
+                                        if(carditData!=null)
                                           GestureDetector(
                                             onTap: () {
-                                              _paymentController
+                                              if(!_paymentController.isPayNowLoading.value){
+                                                 _paymentController
                                                   .selectedCard.value = index;
+                                                  _paymentController.payNow(creaditData:carditData, cardId:data.id);
+
+                                              }
+
+                                             
                                             },
                                             child: Obx(
                                               () => Container(
@@ -197,7 +208,14 @@ class PaymentDetailsPage extends StatelessWidget {
                                                     border: Border.all(
                                                         width: 1,
                                                         color: backIconClr)),
-                                                child: Text(
+                                                child:_paymentController.isPayNowLoading.value? SizedBox(
+                                height: 15.sp,
+                                width: 15.sp,
+                                child: const CircularProgressIndicator(
+                                  strokeWidth: 3,
+                                  color: Colors.white,
+                                ),
+                              ) : Text(
                                                   'Pay Now',
                                                   style: myStyle(
                                                       14.sp,
@@ -213,10 +231,15 @@ class PaymentDetailsPage extends StatelessWidget {
                                             ),
                                           )
                                        ,
+                                       if(carditData==null)
                                        SizedBox(width:10.w,),
+                                        if(carditData==null)
                                         GestureDetector(
                                             onTap: () {
-                                              _paymentController.deleteCard(data.id);
+                                              if(!_paymentController.isDeleteCardLoading.value){
+                                                   _paymentController.deleteCard(data.id);
+                                              }
+                                             
                                             },
                                             child: Container(
                                                 alignment: Alignment.center,
@@ -231,7 +254,14 @@ class PaymentDetailsPage extends StatelessWidget {
                                                     border: Border.all(
                                                         width: 1,
                                                         color: backIconClr)),
-                                                child: Text(
+                                                child:_paymentController.isDeleteCardLoading.value?SizedBox(
+                                height: 15.sp,
+                                width: 15.sp,
+                                child: const CircularProgressIndicator(
+                                  strokeWidth: 3,
+                                  color: Colors.white,
+                                ),
+                              )  :Text(
                                                   'Delete',
                                                   style: myStyle(
                                                       14.sp,
@@ -486,16 +516,11 @@ class PaymentDetailsPage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      if (3 > _paymentController.cardList.length) {
+                     
                         if (_formKey.currentState!.validate()) {
                           _paymentController.createTokenStripe();
                         }
-                      } else {
-                        Get.snackbar("Error",
-                            "There are already 3 cards, please remove the old card and then add the new card.",
-                            backgroundColor: Colors.red,
-                            colorText: Colors.white);
-                      }
+                     
                     },
                     child: Obx(
                       () => Container(

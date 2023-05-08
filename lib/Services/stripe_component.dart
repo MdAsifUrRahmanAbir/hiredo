@@ -3,6 +3,7 @@
 String createTokenApi="${stripeBaseUrl}v1/tokens";
 String createCardApi="${stripeBaseUrl}v1/customers/";
 String createStripeUserApi="${stripeBaseUrl}v1/customers";
+String chargePaymentApi="${stripeBaseUrl}v1/charges";
 
 
  String fetchCardApi(String customerId){

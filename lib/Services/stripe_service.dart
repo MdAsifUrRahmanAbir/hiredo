@@ -128,6 +128,9 @@ class StripeService {
     Get.offNamedUntil(Routes.mainPage, (route) => false);
   }
 
+
+
+// <---------------  stripe payment api  ----------->
 // card create token
 
 
@@ -260,6 +263,36 @@ class StripeService {
       return 1;
     }
   }
+
+
+static Future<dynamic>  chargePayment( Map<String,String> body)async{
+
+
+   try {
+  var headers = {
+     'Content-Type': 'application/x-www-form-urlencoded',
+     'Authorization': 'Bearer $stripeSecretKey',
+   };
+  var response = await client.post(Uri.parse(chargePaymentApi),body:body,headers: headers);
+  debugPrint(response.body);
+  if (response.statusCode == 200) {
+    return response.body;
+  }
+  else {
+    debugPrint(response.body);
+    debugPrint(response.reasonPhrase);
+    var data=jsonDecode(response.body);
+    Fluttertoast.showToast(msg: data["error"]["message"]);
+    return 1;
+  }
+} on Exception catch (e) {
+  debugPrint("Charge payment error : $e");
+
+  return 1;
+}
+
+  }
+
 
 
 

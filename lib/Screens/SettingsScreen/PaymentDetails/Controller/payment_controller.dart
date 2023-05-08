@@ -5,7 +5,10 @@ import 'package:homelyknock/Services/api_services_by_limon.dart';
 import 'package:homelyknock/Services/stripe_service.dart';
 import 'package:homelyknock/widgets/data_controller.dart';
 
+import '../../../../Services/api_services.dart';
+import '../../MyCredits/Model/user_credit_model.dart';
 import '../Model/card_model.dart';
+import '../Model/payment_complete_details_model.dart';
 
 class PaymentController extends GetxController {
   final _dataController = Get.put(DataController());
@@ -13,6 +16,7 @@ class PaymentController extends GetxController {
   @override
   void onInit() {
     getPaymentCard(false);
+  
     super.onInit();
   }
 
@@ -23,13 +27,12 @@ class PaymentController extends GetxController {
 
   var isLoading = false.obs;
   var isCardAddLoading = false.obs;
-  var selectedCard=0.obs;
-   var totalCredit=0.obs ;
+  var selectedCard = 0.obs;
+  var totalCredit = 0.obs;
+  var isPayNowLoading = false.obs;
+  var isDeleteCardLoading=false.obs;
 
-  RxList<Datum> cardList=List<Datum>.empty(growable: true).obs;
-
-
-  
+  RxList<Datum> cardList = List<Datum>.empty(growable: true).obs;
 
   createTokenStripe() async {
     try {
@@ -57,7 +60,7 @@ class PaymentController extends GetxController {
   createCardStripe(String token) async {
     try {
       var result = await StripeService.createCard(
-          token: token, customerId:_dataController.stripeCustomerId.value);
+          token: token, customerId: _dataController.stripeCustomerId.value);
       if (result.runtimeType != int) {
         nameTextController.clear();
         expiryDataTextController.clear();
@@ -73,57 +76,54 @@ class PaymentController extends GetxController {
     }
   }
 
-  getPaymentCard(bool isAddCard ) async {
-    if(!isAddCard){
+  getPaymentCard(bool isAddCard) async {
+    if (!isAddCard) {
       isLoading(true);
     }
-    
+
     try {
-      var result =
-          await StripeService.fetchCard(customerId:_dataController.stripeCustomerId.value);
+      var result = await StripeService.fetchCard(
+          customerId: _dataController.stripeCustomerId.value);
       if (result.runtimeType != int) {
-      
-      CardModel  cardData = cardModelFromJson(result);
-      cardList.value=cardData.data;
-      update();
-      
+        CardModel cardData = cardModelFromJson(result);
+        cardList.value = cardData.data;
+        getCredit();
+        update();
+
         debugPrint("Card fetch all successful");
-      }else{
+      } else {
         debugPrint("Get payment card error ");
       }
     } on Exception catch (e) {
       debugPrint("Error resion :$e");
     } finally {
-       if(!isAddCard){
-      isLoading(false);
-    }
+      if (!isAddCard) {
+        isLoading(false);
+      }
     }
   }
 
-
-    deleteCard(String cardId)async{
-       try {
-      var result =
-          await StripeService.deleteCard(customerId: _dataController.stripeCustomerId.value,cardId:cardId);
+  deleteCard(String cardId) async {
+    try {
+      isDeleteCardLoading(true);
+      var result = await StripeService.deleteCard(
+          customerId: _dataController.stripeCustomerId.value, cardId: cardId);
       if (result.runtimeType != int) {
         Fluttertoast.showToast(msg: "Card delete successfull");
-        getPaymentCard(false);
+        getPaymentCard(true);
+
         debugPrint("Card delete all successful");
-      }else{
+      } else {
         debugPrint("Get payment card error ");
       }
     } on Exception catch (e) {
       debugPrint("Error resion :$e");
+    }finally{
+      isDeleteCardLoading(false);
     }
+  }
 
-    }
-
-
-
-
-
-
-    getCredit() async {
+  getCredit() async {
     try {
       var result = await ApiServicesByLimon.fetchCredit();
 
@@ -131,10 +131,64 @@ class PaymentController extends GetxController {
         debugPrint("Error credit data  :$result");
       } else {
         totalCredit.value = result["total_credit"];
-       
       }
     } on Exception catch (e) {
       debugPrint('Fetch Error :$e');
+    }
+  }
+
+
+
+  payNow(
+      {required UserCreaditModel creaditData, required String cardId}) async {
+        isPayNowLoading(true);
+        var amount = creaditData.priceAmount
+                                            .toInt();
+   var totalAmount=  calculate(amount.toString());
+    
+    try {
+      Map<String, String> body = {
+        'amount': totalAmount,
+        'currency': 'USD',
+        'customer': _dataController.stripeCustomerId.value,
+        'source': cardId,
+      };
+      var result = await StripeService.chargePayment(body);
+      if (result.runtimeType != int) {
+      PaymentCompleteDetailsModel  paymentCompleteData = paymentCompleteDetailsModelFromJson(result);
+        creaditPurchase(creaditData.priceAmount.toString(), creaditData.creditAmount.toString(), paymentCompleteData.balanceTransaction, paymentCompleteData.id);
+      } else {
+        debugPrint("Opps payment uncomplete");
+      }
+    } on Exception catch (e) {
+      debugPrint("payment uncomplete error resion :$e");
+    }finally{
+      isPayNowLoading(false);
+    }
+  }
+
+   calculate(String amount) {
+    final a = (int.parse(amount)) * 100;
+    return a.toString();
+  }
+
+  creaditPurchase(String amount, cradit,transactionId,paymentId) async {
+    Map<String, dynamic> body = {
+      "user": _dataController.id.value,
+      "credit_amount": amount,
+      "credit_price": cradit,
+      "transaction_id":transactionId,
+      "payment_id": paymentId
+    };
+
+    try {
+      var result = await ApiServices.paymentUserCreditPurchase(body);
+      if (result) {
+        Get.snackbar('Payment Successful', "Payment Successful Done");
+        getCredit();
+      }
+    } on Exception catch (e) {
+      debugPrint("Cradit purchese error $e");
     }
   }
 
