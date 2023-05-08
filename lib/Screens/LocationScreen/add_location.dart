@@ -140,8 +140,7 @@ class AddLoaction extends StatelessWidget {
             //   popupProps:
             //       const PopupPropsMultiSelection.menu(showSearchBox: true),
             // ),
-           
-           
+
             SizedBox(
               height: 70.h,
             ),

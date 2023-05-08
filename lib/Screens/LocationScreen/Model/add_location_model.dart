@@ -11,10 +11,12 @@ List<AddLocationModel> addLocationModelFromJson(String str) =>
 class AddLocationModel {
   int id;
   String city;
+
   String distance;
   double latitude;
   double longitude;
-  List<Service> service;
+  DateTime createdAt;
+  DateTime updatedAt;
 
   AddLocationModel({
     required this.id,
@@ -22,7 +24,8 @@ class AddLocationModel {
     required this.distance,
     required this.latitude,
     required this.longitude,
-    required this.service,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory AddLocationModel.fromJson(Map<String, dynamic> json) =>
@@ -32,19 +35,17 @@ class AddLocationModel {
         distance: json["distance"],
         latitude: json["latitude"]?.toDouble(),
         longitude: json["longitude"]?.toDouble(),
-        service:
-            List<Service>.from(json["service"].map((x) => Service.fromJson(x))),
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
       );
-}
 
-class Service {
-  int id;
-
-  Service({
-    required this.id,
-  });
-
-  factory Service.fromJson(Map<String, dynamic> json) => Service(
-        id: json["id"],
-      );
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "city": city,
+        "distance": distance,
+        "latitude": latitude,
+        "longitude": longitude,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+      };
 }

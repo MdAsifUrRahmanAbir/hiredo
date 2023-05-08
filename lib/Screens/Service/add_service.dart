@@ -3,13 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/Screens/ProfileScreen/Controller/profile_controller.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 
+import '../../GoogleMapService/Model/prediction_model.dart';
 import '../HomeScreen/Controller/home_controller.dart';
 import '../HomeScreen/Model/lead_category_model.dart';
+import '../JobPost/Model/location_model.dart';
+import '../LocationScreen/Model/add_location_model.dart';
 import 'Controller/service_controller.dart';
 
 class ServiceAdd extends StatelessWidget {
@@ -18,6 +24,7 @@ class ServiceAdd extends StatelessWidget {
   final _serviceController = Get.put(ServiceController());
   final _homeController = Get.put(HomeController());
   final _formKey = GlobalKey<FormState>();
+  final _profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +77,9 @@ class ServiceAdd extends StatelessWidget {
                         SizedBox(
                           height: 10.h,
                         ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
                         Obx(
                           () => DropdownSearch<LeadCategoriesModel>(
                             items: _homeController.subCategoryList,
@@ -106,6 +116,59 @@ class ServiceAdd extends StatelessWidget {
                             },
                           ),
                         ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        DropdownSearch<AddLocationModel>.multiSelection(
+                          dropdownDecoratorProps:
+                              const DropDownDecoratorProps(),
+                          items: _profileController.locationList,
+                          onChanged: (value) {
+                            for (var element in value) {
+                              _serviceController.locationList.clear();
+                              _serviceController.locationList.add(element.id);
+                            }
+                          },
+                          itemAsString: (item) => item.city,
+                          popupProps: const PopupPropsMultiSelection.menu(
+                              showSearchBox: true),
+                        ),
+
+                        // Obx(
+                        //   () => DropdownSearch<AddLocationModel>(
+                        //     items: _profileController.locationList,
+                        //     dropdownButtonProps: const DropdownButtonProps(
+                        //       icon: SizedBox(),
+                        //     ),
+                        //     popupProps:
+                        //         const PopupProps.menu(showSearchBox: true),
+                        //     dropdownDecoratorProps: DropDownDecoratorProps(
+                        //       dropdownSearchDecoration: InputDecoration(
+                        //           labelText: "What service do you need?",
+                        //           hintText:
+                        //               "e.g. Personal Trainers,House Cleaning ",
+                        //           isDense: true,
+                        //           contentPadding: EdgeInsets.symmetric(
+                        //             horizontal: 16.w,
+                        //           ),
+                        //           enabledBorder: OutlineInputBorder(
+                        //               borderRadius: BorderRadius.circular(3.r),
+                        //               borderSide: BorderSide(
+                        //                   color: _serviceController
+                        //                           .isServieselect.value
+                        //                       ? Colors.red
+                        //                       : const Color(0xFF848484))),
+                        //           border: OutlineInputBorder(
+                        //               borderRadius:
+                        //                   BorderRadius.circular(3.r))),
+                        //     ),
+                        //     itemAsString: (AddLocationModel u) => u.city,
+                        //     onChanged: (value) {
+                        //       _serviceController.locationId.value = value!.id;
+                        //     },
+                        //   ),
+                        // ),
+
                         SizedBox(
                           height: 10.h,
                         ),
