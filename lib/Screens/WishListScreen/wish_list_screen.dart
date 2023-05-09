@@ -10,12 +10,12 @@ import 'Controller/wish_list_controller.dart';
 WishListController wishListController = Get.put(WishListController());
 
 class WishListScreen extends StatelessWidget {
-  WishListScreen({super.key});
+ const WishListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // wishListController.fetchWishListCompany();
-    // wishListController.fetchWishListService();
+    wishListController.fetchWishListCompany();
+    wishListController.fetchWishListService();
     return Scaffold(
       backgroundColor: Colors.white,
         appBar: AppBar(
