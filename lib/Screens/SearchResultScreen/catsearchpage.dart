@@ -6,6 +6,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homelyknock/widgets/custom_loader.dart';
 
 import '../../widgets/common_dashboard_controller.dart';
 import '../HomeScreen/Controller/home_controller.dart';
@@ -21,19 +22,21 @@ class SearchResult extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          padding: EdgeInsets.all(20.0.w),
-          child: Column(
-            children: [
-              // <------------------- search Screen---------------->
-              _searchTextFieldWidget(),
-              SizedBox(
-                height: 25.h,
-              ),
-
-              _searchCategoriesBodyWidget(),
-            ],
+        child: Obx(()=>controller.isInitLocationLoading.value?CustomLoader():
+           SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            padding: EdgeInsets.all(20.0.w),
+            child: Column(
+              children: [
+                // <------------------- search Screen---------------->
+                _searchTextFieldWidget(),
+                SizedBox(
+                  height: 25.h,
+                ),
+        
+                _searchCategoriesBodyWidget(),
+              ],
+            ),
           ),
         ),
       ),
@@ -42,6 +45,7 @@ class SearchResult extends StatelessWidget {
 
   _searchCategoriesBodyWidget() {
     return Card(
+      
       child: Column(
         children: [
           _categoriesBodyTopTitleWidget(),
@@ -49,7 +53,8 @@ class SearchResult extends StatelessWidget {
             () => controller.isTopCatSearchScreen.value
                 ? _gridViewCategoryWidget()
                 : _gridViewLocationWidget(),
-          )
+          ),
+          SizedBox(height:15.h,)
         ],
       ),
     );
@@ -77,119 +82,200 @@ class SearchResult extends StatelessWidget {
   }
 
   _gridViewLocationWidget() {
-    return GridView.builder(
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: controller.predictionList.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 2.3,
-        ),
-        itemBuilder: (_, index) {
-          var data = controller.predictionList[index];
-          return GestureDetector(
-            onTap: () async {
-              List<Location> locations =
-                  await locationFromAddress(data.description);
-              var lat = locations.last.latitude;
-
-              var long = locations.last.longitude;
-
-          controller.locationData=    LocationDataModel(location: data.description, latitude:lat.toString(), longitude:long.toString());
-
-              controller.selectedLocationIndex.value = index;
-              if (controller.selectCategory != null) {
-                controller.goToPostJobScreen();
-              } else {
-                controller.isTopCatSearchScreen.value = true;
-              }
-            },
-            child: Container(
-              padding:
-                  EdgeInsets.only(left: 5.w, right: 5.w, bottom: 5.w, top: 5.h),
-              child: Card(
-                child: Obx(() => Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4.r),
-                          border: Border.all(
-                            color:
-                                controller.selectedLocationIndex.value == index
-                                    ? Color(0xff9CCDB5)
-                                    : Color(0xffffffff),
-                          )),
-                      child: ListTile(
-                        title: Text(
-                          data.description,
-                          style: GoogleFonts.roboto(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xff272727)),
+    return Obx(()=>controller.predictionList.isEmpty?
+    GridView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount:controller.locationList.length>=5?5:controller.locationList.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 2.3,
+          ),
+          itemBuilder: (_, index) {
+            var data =controller.locationList[index];
+            return GestureDetector(
+              onTap: () async {
+                List<Location> locations =
+                    await locationFromAddress(data.city);
+                var lat = locations.last.latitude;
+    
+                var long = locations.last.longitude;
+    
+            controller.locationData=    LocationDataModel(location: data.city, latitude:lat.toString(), longitude:long.toString());
+    
+                controller.selectedLocationIndex.value = index;
+                if (controller.selectCategory != null) {
+                    if(controller.selectCategory!.catName.isNotEmpty){
+                    controller.goToPostJobScreen();
+                  }else{
+                    controller.isTopCatSearchScreen.value = true;
+                  }
+                  
+                } else {
+                  controller.isTopCatSearchScreen.value = true;
+                }
+              },
+              child: Container(
+                padding:
+                    EdgeInsets.only(left: 5.w, right: 5.w, bottom: 5.w, top: 5.h),
+                child: Card(
+                  child: Obx(() => Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4.r),
+                            border: Border.all(
+                              color:
+                                  controller.selectedLocationIndex.value == index
+                                      ? Color(0xff9CCDB5)
+                                      : Color(0xffffffff),
+                            )),
+                        child: ListTile(
+                          title: Text(
+                            data.city,
+                            style: GoogleFonts.roboto(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xff272727)),
+                          ),
+                          trailing: Icon(
+                            controller.isTopCatSearchScreen.value
+                                ? Icons.fingerprint
+                                : Icons.location_on_outlined,
+                            color: Color(0xff187949),
+                          ),
                         ),
-                        trailing: Icon(
-                          controller.isTopCatSearchScreen.value
-                              ? Icons.fingerprint
-                              : Icons.location_on_outlined,
-                          color: Color(0xff187949),
-                        ),
-                      ),
-                    )),
+                      )),
+                ),
               ),
-            ),
-          );
-        });
+            );
+          })
+     :controller.isLoading.value?CustomLoader():
+       GridView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount:controller.predictionList.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 2.3,
+          ),
+          itemBuilder: (_, index) {
+            var data =controller.predictionList[index];
+            return GestureDetector(
+              onTap: () async {
+                List<Location> locations =
+                    await locationFromAddress(data.description);
+                var lat = locations.last.latitude;
+    
+                var long = locations.last.longitude;
+    
+            controller.locationData=    LocationDataModel(location: data.description, latitude:lat.toString(), longitude:long.toString());
+    
+                controller.selectedLocationIndex.value = index;
+                if (controller.selectCategory != null) {
+
+                  if(controller.selectCategory!.catName.isNotEmpty){
+                    controller.goToPostJobScreen();
+                  }else{
+                    controller.isTopCatSearchScreen.value = true;
+                  }
+                  
+                } else {
+                  controller.isTopCatSearchScreen.value = true;
+                }
+              },
+              child: Container(
+                padding:
+                    EdgeInsets.only(left: 5.w, right: 5.w, bottom: 5.w, top: 5.h),
+                child: Card(
+                  child: Obx(() => Container(
+                    
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4.r),
+                            border: Border.all(
+                              color:
+                                  controller.selectedLocationIndex.value == index
+                                      ? Color(0xff9CCDB5)
+                                      : Color(0xffffffff),
+                            )),
+                            
+                        child: ListTile(
+
+                          title: Text(
+                            data.description,
+                            style: GoogleFonts.roboto(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xff272727)),
+                          ),
+                          trailing: Icon(
+                            controller.isTopCatSearchScreen.value
+                                ? Icons.fingerprint
+                                : Icons.location_on_outlined,
+                            color: Color(0xff187949),
+                          ),
+                        ),
+                      )),
+                ),
+              ),
+            );
+          }),
+    
+    
+    );
   }
 
   _gridViewCategoryWidget() {
-    return GridView.builder(
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: controller.subcategory.length >= 8
-            ? 8
-            : controller.subcategory.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 2.3,
-        ),
-        itemBuilder: (_, index) {
-          var data = controller.subcategory[index];
-
-          return GestureDetector(
-            onTap: () {
-              controller.selectedCategoryIndex.value = index;
-              controller.selectCategory = data;
-              controller.isTopCatSearchScreen.value = false;
-            },
-            child: Container(
-              padding:
-                  EdgeInsets.only(left: 5.w, right: 5.w, bottom: 5.w, top: 5.h),
-              child: Card(
-                child: Obx(() => Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4.r),
-                          border: Border.all(
-                            color:
-                                controller.selectedCategoryIndex.value == index
-                                    ? Color(0xff9CCDB5)
-                                    : Color(0xffffffff),
-                          )),
-                      child: ListTile(
-                        title: Text(
-                          data.name,
-                          style: GoogleFonts.roboto(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xff272727)),
+    return  
+       GridView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: controller.subcategory.length >= 8
+              ? 8
+              : controller.subcategory.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 2.3,
+          ),
+          itemBuilder: (_, index) {
+            var data = controller.subcategory[index];
+    
+            return GestureDetector(
+              onTap: () {
+                controller.selectedCategoryIndex.value = index;
+                controller.selectCategory = data;
+                controller.isTopCatSearchScreen.value = false;
+              },
+              child: Container(
+                padding:
+                    EdgeInsets.only(left: 5.w, right: 5.w, bottom: 5.w, top: 5.h),
+                child: Card(
+                  child: Obx(() => Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4.r),
+                            border: Border.all(
+                              color:
+                                  controller.selectedCategoryIndex.value == index
+                                      ? Color(0xff9CCDB5)
+                                      : Color(0xffffffff),
+                            )),
+                        child: ListTile(
+                          title: Text(
+                            data.name,
+                            style: GoogleFonts.roboto(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xff272727)),
+                          ),
+                          trailing: Icon(
+                            Icons.fingerprint,
+                            color: Color(0xff187949),
+                          ),
                         ),
-                        trailing: Icon(
-                          Icons.fingerprint,
-                          color: Color(0xff187949),
-                        ),
-                      ),
-                    )),
+                      )),
+                ),
               ),
-            ),
-          );
-        });
+            );
+          });
+    
   }
 
   _searchTextFieldWidget() {

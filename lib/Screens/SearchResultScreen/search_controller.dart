@@ -7,9 +7,11 @@ import 'package:homelyknock/Screens/JobPost/Model/location_model.dart';
 import '../../GoogleMapService/Model/prediction_model.dart';
 import '../../GoogleMapService/google_map_service.dart';
 import '../../Route/routes.dart';
+import '../../Services/api_services_by_limon.dart';
 import '../../widgets/common_dashboard_controller.dart';
 import '../HomeScreen/Controller/home_controller.dart';
 import '../HomeScreen/Model/lead_category_model.dart';
+import '../LocationScreen/Model/add_location_model.dart';
 
 
 class SearchController extends GetxController{
@@ -20,7 +22,8 @@ class SearchController extends GetxController{
   RxBool isTopCatSearchScreen = true.obs;
   RxInt selectedLocationIndex = (-1).obs;
   RxInt selectedCategoryIndex = (-1).obs;
-  var isLoading=true.obs;
+  var isLoading=false.obs;
+  var isInitLocationLoading=false.obs;
   
  late RxList<LeadCategoriesModel> subcategory=List<LeadCategoriesModel>.empty(growable: true).obs;
  late RxList<Prediction> predictionList=List<Prediction>.empty(growable: true).obs;
@@ -28,10 +31,14 @@ class SearchController extends GetxController{
 
   LeadCategoriesModel? selectCategory;
    LocationDataModel? locationData;
+   
+    RxList<AddLocationModel> locationList =
+      List<AddLocationModel>.empty(growable: true).obs;
 
   @override
   void onInit() {
     subcategory.value=homeController.subCategoryList;
+    getServiceLocation();
     super.onInit();
   }
 
@@ -102,12 +109,30 @@ searchLocation(String? text) async {
   debugPrint("Search result error $e");
   
 }finally{
-  isLoading(false);
+   isLoading(false);
 }
     
   }
 
+ getServiceLocation() async {
+    try {
+      isInitLocationLoading(true);
+      var result = await ApiServicesByLimon.fetchServiceLocation();
+      if (result.runtimeType == int) {
+        print("Error $result");
+      } else {
+        locationList.value = result;
 
+        debugPrint(locationList.toString());
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        debugPrint('Data Fetch Error: $e');
+      }
+    }finally{
+      isInitLocationLoading(false);
+    }
+  }
 
 
 }
