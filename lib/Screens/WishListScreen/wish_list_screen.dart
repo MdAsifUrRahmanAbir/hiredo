@@ -37,15 +37,7 @@ class WishListScreen extends StatelessWidget {
                 color: const Color(0xFF272727)),
           ),
           centerTitle: true,
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(right: 8.0.w),
-              child: CircleAvatar(
-                radius: 15.r,
-                backgroundImage: const AssetImage('images/kumar.png'),
-              ),
-            )
-          ],
+         
         ),
         body: Obx(
           (() => wishListController.isLoading.value
@@ -213,7 +205,15 @@ class WishListScreen extends StatelessWidget {
                                 children: [
                                   Row(
                                     children: [
-                                      Image.network(
+                                      
+                                    result
+                                            .wishedUser.userProfilePic==null? Container(
+                                              height: 100.h,
+                                        width: 100.h,
+                                        color: Colors.grey.shade300,
+                                            )
+                                            
+                                            :Image.network(
                                         result
                                             .wishedUser.userProfilePic.picture,
                                         height: 100.h,

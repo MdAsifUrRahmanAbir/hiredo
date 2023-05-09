@@ -7,9 +7,12 @@ import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/custom_widgets.dart';
+import 'package:homelyknock/widgets/data_controller.dart';
 
 class AccountDetailsPage extends StatelessWidget {
   AccountDetailsPage({Key? key}) : super(key: key);
+
+  final DataController _dataController=Get.put(DataController());
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +119,8 @@ class AccountDetailsPage extends StatelessWidget {
                     SizedBox(
                       height: 50,
                       child: CustomTextFieldForm(
-                        hintText: 'suppose@gmail.com',
+                        readOnly: true,
+                        hintText: _dataController.email.value,
                       ),
                     ),
                     SizedBox(
@@ -135,29 +139,30 @@ class AccountDetailsPage extends StatelessWidget {
                     SizedBox(
                       height: 50,
                       child: CustomTextFieldForm(
-                        hintText: '01888888888',
+                        readOnly: true,
+                        hintText: _dataController.phoneNumber.value,
                       ),
                     ),
                     SizedBox(
                       height: 10.h,
                     ),
-                    Text(
-                      'SMS notification number',
-                      style: GoogleFonts.roboto(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w400,
-                          color: const Color(0xff555957)),
-                    ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
-                    SizedBox(
-                      height: 50,
-                      width: double.infinity,
-                      child: CustomTextFieldForm(
-                        hintText: '01888888888',
-                      ),
-                    ),
+                    // Text(
+                    //   'SMS notification number',
+                    //   style: GoogleFonts.roboto(
+                    //       fontSize: 16.sp,
+                    //       fontWeight: FontWeight.w400,
+                    //       color: const Color(0xff555957)),
+                    // ),
+                    // SizedBox(
+                    //   height: 5.h,
+                    // ),
+                    // SizedBox(
+                    //   height: 50,
+                    //   width: double.infinity,
+                    //   child: CustomTextFieldForm(
+                    //     hintText: '01888888888',
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
