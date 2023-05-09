@@ -10,17 +10,20 @@ class CustomTextFieldForm extends StatelessWidget {
     super.key,
     this.controller,
     this.hintText,
-    this.suffixIconButton
+    this.suffixIconButton,
+    this.readOnly=false,
   });
 
   TextEditingController? controller;
   String? hintText;
   IconButton? suffixIconButton;
+  bool readOnly;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      readOnly: readOnly,
       decoration: InputDecoration(
           filled: true,
           fillColor: themeColorGreen.withOpacity(0.1),
