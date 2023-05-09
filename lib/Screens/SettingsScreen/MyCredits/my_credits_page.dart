@@ -6,53 +6,19 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
-import 'package:homelyknock/widgets/common_data.dart';
+
 import 'package:homelyknock/widgets/custom_loader.dart';
-import 'package:intl/intl.dart';
+
 import 'package:jiffy/jiffy.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Route/routes.dart';
-import '../../../Services/stripe_service.dart';
+
 import 'Controller/credit_controller.dart';
 
 class MyCreditsPage extends StatelessWidget {
   MyCreditsPage({Key? key}) : super(key: key);
 
   final _creditController = Get.put(CreditController());
-
-  List<Map> details = [
-    {
-      'id': '24131012',
-      'description': '10 credits used to reply',
-      'credits': '-10',
-      'date': 'Jan 23, 2023'
-    },
-    {
-      'id': '24131012',
-      'description': '10 credits used to reply',
-      'credits': '-10',
-      'date': 'Jan 23, 2023'
-    },
-    {
-      'id': '24131012',
-      'description': '10 credits used to reply',
-      'credits': '-10',
-      'date': 'Jan 23, 2023'
-    },
-    {
-      'id': '24131012',
-      'description': '10 credits used to reply',
-      'credits': '-10',
-      'date': 'Jan 23, 2023'
-    },
-    {
-      'id': '24131012',
-      'description': '10 credits used to reply',
-      'credits': '-10',
-      'date': 'Jan 23, 2023'
-    }
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -354,51 +320,53 @@ class MyCreditsPage extends StatelessWidget {
                       SizedBox(
                         height: 10.h,
                       ),
-                      Text(
-                        'Redeem coupon',
-                        style: myStyle(12.sp, FontWeight.w400, textClr),
-                      ),
-                      SizedBox(
-                        height: 5.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 35.h,
-                            width: 180.w,
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                hintText: 'coupon code',
-                                fillColor: textformback,
-                                filled: true,
-                                hintStyle:
-                                    myStyle(12.sp, FontWeight.w400, offWhite),
-                                enabledBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide.none),
-                                focusedBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide.none),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 15.h,
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.symmetric(horizontal: 20.w),
-                            height: 35.h,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4.r),
-                                border: Border.all(
-                                    color: themeColorGreen, width: 1)),
-                            child: Text(
-                              'Apply',
-                              style: myStyle(14.sp, FontWeight.w400, textClr),
-                            ),
-                          )
-                        ],
-                      ),
+
+                      // Text(
+                      //   'Redeem coupon',
+                      //   style: myStyle(12.sp, FontWeight.w400, textClr),
+                      // ),
+                      // SizedBox(
+                      //   height: 5.h,
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.start,
+                      //   children: [
+                      //     SizedBox(
+                      //       height: 35.h,
+                      //       width: 180.w,
+                      //       child: TextFormField(
+                      //         decoration: InputDecoration(
+                      //           hintText: 'coupon code',
+                      //           fillColor: textformback,
+                      //           filled: true,
+                      //           hintStyle:
+                      //               myStyle(12.sp, FontWeight.w400, offWhite),
+                      //           enabledBorder: const OutlineInputBorder(
+                      //               borderSide: BorderSide.none),
+                      //           focusedBorder: const OutlineInputBorder(
+                      //               borderSide: BorderSide.none),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     SizedBox(
+                      //       width: 15.h,
+                      //     ),
+                      //     Container(
+                      //       alignment: Alignment.center,
+                      //       padding: EdgeInsets.symmetric(horizontal: 20.w),
+                      //       height: 35.h,
+                      //       decoration: BoxDecoration(
+                      //           borderRadius: BorderRadius.circular(4.r),
+                      //           border: Border.all(
+                      //               color: themeColorGreen, width: 1)),
+                      //       child: Text(
+                      //         'Apply',
+                      //         style: myStyle(14.sp, FontWeight.w400, textClr),
+                      //       ),
+                      //     )
+                      //   ],
+                      // ),
+
                       SizedBox(
                         height: 15.h,
                       ),
@@ -457,22 +425,22 @@ class MyCreditsPage extends StatelessWidget {
                                   Text(
                                     data.id.toString(),
                                     style: myStyle(
-                                        11.sp, FontWeight.w400, textClr),
+                                        12.sp, FontWeight.w400, textClr),
                                   ),
                                   Text(
                                     "${data.leadPostCredit} credits used to reply",
                                     style: myStyle(
-                                        11.sp, FontWeight.w400, textClr),
+                                        12.sp, FontWeight.w400, textClr),
                                   ),
                                   Text(
                                     data.leadPostCredit.toString(),
                                     style: myStyle(
-                                        11.sp, FontWeight.w400, textClr),
+                                        12.sp, FontWeight.w400, textClr),
                                   ),
                                   Text(
-                                    "$date",
+                                    date,
                                     style: myStyle(
-                                        11.sp, FontWeight.w400, textClr),
+                                        12.sp, FontWeight.w400, textClr),
                                   ),
                                 ],
                               ),
