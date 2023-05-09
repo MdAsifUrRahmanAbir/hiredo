@@ -14,8 +14,10 @@ class WishListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // wishListController.fetchWishListCompany();
     // wishListController.fetchWishListService();
     return Scaffold(
+      backgroundColor: Colors.white,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
@@ -50,7 +52,7 @@ class WishListScreen extends StatelessWidget {
               ? const CustomLoader()
               : SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.only(left: 10.w, right: 10.w),
+                    padding: EdgeInsets.symmetric(horizontal:26.w,),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -63,9 +65,11 @@ class WishListScreen extends StatelessWidget {
                                 fontSize: 20.sp,
                                 fontWeight: FontWeight.w500),
                           ),
+                             if (wishListController.serviceWishListModel.isNotEmpty)
                         SizedBox(
                           height: 20.h,
                         ),
+                        if(wishListController.serviceWishListModel.isNotEmpty)
                         GridView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
@@ -84,6 +88,12 @@ class WishListScreen extends StatelessWidget {
                               return Container(
                                 decoration: BoxDecoration(
                                     color: const Color(0xFFFFFFFF),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 17,
+                                        color: Color(0xFF000000).withOpacity(0.07)
+                                      )
+                                    ],
                                     borderRadius: BorderRadius.circular(12.r)),
                                 child: Padding(
                                   padding: EdgeInsets.all(10.0.w),
@@ -170,6 +180,8 @@ class WishListScreen extends StatelessWidget {
                                 ),
                               );
                             }),
+                     
+                       if (wishListController.wishlistModel.isNotEmpty)
                         SizedBox(
                           height: 25.h,
                         ),
@@ -179,9 +191,11 @@ class WishListScreen extends StatelessWidget {
                                   fontSize: 20.sp,
                                   fontWeight: FontWeight.w500,
                                   color: const Color(0xFF272727))),
+                                    if (wishListController.wishlistModel.isNotEmpty)
                         SizedBox(
                           height: 25.h,
                         ),
+                          if (wishListController.wishlistModel.isNotEmpty)
                         ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
@@ -189,8 +203,9 @@ class WishListScreen extends StatelessWidget {
                             var result =
                                 wishListController.wishlistModel[index];
                             return Container(
-                              height: 230.h,
+                              
                               width: double.infinity,
+                              padding: EdgeInsets.symmetric(horizontal:23.w,vertical: 25.h),
                               decoration: BoxDecoration(
                                   color: const Color(0xFFF8F8F8),
                                   borderRadius: BorderRadius.circular(5)),
@@ -201,42 +216,50 @@ class WishListScreen extends StatelessWidget {
                                       Image.network(
                                         result
                                             .wishedUser.userProfilePic.picture,
-                                        height: 70.h,
-                                        width: 100.w,
+                                        height: 100.h,
+                                        width: 100.h,
+                                        fit: BoxFit.fill,
                                       ),
                                       SizedBox(
                                         width: 10.w,
                                       ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            result.wishedUser.corporationName,
-                                            style: GoogleFonts.roboto(
-                                                fontSize: 18.sp,
-                                                fontWeight: FontWeight.w500,
-                                                color: const Color(0xFF272727)),
-                                          ),
-                                          Row(
-                                            children: [
-                                              const Icon(
-                                                Icons.star,
-                                                color: Color(0xFFEACA23),
-                                              ),
-                                              Text(
-                                                '${result.productRatingAvg}',
-                                                style: GoogleFonts.roboto(
-                                                    fontSize: 14.sp,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: const Color(
-                                                        0xFF424242)),
-                                              )
-                                            ],
-                                          ),
-                                        ],
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              result.wishedUser.corporationName,
+                                              style: GoogleFonts.roboto(
+                                                  fontSize: 18.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: const Color(0xFF272727)),
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.ellipsis,
+                                            ),
+                                            Row(
+                                              
+                                              children: [
+                                                 Icon(
+                                                  Icons.star,
+                                                  color:const Color(0xFFEACA23),
+                                                  size: 25.sp,
+                                                ),
+                                                SizedBox(width: 5.w,),
+                                                Text(
+                                                  '${result.productRatingAvg}',
+                                                  style: GoogleFonts.roboto(
+                                                      fontSize: 14.sp,
+                                                      fontWeight: FontWeight.w400,
+                                                      color: const Color(
+                                                          0xFF424242)),
+                                                )
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(
                                         width: 50.w,

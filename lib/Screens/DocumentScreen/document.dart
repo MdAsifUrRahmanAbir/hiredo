@@ -115,7 +115,8 @@ class Document extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           _realTimeController.fetchRealTimeServiceSearchData(
-                              nameController.text.trim(), locationController.text.trim());
+                              nameController.text.trim(),
+                              locationController.text.trim());
                           _realTimeController.isSearch.value = true;
                         },
                         child: Container(
@@ -200,13 +201,27 @@ class Document extends StatelessWidget {
                                             fit: BoxFit.fill,
                                           )),
                                     ),
-                                    Positioned(
-                                        right: 10.w,
-                                        top: 10.h,
-                                        child: const Icon(
-                                          Icons.favorite_border,
-                                          color: Color(0xFF187949),
-                                        ))
+                                     Positioned(
+                                          right: 10.w,
+                                          top: 10.h,
+                                          child:Obx(()=>
+                                             InkWell(
+                                              onTap: (){
+                                                 _realTimeController.addAndRemoveCompanyWishList(result.id);
+                                              },
+                                               child: _realTimeController
+                                                    .companyWishList
+                                                    .contains(result.id)
+                                                ? const Icon(
+                                                    Icons.favorite,
+                                                    color: Color(0xFF174E31),
+                                                  )
+                                                : const Icon(
+                                                    Icons.favorite_border,
+                                                    color: Color(0xFF187949),
+                                                  )),
+                                          )),
+                                    
                                   ],
                                 ),
                                 SizedBox(

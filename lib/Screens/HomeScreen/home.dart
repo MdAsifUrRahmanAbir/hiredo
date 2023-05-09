@@ -344,41 +344,51 @@ class Home extends StatelessWidget {
                   ? 10
                   : _homeController.categoryList.length,
               shrinkWrap: true,
+              padding: EdgeInsets.only(left:27.w),
               itemBuilder: (context, index) {
                 var result = _homeController.categoryList[index];
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: SizedBox(
-                    width: 100.w,
-                    child: Column(
-                      children: [
-                        result.image == null
-                            ? CircleAvatar(
-                                backgroundColor: Color(0xffD9F1E5),
-                                radius: 25.r,
-                                child: Icon(
-                                  Icons.face,
-                                  color: Colors.grey,
-                                ),
-                              )
-                            : CircleAvatar(
-                                backgroundImage: NetworkImage(result.image!),
-                              ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        Text(
-                          result.name,
-                          style: GoogleFonts.roboto(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xff555957),
-                              letterSpacing: 1),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        )
-                      ],
-                    ),
+                return SizedBox(
+                  width:index==0?82.w: 115.w,
+                  child: Column(
+                    crossAxisAlignment:index==0? CrossAxisAlignment.start:CrossAxisAlignment.center,
+                    children: [
+                      result.image == null
+                          ? Container(
+                            height: 50.w,
+                            width: 50.w,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0xffD9F1E5),
+
+                            ),
+                             
+                            )
+                          :Container(
+                            height: 50.h,
+                            width: 50.h,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0xffD9F1E5),
+                              image: DecorationImage(image:NetworkImage(result.image!),fit: BoxFit.fill )
+
+                            ),
+                             
+                            ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      Text(
+                        result.name,
+                        textAlign: index==0?TextAlign.start:TextAlign.center,
+                        style: GoogleFonts.roboto(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xff555957),
+                            letterSpacing: 1),
+                        maxLines:1,
+                        overflow: TextOverflow.ellipsis,
+                      )
+                    ],
                   ),
                 );
               }),

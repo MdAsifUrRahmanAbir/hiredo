@@ -26,7 +26,7 @@ class ApiServicesByParvez {
 
       if (response.statusCode == 200) {
         debugPrint("Data :${jsonDecode(response.body)}");
-        return wishListModelFromJson(response.body);
+        return companyWishListModelFromJson(response.body);
       } else {
         return response.statusCode;
       }
@@ -90,29 +90,31 @@ class ApiServicesByParvez {
     }
   }
 
-  static dynamic removeServiceWishList(int serviceId) async {
+  static dynamic addAndRemoveCompanyWishList(int companyId) async {
     var accessToken = await MyPreference.getToken();
 
     try {
+      final body = {"wished_user": companyId};
+
       var headers = {
         'Authorization': 'Bearer $accessToken',
         'Content-Type': 'application/json',
       };
 
-      var response = await client
-          .post(Uri.parse("$wishListServiceApi/$serviceId/"), headers: headers);
+      var response = await client.post(Uri.parse(companyWishListAddRemoveApi),
+          body: jsonEncode(body), headers: headers);
 
       if (response.statusCode == 200) {
-        debugPrint('Wish list service remove Successfull');
-
+        debugPrint('Wish list add and remove successfull');
+        debugPrint(response.body);
         return true;
       } else {
-        debugPrint('WishList Add Failed ${response.statusCode}');
+        debugPrint('WishList Add and remove Failed ${response.statusCode}');
         return false;
       }
     } on Exception catch (e) {
       if (kDebugMode) {
-        print('Wish List Add Failed ${e.toString()}');
+        print('Wish List Add and remove Failed ${e.toString()}');
       }
       return false;
     }
