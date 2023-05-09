@@ -113,7 +113,7 @@ class LocationController extends GetxController {
       var result = await ApiServicesByLimon.updateService(body, id);
       if (result.runtimeType != int) {
         debugPrint('Data Update Successfull');
-        // getServiceLocation();
+        _profileController.getServiceLocation();
         Get.snackbar('Success', 'Data Update Successfull',
             colorText: Colors.white, backgroundColor: const Color(0xFF0C134F));
       } else {

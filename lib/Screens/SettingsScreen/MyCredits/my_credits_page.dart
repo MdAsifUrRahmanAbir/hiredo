@@ -8,6 +8,8 @@ import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/common_data.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
+import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Route/routes.dart';
@@ -177,7 +179,7 @@ class MyCreditsPage extends StatelessWidget {
                                     8.sp, FontWeight.w400, themeColorGreen),
                               ),
                             ),
-                         const   Spacer(),
+                            const Spacer(),
                             Text(
                               "You have ${_creditController.totalCredit.value} credits",
                               style: myStyle(14.sp, FontWeight.w400, textClr),
@@ -275,9 +277,9 @@ class MyCreditsPage extends StatelessWidget {
                                     const Spacer(),
                                     InkWell(
                                       onTap: () async {
-
-                                         Get.toNamed(Routes.myPaymentDetails,arguments:_creditController
-                                             .userCreditData[index]);
+                                        Get.toNamed(Routes.myPaymentDetails,
+                                            arguments: _creditController
+                                                .userCreditData[index]);
 
                                         // var amount = _creditController
                                         //     .userCreditData[index].priceAmount
@@ -436,45 +438,51 @@ class MyCreditsPage extends StatelessWidget {
                       ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) => Container(
-                                padding: EdgeInsets.symmetric(vertical: 10.h),
-                                decoration: const BoxDecoration(
-                                    border: Border(
-                                        top: BorderSide(
-                                            color: offWhite, width: 1),
-                                        bottom: BorderSide(
-                                            color: offWhite, width: 1))),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      details[index]['id'],
-                                      style: myStyle(
-                                          11.sp, FontWeight.w400, textClr),
-                                    ),
-                                    Text(
-                                      details[index]['description'],
-                                      style: myStyle(
-                                          11.sp, FontWeight.w400, textClr),
-                                    ),
-                                    Text(
-                                      details[index]['credits'],
-                                      style: myStyle(
-                                          11.sp, FontWeight.w400, textClr),
-                                    ),
-                                    Text(
-                                      details[index]['date'],
-                                      style: myStyle(
-                                          11.sp, FontWeight.w400, textClr),
-                                    ),
-                                  ],
-                                ),
+                          itemBuilder: (context, index) {
+                            var data =
+                                _creditController.creditTransactionList[index];
+                            var date = Jiffy.parse('${data.date}').yMMMd;
+                            return Container(
+                              padding: EdgeInsets.symmetric(vertical: 10.h),
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      top:
+                                          BorderSide(color: offWhite, width: 1),
+                                      bottom: BorderSide(
+                                          color: offWhite, width: 1))),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    data.id.toString(),
+                                    style: myStyle(
+                                        11.sp, FontWeight.w400, textClr),
+                                  ),
+                                  Text(
+                                    "${data.leadPostCredit} credits used to reply",
+                                    style: myStyle(
+                                        11.sp, FontWeight.w400, textClr),
+                                  ),
+                                  Text(
+                                    data.leadPostCredit.toString(),
+                                    style: myStyle(
+                                        11.sp, FontWeight.w400, textClr),
+                                  ),
+                                  Text(
+                                    "$date",
+                                    style: myStyle(
+                                        11.sp, FontWeight.w400, textClr),
+                                  ),
+                                ],
                               ),
+                            );
+                          },
                           separatorBuilder: (context, index) => SizedBox(
                                 height: 15.h,
                               ),
-                          itemCount: details.length),
+                          itemCount:
+                              _creditController.creditTransactionList.length),
                       SizedBox(
                         height: 15.h,
                       ),
