@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:geocoding/geocoding.dart';
 
 import 'package:get/get.dart';
 
@@ -10,6 +12,8 @@ import 'package:homelyknock/Route/routes.dart';
 
 import 'package:homelyknock/widgets/custom_loader.dart';
 
+import '../../GoogleMapService/Model/prediction_model.dart';
+import '../JobPost/Model/location_model.dart';
 import '../ProfileScreen/Controller/profile_controller.dart';
 import 'location_controller.dart';
 
@@ -23,6 +27,27 @@ class LocationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(
+          " Location",
+          style: GoogleFonts.roboto(
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w500,
+              color: const Color(0xff272727)),
+        ),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Color(0xFF187949),
+            )),
+        automaticallyImplyLeading: false,
+      ),
       body: SafeArea(
         child: Obx(
           () => _locationController.isLoading.value
@@ -35,87 +60,89 @@ class LocationPage extends StatelessWidget {
                       SizedBox(
                         height: 44.h,
                       ),
-                      IntrinsicHeight(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              border: Border.all(color: Colors.green)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 50.h,
-                                width: 120.w,
-                                child: Container(
-                                  padding: EdgeInsets.all(8.0.w),
-                                  child: TextFormField(
-                                    controller: _locationController.searchCtrl,
-                                    decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      fillColor: Colors.white,
-                                      hintText: "Search ",
-                                      hintStyle: GoogleFonts.roboto(
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w400,
-                                          letterSpacing: 1,
-                                          color: Color(0xffB7B7B7)),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              VerticalDivider(
-                                width: 20.w,
-                                thickness: 1,
-                                indent: 10,
-                                endIndent: 10,
-                                color: Colors.grey,
-                              ),
-                              SizedBox(
-                                height: 50.h,
-                                width: 120.w,
-                                child: Container(
-                                  padding: EdgeInsets.all(5),
-                                  child: TextFormField(
-                                    controller:
-                                        _locationController.locationSearchCtrl,
-                                    decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      fillColor: Colors.white,
-                                      hintText: "Location",
-                                      prefix: InkWell(
-                                        onTap: () {},
-                                        child: Icon(
-                                          Icons.location_pin,
-                                          color: Colors.grey,
-                                          size: 20,
-                                        ),
-                                      ),
-                                      hintStyle: GoogleFonts.roboto(
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w400,
-                                          letterSpacing: 1,
-                                          color: Color(0xffB7B7B7)),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  color: Color(0xff187949),
-                                  height: 50.h,
-                                  width: 45.w,
-                                  child: Icon(
-                                    Icons.search,
-                                    color: Color(0xffFFFFFF),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+
+                      // IntrinsicHeight(
+                      //   child: Container(
+                      //     decoration: BoxDecoration(
+                      //         borderRadius: BorderRadius.circular(4),
+                      //         border: Border.all(color: Colors.green)),
+                      //     child: Row(
+                      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //       crossAxisAlignment: CrossAxisAlignment.center,
+                      //       children: [
+                      //         SizedBox(
+                      //           height: 50.h,
+                      //           width: 120.w,
+                      //           child: Container(
+                      //             padding: EdgeInsets.all(8.0.w),
+                      //             child: TextFormField(
+                      //               controller: _locationController.searchCtrl,
+                      //               decoration: InputDecoration(
+                      //                 border: InputBorder.none,
+                      //                 fillColor: Colors.white,
+                      //                 hintText: "Search ",
+                      //                 hintStyle: GoogleFonts.roboto(
+                      //                     fontSize: 16.sp,
+                      //                     fontWeight: FontWeight.w400,
+                      //                     letterSpacing: 1,
+                      //                     color: Color(0xffB7B7B7)),
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //         VerticalDivider(
+                      //           width: 20.w,
+                      //           thickness: 1,
+                      //           indent: 10,
+                      //           endIndent: 10,
+                      //           color: Colors.grey,
+                      //         ),
+                      //         SizedBox(
+                      //           height: 50.h,
+                      //           width: 120.w,
+                      //           child: Container(
+                      //             padding: EdgeInsets.all(5),
+                      //             child: TextFormField(
+                      //               controller:
+                      //                   _locationController.locationSearchCtrl,
+                      //               decoration: InputDecoration(
+                      //                 border: InputBorder.none,
+                      //                 fillColor: Colors.white,
+                      //                 hintText: "Location",
+                      //                 prefix: InkWell(
+                      //                   onTap: () {},
+                      //                   child: Icon(
+                      //                     Icons.location_pin,
+                      //                     color: Colors.grey,
+                      //                     size: 20,
+                      //                   ),
+                      //                 ),
+                      //                 hintStyle: GoogleFonts.roboto(
+                      //                     fontSize: 16.sp,
+                      //                     fontWeight: FontWeight.w400,
+                      //                     letterSpacing: 1,
+                      //                     color: Color(0xffB7B7B7)),
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //         GestureDetector(
+                      //           onTap: () {},
+                      //           child: Container(
+                      //             color: Color(0xff187949),
+                      //             height: 50.h,
+                      //             width: 45.w,
+                      //             child: Icon(
+                      //               Icons.search,
+                      //               color: Color(0xffFFFFFF),
+                      //             ),
+                      //           ),
+                      //         )
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+
                       SizedBox(
                         height: 10.h,
                       ),
@@ -169,7 +196,7 @@ class LocationPage extends StatelessWidget {
                                                         TextSpan(children: [
                                                   TextSpan(
                                                       text:
-                                                          "${data.distance} miles of ",
+                                                          "Within ${data.distance} miles of ",
                                                       style: GoogleFonts.roboto(
                                                           fontSize: 16.sp,
                                                           fontWeight:
@@ -190,14 +217,6 @@ class LocationPage extends StatelessWidget {
                                             SizedBox(
                                               height: 8.h,
                                             ),
-                                            // Text(
-                                            //   ' Service',
-                                            //   style: GoogleFonts.roboto(
-                                            //       fontSize: 14.sp,
-                                            //       fontWeight: FontWeight.w400,
-                                            //       color: Color(0xFF848484)
-                                            //           .withOpacity(0.5)),
-                                            // ),
                                             SizedBox(
                                               height: 8.h,
                                             ),
@@ -262,7 +281,11 @@ class LocationPage extends StatelessWidget {
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          Get.toNamed(Routes.addLocationScreen);
+                                          Get.toNamed(Routes.addLocationScreen,
+                                              arguments: {
+                                                "isEdit": true,
+                                                "data": data
+                                              });
                                         },
                                         child: Icon(
                                           Icons.edit,
@@ -292,7 +315,8 @@ class LocationPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Get.toNamed(Routes.addLocationScreen);
+            Get.toNamed(Routes.addLocationScreen,
+                arguments: {"isEdit": false, "data": null});
           },
           child: Icon(Icons.add)),
     );

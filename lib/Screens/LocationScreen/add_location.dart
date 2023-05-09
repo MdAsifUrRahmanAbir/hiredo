@@ -5,29 +5,39 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:homelyknock/Screens/ProfileScreen/profile.dart';
-import 'package:homelyknock/Screens/Service/Model/service_model.dart';
+import 'package:homelyknock/Screens/LocationScreen/Model/add_location_model.dart';
 
 import '../../GoogleMapService/Model/prediction_model.dart';
 
 import '../JobPost/Model/location_model.dart';
+
 import 'location_controller.dart';
 
 class AddLoaction extends StatelessWidget {
   AddLoaction({super.key});
 
   final _locationController = Get.put(LocationController());
-  final _popupCustomValidationKey = GlobalKey<DropdownSearchState<int>>();
+  var isEdit = Get.arguments['isEdit'];
+  var data = Get.arguments['data'];
+  AddLocationModel? locationData;
 
   @override
   Widget build(BuildContext context) {
+    _locationController.searchTextController.clear();
+    _locationController.distanceController.clear();
+    if (data != null) {
+      locationData = data;
+
+      _locationController.searchTextController.text = locationData!.city;
+      _locationController.distanceController.text = locationData!.distance;
+    }
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          "Add Location",
+          isEdit ? "Update Location" : "Add Location",
           style: GoogleFonts.roboto(
               fontSize: 20.sp,
               fontWeight: FontWeight.w500,
@@ -100,9 +110,11 @@ class AddLoaction extends StatelessWidget {
                 );
               },
             ),
+
             SizedBox(
               height: 10.h,
             ),
+
             TextFormField(
               controller: _locationController.distanceController,
               validator: (value) {
@@ -121,6 +133,7 @@ class AddLoaction extends StatelessWidget {
                     borderSide: BorderSide(color: Colors.black, width: 0)),
               ),
             ),
+
             SizedBox(
               height: 10.h,
             ),
@@ -146,7 +159,11 @@ class AddLoaction extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                _locationController.addLocationService();
+                if (isEdit) {
+                  _locationController.updateServiceLocation(locationData!.id);
+                } else {
+                  _locationController.addLocationService();
+                }
               },
               child: Container(
                 height: 50.h,
@@ -158,7 +175,7 @@ class AddLoaction extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Submit",
+                      isEdit ? "Update" : "Submit",
                       style: GoogleFonts.roboto(
                           fontSize: 16.sp,
                           color: Colors.white,

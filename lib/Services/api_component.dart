@@ -77,15 +77,17 @@ String bookNowApi = "${baseUrl}lead/RealTimeBookNowServiceCreate/";
 String sellerPendingBookNowApi = "${baseUrl}lead/SellerPendingRealTimePost/";
 String buyerPendingBookNowApi = "${baseUrl}lead/RealTimeBookNowServiceCreate/";
 String addLocationServicePost = "${baseUrl}service-location/";
-String sellerPendingAcceptAndRejectBookNowApi="${baseUrl}lead/book-now-accept-reject/";
-String sellerCompleteBookNowApi="${baseUrl}lead/seller-completed-post/";
-String buyerCompleteBookNowApi="${baseUrl}lead/buyer-completed-post/";
+String sellerPendingAcceptAndRejectBookNowApi =
+    "${baseUrl}lead/book-now-accept-reject/";
+String sellerCompleteBookNowApi = "${baseUrl}lead/seller-completed-post/";
+String buyerCompleteBookNowApi = "${baseUrl}lead/buyer-completed-post/";
+String creditTransactionGetApi = "${baseUrl}lead/CreditReduceTransactionView/";
 
-
-String realTimeServiceSearchApi(String serviceName,String location){
- 
+String realTimeServiceSearchApi(String serviceName, String location) {
   return '${baseUrl}lead/RealTimeService/?service_name=$serviceName&service_location=$location';
 }
 
+
 String companyWishListAddRemoveApi="${baseUrl}lead/WishlistCompanyViewSet/";
+
 
