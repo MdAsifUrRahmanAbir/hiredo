@@ -8,6 +8,7 @@ import 'package:homelyknock/Screens/LocationScreen/Model/add_location_model.dart
 import 'package:homelyknock/Screens/ReviewScreen/model/review_model.dart';
 
 import 'package:homelyknock/Screens/SettingsScreen/EmailTemplate/Model/email_template_model.dart';
+import 'package:homelyknock/Screens/SettingsScreen/MyCredits/Model/credit_transaction_model.dart';
 import 'package:homelyknock/Screens/SettingsScreen/SMSTemplate/Model/sms_template_model.dart';
 import 'package:homelyknock/Screens/TrackingScreen/Model/pending_post_model.dart';
 
@@ -648,6 +649,29 @@ class ApiServicesByLimon {
       }
     } on Exception catch (e) {
       debugPrint('Do not updated data $e');
+      return 0;
+    }
+  }
+
+  // credit transactions
+
+  static dynamic fetchCreditTransaction() async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+      };
+      var response = await client.get(Uri.parse(creditTransactionGetApi),
+          headers: headers);
+      if (response.statusCode == 200) {
+        debugPrint(jsonEncode(response.body));
+        return creditTransactionModelFromJson(response.body);
+      } else {
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      debugPrint("Data fetch Error. Reason ${e.toString()}");
       return 0;
     }
   }
