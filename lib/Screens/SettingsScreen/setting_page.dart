@@ -63,11 +63,15 @@ class SettingsPage extends StatelessWidget {
               ),
               // <------------ My Profile ------->
               _profileCard(
-                  title: 'My Profile', icon: 'images/user.png', onTap: () {
+                  title: 'My Profile',
+                  icon: 'images/user.png',
+                  onTap: () {
                     Get.toNamed(Routes.myProfile);
                   }),
               _profileCard(
-                  title: 'Reviews', icon: 'images/reviews.png', onTap: () {
+                  title: 'Reviews',
+                  icon: 'images/reviews.png',
+                  onTap: () {
                     Get.toNamed(Routes.reviewPage);
                   }),
 
@@ -75,10 +79,12 @@ class SettingsPage extends StatelessWidget {
                   title: 'Elite Pro',
                   icon: 'images/elite_pro.png',
                   onTap: () {
-                    Get.toNamed(Routes.elitProPage);
+                    // Get.toNamed(Routes.elitProPage);
                   }),
               _profileCard(
-                  title: 'Badges', icon: 'images/badge.png', onTap: () {
+                  title: 'Badges',
+                  icon: 'images/badge.png',
+                  onTap: () {
                     Get.toNamed(Routes.badgePage);
                   }),
               _profileCard(
@@ -107,14 +113,15 @@ class SettingsPage extends StatelessWidget {
                   title: 'Email Templates',
                   icon: 'images/email.png',
                   onTap: () {
-                       Get.toNamed(Routes.emailTemplate);
+                    Get.toNamed(Routes.emailTemplate);
                   }),
 
               _profileCard(
-                  title: 'SMS Templates', icon: 'images/sms.png',
-                   onTap: () {
-                      Get.toNamed(Routes.smsTemplate);
-                   }),
+                  title: 'SMS Templates',
+                  icon: 'images/sms.png',
+                  onTap: () {
+                    Get.toNamed(Routes.smsTemplate);
+                  }),
 
               SizedBox(
                 height: 30.h,
@@ -126,21 +133,23 @@ class SettingsPage extends StatelessWidget {
 
               // -------> Credits & Payment <----------
               _profileCard(
-                  title: 'My Credits', icon: 'images/credit.png', onTap: () {
+                  title: 'My Credits',
+                  icon: 'images/credit.png',
+                  onTap: () {
                     Get.toNamed(Routes.myCredits);
                   }),
-              _profileCard(
-                  title: 'Invoices and billing details',
-                  icon: 'images/invoice.png',
-                  onTap: () {
-                    Get.toNamed(Routes.invoiceAndBilling);
-                  }),
+              // _profileCard(
+              //     title: 'Invoices and billing details',
+              //     icon: 'images/invoice.png',
+              //     onTap: () {
+              //       Get.toNamed(Routes.invoiceAndBilling);
+              //     }),
 
               _profileCard(
                   title: 'My payment details',
                   icon: 'images/payment.png',
                   onTap: () {
-                    Get.toNamed(Routes.myPaymentDetails,arguments: null);
+                    Get.toNamed(Routes.myPaymentDetails, arguments: null);
                   }),
 
               SizedBox(
@@ -154,12 +163,16 @@ class SettingsPage extends StatelessWidget {
               // --------> Intergration <--------
 
               _profileCard(
-                  title: 'Email', icon: 'images/email.png', onTap: () {
+                  title: 'Email',
+                  icon: 'images/email.png',
+                  onTap: () {
                     Get.toNamed(Routes.emailNotification);
                   }),
               _profileCard(
-                  title: 'Browser', icon: 'images/browser.png', onTap: () {
-                     Get.toNamed(Routes.browserNotification);
+                  title: 'Browser',
+                  icon: 'images/browser.png',
+                  onTap: () {
+                    Get.toNamed(Routes.browserNotification);
                   }),
 
               SizedBox(

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Route/routes.dart';
 
-
 import 'package:homelyknock/Screens/IntroScreen/onBoarding_screen.dart';
 import 'package:homelyknock/Screens/IntroScreen/signupintropage.dart';
 import 'package:homelyknock/local/my_local.dart';
@@ -21,33 +20,28 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
- 
-   final _signInController = Get.put(SignInController());
+  final _signInController = Get.put(SignInController());
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 3), () async {
       SharedPreferences preferences = await SharedPreferences.getInstance();
-        String isLoggedEmail= preferences.getString(Constance.isLoggedEmail)??"";
-        String isLoggedPassword= preferences.getString(Constance.isLoggedPassword)??"";
-        bool isOnBoard= preferences.getBool(Constance.isOnboard) ?? false;
+      String isLoggedEmail =
+          preferences.getString(Constance.isLoggedEmail) ?? "";
+      String isLoggedPassword =
+          preferences.getString(Constance.isLoggedPassword) ?? "";
+      bool isOnBoard = preferences.getBool(Constance.isOnboard) ?? false;
 
       if (isLoggedEmail.isNotEmpty) {
-          _signInController.userSignIn(isLogged: false, email: isLoggedEmail, password:isLoggedPassword);
+        _signInController.userSignIn(
+            isLogged: false, email: isLoggedEmail, password: isLoggedPassword);
       } else {
-        
-       
-        if(isOnBoard){
-      
-       Get.offAllNamed(Routes.signIntroPage);
-         
-        }else{
+        if (isOnBoard) {
+          Get.offAllNamed(Routes.signIntroPage);
+        } else {
           debugPrint("navigate on board screen $isOnBoard");
-       
+
           Get.offAllNamed(Routes.onboard);
-         
-           
         }
-      
       }
     });
 
@@ -59,29 +53,21 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
-        width:  MediaQuery.of(context).size.width,
+        width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
-            gradient: LinearGradient(
+          gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               tileMode: TileMode.mirror,
-            
-              colors:[
-                   Color(0xFF174E31),
-                 Color(0xFF1A7949),
-                 Color(0xFF174E31),
-              
-                 
-               
-                
-            ]),
-
+              colors: [
+                Color(0xFF174E31),
+                Color(0xFF1A7949),
+                Color(0xFF174E31),
+              ]),
         ),
         child: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 20.w
-          ),
-           alignment: Alignment.center,
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            alignment: Alignment.center,
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             //decoration: BoxDecoration(color: themeColorGreen),
@@ -97,7 +83,7 @@ class _SplashPageState extends State<SplashPage> {
                       color: Color(0xFFFFFFFF)),
                 ),
                 Text(
-                  'Homely Knocks ',
+                  'HireDo',
                   style: GoogleFonts.museoModerno(
                       fontSize: 40.sp,
                       fontWeight: FontWeight.w600,

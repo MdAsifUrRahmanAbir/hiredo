@@ -162,9 +162,7 @@ class UpdateLeadSettings extends StatelessWidget {
                               height: 20.h,
                             ),
                             InkWell(
-                              onTap: () {
-                               
-                              },
+                              onTap: () {},
                               child: Container(
                                 height: 50.h,
                                 width: double.infinity,
