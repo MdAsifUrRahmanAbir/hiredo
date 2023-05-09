@@ -21,7 +21,7 @@ class WishListController extends GetxController {
   var accessToken = MyPreference.getToken();
 
 // Company WishList
-  List<WishListModel> wishlistModel = [];
+  List<CompanyWishListModel> wishlistModel = [];
   fetchWishListCompany() async {
     isLoading(true);
 

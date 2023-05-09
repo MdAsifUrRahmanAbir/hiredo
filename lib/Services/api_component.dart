@@ -59,7 +59,7 @@ String completePostApi = "${baseUrl}lead/complete-post-list/";
 String myResponseApi = "${baseUrl}lead/my-reponse/?page=";
 String myResponseCountApi = "${baseUrl}lead/my-reponse-count/";
 
-String wishListCompanyApi = "${baseUrl}lead/WishlistServiceViewSet/";
+String wishListCompanyApi = "${baseUrl}lead/WishlistCompanyViewSet/";
 String wishListServiceApi = "${baseUrl}lead/WishlistFeatureViewSet/";
 String addWishListPostApi = "${baseUrl}lead/WishlistServiceViewSet/";
 
@@ -86,4 +86,6 @@ String realTimeServiceSearchApi(String serviceName,String location){
  
   return '${baseUrl}lead/RealTimeService/?service_name=$serviceName&service_location=$location';
 }
+
+String companyWishListAddRemoveApi="${baseUrl}lead/WishlistCompanyViewSet/";
 

@@ -129,20 +129,5 @@ class HomeController extends GetxController {
     }
   }
 
-  removeWishList(int wishedUserId) async {
-    try {
-      var result =
-          await ApiServicesByParvez.removeServiceWishList(wishedUserId);
-      if (result) {
-        debugPrint('Wish List remove Successfull');
-        wishList.remove(wishedUserId);
-      } else {
-        debugPrint('Wish list remove error ');
-      }
-    } on Exception catch (e) {
-      if (kDebugMode) {
-        print('Wish list remove Error : $e');
-      }
-    }
-  }
+  
 }
