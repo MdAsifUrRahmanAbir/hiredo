@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
+import 'package:homelyknock/Screens/SettingsScreen/OneClickResponce/Model/on_click_response_model.dart';
 
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
+import 'package:homelyknock/widgets/custom_loader.dart';
 
 import 'controller/on_click_response_controller.dart';
 
@@ -16,10 +18,13 @@ class OneClickResponcePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: scaffoldClr,
-      appBar: _appBarWidget(context),
-      body: _bodyWidget(context),
-    );
+        backgroundColor: scaffoldClr,
+        appBar: _appBarWidget(context),
+        body: Obx(
+          () => _onClickResponseController.isLoading.value
+              ? CustomLoader()
+              : _bodyWidget(context),
+        ));
   }
 
   _appBarWidget(BuildContext context) {
@@ -50,24 +55,24 @@ class OneClickResponcePage extends StatelessWidget {
       height: double.infinity,
       width: double.infinity,
       padding: EdgeInsets.all(15.r),
-      child: Obx(()=>
-         Column(
+      child: Obx(
+        () => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _switchWidget(),
             SizedBox(
               height: 40.h,
             ),
-             if(_onClickResponseController.status.value)
-            Text(
-              'Email template to be used for your one-click response:',
-              style: myStyle(14.sp, FontWeight.w400, textClr),
-            ),
+            if (_onClickResponseController.status.value)
+              Text(
+                'Email template to be used for your one-click response:',
+                style: myStyle(14.sp, FontWeight.w400, textClr),
+              ),
             SizedBox(
               height: 5.h,
             ),
-            if(_onClickResponseController.status.value)
-            _dropDownWidget(context),
+            if (_onClickResponseController.status.value)
+              _dropDownWidget(context),
             SizedBox(
               height: 5.h,
             ),
@@ -124,12 +129,15 @@ class OneClickResponcePage extends StatelessWidget {
             style: myStyle(18.sp, FontWeight.w500, offWhite),
             focusColor: themeColorGreen,
             dropdownColor: scaffoldClr,
-            hint: Text(_onClickResponseController.selectedValue.value),
-            items: _onClickResponseController.items
+            value: _onClickResponseController.selectedValue.value.isNotEmpty
+                ? _onClickResponseController.selectedValue.value
+                : null,
+            hint: Text('Selecet'),
+            items: _onClickResponseController.onClickResponseList
                 .map((item) => DropdownMenuItem(
-                      value: item,
+                      value: item.template.templateName,
                       child: Text(
-                        item,
+                        item.template.templateName,
                       ),
                     ))
                 .toList(),
@@ -145,7 +153,10 @@ class OneClickResponcePage extends StatelessWidget {
   _errorRowWidget() {
     return Row(
       children: [
-         Icon(Icons.error,size:10.w,),
+        Icon(
+          Icons.error,
+          size: 10.w,
+        ),
         SizedBox(
           width: 3.w,
         ),
@@ -162,8 +173,8 @@ class OneClickResponcePage extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(17.w),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4.r),
-          border: Border.all(color:const Color(0xFF848484), width: 0.5)),
+          borderRadius: BorderRadius.circular(4.r),
+          border: Border.all(color: const Color(0xFF848484), width: 0.5)),
       child: Column(
         children: [
           Row(
@@ -196,7 +207,9 @@ class OneClickResponcePage extends StatelessWidget {
                         size: 18.sp,
                       ),
                     ),
-                    SizedBox(height: 8.h,),
+                    SizedBox(
+                      height: 8.h,
+                    ),
                     SizedBox(
                       child: Text(
                         'Customise your templates for your one-click response',
@@ -220,7 +233,9 @@ class OneClickResponcePage extends StatelessWidget {
                         size: 18.sp,
                       ),
                     ),
-                    SizedBox(height: 8.h,),
+                    SizedBox(
+                      height: 8.h,
+                    ),
                     SizedBox(
                       child: Text(
                         'Respond to leads by using the one-click response button',
@@ -252,7 +267,9 @@ class OneClickResponcePage extends StatelessWidget {
                         size: 18.sp,
                       ),
                     ),
-                    SizedBox(height: 8.h,),
+                    SizedBox(
+                      height: 8.h,
+                    ),
                     SizedBox(
                       child: Text(
                         'Customers will receive your response instantly',
@@ -276,7 +293,9 @@ class OneClickResponcePage extends StatelessWidget {
                         size: 18.sp,
                       ),
                     ),
-                    SizedBox(height: 8.h,),
+                    SizedBox(
+                      height: 8.h,
+                    ),
                     SizedBox(
                       child: Text(
                         'Follow up with a more personalised message and quote later',

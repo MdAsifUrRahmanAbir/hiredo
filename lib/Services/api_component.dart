@@ -87,7 +87,5 @@ String realTimeServiceSearchApi(String serviceName, String location) {
   return '${baseUrl}lead/RealTimeService/?service_name=$serviceName&service_location=$location';
 }
 
-
-String companyWishListAddRemoveApi="${baseUrl}lead/WishlistCompanyViewSet/";
-
-
+String companyWishListAddRemoveApi = "${baseUrl}lead/WishlistCompanyViewSet/";
+String onClickResponseGetApi = "${baseUrl}one-click-responses/";
