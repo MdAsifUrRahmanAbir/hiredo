@@ -11,7 +11,6 @@ import 'package:homelyknock/local/my_local.dart';
 class WishListController extends GetxController {
   @override
   void onInit() {
-    fetchWishListCompany();
     fetchWishListService();
     super.onInit();
   }
@@ -23,8 +22,6 @@ class WishListController extends GetxController {
 // Company WishList
   List<CompanyWishListModel> wishlistModel = [];
   fetchWishListCompany() async {
-    isLoading(true);
-
     try {
       var result = await ApiServicesByParvez.fetchWishListCompany();
       if (result.runtimeType == int) {
@@ -38,8 +35,6 @@ class WishListController extends GetxController {
       if (kDebugMode) {
         print("Fetch Error $e");
       }
-    } finally {
-      isLoading(false);
     }
   }
 
@@ -56,6 +51,7 @@ class WishListController extends GetxController {
         }
       } else {
         serviceWishListModel = result;
+        await fetchWishListCompany();
         debugPrint("result : $result");
       }
     } on Exception catch (e) {
