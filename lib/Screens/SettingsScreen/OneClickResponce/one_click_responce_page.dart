@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Screens/SettingsScreen/OneClickResponce/Model/on_click_response_model.dart';
 
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
@@ -132,13 +133,21 @@ class OneClickResponcePage extends StatelessWidget {
             value: _onClickResponseController.selectedValue.value.isNotEmpty
                 ? _onClickResponseController.selectedValue.value
                 : null,
-            hint: Text('Selecet'),
+            hint: Text('Selecet',
+                style: GoogleFonts.roboto(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                  color: const Color(0xFF272727),
+                )),
             items: _onClickResponseController.onClickResponseList
                 .map((item) => DropdownMenuItem(
                       value: item.template.templateName,
-                      child: Text(
-                        item.template.templateName,
-                      ),
+                      child: Text(item.template.templateName,
+                          style: GoogleFonts.roboto(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500,
+                            color: const Color(0xFF272727),
+                          )),
                     ))
                 .toList(),
             onChanged: (value) {
@@ -161,10 +170,19 @@ class OneClickResponcePage extends StatelessWidget {
           width: 3.w,
         ),
         Expanded(
-            child: Text(
-          'You can view, edit and manage your email templates in email templates',
-          style: myStyle(10.sp, FontWeight.w400, textClr),
-        ))
+          child: RichText(
+            text: TextSpan(
+                text: "You can view, edit and manage your email templates in ",
+                style: GoogleFonts.roboto(
+                    fontSize: 11.sp, color: const Color(0xFF848484)),
+                children: [
+                  TextSpan(
+                      text: "email templates",
+                      style: GoogleFonts.roboto(
+                          fontSize: 11.sp, color: const Color(0xFF187949)))
+                ]),
+          ),
+        )
       ],
     );
   }
