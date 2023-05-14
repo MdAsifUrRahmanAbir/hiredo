@@ -18,7 +18,6 @@ class LeadsScreen extends StatelessWidget {
 
   final _profileController = Get.put(ProfileController());
   final _leadController = Get.put(LeadController());
- 
 
   @override
   Widget build(BuildContext context) {
@@ -62,10 +61,10 @@ class LeadsScreen extends StatelessWidget {
                           height: 50.h,
                           child: TextFormField(
                             controller: _leadController.searchController,
-                            onChanged: (v){
-                            if(v.isEmpty){
-                              _leadController.isSearch.value=false;
-                            }
+                            onChanged: (v) {
+                              if (v.isEmpty) {
+                                _leadController.isSearch.value = false;
+                              }
                             },
                             decoration: InputDecoration(
                               hintText: 'Search',
@@ -89,15 +88,12 @@ class LeadsScreen extends StatelessWidget {
                         ),
                       ),
                       InkWell(
-                        onTap: (){
-                          if(_leadController.searchController.text.isNotEmpty){
-                             _leadController.isSearch.value=true;
-                             _leadController.searchLeads();
-
+                        onTap: () {
+                          if (_leadController
+                              .searchController.text.isNotEmpty) {
+                            _leadController.isSearch.value = true;
+                            _leadController.searchLeads();
                           }
-                         
-
-                        
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(horizontal: 10.w),
@@ -237,12 +233,16 @@ class LeadsScreen extends StatelessWidget {
                   ListView.separated(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount:_leadController.isSearch.value?_leadController.searchLeadList.length:_leadController.leadsList.length,
+                    itemCount: _leadController.isSearch.value
+                        ? _leadController.searchLeadList.length
+                        : _leadController.leadsList.length,
                     itemBuilder: (context, index) {
-                      var data = _leadController.isSearch.value?_leadController.searchLeadList[index]:_leadController.leadsList[index];
+                      var data = _leadController.isSearch.value
+                          ? _leadController.searchLeadList[index]
+                          : _leadController.leadsList[index];
                       return InkWell(
                         onTap: () {
-                          Get.toNamed(Routes.leadDetailsPage,arguments:data);
+                          Get.toNamed(Routes.leadDetailsPage, arguments: data);
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -313,7 +313,8 @@ class LeadsScreen extends StatelessWidget {
                                               style: GoogleFonts.roboto(
                                                   fontSize: 12.sp,
                                                   fontWeight: FontWeight.w400),
-                                                  maxLines: 1,overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
                                             ),
                                           )
                                         ],
@@ -403,27 +404,19 @@ class LeadsScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    
                     separatorBuilder: (BuildContext context, int index) {
                       return SizedBox(
                         height: 25.h,
                       );
                     },
-                  )
-                ,
+                  ),
                   if (_leadController.isLoadMoreRunning.value == true)
-               Padding(
-                padding: EdgeInsets.only(top: 10.h, bottom: 40.h),
-                child: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              ),
-                
-                
-                
-                
-                
-                
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.h, bottom: 40.h),
+                      child: const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
                 ],
               ),
       ),

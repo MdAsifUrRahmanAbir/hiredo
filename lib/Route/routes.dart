@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:homelyknock/Screens/CategoriesScreen/categories.dart';
 import 'package:homelyknock/Screens/FeturedService/fetured_service.dart';
 import 'package:homelyknock/Screens/ForgetPasswordScreen/forgotpasswordpage.dart';
+import 'package:homelyknock/Screens/InboxScreen/inbox_screen.dart';
 import 'package:homelyknock/Screens/IntroScreen/introonepage.dart';
 import 'package:homelyknock/Screens/IntroScreen/onBoarding_screen.dart';
 import 'package:homelyknock/Screens/IntroScreen/signupintropage.dart';
@@ -95,6 +96,7 @@ class Routes {
   static String completePostDetails = "/complete_post_delete";
   static String myresponseDetailsScreen = "/myresponse_details_screen";
   static String addLocationScreen = "/add_location_screen";
+  static String inboxScreen = "/inbox_screen";
 }
 
 /// Add this list variable into your GetMaterialApp as the value of getPages parameter.
@@ -202,5 +204,6 @@ final getPages = [
       name: Routes.myresponseDetailsScreen,
       page: () => MyresponseDetailsScreen()),
 
-  GetPage(name: Routes.addLocationScreen, page: () => AddLoaction())
+  GetPage(name: Routes.addLocationScreen, page: () => AddLoaction()),
+  GetPage(name: Routes.inboxScreen, page: () => InboxScreen())
 ];
