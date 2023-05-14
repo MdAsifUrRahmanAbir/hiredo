@@ -8,7 +8,6 @@ class OnClickResponseController extends GetxController {
 
   var isLoading = false.obs;
 
-  List items = ['Bathroom', 'Kitchen', 'Renovation'];
   var selectedValue = ''.obs;
 
   RxList<OnClickResponseModel> onClickResponseList =

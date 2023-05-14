@@ -501,6 +501,14 @@ class Profile extends StatelessWidget {
             count: profileController.serviceList.length.toString()),
         _cardItem(
             onTap: () {
+              Get.toNamed(Routes.inboxScreen);
+            },
+            icon: Icons.message,
+            text: 'Message',
+            isCount: false,
+            count: profileController.locationList.length.toString()),
+        _cardItem(
+            onTap: () {
               Get.toNamed(Routes.locationPage);
             },
             icon: Icons.location_pin,
