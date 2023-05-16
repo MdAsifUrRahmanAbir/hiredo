@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/colors.dart';
 import '../SettingsScreen/setting_page.dart';
+import 'Controller/chat_controller.dart';
 
 class ChatScreen extends StatelessWidget {
-  const ChatScreen({super.key});
+  ChatScreen({super.key});
+
+  final _chatController = Get.put(ChatController());
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +108,7 @@ class ChatScreen extends StatelessWidget {
                                 IconButton(
                                     onPressed: () {
                                       showModalBottomSheet(
+                                          backgroundColor: Colors.transparent,
                                           context: context,
                                           builder: (_) => _bottomSheet());
                                     },
@@ -121,5 +126,79 @@ class ChatScreen extends StatelessWidget {
     );
   }
 
-  _bottomSheet() {}
+  _bottomSheet() {
+    return SizedBox(
+      width: 240.w,
+      height: 250.h,
+      child: Card(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+        margin: EdgeInsets.only(left: 60.w, bottom: 76.w, right: 60.w),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 35.r,
+                  backgroundColor: const Color(0xFF02A652),
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.camera_alt,
+                      color: Color(0xFFFFFFFF),
+                    ),
+                    onPressed: () {
+                      _chatController.selectedImageCamera();
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Text(
+                  'Camera',
+                  style: GoogleFonts.roboto(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                      color: const Color(0xFF555957)),
+                )
+              ],
+            ),
+            SizedBox(
+              width: 30.w,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 35.r,
+                  backgroundColor: const Color(0xFFF25A2A),
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.insert_photo,
+                      color: Color(0xFFFFFFFF),
+                    ),
+                    onPressed: () {
+                      _chatController.selectedImageGallery();
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Text(
+                  'Gallery',
+                  style: GoogleFonts.roboto(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                      color: const Color(0xFF555957)),
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
