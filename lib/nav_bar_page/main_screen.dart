@@ -58,7 +58,7 @@ class MainScreen extends StatelessWidget {
                       label: ""),
                   BottomNavigationBarItem(
                       icon: Image.asset(
-                        AppIcons.order,
+                        AppIcons.messenger,
                         fit: BoxFit.fill,
                         color: _mainController.initIndex.value == 2
                             ? themeColorGreen
@@ -68,7 +68,7 @@ class MainScreen extends StatelessWidget {
                       label: ""),
                   BottomNavigationBarItem(
                       icon: Image.asset(
-                        AppIcons.search,
+                        AppIcons.order,
                         fit: BoxFit.fill,
                         color: _mainController.initIndex.value == 3
                             ? themeColorGreen
@@ -78,9 +78,19 @@ class MainScreen extends StatelessWidget {
                       label: ""),
                   BottomNavigationBarItem(
                       icon: Image.asset(
-                        AppIcons.profile,
+                        AppIcons.search,
                         fit: BoxFit.fill,
                         color: _mainController.initIndex.value == 4
+                            ? themeColorGreen
+                            : greyColor,
+                        height: 23.h,
+                      ),
+                      label: ""),
+                  BottomNavigationBarItem(
+                      icon: Image.asset(
+                        AppIcons.profile,
+                        fit: BoxFit.fill,
+                        color: _mainController.initIndex.value == 5
                             ? themeColorGreen
                             : greyColor,
                         height: 23.h,
