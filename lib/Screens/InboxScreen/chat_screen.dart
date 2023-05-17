@@ -21,7 +21,9 @@ class ChatScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: const Icon(
               Icons.arrow_back,
               color: backIconClr,
@@ -59,15 +61,78 @@ class ChatScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Container(
+      body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
-            ListView(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: _chatController.messageList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  var data = _chatController.messageList[index];
+                  return Row(
+                    mainAxisAlignment: data.isSender
+                        ? MainAxisAlignment.end
+                        : MainAxisAlignment.start,
+                    children: [
+                      Column(
+                        crossAxisAlignment: data.isSender
+                            ? CrossAxisAlignment.end
+                            : CrossAxisAlignment.start,
+                        children: [
+                          ConstrainedBox(
+                            constraints: BoxConstraints(
+                              maxWidth:
+                                  MediaQuery.of(context).size.width - 45.w,
+                            ),
+                            child: Card(
+                              elevation: 1,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.r)),
+                              color: data.isSender
+                                  ? const Color(0xFF187949)
+                                  : const Color(0xFFFFFFFF),
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 15.w, vertical: 10.h),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10.w, vertical: 10.h),
+                                child: Text(
+                                  data.text,
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.w400,
+                                      color: data.isSender
+                                          ? const Color(0xFFFFFFFF)
+                                          : const Color(0xFF353535)),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.w, vertical: 10.h),
+                            child: Text(
+                              data.time,
+                              style: GoogleFonts.roboto(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: const Color(0xFF777A79)),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: Container(
+              child: SizedBox(
                   width: MediaQuery.of(context).size.width - 55.w,
                   child: Card(
                       margin:
@@ -90,17 +155,17 @@ class ChatScreen extends StatelessWidget {
                             focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: const Color(0xFF000000)
-                                        .withOpacity(0.2),
+                                        .withOpacity(0.1),
                                     width: 2)),
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: const Color(0xFF000000)
-                                        .withOpacity(0.2),
+                                        .withOpacity(0.1),
                                     width: 2)),
                             errorBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: const Color(0xFF000000)
-                                        .withOpacity(0.2),
+                                        .withOpacity(0.1),
                                     width: 2)),
                             suffixIcon: Row(
                               mainAxisSize: MainAxisSize.min,
@@ -115,6 +180,12 @@ class ChatScreen extends StatelessWidget {
                                     icon: const Icon(
                                       Icons.attach_file,
                                       color: Color(0xFF353535),
+                                    )),
+                                IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.send,
+                                      color: Color(0xFF187949),
                                     )),
                               ],
                             )),
