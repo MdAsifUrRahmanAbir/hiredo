@@ -41,7 +41,9 @@ class ChangePasswordScreen extends StatelessWidget {
                     ),
                     child: Center(
                       child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                           icon: Icon(
                             Icons.arrow_back_ios,
                             color: const Color(0xFF187949),
@@ -245,14 +247,14 @@ class ChangePasswordScreen extends StatelessWidget {
             style: GoogleFonts.roboto(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w400,
-                color: Color(0xFF25302B)),
+                color: const Color(0xFF25302B)),
             children: [
           TextSpan(
               text: "*",
               style: GoogleFonts.roboto(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xffDA1414))),
+                  color: const Color(0xffDA1414))),
         ]));
   }
 }
