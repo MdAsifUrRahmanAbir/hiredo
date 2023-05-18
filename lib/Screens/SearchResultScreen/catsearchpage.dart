@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 
-import '../../widgets/common_dashboard_controller.dart';
 import '../HomeScreen/Controller/home_controller.dart';
 import '../JobPost/Model/location_model.dart';
 import 'search_controller.dart';
@@ -16,7 +15,7 @@ import 'search_controller.dart';
 class SearchResult extends StatelessWidget {
   SearchResult({super.key});
 
-  final controller = Get.put(SearchController());
+  final controller = Get.put(SearchScreenController());
 
   @override
   Widget build(BuildContext context) {
