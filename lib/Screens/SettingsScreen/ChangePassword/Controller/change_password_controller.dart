@@ -28,7 +28,7 @@ class ChangePasswordController extends GetxController {
         debugPrint("$result");
 
         debugPrint('Change Password Successful');
-        
+
         Get.offAllNamed(Routes.signinPage);
       } else {
         debugPrint(" Password Change Faield");

@@ -12,7 +12,7 @@ import 'package:homelyknock/widgets/data_controller.dart';
 class AccountDetailsPage extends StatelessWidget {
   AccountDetailsPage({Key? key}) : super(key: key);
 
-  final DataController _dataController=Get.put(DataController());
+  final DataController _dataController = Get.put(DataController());
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,8 @@ class AccountDetailsPage extends StatelessWidget {
                             text: TextSpan(
                                 text:
                                     'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet',
-                                style: myStyle(14.sp, FontWeight.w400, Color(0xff555957)),
+                                style: myStyle(14.sp, FontWeight.w400,
+                                    const Color(0xff555957)),
                                 children: [
                               TextSpan(
                                   text: ' \nMy Profile',
@@ -98,7 +99,9 @@ class AccountDetailsPage extends StatelessWidget {
                       'Contact details',
                       style: myStyle(16.sp, FontWeight.w400, textClr),
                     ),
-                    SizedBox(height: 8.h,),
+                    SizedBox(
+                      height: 8.h,
+                    ),
                     Text(
                       'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.',
                       style: myStyle(14.sp, FontWeight.w400, textClr),
@@ -111,7 +114,7 @@ class AccountDetailsPage extends StatelessWidget {
                       style: GoogleFonts.roboto(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w400,
-                          color: Color(0xff555957)),
+                          color: const Color(0xff555957)),
                     ),
                     SizedBox(
                       height: 5.h,
@@ -180,14 +183,13 @@ class AccountDetailsPage extends StatelessWidget {
               SizedBox(
                 height: 16.h,
               ),
-              InkWell
-              (
-                onTap: (){
+              InkWell(
+                onTap: () {
                   Get.toNamed(Routes.changePasswordScreen);
                 },
                 child: Container(
                   alignment: Alignment.center,
-                 width: 147.w,
+                  width: 147.w,
                   height: 34.h,
                   decoration: BoxDecoration(
                       color: backIconClr,

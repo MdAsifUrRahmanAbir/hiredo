@@ -135,11 +135,13 @@ class ChatScreen extends StatelessWidget {
               child: SizedBox(
                   width: MediaQuery.of(context).size.width - 55.w,
                   child: Card(
+                      elevation: 1,
                       margin:
-                          EdgeInsets.only(left: 2.w, right: 2.w, bottom: 12.w),
+                          EdgeInsets.only(left: 2.w, right: 2.w, bottom: 5.w),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6.r)),
                       child: TextFormField(
+                        controller: _chatController.messageEditingController,
                         keyboardType: TextInputType.multiline,
                         maxLines: 5,
                         minLines: 1,
