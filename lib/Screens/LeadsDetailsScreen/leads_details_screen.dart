@@ -357,28 +357,44 @@ class LeadsDetailsScreen extends StatelessWidget {
                                   SizedBox(
                                     width: 10.w,
                                   ),
-                                    Container(
-                                    height: 50.h,
-                                    width: 110.w,
-                                    padding: EdgeInsets.symmetric(horizontal: 3.w),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: const Color(0xFF187949)),
-                                        borderRadius:
-                                            BorderRadius.circular(5.r)),
-                                    child: Center(
-                                      child: Text(
-                                        'One Click Responce',
-                                        style: GoogleFonts.roboto(
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w500,
-                                            
-                                            color: const Color(0xFF187949)),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
+                                  if(_leadDetailsController.onClickResponseList[0].oneClickResponse&&_leadDetailsController.onClickResponseList[0].template!=null)
+                                    InkWell(
+                                      onTap: (){
+                                                                Uri uri = Uri(
+                                                scheme: 'mailto',
+                                                path: leadData.user.email,
+                                                query: _leadDetailsController
+                                                    .encodeQueryParameters(<String, String>{
+                                                  'subject':_leadDetailsController.onClickResponseList[0].template.templateName,
+                                                  'body': _leadDetailsController
+                                                      .onClickResponseList[0].template.message
+                                                      
+                                                }));
+                                            _leadDetailsController.sendLaunchUrl(uri: uri);
+                                      },
+                                      child: Container(
+                                      height: 50.h,
+                                      width: 110.w,
+                                      padding: EdgeInsets.symmetric(horizontal: 3.w),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: const Color(0xFF187949)),
+                                          borderRadius:
+                                              BorderRadius.circular(5.r)),
+                                      child: Center(
+                                        child: Text(
+                                          'One Click Responce',
+                                          style: GoogleFonts.roboto(
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w500,
+                                              
+                                              color: const Color(0xFF187949)),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                        ),
                                       ),
+                                                                      ),
                                     ),
-                                  ),
                                   
                                   SizedBox(
                                     width: 10.w,

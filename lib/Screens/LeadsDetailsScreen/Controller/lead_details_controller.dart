@@ -5,11 +5,15 @@ import 'package:get/get.dart';
 import 'package:homelyknock/Screens/ProfileScreen/profile.dart';
 import 'package:homelyknock/Screens/SettingsScreen/SMSTemplate/Model/sms_template_model.dart';
 import 'package:homelyknock/Services/api_services.dart';
+import 'package:homelyknock/widgets/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../Services/api_services_by_limon.dart';
 import '../../LeadsScreen/Controller/lead_controller.dart';
 import '../../SettingsScreen/EmailTemplate/Model/email_template_model.dart';
+import '../../SettingsScreen/OneClickResponce/Model/on_click_response_model.dart';
+
+final log=logger(LeadDetailsController);
 
 class LeadDetailsController extends GetxController {
   // var isContect = [].obs;
@@ -82,6 +86,7 @@ class LeadDetailsController extends GetxController {
     isLoading(true);
     await getEmailTemplete();
     await getSmsTemplete();
+    await getOnClickResponse();
     isLoading(false);
   }
 
@@ -157,4 +162,31 @@ class LeadDetailsController extends GetxController {
       isNotInterestedLoading(false);
     }
   }
+
+  
+  RxList<OnClickResponseModel> onClickResponseList =
+      List<OnClickResponseModel>.empty(growable: true).obs;
+
+ getOnClickResponse() async {
+    
+    try {
+      var result = await ApiServicesByLimon.fetchOnClickResponse();
+
+      if (result.runtimeType == int) {
+        if (kDebugMode) {
+          print("Error $result");
+        }
+      } else {
+        onClickResponseList.value = result;
+       
+        log.i(onClickResponseList[0].template);
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        debugPrint('Data Fetch Error: $e');
+      }
+    } 
+  }
+
+
 }

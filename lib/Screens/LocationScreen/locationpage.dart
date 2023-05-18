@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Route/routes.dart';
+import 'package:homelyknock/utils/colors.dart';
 
 import 'package:homelyknock/widgets/custom_loader.dart';
 
@@ -55,9 +56,7 @@ class LocationPage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 26.w),
                   child: Column(
                     children: [
-                      SizedBox(
-                        height: 44.h,
-                      ),
+                      
 
                       // IntrinsicHeight(
                       //   child: Container(
@@ -194,7 +193,7 @@ class LocationPage extends StatelessWidget {
                                                         TextSpan(children: [
                                                   TextSpan(
                                                       text:
-                                                          "Within ${data.distance} miles of ",
+                                                          "Within ${data.distance} of ",
                                                       style: GoogleFonts.roboto(
                                                           fontSize: 16.sp,
                                                           fontWeight:
@@ -312,6 +311,7 @@ class LocationPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: themeColorGreen,
           onPressed: () {
             Get.toNamed(Routes.addLocationScreen,
                 arguments: {"isEdit": false, "data": null});
