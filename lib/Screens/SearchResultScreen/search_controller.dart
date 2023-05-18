@@ -14,7 +14,7 @@ import '../HomeScreen/Model/lead_category_model.dart';
 import '../LocationScreen/Model/add_location_model.dart';
 
 
-class SearchController extends GetxController{
+class SearchScreenController extends GetxController{
 
   final categoryController = TextEditingController();
   final locationController = TextEditingController();
