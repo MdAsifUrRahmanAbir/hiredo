@@ -1,8 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/Screens/InboxScreen/Model/message_model.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ChatController extends GetxController {
+  final TextEditingController messageEditingController =
+      TextEditingController();
+
   RxString imageFile = ''.obs;
 
   void selectedImageCamera() async {

@@ -86,6 +86,8 @@ class ChangePasswordScreen extends StatelessWidget {
               Obx(
                 () => CustomeTextField(
                   hintText: '********',
+                  keyboardType: TextInputType.text,
+                  maxLines: 1,
                   obscureText: !_changePasswordController.isVisibility.value,
                   controller: _changePasswordController.oldPasswordController,
                   validator: (value) {
@@ -118,6 +120,8 @@ class ChangePasswordScreen extends StatelessWidget {
               Obx(
                 () => CustomeTextField(
                   hintText: '********',
+                  keyboardType: TextInputType.text,
+                  maxLines: 1,
                   obscureText: !_changePasswordController.isVisible.value,
                   controller: _changePasswordController.newPasswordController,
                   validator: (value) {
@@ -150,8 +154,11 @@ class ChangePasswordScreen extends StatelessWidget {
               Obx(
                 () => CustomeTextField(
                   hintText: '********',
+                  keyboardType: TextInputType.text,
+                  maxLines: 1,
                   obscureText: !_changePasswordController.isVisiblele.value,
-                  controller: _changePasswordController.confirmPasswordController,
+                  controller:
+                      _changePasswordController.confirmPasswordController,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Field is Empty';
@@ -199,27 +206,27 @@ class ChangePasswordScreen extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                             color: const Color(0xFFFFFFFF)),
                       ),
-                        Obx(
-                              () => SizedBox(
-                                width: _changePasswordController.isLoading.value
-                                    ? 5.w
-                                    : 0,
-                              ),
+                      Obx(
+                        () => SizedBox(
+                          width: _changePasswordController.isLoading.value
+                              ? 5.w
+                              : 0,
+                        ),
+                      ),
+                      Obx(() {
+                        if (_changePasswordController.isLoading.value) {
+                          return SizedBox(
+                            height: 15.sp,
+                            width: 15.sp,
+                            child: const CircularProgressIndicator(
+                              strokeWidth: 1,
+                              color: Colors.white,
                             ),
-                              Obx(() {
-                              if (_changePasswordController.isLoading.value) {
-                                return SizedBox(
-                                  height: 15.sp,
-                                  width: 15.sp,
-                                  child: const CircularProgressIndicator(
-                                    strokeWidth: 1,
-                                    color: Colors.white,
-                                  ),
-                                );
-                              } else {
-                                return SizedBox();
-                              }
-                            })
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
+                      })
                     ],
                   ),
                 ),
