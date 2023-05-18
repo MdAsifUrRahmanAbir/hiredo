@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -84,7 +84,7 @@ class CompleteBuyerBookingDetails extends StatelessWidget {
                       padding:
                           EdgeInsets.only(top: 15.h, left: 5.w, bottom: 15.h),
                       decoration: BoxDecoration(
-                          color: Color(0xFFF8F8F8),
+                          color: const Color(0xFFF8F8F8),
                           borderRadius: BorderRadius.circular(5.r)),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,13 +122,13 @@ class CompleteBuyerBookingDetails extends StatelessWidget {
                                   data.bookedInUser.email,
                                   style: GoogleFonts.roboto(
                                       fontSize: 14.sp,
-                                      color: Color(0xFF424242)),
+                                      color: const Color(0xFF424242)),
                                 ),
                                 Text(
                                   data.bookedInUser.phoneNumber,
                                   style: GoogleFonts.roboto(
                                       fontSize: 14.sp,
-                                      color: Color(0xFF424242)),
+                                      color: const Color(0xFF424242)),
                                 ),
 
                                 // Row(

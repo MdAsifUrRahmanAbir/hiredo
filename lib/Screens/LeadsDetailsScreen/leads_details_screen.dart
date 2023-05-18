@@ -171,7 +171,7 @@ class LeadsDetailsScreen extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.phone,
-                                    color: Color(0xFF187949),
+                                    color: const Color(0xFF187949),
                                     size: 20.sp,
                                   ),
                                   SizedBox(
@@ -562,7 +562,7 @@ class LeadsDetailsScreen extends StatelessWidget {
                       ),
                       SizedBox(
                         height: 200.h,
-                        child: GoogleMapsShow(lat:leadData.latitude,leng:leadData.longitude,),
+                        child: GoogleMapsShow(lat:leadData.latitude!,leng:leadData.longitude!,),
                       ),
                       SizedBox(
                         height: 20.h,

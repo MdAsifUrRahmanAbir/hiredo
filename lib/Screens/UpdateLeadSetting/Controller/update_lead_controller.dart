@@ -49,7 +49,9 @@ class UpdateController extends GetxController {
       } else {
         addServiceModel = result;
 
-        print("accsse: $accessToken");
+        if (kDebugMode) {
+          print("accsse: $accessToken");
+        }
       }
     } on Exception catch (e) {
       if (kDebugMode) {
@@ -78,7 +80,9 @@ class UpdateController extends GetxController {
           );
         }
       } else {
-        print('Location Added Successful');
+        if (kDebugMode) {
+          print('Location Added Successful');
+        }
 
         Get.snackbar(
           "title",
@@ -109,7 +113,9 @@ class UpdateController extends GetxController {
         }
       } else {
         locationModel = result;
-        print(locationModel);
+        if (kDebugMode) {
+          print(locationModel);
+        }
       }
     } on Exception catch (e) {
       if (kDebugMode) {

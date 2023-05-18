@@ -5,8 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 import '../../../widgets/common_data.dart';
-import '../TabsScreen/trackingpost.dart';
-import '../TabsScreen/trackingpostorder.dart';
+
 
 class TrackingController extends GetxController {
   List<String> items = ['Pending Post', 'Complete Post'];

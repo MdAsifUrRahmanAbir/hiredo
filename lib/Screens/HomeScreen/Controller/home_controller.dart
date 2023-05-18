@@ -45,12 +45,12 @@ class HomeController extends GetxController {
         }
       } else {
         categoryList = result;
-        categoryList.forEach((element) {
-          element.children.forEach((ele) {
+        for (var element in categoryList) {
+          for (var ele in element.children) {
             subCategoryList.add(ele);
-          });
-        });
-        print(subCategoryList.length);
+          }
+        }
+        debugPrint(subCategoryList.length.toString());
 
         if (kDebugMode) {
           print(categoryList);
@@ -72,13 +72,13 @@ class HomeController extends GetxController {
         }
       } else {
         List demoList = result;
-        demoList.forEach((element) {
+        for (var element in demoList) {
           carouselImages.add(element["image"]);
-        });
+        }
       }
     } on Exception catch (e) {
       if (kDebugMode) {
-        print("Opps fetch slider error ");
+        print("Opps fetch slider error $e");
       }
     }
   }

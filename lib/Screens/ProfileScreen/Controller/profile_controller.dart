@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -172,9 +171,9 @@ class ProfileController extends GetxController {
       }
     } on Exception catch (e) {
       isLoading(false);
-      debugPrint("Opps logout error ");
+      debugPrint("Opps logout error $e");
 
-      // TODO
+      
     }
   }
 
@@ -232,8 +231,8 @@ class ProfileController extends GetxController {
   modeChange() async {
     try {
       isLoading(true);
-      print(isUser.value);
-      print(isProfessional.value);
+      debugPrint(isUser.value.toString());
+      debugPrint(isProfessional.value.toString());
 
       var result = await ApiServices.changeUserMode(
           isUser: isUser.value, isProfessional: isProfessional.value);
@@ -286,11 +285,11 @@ class ProfileController extends GetxController {
     try {
       var result = await ApiServicesByLimon.fetchServiceLocation();
       if (result.runtimeType == int) {
-        print("Error $result");
+        debugPrint("Error $result");
       } else {
         locationList.value = result;
 
-        print(locationList);
+        debugPrint(locationList.toString());
       }
     } on Exception catch (e) {
       if (kDebugMode) {

@@ -69,7 +69,7 @@ class BrowserNotification extends StatelessWidget {
                       style: GoogleFonts.roboto(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w400,
-                          color: Color(0xFF515053)),
+                          color: const Color(0xFF515053)),
                     ),
                   )
                 ],

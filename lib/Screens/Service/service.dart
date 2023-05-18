@@ -1,4 +1,4 @@
-import 'package:dropdown_search/dropdown_search.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -8,11 +8,11 @@ import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 
 
-import '../ProfileScreen/Controller/profile_controller.dart';
+
 
 import '../ProfileScreen/profile.dart';
 import 'Controller/service_controller.dart';
-import 'add_service.dart';
+
 
 class ServiceScreen extends StatelessWidget {
   ServiceScreen({super.key});
@@ -22,7 +22,7 @@ class ServiceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(profileController.serviceList.length);
+    debugPrint(profileController.serviceList.length.toString());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,

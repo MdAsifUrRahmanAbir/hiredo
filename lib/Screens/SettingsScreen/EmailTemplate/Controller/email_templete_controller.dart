@@ -5,7 +5,7 @@ import 'package:homelyknock/Screens/SettingsScreen/EmailTemplate/Model/email_tem
 import 'package:homelyknock/Services/api_services_by_limon.dart';
 import 'package:homelyknock/widgets/common_dashboard_controller.dart';
 
-import '../../../../widgets/data_controller.dart';
+
 
 class EmailTemplateController extends GetxController {
   final TextEditingController templeteNameController = TextEditingController();
@@ -133,7 +133,7 @@ class EmailTemplateController extends GetxController {
         Get.snackbar('Delete Data', 'Success');
       }
     } on Exception catch (e) {
-      print('Not Delete Item ${e.toString()}');
+      debugPrint('Not Delete Item ${e.toString()}');
     }
   }
 }

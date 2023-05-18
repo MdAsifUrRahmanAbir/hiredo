@@ -17,7 +17,6 @@ import '../Screens/DocumentScreen/Model/real_time_model.dart';
 import '../Screens/HelpScreen/model/help_model.dart';
 
 import '../Screens/MyResponse/Model/my_response_search_model.dart';
-import '../Screens/Service/Model/service_model.dart';
 import '../Screens/SettingsScreen/MyCredits/Model/user_credit_model.dart';
 import '../local/my_local.dart';
 import 'package:http/http.dart' as http;
@@ -87,7 +86,9 @@ class ApiServicesByLimon {
 
       if (response.statusCode == 201) {
         debugPrint('SMS Template Successfull');
-        print(response.body);
+        if (kDebugMode) {
+          print(response.body);
+        }
         return true;
       } else {
         if (kDebugMode) {
@@ -437,7 +438,9 @@ class ApiServicesByLimon {
       if (response.statusCode == 200) {
         return realTimeServiceModelFromJson(response.body);
       } else {
-        print('Error');
+        if (kDebugMode) {
+          print('Error');
+        }
         return response.statusCode;
       }
     } on Exception catch (e) {

@@ -4,7 +4,7 @@ import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 
 class EliteProPage extends StatelessWidget {
-  EliteProPage({Key? key}) : super(key: key);
+  const EliteProPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class EliteProPage extends StatelessWidget {
           Image.asset('images/notification.png'),
         ],
       ),
-      body: Center(child: Text('Elite Pro Page')),
+      body: const Center(child: Text('Elite Pro Page')),
     );
   }
 }

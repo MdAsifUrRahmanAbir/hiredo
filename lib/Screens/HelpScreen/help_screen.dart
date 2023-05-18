@@ -17,7 +17,7 @@ class HelpScreen extends StatelessWidget {
     return Scaffold(
         appBar: _appBarWidget(context),
         body: Obx(
-          () => controller.isLoading.value ? CustomLoader() : _bodyWidget(),
+          () => controller.isLoading.value ? const CustomLoader() : _bodyWidget(),
         ));
   }
 
@@ -165,60 +165,6 @@ class HelpScreen extends StatelessWidget {
     );
   }
 
-  _searchWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'FAQs',
-          style: GoogleFonts.roboto(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.w500,
-              color: const Color(0xFF187949)),
-        ),
-        SizedBox(
-          height: 20.h,
-        ),
-        SizedBox(
-          height: 50.h,
-          child: TextFormField(
-            controller: controller.searchController,
-            decoration: InputDecoration(
-              hintText: 'Search',
-              fillColor: Colors.white,
-              suffixIcon: Container(
-                height: 50.h,
-                width: 52.w,
-                decoration: BoxDecoration(
-                    color: const Color(0xFF187949),
-                    borderRadius: BorderRadius.circular(4.r)),
-                child: const Center(
-                  child: Icon(
-                    Icons.search,
-                    color: Color(0xFFFFFFFF),
-                  ),
-                ),
-              ),
-              filled: true,
-              hintStyle: const TextStyle(color: Colors.grey),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.green.withOpacity(0.3),
-                  width: 2.0,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.green.withOpacity(0.3),
-                  width: 2.0,
-                ),
-              ),
-            ),
-          ),
-        )
-      ],
-    );
-  }
 
   _popularItemListWidget() {
     return Column(

@@ -1,14 +1,14 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_field, avoid_unnecessary_containers
 
-import 'package:dropdown_button2/dropdown_button2.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:homelyknock/Route/routes.dart';
+
 import 'package:homelyknock/Screens/CategoriesScreen/subcategory.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
-import 'package:homelyknock/nav_bar_page/main_controller.dart';
+
 import 'package:homelyknock/utils/colors.dart';
 
 import '../HomeScreen/Model/lead_category_model.dart';
@@ -98,8 +98,8 @@ class CategoriesPage extends StatelessWidget {
                           onChanged: (String? value) {
                             // This is called when the user selects an item.
                             _categoriesController.isSelect.value = value!;
-                            print("data : $value");
-                            print("data : ${_categoriesController.isSelect.value}");
+                            debugPrint("data : $value");
+                            debugPrint("data : ${_categoriesController.isSelect.value}");
                           },
                           items: _categoriesController.list
                               .map<DropdownMenuItem<String>>((String value) {

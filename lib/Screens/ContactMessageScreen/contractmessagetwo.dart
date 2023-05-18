@@ -82,7 +82,7 @@ class _ContractMessageTwoState extends State<ContractMessageTwo> {
           child: Column(
             children: [
               Center(
-                child: Container(
+                child: SizedBox(
                   height: 35,
                   width: 93,
                   child: Card(

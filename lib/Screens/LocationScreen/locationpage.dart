@@ -2,8 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:geocoding/geocoding.dart';
+
 
 import 'package:get/get.dart';
 
@@ -12,8 +11,7 @@ import 'package:homelyknock/Route/routes.dart';
 
 import 'package:homelyknock/widgets/custom_loader.dart';
 
-import '../../GoogleMapService/Model/prediction_model.dart';
-import '../JobPost/Model/location_model.dart';
+
 import '../ProfileScreen/Controller/profile_controller.dart';
 import 'location_controller.dart';
 

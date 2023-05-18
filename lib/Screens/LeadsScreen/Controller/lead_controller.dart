@@ -79,10 +79,10 @@ class LeadController extends GetxController {
         demoData = res;
         leadsList.value = demoData!.result;
 
-        print("leadsList.length:${leadsList.length}");
+        debugPrint("leadsList.length:${leadsList.length}");
       }
     } on Exception catch (e) {
-      print('Something went wrong');
+      debugPrint('Something went wrong $e');
     } finally {
       isFirstLoadRunning.value = false;
     }
@@ -101,7 +101,7 @@ class LeadController extends GetxController {
         debugPrint("leadsList.length:${leadsList.length}");
       }
     } on Exception catch (e) {
-      print('Something went wrong');
+      debugPrint('Something went wrong $e');
     } finally {
       isFirstLoadRunning.value = false;
     }

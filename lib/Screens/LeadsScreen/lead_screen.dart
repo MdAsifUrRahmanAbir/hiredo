@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 import '../../Services/api_component.dart';
-import '../LeadsDetailsScreen/Controller/lead_details_controller.dart';
+
 import '../ProfileScreen/Controller/profile_controller.dart';
 import 'package:jiffy/jiffy.dart';
 

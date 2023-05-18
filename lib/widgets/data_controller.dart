@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:homelyknock/Services/api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'common_data.dart';

@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../Route/routes.dart';
 import '../HomeScreen/Model/lead_category_model.dart';
-import '../JobPost/post_a_job.dart';
-import '../QuestionScreen/question_screen.dart';
+
 
 class FeturedServiceScreen extends StatelessWidget {
    FeturedServiceScreen({super.key,});
@@ -29,14 +26,14 @@ class FeturedServiceScreen extends StatelessWidget {
         icon: Icon(
           Icons.arrow_back,
           size: 25.sp,
-          color: Color(0xff187949),
+          color: const Color(0xff187949),
         )),
     title: Text(
       "Fetured Service",
       style: GoogleFonts.roboto(
           fontSize: 20.sp,
           fontWeight: FontWeight.w500,
-          color: Color(0xff272727)),
+          color: const Color(0xff272727)),
     ),),
 body:  GridView.builder( 
             shrinkWrap: true,
@@ -134,7 +131,7 @@ body:  GridView.builder(
               height: 30.h,
               width: 84.w,
               decoration: BoxDecoration(
-                  color: Color(0xFF187949),
+                  color: const Color(0xFF187949),
                   borderRadius: BorderRadius.circular(5.r)),
               child: Center(
                 child: Text(
@@ -142,7 +139,7 @@ body:  GridView.builder(
                   style: GoogleFonts.roboto(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w500,
-                      color: Color(0xFFFFFFFF)),
+                      color: const Color(0xFFFFFFFF)),
                 ),
               ),
             ),

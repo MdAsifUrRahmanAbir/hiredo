@@ -3,25 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Route/routes.dart';
-import 'package:homelyknock/Screens/ProfileScreen/profile.dart';
-import 'package:homelyknock/Screens/ReviewScreen/reviews_page.dart';
-import 'package:homelyknock/Screens/SettingsScreen/AccountDetails/account_details.dart';
-import 'package:homelyknock/Screens/SettingsScreen/BillingDetails/billing_details.dart';
-import 'package:homelyknock/Screens/SettingsScreen/BrowserNotification/browser_notification.dart';
-import 'package:homelyknock/Screens/SettingsScreen/ElitePro/elite_pro_page.dart';
-import 'package:homelyknock/Screens/SettingsScreen/EmailNotification/email_notification.dart';
-import 'package:homelyknock/Screens/SettingsScreen/EmailTemplate/email_template_page.dart';
-import 'package:homelyknock/Screens/SettingsScreen/MyCredits/my_credits_page.dart';
-import 'package:homelyknock/Screens/SettingsScreen/OneClickResponce/one_click_responce_page.dart';
-import 'package:homelyknock/Screens/SettingsScreen/PaymentDetails/payment_details_page.dart';
-import 'package:homelyknock/Screens/SettingsScreen/SMSTemplate/sms_template_page.dart';
-import 'package:homelyknock/Screens/SettingsScreen/SettingsBadge/badge_page.dart';
+
 import 'package:homelyknock/utils/colors.dart';
 
 class SettingsPage extends StatelessWidget {
   static const String routename = '/settings';
 
-  SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -186,7 +174,7 @@ class SettingsPage extends StatelessWidget {
                   height: 43.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5.r),
-                    color: Color(0xffDF2929),
+                    color: const Color(0xffDF2929),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

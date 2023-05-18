@@ -39,7 +39,7 @@ class EmailTemplatePage extends StatelessWidget {
           Image.asset('images/notification.png'),
         ],
       ),
-      body: Obx(()=>_emailTemplateController.isLoading.value?CustomLoader()
+      body: Obx(()=>_emailTemplateController.isLoading.value?const CustomLoader()
         : Padding(
           padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
           child: Column(

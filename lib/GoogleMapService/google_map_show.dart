@@ -10,8 +10,8 @@ class GoogleMapsShow extends StatefulWidget {
     required this.leng,
   });
 
-   var lat;
-   var leng;
+   String lat;
+   String leng;
 
   @override
   State<GoogleMapsShow> createState() => _GoogleMapsShowState();
@@ -30,7 +30,7 @@ final Completer<GoogleMapController> _controller =
   void initState() {
     
     _kGooglePlex = CameraPosition(
-    target: LatLng(double.parse(widget.lat!), double.parse(widget.leng!)),
+    target: LatLng(double.parse(widget.lat), double.parse(widget.leng)),
     zoom: 14.4746,
   );
     super.initState();

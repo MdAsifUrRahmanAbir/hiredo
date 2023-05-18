@@ -29,7 +29,7 @@ class LeadDetailsController extends GetxController {
       }
     } on Exception catch (e) {
       debugPrint("Contect error reson $e");
-      // TODO
+
     } finally {
       isContectLoading(false);
     }

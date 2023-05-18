@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:homelyknock/Screens/IntroScreen/signupintropage.dart';
 
-import '../../utils/colors.dart';
 
 class IntroTwoPage extends StatefulWidget {
   const IntroTwoPage({Key? key}) : super(key: key);
@@ -16,8 +14,6 @@ class IntroTwoPage extends StatefulWidget {
 class _IntroTwoPageState extends State<IntroTwoPage> {
   @override
   Widget build(BuildContext context) {
-    double sch = MediaQuery.of(context).size.height;
-    double scw = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
           body: Column(
@@ -33,7 +29,7 @@ class _IntroTwoPageState extends State<IntroTwoPage> {
               style: GoogleFonts.roboto(
                   fontSize: 24.sp,
                   fontWeight: FontWeight.w500,
-                  color: Color(0xFF555957)),
+                  color: const Color(0xFF555957)),
             ),
           ),
           SizedBox(
@@ -46,7 +42,7 @@ class _IntroTwoPageState extends State<IntroTwoPage> {
               style: GoogleFonts.roboto(
                   fontSize: 15.sp,
                   fontWeight: FontWeight.w300,
-                  color: Color(0xFF555957)),
+                  color: const Color(0xFF555957)),
             ),
           )
         ],

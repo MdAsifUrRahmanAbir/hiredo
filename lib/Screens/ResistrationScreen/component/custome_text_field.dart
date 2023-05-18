@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../utils/colors.dart';
 
 class CustomeTextField extends StatelessWidget {
   CustomeTextField(
@@ -46,7 +45,7 @@ class CustomeTextField extends StatelessWidget {
                 color: const Color(0xFF187949).withOpacity(0.2), width: 0.5)),
         border: OutlineInputBorder(
             borderSide: BorderSide(
-                color: const Color(0xFF1879492B).withOpacity(0.2), width: 0)),
+                color: const Color(0xff1879492b).withOpacity(0.2), width: 0)),
         hintText: hintText,
         suffixIcon: suffixIcon,
         suffixIconConstraints: BoxConstraints(minHeight: 14.h, minWidth: 45.w),

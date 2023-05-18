@@ -3,7 +3,7 @@ import 'package:homelyknock/Screens/InboxScreen/inbox_screen.dart';
 
 import '../Screens/DocumentScreen/document.dart';
 import '../Screens/HomeScreen/home.dart';
-import '../Screens/ProfileScreen/Controller/profile_controller.dart';
+
 import '../Screens/ProfileScreen/profile.dart';
 import '../Screens/SearchResultScreen/catsearchpage.dart';
 import '../Screens/TrackingScreen/tracking_screen.dart';
@@ -24,7 +24,7 @@ class MainScreenController extends GetxController {
   final pages = [
     Home(),
     Document(),
-    InboxScreen(),
+    const InboxScreen(),
     TrackingScreen(),
     SearchResult(),
     Profile(),

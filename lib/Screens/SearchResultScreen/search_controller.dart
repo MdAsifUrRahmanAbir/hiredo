@@ -8,7 +8,7 @@ import '../../GoogleMapService/Model/prediction_model.dart';
 import '../../GoogleMapService/google_map_service.dart';
 import '../../Route/routes.dart';
 import '../../Services/api_services_by_limon.dart';
-import '../../widgets/common_dashboard_controller.dart';
+
 import '../HomeScreen/Controller/home_controller.dart';
 import '../HomeScreen/Model/lead_category_model.dart';
 import '../LocationScreen/Model/add_location_model.dart';
@@ -119,7 +119,7 @@ searchLocation(String? text) async {
       isInitLocationLoading(true);
       var result = await ApiServicesByLimon.fetchServiceLocation();
       if (result.runtimeType == int) {
-        print("Error $result");
+        debugPrint("Error $result");
       } else {
         locationList.value = result;
 

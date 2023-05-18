@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable, deprecated_member_use
 
-import 'dart:async';
+
 
 import 'package:flutter/material.dart';
-import 'package:flutter_countdown_timer/countdown_controller.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
 import 'package:get/get.dart';
@@ -11,8 +10,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Route/routes.dart';
 
 
-
-import 'package:homelyknock/Screens/RestPasswordScreen/resetpasswordpage.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 
 import '../../utils/colors.dart';
@@ -25,8 +22,6 @@ class VerificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double scheight = MediaQuery.of(context).size.height;
-    double scwidth = MediaQuery.of(context).size.width;
     _verificationController.startTimer();
     return Scaffold(
       backgroundColor: scaffoldClr,
@@ -34,7 +29,7 @@ class VerificationPage extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: Padding(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: Container(
               height: 43.h,
               width: 43.w,
@@ -46,7 +41,7 @@ class VerificationPage extends StatelessWidget {
                     color: Colors.grey.withOpacity(0.1),
                     spreadRadius: 1,
                     blurRadius: 1,
-                    offset: Offset(0, 2), // changes position of shadow
+                    offset: const Offset(0, 2), // changes position of shadow
                   ),
                 ],
               ),
@@ -99,7 +94,7 @@ class VerificationPage extends StatelessWidget {
                 length: 4,
                 cursorColor:
                     backIconClr, // If this is null it will default to the ambient
-                margin:  EdgeInsets.all(5),
+                margin:  const EdgeInsets.all(5),
                 onCompleted: (String value) {
                   
                    _verificationController. code.value = value;
@@ -125,7 +120,7 @@ class VerificationPage extends StatelessWidget {
                       style: GoogleFonts.roboto(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w400,
-                        color: Color(0xFF555957)
+                        color: const Color(0xFF555957)
                       ),
                       children: [
                         TextSpan(
@@ -133,7 +128,7 @@ class VerificationPage extends StatelessWidget {
                             style:GoogleFonts.roboto(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w400,
-                        color:_verificationController.isValue.value? Color(0xFF555957):Color(0xFFED282E)
+                        color:_verificationController.isValue.value? const Color(0xFF555957):const Color(0xFFED282E)
                       ),),
                         TextSpan(
                             text: ' s',
@@ -182,7 +177,7 @@ class VerificationPage extends StatelessWidget {
                     style: GoogleFonts.roboto(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w500,
-                      color: Color(0xFFFFFFFF)
+                      color: const Color(0xFFFFFFFF)
                     ),
                   ),
                 ),

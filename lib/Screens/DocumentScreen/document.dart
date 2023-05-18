@@ -294,7 +294,7 @@ class Document extends StatelessWidget {
                 blurRadius: 1,
                 spreadRadius: 0,
                 color: Colors.black.withOpacity(0.1),
-                offset: Offset(0, 1))
+                offset: const Offset(0, 1))
           ]),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -319,7 +319,7 @@ class Document extends StatelessWidget {
               Positioned(
                   right: 10.w,
                   top: 10.h,
-                  child: Icon(
+                  child: const Icon(
                     Icons.favorite_border,
                     color: Color(0xFF187949),
                   ))
@@ -331,7 +331,7 @@ class Document extends StatelessWidget {
           Text("",
               style: GoogleFonts.roboto(
                 fontSize: 14.sp,
-                color: Color(0xFF272727),
+                color: const Color(0xFF272727),
                 fontWeight: FontWeight.w400,
               )),
           SizedBox(
@@ -351,7 +351,7 @@ class Document extends StatelessWidget {
             height: 30.h,
             width: 84.w,
             decoration: BoxDecoration(
-                color: Color(0xFF187949),
+                color: const Color(0xFF187949),
                 borderRadius: BorderRadius.circular(5.r)),
             child: Center(
               child: Text(
@@ -359,7 +359,7 @@ class Document extends StatelessWidget {
                 style: GoogleFonts.roboto(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
-                    color: Color(0xFFFFFFFF)),
+                    color: const Color(0xFFFFFFFF)),
               ),
             ),
           )

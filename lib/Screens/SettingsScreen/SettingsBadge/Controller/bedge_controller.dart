@@ -33,12 +33,12 @@ class BedgeController extends GetxController {
         List<BedgeModel> demoList = result;
         bedgeList = demoList;
 
-        print(bedgeList);
+        debugPrint(bedgeList.toString());
        
       }
     } on Exception catch (e) {
       if (kDebugMode) {
-        debugPrint('Fetch Error');
+        debugPrint('Fetch Error $e');
       }
     } finally {
       isLoading(false);

@@ -1,20 +1,17 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:geocoding/geocoding.dart';
+
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Screens/ProfileScreen/Controller/profile_controller.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 
-import '../../GoogleMapService/Model/prediction_model.dart';
 import '../HomeScreen/Controller/home_controller.dart';
 import '../HomeScreen/Model/lead_category_model.dart';
-import '../JobPost/Model/location_model.dart';
+
 import '../LocationScreen/Model/add_location_model.dart';
 import 'Controller/service_controller.dart';
 
@@ -52,7 +49,7 @@ class ServiceAdd extends StatelessWidget {
       ),
       body: Obx(
         () => _serviceController.isLoading.value
-            ? CustomLoader()
+            ? const CustomLoader()
             : SingleChildScrollView(
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 17.w),

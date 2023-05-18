@@ -5,11 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';
+
 
 import '../../Route/routes.dart';
-import '../SignUpAccountScreen/signupaccountchoosepage.dart';
-import '../../utils/colors.dart';
 
 class SignIntroPage extends StatefulWidget {
   static const String routename = '/signupintropage';

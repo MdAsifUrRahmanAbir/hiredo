@@ -114,10 +114,10 @@ class MyResponseController extends GetxController {
         demoData = res;
         myResponseList.value = demoData!.result;
 
-        print("leadsList.length:${myResponseList.length}");
+        debugPrint("leadsList.length:${myResponseList.length}");
       }
     } on Exception catch (e) {
-      print('Something went wrong');
+      debugPrint('Something went wrong $e');
     } finally {
       getPendingResponse();
       isFirstLoadRunning.value = false;
