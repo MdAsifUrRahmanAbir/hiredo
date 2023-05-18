@@ -226,11 +226,10 @@ class ProfileController extends GetxController {
     isProfessional.value =
         preferences.getBool(CommonData.isProfessional) ?? false;
     isUser.value = preferences.getBool(CommonData.isUser) ?? false;
-    log.e(isProfessional.value);
-    log.e(isUser.value);
+    
     isUser.value==true?await modeChange():
   
-       log.e(isProfessional.value);
+       log.i("User role : Professional");
     
     
   }
@@ -259,8 +258,7 @@ class ProfileController extends GetxController {
       debugPrint("User not mode change error : $e");
     } finally {
       isLoading(false);
-       log.e(isProfessional.value);
-    log.e(isUser.value);
+       
     }
   }
 

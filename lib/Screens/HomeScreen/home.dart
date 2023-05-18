@@ -350,8 +350,8 @@ class Home extends StatelessWidget {
                     children: [
                       result.image == null
                           ? Container(
-                            height: 50.w,
-                            width: 50.w,
+                            height: 65.h,
+                            width: 65.h,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: Color(0xffD9F1E5),
@@ -360,8 +360,8 @@ class Home extends StatelessWidget {
                              
                             )
                           :Container(
-                            height: 50.h,
-                            width: 50.h,
+                            height: 65.h,
+                            width: 65.h,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: Color(0xffD9F1E5),
