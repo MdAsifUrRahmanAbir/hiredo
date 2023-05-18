@@ -421,7 +421,7 @@ class CategoriesPage extends StatelessWidget {
                   color: themeColorGreen,
                   borderRadius: BorderRadius.circular(3.r)),
               child: Text(
-                "view",
+                "View",
                 style: GoogleFonts.roboto(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w500,

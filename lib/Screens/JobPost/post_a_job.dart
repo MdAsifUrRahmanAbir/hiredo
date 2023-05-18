@@ -213,7 +213,7 @@ class PostAJob extends StatelessWidget {
                   },
                   child: Container(
                     height: 50.h,
-                    width: 300.w,
+                    width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5.r),
                       color: themeColorGreen,
