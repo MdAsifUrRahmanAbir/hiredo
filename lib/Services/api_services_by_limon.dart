@@ -703,4 +703,62 @@ class ApiServicesByLimon {
       return 0;
     }
   }
+
+  static dynamic onclickStatusChange(int id, bool isStatus) async {
+    var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+         'Content-Type': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      };
+      Map<String, dynamic> body = {"one_click_response": isStatus};
+      var response = await client.put(Uri.parse("$onClickStatusChangeApi$id/"),
+          body: jsonEncode(body), headers: headers);
+
+      if (response.statusCode == 200) {
+        return onClickResponseModelFromMap(response.body);
+      } else {
+        debugPrint("onclick status change error : ${response.statusCode}");
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      debugPrint("onclick status change $e");
+      return 1;
+    }
+  }
+
+
+
+static dynamic onClickSetEmailTemplete(int tamId,id,bool status)async{
+   var accessToken = await MyPreference.getToken();
+
+    try {
+      var headers = {
+         'Content-Type': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      };
+      Map<String, dynamic> body = {
+         "template_id": tamId,
+        "one_click_response": status
+      };
+      var response = await client.put(Uri.parse("$onClickSetTemplete$id/"),
+          body: jsonEncode(body), headers: headers);
+
+      if (response.statusCode == 200) {
+        return onClickResponseModelFromMap(response.body);
+      } else {
+        debugPrint("onclick set templete error : ${response.statusCode}");
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      debugPrint("onclick set templete change $e");
+      return 1;
+    }
+
+
+
+
+}
+
 }

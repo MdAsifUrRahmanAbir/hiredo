@@ -31,10 +31,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _profileController.getLocalData();
-    
-    if (_profileController.isUser.value == true) {
-      _profileController.modeChange();
-    }
+   
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,

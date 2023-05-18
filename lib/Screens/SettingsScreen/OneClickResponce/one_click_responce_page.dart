@@ -4,7 +4,6 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
@@ -102,7 +101,8 @@ class OneClickResponcePage extends StatelessWidget {
             padding: 4.0.w,
             showOnOff: false,
             onToggle: (val) {
-              _onClickResponseController.status.value = val;
+              _onClickResponseController.changeStatus(
+                  _onClickResponseController.onClickResponseList[0].id, val);
             },
           ),
         ),
@@ -139,10 +139,11 @@ class OneClickResponcePage extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   color: const Color(0xFF272727),
                 )),
-            items: _onClickResponseController.onClickResponseList
+            items: _onClickResponseController
+                .emailTempleteController.emailTemplateModel
                 .map((item) => DropdownMenuItem(
-                      value: item.template.templateName,
-                      child: Text(item.template.templateName,
+                      value: item.templateName,
+                      child: Text(item.templateName,
                           style: GoogleFonts.roboto(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
@@ -152,6 +153,12 @@ class OneClickResponcePage extends StatelessWidget {
                 .toList(),
             onChanged: (value) {
               _onClickResponseController.selectedValue.value = '$value';
+              for (var element in _onClickResponseController
+                  .emailTempleteController.emailTemplateModel) {
+                if (element.templateName == value) {
+                  _onClickResponseController.setEmailTemplete(element.id);
+                }
+              }
             },
           ),
         ),

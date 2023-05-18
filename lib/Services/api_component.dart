@@ -89,3 +89,5 @@ String realTimeServiceSearchApi(String serviceName, String location) {
 
 String companyWishListAddRemoveApi = "${baseUrl}lead/WishlistCompanyViewSet/";
 String onClickResponseGetApi = "${baseUrl}one-click-responses/";
+String onClickStatusChangeApi="${baseUrl}one-click-statuschange/";
+String onClickSetTemplete="${baseUrl}one-click-responses/";
