@@ -140,8 +140,9 @@ class LeadsDetailsScreen extends StatelessWidget {
                                       ],
                                     ),
                                     // ListTile(
-
+                                    SizedBox(height: 5.h,),
                                     Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Image.asset(
                                           "images/location.png",
@@ -151,11 +152,14 @@ class LeadsDetailsScreen extends StatelessWidget {
                                         SizedBox(
                                           width: 8.w,
                                         ),
-                                        Text(
-                                          leadData.location,
-                                          style: GoogleFonts.roboto(
-                                              fontSize: 14.sp,
-                                              color: const Color(0xFF424242)),
+                                        Expanded(
+                                          child: Text(
+                                         leadData.location,
+                                            style: GoogleFonts.roboto(
+                                                fontSize: 14.sp,
+                                                color: const Color(0xFF424242)),
+                                                
+                                          ),
                                         )
                                       ],
                                     )

@@ -7,6 +7,8 @@ import 'dart:convert';
 List<OnClickResponseModel> onClickResponseModelFromJson(String str) =>
     List<OnClickResponseModel>.from(
         json.decode(str).map((x) => OnClickResponseModel.fromJson(x)));
+OnClickResponseModel onClickResponseModelFromMap(String str) => OnClickResponseModel.fromJson(json.decode(str));
+
 
 String onClickResponseModelToJson(List<OnClickResponseModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -15,7 +17,7 @@ class OnClickResponseModel {
   int id;
   String user;
   bool oneClickResponse;
-  Template template;
+  dynamic template;
 
   OnClickResponseModel({
     required this.id,
@@ -29,7 +31,7 @@ class OnClickResponseModel {
         id: json["id"],
         user: json["user"],
         oneClickResponse: json["one_click_response"],
-        template: Template.fromJson(json["template"]),
+        template:json["template"]==null?null:Template.fromJson(json["template"]),
       );
 
   Map<String, dynamic> toJson() => {
