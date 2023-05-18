@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/Route/routes.dart';
-import 'package:homelyknock/Screens/LeadsScreen/Model/leads_model.dart';
+
 import 'package:homelyknock/Services/stripe_service.dart';
 import 'package:intl/intl.dart';
 
 import 'package:homelyknock/Screens/ResistrationScreen/Model/registration_model.dart';
-import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';
+
 
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -1,11 +1,7 @@
-import 'dart:async';
-import 'dart:ui';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_countdown_timer/index.dart';
 import 'package:get/get.dart';
 
-import '../../../utils/colors.dart';
+import 'dart:async';
+
 
 class VerificationController extends GetxController{
 
@@ -33,7 +29,7 @@ class VerificationController extends GetxController{
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    
     timer.cancel();
     super.dispose();
   }

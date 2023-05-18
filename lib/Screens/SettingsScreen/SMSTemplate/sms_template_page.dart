@@ -7,7 +7,7 @@ import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 
-import '../../../widgets/data_controller.dart';
+
 
 
 
@@ -55,26 +55,26 @@ class SMSTemplatePage extends StatelessWidget {
                     style: GoogleFonts.roboto(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w500,
-                        color: Color(0xFF272727)),
+                        color: const Color(0xFF272727)),
                   ),
                   InkWell(
                     onTap: () {
                       
-                      _add_bottom_sheet(context);
+                      _addBottomSheet(context);
 
                     },
                     child: Container(
                       height: 28.h,
                       width: 104.w,
                       decoration: BoxDecoration(
-                          color: Color(0xFF187949),
+                          color: const Color(0xFF187949),
                           borderRadius: BorderRadius.circular(3.r)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
                             Icons.add,
-                            color: Color(0xFFFFFFFF),
+                            color: const Color(0xFFFFFFFF),
                             size: 18.sp,
                           ),
                           Text(
@@ -315,7 +315,7 @@ class SMSTemplatePage extends StatelessWidget {
   );
   }
 
-  Future<dynamic> _add_bottom_sheet(BuildContext context) {
+ _addBottomSheet(BuildContext context) {
     return showModalBottomSheet(
                       context: context,
                       isDismissible: true,
@@ -435,4 +435,6 @@ class SMSTemplatePage extends StatelessWidget {
                         );
                       });
   }
+
+
 }

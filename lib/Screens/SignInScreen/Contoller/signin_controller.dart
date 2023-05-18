@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/Route/routes.dart';
-import 'package:homelyknock/Screens/SignInScreen/signinpage.dart';
 
-import 'package:homelyknock/nav_bar_page/main_screen.dart';
+
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Services/api_services.dart';
@@ -95,10 +95,10 @@ class SignInController extends GetxController {
         }
        await MyPreference.isLoggedSave(
             email: emailController.text, password: passwordController.text);
-          print(allData.token);
+          debugPrint(allData.token);
        await MyPreference.setToken(allData.token);
          var accessToken = await MyPreference.getToken();
-          print("last token $accessToken");
+          debugPrint("last token $accessToken");
 
         emailController.clear();
         passwordController.clear();

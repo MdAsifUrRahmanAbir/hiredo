@@ -161,15 +161,15 @@ final getPages = [
   GetPage(name: Routes.leadDetailsPage, page: () => LeadsDetailsScreen()),
   GetPage(name: Routes.questionScreen, page: () => QuestionScreen()),
   GetPage(name: Routes.myResponse, page: () => MyResponse()),
-  GetPage(name: Routes.wishListScreen, page: () => WishListScreen()),
-  GetPage(name: Routes.settingPage, page: () => SettingsPage()),
+  GetPage(name: Routes.wishListScreen, page: () => const WishListScreen()),
+  GetPage(name: Routes.settingPage, page: () => const SettingsPage()),
   GetPage(
       name: Routes.changePasswordScreen, page: () => ChangePasswordScreen()),
   GetPage(name: Routes.badgeDetails, page: () => BadgesSecondPage()),
   GetPage(name: Routes.helpPage, page: () => HelpScreen()),
   GetPage(name: Routes.myProfile, page: () => Profile()),
   GetPage(name: Routes.reviewPage, page: () => ReviewsPage()),
-  GetPage(name: Routes.elitProPage, page: () => EliteProPage()),
+  GetPage(name: Routes.elitProPage, page: () => const EliteProPage()),
   GetPage(name: Routes.badgePage, page: () => BadgePage()),
   GetPage(name: Routes.accountDetails, page: () => AccountDetailsPage()),
   GetPage(
@@ -207,6 +207,6 @@ final getPages = [
       page: () => MyresponseDetailsScreen()),
 
   GetPage(name: Routes.addLocationScreen, page: () => AddLoaction()),
-  GetPage(name: Routes.inboxScreen, page: () => InboxScreen()),
+  GetPage(name: Routes.inboxScreen, page: () => const InboxScreen()),
   GetPage(name: Routes.chatScreen, page: () => ChatScreen())
 ];

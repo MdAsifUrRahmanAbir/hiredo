@@ -63,7 +63,9 @@ class SmsTemplateController extends GetxController {
         }
       } else {
         smsTemplateModel.assignAll(result);
-        print(smsTemplateModel);
+        if (kDebugMode) {
+          print(smsTemplateModel);
+        }
       }
     } on Exception catch (e) {
       if (kDebugMode) {
@@ -123,7 +125,9 @@ class SmsTemplateController extends GetxController {
         Get.snackbar('Delete Data', 'Success');
       }
     } on Exception catch (e) {
-      print('Not Delete Item ${e.toString()}');
+      if (kDebugMode) {
+        print('Not Delete Item ${e.toString()}');
+      }
     }
   }
 }

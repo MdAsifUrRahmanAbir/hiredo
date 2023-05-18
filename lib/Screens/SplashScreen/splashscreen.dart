@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Route/routes.dart';
 
-import 'package:homelyknock/Screens/IntroScreen/onBoarding_screen.dart';
-import 'package:homelyknock/Screens/IntroScreen/signupintropage.dart';
 import 'package:homelyknock/local/my_local.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -80,14 +78,14 @@ class _SplashPageState extends State<SplashPage> {
                   style: GoogleFonts.roboto(
                       fontSize: 22.sp,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xFFFFFFFF)),
+                      color: const Color(0xFFFFFFFF)),
                 ),
                 Text(
                   'HireDo',
                   style: GoogleFonts.museoModerno(
                       fontSize: 40.sp,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFFFFFFFF)),
+                      color: const Color(0xFFFFFFFF)),
                 )
               ],
             )),

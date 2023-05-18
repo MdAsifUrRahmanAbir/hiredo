@@ -41,7 +41,7 @@ class BadgePage extends StatelessWidget {
       ),
       body: Obx(
         () => _bedgeController.isLoading.value
-            ? CustomLoader()
+            ? const CustomLoader()
             : SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,7 +110,7 @@ class BadgePage extends StatelessWidget {
                                 color: Colors.grey.withOpacity(0.1),
                                 spreadRadius: 1,
                                 blurRadius: 1,
-                                offset: Offset(0, 1),
+                                offset: const Offset(0, 1),
                               ),
                             ],
                           ),

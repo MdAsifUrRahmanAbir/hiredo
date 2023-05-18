@@ -9,11 +9,10 @@ import 'package:homelyknock/Screens/HomeScreen/Model/lead_category_model.dart';
 import 'package:homelyknock/Screens/ProfileScreen/Model/profile_model.dart';
 
 import 'package:homelyknock/Screens/ResistrationScreen/Model/registration_model.dart';
-import 'package:homelyknock/utils/colors.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:homelyknock/Screens/SettingsScreen/SettingsBadge/Model/bedge_mode.dart';
 import 'package:homelyknock/Screens/SignInScreen/Model/login_model.dart';
-import 'package:homelyknock/Screens/UpdateLeadSetting/Model/add_services_model.dart';
 import 'package:homelyknock/Screens/UpdateLeadSetting/Model/location_model.dart';
 import 'package:homelyknock/Services/api_component.dart';
 import 'package:homelyknock/local/my_local.dart';
@@ -28,7 +27,6 @@ import '../Screens/QuestionScreen/Model/booking_Model.dart';
 import '../Screens/Service/Model/service_model.dart';
 import '../Screens/TrackingScreen/Model/complete_post_model.dart';
 import '../Screens/TrackingScreen/Model/pending_book_now_model.dart';
-import '../widgets/data_controller.dart';
 
 class ApiServices {
   static var client = http.Client();
@@ -97,7 +95,9 @@ class ApiServices {
       var response = await client.get(Uri.parse(leadcategory));
 
       if (response.statusCode == 200) {
-        print("data : ${jsonDecode(response.body)}");
+        if (kDebugMode) {
+          print("data : ${jsonDecode(response.body)}");
+        }
 
         return leadCategoriesModelFromJson(response.body);
       } else {
@@ -196,7 +196,9 @@ class ApiServices {
       http.StreamedResponse response = await request.send();
 
       if (response.statusCode == 201) {
-        print(await response.stream.bytesToString());
+        if (kDebugMode) {
+          print(await response.stream.bytesToString());
+        }
         return true;
       } else {
         if (kDebugMode) {
@@ -255,6 +257,7 @@ class ApiServices {
         }
       }
     } on Exception catch (e) {
+      debugPrint("Error slider $e");
       return 1;
     }
   }
@@ -333,9 +336,13 @@ class ApiServices {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      if (kDebugMode) {
+        print(await response.stream.bytesToString());
+      }
     } else {
-      print(response.reasonPhrase);
+      if (kDebugMode) {
+        print(response.reasonPhrase);
+      }
     }
   }
 
@@ -368,7 +375,7 @@ class ApiServices {
       debugPrint("Change user mode error :  $e");
 
       return false;
-      // TODO
+    
     }
   }
 
@@ -396,7 +403,7 @@ class ApiServices {
       debugPrint("Change user mode error :  $e");
 
       return false;
-      // TODO
+     
     }
   }
 

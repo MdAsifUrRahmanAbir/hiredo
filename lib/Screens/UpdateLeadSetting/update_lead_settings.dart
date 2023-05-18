@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:homelyknock/widgets/custom_widgets.dart';
+
 
 import 'Controller/update_lead_controller.dart';
 
@@ -525,7 +525,7 @@ class UpdateLeadSettings extends StatelessWidget {
       ),
       trailing: Icon(
         Icons.arrow_back_ios,
-        color: Color(0xFF272727),
+        color: const Color(0xFF272727),
         size: 15.sp,
       ),
     );

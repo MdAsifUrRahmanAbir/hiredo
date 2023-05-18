@@ -5,8 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:homelyknock/Screens/IntroScreen/introtwopage.dart';
-import 'package:homelyknock/utils/colors.dart';
+
 
 class IntroOnePage extends StatefulWidget {
   const IntroOnePage({Key? key}) : super(key: key);

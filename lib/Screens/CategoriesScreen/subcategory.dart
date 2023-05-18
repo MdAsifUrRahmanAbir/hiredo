@@ -1,17 +1,17 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructor, prefer_const_constructors, avoid_unnecessary_containers, unused_field
 
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
+
 
 import '../../Route/routes.dart';
 import '../../utils/colors.dart';
 import '../HomeScreen/Controller/home_controller.dart';
 import '../HomeScreen/Model/lead_category_model.dart';
-import '../JobPost/post_a_job.dart';
+
 import 'Controller/sub_categories_controller.dart';
 
 class SubCategoryPage extends StatelessWidget {
@@ -276,7 +276,7 @@ class SubCategoryPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(5.r),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Color(0xFF1879490d).withOpacity(0.05),
+                                      color:const Color(0xFF1879490d).withOpacity(0.05),
                                       blurRadius: 10,
                                       spreadRadius: 0,
                                     )

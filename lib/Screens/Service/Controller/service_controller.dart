@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/utils/colors.dart';
 
-import '../../../GoogleMapService/Model/prediction_model.dart';
-import '../../../GoogleMapService/google_map_service.dart';
+
 import '../../../Services/api_services.dart';
 
 import '../../ProfileScreen/profile.dart';

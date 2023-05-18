@@ -59,7 +59,7 @@ class MyCreditsPage extends StatelessWidget {
       ),
       body: Obx(
         () => _creditController.isLoading.value
-            ? CustomLoader()
+            ? const CustomLoader()
             : Container(
                 padding: EdgeInsets.all(13.w),
                 height: double.infinity,

@@ -95,7 +95,9 @@ class LocationController extends GetxController {
         Get.snackbar('Delete Data', 'Data Delete Successful');
       }
     } on Exception catch (e) {
-      print('Not Delete Data ${e.toString()}');
+      if (kDebugMode) {
+        print('Not Delete Data ${e.toString()}');
+      }
     }
   }
 

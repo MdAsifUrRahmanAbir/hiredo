@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/Screens/SettingsScreen/MyCredits/Model/credit_transaction_model.dart';
@@ -65,7 +65,9 @@ class CreditController extends GetxController {
         debugPrint('Credit Transaction Error : $result');
       } else {
         creditTransactionList.value = result;
-        print(creditTransactionList);
+        if (kDebugMode) {
+          print(creditTransactionList);
+        }
       }
     } on Exception catch (e) {
       if (kDebugMode) {

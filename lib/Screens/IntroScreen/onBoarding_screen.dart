@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 import 'package:homelyknock/Screens/IntroScreen/introonepage.dart';
 import 'package:homelyknock/Screens/IntroScreen/introtwopage.dart';
 import 'package:homelyknock/Screens/IntroScreen/signupintropage.dart';
-import 'package:homelyknock/Screens/SignUpAccountScreen/signupaccountchoosepage.dart';
+
 import 'package:homelyknock/local/my_local.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../SignInScreen/signinpage.dart';
+
 
 class OnboardinScreen extends StatefulWidget {
   const OnboardinScreen({super.key});
@@ -18,10 +18,10 @@ class OnboardinScreen extends StatefulWidget {
 }
 
 class _OnboardinScreenState extends State<OnboardinScreen> {
-  PageController _controller = PageController();
+  final PageController _controller = PageController();
 
   int selectIndex=0;
-  List<Widget> page=[IntroOnePage(), IntroTwoPage(),];
+  List<Widget> page=[const IntroOnePage(), const IntroTwoPage(),];
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class _OnboardinScreenState extends State<OnboardinScreen> {
           children: page ,
         ),
         Container(
-            alignment: Alignment(0, 0.9),
+            alignment: const Alignment(0, 0.9),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -59,7 +59,7 @@ class _OnboardinScreenState extends State<OnboardinScreen> {
                         dotWidth: 10.0.w,
                         dotHeight: 10.0.h,
                         dotColor: const Color(0xFF174E31).withOpacity(0.3),
-                        activeDotColor: Color(0xFF187949))),
+                        activeDotColor: const Color(0xFF187949))),
                 IconButton(
                     onPressed: () {
                           if(page.length>selectIndex+1){
@@ -67,7 +67,7 @@ class _OnboardinScreenState extends State<OnboardinScreen> {
                           duration: const Duration(milliseconds: 500),
                           curve: Curves.easeIn);
                           }else{
-                               Get.off(SignIntroPage());
+                               Get.off(const SignIntroPage());
                                MyPreference.setOnBoard(true);
                           }
                      

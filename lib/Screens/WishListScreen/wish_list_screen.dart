@@ -83,7 +83,7 @@ class WishListScreen extends StatelessWidget {
                                       boxShadow: [
                                         BoxShadow(
                                             blurRadius: 17,
-                                            color: Color(0xFF000000)
+                                            color: const Color(0xFF000000)
                                                 .withOpacity(0.07))
                                       ],
                                       borderRadius:
@@ -308,7 +308,7 @@ class WishListScreen extends StatelessWidget {
                                           width: 171.w,
                                           decoration: BoxDecoration(
                                               border: Border.all(
-                                                  color: Color(0xFF187949)),
+                                                  color: const Color(0xFF187949)),
                                               borderRadius:
                                                   BorderRadius.circular(3.r)),
                                           child: Center(
@@ -330,7 +330,7 @@ class WishListScreen extends StatelessWidget {
                             },
                             itemCount: wishListController.wishlistModel.length,
                             separatorBuilder:
-                                (BuildContext context, int index) => SizedBox(),
+                                (BuildContext context, int index) => const SizedBox(),
                           )
                       ],
                     ),

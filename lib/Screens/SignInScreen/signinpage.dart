@@ -131,7 +131,7 @@ class SignInPage extends StatelessWidget {
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color:
-                                    const Color(0xFF1879492B).withOpacity(0.2),
+                                    const Color(0xff1879492b).withOpacity(0.2),
                                 width: 0)),
                         hintText: "*******",
                         suffixIcon: Obx(
@@ -269,7 +269,7 @@ class SignInPage extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return SizedBox();
+                              return const SizedBox();
                             }
                           })
                         ],
@@ -299,7 +299,7 @@ class SignInPage extends StatelessWidget {
                         style: GoogleFonts.roboto(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w400,
-                            color: Color(0xff555957)),
+                            color: const Color(0xff555957)),
                       ),
                       InkWell(
                           onTap: () {

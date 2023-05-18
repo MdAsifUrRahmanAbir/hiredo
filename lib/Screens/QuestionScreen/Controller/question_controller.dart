@@ -32,7 +32,7 @@ class QuestionController extends GetxController {
     } on Exception catch (e) {
       isLoading(false);
       debugPrint(e.toString());
-      // TODO
+   
     } finally {
       isLoading(false);
     }

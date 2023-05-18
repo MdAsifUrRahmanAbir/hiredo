@@ -68,7 +68,7 @@ hendleAcceptAndReject(bool accept, String id,userId, int index)async{
   }
 } on Exception catch (e) {
   debugPrint("Accept error resion : $e ");
-  // TODO
+
 }finally{
   isStatusLoading(false);
 }

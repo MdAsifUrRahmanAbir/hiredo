@@ -86,7 +86,7 @@ class ResetPasswordPage extends StatelessWidget {
                         style:GoogleFonts.roboto(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w400,
-                          color: Color(0xFF25302B)
+                          color: const Color(0xFF25302B)
                         ),
                         children: [
                           TextSpan(

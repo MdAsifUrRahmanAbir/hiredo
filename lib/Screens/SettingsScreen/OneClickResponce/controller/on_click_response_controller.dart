@@ -25,7 +25,9 @@ class OnClickResponseController extends GetxController {
       var result = await ApiServicesByLimon.fetchOnClickResponse();
 
       if (result.runtimeType == int) {
-        print("Error $result");
+        if (kDebugMode) {
+          print("Error $result");
+        }
       } else {
         onClickResponseList.value = result;
       }
