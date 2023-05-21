@@ -26,7 +26,7 @@ class ProfileController extends GetxController {
     final dataController = Get.put(DataController());
   @override
   void onInit() {
-    fetchProfileData();
+    fetchProfileData(true);
     getLeadCount();
     getMyResponseCount();
     getServices();
@@ -61,11 +61,8 @@ class ProfileController extends GetxController {
       final image = await picked.pickImage(source: ImageSource.gallery);
       if (image != null) {
        String imagePth = image.path.toString();
-        if (isAdd) {
-          addImage(imagePth);
-        } else {
-          updateImage(imagePth);
-        }
+       updateProfileImage(imagePth);
+        
       }
     } on Exception catch (e) {
       if (kDebugMode) {
@@ -73,52 +70,39 @@ class ProfileController extends GetxController {
       }
     }
   }
-  // add image
+ 
 
-  addImage(String imagePth) async {
+  updateProfileImage(String imagePth)async{
     try {
-      var result = await ApiServicesByLimon.uploadeProfilePic(imagePth);
-      if (result.runtimeType == int) {
+      isLoading(true);
+      var result = await ApiServicesByLimon.updateProfileImage(imagePath:imagePth, userId:profileData!.id);
+      if (!result) {
         if (kDebugMode) {
           debugPrint("$result");
           log.e(result);
           Get.snackbar('Error', 'Image Upload Faild');
         }
       } else {
-        fetchProfileData();
-         imagePath.value=imagePth;
-         dataController.updateProfileImage(profileData!.image);
-        Get.snackbar('success', 'Image Upload success');
-      }
-    } on Exception catch (e) {
-      debugPrint("Error $e");
-    }
-  }
-
-  updateImage(String imagePth) async {
-    try {
-      var result = await ApiServicesByLimon.updateProfilePic(imagePth);
-      if (result.runtimeType == int) {
-        if (kDebugMode) {
-          debugPrint("$result");
-          log.e(result);
-          Get.snackbar('Error', 'Image Upload Faild');
-        }
-      } else {
-        fetchProfileData();
+        fetchProfileData(false);
         imagePath.value=imagePth;
          dataController.updateProfileImage(profileData!.image);
         Get.snackbar('success', 'Image Upload success');
       }
     } on Exception catch (e) {
       debugPrint("Error $e");
+    }finally{
+       isLoading(false);
     }
+
   }
 
 //<----------- fetch profile data------------>
-  fetchProfileData() async {
+  fetchProfileData(bool isFastLoad) async {
     try {
-      isLoading(true);
+      if(isFastLoad){
+        isLoading(true);
+      }
+      
       var result = await ApiServices.fetchProfileData();
       if (result.runtimeType == int) {
         if (kDebugMode) {
@@ -139,7 +123,9 @@ class ProfileController extends GetxController {
         print("Fetch profile data error : $e");
       }
     } finally {
-      isLoading(false);
+       if(isFastLoad){
+        isLoading(false);
+      }
     }
   }
 
