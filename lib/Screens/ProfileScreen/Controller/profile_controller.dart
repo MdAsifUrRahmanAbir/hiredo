@@ -53,18 +53,18 @@ class ProfileController extends GetxController {
   var isProfessional = false.obs;
   var isUser = false.obs;
 
-  RxString imagePath = ''.obs;
+  RxString imagePath =''.obs;
 
   getImage(bool isAdd) async {
     try {
       final ImagePicker picked = ImagePicker();
       final image = await picked.pickImage(source: ImageSource.gallery);
       if (image != null) {
-        imagePath.value = image.path.toString();
+       String imagePth = image.path.toString();
         if (isAdd) {
-          addImage();
+          addImage(imagePth);
         } else {
-          updateImage();
+          updateImage(imagePth);
         }
       }
     } on Exception catch (e) {
@@ -75,9 +75,9 @@ class ProfileController extends GetxController {
   }
   // add image
 
-  addImage() async {
+  addImage(String imagePth) async {
     try {
-      var result = await ApiServicesByLimon.uploadeProfilePic(imagePath.value);
+      var result = await ApiServicesByLimon.uploadeProfilePic(imagePth);
       if (result.runtimeType == int) {
         if (kDebugMode) {
           debugPrint("$result");
@@ -86,6 +86,8 @@ class ProfileController extends GetxController {
         }
       } else {
         fetchProfileData();
+         imagePath.value=imagePth;
+         dataController.updateProfileImage(profileData!.image);
         Get.snackbar('success', 'Image Upload success');
       }
     } on Exception catch (e) {
@@ -93,9 +95,9 @@ class ProfileController extends GetxController {
     }
   }
 
-  updateImage() async {
+  updateImage(String imagePth) async {
     try {
-      var result = await ApiServicesByLimon.updateProfilePic(imagePath.value);
+      var result = await ApiServicesByLimon.updateProfilePic(imagePth);
       if (result.runtimeType == int) {
         if (kDebugMode) {
           debugPrint("$result");
@@ -104,6 +106,8 @@ class ProfileController extends GetxController {
         }
       } else {
         fetchProfileData();
+        imagePath.value=imagePth;
+         dataController.updateProfileImage(profileData!.image);
         Get.snackbar('success', 'Image Upload success');
       }
     } on Exception catch (e) {
