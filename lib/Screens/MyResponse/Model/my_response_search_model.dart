@@ -265,7 +265,7 @@ class PostsUser {
     int id;
     
     String fullName;
-    UserProfilePic? userProfilePic;
+    dynamic userProfilePic;
     String email;
     DateTime dateOfBirth;
     String phoneNumber;
@@ -292,7 +292,7 @@ class PostsUser {
     factory PostsUser.fromJson(Map<String, dynamic> json) => PostsUser(
         id: json["id"],
         fullName: json["full_name"],
-        userProfilePic: json["user_profile_pic"] == null ? null : UserProfilePic.fromJson(json["user_profile_pic"]),
+        userProfilePic: json["user_profile_pic"] ,
         email: json["email"],
         dateOfBirth: DateTime.parse(json["date_of_birth"]),
         phoneNumber: json["phone_number"],
@@ -306,25 +306,7 @@ class PostsUser {
    
 }
 
-class UserProfilePic {
-    int id;
-    int user;
-    String picture;
 
-    UserProfilePic({
-        required this.id,
-        required this.user,
-        required this.picture,
-    });
-
-    factory UserProfilePic.fromJson(Map<String, dynamic> json) => UserProfilePic(
-        id: json["id"],
-        user: json["user"],
-        picture: json["picture"],
-    );
-
-   
-}
 
 
 

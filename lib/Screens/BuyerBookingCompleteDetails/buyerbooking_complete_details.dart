@@ -98,7 +98,7 @@ class CompleteBuyerBookingDetails extends StatelessWidget {
                                   radius: 25.h,
                                   backgroundColor: Colors.white,
                                   backgroundImage: NetworkImage(
-                                      data.bookedInUser.userProfilePic.picture),
+                                      data.bookedInUser.userProfilePic),
                                 ),
                           SizedBox(
                             width: 10.w,

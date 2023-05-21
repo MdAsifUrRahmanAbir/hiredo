@@ -45,7 +45,7 @@ class MyresponseDetailsScreen extends StatelessWidget {
               : CircleAvatar(
                   radius: 20.r,
                   backgroundImage: NetworkImage(
-                      "$baseUrl${leadData.posts.user.userProfilePic.picture}"),
+                      "$baseUrl${leadData.posts.user.userProfilePic}"),
                 ),
           title: Text(
             leadData.user.fullName,

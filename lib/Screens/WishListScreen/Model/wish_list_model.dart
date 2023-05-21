@@ -57,33 +57,13 @@ class WishedUser {
     factory WishedUser.fromJson(Map<String, dynamic> json) => WishedUser(
         id: json["id"],
         fullName: json["full_name"],
-        userProfilePic:json["user_profile_pic"]==null?null:UserProfilePic.fromJson(json["user_profile_pic"]),
+        userProfilePic:json["user_profile_pic"],
         email: json["email"],
         dateOfBirth: DateTime.parse(json["date_of_birth"]),
         phoneNumber: json["phone_number"],
         corporationName: json["corporation_name"],
         corporationNumber: json["corporation_number"],
        
-    );
-
-   
-}
-
-class UserProfilePic {
-    int id;
-    int user;
-    String picture;
-
-    UserProfilePic({
-        required this.id,
-        required this.user,
-        required this.picture,
-    });
-
-    factory UserProfilePic.fromJson(Map<String, dynamic> json) => UserProfilePic(
-        id: json["id"],
-        user: json["user"],
-        picture: json["picture"],
     );
 
    

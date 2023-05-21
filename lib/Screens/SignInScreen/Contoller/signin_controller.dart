@@ -86,7 +86,7 @@ class SignInController extends GetxController {
           isProfessionalD: allData.user.isProfessional,
           isUserD: allData.user.isUser,
           bearerTokenD: allData.token,
-           profileImageD:allData.user.userProfilePic==null?"":allData.user.userProfilePic!.picture,
+           profileImageD:allData.user.userProfilePic?? "",
           stripeCustomerIdD: allData.user.stripeCustomerId,
         );
 

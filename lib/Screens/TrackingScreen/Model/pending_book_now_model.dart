@@ -254,7 +254,7 @@ class BookedInUser {
         id: json["id"],
         fullName: json["full_name"],
         email: json["email"],
-        userProfilePic: json["user_profile_pic"]==null?null:UserProfilePic.fromJson(json["user_profile_pic"]),
+        userProfilePic: json["user_profile_pic"],
         dateOfBirth: DateTime.parse(json["date_of_birth"]),
         phoneNumber: json["phone_number"],
         corporationName: json["corporation_name"],

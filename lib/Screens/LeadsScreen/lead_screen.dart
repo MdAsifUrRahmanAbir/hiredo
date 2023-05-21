@@ -259,7 +259,7 @@ class LeadsScreen extends StatelessWidget {
                                     : CircleAvatar(
                                         radius: 20.r,
                                         backgroundImage: NetworkImage(
-                                            "$baseUrl${data.user.userProfilePic!.picture}"),
+                                            "${data.user.userProfilePic}"),
                                       ),
                                 SizedBox(
                                   width: 8.w,

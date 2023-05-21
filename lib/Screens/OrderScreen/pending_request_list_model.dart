@@ -6,7 +6,6 @@ import 'dart:convert';
 
 List<PendingRequestListModel> pendingRequestListModelFromJson(String str) => List<PendingRequestListModel>.from(json.decode(str).map((x) => PendingRequestListModel.fromJson(x)));
 
-String pendingRequestListModelToJson(List<PendingRequestListModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class PendingRequestListModel {
     PendingRequestListModel({
@@ -37,15 +36,7 @@ class PendingRequestListModel {
         requestAccepted: json["request_accepted"],
     );
 
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "post": post.toJson(),
-        "profile_name": profileName,
-        "userId": userId,
-        "profile": profile.toJson(),
-        "rating": rating,
-        "request_accepted": requestAccepted,
-    };
+   
 }
 
 class Post {
@@ -86,18 +77,7 @@ class Post {
         created: DateTime.parse(json["created"]),
     );
 
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "user": user.toJson(),
-        "location": location,
-        "latitude": latitude,
-        "longitude": longitude,
-        "category": category.toJson(),
-        "post_object": List<dynamic>.from(postObject.map((x) => x)),
-        "response_count": responseCount,
-        "post_credit": postCredit,
-        "created": created.toIso8601String(),
-    };
+   
 }
 
 class Category {
@@ -153,7 +133,7 @@ class User {
 
     int id;
     String fullName;
-    UserProfilePic userProfilePic;
+    dynamic userProfilePic;
     String email;
     DateTime dateOfBirth;
     String phoneNumber;
@@ -166,7 +146,7 @@ class User {
     factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         fullName: json["full_name"],
-        userProfilePic: UserProfilePic.fromJson(json["user_profile_pic"]),
+        userProfilePic: json["user_profile_pic"],
         email: json["email"],
         dateOfBirth: DateTime.parse(json["date_of_birth"]),
         phoneNumber: json["phone_number"],
@@ -177,43 +157,7 @@ class User {
         password: json["password"],
     );
 
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "full_name": fullName,
-        "user_profile_pic": userProfilePic.toJson(),
-        "email": email,
-        "date_of_birth": "${dateOfBirth.year.toString().padLeft(4, '0')}-${dateOfBirth.month.toString().padLeft(2, '0')}-${dateOfBirth.day.toString().padLeft(2, '0')}",
-        "phone_number": phoneNumber,
-        "corporation_name": corporationName,
-        "corporation_number": corporationNumber,
-        "is_professional": isProfessional,
-        "is_user": isUser,
-        "password": password,
-    };
-}
-
-class UserProfilePic {
-    UserProfilePic({
-        required this.id,
-        required this.user,
-        required this.picture,
-    });
-
-    int id;
-    int user;
-    String picture;
-
-    factory UserProfilePic.fromJson(Map<String, dynamic> json) => UserProfilePic(
-        id: json["id"],
-        user: json["user"],
-        picture: json["picture"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "user": user,
-        "picture": picture,
-    };
+   
 }
 
 class Profile {
@@ -242,12 +186,5 @@ class Profile {
         badges: List<int>.from(json["badges"].map((x) => x)),
     );
 
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "image": image,
-        "credit": credit,
-        "updated_at": updatedAt.toIso8601String(),
-        "user": user,
-        "badges": List<dynamic>.from(badges.map((x) => x)),
-    };
+   
 }

@@ -8,8 +8,7 @@ List<AddWishListModel> addWishListModelFromJson(String str) =>
     List<AddWishListModel>.from(
         json.decode(str).map((x) => AddWishListModel.fromJson(x)));
 
-String addWishListModelToJson(List<AddWishListModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 
 class AddWishListModel {
   AddWishListModel({
@@ -32,12 +31,7 @@ class AddWishListModel {
         productRatingAvg: json["product_rating_avg"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "user": user.toJson(),
-        "wished_user": wishedUser.toJson(),
-        "product_rating_avg": productRatingAvg,
-      };
+ 
 }
 
 class User {
@@ -142,7 +136,7 @@ class WishedUser {
   WishedUser({
     required this.id,
     required this.fullName,
-    required this.userProfilePic,
+  
     required this.email,
     required this.dateOfBirth,
     required this.phoneNumber,
@@ -155,7 +149,7 @@ class WishedUser {
 
   int id;
   String fullName;
-  UserProfilePic userProfilePic;
+ 
   String email;
   DateTime dateOfBirth;
   String phoneNumber;
@@ -168,7 +162,7 @@ class WishedUser {
   factory WishedUser.fromJson(Map<String, dynamic> json) => WishedUser(
         id: json["id"],
         fullName: json["full_name"],
-        userProfilePic: UserProfilePic.fromJson(json["user_profile_pic"]),
+       
         email: json["email"],
         dateOfBirth: DateTime.parse(json["date_of_birth"]),
         phoneNumber: json["phone_number"],
@@ -179,42 +173,5 @@ class WishedUser {
         password: json["password"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "full_name": fullName,
-        "user_profile_pic": userProfilePic.toJson(),
-        "email": email,
-        "date_of_birth":
-            "${dateOfBirth.year.toString().padLeft(4, '0')}-${dateOfBirth.month.toString().padLeft(2, '0')}-${dateOfBirth.day.toString().padLeft(2, '0')}",
-        "phone_number": phoneNumber,
-        "corporation_name": corporationName,
-        "corporation_number": corporationNumber,
-        "is_professional": isProfessional,
-        "is_user": isUser,
-        "password": password,
-      };
-}
-
-class UserProfilePic {
-  UserProfilePic({
-    required this.id,
-    required this.user,
-    required this.picture,
-  });
-
-  int id;
-  int user;
-  String picture;
-
-  factory UserProfilePic.fromJson(Map<String, dynamic> json) => UserProfilePic(
-        id: json["id"],
-        user: json["user"],
-        picture: json["picture"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "user": user,
-        "picture": picture,
-      };
+  
 }
