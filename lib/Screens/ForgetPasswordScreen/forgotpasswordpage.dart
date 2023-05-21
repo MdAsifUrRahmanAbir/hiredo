@@ -128,12 +128,57 @@ class ForegPasswordPage extends StatelessWidget {
               SizedBox(
                 height: 40.h,
               ),
-              customButton(
+
+              InkWell(
                 onTap: () {
-                  Get.toNamed(Routes.forgotVerification);
+                  _forgetController.resetPasswordEmail();
                 },
-                title: 'Next',
-              )
+                child: Container(
+                  height: 50.h,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: const Color(0xFF187949),
+                      borderRadius: BorderRadius.circular(4.r)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Next',
+                        style: GoogleFonts.roboto(
+                            color: Colors.white,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      Obx(
+                        () => SizedBox(
+                          width: _forgetController.isLoading.value ? 5.w : 0,
+                        ),
+                      ),
+                      Obx(() {
+                        if (_forgetController.isLoading.value) {
+                          return SizedBox(
+                            height: 15.sp,
+                            width: 15.sp,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 1,
+                              color: Colors.white,
+                            ),
+                          );
+                        } else {
+                          return SizedBox();
+                        }
+                      })
+                    ],
+                  ),
+                ),
+              ),
+
+              // customButton(
+              //   onTap: () {
+              //     Get.toNamed(Routes.forgotVerification);
+              //   },
+              //   title: 'Next',
+              // )
             ],
           ),
         ),
