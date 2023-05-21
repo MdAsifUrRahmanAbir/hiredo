@@ -6,7 +6,7 @@ import 'dart:convert';
 
 ReviewsModel reviewsModelFromJson(String str) => ReviewsModel.fromJson(json.decode(str));
 
-String reviewsModelToJson(ReviewsModel data) => json.encode(data.toJson());
+
 
 class ReviewsModel {
     ReviewsModel({
@@ -22,10 +22,7 @@ class ReviewsModel {
         avgRating: json["avg_rating"]??0,
     );
 
-    Map<String, dynamic> toJson() => {
-        "result": result.toJson(),
-        "avg_rating": avgRating,
-    };
+    
 }
 
 class ReviewsReceived {
@@ -54,13 +51,7 @@ class ReviewsReceived {
         created: json["created"]
     );
 
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "reviewed_by": reviewedBy.toJson(),
-        "reviewed_user": reviewedUser,
-        "rating": rating,
-        "comment": comment,
-    };
+   
 }
 
 class Result {
@@ -89,7 +80,7 @@ class Result {
     bool isProfessional;
     bool isUser;
     List<ReviewsReceived>? reviewsReceived;
-    var userProfilePic;
+    dynamic userProfilePic;
     String? password;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
@@ -103,46 +94,9 @@ class Result {
         isProfessional: json["is_professional"],
         isUser: json["is_user"],
         reviewsReceived: json["reviews_received"] == null ? [] : List<ReviewsReceived>.from(json["reviews_received"]!.map((x) => ReviewsReceived.fromJson(x))),
-        userProfilePic: json["user_profile_pic"]==null?null:UserProfilePic.fromJson(json["user_profile_pic"]),
+        userProfilePic: json["user_profile_pic"],
         password: json["password"],
     );
 
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "full_name": fullName,
-        "email": email,
-        "date_of_birth": "${dateOfBirth.year.toString().padLeft(4, '0')}-${dateOfBirth.month.toString().padLeft(2, '0')}-${dateOfBirth.day.toString().padLeft(2, '0')}",
-        "phone_number": phoneNumber,
-        "corporation_name": corporationName,
-        "corporation_number": corporationNumber,
-        "is_professional": isProfessional,
-        "is_user": isUser,
-        "reviews_received": reviewsReceived == null ? [] : List<dynamic>.from(reviewsReceived!.map((x) => x.toJson())),
-        "user_profile_pic": userProfilePic?.toJson(),
-        "password": password,
-    };
-}
-
-class UserProfilePic {
-    UserProfilePic({
-        required this.id,
-        required this.user,
-        required this.picture,
-    });
-
-    int id;
-    int user;
-    String picture;
-
-    factory UserProfilePic.fromJson(Map<String, dynamic> json) => UserProfilePic(
-        id: json["id"],
-        user: json["user"],
-        picture: json["picture"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "user": user,
-        "picture": picture,
-    };
+   
 }

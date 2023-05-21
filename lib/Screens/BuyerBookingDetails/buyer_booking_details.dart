@@ -123,7 +123,7 @@ class BuyerBookNowDetails extends StatelessWidget {
                             ): CircleAvatar(
                               radius: 25.h,
                               backgroundColor: Colors.white,
-                              backgroundImage: NetworkImage(data.bookedInUser.userProfilePic.picture),
+                              backgroundImage: NetworkImage(data.bookedInUser.userProfilePic),
                             ),
                             SizedBox(width:10.w,),
                             Expanded(

@@ -39,7 +39,7 @@ class User {
   String email;
   String corporationName;
   String corporationNumber;
-  UserProfilePic? userProfilePic;
+ 
 
   User({
     required this.id,
@@ -47,7 +47,7 @@ class User {
     required this.email,
     required this.corporationName,
     required this.corporationNumber,
-    this.userProfilePic,
+    
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -56,26 +56,7 @@ class User {
         email: json["email"],
         corporationName: json["corporation_name"],
         corporationNumber: json["corporation_number"],
-        userProfilePic: json["user_profile_pic"] == null
-            ? null
-            : UserProfilePic.fromJson(json["user_profile_pic"]),
+       
       );
 }
 
-class UserProfilePic {
-  int id;
-  int user;
-  String picture;
-
-  UserProfilePic({
-    required this.id,
-    required this.user,
-    required this.picture,
-  });
-
-  factory UserProfilePic.fromJson(Map<String, dynamic> json) => UserProfilePic(
-        id: json["id"],
-        user: json["user"],
-        picture: json["picture"],
-      );
-}

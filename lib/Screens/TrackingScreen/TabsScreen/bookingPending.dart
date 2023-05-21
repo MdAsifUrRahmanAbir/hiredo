@@ -82,7 +82,7 @@ class BookingPandeingScreen extends StatelessWidget {
                           width: 80.w,
                           fit: BoxFit.cover,
                         ):Image.network(
-                          data.user.userProfilePic.picture,
+                          data.user.userProfilePic,
                           height: 89.h,
                           width: 80.w,
                           fit: BoxFit.cover,

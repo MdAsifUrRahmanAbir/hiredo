@@ -41,7 +41,7 @@ class SellerBookingDetailsScreen extends StatelessWidget {
               : CircleAvatar(
                   radius: 20.r,
                   backgroundImage:
-                      NetworkImage(data!.user.userProfilePic!.picture),
+                      NetworkImage(data!.user.userProfilePic),
                 ),
           title: Text(
             data!.user.corporationName,

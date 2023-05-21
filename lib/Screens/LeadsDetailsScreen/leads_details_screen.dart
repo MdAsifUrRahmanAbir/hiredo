@@ -51,7 +51,7 @@ class LeadsDetailsScreen extends StatelessWidget {
               : CircleAvatar(
                   radius: 20.r,
                   backgroundImage: NetworkImage(
-                      "$baseUrl${leadData.user.userProfilePic!.picture}"),
+                      "${leadData.user.userProfilePic}"),
                 ),
           title: Text(
             leadData.user.fullName,
