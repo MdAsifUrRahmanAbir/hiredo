@@ -87,5 +87,12 @@ class DataController extends GetxController {
     preferences.setString(CommonData.profileImage, profileImageD);
   }
 
+  updateProfileImage(String profileImageD)async{
+     preferences = await SharedPreferences.getInstance();
+    profileImage.value=profileImageD;
+     preferences.setString(CommonData.profileImage, profileImageD);
+
+  }
+
  
 }

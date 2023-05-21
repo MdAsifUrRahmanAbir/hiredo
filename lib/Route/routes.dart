@@ -207,6 +207,6 @@ final getPages = [
       page: () => MyresponseDetailsScreen()),
 
   GetPage(name: Routes.addLocationScreen, page: () => AddLoaction()),
-  GetPage(name: Routes.inboxScreen, page: () => const InboxScreen()),
+  GetPage(name: Routes.inboxScreen, page: () =>  InboxScreen()),
   GetPage(name: Routes.chatScreen, page: () => ChatScreen())
 ];
