@@ -19,10 +19,11 @@ class ChatScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
+        leadingWidth: 45.w,
         backgroundColor: Colors.white,
         leading: IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              Get.back();
             },
             icon: const Icon(
               Icons.arrow_back,
@@ -30,17 +31,16 @@ class ChatScreen extends StatelessWidget {
             )),
         title: Row(
           children: [
-            Stack(children: [
+            Stack(alignment: Alignment.bottomRight, children: [
               CircleAvatar(
-                radius: 30.r,
+                radius: 25.w,
                 backgroundImage: const AssetImage('images/img2.png'),
               ),
               Positioned(
-                  top: 38.w,
-                  right: 1.w,
+                  bottom: 5.w,
                   child: Container(
-                    height: 18.h,
-                    width: 18.w,
+                    height: 12.w,
+                    width: 12.w,
                     decoration: const BoxDecoration(
                         color: Color(0xFF008A00), shape: BoxShape.circle),
                   ))
@@ -48,32 +48,38 @@ class ChatScreen extends StatelessWidget {
             SizedBox(
               width: 15.w,
             ),
-            Text(
-              'Jasim Uddin',
-              style: myStyle(20.sp, FontWeight.w500, const Color(0xFF272727)),
+            Expanded(
+              child: Text(
+                'Jasim Uddin',
+                style: myStyle(20.sp, FontWeight.w500, const Color(0xFF272727)),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ],
         ),
-        actions: const [
-          Icon(
+        actions: [
+          const Icon(
             Icons.more_vert,
             color: Color(0xFF353535),
+          ),
+          SizedBox(
+            width: 15.w,
           )
         ],
       ),
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Stack(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: _chatController.messageList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  var data = _chatController.messageList[index];
-                  return Row(
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
+              itemCount: _chatController.messageList.length,
+              itemBuilder: (BuildContext context, int index) {
+                var data = _chatController.messageList[index];
+                return Padding(
+                  padding: EdgeInsets.symmetric(vertical: 6.h),
+                  child: Row(
                     mainAxisAlignment: data.isSender
                         ? MainAxisAlignment.end
                         : MainAxisAlignment.start,
@@ -83,118 +89,112 @@ class ChatScreen extends StatelessWidget {
                             ? CrossAxisAlignment.end
                             : CrossAxisAlignment.start,
                         children: [
-                          ConstrainedBox(
-                            constraints: BoxConstraints(
-                              maxWidth:
-                                  MediaQuery.of(context).size.width - 45.w,
-                            ),
-                            child: Card(
-                              elevation: 1,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.r)),
-                              color: data.isSender
-                                  ? const Color(0xFF187949)
-                                  : const Color(0xFFFFFFFF),
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 15.w, vertical: 10.h),
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10.w, vertical: 10.h),
-                                child: Text(
-                                  data.text,
-                                  style: GoogleFonts.roboto(
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.w400,
-                                      color: data.isSender
-                                          ? const Color(0xFFFFFFFF)
-                                          : const Color(0xFF353535)),
-                                ),
-                              ),
+                          Container(
+                            constraints: BoxConstraints(maxWidth: 267.w),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16.w, vertical: 18.h),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5.r),
+                                color: data.isSender
+                                    ? const Color(0xFF187949)
+                                    : Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 12,
+                                      spreadRadius: 0,
+                                      offset: const Offset(0, 0),
+                                      color: const Color(0xFF000000)
+                                          .withOpacity(0.06))
+                                ]),
+                            child: Text(
+                              data.text,
+                              style: GoogleFonts.roboto(
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: data.isSender
+                                      ? const Color(0xFFFFFFFF)
+                                      : const Color(0xFF353535)),
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10.w, vertical: 10.h),
-                            child: Text(
-                              data.time,
-                              style: GoogleFonts.roboto(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400,
-                                  color: const Color(0xFF777A79)),
-                            ),
+                          SizedBox(
+                            height: 7.h,
+                          ),
+                          Text(
+                            data.time,
+                            style: GoogleFonts.roboto(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                                color: const Color(0xFF777A79)),
                           )
                         ],
                       ),
                     ],
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: SizedBox(
-                  width: MediaQuery.of(context).size.width - 55.w,
-                  child: Card(
-                      elevation: 1,
-                      margin:
-                          EdgeInsets.only(left: 2.w, right: 2.w, bottom: 5.w),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6.r)),
-                      child: TextFormField(
-                        controller: _chatController.messageEditingController,
-                        keyboardType: TextInputType.multiline,
-                        maxLines: 5,
-                        minLines: 1,
-                        decoration: InputDecoration(
-                            hintText: 'Write message....',
-                            hintStyle: GoogleFonts.roboto(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400,
-                                color: const Color(0xFF777A79)),
-                            labelStyle: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w300),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: const Color(0xFF000000)
-                                        .withOpacity(0.1),
-                                    width: 2)),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: const Color(0xFF000000)
-                                        .withOpacity(0.1),
-                                    width: 2)),
-                            errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: const Color(0xFF000000)
-                                        .withOpacity(0.1),
-                                    width: 2)),
-                            suffixIcon: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                    onPressed: () {
-                                      showModalBottomSheet(
-                                          backgroundColor: Colors.transparent,
-                                          context: context,
-                                          builder: (_) => _bottomSheet());
-                                    },
-                                    icon: const Icon(
-                                      Icons.attach_file,
-                                      color: Color(0xFF353535),
-                                    )),
-                                IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.send,
-                                      color: Color(0xFF187949),
-                                    )),
-                              ],
-                            )),
-                      ))),
-            )
-          ],
-        ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 26.w),
+            child: TextFormField(
+              controller: _chatController.messageEditingController,
+              keyboardType: TextInputType.multiline,
+              maxLines: 4,
+              minLines: 1,
+              style: TextStyle(fontSize: 14.sp, color: Colors.black),
+              decoration: InputDecoration(
+                  hintText: 'Write message....',
+                  hintStyle: GoogleFonts.roboto(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                      color: const Color(0xFF777A79)),
+                  labelStyle: const TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.w300),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: const Color(0xFF000000).withOpacity(0.04),
+                          width: 1)),
+                  suffixIcon: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      InkWell(
+                          onTap: () {
+                            showModalBottomSheet(
+                                backgroundColor: Colors.transparent,
+                                context: context,
+                                builder: (_) => _bottomSheet());
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.w, vertical: 5.h),
+                            child: Icon(
+                              Icons.attach_file,
+                              color: const Color(0xFF353535),
+                              size: 25.h,
+                            ),
+                          )),
+                      InkWell(
+                          onTap: () {},
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.w, vertical: 5.h),
+                            child: Icon(
+                              Icons.send,
+                              color: const Color(0xFF187949),
+                              size: 25.h,
+                            ),
+                          )),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                    ],
+                  )),
+            ),
+          ),
+          SizedBox(
+            height: 15.h,
+          )
+        ],
       ),
     );
   }

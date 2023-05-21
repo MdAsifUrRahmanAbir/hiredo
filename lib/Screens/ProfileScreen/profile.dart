@@ -77,21 +77,39 @@ class Profile extends StatelessWidget {
                                 border: Border.all(
                                     width: 1, color: Colors.grey.shade500),
                                 color: Colors.grey.shade400,
-                              ),
-                              child: CircleAvatar(
-                                backgroundImage: profileController
+                                image:profileController
                                         .imagePath.isNotEmpty
-                                    ? FileImage(File(
+                                    ? DecorationImage(image:  FileImage(File(
                                         profileController.imagePath.toString()))
-                                    : null,
+                                    
+                                
+                                ):profileController.profileData!.image!=null?DecorationImage(image: NetworkImage(profileController.profileData!.image)
+                                    
+                                
+                                ):null
                               ),
+                              // child: CircleAvatar(
+                              //   backgroundImage: profileController
+                              //           .imagePath.isNotEmpty
+                              //       ? FileImage(File(
+                              //           profileController.imagePath.toString()))
+                              //       : profileController.profileData!.image!=null?:null,
+                              // ),
                             ),
                             Positioned(
                                 bottom: -20.h,
                                 right: -20.h,
                                 child: IconButton(
                                     onPressed: () {
-                                      profileController.getImage(false);
+                                      if(profileController.profileData!.image==null&&profileController.imagePath.value==''){
+                                              profileController.getImage(true);
+                                              debugPrint("add profile image");
+                                      }else{
+                                          profileController.getImage(false);
+                                                debugPrint("upload profile image");
+
+                                      }
+                                    
                                     },
                                     icon: Icon(
                                       Icons.camera_alt,
