@@ -684,7 +684,7 @@ class ApiServicesByLimon {
 
     try {
       var headers = {
-         'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer $accessToken',
       };
       Map<String, dynamic> body = {"one_click_response": isStatus};
@@ -703,18 +703,16 @@ class ApiServicesByLimon {
     }
   }
 
-
-
-static dynamic onClickSetEmailTemplete(int tamId,id,bool status)async{
-   var accessToken = await MyPreference.getToken();
+  static dynamic onClickSetEmailTemplete(int tamId, id, bool status) async {
+    var accessToken = await MyPreference.getToken();
 
     try {
       var headers = {
-         'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer $accessToken',
       };
       Map<String, dynamic> body = {
-         "template_id": tamId,
+        "template_id": tamId,
         "one_click_response": status
       };
       var response = await client.put(Uri.parse("$onClickSetTemplete$id/"),
@@ -730,10 +728,48 @@ static dynamic onClickSetEmailTemplete(int tamId,id,bool status)async{
       debugPrint("onclick set templete change $e");
       return 1;
     }
+  }
 
+  // Reset Password OTP for Email
 
+  static dynamic resetPasswordOTPEmail(Map<String, dynamic> body) async {
+    try {
+      var headers = {'Content-Type': 'application/json'};
 
+      var response = await client.post(Uri.parse(resetPasswordEmailOptPost),
+          body: jsonEncode(body), headers: headers);
+      if (response.statusCode == 200) {
+        debugPrint(response.body);
+        return true;
+      } else {
+        return response.reasonPhrase;
+      }
+    } on Exception catch (e) {
+      debugPrint("Data fetch Error. Reason ${e.toString()}");
+      return 0;
+    }
+  }
 
-}
+  // forget Password
 
+  static dynamic forgetPassword(Map<String, dynamic> body) async {
+    try {
+      var headers = {
+        'Content-Type': 'application/json',
+      };
+
+      var response = await client.post(Uri.parse(forgetPasswordPostApi),
+          body: jsonEncode(body), headers: headers);
+
+      if (response.statusCode == 200) {
+        debugPrint(response.body);
+        return true;
+      } else {
+        return response.reasonPhrase;
+      }
+    } on Exception catch (e) {
+      debugPrint("Data fetch Error. Reason ${e.toString()}");
+      return 0;
+    }
+  }
 }

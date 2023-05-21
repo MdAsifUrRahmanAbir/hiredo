@@ -1,5 +1,3 @@
-
-
 String baseUrl = "http://ringknock.pythonanywhere.com/";
 String signupApi = "${baseUrl}register/";
 String signInApi = "${baseUrl}login/";
@@ -88,5 +86,11 @@ String realTimeServiceSearchApi(String serviceName, String location) {
 
 String companyWishListAddRemoveApi = "${baseUrl}lead/WishlistCompanyViewSet/";
 String onClickResponseGetApi = "${baseUrl}one-click-responses/";
-String onClickStatusChangeApi="${baseUrl}one-click-statuschange/";
-String onClickSetTemplete="${baseUrl}one-click-responses/";
+String onClickStatusChangeApi = "${baseUrl}one-click-statuschange/";
+String onClickSetTemplete = "${baseUrl}one-click-responses/";
+
+// Reset Password for Email
+String resetPasswordEmailOptPost = 'https://hiredo.com/reset-password-otp/';
+
+// Foeget password
+String forgetPasswordPostApi = "${baseUrl}reset-password/";

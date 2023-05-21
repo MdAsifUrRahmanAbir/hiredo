@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,14 +6,13 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Route/routes.dart';
 
-
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 
 import '../../utils/colors.dart';
 import 'Controller/verifyController.dart';
 
 class VerificationPage extends StatelessWidget {
-   VerificationPage({Key? key}) : super(key: key);
+  VerificationPage({Key? key}) : super(key: key);
 
   final _verificationController = Get.put(VerificationController());
 
@@ -34,7 +30,7 @@ class VerificationPage extends StatelessWidget {
               height: 43.h,
               width: 43.w,
               decoration: BoxDecoration(
-                color:scaffoldClr,
+                color: scaffoldClr,
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
@@ -61,124 +57,127 @@ class VerificationPage extends StatelessWidget {
           children: [
             Text(
               'Enter Code',
-             style: myStyle(20, FontWeight.w500, textClr),
+              style: myStyle(20, FontWeight.w500, textClr),
             ),
             RichText(
                 text: TextSpan(
-                    text:
-                    'Code has send to ',
+                    text: 'Code has send to ',
                     style: myStyle(14.sp, FontWeight.w400, offWhite),
                     children: [
-                      TextSpan(
-                          text: '01921*******',
-                          style: myStyle(
-                              14.sp, FontWeight.w400, backIconClr))
-                    ]))
+                  TextSpan(
+                      text: '01921*******',
+                      style: myStyle(14.sp, FontWeight.w400, backIconClr))
+                ]))
           ],
         ),
       ),
       body: SingleChildScrollView(
-       
         padding: EdgeInsets.all(15.w),
         child: Column(
           children: [
             SizedBox(
               height: 63.h,
             ),
-            
-               VerificationCode(
-                underlineUnfocusedColor: backIconClr.withOpacity(0.3),
-                fullBorder: true,
-                fillColor: backIconClr.withOpacity(0.1),
-                underlineWidth: 1,
-                length: 4,
-                cursorColor:
-                    backIconClr, // If this is null it will default to the ambient
-                margin:  const EdgeInsets.all(5),
-                onCompleted: (String value) {
-                  
-                   _verificationController. code.value = value;
-                  
-                },
-                onEditing: ( value) {
-                  
-                   _verificationController. onEditing.value = value;
-                  
-                  if ( _verificationController. onEditing.value) FocusScope.of(context).unfocus();
-                },
-              ),
-            
+            VerificationCode(
+              underlineUnfocusedColor: backIconClr.withOpacity(0.3),
+              fullBorder: true,
+              fillColor: backIconClr.withOpacity(0.1),
+              underlineWidth: 1,
+              length: 4,
+              cursorColor:
+                  backIconClr, // If this is null it will default to the ambient
+              margin: const EdgeInsets.all(5),
+              onCompleted: (String value) {
+                _verificationController.code.value = value;
+              },
+              onEditing: (value) {
+                _verificationController.onEditing.value = value;
+
+                if (_verificationController.onEditing.value)
+                  FocusScope.of(context).unfocus();
+              },
+            ),
             SizedBox(
               height: 46.h,
             ),
-            Obx
-            (()=>
-               RichText(
+            Obx(
+              () => RichText(
                   text: TextSpan(
-                      text:
-                      'Resend code in',
+                      text: 'Resend code in',
                       style: GoogleFonts.roboto(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w400,
-                        color: const Color(0xFF555957)
-                      ),
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w400,
+                          color: const Color(0xFF555957)),
                       children: [
-                        TextSpan(
-                            text: " ${_verificationController.secounds.value}",
-                            style:GoogleFonts.roboto(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w400,
-                        color:_verificationController.isValue.value? const Color(0xFF555957):const Color(0xFFED282E)
-                      ),),
-                        TextSpan(
-                            text: ' s',
-                            style: myStyle(
-                                16.sp, FontWeight.w400, offWhite)),
-                      ])),
+                    TextSpan(
+                      text: " ${_verificationController.secounds.value}",
+                      style: GoogleFonts.roboto(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w400,
+                          color: _verificationController.isValue.value
+                              ? const Color(0xFF555957)
+                              : const Color(0xFFED282E)),
+                    ),
+                    TextSpan(
+                        text: ' s',
+                        style: myStyle(16.sp, FontWeight.w400, offWhite)),
+                  ])),
             ),
             SizedBox(
               height: 63.h,
             ),
-
-            Obx
-            (()=>
-               InkWell(
+            Obx(
+              () => InkWell(
                 onTap: () {
-
-
-                  if(_verificationController.secounds.value==0){
-                     _verificationController.startTimer();
-
-                  }else{
-                    _verificationController.timer.cancel();
+                  _verificationController.isLoading.value = true;
+                  if (_verificationController.secounds.value == 0) {
+                    _verificationController.startTimer();
+                  } else {
+                    _verificationController.timer!.cancel();
 
                     Get.toNamed(Routes.resetpasswordpage);
-                   
-
-
                   }
-                       
-                
-                 
-                
-                
-                  
-              
-              },
+                },
                 child: Container(
                   alignment: Alignment.center,
                   height: 50.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4.r),
-                      color: backIconClr
-                  ),
-                  child: Text(_verificationController. secounds.value!=0 ?'Next' : 'Re-send',
-                    style: GoogleFonts.roboto(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w500,
-                      color: const Color(0xFFFFFFFF)
-                    ),
+                      color: backIconClr),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        _verificationController.secounds.value != 0
+                            ? 'Next'
+                            : 'Re-send',
+                        style: GoogleFonts.roboto(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w500,
+                            color: const Color(0xFFFFFFFF)),
+                      ),
+                      Obx(
+                        () => SizedBox(
+                          width:
+                              _verificationController.isLoading.value ? 5.w : 0,
+                        ),
+                      ),
+                      Obx(() {
+                        if (_verificationController.isLoading.value) {
+                          return SizedBox(
+                            height: 15.sp,
+                            width: 15.sp,
+                            child: const CircularProgressIndicator(
+                              strokeWidth: 1,
+                              color: Colors.white,
+                            ),
+                          );
+                        } else {
+                          return SizedBox();
+                        }
+                      })
+                    ],
                   ),
                 ),
               ),
