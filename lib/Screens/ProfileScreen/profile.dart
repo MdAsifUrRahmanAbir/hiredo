@@ -29,7 +29,7 @@ class Profile extends StatelessWidget {
     _dataController.getData();
     profileController.getServices();
     profileController.getLeadCount();
-    profileController.fetchProfileData();
+    profileController.fetchProfileData(true);
     profileController.getMyResponseCount();
     return Scaffold(
       backgroundColor: scaffoldClr,

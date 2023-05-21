@@ -172,7 +172,7 @@ class _OrderNameState extends State<OrderName> {
                       TextButton(
                           onPressed: () {},
                           child: Text(
-                            "Showing all ${data.responseCount} request",
+                            "Showing all ${_orderController.requestList.length} request",
                             style: GoogleFonts.roboto(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
@@ -335,7 +335,7 @@ class _OrderNameState extends State<OrderName> {
                                             color: Colors.white,
                                           ),
                                         ): Text(
-                                         _orderController.isAccept.value==data.id? 'Accepted':"Accept",
+                                         _orderController.isAccept.value==data.post.id? 'Accepted':"Accept",
                                           style: GoogleFonts.roboto(
                                               fontSize: 14.sp,
                                               fontWeight: FontWeight.w400,
@@ -350,9 +350,9 @@ class _OrderNameState extends State<OrderName> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    bool isReJect=_orderController.isReject.contains(data.id);
+                                    bool isReJect=_orderController.isReject.contains(data.post.id);
                                     
-                                    if(isReJect==false&&_orderController.isStatusLoading.value==false&&_orderController.isAccept.value!=data.id){
+                                    if(isReJect==false&&_orderController.isStatusLoading.value==false&&_orderController.isAccept.value!=data.post.id){
                                         _orderController.hendleAcceptAndReject(false, data.post.id.toString(),data.userId,index);
                                        
                                     }
@@ -376,7 +376,7 @@ class _OrderNameState extends State<OrderName> {
                                             color:themeColorGreen,
                                           ),
                                         ): Text(
-                                         _orderController.isReject.contains(data.id)?"Rejected" :'Reject',
+                                         _orderController.isReject.contains(data.post.id)?"Rejected" :'Reject',
                                           style: GoogleFonts.roboto(
                                               fontSize: 14.sp,
                                               fontWeight: FontWeight.w400,

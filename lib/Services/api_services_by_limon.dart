@@ -496,64 +496,39 @@ class ApiServicesByLimon {
     }
   }
 
-  static Future<dynamic> uploadeProfilePic(String file) async {
-    var accessToken = await MyPreference.getToken();
+  
+
+  static updateProfileImage({required String imagePath,required int userId})async{
+     var accessToken = await MyPreference.getToken();
 
     try {
-      final request = http.MultipartRequest(
-        'POST',
-        Uri.parse(profilePicPostApi),
-      )
-        ..headers.addAll({
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': 'Bearer $accessToken'
-        })
-        ..files.add(await http.MultipartFile.fromPath("picture", file));
-      var response = await request.send();
-
-      if (response.statusCode == 201) {
-        return true;
-      } else {
-        if (kDebugMode) {
-          print('Error image upload statuscode : ${response.statusCode}');
-        }
-        return response.statusCode;
-      }
-    } on Exception catch (e) {
-      debugPrint("Image Upload Faild. Reason ${e.toString()}");
-      return 0;
-    }
+  var headers = {
+    'Authorization': 'Bearer $accessToken',
+    'Cookie': 'csrftoken=EGVy0BnR9VTxGsTb6n0nE00VYxDOzE5g; sessionid=7t81nftsxn80b70w1t20dsanfz6x6vpx'
+  };
+  var request = http.MultipartRequest('PATCH', Uri.parse('$profilePicUpdateApi$userId/'));
+  request.files.add(await http.MultipartFile.fromPath('image',imagePath));
+  request.headers.addAll(headers);
+  
+  http.StreamedResponse response = await request.send();
+  
+  if (response.statusCode == 200) {
+   
+    log.i(await response.stream.bytesToString());
+    return true;
   }
+  else {
+   
+     log.e(await response.stream.bytesToString());
+      return false;
+  
+  }
+} on Exception catch (e) {
+    log.e("Image upload error $e");
+     return false;
 
-  static Future<dynamic> updateProfilePic(String file) async {
-    var accessToken = await MyPreference.getToken();
+}
 
-    try {
-      final request = http.MultipartRequest(
-        'PUT',
-        Uri.parse(profilePicUpdateApi),
-      )
-        ..headers.addAll({
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': 'Bearer $accessToken'
-        })
-        ..files.add(await http.MultipartFile.fromPath("picture", file));
-      var response = await request.send();
-
-      if (response.statusCode == 200) {
-        return true;
-      } else {
-        if (kDebugMode) {
-          print('Error image upload statuscode : ${response.statusCode}');
-        }
-        return response.statusCode;
-      }
-    } on Exception catch (e) {
-      debugPrint("Image Upload Faild. Reason ${e.toString()}");
-      return 0;
-    }
   }
 
   // add location service
