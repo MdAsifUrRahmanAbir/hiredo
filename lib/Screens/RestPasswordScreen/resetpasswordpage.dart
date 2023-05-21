@@ -34,7 +34,7 @@ class ResetPasswordPage extends StatelessWidget {
                     color: Colors.grey.withOpacity(0.1),
                     spreadRadius: 1,
                     blurRadius: 1,
-                    offset:const Offset(0, 2), // changes position of shadow
+                    offset: const Offset(0, 2), // changes position of shadow
                   ),
                 ],
               ),
@@ -55,18 +55,16 @@ class ResetPasswordPage extends StatelessWidget {
             Text(
               'Forgot Password',
               style: GoogleFonts.roboto(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xFF555957)
-              ),
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w500,
+                  color: const Color(0xFF555957)),
             ),
             Text(
               'Create a new password',
               style: GoogleFonts.roboto(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
-                color: const Color(0xFF798079)
-              ),
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
+                  color: const Color(0xFF798079)),
             )
           ],
         ),
@@ -79,163 +77,176 @@ class ResetPasswordPage extends StatelessWidget {
             SizedBox(
               height: 51.h,
             ),
-      
             RichText(
-                      text: TextSpan(
-                       text: "New Password",
-                        style:GoogleFonts.roboto(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w400,
-                          color: const Color(0xFF25302B)
-                        ),
-                        children: [
-                          TextSpan(
-                            text:"*",
-                            style: GoogleFonts.roboto(
-                              color: const Color(0xFFDA1414)
-                            )
-                          )
-                        ]
-                      ),
-                    ),
-           
+              text: TextSpan(
+                  text: "New Password",
+                  style: GoogleFonts.roboto(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w400,
+                      color: const Color(0xFF25302B)),
+                  children: [
+                    TextSpan(
+                        text: "*",
+                        style:
+                            GoogleFonts.roboto(color: const Color(0xFFDA1414)))
+                  ]),
+            ),
             SizedBox(
               height: 9.h,
             ),
-      
-              Obx
-              (()=>
-                 TextFormField(
-                      controller: _restPasswordController.passwordController,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                         
-                          return 'Field is Empty';
-                        } else if (value.length < 8) {
-                          return '8 character requried is password';
-                        }
-                        return null;
-                        
+            Obx(
+              () => TextFormField(
+                controller: _restPasswordController.passwordController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Field is Empty';
+                  } else if (value.length < 8) {
+                    return '8 character requried is password';
+                  }
+                  return null;
+                },
+                obscureText: !_restPasswordController.isVisibility.value,
+                decoration: InputDecoration(
+                  filled: true,
+                  isDense: true,
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w),
+                  fillColor: const Color(0xFFD9F1E5).withOpacity(0.62),
+                  focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 0.5)),
+                  enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 0.5)),
+                  border: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 0)),
+                  hintText: "*******",
+                  suffixIcon: InkWell(
+                      onTap: () {
+                        _restPasswordController.isVisibility.value =
+                            !_restPasswordController.isVisibility.value;
                       },
-                      obscureText: !_restPasswordController.isVisibility.value,
-                      decoration: InputDecoration(
-                        filled: true,
-                         isDense: true,
-        contentPadding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w),
-        fillColor:const Color(0xFFD9F1E5).withOpacity(0.62),
-                        focusedBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        enabledBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        border: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0)),
-                        hintText: "*******",
-                        suffixIcon: InkWell(
-                              onTap: () {
-                                _restPasswordController.isVisibility.value =
-                                    !_restPasswordController.isVisibility.value;
-                              },
-                              child: Icon(
-                                  !_restPasswordController.isVisibility.value
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                  color: Colors.black)),
-                                     suffixIconConstraints: BoxConstraints(
-                      minHeight:14.h,
-                      minWidth:45.w
-                    ),
-                        ),
-                      ),
+                      child: Icon(
+                          !_restPasswordController.isVisibility.value
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.black)),
+                  suffixIconConstraints:
+                      BoxConstraints(minHeight: 14.h, minWidth: 45.w),
+                ),
               ),
-                  
-                
-                 
+            ),
             SizedBox(
               height: 25.h,
             ),
-             RichText(
-                      text: TextSpan(
-                       text: "Confirm Password",
-                        style:GoogleFonts.roboto(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w400,
-                          color: const Color(0xFF25302B)
-                        ),
-                        children: [
-                          TextSpan(
-                            text:"*",
-                            style: GoogleFonts.roboto(
-                              color: const Color(0xFFDA1414)
-                            )
-                          )
-                        ]
-                      ),
-                    ),
-           
+            RichText(
+              text: TextSpan(
+                  text: "Confirm Password",
+                  style: GoogleFonts.roboto(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w400,
+                      color: const Color(0xFF25302B)),
+                  children: [
+                    TextSpan(
+                        text: "*",
+                        style:
+                            GoogleFonts.roboto(color: const Color(0xFFDA1414)))
+                  ]),
+            ),
             SizedBox(
               height: 9.sp,
             ),
-      
-              
-                  Obx(()=>
-                     TextFormField(
-                      controller:
-                          _restPasswordController.confirmpasswordController,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Field is Empty';
-                        } else if (value.length < 8) {
-                          return '8 character requried is password';
-                        }
-                        return null;
+            Obx(
+              () => TextFormField(
+                controller: _restPasswordController.confirmpasswordController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Field is Empty';
+                  } else if (value.length < 8) {
+                    return '8 character requried is password';
+                  }
+                  return null;
+                },
+                obscureText: !_restPasswordController.isVisiable.value,
+                decoration: InputDecoration(
+                  filled: true,
+                  isDense: true,
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w),
+                  fillColor: const Color(0xFFD9F1E5).withOpacity(0.62),
+                  focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 0.5)),
+                  enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 0.5)),
+                  border: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 0)),
+                  hintText: "*******",
+                  suffixIcon: InkWell(
+                      onTap: () {
+                        _restPasswordController.isVisiable.value =
+                            !_restPasswordController.isVisiable.value;
                       },
-                      obscureText: !_restPasswordController.isVisiable.value,
-                      decoration: InputDecoration(
-                        filled: true,
-        isDense: true,
-        contentPadding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w),
-        fillColor:const Color(0xFFD9F1E5).withOpacity(0.62),
-                        focusedBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        enabledBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.5)),
-                        border: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0)),
-                        hintText: "*******",
-                        suffixIcon: 
-                          InkWell(
-                              onTap: () {
-                                _restPasswordController.isVisiable.value =
-                                    !_restPasswordController.isVisiable.value;
-                              },
-                              child: Icon(
-                                  !_restPasswordController.isVisiable.value
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                  color: Colors.black)),
-                                  
-          suffixIconConstraints: BoxConstraints(
-                      minHeight:14.h,
-                      minWidth:45.w
-                    ),
-                      
-                      ),
-                    ),
-                  ),
-                 
+                      child: Icon(
+                          !_restPasswordController.isVisiable.value
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.black)),
+                  suffixIconConstraints:
+                      BoxConstraints(minHeight: 14.h, minWidth: 45.w),
+                ),
+              ),
+            ),
             SizedBox(
               height: 44.h,
             ),
-            customButton(
-              onTap: () {},
-              title: 'Save',
-            )
+
+            InkWell(
+              onTap: () {
+                _restPasswordController.forgetPassword();
+              },
+              child: Container(
+                height: 50.h,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    color: const Color(0xFF187949),
+                    borderRadius: BorderRadius.circular(4.r)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Next',
+                      style: GoogleFonts.roboto(
+                          color: Colors.white,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    Obx(
+                      () => SizedBox(
+                        width:
+                            _restPasswordController.isLoading.value ? 5.w : 0,
+                      ),
+                    ),
+                    Obx(() {
+                      if (_restPasswordController.isLoading.value) {
+                        return SizedBox(
+                          height: 15.sp,
+                          width: 15.sp,
+                          child: const CircularProgressIndicator(
+                            strokeWidth: 1,
+                            color: Colors.white,
+                          ),
+                        );
+                      } else {
+                        return SizedBox();
+                      }
+                    })
+                  ],
+                ),
+              ),
+            ),
+
+            // customButton(
+            //   onTap: () {},
+            //   title: 'Save',
+            // )
           ],
         ),
       ),

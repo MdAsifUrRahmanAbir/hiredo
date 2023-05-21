@@ -5,11 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:homelyknock/Route/routes.dart';
 
 import 'package:homelyknock/Screens/ForgetPasswordScreen/Controller/forget_controller.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
-import 'package:homelyknock/widgets/custom_widgets.dart';
 
 import '../../utils/colors.dart';
 import '../ResistrationScreen/component/custome_text_field.dart';
@@ -131,7 +129,7 @@ class ForegPasswordPage extends StatelessWidget {
 
               InkWell(
                 onTap: () {
-                  _forgetController.resetPasswordEmail();
+                  _forgetController.resetPasswordOTPByEmail();
                 },
                 child: Container(
                   height: 50.h,

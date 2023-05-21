@@ -91,4 +91,7 @@ String onClickStatusChangeApi = "${baseUrl}one-click-statuschange/";
 String onClickSetTemplete = "${baseUrl}one-click-responses/";
 
 // Reset Password for Email
-String resetPasswordEmailPost = 'https://hiredo.com/reset-password-otp/';
+String resetPasswordEmailOptPost = 'https://hiredo.com/reset-password-otp/';
+
+// Foeget password
+String forgetPasswordPostApi = "${baseUrl}reset-password/";

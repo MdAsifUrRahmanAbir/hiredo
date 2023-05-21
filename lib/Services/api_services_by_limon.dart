@@ -755,14 +755,37 @@ class ApiServicesByLimon {
     }
   }
 
-  // Reset Password for Email
+  // Reset Password OTP for Email
 
-  static dynamic resetPasswordEmail(Map<String, dynamic> body) async {
+  static dynamic resetPasswordOTPEmail(Map<String, dynamic> body) async {
     try {
       var headers = {'Content-Type': 'application/json'};
 
-      var response = await client.post(Uri.parse(resetPasswordEmailPost),
+      var response = await client.post(Uri.parse(resetPasswordEmailOptPost),
           body: jsonEncode(body), headers: headers);
+      if (response.statusCode == 200) {
+        debugPrint(response.body);
+        return true;
+      } else {
+        return response.reasonPhrase;
+      }
+    } on Exception catch (e) {
+      debugPrint("Data fetch Error. Reason ${e.toString()}");
+      return 0;
+    }
+  }
+
+  // forget Password
+
+  static dynamic forgetPassword(Map<String, dynamic> body) async {
+    try {
+      var headers = {
+        'Content-Type': 'application/json',
+      };
+
+      var response = await client.post(Uri.parse(forgetPasswordPostApi),
+          body: jsonEncode(body), headers: headers);
+
       if (response.statusCode == 200) {
         debugPrint(response.body);
         return true;

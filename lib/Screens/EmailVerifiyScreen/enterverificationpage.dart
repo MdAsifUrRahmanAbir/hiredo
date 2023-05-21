@@ -129,6 +129,7 @@ class VerificationPage extends StatelessWidget {
             Obx(
               () => InkWell(
                 onTap: () {
+                  _verificationController.isLoading.value = true;
                   if (_verificationController.secounds.value == 0) {
                     _verificationController.startTimer();
                   } else {
@@ -144,14 +145,39 @@ class VerificationPage extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4.r),
                       color: backIconClr),
-                  child: Text(
-                    _verificationController.secounds.value != 0
-                        ? 'Next'
-                        : 'Re-send',
-                    style: GoogleFonts.roboto(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w500,
-                        color: const Color(0xFFFFFFFF)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        _verificationController.secounds.value != 0
+                            ? 'Next'
+                            : 'Re-send',
+                        style: GoogleFonts.roboto(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w500,
+                            color: const Color(0xFFFFFFFF)),
+                      ),
+                      Obx(
+                        () => SizedBox(
+                          width:
+                              _verificationController.isLoading.value ? 5.w : 0,
+                        ),
+                      ),
+                      Obx(() {
+                        if (_verificationController.isLoading.value) {
+                          return SizedBox(
+                            height: 15.sp,
+                            width: 15.sp,
+                            child: const CircularProgressIndicator(
+                              strokeWidth: 1,
+                              color: Colors.white,
+                            ),
+                          );
+                        } else {
+                          return SizedBox();
+                        }
+                      })
+                    ],
                   ),
                 ),
               ),

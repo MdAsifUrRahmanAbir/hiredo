@@ -6,6 +6,7 @@ class VerificationController extends GetxController {
   var onEditing = true.obs;
   var code = ''.obs;
   var secounds = 0.obs;
+  var isLoading = false.obs;
 
   var isValue = false.obs;
 
@@ -13,7 +14,7 @@ class VerificationController extends GetxController {
 
   void startTimer() {
     timer?.cancel();
-    secounds.value = 60;
+    secounds.value = 180;
     timer = Timer.periodic(const Duration(seconds: 1), (ter) {
       if (secounds.value > 0) {
         secounds.value--;

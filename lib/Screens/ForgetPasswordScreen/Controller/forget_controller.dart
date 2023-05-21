@@ -12,7 +12,7 @@ class ForgetController extends GetxController {
 
   // reset password for email
 
-  resetPasswordEmail() async {
+  resetPasswordOTPByEmail() async {
     isLoading(true);
     try {
       final body = {
@@ -20,7 +20,7 @@ class ForgetController extends GetxController {
         "media": userType.value
       };
 
-      var result = await ApiServicesByLimon.resetPasswordEmail(body);
+      var result = await ApiServicesByLimon.resetPasswordOTPEmail(body);
       if (result.runtimeType == int) {
         debugPrint('OTP not sent  $result');
         Get.snackbar('Error', 'OTP sent faild',
