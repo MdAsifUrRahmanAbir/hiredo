@@ -16,7 +16,7 @@ class ReviewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     _reviewController.fetchReview();
+    _reviewController.fetchReview();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -159,10 +159,8 @@ class ReviewsPage extends StatelessWidget {
                                           : CircleAvatar(
                                               radius: 22.r,
                                               backgroundImage: NetworkImage(
-                                                  result
-                                                      .reviewedBy
-                                                      .userProfilePic!
-                                                      .picture)),
+                                                  result.reviewedBy
+                                                      .userProfilePic)),
                                       SizedBox(
                                         width: 10.w,
                                       ),
@@ -253,28 +251,31 @@ class ReviewsPage extends StatelessWidget {
                       SizedBox(
                         height: 20.h,
                       ),
-                      _reviewController.isSeeAll.value==true?const SizedBox():_reviewController
-                              .reviewData!.result.reviewsReceived!.length >
-                          10?
-        
-                        InkWell(
-                          onTap: () {
-                            _reviewController.isSeeAll.value = true;
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 50.h,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5.r),
-                                color: const Color(0xff187949)),
-                            child: Text(
-                              'See All Review',
-                              style: myStyle(16.sp, FontWeight.w500,
-                                  const Color(0xffF2F2F2)),
-                            ),
-                          ),
-                        ):const SizedBox()
+                      _reviewController.isSeeAll.value == true
+                          ? const SizedBox()
+                          : _reviewController.reviewData!.result
+                                      .reviewsReceived!.length >
+                                  10
+                              ? InkWell(
+                                  onTap: () {
+                                    _reviewController.isSeeAll.value = true;
+                                  },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: 50.h,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(5.r),
+                                        color: const Color(0xff187949)),
+                                    child: Text(
+                                      'See All Review',
+                                      style: myStyle(16.sp, FontWeight.w500,
+                                          const Color(0xffF2F2F2)),
+                                    ),
+                                  ),
+                                )
+                              : const SizedBox()
                     ],
                   ),
                 ),
