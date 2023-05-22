@@ -9,7 +9,10 @@ import 'package:homelyknock/Route/routes.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 
 import '../../utils/colors.dart';
+import '../ForgetPasswordScreen/Controller/forget_controller.dart';
 import 'Controller/verifyController.dart';
+
+final forgetController = Get.put(ForgetController());
 
 class VerificationPage extends StatelessWidget {
   VerificationPage({Key? key}) : super(key: key);
@@ -130,7 +133,7 @@ class VerificationPage extends StatelessWidget {
             Obx(
               () => InkWell(
                 onTap: () {
-                  if (_verificationController.timeShow.value == 0) {
+                  if (_verificationController.secounds.value == 0) {
                     _verificationController.startTimer();
                   } else {
                     _verificationController.timer!.cancel();
@@ -146,7 +149,7 @@ class VerificationPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(4.r),
                       color: backIconClr),
                   child: Text(
-                    _verificationController.timeShow.value != 0
+                    _verificationController.secounds.value != 0
                         ? 'Next'
                         : 'Re-send',
                     style: GoogleFonts.roboto(
