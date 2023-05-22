@@ -16,6 +16,7 @@ class ForegPasswordPage extends StatelessWidget {
   ForegPasswordPage({Key? key}) : super(key: key);
 
   final _forgetController = Get.put(ForgetController());
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -116,17 +117,20 @@ class ForegPasswordPage extends StatelessWidget {
                 height: 9.h,
               ),
               Obx(
-                () => CustomeTextField(
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Field is Empty';
-                    }
-                    return null;
-                  },
-                  controller: _forgetController.phoneController,
-                  hintText: _forgetController.userType.value == "phone"
-                      ? 'Enter Your Phone'
-                      : 'Enter Your Email',
+                () => Form(
+                  key: _formKey,
+                  child: CustomeTextField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Field is Empty';
+                      }
+                      return null;
+                    },
+                    controller: _forgetController.phoneController,
+                    hintText: _forgetController.userType.value == "phone"
+                        ? 'Enter Your Phone'
+                        : 'Enter Your Email',
+                  ),
                 ),
               ),
               SizedBox(
@@ -135,7 +139,9 @@ class ForegPasswordPage extends StatelessWidget {
 
               InkWell(
                 onTap: () {
-                  _forgetController.resetPasswordOTPByEmail();
+                  if (_formKey.currentState!.validate()) {
+                    _forgetController.resetPasswordOTPByEmail();
+                  }
                 },
                 child: Container(
                   height: 50.h,
