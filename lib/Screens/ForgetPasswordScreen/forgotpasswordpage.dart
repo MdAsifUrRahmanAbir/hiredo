@@ -117,6 +117,12 @@ class ForegPasswordPage extends StatelessWidget {
               ),
               Obx(
                 () => CustomeTextField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Field is Empty';
+                    }
+                    return null;
+                  },
                   controller: _forgetController.phoneController,
                   hintText: _forgetController.userType.value == "phone"
                       ? 'Enter Your Phone'

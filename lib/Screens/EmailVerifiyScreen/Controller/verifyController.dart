@@ -7,6 +7,7 @@ class VerificationController extends GetxController {
   var code = ''.obs;
   var secounds = 0.obs;
   var isLoading = false.obs;
+  var timeShow = "".obs;
 
   var isValue = false.obs;
 
@@ -21,6 +22,11 @@ class VerificationController extends GetxController {
       } else {
         timer?.cancel();
       }
+      int minutes = secounds.value ~/ 60;
+      int startSecond = (secounds.value % 60);
+
+      timeShow.value =
+          "${minutes.toString().padLeft(2, "0")}.${startSecond.toString().padLeft(2, "0")}";
     });
   }
 
