@@ -23,13 +23,14 @@ class ForgetController extends GetxController {
       var result = await ApiServicesByLimon.resetPasswordOTPEmail(body);
       if (result.runtimeType == int) {
         debugPrint('OTP not sent  $result');
-        Get.snackbar('Error', 'OTP sent faild',
-            colorText: Colors.red, backgroundColor: const Color(0xFF0C134F));
       } else {
-        debugPrint("OTP has been sent to your email");
-        Get.snackbar('Success', 'OTP has been sent to your email',
+        debugPrint("OTP has been send to your email");
+        Get.snackbar('Success', 'OTP has been send to your email',
             colorText: Colors.white, backgroundColor: const Color(0xFF0C134F));
-        Get.toNamed(Routes.forgotVerification);
+        Get.toNamed(Routes.forgotVerification,arguments:{
+          "emailOrPhone":phoneController.text,
+          "type":userType.value,
+        });
       }
     } on Exception catch (e) {
       if (kDebugMode) {

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:homelyknock/Screens/HelpScreen/help_screen_controller.dart';
 import 'package:homelyknock/Screens/LocationScreen/Model/add_location_model.dart';
@@ -496,39 +497,34 @@ class ApiServicesByLimon {
     }
   }
 
-  
-
-  static updateProfileImage({required String imagePath,required int userId})async{
-     var accessToken = await MyPreference.getToken();
+  static updateProfileImage(
+      {required String imagePath, required int userId}) async {
+    var accessToken = await MyPreference.getToken();
 
     try {
-  var headers = {
-    'Authorization': 'Bearer $accessToken',
-    'Cookie': 'csrftoken=EGVy0BnR9VTxGsTb6n0nE00VYxDOzE5g; sessionid=7t81nftsxn80b70w1t20dsanfz6x6vpx'
-  };
-  var request = http.MultipartRequest('PATCH', Uri.parse('$profilePicUpdateApi$userId/'));
-  request.files.add(await http.MultipartFile.fromPath('image',imagePath));
-  request.headers.addAll(headers);
-  
-  http.StreamedResponse response = await request.send();
-  
-  if (response.statusCode == 200) {
-   
-    log.i(await response.stream.bytesToString());
-    return true;
-  }
-  else {
-   
-     log.e(await response.stream.bytesToString());
+      var headers = {
+        'Authorization': 'Bearer $accessToken',
+        'Cookie':
+            'csrftoken=EGVy0BnR9VTxGsTb6n0nE00VYxDOzE5g; sessionid=7t81nftsxn80b70w1t20dsanfz6x6vpx'
+      };
+      var request = http.MultipartRequest(
+          'PATCH', Uri.parse('$profilePicUpdateApi$userId/'));
+      request.files.add(await http.MultipartFile.fromPath('image', imagePath));
+      request.headers.addAll(headers);
+
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        log.i(await response.stream.bytesToString());
+        return true;
+      } else {
+        log.e(await response.stream.bytesToString());
+        return false;
+      }
+    } on Exception catch (e) {
+      log.e("Image upload error $e");
       return false;
-  
-  }
-} on Exception catch (e) {
-    log.e("Image upload error $e");
-     return false;
-
-}
-
+    }
   }
 
   // add location service
@@ -742,7 +738,11 @@ class ApiServicesByLimon {
         debugPrint(response.body);
         return true;
       } else {
-        return response.reasonPhrase;
+        debugPrint(response.body);
+        var data = jsonDecode(response.body);
+        Fluttertoast.showToast(
+            msg: data["message"], toastLength: Toast.LENGTH_LONG);
+        return response.statusCode;
       }
     } on Exception catch (e) {
       debugPrint("Data fetch Error. Reason ${e.toString()}");
@@ -765,11 +765,34 @@ class ApiServicesByLimon {
         debugPrint(response.body);
         return true;
       } else {
-        return response.reasonPhrase;
+        debugPrint(response.body);
+        return response.statusCode;
       }
     } on Exception catch (e) {
       debugPrint("Data fetch Error. Reason ${e.toString()}");
       return 0;
     }
+  }
+
+  static dynamic checkOtp({required Map<String, dynamic> body}) async {
+    try {
+  var headers = {
+    'Content-Type': 'application/json',
+  };
+  var response = await client.post(Uri.parse(checkOtpApi),
+      body: jsonEncode(body), headers: headers);
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body);
+  } else {
+    var data=jsonDecode(response.body);
+    debugPrint(response.reasonPhrase);
+    Fluttertoast.showToast(msg: data["message"],toastLength:Toast.LENGTH_LONG);
+    return response.statusCode;
+  }
+} on Exception catch (e) {
+  debugPrint("Otp check Error. Reason ${e.toString()}");
+      return 0;
+ 
+}
   }
 }

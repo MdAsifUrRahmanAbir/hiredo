@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:homelyknock/Screens/ForgetPasswordScreen/Controller/forget_controller.dart';
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../../utils/colors.dart';
 import '../ResistrationScreen/component/custome_text_field.dart';
@@ -119,18 +120,49 @@ class ForegPasswordPage extends StatelessWidget {
               Obx(
                 () => Form(
                   key: _formKey,
-                  child: CustomeTextField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Field is Empty';
-                      }
-                      return null;
-                    },
-                    controller: _forgetController.phoneController,
-                    hintText: _forgetController.userType.value == "phone"
-                        ? 'Enter Your Phone'
-                        : 'Enter Your Email',
-                  ),
+                  child: _forgetController.userType.value == "phone"
+                      ? IntlPhoneField(
+                          decoration: InputDecoration(
+                            filled: true,
+                            isDense: true,
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 15.h, horizontal: 16.w),
+                            fillColor:
+                                const Color(0xFFD9F1E5).withOpacity(0.62),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: const Color(0xFF187949)
+                                        .withOpacity(0.2),
+                                    width: 0.5)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: const Color(0xFF187949)
+                                        .withOpacity(0.2),
+                                    width: 0.5)),
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: const Color(0xff187949)
+                                        .withOpacity(0.2),
+                                    width: 0)),
+                            hintText: "Enter your phone",
+                            
+                          ),
+                          initialCountryCode: 'CA',
+                          onChanged: (phone) {
+                            _forgetController.phoneController.text=phone.completeNumber;
+                            debugPrint(_forgetController.phoneController.text);
+                          },
+                        )
+                      : CustomeTextField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Field is Empty';
+                            }
+                            return null;
+                          },
+                          controller: _forgetController.phoneController,
+                          hintText: 'Enter Your Email',
+                        ),
                 ),
               ),
               SizedBox(

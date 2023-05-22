@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Screens/ResistrationScreen/Controller/registration_controller.dart';
 
 import 'package:homelyknock/Screens/ResistrationScreen/component/custome_text_field.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../../utils/colors.dart';
 
@@ -259,17 +260,48 @@ class RegistrationPage extends StatelessWidget {
                   SizedBox(
                     height: 9.h,
                   ),
-                  CustomeTextField(
-                    controller: _registrationController.numberController,
-                    keyboardType: TextInputType.number,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Feild is Empty';
-                      }
-                      return null;
-                    },
-                    hintText: '+880100000000',
+                  SizedBox(
+                    height:75.h,
+                    child: IntlPhoneField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        isDense: true,
+                        
+                        contentPadding: EdgeInsets.symmetric(vertical:0.h,
+                             horizontal: 16.w),
+                        fillColor: const Color(0xFFD9F1E5).withOpacity(0.62),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: const Color(0xFF187949).withOpacity(0.2),
+                                width: 0.5)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: const Color(0xFF187949).withOpacity(0.2),
+                                width: 0.5)),
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: const Color(0xff187949).withOpacity(0.2),
+                                width: 0)),
+                        hintText: "Phone Number",
+                      ),
+                      initialCountryCode: 'CA',
+                      onChanged: (phone) {
+                        _registrationController.numberController.text=phone.completeNumber;
+                        debugPrint(phone.toString());
+                      },
+                    ),
                   ),
+                  // CustomeTextField(
+                  //   controller: _registrationController.numberController,
+                  //   keyboardType: TextInputType.number,
+                  //   validator: (value) {
+                  //     if (value!.isEmpty) {
+                  //       return 'Feild is Empty';
+                  //     }
+                  //     return null;
+                  //   },
+                  //   hintText: '+880100000000',
+                  // ),
                   SizedBox(
                     height: 25.h,
                   ),
