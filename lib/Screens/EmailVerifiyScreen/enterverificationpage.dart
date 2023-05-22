@@ -93,8 +93,9 @@ class VerificationPage extends StatelessWidget {
               onEditing: (value) {
                 _verificationController.onEditing.value = value;
 
-                if (_verificationController.onEditing.value)
+                if (_verificationController.onEditing.value) {
                   FocusScope.of(context).unfocus();
+                }
               },
             ),
             SizedBox(
@@ -110,7 +111,7 @@ class VerificationPage extends StatelessWidget {
                           color: const Color(0xFF555957)),
                       children: [
                     TextSpan(
-                      text: " ${_verificationController.secounds.value}",
+                      text: " ${_verificationController.timeShow.value}",
                       style: GoogleFonts.roboto(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w400,
@@ -129,8 +130,7 @@ class VerificationPage extends StatelessWidget {
             Obx(
               () => InkWell(
                 onTap: () {
-                  _verificationController.isLoading.value = true;
-                  if (_verificationController.secounds.value == 0) {
+                  if (_verificationController.timeShow.value == 0) {
                     _verificationController.startTimer();
                   } else {
                     _verificationController.timer!.cancel();
@@ -145,39 +145,14 @@ class VerificationPage extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4.r),
                       color: backIconClr),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        _verificationController.secounds.value != 0
-                            ? 'Next'
-                            : 'Re-send',
-                        style: GoogleFonts.roboto(
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.w500,
-                            color: const Color(0xFFFFFFFF)),
-                      ),
-                      Obx(
-                        () => SizedBox(
-                          width:
-                              _verificationController.isLoading.value ? 5.w : 0,
-                        ),
-                      ),
-                      Obx(() {
-                        if (_verificationController.isLoading.value) {
-                          return SizedBox(
-                            height: 15.sp,
-                            width: 15.sp,
-                            child: const CircularProgressIndicator(
-                              strokeWidth: 1,
-                              color: Colors.white,
-                            ),
-                          );
-                        } else {
-                          return SizedBox();
-                        }
-                      })
-                    ],
+                  child: Text(
+                    _verificationController.timeShow.value != 0
+                        ? 'Next'
+                        : 'Re-send',
+                    style: GoogleFonts.roboto(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w500,
+                        color: const Color(0xFFFFFFFF)),
                   ),
                 ),
               ),
