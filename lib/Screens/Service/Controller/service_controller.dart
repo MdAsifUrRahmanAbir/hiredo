@@ -6,9 +6,11 @@ import 'package:homelyknock/utils/colors.dart';
 
 import '../../../Services/api_services.dart';
 
-import '../../ProfileScreen/profile.dart';
+import '../../ProfileScreen/Controller/profile_controller.dart';
 
 class ServiceController extends GetxController {
+
+final profileController = Get.put(ProfileController());
   TextEditingController descriptionController = TextEditingController();
   var isServieselect = false.obs;
   int selectedServiceId = 0;

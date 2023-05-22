@@ -8,7 +8,6 @@ import 'package:homelyknock/widgets/custom_loader.dart';
 import '../ProfileScreen/Controller/profile_controller.dart';
 import 'package:jiffy/jiffy.dart';
 
-import '../ProfileScreen/profile.dart';
 import 'Controller/lead_controller.dart';
 
 class LeadsScreen extends StatelessWidget {
@@ -139,7 +138,7 @@ class LeadsScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              '${profileController.leadsCount.value} matching leads',
+                              '${_profileController.leadsCount.value} matching leads',
                               style: GoogleFonts.roboto(
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.w500,
@@ -220,7 +219,7 @@ class LeadsScreen extends StatelessWidget {
                     height: 15.h,
                   ),
                   Text(
-                    'Showing all ${profileController.leadsCount.value} leads',
+                    'Showing all ${_profileController.leadsCount.value} leads',
                     style: GoogleFonts.roboto(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w400,

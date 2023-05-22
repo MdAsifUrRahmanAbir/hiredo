@@ -10,22 +10,22 @@ ProfileModel profileModelFromJson(String str) =>
 
 
 class ProfileModel {
-  int id;
-  User user;
+  int? id;
+  User? user;
   dynamic image;
-  int credit;
-  List<dynamic> badges;
-  DateTime updatedAt;
-  int percentageComplete;
+  int? credit;
+  List<dynamic>? badges;
+  DateTime? updatedAt;
+  int? percentageComplete;
 
   ProfileModel({
-    required this.id,
-    required this.user,
+     this.id,
+     this.user,
     this.image,
-    required this.credit,
-    required this.badges,
-    required this.updatedAt,
-    required this.percentageComplete,
+     this.credit,
+     this.badges,
+     this.updatedAt,
+     this.percentageComplete,
   });
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(

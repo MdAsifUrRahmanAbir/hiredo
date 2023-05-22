@@ -16,21 +16,19 @@ import '../../widgets/data_controller.dart';
 import '../Service/service.dart';
 import 'Controller/profile_controller.dart';
 
-final _mainController = Get.put(MainScreenController());
-final profileController = Get.put(ProfileController());
+  final _mainController = Get.put(MainScreenController());
 
 class Profile extends StatelessWidget {
   Profile({super.key});
 
+
   final _dataController = Get.put(DataController());
+
+final profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
      _dataController.getData();
-    // profileController.getServices();
-    // profileController.getLeadCount();
-    // profileController.fetchProfileData(true);
-    // profileController.getMyResponseCount();
     return Scaffold(
       backgroundColor: scaffoldClr,
       appBar: AppBar(
@@ -69,39 +67,41 @@ class Profile extends StatelessWidget {
                         Stack(
                           alignment: Alignment.bottomRight,
                           children: [
-                            Container(
-                              height: 63.h,
-                              width: 63.h,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    width: 1, color: Colors.grey.shade500),
-                                color: Colors.grey.shade400,
-                                image:profileController
-                                        .imagePath.isNotEmpty
-                                    ? DecorationImage(image:  FileImage(File(
-                                        profileController.imagePath.toString()))
-                                    
-                                
-                                ):profileController.profileData!.image!=null?DecorationImage(image: NetworkImage(profileController.profileData!.image)
-                                    
-                                
-                                ):null
+                            Obx(()=>
+                               Container(
+                                height: 63.h,
+                                width: 63.h,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                      width: 1, color: Colors.grey.shade500),
+                                  color: Colors.grey.shade400,
+                                  image:profileController
+                                          .imagePath.value.isNotEmpty
+                                      ? DecorationImage(image:  FileImage(File(
+                                          profileController.imagePath.value))
+                                      
+                                  
+                                  ):profileController.profileData.image!=null?DecorationImage(image: NetworkImage(profileController.profileData.image)
+                                      
+                                  
+                                  ):null
+                                ),
+                                // child: CircleAvatar(
+                                //   backgroundImage: profileController
+                                //           .imagePath.isNotEmpty
+                                //       ? FileImage(File(
+                                //           profileController.imagePath.toString()))
+                                //       : profileController.profileData!.image!=null?:null,
+                                // ),
                               ),
-                              // child: CircleAvatar(
-                              //   backgroundImage: profileController
-                              //           .imagePath.isNotEmpty
-                              //       ? FileImage(File(
-                              //           profileController.imagePath.toString()))
-                              //       : profileController.profileData!.image!=null?:null,
-                              // ),
                             ),
                             Positioned(
                                 bottom: -20.h,
                                 right: -20.h,
                                 child: IconButton(
                                     onPressed: () {
-                                      if(profileController.profileData!.image==null&&profileController.imagePath.value==''){
+                                      if(profileController.profileData.image==null&&profileController.imagePath.value==''){
                                               profileController.getImage(true);
                                               debugPrint("add profile image");
                                       }else{
@@ -125,13 +125,13 @@ class Profile extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                profileController.profileData!.user.fullName,
+                                profileController.profileData.user!.fullName,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: myStyle(16.sp, FontWeight.w500, textClr),
                               ),
                               Text(
-                                profileController.profileData!.user.email,
+                                profileController.profileData.user!.email,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: myStyle(14.sp, FontWeight.w400,
@@ -217,7 +217,7 @@ class Profile extends StatelessWidget {
             style: GoogleFonts.roboto(fontSize: 20.sp, color: Colors.black),
           ),
           subtitle: Text(
-            profileController.profileData!.user.phoneNumber,
+            profileController.profileData.user!.phoneNumber,
             style: GoogleFonts.roboto(fontSize: 16.sp, color: Colors.black),
           ),
         )),
@@ -228,7 +228,7 @@ class Profile extends StatelessWidget {
             style: GoogleFonts.roboto(fontSize: 20.sp, color: Colors.black),
           ),
           subtitle: Text(
-            profileController.profileData!.user.corporationName,
+            profileController.profileData.user!.corporationName,
             style: GoogleFonts.roboto(fontSize: 16.sp, color: Colors.black),
           ),
         )),
@@ -239,7 +239,7 @@ class Profile extends StatelessWidget {
             style: GoogleFonts.roboto(fontSize: 20.sp, color: Colors.black),
           ),
           subtitle: Text(
-            profileController.profileData!.user.corporationNumber,
+            profileController.profileData.user!.corporationNumber,
             style: GoogleFonts.roboto(fontSize: 16.sp, color: Colors.black),
           ),
         )),
@@ -277,7 +277,7 @@ class Profile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                      "Your profile is ${profileController.profileData!.percentageComplete}% complete",
+                      "Your profile is ${profileController.profileData.percentageComplete}% complete",
                       style: myStyle(16, FontWeight.w500, textClr)),
                   Image.asset(
                     "images/editicon.png",
@@ -294,7 +294,7 @@ class Profile extends StatelessWidget {
                       animationDuration: 1000,
                       lineHeight: 8.h,
                       percent:
-                          profileController.profileData!.percentageComplete /
+                          profileController.profileData.percentageComplete! /
                               100,
                       barRadius: Radius.circular(30.r),
                       progressColor: backIconClr,
@@ -302,7 +302,7 @@ class Profile extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "${profileController.profileData!.percentageComplete / 10}/10",
+                    "${profileController.profileData.percentageComplete! / 10}/10",
                     style: myStyle(14, FontWeight.w500, textClr),
                   )
                 ],
@@ -333,7 +333,7 @@ class Profile extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  profileController.profileData!.badges != []
+                  profileController.profileData.badges != []
                       ? Row(
                           children: [
                             Image.asset('images/eliteicon.png'),
@@ -351,7 +351,7 @@ class Profile extends StatelessWidget {
                             Image.network(
                               baseUrl +
                                   profileController
-                                      .profileData!.badges[0].image,
+                                      .profileData.badges![0].image,
                               height: 15.sp,
                               width: 15.sp,
                             ),
@@ -359,7 +359,7 @@ class Profile extends StatelessWidget {
                               width: 4.w,
                             ),
                             Text(
-                              profileController.profileData!.badges[0].title,
+                              profileController.profileData.badges![0].title,
                               style: myStyle(14.sp, FontWeight.w500, textClr),
                             )
                           ],
@@ -469,6 +469,7 @@ class Profile extends StatelessWidget {
         SizedBox(
           height: 20.h,
         ),
+        Obx(() => 
         _cardItem(
             onTap: () {
               Get.toNamed(Routes.leadPage);
@@ -477,7 +478,7 @@ class Profile extends StatelessWidget {
             text: 'Leads',
             isCount: true,
             isLoading: profileController.isLeadLoading.value,
-            count: profileController.leadsCount.value.toString()),
+            count: profileController.leadsCount.value.toString()),),
         _cardItem(
             onTap: () {
               Get.toNamed(Routes.myResponse);
