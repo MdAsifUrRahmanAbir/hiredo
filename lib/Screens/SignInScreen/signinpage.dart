@@ -131,7 +131,7 @@ class SignInPage extends StatelessWidget {
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color:
-                                    const Color(0xff1879492b).withOpacity(0.2),
+                                    const Color(0xff187949).withOpacity(0.2),
                                 width: 0)),
                         hintText: "*******",
                         suffixIcon: Obx(

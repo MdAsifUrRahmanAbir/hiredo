@@ -4,9 +4,10 @@ import 'package:get/get.dart';
 import 'package:homelyknock/Screens/SettingsScreen/SMSTemplate/Model/sms_template_model.dart';
 
 import 'package:homelyknock/Services/api_services_by_limon.dart';
+import 'package:homelyknock/widgets/logger.dart';
 
-import '../../../../widgets/common_dashboard_controller.dart';
 
+final log=logger(SmsTemplateController);
 class SmsTemplateController extends GetxController {
   final TextEditingController smsNameController = TextEditingController();
   final TextEditingController messageTemplateController =

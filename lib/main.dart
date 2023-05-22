@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
     ScreenUtil.init(context, designSize: const Size(428, 928));
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      builder: (context, child) => ResponsiveWrapper.builder(child,
+        builder: (context, child) => ResponsiveWrapper.builder(child,
           maxWidth: 1200,
           minWidth: 360,
           defaultScale: true,
@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
             const ResponsiveBreakpoint.resize(1000, name: DESKTOP),
           ],
           background: Container(color: const Color(0xFFF5F5F5))),
+     
       initialRoute: Routes.splash,
       getPages: getPages,
     );

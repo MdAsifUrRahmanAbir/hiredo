@@ -11,7 +11,7 @@ import '../../widgets/custom_loader.dart';
 import 'Controller/myresponse_controller.dart';
 
 class MyResponse extends StatefulWidget {
-  MyResponse({Key? key}) : super(key: key);
+  const MyResponse({Key? key}) : super(key: key);
 
   @override
   State<MyResponse> createState() => _MyResponseState();

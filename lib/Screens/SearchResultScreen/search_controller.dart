@@ -15,6 +15,7 @@ import '../LocationScreen/Model/add_location_model.dart';
 
 
 class SearchScreenController extends GetxController{
+  final homeController = Get.put(HomeController());
 
   final categoryController = TextEditingController();
   final locationController = TextEditingController();

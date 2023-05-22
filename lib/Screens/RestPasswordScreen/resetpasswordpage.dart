@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Screens/RestPasswordScreen/Controller/rest_controller.dart';
 
-import 'package:homelyknock/widgets/custom_widgets.dart';
 
 import '../../utils/colors.dart';
 
@@ -235,7 +234,7 @@ class ResetPasswordPage extends StatelessWidget {
                           ),
                         );
                       } else {
-                        return SizedBox();
+                        return const SizedBox();
                       }
                     })
                   ],
