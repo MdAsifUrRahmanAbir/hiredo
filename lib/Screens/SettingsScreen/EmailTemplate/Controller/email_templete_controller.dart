@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/Screens/SettingsScreen/EmailTemplate/Model/email_template_model.dart';
 import 'package:homelyknock/Services/api_services_by_limon.dart';
-import 'package:homelyknock/widgets/common_dashboard_controller.dart';
+import 'package:homelyknock/widgets/logger.dart';
 
 
 
+final log=logger(EmailTemplateController);
 class EmailTemplateController extends GetxController {
   final TextEditingController templeteNameController = TextEditingController();
   final TextEditingController messageController = TextEditingController();

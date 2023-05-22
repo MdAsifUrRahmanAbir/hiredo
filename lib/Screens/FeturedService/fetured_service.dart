@@ -4,69 +4,69 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../Route/routes.dart';
+import '../HomeScreen/Controller/home_controller.dart';
 import '../HomeScreen/Model/lead_category_model.dart';
 
-
 class FeturedServiceScreen extends StatelessWidget {
-   FeturedServiceScreen({super.key,});
+  FeturedServiceScreen({
+    super.key,
+  });
 
-   List<LeadCategoriesModel> data =Get.arguments;
+  List<LeadCategoriesModel> data = Get.arguments;
+  final _homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:AppBar(
-    centerTitle: true,
-    backgroundColor: Colors.transparent,
-    elevation: 0,
-    leading: IconButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        icon: Icon(
-          Icons.arrow_back,
-          size: 25.sp,
-          color: const Color(0xff187949),
-        )),
-    title: Text(
-      "Fetured Service",
-      style: GoogleFonts.roboto(
-          fontSize: 20.sp,
-          fontWeight: FontWeight.w500,
-          color: const Color(0xff272727)),
-    ),),
-body:  GridView.builder( 
-            shrinkWrap: true,
-            padding: EdgeInsets.symmetric(horizontal:17.w,vertical: 10.h),
-           // physics: NeverScrollableScrollPhysics(),
-            itemCount:data.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                  mainAxisExtent: 231.h,
-                                  crossAxisSpacing:15.w,
-                                  mainAxisSpacing: 15.h,
-                                  crossAxisCount: 2), 
-                                  itemBuilder: (context,index)=>itemContainer(data[index],index),
-                                  ),
-
-
-    );
-    }
-   itemContainer(LeadCategoriesModel data,int index) {
-    return Container(
-      padding:EdgeInsets.all(10.w),
-      decoration: BoxDecoration(
-         borderRadius: BorderRadius.circular(10.r),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 1,
-            spreadRadius: 0,
-            color: Colors.black.withOpacity(0.1),
-            offset: const Offset(0, 1)
-          )
-        ]
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              size: 25.sp,
+              color: const Color(0xff187949),
+            )),
+        title: Text(
+          "Fetured Service",
+          style: GoogleFonts.roboto(
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w500,
+              color: const Color(0xff272727)),
+        ),
       ),
-     
+      body: GridView.builder(
+        shrinkWrap: true,
+        padding: EdgeInsets.symmetric(horizontal: 17.w, vertical: 10.h),
+        // physics: NeverScrollableScrollPhysics(),
+        itemCount: data.length,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            mainAxisExtent: 231.h,
+            crossAxisSpacing: 15.w,
+            mainAxisSpacing: 15.h,
+            crossAxisCount: 2),
+        itemBuilder: (context, index) => itemContainer(data[index], index),
+      ),
+    );
+  }
+
+  itemContainer(LeadCategoriesModel data, int index) {
+    return Container(
+      padding: EdgeInsets.all(10.w),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.r),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+                blurRadius: 1,
+                spreadRadius: 0,
+                color: Colors.black.withOpacity(0.1),
+                offset: const Offset(0, 1))
+          ]),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,13 +76,11 @@ body:  GridView.builder(
               Container(
                 height: 114.h,
                 width: double.infinity,
-                
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.r),
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(
-                      10.r),
+                  borderRadius: BorderRadius.circular(10.r),
                   child: Image.network(
                     data.image!,
                     fit: BoxFit.cover,
@@ -90,12 +88,25 @@ body:  GridView.builder(
                 ),
               ),
               Positioned(
-                  right: 10.w,
-                  top: 10.h,
-                  child:const Icon(
-                    Icons.favorite_border,
-                    color: Color(0xFF187949),
-                  ))
+                right: 10.w,
+                top: 10.h,
+                child: Obx(
+                  () => InkWell(
+                    onTap: () {
+                      _homeController.addAndRemoveWishList(data.id);
+                    },
+                    child: _homeController.wishList.contains(data.id)
+                        ? const Icon(
+                            Icons.favorite,
+                            color: Color(0xFF174E31),
+                          )
+                        : const Icon(
+                            Icons.favorite_border,
+                            color: Color(0xFF187949),
+                          ),
+                  ),
+                ),
+              )
             ],
           ),
           SizedBox(
@@ -104,7 +115,7 @@ body:  GridView.builder(
           Text(data.name,
               style: GoogleFonts.roboto(
                 fontSize: 14.sp,
-                color:const Color(0xFF272727),
+                color: const Color(0xFF272727),
                 fontWeight: FontWeight.w400,
               )),
           SizedBox(
@@ -121,11 +132,9 @@ body:  GridView.builder(
             height: 15.h,
           ),
           InkWell(
-            onTap: (){
-               
-                    Get.toNamed(Routes.postAJob,arguments:{ "isBookId":null,
-                                        "category":data}); 
-              
+            onTap: () {
+              Get.toNamed(Routes.postAJob,
+                  arguments: {"isBookId": null, "category": data});
             },
             child: Container(
               height: 30.h,

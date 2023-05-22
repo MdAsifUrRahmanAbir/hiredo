@@ -7,8 +7,6 @@ import 'dart:convert';
 List<ServiceModel> serviceModelFromJson(String str) => List<ServiceModel>.from(
     json.decode(str).map((x) => ServiceModel.fromJson(x)));
 
-String serviceModelToJson(List<ServiceModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class ServiceModel {
   ServiceModel({
@@ -28,11 +26,6 @@ class ServiceModel {
         serviceDescription: json["service_description"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "service_name": serviceName.toJson(),
-        "service_description": serviceDescription,
-      };
 }
 
 class ServiceName {
@@ -58,11 +51,5 @@ class ServiceName {
         popularity: json["popularity"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "image": image,
-        "created": created.toIso8601String(),
-        "popularity": popularity,
-      };
+
 }

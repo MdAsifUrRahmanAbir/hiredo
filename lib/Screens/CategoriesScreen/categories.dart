@@ -345,7 +345,7 @@ class CategoriesPage extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.r),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF1879490d).withOpacity(0.05),
+              color: const Color(0xFF187949).withOpacity(0.05),
               blurRadius: 10,
               spreadRadius: 0,
             )

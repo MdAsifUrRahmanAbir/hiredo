@@ -19,14 +19,15 @@ import '../../nav_bar_page/main_controller.dart';
 import '../ProfileScreen/Controller/profile_controller.dart';
 import 'Model/lead_category_model.dart';
 
-final mainController = Get.put(MainScreenController());
+  final mainController = Get.put(MainScreenController());
 final _profileController = Get.put(ProfileController());
-
-
 class Home extends StatelessWidget {
   Home({super.key});
 
   final _homeController = Get.put(HomeController());
+  
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -480,8 +481,8 @@ class Home extends StatelessWidget {
                     right: 10.w,
                     top: 10.h,
                     child: Obx(()=>
-                       IconButton(
-                        onPressed: () {
+                       InkWell(
+                        onTap: () {
                         
                             _homeController.addAndRemoveWishList(data.id);
                                   
@@ -489,7 +490,7 @@ class Home extends StatelessWidget {
                           
                          
                         },
-                        icon:_homeController.wishList.contains(data.id)?Icon(
+                        child:_homeController.wishList.contains(data.id)?Icon(
                           Icons.favorite,
                           color: Color(0xFF174E31),
                         ): Icon(

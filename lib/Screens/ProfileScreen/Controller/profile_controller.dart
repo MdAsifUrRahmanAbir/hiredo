@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -22,8 +21,7 @@ import 'package:flutter/material.dart';
 final log = logger(ProfileController);
 
 class ProfileController extends GetxController {
-
-    final dataController = Get.put(DataController());
+  final dataController = Get.put(DataController());
   @override
   void onInit() {
     fetchProfileData(true);
@@ -53,16 +51,15 @@ class ProfileController extends GetxController {
   var isProfessional = false.obs;
   var isUser = false.obs;
 
-  RxString imagePath =''.obs;
+  RxString imagePath = ''.obs;
 
   getImage(bool isAdd) async {
     try {
       final ImagePicker picked = ImagePicker();
       final image = await picked.pickImage(source: ImageSource.gallery);
       if (image != null) {
-       String imagePth = image.path.toString();
-       updateProfileImage(imagePth);
-        
+        String imagePth = image.path.toString();
+        updateProfileImage(imagePth);
       }
     } on Exception catch (e) {
       if (kDebugMode) {
@@ -70,12 +67,12 @@ class ProfileController extends GetxController {
       }
     }
   }
- 
 
-  updateProfileImage(String imagePth)async{
+  updateProfileImage(String imagePth) async {
     try {
       isLoading(true);
-      var result = await ApiServicesByLimon.updateProfileImage(imagePath:imagePth, userId:profileData!.id);
+      var result = await ApiServicesByLimon.updateProfileImage(
+          imagePath: imagePth, userId: profileData!.id);
       if (!result) {
         if (kDebugMode) {
           debugPrint("$result");
@@ -84,25 +81,24 @@ class ProfileController extends GetxController {
         }
       } else {
         fetchProfileData(false);
-        imagePath.value=imagePth;
-         dataController.updateProfileImage(profileData!.image);
+        imagePath.value = imagePth;
+        dataController.updateProfileImage(profileData!.image);
         Get.snackbar('success', 'Image Upload success');
       }
     } on Exception catch (e) {
       debugPrint("Error $e");
-    }finally{
-       isLoading(false);
+    } finally {
+      isLoading(false);
     }
-
   }
 
 //<----------- fetch profile data------------>
   fetchProfileData(bool isFastLoad) async {
     try {
-      if(isFastLoad){
+      if (isFastLoad) {
         isLoading(true);
       }
-      
+
       var result = await ApiServices.fetchProfileData();
       if (result.runtimeType == int) {
         if (kDebugMode) {
@@ -123,7 +119,7 @@ class ProfileController extends GetxController {
         print("Fetch profile data error : $e");
       }
     } finally {
-       if(isFastLoad){
+      if (isFastLoad) {
         isLoading(false);
       }
     }
@@ -162,8 +158,6 @@ class ProfileController extends GetxController {
     } on Exception catch (e) {
       isLoading(false);
       debugPrint("Opps logout error $e");
-
-      
     }
   }
 
@@ -174,7 +168,7 @@ class ProfileController extends GetxController {
         if (kDebugMode) {
           print('Error $result');
         }
-        log.e(result);
+        log.e("Get service error : $result");
       } else {
         serviceList.value = result;
         debugPrint("service list length: ${serviceList.length.toString()}");
@@ -216,12 +210,10 @@ class ProfileController extends GetxController {
     isProfessional.value =
         preferences.getBool(CommonData.isProfessional) ?? false;
     isUser.value = preferences.getBool(CommonData.isUser) ?? false;
-    
-    isUser.value==true?await modeChange():
-  
-       log.i("User role : Professional");
-    
-    
+
+    isUser.value == true
+        ? await modeChange()
+        : log.i("User role : Professional");
   }
 
   modeChange() async {
@@ -236,8 +228,8 @@ class ProfileController extends GetxController {
       if (result) {
         isProfessional.value = !isProfessional.value;
         isUser.value = !isUser.value;
-        dataController.isProfessional.value=!isProfessional.value;
-        dataController.isUser.value=!isUser.value;
+        dataController.isProfessional.value = !isProfessional.value;
+        dataController.isUser.value = !isUser.value;
         preferences = await SharedPreferences.getInstance();
         preferences.setBool(CommonData.isProfessional, isProfessional.value);
         preferences.setBool(CommonData.isUser, isUser.value);
@@ -248,7 +240,6 @@ class ProfileController extends GetxController {
       debugPrint("User not mode change error : $e");
     } finally {
       isLoading(false);
-       
     }
   }
 
