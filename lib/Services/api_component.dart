@@ -94,3 +94,4 @@ String resetPasswordEmailOptPost = 'https://hiredo.com/reset-password-otp/';
 
 // Foeget password
 String forgetPasswordPostApi = "${baseUrl}reset-password/";
+String checkOtpApi="${baseUrl}verify-reset-otp/";

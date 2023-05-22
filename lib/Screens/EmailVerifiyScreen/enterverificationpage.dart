@@ -18,7 +18,7 @@ class VerificationPage extends StatelessWidget {
   VerificationPage({Key? key}) : super(key: key);
 
   final _verificationController = Get.put(VerificationController());
-
+  var data=Get.arguments;
   @override
   Widget build(BuildContext context) {
     _verificationController.startTimer();
@@ -68,7 +68,7 @@ class VerificationPage extends StatelessWidget {
                     style: myStyle(14.sp, FontWeight.w400, offWhite),
                     children: [
                   TextSpan(
-                      text: '01921*******',
+                      text:"${data["emailOrPhone"].substring(0, 5)}*********",
                       style: myStyle(14.sp, FontWeight.w400, backIconClr))
                 ]))
           ],
@@ -134,11 +134,13 @@ class VerificationPage extends StatelessWidget {
               () => InkWell(
                 onTap: () {
                   if (_verificationController.secounds.value == 0) {
-                    _verificationController.startTimer();
+                  
+                   _verificationController.resentOTP(phoneOrEmail:data["emailOrPhone"],type:data["type"]);
                   } else {
-                    _verificationController.timer!.cancel();
-
-                    Get.toNamed(Routes.resetpasswordpage);
+                   
+                    _verificationController.checkOtp(code: _verificationController.code.value,phoneOrEmail:data["emailOrPhone"]);
+                 
+                  
                   }
                 },
                 child: Container(
@@ -148,7 +150,14 @@ class VerificationPage extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4.r),
                       color: backIconClr),
-                  child: Text(
+                  child:_verificationController.isLoading.value? SizedBox(
+                    height:15.h,
+                    width: 15.h,
+                    child: const CircularProgressIndicator(
+                      strokeWidth: 1.5,
+                      color: Colors.white,
+                    ),
+                  ):Text(
                     _verificationController.secounds.value != 0
                         ? 'Next'
                         : 'Re-send',
