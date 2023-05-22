@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Route/routes.dart';
-import 'package:homelyknock/Screens/ProfileScreen/profile.dart';
 
 import '../../utils/colors.dart';
 import '../../widgets/data_controller.dart';

@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 
 class CustomTextFieldForm extends StatelessWidget {
@@ -48,35 +47,4 @@ class CustomTextFieldForm extends StatelessWidget {
 }
 
 
-
-class customButton extends StatelessWidget {
-   customButton({
-    super.key,
-    this.onTap,
-     this.title
-  });
-
-  void Function()? onTap;
-  String? title;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap:onTap,
-      child: Container(
-        alignment: Alignment.center,
-        height: 50.h,
-        width: double.infinity,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4.r),
-            color: backIconClr
-        ),
-        child: Text(
-          title!,
-          style: myStyle(18.sp, FontWeight.w500, scaffoldClr),
-        ),
-      ),
-    );
-  }
-}
 

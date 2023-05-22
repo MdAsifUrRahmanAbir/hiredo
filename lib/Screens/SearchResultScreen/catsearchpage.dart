@@ -16,6 +16,7 @@ class SearchResult extends StatelessWidget {
   SearchResult({super.key});
 
   final controller = Get.put(SearchScreenController());
+  final homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {

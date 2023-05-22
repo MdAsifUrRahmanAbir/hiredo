@@ -9,7 +9,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Services/api_services.dart';
 import '../../../local/my_local.dart';
-import '../../../nav_bar_page/main_controller.dart';
 import '../../../widgets/data_controller.dart';
 import '../Model/login_model.dart';
 
@@ -19,7 +18,7 @@ class SignInController extends GetxController {
   var isVisibility = false.obs;
 
   final _dataController = Get.put(DataController());
-  final _mainController = Get.put(MainScreenController());
+ // final _mainController = Get.put(MainScreenController());
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -48,7 +47,7 @@ class SignInController extends GetxController {
 
       if (result.runtimeType == int) {
         if (!isLogged) {
-          _mainController.initIndex.value = 0;
+          //_mainController.initIndex.value = 0;
           Get.offAllNamed(Routes.signinPage);
             _dataController.getData();
         } else {
@@ -72,7 +71,7 @@ class SignInController extends GetxController {
         
 
         debugPrint(_dataController.id.toString());
-        _mainController.initIndex.value = 0;
+     //   _mainController.initIndex.value = 0;
         Get.offAllNamed(Routes.mainPage);
            _dataController.setData(
           idD: allData.user.id,

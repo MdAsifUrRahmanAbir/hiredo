@@ -7,7 +7,7 @@ import '../../../Services/api_service_by_parvez.dart';
 import '../../../Services/api_services.dart';
 import '../../WishListScreen/Model/add_service_wish_list_model.dart';
 
-final homeController = Get.put(HomeController());
+//final homeController = Get.put(HomeController());
 
 class HomeController extends GetxController {
   var isLoading = false.obs;

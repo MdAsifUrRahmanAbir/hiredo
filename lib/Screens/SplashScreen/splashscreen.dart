@@ -34,11 +34,11 @@ class _SplashPageState extends State<SplashPage> {
             isLogged: false, email: isLoggedEmail, password: isLoggedPassword);
       } else {
         if (isOnBoard) {
-          Get.offAllNamed(Routes.signIntroPage);
+          Get.toNamed(Routes.signIntroPage);
         } else {
           debugPrint("navigate on board screen $isOnBoard");
 
-          Get.offAllNamed(Routes.onboard);
+          Get.toNamed(Routes.onboard);
         }
       }
     });

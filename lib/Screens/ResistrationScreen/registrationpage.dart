@@ -139,15 +139,15 @@ class RegistrationPage extends StatelessWidget {
                       fillColor: const Color(0xFFD9F1E5).withOpacity(0.62),
                       focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: const Color(0xff1879492b).withOpacity(0.2),
+                              color: const Color(0xff187949).withOpacity(0.2),
                               width: 0.5)),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: const Color(0xFF1879492B).withOpacity(0.2),
+                              color: const Color(0xFF187949).withOpacity(0.2),
                               width: 0.5)),
                       border: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: const Color(0xFF1879492B).withOpacity(0.2),
+                              color: const Color(0xFF187949).withOpacity(0.2),
                               width: 0)),
                       hintText: "*******",
                       //     suffixIcon: Obx(

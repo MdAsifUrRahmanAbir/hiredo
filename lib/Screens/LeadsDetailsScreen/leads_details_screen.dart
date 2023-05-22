@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:homelyknock/Services/api_component.dart';
 import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 import 'package:jiffy/jiffy.dart';
