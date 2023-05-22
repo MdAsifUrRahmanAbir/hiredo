@@ -7,7 +7,7 @@ class VerificationController extends GetxController {
   var code = ''.obs;
   var secounds = 0.obs;
   var isLoading = false.obs;
-  var timeShow = "".obs;
+  var timeShow = ''.obs;
 
   var isValue = false.obs;
 
@@ -35,7 +35,6 @@ class VerificationController extends GetxController {
     if (timer != null) {
       timer!.cancel();
     }
-
     super.dispose();
   }
 }
