@@ -10,14 +10,14 @@ import 'package:homelyknock/widgets/custom_loader.dart';
 
 
 
-import '../ProfileScreen/profile.dart';
+import '../ProfileScreen/Controller/profile_controller.dart';
 import 'Controller/service_controller.dart';
 
 
 class ServiceScreen extends StatelessWidget {
   ServiceScreen({super.key});
  
-   // final _profileController = Get.put(ProfileController());
+    final profileController = Get.put(ProfileController());
      final _serviceController = Get.put(ServiceController());
 
   @override

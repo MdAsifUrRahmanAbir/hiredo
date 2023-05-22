@@ -160,7 +160,7 @@ final getPages = [
   GetPage(name: Routes.leadPage, page: () => LeadsScreen()),
   GetPage(name: Routes.leadDetailsPage, page: () => LeadsDetailsScreen()),
   GetPage(name: Routes.questionScreen, page: () => QuestionScreen()),
-  GetPage(name: Routes.myResponse, page: () => MyResponse()),
+  GetPage(name: Routes.myResponse, page: () => const MyResponse()),
   GetPage(name: Routes.wishListScreen, page: () => const WishListScreen()),
   GetPage(name: Routes.settingPage, page: () => const SettingsPage()),
   GetPage(

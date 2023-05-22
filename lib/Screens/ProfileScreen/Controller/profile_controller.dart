@@ -35,6 +35,8 @@ class ProfileController extends GetxController {
     super.onInit();
   }
 
+  
+
   var isLoading = false.obs;
   var isLeadLoading = false.obs;
   var isMyresponseLoading = false.obs;
@@ -46,8 +48,9 @@ class ProfileController extends GetxController {
 
   RxList<AddLocationModel> locationList =
       List<AddLocationModel>.empty(growable: true).obs;
-
-  ProfileModel? profileData;
+final _profileData=ProfileModel().obs;
+  ProfileModel get profileData=>_profileData.value;
+  
   var isProfessional = false.obs;
   var isUser = false.obs;
 
@@ -72,7 +75,7 @@ class ProfileController extends GetxController {
     try {
       isLoading(true);
       var result = await ApiServicesByLimon.updateProfileImage(
-          imagePath: imagePth, userId: profileData!.id);
+          imagePath: imagePth, userId: profileData.id!);
       if (!result) {
         if (kDebugMode) {
           debugPrint("$result");
@@ -82,7 +85,7 @@ class ProfileController extends GetxController {
       } else {
         fetchProfileData(false);
         imagePath.value = imagePth;
-        dataController.updateProfileImage(profileData!.image);
+        dataController.updateProfileImage(profileData.image);
         Get.snackbar('success', 'Image Upload success');
       }
     } on Exception catch (e) {
@@ -106,13 +109,14 @@ class ProfileController extends GetxController {
         }
         log.e(result);
       } else {
-        profileData = result;
+        _profileData(result);
         isProfessional.value = result!.user.isProfessional;
         isUser.value = result!.user.isUser;
         debugPrint(isProfessional.value.toString());
         debugPrint(isUser.value.toString());
-
-        log.i(result);
+        
+        log.i("User name ${profileData.user!.email}");
+        _profileData.refresh();
       }
     } on Exception catch (e) {
       if (kDebugMode) {
