@@ -12,6 +12,7 @@ class CustomeTextField extends StatelessWidget {
       this.onTap,
       this.keyboardType,
       this.maxLines,
+      this.readOnly,
       this.validator});
 
   TextEditingController? controller;
@@ -22,6 +23,7 @@ class CustomeTextField extends StatelessWidget {
   bool obscureText;
   Function()? onTap;
   TextInputType? keyboardType;
+  bool? readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +34,11 @@ class CustomeTextField extends StatelessWidget {
       validator: validator,
       obscureText: obscureText,
       maxLines: maxLines,
+      readOnly: readOnly??false,
       decoration: InputDecoration(
         filled: true,
         isDense: true,
+        
         contentPadding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w),
         fillColor: const Color(0xFFD9F1E5).withOpacity(0.62),
         focusedBorder: OutlineInputBorder(
