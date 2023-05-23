@@ -51,7 +51,7 @@ class PaymentDetailsPage extends StatelessWidget {
                                   ) :CircleAvatar(
                                     backgroundColor: Colors.grey.shade300,
                                     radius: 25.r,
-                                    backgroundImage: NetworkImage(baseUrl+_dataController.profileImage.value),
+                                    backgroundImage: NetworkImage(_dataController.profileImage.value),
                                   )
                                   // Image.asset('images/payment_img.png')
                                   
@@ -60,6 +60,7 @@ class PaymentDetailsPage extends StatelessWidget {
                                 width: 8.w,
                               ),
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     _dataController.fullName.value,
@@ -147,6 +148,7 @@ class PaymentDetailsPage extends StatelessWidget {
                                     return Container(
                                       height: 62.h,
                                       width: double.infinity,
+                                      padding: EdgeInsets.symmetric(horizontal:10.w),
                                       decoration: BoxDecoration(
                                           color: scaffoldClr,
                                           boxShadow: [

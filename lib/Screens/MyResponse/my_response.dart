@@ -18,8 +18,6 @@ class MyResponse extends StatefulWidget {
 }
 
 class _MyResponseState extends State<MyResponse> {
-  
-
   final _myResponseController = Get.put(MyResponseController());
 
   @override
@@ -282,8 +280,9 @@ class _MyResponseState extends State<MyResponse> {
                                                         12.sp,
                                                         FontWeight.w400,
                                                         Colors.grey),
-                                                        maxLines: 1,
-                                                        overflow: TextOverflow.ellipsis,
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                   ),
                                                 )
                                               ],
@@ -381,13 +380,8 @@ class _MyResponseState extends State<MyResponse> {
                                             )
                                           : CircleAvatar(
                                               radius: 20.r,
-                                              backgroundImage: NetworkImage(
-                                                  baseUrl +
-                                                      data
-                                                          .posts
-                                                          .user
-                                                          .userProfilePic
-                                                          .picture),
+                                              backgroundImage: NetworkImage(data
+                                                  .posts.user.userProfilePic),
                                             ),
                                       SizedBox(
                                         width: 8.w,
