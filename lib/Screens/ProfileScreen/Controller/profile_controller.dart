@@ -85,7 +85,7 @@ final _profileData=ProfileModel().obs;
       } else {
         fetchProfileData(false);
         imagePath.value = imagePth;
-        dataController.updateProfileImage(profileData.image);
+        dataController.updateProfileImage(profileData.image ?? "");
         Get.snackbar('success', 'Image Upload success');
       }
     } on Exception catch (e) {

@@ -54,7 +54,7 @@ class SettingsPage extends StatelessWidget {
                   title: 'My Profile',
                   icon: 'images/user.png',
                   onTap: () {
-                    Get.toNamed(Routes.myProfile);
+                    Get.back();
                   }),
               _profileCard(
                   title: 'Reviews',
