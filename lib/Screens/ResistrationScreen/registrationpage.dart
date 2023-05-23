@@ -11,6 +11,7 @@ import 'package:homelyknock/Screens/ResistrationScreen/component/custome_text_fi
 import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../../utils/colors.dart';
+import '../../widgets/common_data.dart';
 
 class RegistrationPage extends StatelessWidget {
   RegistrationPage({Key? key}) : super(key: key);
@@ -108,7 +109,7 @@ class RegistrationPage extends StatelessWidget {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Field is Empty';
-                      } else if (value.contains('@') && !value.contains('.')) {
+                      } else if (!CommonData.emailValidator.hasMatch(value)) {
                         return 'Enter valid email';
                       }
                       return null;
@@ -128,6 +129,10 @@ class RegistrationPage extends StatelessWidget {
                         return 'Field is Empty';
                       } else if (value.length < 8) {
                         return '8 character requried is password';
+                      } else {
+                        if (!CommonData.passValidator.hasMatch(value)) {
+                          return 'Enter valid password';
+                        }
                       }
                       return null;
                     },
@@ -182,11 +187,9 @@ class RegistrationPage extends StatelessWidget {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Field is Empty';
-                      } else if (value.length < 8) {
-                        return '8 character requried is password';
                       } else if (value !=
                           _registrationController.passwordController.text) {
-                        return 'password do not match';
+                        return 'Password does not match';
                       }
                       return null;
                     },
@@ -240,7 +243,9 @@ class RegistrationPage extends StatelessWidget {
                       onTap: () {
                         _registrationController.selectdDateTime(context);
                       },
+                      
                       controller: _registrationController.dateController,
+                      readOnly: true,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Feild is Empty';
@@ -261,14 +266,13 @@ class RegistrationPage extends StatelessWidget {
                     height: 9.h,
                   ),
                   SizedBox(
-                    height:75.h,
+                    height: 75.h,
                     child: IntlPhoneField(
                       decoration: InputDecoration(
                         filled: true,
                         isDense: true,
-                        
-                        contentPadding: EdgeInsets.symmetric(vertical:0.h,
-                             horizontal: 16.w),
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 0.h, horizontal: 16.w),
                         fillColor: const Color(0xFFD9F1E5).withOpacity(0.62),
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -286,7 +290,8 @@ class RegistrationPage extends StatelessWidget {
                       ),
                       initialCountryCode: 'CA',
                       onChanged: (phone) {
-                        _registrationController.numberController.text=phone.completeNumber;
+                        _registrationController.numberController.text =
+                            phone.completeNumber;
                         debugPrint(phone.toString());
                       },
                     ),

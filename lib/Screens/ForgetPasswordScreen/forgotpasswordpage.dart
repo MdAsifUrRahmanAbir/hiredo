@@ -11,6 +11,7 @@ import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../../utils/colors.dart';
+import '../../widgets/common_data.dart';
 import '../ResistrationScreen/component/custome_text_field.dart';
 
 class ForegPasswordPage extends StatelessWidget {
@@ -145,11 +146,11 @@ class ForegPasswordPage extends StatelessWidget {
                                         .withOpacity(0.2),
                                     width: 0)),
                             hintText: "Enter your phone",
-                            
                           ),
                           initialCountryCode: 'CA',
                           onChanged: (phone) {
-                            _forgetController.phoneController.text=phone.completeNumber;
+                            _forgetController.phoneController.text =
+                                phone.completeNumber;
                             debugPrint(_forgetController.phoneController.text);
                           },
                         )
@@ -157,6 +158,9 @@ class ForegPasswordPage extends StatelessWidget {
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Field is Empty';
+                            } else if (!CommonData.emailValidator
+                                .hasMatch(value)) {
+                              return 'Enter valid email';
                             }
                             return null;
                           },

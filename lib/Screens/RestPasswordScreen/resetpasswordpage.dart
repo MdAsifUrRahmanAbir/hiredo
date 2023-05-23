@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homelyknock/Screens/RestPasswordScreen/Controller/rest_controller.dart';
+import 'package:homelyknock/widgets/common_data.dart';
 
 import '../../utils/colors.dart';
 
@@ -103,6 +104,10 @@ class ResetPasswordPage extends StatelessWidget {
                       return 'Field is Empty';
                     } else if (value.length < 8) {
                       return '8 character requried is password';
+                    }else{
+                      if (!CommonData.passValidator.hasMatch(value)) {
+                      return 'Enter valid password';
+                    } 
                     }
                     return null;
                   },
@@ -165,6 +170,8 @@ class ResetPasswordPage extends StatelessWidget {
                       return 'Field is Empty';
                     } else if (value.length < 8) {
                       return '8 character requried is password';
+                    }else if(value!=_restPasswordController.passwordController.text){
+                      return "Password does not match";
                     }
                     return null;
                   },
