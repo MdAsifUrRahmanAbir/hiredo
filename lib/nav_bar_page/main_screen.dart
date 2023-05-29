@@ -56,16 +56,16 @@ class MainScreen extends StatelessWidget {
                         height: 23.h,
                       ),
                       label: ""),
-                  BottomNavigationBarItem(
-                      icon: Image.asset(
-                        AppIcons.messenger,
-                        fit: BoxFit.fill,
-                        color: _mainController.initIndex.value == 2
-                            ? themeColorGreen
-                            : greyColor,
-                        height: 23.h,
-                      ),
-                      label: ""),
+                  // BottomNavigationBarItem(
+                  //     icon: Image.asset(
+                  //       AppIcons.messenger,
+                  //       fit: BoxFit.fill,
+                  //       color: _mainController.initIndex.value == 2
+                  //           ? themeColorGreen
+                  //           : greyColor,
+                  //       height: 23.h,
+                  //     ),
+                  //     label: ""),
                   BottomNavigationBarItem(
                       icon: Image.asset(
                         AppIcons.order,

@@ -190,38 +190,36 @@ class Document extends StatelessWidget {
                                       height: 114.h,
                                       width: double.infinity,
                                       decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10.r),
-                                      ),
-                                      child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(10.r),
-                                          child: Image.network(
-                                            result.serviceName.image!,
-                                            fit: BoxFit.fill,
-                                          )),
+                                          color: Colors.grey.shade300,
+                                          image: DecorationImage(
+                                              image: NetworkImage(
+                                                  result.serviceName.image!),
+                                              fit: BoxFit.cover)),
                                     ),
-                                     Positioned(
-                                          right: 10.w,
-                                          top: 10.h,
-                                          child:Obx(()=>
-                                             InkWell(
-                                              onTap: (){
-                                                 _realTimeController.addAndRemoveCompanyWishList(result.id);
+                                    Positioned(
+                                        right: 10.w,
+                                        top: 10.h,
+                                        child: Obx(
+                                          () => InkWell(
+                                              onTap: () {
+                                                _realTimeController
+                                                    .addAndRemoveCompanyWishList(
+                                                        result.id);
                                               },
-                                               child: _realTimeController
-                                                    .companyWishList
-                                                    .contains(result.id)
-                                                ? const Icon(
-                                                    Icons.favorite,
-                                                    color: Color(0xFF174E31),
-                                                  )
-                                                : const Icon(
-                                                    Icons.favorite_border,
-                                                    color: Color(0xFF187949),
-                                                  )),
-                                          )),
-                                    
+                                              child: _realTimeController
+                                                      .companyWishList
+                                                      .contains(result.id)
+                                                  ? const Icon(
+                                                      Icons.favorite,
+                                                      color: Color(0xFF174E31),
+                                                    )
+                                                  : const Icon(
+                                                      Icons.favorite_border,
+                                                      color: Color(0xFF187949),
+                                                    )),
+                                        )),
                                   ],
                                 ),
                                 SizedBox(
@@ -279,91 +277,6 @@ class Document extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  itemCard() {
-    return Container(
-      padding: EdgeInsets.all(10.w),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.r),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-                blurRadius: 1,
-                spreadRadius: 0,
-                color: Colors.black.withOpacity(0.1),
-                offset: const Offset(0, 1))
-          ]),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              Container(
-                height: 114.h,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10.r),
-                  child: Image.asset(
-                    "images/img.jpg",
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              Positioned(
-                  right: 10.w,
-                  top: 10.h,
-                  child: const Icon(
-                    Icons.favorite_border,
-                    color: Color(0xFF187949),
-                  ))
-            ],
-          ),
-          SizedBox(
-            height: 5.h,
-          ),
-          Text("",
-              style: GoogleFonts.roboto(
-                fontSize: 14.sp,
-                color: const Color(0xFF272727),
-                fontWeight: FontWeight.w400,
-              )),
-          SizedBox(
-            height: 5.h,
-          ),
-          // Text(
-          //   '200+ Company work',
-          //   style: GoogleFonts.roboto(
-          //       fontSize: 10.sp,
-          //       fontWeight: FontWeight.w400,
-          //       color: Color(0xFF848484)),
-          // ),
-          SizedBox(
-            height: 15.h,
-          ),
-          Container(
-            height: 30.h,
-            width: 84.w,
-            decoration: BoxDecoration(
-                color: const Color(0xFF187949),
-                borderRadius: BorderRadius.circular(5.r)),
-            child: Center(
-              child: Text(
-                'Book Now',
-                style: GoogleFonts.roboto(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w500,
-                    color: const Color(0xFFFFFFFF)),
-              ),
-            ),
-          )
-        ],
       ),
     );
   }
