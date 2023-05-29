@@ -1,4 +1,4 @@
-String baseUrl = "http://ringknock.pythonanywhere.com/";
+String baseUrl = "http://hiredo.com/";
 String signupApi = "${baseUrl}register/";
 String signInApi = "${baseUrl}login/";
 String leadcategory = "${baseUrl}lead/category/";
@@ -94,4 +94,4 @@ String resetPasswordEmailOptPost = 'https://hiredo.com/reset-password-otp/';
 
 // Foeget password
 String forgetPasswordPostApi = "${baseUrl}reset-password/";
-String checkOtpApi="${baseUrl}verify-reset-otp/";
+String checkOtpApi = "${baseUrl}verify-reset-otp/";

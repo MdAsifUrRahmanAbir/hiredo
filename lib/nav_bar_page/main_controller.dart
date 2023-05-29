@@ -8,23 +8,19 @@ import '../Screens/ProfileScreen/profile.dart';
 import '../Screens/SearchResultScreen/catsearchpage.dart';
 import '../Screens/TrackingScreen/tracking_screen.dart';
 
-
 class MainScreenController extends GetxController {
-  
-
   var initIndex = 0.obs;
 
   @override
   void onInit() {
-    initIndex.value=0;
+    initIndex.value = 0;
     super.onInit();
   }
-
 
   final pages = [
     Home(),
     Document(),
-     InboxScreen(),
+    //InboxScreen(),
     TrackingScreen(),
     SearchResult(),
     Profile(),
