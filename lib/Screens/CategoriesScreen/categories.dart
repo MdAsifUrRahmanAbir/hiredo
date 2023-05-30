@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_field, avoid_unnecessary_containers
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -15,8 +14,10 @@ import '../HomeScreen/Model/lead_category_model.dart';
 import 'Controller/categories_controller.dart';
 
 class CategoriesPage extends StatelessWidget {
-  CategoriesPage({super.key,});
-  
+  CategoriesPage({
+    super.key,
+  });
+
   final _categoriesController = Get.put(CategorisController());
 
   @override
@@ -75,8 +76,8 @@ class CategoriesPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Obx(()=>
-                     Container(
+                  Obx(
+                    () => Container(
                       // margin: EdgeInsets.symmetric(vertical: 5),
                       padding: EdgeInsets.symmetric(horizontal: 15.w),
                       height: 36.h,
@@ -98,8 +99,10 @@ class CategoriesPage extends StatelessWidget {
                           onChanged: (String? value) {
                             // This is called when the user selects an item.
                             _categoriesController.isSelect.value = value!;
+                            _categoriesController.sortingCategory(value);
                             debugPrint("data : $value");
-                            debugPrint("data : ${_categoriesController.isSelect.value}");
+                            debugPrint(
+                                "data : ${_categoriesController.isSelect.value}");
                           },
                           items: _categoriesController.list
                               .map<DropdownMenuItem<String>>((String value) {
@@ -229,15 +232,14 @@ class CategoriesPage extends StatelessWidget {
                         controller: _categoriesController.searchController,
                         onChanged: (value) {
                           if (value.isEmpty) {
-
-                            if(_categoriesController.isSelect.value=="All Category"){
-                                 _categoriesController.demoList.value =
-                                _categoriesController.categoryList;
-                            }else{
-                                 _categoriesController.demoMostList.value =
-                                _categoriesController.categoryMostList;
+                            if (_categoriesController.isSelect.value ==
+                                "All Category") {
+                              _categoriesController.demoList.value =
+                                  _categoriesController.categoryList;
+                            } else {
+                              _categoriesController.demoMostList.value =
+                                  _categoriesController.categoryMostList;
                             }
-                           
                           }
                         },
                         decoration: InputDecoration(
@@ -263,14 +265,14 @@ class CategoriesPage extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                       if(_categoriesController.isSelect.value=="All Category"){
-                                 _categoriesController.searchAllCategory(
-                          _categoriesController.searchController.text);
-                            }else{
-                                  _categoriesController.searchMostCategory(
-                          _categoriesController.searchController.text);
-                            }
-                     
+                      if (_categoriesController.isSelect.value ==
+                          "All Category") {
+                        _categoriesController.searchAllCategory(
+                            _categoriesController.searchController.text);
+                      } else {
+                        _categoriesController.searchMostCategory(
+                            _categoriesController.searchController.text);
+                      }
                     },
                     child: Container(
                       height: 50.h,
@@ -297,40 +299,51 @@ class CategoriesPage extends StatelessWidget {
 
 // <----------------- all Categoris ------------>
 
-      //  _categoriesController.isSelect.value=="All Category"?Container(child: Text("all cate"),):Container(child: Text("most"),),
+            //  _categoriesController.isSelect.value=="All Category"?Container(child: Text("all cate"),):Container(child: Text("most"),),
 
-           
-               Obx(()=>_categoriesController.isSelect.value=="All Category"? ListView.separated(
-                    scrollDirection: Axis.vertical,
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    
-                    itemBuilder: (context, index) {
-                      LeadCategoriesModel data =_categoriesController.demoList[index];
-                           
-                      return _categoriesCard(data, context);
-                    },
-                    separatorBuilder: (_, index) => SizedBox(
-                          height: 10.h,
-                        ),
-                    itemCount:
-                        _categoriesController.demoList.length):
-                  ListView.separated(
-                    scrollDirection: Axis.vertical,
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      LeadCategoriesModel data =_categoriesController.demoMostList[index];
-                           
-                      return _categoriesCard(data, context);
-                    },
-                    separatorBuilder: (_, index) => SizedBox(
-                          height: 10.h,
-                        ),
-                    itemCount:
-                        _categoriesController.demoMostList.length),
-               ),
-            
+            Obx(
+              () => _categoriesController.isSelect.value == "All Category"
+                  ? _categoriesController.demoList.isEmpty
+                      ? Center(
+                          child: Text(
+                          "Not data available",
+                          style: TextStyle(color: Colors.red),
+                        ))
+                      : ListView.separated(
+                          scrollDirection: Axis.vertical,
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            LeadCategoriesModel data =
+                                _categoriesController.demoList[index];
+
+                            return _categoriesCard(data, context);
+                          },
+                          separatorBuilder: (_, index) => SizedBox(
+                                height: 10.h,
+                              ),
+                          itemCount: _categoriesController.demoList.length)
+                  : _categoriesController.demoMostList.isEmpty
+                      ? Center(
+                          child: Text(
+                          "Not data available",
+                          style: TextStyle(color: Colors.red),
+                        ))
+                      : ListView.separated(
+                          scrollDirection: Axis.vertical,
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            LeadCategoriesModel data =
+                                _categoriesController.demoMostList[index];
+
+                            return _categoriesCard(data, context);
+                          },
+                          separatorBuilder: (_, index) => SizedBox(
+                                height: 10.h,
+                              ),
+                          itemCount: _categoriesController.demoMostList.length),
+            ),
           ],
         ),
       ),
@@ -405,13 +418,8 @@ class CategoriesPage extends StatelessWidget {
           )),
           InkWell(
             onTap: () {
-              
-             
-              Get.to(SubCategoryPage(), arguments:{
-              "name":data.name,
-              "subCategory":data.children
-            });
-             
+              Get.to(SubCategoryPage(),
+                  arguments: {"name": data.name, "subCategory": data.children});
             },
             child: Container(
               height: 34.h,
