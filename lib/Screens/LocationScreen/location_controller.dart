@@ -61,13 +61,15 @@ class LocationController extends GetxController {
       var result = await ApiServicesByLimon.addServicePost(body: body);
 
       if (result.runtimeType != int) {
-        debugPrint('Data Added Successfull');
+        debugPrint('Data Added Successfully');
         _profileController.getServiceLocation();
-        Get.snackbar('Success', 'Data Added Successfull',
+        distanceController.clear();
+        Get.back();
+        Get.snackbar('Success', 'Data Added Successfully',
             colorText: Colors.white, backgroundColor: const Color(0xFF0C134F));
       } else {
         debugPrint('Data added error ');
-        Get.snackbar('Error', 'Data Added Faild',
+        Get.snackbar('Error', 'Data Added Failed',
             colorText: Colors.red, backgroundColor: const Color(0xFF0C134F));
       }
     } on Exception catch (e) {

@@ -128,10 +128,10 @@ class RegistrationPage extends StatelessWidget {
                       if (value!.isEmpty) {
                         return 'Field is Empty';
                       } else if (value.length < 8) {
-                        return '8 character requried is password';
+                        return '8 character required is password';
                       } else {
                         if (!CommonData.passValidator.hasMatch(value)) {
-                          return 'Enter valid password';
+                          return 'Password Must be character, digit and symbol.';
                         }
                       }
                       return null;

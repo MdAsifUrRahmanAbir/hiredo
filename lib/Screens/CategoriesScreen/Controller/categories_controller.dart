@@ -1,13 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homelyknock/widgets/logger.dart';
 
 import '../../HomeScreen/Controller/home_controller.dart';
 import '../../HomeScreen/Model/lead_category_model.dart';
 
+
+final log=logger(CategorisController);
 class CategorisController extends GetxController {
-
-
   final homeController = Get.put(HomeController());
   final TextEditingController searchController = TextEditingController();
   List<String> list = <String>['All Category', "Most Popular"];
@@ -25,7 +26,7 @@ class CategorisController extends GetxController {
 
   late RxList<LeadCategoriesModel> sortList =
       List<LeadCategoriesModel>.empty(growable: true).obs;
-      
+
   @override
   void onInit() {
     setData();
@@ -38,7 +39,7 @@ class CategorisController extends GetxController {
     for (var value in categoryList) {
       sortList.add(value);
     }
-    sortingCategory();
+    // sortingCategory();
   }
 
   searchMostCategory(String text) async {
@@ -69,13 +70,20 @@ class CategorisController extends GetxController {
     }
   }
 
-  sortingCategory() {
-    categoryMostList.clear(); 
+  sortingCategory(String value) {
+    categoryMostList.clear();
     demoMostList.clear();
-    sortList.sort((a, b) => b.popularity.compareTo(a.popularity));
-    for (var value in sortList) {
-      categoryMostList.add(value);
-      demoMostList.add(value);
+    if (value == "All Category") {
+      demoList.value = homeController.categoryList;
+      categoryList.value = homeController.categoryList;
+
+    } else {
+      sortList.sort((a, b) => b.popularity.compareTo(a.popularity));
+      for (var value in sortList) {
+        categoryMostList.add(value);
+        demoMostList.add(value);
+      }
+
     }
   }
 }
