@@ -70,7 +70,7 @@ class MainScreen extends StatelessWidget {
                       icon: Image.asset(
                         AppIcons.order,
                         fit: BoxFit.fill,
-                        color: _mainController.initIndex.value == 3
+                        color: _mainController.initIndex.value == 2
                             ? themeColorGreen
                             : greyColor,
                         height: 23.h,
@@ -80,7 +80,7 @@ class MainScreen extends StatelessWidget {
                       icon: Image.asset(
                         AppIcons.search,
                         fit: BoxFit.fill,
-                        color: _mainController.initIndex.value == 4
+                        color: _mainController.initIndex.value == 3
                             ? themeColorGreen
                             : greyColor,
                         height: 23.h,
@@ -90,7 +90,7 @@ class MainScreen extends StatelessWidget {
                       icon: Image.asset(
                         AppIcons.profile,
                         fit: BoxFit.fill,
-                        color: _mainController.initIndex.value == 5
+                        color: _mainController.initIndex.value == 4
                             ? themeColorGreen
                             : greyColor,
                         height: 23.h,
