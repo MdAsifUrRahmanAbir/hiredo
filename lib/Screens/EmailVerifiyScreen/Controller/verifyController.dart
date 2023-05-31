@@ -21,20 +21,26 @@ class VerificationController extends GetxController {
   Timer? timer;
 
   void startTimer() {
-    timer?.cancel();
-    secounds.value = 180;
-    timer = Timer.periodic(const Duration(seconds: 1), (ter) {
-      if (secounds.value > 0) {
-        secounds.value--;
-      } else {
-        timer?.cancel();
-      }
-      int minutes = secounds.value ~/ 60;
-      int startSecond = (secounds.value % 60);
+   // secounds(180);
+   // secounds.value = 180;
+    print(secounds);
+    timer!.cancel();
 
-      timeShow.value =
-          "${minutes.toString().padLeft(2, "0")}.${startSecond.toString().padLeft(2, "0")}";
-    });
+    // timer = Timer.periodic(const Duration(seconds: 1), (ter) {
+    //   if (secounds.value > 0) {
+    //     secounds.value--;
+    //   } else {
+    //     timer?.cancel();
+    //   }
+    //   int minutes = secounds.value ~/ 60;
+    //   int startSecond = (secounds.value % 60);
+    //
+    //   timeShow.value =
+    //       "${minutes.toString().padLeft(2, "0")}.${startSecond.toString().padLeft(2, "0")}";
+    // });
+    //
+    //
+
   }
 
   checkOtp({required String code, phoneOrEmail}) async {
