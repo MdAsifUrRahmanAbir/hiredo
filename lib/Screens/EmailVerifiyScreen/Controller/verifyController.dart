@@ -7,7 +7,7 @@ import 'dart:async';
 import '../../../Route/routes.dart';
 import '../../../Services/api_services_by_limon.dart';
 
-final log=logger(VerificationController);
+final log = logger(VerificationController);
 
 class VerificationController extends GetxController {
   var onEditing = true.obs;
@@ -21,50 +21,44 @@ class VerificationController extends GetxController {
   Timer? timer;
 
   void startTimer() {
-   // secounds(180);
-   // secounds.value = 180;
+    // secounds(180);
+    secounds.value = 180;
     print(secounds);
-    timer!.cancel();
+    //timer!.cancel();
 
-    // timer = Timer.periodic(const Duration(seconds: 1), (ter) {
-    //   if (secounds.value > 0) {
-    //     secounds.value--;
-    //   } else {
-    //     timer?.cancel();
-    //   }
-    //   int minutes = secounds.value ~/ 60;
-    //   int startSecond = (secounds.value % 60);
-    //
-    //   timeShow.value =
-    //       "${minutes.toString().padLeft(2, "0")}.${startSecond.toString().padLeft(2, "0")}";
-    // });
-    //
-    //
+    timer = Timer.periodic(const Duration(seconds: 1), (ter) {
+      if (secounds.value > 0) {
+        secounds.value--;
+      } else {
+        timer?.cancel();
+      }
+      int minutes = secounds.value ~/ 60;
+      int startSecond = (secounds.value % 60);
 
+      timeShow.value =
+          "${minutes.toString().padLeft(2, "0")}.${startSecond.toString().padLeft(2, "0")}";
+    });
   }
 
   checkOtp({required String code, phoneOrEmail}) async {
     try {
       isLoading(true);
-  Map<String, dynamic> body = {"otp": code, "phone_or_email": phoneOrEmail};
-  
-  var result = await ApiServicesByLimon.checkOtp(body: body);
-  
-  if(result.runtimeType==int){
-      log.e("Check otp error : $result");
-  }else{
-    log.i("Otp matched : $result");
-     timer!.cancel();
-      Get.toNamed(Routes.resetpasswordpage,arguments:phoneOrEmail);
-    
-  
-  }
-} on Exception catch (e) {
-  log.e("Check otp error : Reason. $e");
+      Map<String, dynamic> body = {"otp": code, "phone_or_email": phoneOrEmail};
 
-}finally{
-  isLoading(false);
-}
+      var result = await ApiServicesByLimon.checkOtp(body: body);
+
+      if (result.runtimeType == int) {
+        log.e("Check otp error : $result");
+      } else {
+        log.i("Otp matched : $result");
+        timer!.cancel();
+        Get.toNamed(Routes.resetpasswordpage, arguments: phoneOrEmail);
+      }
+    } on Exception catch (e) {
+      log.e("Check otp error : Reason. $e");
+    } finally {
+      isLoading(false);
+    }
   }
 
   resentOTP({
