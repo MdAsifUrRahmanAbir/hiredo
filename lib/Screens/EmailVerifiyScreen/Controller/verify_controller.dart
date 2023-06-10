@@ -23,7 +23,7 @@ class VerificationController extends GetxController {
   void startTimer() {
     // secounds(180);
     secounds.value = 180;
-    print(secounds);
+  
     //timer!.cancel();
 
     timer = Timer.periodic(const Duration(seconds: 1), (ter) {

@@ -8,7 +8,7 @@ import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 
-import '../../../Services/api_component.dart';
+
 import '../../../widgets/data_controller.dart';
 import 'Controller/payment_controller.dart';
 import 'input_formetters.dart';
@@ -19,7 +19,7 @@ class PaymentDetailsPage extends StatelessWidget {
   final _paymentController = Get.put(PaymentController());
   final _dataController = Get.put(DataController());
 
-  var carditData= Get.arguments;
+  final carditData= Get.arguments;
 
   final _formKey = GlobalKey<FormState>();
 

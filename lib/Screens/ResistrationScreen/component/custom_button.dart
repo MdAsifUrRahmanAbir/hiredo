@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomButton extends StatelessWidget {
-  CustomButton({super.key, required this.title, required this.onTap});
-  String title;
-  Function()? onTap;
+ const CustomButton({super.key, required this.title, required this.onTap});
+ final String title;
+ final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {

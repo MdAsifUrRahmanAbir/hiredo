@@ -22,7 +22,7 @@ class CompletePostDetails extends StatelessWidget {
   final _completeController = Get.put(CompletePostDetailsController());
 
 
-  CompletePostModel data=Get.arguments;
+ final CompletePostModel data=Get.arguments;
 
   @override
   Widget build(BuildContext context) {

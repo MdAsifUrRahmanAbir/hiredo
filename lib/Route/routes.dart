@@ -7,7 +7,7 @@ import 'package:homelyknock/Screens/ForgetPasswordScreen/forgotpasswordpage.dart
 import 'package:homelyknock/Screens/InboxScreen/chat_screen.dart';
 import 'package:homelyknock/Screens/InboxScreen/inbox_screen.dart';
 import 'package:homelyknock/Screens/IntroScreen/introonepage.dart';
-import 'package:homelyknock/Screens/IntroScreen/onBoarding_screen.dart';
+import 'package:homelyknock/Screens/IntroScreen/on_boarding_screen.dart';
 import 'package:homelyknock/Screens/IntroScreen/signupintropage.dart';
 import 'package:homelyknock/Screens/JobPost/post_a_job.dart';
 import 'package:homelyknock/Screens/LeadsDetailsScreen/leads_details_screen.dart';

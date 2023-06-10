@@ -17,8 +17,8 @@ class AddLoaction extends StatelessWidget {
   AddLoaction({super.key});
 
   final _locationController = Get.put(LocationController());
-  var isEdit = Get.arguments['isEdit'];
-  var data = Get.arguments['data'];
+  final isEdit = Get.arguments['isEdit'];
+  final data = Get.arguments['data'];
   AddLocationModel? locationData;
 
   @override

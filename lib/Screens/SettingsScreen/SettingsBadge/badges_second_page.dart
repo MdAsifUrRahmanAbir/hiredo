@@ -9,7 +9,7 @@ class BadgesSecondPage extends StatelessWidget {
   BadgesSecondPage({
     Key? key,
   }) : super(key: key);
-  Map data = Get.arguments;
+ final Map data = Get.arguments;
 
   @override
   Widget build(BuildContext context) {

@@ -4,13 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:homelyknock/Route/routes.dart';
+
 
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 
 import '../../utils/colors.dart';
 import '../ForgetPasswordScreen/Controller/forget_controller.dart';
-import 'Controller/verifyController.dart';
+import 'Controller/verify_controller.dart';
 
 final forgetController = Get.put(ForgetController());
 
@@ -18,7 +18,7 @@ class VerificationPage extends StatelessWidget {
   VerificationPage({Key? key}) : super(key: key);
 
   final _verificationController = Get.put(VerificationController());
-  var data=Get.arguments;
+   var data=Get.arguments;
   @override
   Widget build(BuildContext context) {
     _verificationController.startTimer();

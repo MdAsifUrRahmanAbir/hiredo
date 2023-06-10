@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../../../Services/api_services.dart';
 import '../../TrackingScreen/Controller/pending_controller.dart';
-import '../Model/booking_Model.dart';
+import '../Model/booking_model.dart';
 import '../Model/job_post_model.dart';
 
 class QuestionController extends GetxController {

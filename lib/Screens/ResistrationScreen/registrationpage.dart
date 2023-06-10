@@ -20,7 +20,7 @@ class RegistrationPage extends StatelessWidget {
 
   final _registrationController = Get.put(RegistrationController());
 
-  var userType = Get.arguments;
+  final userType = Get.arguments;
 
   @override
   Widget build(BuildContext context) {

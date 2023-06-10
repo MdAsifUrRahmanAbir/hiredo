@@ -5,7 +5,7 @@ import 'package:homelyknock/utils/colors.dart';
 
 class CustomTextFieldForm extends StatelessWidget {
 
-  CustomTextFieldForm({
+ const CustomTextFieldForm({
     super.key,
     this.controller,
     this.hintText,
@@ -13,10 +13,10 @@ class CustomTextFieldForm extends StatelessWidget {
     this.readOnly=false,
   });
 
-  TextEditingController? controller;
-  String? hintText;
-  IconButton? suffixIconButton;
-  bool readOnly;
+  final TextEditingController? controller;
+  final String? hintText;
+  final IconButton? suffixIconButton;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {

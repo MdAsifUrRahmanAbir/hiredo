@@ -20,7 +20,7 @@ class LeadsDetailsScreen extends StatelessWidget {
     super.key,
   });
 
-  Result leadData = Get.arguments;
+ final Result leadData = Get.arguments;
 
   final _leadDetailsController = Get.put(LeadDetailsController());
   final _leadController = Get.put(LeadController());
