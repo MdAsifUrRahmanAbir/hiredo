@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,9 +33,12 @@ class RestPasswordController extends GetxController {
             colorText: Colors.red, backgroundColor: const Color(0xFF0C134F));
       } else {
         debugPrint("Password has been reset successfully");
+
         Get.snackbar('Success', 'Password has been reset successfully',
             colorText: Colors.white, backgroundColor: const Color(0xFF0C134F));
         Get.toNamed(Routes.signinPage);
+        passwordController.clear();
+        confirmpasswordController.clear();
       }
     } on Exception catch (e) {
       if (kDebugMode) {

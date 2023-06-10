@@ -736,7 +736,8 @@ class ApiServicesByLimon {
           body: jsonEncode(body), headers: headers);
       if (response.statusCode == 200) {
         debugPrint(response.body);
-        return true;
+        var data = jsonDecode(response.body);
+        return data["message"];
       } else {
         debugPrint(response.body);
         var data = jsonDecode(response.body);
@@ -776,23 +777,23 @@ class ApiServicesByLimon {
 
   static dynamic checkOtp({required Map<String, dynamic> body}) async {
     try {
-  var headers = {
-    'Content-Type': 'application/json',
-  };
-  var response = await client.post(Uri.parse(checkOtpApi),
-      body: jsonEncode(body), headers: headers);
-  if (response.statusCode == 200) {
-    return jsonDecode(response.body);
-  } else {
-    var data=jsonDecode(response.body);
-    debugPrint(response.reasonPhrase);
-    Fluttertoast.showToast(msg: data["message"],toastLength:Toast.LENGTH_LONG);
-    return response.statusCode;
-  }
-} on Exception catch (e) {
-  debugPrint("Otp check Error. Reason ${e.toString()}");
+      var headers = {
+        'Content-Type': 'application/json',
+      };
+      var response = await client.post(Uri.parse(checkOtpApi),
+          body: jsonEncode(body), headers: headers);
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        var data = jsonDecode(response.body);
+        debugPrint(response.reasonPhrase);
+        Fluttertoast.showToast(
+            msg: data["message"], toastLength: Toast.LENGTH_LONG);
+        return response.statusCode;
+      }
+    } on Exception catch (e) {
+      debugPrint("Otp check Error. Reason ${e.toString()}");
       return 0;
- 
-}
+    }
   }
 }

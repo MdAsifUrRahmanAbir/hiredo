@@ -24,12 +24,12 @@ class ForgetController extends GetxController {
       if (result.runtimeType == int) {
         debugPrint('OTP not sent  $result');
       } else {
-        debugPrint("OTP has been send to your email");
-        Get.snackbar('Success', 'OTP has been send to your email',
+        debugPrint(result);
+        Get.snackbar('Success', result,
             colorText: Colors.white, backgroundColor: const Color(0xFF0C134F));
-        Get.toNamed(Routes.forgotVerification,arguments:{
-          "emailOrPhone":phoneController.text,
-          "type":userType.value,
+        Get.toNamed(Routes.forgotVerification, arguments: {
+          "emailOrPhone": phoneController.text,
+          "type": userType.value,
         });
       }
     } on Exception catch (e) {

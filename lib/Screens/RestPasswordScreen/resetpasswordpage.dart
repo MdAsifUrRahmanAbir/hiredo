@@ -104,10 +104,10 @@ class ResetPasswordPage extends StatelessWidget {
                       return 'Field is Empty';
                     } else if (value.length < 8) {
                       return '8 character requried is password';
-                    }else{
+                    } else {
                       if (!CommonData.passValidator.hasMatch(value)) {
-                      return 'Enter valid password';
-                    } 
+                        return 'Password Must be character, digit and symbol.';
+                      }
                     }
                     return null;
                   },
@@ -170,7 +170,8 @@ class ResetPasswordPage extends StatelessWidget {
                       return 'Field is Empty';
                     } else if (value.length < 8) {
                       return '8 character requried is password';
-                    }else if(value!=_restPasswordController.passwordController.text){
+                    } else if (value !=
+                        _restPasswordController.passwordController.text) {
                       return "Password does not match";
                     }
                     return null;
