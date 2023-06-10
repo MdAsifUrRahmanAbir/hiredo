@@ -10,9 +10,9 @@ import '../TrackingScreen/Model/pending_book_now_model.dart';
 
 
 class BuyerBookNowDetails extends StatelessWidget {
-   BuyerBookNowDetails({super.key ,required this.data});
+  const BuyerBookNowDetails({super.key ,required this.data});
 
-  PendingBookNowModel data;
+ final PendingBookNowModel data;
 
   @override
   Widget build(BuildContext context) {

@@ -15,8 +15,8 @@ class SellerBookingDetailsScreen extends StatelessWidget {
   final SellerBookNowPendingController _sellerBookNowPendingController =
       Get.put(SellerBookNowPendingController());
 
-  bool isPending;
-  PendingBookNowModel? data;
+ final bool isPending;
+ final PendingBookNowModel? data;
 
   @override
   Widget build(BuildContext context) {

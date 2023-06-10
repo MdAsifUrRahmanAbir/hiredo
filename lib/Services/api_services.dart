@@ -23,7 +23,7 @@ import '../Screens/LeadsScreen/Model/lead_search_model.dart';
 import '../Screens/LeadsScreen/Model/leads_model.dart';
 import '../Screens/MyResponse/Model/my_response_model.dart';
 import '../Screens/OrderScreen/pending_request_list_model.dart';
-import '../Screens/QuestionScreen/Model/booking_Model.dart';
+import '../Screens/QuestionScreen/Model/booking_model.dart';
 import '../Screens/Service/Model/service_model.dart';
 import '../Screens/TrackingScreen/Model/complete_post_model.dart';
 import '../Screens/TrackingScreen/Model/pending_book_now_model.dart';

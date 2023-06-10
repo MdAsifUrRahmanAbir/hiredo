@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:homelyknock/Screens/ResistrationScreen/component/custome_text_field.dart';
-import 'package:homelyknock/Services/api_component.dart';
+
 import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
 import 'package:jiffy/jiffy.dart';
@@ -18,7 +18,7 @@ class MyresponseDetailsScreen extends StatelessWidget {
     super.key,
   });
 
-  Result leadData = Get.arguments;
+ final Result leadData = Get.arguments;
   final _mydetailsController = Get.put(MyresponseDetailesController());
   final _formKey = GlobalKey<FormState>();
 

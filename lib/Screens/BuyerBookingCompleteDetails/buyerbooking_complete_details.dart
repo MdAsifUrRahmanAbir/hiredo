@@ -11,9 +11,9 @@ import '../../GoogleMapService/google_map_show.dart';
 import '../TrackingScreen/Model/pending_book_now_model.dart';
 
 class CompleteBuyerBookingDetails extends StatelessWidget {
-  CompleteBuyerBookingDetails({super.key, required this.data});
+  const CompleteBuyerBookingDetails({super.key, required this.data});
 
-  PendingBookNowModel data;
+ final PendingBookNowModel data;
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,7 @@ import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:jiffy/jiffy.dart';
 
 import '../../Route/routes.dart';
-import '../../Services/api_component.dart';
+
 import '../../widgets/custom_loader.dart';
 import 'Controller/myresponse_controller.dart';
 

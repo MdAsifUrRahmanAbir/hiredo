@@ -8,7 +8,7 @@ import 'package:homelyknock/widgets/custom_widgets.dart';
 class BillingDetails extends StatelessWidget {
   BillingDetails({Key? key}) : super(key: key);
 
-  List<Map> downloads = [
+ final List<Map> downloads = [
     {
       'invoice': '3328581',
       'date': 'Jan 11/22',
@@ -139,7 +139,7 @@ class BillingDetails extends StatelessWidget {
               SizedBox(
                 height: 5.h,
               ),
-              CustomTextFieldForm(
+              const CustomTextFieldForm(
                 hintText: 'Build Wright',
               ),
               SizedBox(
@@ -149,7 +149,7 @@ class BillingDetails extends StatelessWidget {
               SizedBox(
                 height: 5.h,
               ),
-              CustomTextFieldForm(
+              const CustomTextFieldForm(
                 hintText: '2464 Royal Ln. Jersey 45463',
               ),
               SizedBox(
@@ -159,7 +159,7 @@ class BillingDetails extends StatelessWidget {
               SizedBox(
                 height: 5.h,
               ),
-              CustomTextFieldForm(
+              const CustomTextFieldForm(
                 hintText: '2464 Royal Ln. Jersey 45463',
               ),
               SizedBox(
@@ -181,7 +181,7 @@ class BillingDetails extends StatelessWidget {
                       SizedBox(
                         height: 5.h,
                       ),
-                      CustomTextFieldForm(
+                      const CustomTextFieldForm(
                         hintText: 'Oshawa',
                       )
                     ],
@@ -203,7 +203,7 @@ class BillingDetails extends StatelessWidget {
                       SizedBox(
                         height: 5.h,
                       ),
-                      CustomTextFieldForm(
+                      const CustomTextFieldForm(
                         hintText: 'L1K0B5',
                       )
                     ],
@@ -217,7 +217,7 @@ class BillingDetails extends StatelessWidget {
               SizedBox(
                 height: 5.h,
               ),
-              CustomTextFieldForm(
+              const CustomTextFieldForm(
                 hintText: '01888888888',
               ),
               SizedBox(
@@ -227,7 +227,7 @@ class BillingDetails extends StatelessWidget {
               SizedBox(
                 height: 5.h,
               ),
-              CustomTextFieldForm(
+              const CustomTextFieldForm(
                 hintText: '01888888888',
               ),
               SizedBox(

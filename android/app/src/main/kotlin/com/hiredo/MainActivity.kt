@@ -1,4 +1,4 @@
-package com.homely.knock
+package com.hiredo
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.android.FlutterFragmentActivity

@@ -12,7 +12,7 @@ class FeturedServiceScreen extends StatelessWidget {
     super.key,
   });
 
-  List<LeadCategoriesModel> data = Get.arguments;
+ final List<LeadCategoriesModel> data = Get.arguments;
   final _homeController = Get.put(HomeController());
 
   @override

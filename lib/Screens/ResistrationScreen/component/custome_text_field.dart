@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class CustomeTextField extends StatelessWidget {
-  CustomeTextField(
+ const CustomeTextField(
       {super.key,
       this.controller,
       this.hintText,
@@ -15,15 +15,15 @@ class CustomeTextField extends StatelessWidget {
       this.readOnly,
       this.validator});
 
-  TextEditingController? controller;
-  String? hintText;
-  Widget? suffixIcon;
-  int? maxLines;
-  String? Function(String?)? validator;
-  bool obscureText;
-  Function()? onTap;
-  TextInputType? keyboardType;
-  bool? readOnly;
+ final TextEditingController? controller;
+ final String? hintText;
+ final Widget? suffixIcon;
+ final int? maxLines;
+ final String? Function(String?)? validator;
+ final bool obscureText;
+ final Function()? onTap;
+ final TextInputType? keyboardType;
+ final bool? readOnly;
 
   @override
   Widget build(BuildContext context) {

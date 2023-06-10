@@ -9,13 +9,13 @@ import 'package:homelyknock/widgets/custom_loader.dart';
 
 import '../HomeScreen/Model/lead_category_model.dart';
 import 'Controller/question_controller.dart';
-import 'Model/booking_Model.dart';
+import 'Model/booking_model.dart';
 import 'Model/job_post_model.dart';
 
 class QuestionScreen extends StatelessWidget {
   QuestionScreen({super.key,});
 
-var allData = Get.arguments;
+final allData = Get.arguments;
 
 
 

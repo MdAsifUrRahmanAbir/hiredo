@@ -22,7 +22,7 @@ class PostAJob extends StatelessWidget {
   });
 
   dynamic catagory = Get.arguments["category"];
-  var bookUserId=Get.arguments["isBookId"];
+  final bookUserId=Get.arguments["isBookId"];
   
   final _homeController = Get.put(HomeController());
   final _jobPostController = Get.put(JobPostController());

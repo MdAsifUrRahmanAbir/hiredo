@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:homelyknock/Screens/TrackingScreen/TabsScreen/bookingComplete.dart';
+import 'package:homelyknock/Screens/TrackingScreen/TabsScreen/booking_complete.dart';
 
 import 'package:homelyknock/widgets/custom_loader.dart';
 
 import 'Controller/tracking_controller.dart';
-import 'TabsScreen/bookingPending.dart';
+import 'TabsScreen/booking_pending.dart';
 import 'TabsScreen/trackingpost.dart';
 import 'TabsScreen/trackingpostorder.dart';
 
