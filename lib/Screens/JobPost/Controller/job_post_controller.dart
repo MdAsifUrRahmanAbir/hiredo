@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:homelyknock/GoogleMapService/google_map_service.dart';
 
@@ -10,6 +11,7 @@ class JobPostController extends GetxController{
 
   var lat=0.0.obs;
   var leng=0.0.obs;
+  var isLoading=false.obs;
 
 
 
@@ -39,6 +41,36 @@ TextEditingController searchTextController=TextEditingController();
     return _predictionList;
   }
 
+
+  Future<bool>  getLocation(String description) async {
+    isLoading(true);
+    try{
+      List<Location> locations = await locationFromAddress(description);
+      lat.value=locations.last.latitude;
+      leng.value=locations.last.longitude;
+
+      locationData=LocationDataModel(location:description, latitude:lat.value.toString(), longitude: leng.value.toString());
+      debugPrint(lat.value.toString());
+      debugPrint(leng.value.toString());
+      searchTextController.clear();
+
+      isLoading(false);
+      return true;
+
+    }catch (e){
+      debugPrint(e.toString());
+      isLoading(false);
+      return false;
+
+    }finally{
+      isLoading(false);
+    }
+
+
+
+
+
+  }
 
 
 

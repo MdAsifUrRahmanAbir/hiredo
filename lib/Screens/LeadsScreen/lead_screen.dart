@@ -270,12 +270,16 @@ class LeadsScreen extends StatelessWidget {
                                     children: [
                                       Row(
                                         children: [
-                                          Text(
-                                            data.user.fullName,
-                                            style: GoogleFonts.roboto(
-                                                fontSize: 16.sp,
-                                                fontWeight: FontWeight.w500,
-                                                color: const Color(0xFF272727)),
+                                          Expanded(
+                                            child: Text(
+                                              data.user.fullName,
+                                              style: GoogleFonts.roboto(
+                                                  fontSize: 16.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: const Color(0xFF272727)),
+                                              overflow:TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                            ),
                                           ),
                                           SizedBox(
                                             width: 30.w,

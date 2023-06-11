@@ -11,6 +11,7 @@ import 'package:homelyknock/Screens/JobPost/Model/location_model.dart';
 
 import 'package:homelyknock/utils/colors.dart';
 
+import '../../widgets/custom_loader.dart';
 import '../HomeScreen/Controller/home_controller.dart';
 import '../HomeScreen/Model/lead_category_model.dart';
 
@@ -164,13 +165,7 @@ class PostAJob extends StatelessWidget {
                 onSuggestionSelected: (Prediction suggestion)async{
                   _jobPostController.searchTextController.text =
                       suggestion.description;
-                      List<Location> locations = await locationFromAddress(suggestion.description);
-                      _jobPostController.lat.value=locations.last.latitude;
-                      _jobPostController.leng.value=locations.last.longitude;
 
-                      _jobPostController.locationData=LocationDataModel(location:suggestion.description, latitude: _jobPostController.lat.value.toString(), longitude: _jobPostController.leng.value.toString());
-                      debugPrint(_jobPostController.lat.value.toString());
-                      debugPrint(_jobPostController.leng.value.toString());
                 },
               ),
 
@@ -182,34 +177,42 @@ class PostAJob extends StatelessWidget {
 
               Center(
                 child: InkWell(
-                  onTap: () {
-                    if (catagory != null) {
-                      LeadCategoriesModel categorieData = catagory;
-                      if (_jobPostController.locationData == null) {
-                       Get.snackbar("Error", "Please select location");
-                      } else if (categorieData.catName.isNotEmpty) {
-                        Map<String, dynamic> data = {
-                          "data": categorieData.catName,
-                          "locationData": _jobPostController.locationData,
-                          "bookingUserId":bookUserId
-                        };
+                  onTap: ()async {
 
-                        Get.toNamed(Routes.questionScreen, arguments: data);
+                    var result= await _jobPostController.getLocation(_jobPostController.searchTextController.text);
+                    if(result){
+                      if (catagory != null) {
+                        LeadCategoriesModel categorieData = catagory;
+                       if (categorieData.catName.isNotEmpty) {
+                          Map<String, dynamic> data = {
+                            "data": categorieData.catName,
+                            "locationData": _jobPostController.locationData,
+                            "bookingUserId":bookUserId
+                          };
+                          Get.toNamed(Routes.questionScreen, arguments: data);
+                        }
+                      } else {
+                        if (_jobPostController.cateName.isEmpty) {
+                          _jobPostController.isCategoryError.value = true;
+                        }else if (_jobPostController.cateName.isNotEmpty) {
+                          Map<String, dynamic> data = {
+                            "data": _jobPostController.cateName,
+                            "locationData": _jobPostController.locationData,
+                            "bookingUserId":bookUserId
+                          };
+                          Get.toNamed(Routes.questionScreen, arguments: data);
+                        }
                       }
-                    } else {
-                      if (_jobPostController.cateName.isEmpty) {
-                        _jobPostController.isCategoryError.value = true;
-                      } else if (_jobPostController.locationData == null) {
-                         Get.snackbar("Error", "Please select location");
-                      } else if (_jobPostController.cateName.isNotEmpty) {
-                        Map<String, dynamic> data = {
-                          "data": _jobPostController.cateName,
-                          "locationData": _jobPostController.locationData,
-                          "bookingUserId":bookUserId
-                        };
-                        Get.toNamed(Routes.questionScreen, arguments: data);
-                      }
+
+
+                    }else{
+                      Get.snackbar("Error", "Select the correct location");
+
                     }
+
+
+
+
                   },
                   child: Container(
                     height: 50.h,
@@ -219,12 +222,22 @@ class PostAJob extends StatelessWidget {
                       color: themeColorGreen,
                     ),
                     alignment: Alignment.center,
-                    child: Text(
-                      "Next",
-                      style: GoogleFonts.roboto(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white),
+                    child: Obx(()=>_jobPostController.isLoading.value?SizedBox(
+                        height: 15.h,
+                        width: 15.h,
+                        child:const CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2,
+
+
+                        ))
+                      : Text(
+                        "Next",
+                        style: GoogleFonts.roboto(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
