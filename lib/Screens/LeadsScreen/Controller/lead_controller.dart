@@ -5,10 +5,13 @@ import 'package:get/get.dart';
 import 'package:homelyknock/Screens/LeadsScreen/Model/leads_model.dart';
 import 'package:homelyknock/Services/api_services.dart';
 
+import '../../ProfileScreen/Controller/profile_controller.dart';
 import '../Model/lead_search_model.dart';
 
 class LeadController extends GetxController {
   late ScrollController scrolController;
+  final profileController = Get.put(ProfileController());
+
 
   TextEditingController searchController = TextEditingController();
   var isSearch = false.obs;
@@ -78,6 +81,8 @@ class LeadController extends GetxController {
       } else {
         demoData = res;
         leadsList.value = demoData!.result;
+        profileController.getLeadCount();
+
 
         debugPrint("leadsList.length:${leadsList.length}");
       }
