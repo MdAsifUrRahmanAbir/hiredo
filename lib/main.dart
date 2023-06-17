@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
+
 import 'package:get/get.dart';
 
 
 import 'Route/routes.dart';
-import 'Services/api_component.dart';
+
 import 'network_check/dependency_injection.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
    await ScreenUtil.ensureScreenSize();
 
-  Stripe.publishableKey = stripePublishKey;
+
   InternetCheckDependencyInjection.init();
 
   runApp(const MyApp());
