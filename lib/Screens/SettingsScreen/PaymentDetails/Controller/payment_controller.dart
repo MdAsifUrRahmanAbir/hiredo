@@ -87,7 +87,7 @@ class PaymentController extends GetxController {
       if (result.runtimeType != int) {
         CardModel cardData = cardModelFromJson(result);
         cardList.value = cardData.data;
-        getCredit();
+       await getCredit();
         update();
 
         debugPrint("Card fetch all successful");
