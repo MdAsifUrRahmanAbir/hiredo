@@ -82,6 +82,7 @@ class ForegPasswordPage extends StatelessWidget {
                         groupValue: _forgetController.userType.value,
                         onChanged: (value) {
                           _forgetController.userType.value = "$value";
+                          _forgetController.phoneController.clear();
                         },
                       ),
                     ),
@@ -95,6 +96,7 @@ class ForegPasswordPage extends StatelessWidget {
                         groupValue: _forgetController.userType.value,
                         onChanged: (value) {
                           _forgetController.userType.value = "$value";
+                           _forgetController.phoneController.clear();
                         },
                       ),
                     ),
