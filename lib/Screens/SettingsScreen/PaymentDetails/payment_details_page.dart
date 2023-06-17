@@ -3,11 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-
 import 'package:homelyknock/Screens/SettingsScreen/setting_page.dart';
 import 'package:homelyknock/utils/colors.dart';
 import 'package:homelyknock/widgets/custom_loader.dart';
-
 
 import '../../../widgets/data_controller.dart';
 import 'Controller/payment_controller.dart';
@@ -19,7 +17,7 @@ class PaymentDetailsPage extends StatelessWidget {
   final _paymentController = Get.put(PaymentController());
   final _dataController = Get.put(DataController());
 
-  final carditData= Get.arguments;
+  final carditData = Get.arguments;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -44,17 +42,21 @@ class PaymentDetailsPage extends StatelessWidget {
                             children: [
                               GestureDetector(
                                   onTap: () {},
-                                  child:_dataController.profileImage.value==""?CircleAvatar(
-                                    backgroundColor: Colors.grey.shade300,
-                                    radius: 25.r,
-                                   
-                                  ) :CircleAvatar(
-                                    backgroundColor: Colors.grey.shade300,
-                                    radius: 25.r,
-                                    backgroundImage: NetworkImage(_dataController.profileImage.value),
-                                  )
+                                  child: _dataController.profileImage.value ==
+                                          ""
+                                      ? CircleAvatar(
+                                          backgroundColor: Colors.grey.shade300,
+                                          radius: 25.r,
+                                        )
+                                      : CircleAvatar(
+                                          backgroundColor: Colors.grey.shade300,
+                                          radius: 25.r,
+                                          backgroundImage: NetworkImage(
+                                              _dataController
+                                                  .profileImage.value),
+                                        )
                                   // Image.asset('images/payment_img.png')
-                                  
+
                                   ),
                               SizedBox(
                                 width: 8.w,
@@ -124,11 +126,12 @@ class PaymentDetailsPage extends StatelessWidget {
                                       style: myStyle(
                                           14.sp, FontWeight.w400, offWhite),
                                     ),
-                                    Obx(()=>
-                                       Text(
-                                        _paymentController.totalCredit.value.toString(),
-                                        style: myStyle(
-                                            14, FontWeight.w400, themeColorGreen),
+                                    Obx(
+                                      () => Text(
+                                        _paymentController.totalCredit.value
+                                            .toString(),
+                                        style: myStyle(14, FontWeight.w400,
+                                            themeColorGreen),
                                       ),
                                     )
                                   ],
@@ -148,7 +151,8 @@ class PaymentDetailsPage extends StatelessWidget {
                                     return Container(
                                       height: 62.h,
                                       width: double.infinity,
-                                      padding: EdgeInsets.symmetric(horizontal:10.w),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 10.w),
                                       decoration: BoxDecoration(
                                           color: scaffoldClr,
                                           boxShadow: [
@@ -180,104 +184,110 @@ class PaymentDetailsPage extends StatelessWidget {
                                                 FontWeight.w500, textClr),
                                           ),
                                           const Spacer(),
-                                        if(carditData!=null)
-                                          GestureDetector(
-                                            onTap: () {
-                                              if(!_paymentController.isPayNowLoading.value){
-                                                 _paymentController
-                                                  .selectedCard.value = index;
-                                                  _paymentController.payNow(creaditData:carditData, cardId:data.id);
-
-                                              }
-
-                                             
-                                            },
-                                            child: Obx(
-                                              () => Container(
-                                                alignment: Alignment.center,
-                                            height: 35.h,
-                                                width: 75.w,
-                                                decoration: BoxDecoration(
-                                                    color: _paymentController
-                                                                .selectedCard
-                                                                .value ==
-                                                            index
-                                                        ? backIconClr
-                                                        : null,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4.r),
-                                                    border: Border.all(
-                                                        width: 1,
-                                                        color: backIconClr)),
-                                                child:_paymentController.isPayNowLoading.value? SizedBox(
-                                height: 15.sp,
-                                width: 15.sp,
-                                child: const CircularProgressIndicator(
-                                  strokeWidth: 3,
-                                  color: Colors.white,
-                                ),
-                              ) : Text(
-                                                  'Pay Now',
-                                                  style: myStyle(
-                                                      14.sp,
-                                                      FontWeight.w400,
-                                                      _paymentController
+                                          if (carditData != null)
+                                            GestureDetector(
+                                              onTap: () {
+                                                if (!_paymentController
+                                                    .isPayNowLoading.value) {
+                                                  _paymentController
+                                                      .selectedCard
+                                                      .value = index;
+                                                  _paymentController.payNow(
+                                                      creaditData: carditData,
+                                                      cardId: data.id);
+                                                }
+                                              },
+                                              child: Obx(
+                                                () => Container(
+                                                  alignment: Alignment.center,
+                                                  height: 35.h,
+                                                  width: 75.w,
+                                                  decoration: BoxDecoration(
+                                                      color: _paymentController
                                                                   .selectedCard
                                                                   .value ==
                                                               index
-                                                          ? scaffoldClr
-                                                          : backIconClr),
+                                                          ? backIconClr
+                                                          : null,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4.r),
+                                                      border: Border.all(
+                                                          width: 1,
+                                                          color: backIconClr)),
+                                                  child: _paymentController
+                                                          .isPayNowLoading.value
+                                                      ? SizedBox(
+                                                          height: 15.sp,
+                                                          width: 15.sp,
+                                                          child:
+                                                              const CircularProgressIndicator(
+                                                            strokeWidth: 3,
+                                                            color: Colors.white,
+                                                          ),
+                                                        )
+                                                      : Text(
+                                                          'Pay Now',
+                                                          style: myStyle(
+                                                              14.sp,
+                                                              FontWeight.w400,
+                                                              _paymentController
+                                                                          .selectedCard
+                                                                          .value ==
+                                                                      index
+                                                                  ? scaffoldClr
+                                                                  : backIconClr),
+                                                        ),
                                                 ),
                                               ),
                                             ),
-                                          )
-                                       ,
-                                       if(carditData==null)
-                                       SizedBox(width:10.w,),
-                                        if(carditData==null)
-                                        GestureDetector(
-                                            onTap: () {
-                                              if(!_paymentController.isDeleteCardLoading.value){
-                                                   _paymentController.deleteCard(data.id);
-                                              }
-                                             
-                                            },
-                                            child: Container(
+                                          if (carditData == null)
+                                            SizedBox(
+                                              width: 10.w,
+                                            ),
+                                          if (carditData == null)
+                                            GestureDetector(
+                                              onTap: () {
+                                                if (!_paymentController
+                                                    .isDeleteCardLoading
+                                                    .value) {
+                                                  _paymentController
+                                                      .deleteCard(data.id);
+                                                }
+                                              },
+                                              child: Container(
                                                 alignment: Alignment.center,
                                                 height: 35.h,
                                                 width: 75.w,
                                                 decoration: BoxDecoration(
-                                                    color:scaffoldClr,
-                                                       
+                                                    color: scaffoldClr,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             4.r),
                                                     border: Border.all(
                                                         width: 1,
                                                         color: backIconClr)),
-                                                child:_paymentController.isDeleteCardLoading.value?SizedBox(
-                                height: 15.sp,
-                                width: 15.sp,
-                                child: const CircularProgressIndicator(
-                                  strokeWidth: 3,
-                                  color: Colors.white,
-                                ),
-                              )  :Text(
-                                                  'Delete',
-                                                  style: myStyle(
-                                                      14.sp,
-                                                      FontWeight.w400,
-                                                       backIconClr
-                                                          ),
-                                                ),
-                                              
-                                            ),
-                                          )
-                                       
-                                       
-                                       
-                                       
+                                                child: _paymentController
+                                                        .isDeleteCardLoading
+                                                        .value
+                                                    ? SizedBox(
+                                                        height: 15.sp,
+                                                        width: 15.sp,
+                                                        child:
+                                                            const CircularProgressIndicator(
+                                                          strokeWidth: 3,
+                                                          color: Colors.white,
+                                                        ),
+                                                      )
+                                                    : Text(
+                                                        'Delete',
+                                                        style: myStyle(
+                                                            14.sp,
+                                                            FontWeight.w400,
+                                                            backIconClr),
+                                                      ),
+                                              ),
+                                            )
                                         ],
                                       ),
                                     );
@@ -518,11 +528,9 @@ class PaymentDetailsPage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                     
-                        if (_formKey.currentState!.validate()) {
-                          _paymentController.createTokenStripe();
-                        }
-                     
+                      if (_formKey.currentState!.validate()) {
+                        _paymentController.createTokenStripe();
+                      }
                     },
                     child: Obx(
                       () => Container(
